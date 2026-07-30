@@ -79,7 +79,7 @@ export function HalfYearReportScreen() {
           </section>
 
           <aside className="report-side">
-            <section>
+            <section className="report-side__states">
               <h2>状态与关系变化</h2>
               <ReportChange label="竞技状态" change={report.states.form} />
               <ReportChange label="身体状态" change={report.states.fitness} />
@@ -88,7 +88,7 @@ export function HalfYearReportScreen() {
               <ReportChange label="队内关系" change={report.relations.squad} />
               <ReportChange label="球迷关系" change={report.relations.fans} />
             </section>
-            <section>
+            <section className="report-side__finance">
               <h2>财务状况</h2>
               <MoneyRow label="青训津贴" value={report.stipendEuro} positive />
               <MoneyRow label="事件支出" value={report.expenseEuro} />

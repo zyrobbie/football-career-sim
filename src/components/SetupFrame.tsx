@@ -13,7 +13,7 @@ export function SetupFrame({
   children: ReactNode
 }) {
   return (
-    <main className="setup-shell">
+    <main className={`setup-shell setup-shell--step-${step}`}>
       <header className="setup-header">
         <Brand compact />
         <div className="setup-header__pitch" aria-hidden="true" />

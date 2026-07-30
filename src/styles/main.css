@@ -4177,6 +4177,754 @@ svg {
   }
 }
 
+/* Compact mobile setup, reports and milestone screens */
+@media (max-width: 520px) {
+  .setup-header {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 7px 12px;
+    padding: 9px 12px 10px;
+  }
+
+  .setup-header .brand--compact .brand__name {
+    font-size: 19px;
+    letter-spacing: 0.05em;
+  }
+
+  .setup-header__pitch {
+    display: none;
+  }
+
+  .setup-header > p {
+    margin: 0;
+    font-size: 11px;
+  }
+
+  .setup-header > p strong {
+    font-size: 14px;
+  }
+
+  .step-rail {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+
+  .step-rail li span {
+    width: 24px;
+    height: 24px;
+    border-width: 1px;
+    font-size: 11px;
+  }
+
+  .step-rail li:not(:last-child)::after {
+    height: 1px;
+  }
+
+  .setup-paper {
+    width: calc(100% - 20px);
+    padding: 11px 0 16px;
+  }
+
+  .setup-intro {
+    margin-bottom: 9px;
+    padding-bottom: 7px;
+  }
+
+  .setup-intro h1 {
+    margin-bottom: 3px;
+    font-size: 25px;
+    line-height: 1.15;
+  }
+
+  .setup-intro p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .setup-form--narrow,
+  .priority-editor,
+  .preference-editor,
+  .reveal-layout {
+    max-width: none;
+  }
+
+  .field {
+    gap: 4px;
+  }
+
+  .field > span,
+  .field-group legend,
+  .foot-selector legend,
+  .preference-editor legend {
+    margin-bottom: 0;
+    font-size: 12px;
+  }
+
+  .field input,
+  .field select,
+  .foot-option {
+    min-height: 40px;
+    font-size: 14px;
+  }
+
+  .field input,
+  .field select {
+    padding: 0 10px;
+  }
+
+  .identity-traits {
+    grid-template-columns: minmax(92px, .64fr) minmax(0, 1.36fr);
+    gap: 8px;
+    margin: 9px 0;
+  }
+
+  .foot-selector {
+    gap: 5px;
+  }
+
+  .foot-option {
+    font-size: 13px;
+  }
+
+  .notice-line {
+    gap: 5px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+
+  .notice-line svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .setup-actions {
+    gap: 6px;
+    margin-top: 9px;
+    padding-top: 8px;
+  }
+
+  .setup-actions .button {
+    min-height: 38px;
+    padding: 0 10px;
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .setup-actions .button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .section-heading {
+    gap: 6px;
+    margin: 9px 0 6px;
+    font-size: 15px;
+  }
+
+  .section-heading::before {
+    width: 2px;
+    height: 17px;
+  }
+
+  .position-pitch {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .position-pitch::before,
+  .position-pitch::after {
+    display: none;
+  }
+
+  .position-pitch__slot,
+  .position-pitch__slot--st,
+  .position-pitch__slot--lw,
+  .position-pitch__slot--rw,
+  .position-pitch__slot--cam,
+  .position-pitch__slot--lm,
+  .position-pitch__slot--cm,
+  .position-pitch__slot--cdm,
+  .position-pitch__slot--rm,
+  .position-pitch__slot--lb,
+  .position-pitch__slot--cb,
+  .position-pitch__slot--rb {
+    position: relative;
+    inset: auto;
+    min-width: 0;
+    min-height: 34px;
+    font-size: 13px;
+  }
+
+  .position-pitch__slot svg,
+  .secondary-options svg {
+    right: -4px;
+    top: -4px;
+    width: 15px;
+    height: 15px;
+    padding: 2px;
+  }
+
+  .position-detail {
+    min-height: 0;
+    grid-template-columns: 72px minmax(0, 1fr);
+    gap: 7px;
+    padding: 6px;
+  }
+
+  .position-detail__name {
+    min-height: 54px;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .position-detail__name span {
+    font-size: 12px;
+  }
+
+  .position-detail__name strong {
+    font-size: 22px;
+  }
+
+  .position-detail p {
+    overflow: hidden;
+    margin: 0 0 3px;
+    font-size: 10px;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .weight-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .weight-list div,
+  .weight-list div:nth-child(3),
+  .weight-list div:nth-child(4) {
+    margin-top: 0;
+    padding: 2px;
+  }
+
+  .weight-list div:nth-child(3) {
+    border-left: 1px solid var(--line);
+  }
+
+  .weight-list dt {
+    font-size: 8px;
+  }
+
+  .weight-list dd {
+    margin-top: 1px;
+    font-size: 12px;
+  }
+
+  .secondary-options {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+  }
+
+  .secondary-options button {
+    min-height: 34px;
+    font-size: 13px;
+  }
+
+  .position-builder > .notice-line {
+    margin-top: 6px;
+  }
+
+  .priority-editor ol {
+    border-top: 0;
+  }
+
+  .priority-editor li {
+    min-height: 48px;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    gap: 6px;
+    padding: 5px 0;
+  }
+
+  .priority-editor__rank {
+    font-size: 16px;
+  }
+
+  .priority-editor li strong {
+    margin-bottom: 1px;
+    font-size: 13px;
+  }
+
+  .priority-editor li small {
+    overflow: hidden;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .priority-editor__controls {
+    gap: 3px;
+  }
+
+  .priority-editor__controls button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .priority-editor__controls svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .preference-editor fieldset {
+    margin-bottom: 9px;
+  }
+
+  .preference-editor fieldset:first-child {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .preference-editor fieldset:first-child legend {
+    grid-column: 1 / -1;
+  }
+
+  .select-row {
+    min-width: 0;
+    min-height: 66px;
+    display: block;
+    padding: 6px;
+    border: 1px solid var(--line);
+  }
+
+  .select-row:last-of-type {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .select-row.is-selected {
+    box-shadow: inset 0 0 0 1px var(--gold);
+  }
+
+  .select-row input {
+    width: 13px;
+    height: 13px;
+    margin: 0 0 3px;
+  }
+
+  .select-row strong {
+    overflow: hidden;
+    font-size: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .select-row small {
+    display: -webkit-box;
+    margin-top: 2px;
+    overflow: hidden;
+    font-size: 8px;
+    line-height: 1.25;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .league-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+  }
+
+  .league-grid label {
+    min-width: 0;
+    min-height: 32px;
+    gap: 3px;
+    font-size: 10px;
+  }
+
+  .league-grid em {
+    width: 14px;
+    height: 14px;
+    font-size: 8px;
+  }
+
+  .field-note {
+    margin: 3px 0 0;
+    font-size: 9px;
+  }
+
+  .reveal-layout {
+    grid-template-columns: 78px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .reveal-overall {
+    padding: 5px 8px 5px 0;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+  }
+
+  .reveal-overall > span {
+    font-size: 10px;
+  }
+
+  .reveal-overall > strong {
+    font-size: 52px;
+  }
+
+  .reveal-overall p {
+    margin: 2px 0 0;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  .reveal-attributes div {
+    grid-template-columns: 36px 28px 1fr;
+    padding: 2px 0;
+    font-size: 9px;
+  }
+
+  .reveal-attributes dd {
+    font-size: 13px;
+  }
+
+  .reveal-attributes span {
+    height: 4px;
+  }
+
+  .reveal-meta {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 5px;
+  }
+
+  .reveal-meta div {
+    min-width: 0;
+    padding: 5px 6px;
+    border-right: 1px solid var(--line);
+    font-size: 9px;
+  }
+
+  .reveal-meta div:nth-child(even) {
+    border-right: 0;
+  }
+
+  .reveal-meta dt,
+  .reveal-meta dd {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .reveal-note,
+  .reveal-layout > .setup-actions {
+    grid-column: 1 / -1;
+  }
+
+  .career-report .report-grid {
+    margin-top: 3px;
+  }
+
+  .career-report .report-main {
+    padding: 0;
+  }
+
+  .career-report .stat-strip {
+    margin: 0 0 5px;
+  }
+
+  .career-report .stat-strip div {
+    min-height: 42px;
+    display: grid;
+    align-content: center;
+  }
+
+  .career-report .stat-strip dt {
+    font-size: 9px;
+  }
+
+  .career-report .stat-strip dd {
+    margin-top: 1px;
+    font-size: 18px;
+  }
+
+  .career-report .attribute-table > div {
+    min-height: 27px;
+  }
+
+  .career-report .attribute-table__head {
+    min-height: 23px !important;
+  }
+
+  .career-report .attribute-table span,
+  .career-report .attribute-table strong {
+    padding: 0 5px;
+    font-size: 10px;
+  }
+
+  .career-report .attribute-table strong {
+    font-size: 11px;
+  }
+
+  .career-report .progress-note {
+    margin: 4px 0 0;
+    font-size: 8px;
+    line-height: 1.3;
+  }
+
+  .career-report .report-side {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    margin-top: 5px;
+    padding: 0;
+    border-top: 0;
+  }
+
+  .career-report .report-side section {
+    min-width: 0;
+    margin: 0;
+    padding: 5px;
+    border: 1px solid var(--line);
+  }
+
+  .career-report .report-side h2,
+  .career-report .report-footer h2 {
+    gap: 5px;
+    margin-bottom: 3px;
+    font-size: 11px;
+  }
+
+  .career-report .report-side__states {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 7px;
+  }
+
+  .career-report .report-side__states h2 {
+    grid-column: 1 / -1;
+  }
+
+  .career-report .report-change {
+    min-height: 25px;
+    gap: 4px;
+    font-size: 9px;
+  }
+
+  .career-report .report-change strong {
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .career-report .report-change i {
+    margin: 0 2px;
+  }
+
+  .career-report .report-side__finance {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-content: start;
+    gap: 0;
+  }
+
+  .career-report .report-side__finance h2 {
+    grid-column: 1 / -1;
+  }
+
+  .career-report .report-side__finance .report-change {
+    min-width: 0;
+    min-height: 43px;
+    display: grid;
+    align-content: center;
+    justify-content: start;
+    gap: 1px;
+    padding: 0 4px;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+  }
+
+  .career-report .report-side__finance .report-change:last-child {
+    border-right: 0;
+  }
+
+  .career-report .report-side__finance .report-change span,
+  .career-report .report-side__finance .report-change strong {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .career-report .first-team-report {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(0, .72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: 3px 7px;
+  }
+
+  .career-report .first-team-report h2 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .career-report .first-team-report h2::after {
+    display: none;
+  }
+
+  .career-report .first-team-report > .report-change {
+    min-width: 0;
+    border-bottom: 0;
+  }
+
+  .career-report .first-team-report__metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin: 0;
+  }
+
+  .career-report .first-team-report__metrics span {
+    padding: 2px;
+    font-size: 8px;
+    text-align: center;
+  }
+
+  .career-report .first-team-report > strong {
+    grid-column: 1 / 2;
+    font-size: 11px;
+  }
+
+  .career-report .first-team-report > p,
+  .career-report .injury-note p {
+    margin: 2px 0 0;
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  .career-report .first-team-report > p {
+    grid-column: 2 / -1;
+  }
+
+  .career-report .injury-note {
+    grid-column: 1 / -1;
+  }
+
+  .career-report .report-footer {
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 7px;
+    align-items: end;
+    margin: 5px 0 0;
+    padding: 6px 0 0;
+  }
+
+  .career-report .report-footer .event-summary {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    font-size: 8px;
+    line-height: 1.25;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .career-report .report-footer ul {
+    display: none;
+  }
+
+  .career-report .autosave-line {
+    gap: 3px;
+    margin: 3px 0 0;
+    font-size: 8px;
+  }
+
+  .career-report .autosave-line svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .career-report .report-footer .button {
+    width: auto;
+    min-height: 34px;
+    padding: 0 9px;
+    gap: 4px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+
+  .career-report .report-footer .button svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .demo-complete--hub {
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 2px 0 0;
+  }
+
+  .demo-complete--hub .demo-complete__number {
+    display: none;
+  }
+
+  .demo-complete--hub .decision-kicker {
+    margin-bottom: 3px;
+    font-size: 10px;
+  }
+
+  .demo-complete--hub h1 {
+    margin: 0 0 5px;
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .demo-complete--hub p {
+    margin-bottom: 5px;
+    font-size: 10px;
+    line-height: 1.45;
+  }
+
+  .demo-complete--hub .demo-complete__next {
+    font-size: 12px;
+  }
+
+  .demo-complete--hub dl {
+    margin: 6px 0;
+  }
+
+  .demo-complete--hub dl div {
+    padding: 6px 0;
+    font-size: 10px;
+  }
+
+  .demo-complete--hub dd {
+    text-align: right;
+  }
+
+  .demo-complete--hub .demo-complete__actions {
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+
+  .demo-complete--hub .button {
+    min-height: 36px;
+    padding: 0 7px;
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .demo-complete--hub .button svg {
+    width: 13px;
+    height: 13px;
+  }
+}
+
 @media (max-width: 360px) {
   .career-panel-lead {
     -webkit-line-clamp: 1;
@@ -4192,6 +4940,34 @@ svg {
 
   .previous-change {
     display: none;
+  }
+
+  .setup-paper {
+    width: calc(100% - 16px);
+  }
+
+  .setup-intro h1 {
+    font-size: 22px;
+  }
+
+  .position-pitch {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .league-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .career-report .report-side {
+    gap: 4px;
+  }
+
+  .career-report .report-change {
+    font-size: 8px;
+  }
+
+  .career-report .report-change strong {
+    font-size: 9px;
   }
 }
 
