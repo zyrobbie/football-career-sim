@@ -151,7 +151,7 @@ export function TrainingPlanScreen() {
           </section>
         ) : null}
         <div
-          className="choice-list choice-list--career"
+          className="choice-list choice-list--career choice-list--training-plan"
           role="radiogroup"
           aria-label="半年发展计划"
         >

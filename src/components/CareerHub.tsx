@@ -124,6 +124,7 @@ export function CareerHub({
     calculateOverall(player.attributes, player.primaryPosition),
   )
   const ledgerRows = buildLedgerRows(game)
+  const windowLabel = careerWindowLabel(game.startYear, currentWindowIndex)
 
   return (
     <AppShell
@@ -131,13 +132,24 @@ export function CareerHub({
         <>
           <span className="topbar__time">
             <Icon name="calendar" />
-            {careerWindowLabel(game.startYear, currentWindowIndex)}窗口
+            <span className="topbar__label--full">{windowLabel}窗口</span>
+            <span className="topbar__label--compact">
+              {windowLabel.replace('年', '').replace('季', '')}
+            </span>
           </span>
           <span className="topbar__save-state">
             <i aria-hidden="true" />
-            自动保存中
+            <span className="topbar__label--full">自动保存中</span>
+            <span className="topbar__label--compact">已保存</span>
           </span>
-          <span>{currentOffer ? `当前俱乐部：${clubName}` : sectionLabel}</span>
+          <span className="topbar__context">
+            <span className="topbar__label--full">
+              {currentOffer ? `当前俱乐部：${clubName}` : sectionLabel}
+            </span>
+            <span className="topbar__label--compact">
+              {currentOffer ? currentOffer.club.name : sectionLabel}
+            </span>
+          </span>
         </>
       }
     >
@@ -216,41 +228,43 @@ function PlayerOverview({
           </small>
         ) : null}
       </div>
-      <div className="career-overview__totals">
-        <p>生涯累计（青年队）</p>
-        <dl>
-          <OverviewNumber label="出场" value={totalStats.appearances} />
-          <OverviewNumber label="进球" value={totalStats.goals} />
-          <OverviewNumber label="助攻" value={totalStats.assists} />
-        </dl>
-      </div>
-      <div className="career-overview__attributes">
-        <p>核心属性</p>
-        <dl>
-          {attributeKeys.map((key) => {
-            const delta = latest?.attributes[key].delta ?? 0
-            return (
-              <div key={key}>
-                <dt>{ATTRIBUTE_LABELS[key]}</dt>
-                <dd>{Math.round(player.attributes[key])}</dd>
-                {latest ? (
-                  <small
-                    className={
-                      delta > 0
-                        ? 'is-positive'
-                        : delta < 0
-                          ? 'is-negative'
-                          : ''
-                    }
-                  >
-                    {delta > 0 ? '+' : ''}
-                    {Math.round(delta * 10) / 10}
-                  </small>
-                ) : null}
-              </div>
-            )
-          })}
-        </dl>
+      <div className="career-overview__performance">
+        <div className="career-overview__totals">
+          <p>生涯累计（青年队）</p>
+          <dl>
+            <OverviewNumber label="出场" value={totalStats.appearances} />
+            <OverviewNumber label="进球" value={totalStats.goals} />
+            <OverviewNumber label="助攻" value={totalStats.assists} />
+          </dl>
+        </div>
+        <div className="career-overview__attributes">
+          <p>核心属性</p>
+          <dl>
+            {attributeKeys.map((key) => {
+              const delta = latest?.attributes[key].delta ?? 0
+              return (
+                <div key={key}>
+                  <dt>{ATTRIBUTE_LABELS[key]}</dt>
+                  <dd>{Math.round(player.attributes[key])}</dd>
+                  {latest ? (
+                    <small
+                      className={
+                        delta > 0
+                          ? 'is-positive'
+                          : delta < 0
+                            ? 'is-negative'
+                            : ''
+                      }
+                    >
+                      {delta > 0 ? '+' : ''}
+                      {Math.round(delta * 10) / 10}
+                    </small>
+                  ) : null}
+                </div>
+              )
+            })}
+          </dl>
+        </div>
       </div>
     </section>
   )
@@ -385,57 +399,95 @@ function CareerLedger({
       <header>
         <Icon name="history" />
         <h2>生涯履历</h2>
+        <span>{rows.length}个窗口</span>
       </header>
-      <div className="career-ledger__scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>窗口</th>
-              <th>年龄</th>
-              <th>俱乐部</th>
-              <th>地位</th>
-              <th>能力</th>
-              <th>出场</th>
-              <th>进球</th>
-              <th>助攻</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((row) => (
-              <tr className={row.current ? 'is-current' : ''} key={row.key}>
-                <td>
-                  {careerWindowLabel(game.startYear, row.windowIndex)
-                    .replace('年', '')
-                    .replace('季', '')}
-                </td>
-                <td>{playerAgeAtWindow(row.windowIndex)}</td>
-                <td>{row.clubName}</td>
-                <td>
-                  {row.teamLevel === 'FIRST_TEAM'
-                    ? '一线队'
-                    : row.role
-                    ? roleLabel(row.role).replace('球员', '')
-                    : '待选择'}
-                </td>
-                <td>
-                  {Math.round(
-                    calculateOverall(
-                      row.attributes,
-                      game.player!.primaryPosition,
-                    ),
-                  )}
-                </td>
-                <td>{row.stats?.appearances ?? '—'}</td>
-                <td>{row.stats?.goals ?? '—'}</td>
-                <td>{row.stats?.assists ?? '—'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="career-ledger__desktop">
+        <CareerLedgerTable game={game} rows={rows} />
+      </div>
+      <div className="career-ledger__mobile">
+        <CareerLedgerTable game={game} rows={rows.slice(-1)} compact />
+        {rows.length > 1 ? (
+          <details>
+            <summary>查看全部{rows.length}个窗口</summary>
+            <CareerLedgerTable game={game} rows={rows} />
+          </details>
+        ) : null}
       </div>
       <p>
         每个半年保留当时的俱乐部、地位、能力和青年队比赛数据。
       </p>
     </section>
+  )
+}
+
+function CareerLedgerTable({
+  game,
+  rows,
+  compact = false,
+}: {
+  game: GameState
+  rows: LedgerRow[]
+  compact?: boolean
+}) {
+  return (
+    <div
+      className={`career-ledger__scroll${
+        compact ? ' career-ledger__scroll--compact' : ''
+      }`}
+    >
+      <table>
+        <thead>
+          <tr>
+            <th>窗口</th>
+            {compact ? null : <th>年龄</th>}
+            <th>俱乐部</th>
+            {compact ? null : <th>地位</th>}
+            <th>能力</th>
+            <th>{compact ? '出/球/助' : '出场'}</th>
+            {compact ? null : <th>进球</th>}
+            {compact ? null : <th>助攻</th>}
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr className={row.current ? 'is-current' : ''} key={row.key}>
+              <td>
+                {careerWindowLabel(game.startYear, row.windowIndex)
+                  .replace('年', '')
+                  .replace('季', '')}
+              </td>
+              {compact ? null : <td>{playerAgeAtWindow(row.windowIndex)}</td>}
+              <td>{row.clubName}</td>
+              {compact ? null : (
+                <td>
+                  {row.teamLevel === 'FIRST_TEAM'
+                    ? '一线队'
+                    : row.role
+                      ? roleLabel(row.role).replace('球员', '')
+                      : '待选择'}
+                </td>
+              )}
+              <td>
+                {Math.round(
+                  calculateOverall(
+                    row.attributes,
+                    game.player!.primaryPosition,
+                  ),
+                )}
+              </td>
+              <td>
+                {compact
+                  ? `${row.stats?.appearances ?? '—'}/${
+                      row.stats?.goals ?? '—'
+                    }/${row.stats?.assists ?? '—'}`
+                  : (row.stats?.appearances ?? '—')}
+              </td>
+              {compact ? null : <td>{row.stats?.goals ?? '—'}</td>}
+              {compact ? null : <td>{row.stats?.assists ?? '—'}</td>}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }

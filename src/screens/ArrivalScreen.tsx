@@ -62,7 +62,7 @@ export function ArrivalScreen() {
           你准备怎样开始这段职业生涯？这次选择会影响最初的关系与训练条件。
         </p>
         <div
-          className="choice-list choice-list--career"
+          className="choice-list choice-list--career choice-list--arrival"
           role="radiogroup"
           aria-label="入队选择"
         >

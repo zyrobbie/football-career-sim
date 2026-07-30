@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { AcademyOffersScreen } from '../screens/AcademyOffersScreen'
 import { ArrivalScreen } from '../screens/ArrivalScreen'
@@ -12,6 +13,11 @@ export function App() {
   const game = useGameStore((state) => state.game)
   const error = useGameStore((state) => state.error)
   const clearError = useGameStore((state) => state.clearError)
+  const phase = game?.phase
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [phase])
 
   let screen = <HomeScreen />
 
