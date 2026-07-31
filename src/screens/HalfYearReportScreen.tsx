@@ -192,7 +192,8 @@ function ReportChange({
     <div className="report-change">
       <span>{label}</span>
       <strong>
-        {Math.round(change.before)} <i>→</i>{' '}
+        {Math.round(change.before)}
+        <i>→</i>
         <em
           className={
             change.delta > 0

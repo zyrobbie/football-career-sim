@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { ATTRIBUTE_LABELS } from '../data/balance'
 import {
   careerWindowLabel,
@@ -403,6 +403,9 @@ function CareerLedger({
   game: GameState
   rows: LedgerRow[]
 }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const visibleRows = isExpanded ? rows : rows.slice(-1)
+
   return (
     <section className="career-ledger">
       <header>
@@ -410,16 +413,21 @@ function CareerLedger({
         <h2>生涯履历</h2>
         <span>{rows.length}个窗口</span>
       </header>
-      <div className="career-ledger__desktop">
-        <CareerLedgerTable game={game} rows={rows} />
-      </div>
-      <div className="career-ledger__mobile">
-        <CareerLedgerTable game={game} rows={rows.slice(-1)} compact />
+      <div
+        className={`career-ledger__details${isExpanded ? ' is-open' : ''}`}
+      >
+        <CareerLedgerTable game={game} rows={visibleRows} />
         {rows.length > 1 ? (
-          <details>
-            <summary>查看全部{rows.length}个窗口</summary>
-            <CareerLedgerTable game={game} rows={rows} />
-          </details>
+          <button
+            aria-expanded={isExpanded}
+            className="career-ledger__toggle"
+            onClick={() => setIsExpanded((expanded) => !expanded)}
+            type="button"
+          >
+            {isExpanded
+              ? '▲ 收起完整履历'
+              : `▼ 查看全部${rows.length}个窗口`}
+          </button>
         ) : null}
       </div>
       <p>
@@ -432,29 +440,23 @@ function CareerLedger({
 function CareerLedgerTable({
   game,
   rows,
-  compact = false,
 }: {
   game: GameState
   rows: LedgerRow[]
-  compact?: boolean
 }) {
   return (
-    <div
-      className={`career-ledger__scroll${
-        compact ? ' career-ledger__scroll--compact' : ''
-      }`}
-    >
+    <div className="career-ledger__scroll">
       <table>
         <thead>
           <tr>
             <th>窗口</th>
-            {compact ? null : <th>年龄</th>}
+            <th>年龄</th>
             <th>俱乐部</th>
-            {compact ? null : <th>地位</th>}
+            <th>地位</th>
             <th>能力</th>
-            <th>{compact ? '出/球/助' : '出场'}</th>
-            {compact ? null : <th>进球</th>}
-            {compact ? null : <th>助攻</th>}
+            <th>出场</th>
+            <th>进球</th>
+            <th>助攻</th>
           </tr>
         </thead>
         <tbody>
@@ -465,17 +467,15 @@ function CareerLedgerTable({
                   .replace('年', '')
                   .replace('季', '')}
               </td>
-              {compact ? null : <td>{playerAgeAtWindow(row.windowIndex)}</td>}
+              <td>{playerAgeAtWindow(row.windowIndex)}</td>
               <td>{row.clubName}</td>
-              {compact ? null : (
-                <td>
-                  {row.teamLevel === 'FIRST_TEAM'
-                    ? '一线队'
-                    : row.role
-                      ? roleLabel(row.role).replace('球员', '')
-                      : '待选择'}
-                </td>
-              )}
+              <td>
+                {row.teamLevel === 'FIRST_TEAM'
+                  ? '一线队'
+                  : row.role
+                    ? roleLabel(row.role).replace('球员', '')
+                    : '待选择'}
+              </td>
               <td>
                 {Math.round(
                   calculateOverall(
@@ -484,15 +484,9 @@ function CareerLedgerTable({
                   ),
                 )}
               </td>
-              <td>
-                {compact
-                  ? `${row.stats?.appearances ?? '—'}/${
-                      row.stats?.goals ?? '—'
-                    }/${row.stats?.assists ?? '—'}`
-                  : (row.stats?.appearances ?? '—')}
-              </td>
-              {compact ? null : <td>{row.stats?.goals ?? '—'}</td>}
-              {compact ? null : <td>{row.stats?.assists ?? '—'}</td>}
+              <td>{row.stats?.appearances ?? '—'}</td>
+              <td>{row.stats?.goals ?? '—'}</td>
+              <td>{row.stats?.assists ?? '—'}</td>
             </tr>
           ))}
         </tbody>

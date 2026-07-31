@@ -2374,11 +2374,32 @@ svg {
   font-size: 12px;
 }
 
-.career-ledger__mobile {
-  display: none;
+.career-ledger__details {
+  display: flex;
+  flex-direction: column;
+}
+
+.career-ledger__toggle {
+  order: 2;
+  width: 100%;
+  min-height: 22px;
+  margin: 0;
+  padding-top: 4px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  text-align: right;
+}
+
+.career-ledger__toggle:hover {
+  color: var(--ink);
 }
 
 .career-ledger__scroll {
+  order: 1;
   margin-top: 14px;
   border: 1px solid var(--line);
   overflow-x: auto;
@@ -2392,8 +2413,8 @@ svg {
 
 .career-ledger th,
 .career-ledger td {
-  height: 54px;
-  padding: 8px 10px;
+  height: 42px;
+  padding: 5px 8px;
   border-bottom: 1px dotted var(--line);
   text-align: center;
   white-space: nowrap;
@@ -2402,7 +2423,7 @@ svg {
 }
 
 .career-ledger th {
-  height: 42px;
+  height: 34px;
   background: var(--paper-muted);
   color: #555a54;
   font-size: 12px;
@@ -3814,53 +3835,41 @@ svg {
     font-size: 9px;
   }
 
-  .career-ledger__desktop {
-    display: none;
-  }
-
-  .career-ledger__mobile {
-    display: block;
-  }
-
   .career-ledger__scroll {
     margin-top: 3px;
-    border: 0;
+    border: 1px solid var(--line);
   }
 
-  .career-ledger__scroll--compact table {
+  .career-ledger table {
     table-layout: fixed;
   }
 
-  .career-ledger__scroll--compact th,
-  .career-ledger__scroll--compact td {
+  .career-ledger th,
+  .career-ledger td {
     height: 25px;
-    padding: 2px 4px;
+    padding: 2px 3px;
     font-size: 9px;
   }
 
-  .career-ledger__scroll--compact th:nth-child(1) { width: 46px; }
-  .career-ledger__scroll--compact th:nth-child(2) {
+  .career-ledger th:nth-child(1) { width: 44px; }
+  .career-ledger th:nth-child(2) { width: 26px; }
+  .career-ledger th:nth-child(3) {
     width: auto;
     text-align: left;
   }
-  .career-ledger__scroll--compact th:nth-child(3) { width: 38px; }
-  .career-ledger__scroll--compact th:nth-child(4) { width: 62px; }
+  .career-ledger th:nth-child(4) { width: 34px; }
+  .career-ledger th:nth-child(5) { width: 30px; }
+  .career-ledger th:nth-child(n + 6) { width: 27px; }
 
-  .career-ledger__mobile details {
-    margin-top: 3px;
-  }
-
-  .career-ledger__mobile summary {
-    color: var(--muted);
-    cursor: pointer;
+  .career-ledger__toggle {
+    min-height: 16px;
+    padding-top: 2px;
     font-size: 9px;
-    text-align: right;
   }
 
-  .career-ledger__mobile details .career-ledger__scroll {
+  .career-ledger__details.is-open .career-ledger__scroll {
     max-height: 220px;
     overflow: auto;
-    border: 1px solid var(--line);
   }
 
   .career-ledger > p {
@@ -4702,7 +4711,7 @@ svg {
   .career-report .report-side__states {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0 7px;
+    gap: 0 4px;
   }
 
   .career-report .report-side__states h2 {
@@ -4711,8 +4720,13 @@ svg {
 
   .career-report .report-change {
     min-height: 25px;
-    gap: 4px;
+    gap: 2px;
     font-size: 9px;
+  }
+
+  .career-report .report-change > span {
+    min-width: 0;
+    white-space: nowrap;
   }
 
   .career-report .report-change strong {
@@ -4721,7 +4735,16 @@ svg {
   }
 
   .career-report .report-change i {
-    margin: 0 2px;
+    margin: 0 1px;
+  }
+
+  .career-report .report-side__states .report-change {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .career-report .report-side__states .report-change strong {
+    justify-self: end;
   }
 
   .career-report .report-side__finance {
@@ -4762,9 +4785,9 @@ svg {
   .career-report .first-team-report {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: auto minmax(0, .72fr) minmax(0, 1.28fr);
+    grid-template-columns: auto auto minmax(0, 1fr);
     align-items: center;
-    gap: 3px 7px;
+    gap: 3px 6px;
   }
 
   .career-report .first-team-report h2 {
@@ -4778,7 +4801,16 @@ svg {
 
   .career-report .first-team-report > .report-change {
     min-width: 0;
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: start;
+    gap: 2px;
     border-bottom: 0;
+    white-space: nowrap;
+  }
+
+  .career-report .first-team-report > .report-change strong {
+    justify-self: end;
   }
 
   .career-report .first-team-report__metrics {
