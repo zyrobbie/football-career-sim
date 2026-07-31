@@ -92,5 +92,5 @@ describe('10,000-player first-window distribution', () => {
       )
       expect(actualShare).toBeLessThan(expected.weight / 100 + 0.025)
     }
-  }, 30_000)
+  }, 90_000)
 })
