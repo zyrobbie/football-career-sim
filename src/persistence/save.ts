@@ -148,9 +148,30 @@ const professionalOfferSchema = contractSchema.extend({
   negotiationMessage: z.string().nullable(),
 })
 
+const transferOfferSchema = contractSchema.extend({
+  id: z.string().min(1),
+  transferFeeEuro: z.number().int().nonnegative(),
+  interestScore: z.number().int().min(0).max(100),
+  estimatedPotential: z.number().int().min(0).max(100),
+  counterUsed: z.boolean(),
+  counterDirection: z
+    .enum(['SALARY', 'ROLE', 'RELEASE_CLAUSE'])
+    .nullable(),
+  negotiationSucceeded: z.boolean().nullable(),
+  negotiationMessage: z.string().nullable(),
+  withdrawn: z.boolean(),
+})
+
+const transferArrivalChoiceSchema = z.enum([
+  'DINNER',
+  'LEADERS',
+  'FANS',
+  'NONE',
+])
+
 const stateSchema = z.object({
-  saveVersion: z.literal(4),
-  dataVersion: z.literal(4),
+  saveVersion: z.literal(5),
+  dataVersion: z.literal(5),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -167,6 +188,9 @@ const stateSchema = z.object({
     'PRO_CONTRACT_OFFER',
     'PRO_CONTRACT_COMPLETE',
     'PRO_STAGE_COMPLETE',
+    'TRANSFER_WINDOW',
+    'TRANSFER_ARRIVAL',
+    'TRANSFER_STAGE_COMPLETE',
   ]),
   careerSeed: z.string().min(8),
   startYear: z.number().int().min(2020).max(9999),
@@ -189,6 +213,17 @@ const stateSchema = z.object({
     .nullable(),
   contract: contractSchema.nullable(),
   professionalOffer: professionalOfferSchema.nullable(),
+  transferOffers: z.array(transferOfferSchema).max(3),
+  selectedTransferChoiceId: z.string().nullable(),
+  transferDecision: z
+    .object({
+      kind: z.enum(['STAY', 'TRANSFER']),
+      fromClubId: z.string().min(1),
+      toClubId: z.string().min(1),
+      arrivalChoice: transferArrivalChoiceSchema.nullable(),
+      cashSpentEuro: z.number().int().nonnegative(),
+    })
+    .nullable(),
   arrivalChoice: z
     .enum(['COACH', 'TEAMMATES', 'OPEN_DAY', 'EXTRA_TRAINING'])
     .nullable(),
@@ -202,6 +237,7 @@ const stateSchema = z.object({
       'ADAPTATION',
     ])
     .nullable(),
+  transferArrivalChoice: transferArrivalChoiceSchema.nullable(),
   developmentApproach: z
     .enum(['PUSH', 'STEADY', 'TEAM_FIRST'])
     .nullable(),
@@ -353,6 +389,18 @@ function migrateLegacyState(value: unknown): unknown {
     }
   }
 
+  if (migrated.saveVersion === 4) {
+    migrated = {
+      ...migrated,
+      saveVersion: 5,
+      dataVersion: 5,
+      transferOffers: [],
+      selectedTransferChoiceId: null,
+      transferDecision: null,
+      transferArrivalChoice: null,
+    }
+  }
+
   return migrated
 }
 
@@ -411,7 +459,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE'].includes(
+    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
       parsed.phase,
     ) &&
     parsed.academyOffers.length !== 3
@@ -420,7 +468,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE'].includes(
+    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
       parsed.phase,
     ) &&
     (!parsed.selectedClubId ||
@@ -444,10 +492,31 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE'].includes(parsed.phase) &&
+    ['PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(parsed.phase) &&
     !parsed.contract
   ) {
     throw new Error('Professional-contract completion requires a contract.')
+  }
+
+  if (
+    parsed.phase === 'TRANSFER_WINDOW' &&
+    parsed.selectedTransferChoiceId === null
+  ) {
+    throw new Error('Transfer-window phase requires a selected option.')
+  }
+
+  if (
+    parsed.phase === 'TRANSFER_ARRIVAL' &&
+    parsed.transferDecision?.kind !== 'TRANSFER'
+  ) {
+    throw new Error('Transfer-arrival phase requires a completed transfer.')
+  }
+
+  if (
+    parsed.phase === 'TRANSFER_STAGE_COMPLETE' &&
+    !parsed.transferDecision
+  ) {
+    throw new Error('Transfer completion requires a decision.')
   }
 
   return parsed

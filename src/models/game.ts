@@ -82,6 +82,12 @@ export type ArrivalChoice =
   | 'OPEN_DAY'
   | 'EXTRA_TRAINING'
 
+export type TransferArrivalChoice =
+  | 'DINNER'
+  | 'LEADERS'
+  | 'FANS'
+  | 'NONE'
+
 export type GamePhase =
   | 'HOME'
   | 'CREATE_IDENTITY'
@@ -98,6 +104,9 @@ export type GamePhase =
   | 'PRO_CONTRACT_OFFER'
   | 'PRO_CONTRACT_COMPLETE'
   | 'PRO_STAGE_COMPLETE'
+  | 'TRANSFER_WINDOW'
+  | 'TRANSFER_ARRIVAL'
+  | 'TRANSFER_STAGE_COMPLETE'
 
 export interface CreationDraft {
   name: string
@@ -208,6 +217,26 @@ export interface ProfessionalContractOffer extends ContractState {
   negotiationMessage: string | null
 }
 
+export interface TransferOffer extends ContractState {
+  id: string
+  transferFeeEuro: number
+  interestScore: number
+  estimatedPotential: number
+  counterUsed: boolean
+  counterDirection: CounterOfferDirection | null
+  negotiationSucceeded: boolean | null
+  negotiationMessage: string | null
+  withdrawn: boolean
+}
+
+export interface TransferDecision {
+  kind: 'STAY' | 'TRANSFER'
+  fromClubId: string
+  toClubId: string
+  arrivalChoice: TransferArrivalChoice | null
+  cashSpentEuro: number
+}
+
 export interface HalfYearReport {
   fromLabel: string
   toLabel: string
@@ -270,8 +299,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 4
-  dataVersion: 4
+  saveVersion: 5
+  dataVersion: 5
   phase: GamePhase
   careerSeed: string
   startYear: number
@@ -285,7 +314,11 @@ export interface GameState {
   firstTeamRole: FirstTeamRole | null
   contract: ContractState | null
   professionalOffer: ProfessionalContractOffer | null
+  transferOffers: TransferOffer[]
+  selectedTransferChoiceId: 'STAY' | string | null
+  transferDecision: TransferDecision | null
   arrivalChoice: ArrivalChoice | null
+  transferArrivalChoice: TransferArrivalChoice | null
   trainingFocus: TrainingFocus | null
   developmentApproach: DevelopmentApproach | null
   trainingQualityBonus: number

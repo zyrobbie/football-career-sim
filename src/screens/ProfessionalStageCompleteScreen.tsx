@@ -6,6 +6,9 @@ import { formatEuro, roleLabel } from '../ui/format'
 export function ProfessionalStageCompleteScreen() {
   const game = useGameStore((state) => state.game)
   const reviewReport = useGameStore((state) => state.reviewReport)
+  const openTransferWindow = useGameStore(
+    (state) => state.openTransferWindow,
+  )
   if (
     !game?.player ||
     !game.lastReport ||
@@ -71,10 +74,17 @@ export function ProfessionalStageCompleteScreen() {
             <button
               type="button"
               className="button button--primary"
+              onClick={openTransferWindow}
+            >
+              进入第一个转会窗口
+              <Icon name="arrow" />
+            </button>
+            <button
+              type="button"
+              className="button button--secondary"
               onClick={reviewReport}
             >
               复查职业半年报告
-              <Icon name="arrow" />
             </button>
           </div>
         </div>

@@ -10,6 +10,7 @@ import { PlayerRevealScreen } from '../screens/PlayerRevealScreen'
 import { ProfessionalContractScreen } from '../screens/ProfessionalContractScreen'
 import { ProfessionalStageCompleteScreen } from '../screens/ProfessionalStageCompleteScreen'
 import { TrainingPlanScreen } from '../screens/TrainingPlanScreen'
+import { TransferWindowScreen } from '../screens/TransferWindowScreen'
 
 export function App() {
   const game = useGameStore((state) => state.game)
@@ -55,6 +56,12 @@ export function App() {
       screen = <ProfessionalContractScreen />
     } else if (game.phase === 'PRO_STAGE_COMPLETE') {
       screen = <ProfessionalStageCompleteScreen />
+    } else if (
+      game.phase === 'TRANSFER_WINDOW' ||
+      game.phase === 'TRANSFER_ARRIVAL' ||
+      game.phase === 'TRANSFER_STAGE_COMPLETE'
+    ) {
+      screen = <TransferWindowScreen />
     }
   }
 

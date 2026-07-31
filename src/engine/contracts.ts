@@ -78,14 +78,22 @@ export function evaluateFirstTeamRole(
   return 'FRINGE'
 }
 
-function salaryForOffer(input: {
+export function salaryForOffer(input: {
   player: Player
   role: YouthRole | FirstTeamRole
   teamLevel: TeamLevel
   careerSeed: string
   clubId: string
+  seedNamespace?: string
 }): number {
-  const { player, role, teamLevel, careerSeed, clubId } = input
+  const {
+    player,
+    role,
+    teamLevel,
+    careerSeed,
+    clubId,
+    seedNamespace = 'first-professional-salary',
+  } = input
   const overall = calculateOverall(
     player.attributes,
     player.primaryPosition,
@@ -93,7 +101,7 @@ function salaryForOffer(input: {
   const reputationMultiplier = 0.75 + player.reputation * 0.005
   const seedMultiplier = createRandom(
     careerSeed,
-    'first-professional-salary',
+    seedNamespace,
     clubId,
   ).float(0.9, 1.1)
   const youthMultiplier =

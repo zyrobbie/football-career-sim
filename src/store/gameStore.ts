@@ -12,6 +12,13 @@ import { createCareerSeed } from '../engine/random'
 import { DEMO_WINDOW_COUNT } from '../engine/careerTime'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
 import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
+import {
+  applyTransferArrivalChoice,
+  contractFromTransferOffer,
+  generateDomesticTransferOffers,
+  integrationBaseForTransfer,
+  resolveTransferCounter,
+} from '../engine/transfers'
 import type {
   ArrivalChoice,
   CareerPriority,
@@ -24,6 +31,7 @@ import type {
   Position,
   PreferredFoot,
   TrainingFocus,
+  TransferArrivalChoice,
   YouthRole,
 } from '../models/game'
 import {
@@ -64,6 +72,11 @@ interface GameStore {
   counterProfessionalOffer: (direction: CounterOfferDirection) => void
   acceptProfessionalContract: () => void
   startProfessionalCareer: () => void
+  openTransferWindow: () => void
+  selectTransferChoice: (choiceId: 'STAY' | string) => void
+  counterTransferOffer: (direction: CounterOfferDirection) => void
+  confirmTransferChoice: () => void
+  chooseTransferArrival: (choice: TransferArrivalChoice) => void
   goToPhase: (phase: GamePhase) => void
   clearError: () => void
 }
@@ -75,8 +88,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 4,
-    dataVersion: 4,
+    saveVersion: 5,
+    dataVersion: 5,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -104,7 +117,11 @@ function createInitialGame(): GameState {
     firstTeamRole: null,
     contract: null,
     professionalOffer: null,
+    transferOffers: [],
+    selectedTransferChoiceId: null,
+    transferDecision: null,
     arrivalChoice: null,
+    transferArrivalChoice: null,
     trainingFocus: null,
     developmentApproach: null,
     trainingQualityBonus: 0,
@@ -501,6 +518,196 @@ export const useGameStore = create<GameStore>((set, get) => {
         windowIndex: Math.max(DEMO_WINDOW_COUNT, game.windowIndex + 1),
         trainingFocus: null,
         developmentApproach: null,
+      })
+    },
+
+    openTransferWindow: () => {
+      const game = get().game
+      if (
+        !game?.player ||
+        !game.contract ||
+        !game.selectedClubId ||
+        game.phase !== 'PRO_STAGE_COMPLETE'
+      ) {
+        set({ error: '当前生涯还不能进入转会窗口。' })
+        return
+      }
+      const windowIndex =
+        game.transferOffers.length > 0
+          ? game.windowIndex
+          : game.windowIndex + 1
+      const transferOffers =
+        game.transferOffers.length > 0
+          ? game.transferOffers
+          : generateDomesticTransferOffers({
+              player: game.player,
+              currentClubId: game.selectedClubId,
+              currentTeamLevel: game.teamLevel,
+              latestReport: game.lastReport,
+              careerSeed: game.careerSeed,
+              windowIndex,
+            })
+      commit({
+        ...game,
+        phase: 'TRANSFER_WINDOW',
+        windowIndex,
+        transferOffers,
+        selectedTransferChoiceId:
+          game.selectedTransferChoiceId ?? 'STAY',
+        transferDecision: null,
+        transferArrivalChoice: null,
+      })
+    },
+
+    selectTransferChoice: (choiceId) => {
+      const game = get().game
+      if (!game || game.phase !== 'TRANSFER_WINDOW') return
+      if (
+        choiceId !== 'STAY' &&
+        !game.transferOffers.some(
+          (offer) => offer.id === choiceId && !offer.withdrawn,
+        )
+      ) {
+        set({ error: '这份转会报价已经失效。' })
+        return
+      }
+      commit({ ...game, selectedTransferChoiceId: choiceId })
+    },
+
+    counterTransferOffer: (direction) => {
+      const game = get().game
+      if (
+        !game?.player ||
+        !game.selectedTransferChoiceId ||
+        game.selectedTransferChoiceId === 'STAY'
+      ) {
+        set({ error: '请先选择一份可谈判的转会报价。' })
+        return
+      }
+      const selected = game.transferOffers.find(
+        (offer) => offer.id === game.selectedTransferChoiceId,
+      )
+      if (!selected) {
+        set({ error: '这份转会报价已经失效。' })
+        return
+      }
+      try {
+        const updated = resolveTransferCounter({
+          offer: selected,
+          direction,
+          player: game.player,
+          careerSeed: game.careerSeed,
+          windowIndex: game.windowIndex,
+        })
+        commit({
+          ...game,
+          transferOffers: game.transferOffers.map((offer) =>
+            offer.id === updated.id ? updated : offer,
+          ),
+          selectedTransferChoiceId: updated.withdrawn
+            ? 'STAY'
+            : updated.id,
+        })
+      } catch (error) {
+        set({
+          error:
+            error instanceof Error
+              ? error.message
+              : '反报价没有成功提交。',
+        })
+      }
+    },
+
+    confirmTransferChoice: () => {
+      const game = get().game
+      if (
+        !game?.player ||
+        !game.contract ||
+        !game.selectedClubId ||
+        !game.selectedTransferChoiceId
+      ) {
+        set({ error: '请先确定本窗口的去向。' })
+        return
+      }
+      const fromClubId = game.selectedClubId
+      if (game.selectedTransferChoiceId === 'STAY') {
+        commit({
+          ...game,
+          phase: 'TRANSFER_STAGE_COMPLETE',
+          transferDecision: {
+            kind: 'STAY',
+            fromClubId,
+            toClubId: fromClubId,
+            arrivalChoice: null,
+            cashSpentEuro: 0,
+          },
+        })
+        return
+      }
+
+      const offer = game.transferOffers.find(
+        (candidate) =>
+          candidate.id === game.selectedTransferChoiceId &&
+          !candidate.withdrawn,
+      )
+      if (!offer) {
+        set({ error: '这份转会报价已经失效。' })
+        return
+      }
+      const contract = contractFromTransferOffer(offer)
+      const isFirstTeam =
+        contract.promisedTeamLevel === 'FIRST_TEAM'
+      const integration = integrationBaseForTransfer(game.player)
+      commit({
+        ...game,
+        phase: 'TRANSFER_ARRIVAL',
+        player: { ...game.player, ...integration },
+        selectedClubId: offer.clubId,
+        contract,
+        teamLevel: contract.promisedTeamLevel,
+        youthRole: isFirstTeam
+          ? null
+          : (contract.promisedRole as YouthRole),
+        firstTeamRole: isFirstTeam
+          ? (contract.promisedRole as FirstTeamRole)
+          : null,
+        firstTeamProgress: createFirstTeamProgress(offer.clubId),
+        transferDecision: {
+          kind: 'TRANSFER',
+          fromClubId,
+          toClubId: offer.clubId,
+          arrivalChoice: null,
+          cashSpentEuro: 0,
+        },
+      })
+    },
+
+    chooseTransferArrival: (choice) => {
+      const game = get().game
+      if (
+        !game?.player ||
+        game.phase !== 'TRANSFER_ARRIVAL' ||
+        game.transferDecision?.kind !== 'TRANSFER'
+      ) {
+        set({ error: '当前没有需要处理的转会融入事件。' })
+        return
+      }
+      const result = applyTransferArrivalChoice({
+        player: game.player,
+        choice,
+        cashEuro: game.cashEuro,
+      })
+      commit({
+        ...game,
+        phase: 'TRANSFER_STAGE_COMPLETE',
+        player: result.player,
+        cashEuro: result.cashEuro,
+        transferArrivalChoice: choice,
+        transferDecision: {
+          ...game.transferDecision,
+          arrivalChoice: choice,
+          cashSpentEuro: result.cashSpentEuro,
+        },
       })
     },
 

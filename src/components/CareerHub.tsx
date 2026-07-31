@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react'
-import { ATTRIBUTE_LABELS } from '../data/balance'
+import { ATTRIBUTE_LABELS, CLUBS } from '../data/balance'
 import {
   careerWindowLabel,
   playerAgeAtWindow,
@@ -53,6 +53,7 @@ function visibleWindowIndex(game: GameState): number {
 
 function clubNameFor(game: GameState, clubId: string): string {
   return (
+    CLUBS.find((club) => club.id === clubId)?.name ??
     game.academyOffers.find((offer) => offer.club.id === clubId)?.club.name ??
     '未知俱乐部'
   )
@@ -114,13 +115,14 @@ export function CareerHub({
   if (!game.player) return null
   const player = game.player
   const currentWindowIndex = visibleWindowIndex(game)
-  const currentOffer = game.selectedClubId
-    ? game.academyOffers.find(
+  const currentClub = game.selectedClubId
+    ? CLUBS.find((club) => club.id === game.selectedClubId) ??
+      game.academyOffers.find(
         (offer) => offer.club.id === game.selectedClubId,
-      )
+      )?.club
     : null
-  const clubName = currentOffer
-    ? `${currentOffer.club.name}${
+  const clubName = currentClub
+    ? `${currentClub.name}${
         game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'
       }`
     : '等待选择第一家俱乐部'
@@ -156,10 +158,10 @@ export function CareerHub({
           </span>
           <span className="topbar__context">
             <span className="topbar__label--full">
-              {currentOffer ? `当前俱乐部：${clubName}` : sectionLabel}
+              {currentClub ? `当前俱乐部：${clubName}` : sectionLabel}
             </span>
             <span className="topbar__label--compact">
-              {currentOffer ? currentOffer.club.name : sectionLabel}
+              {currentClub ? currentClub.name : sectionLabel}
             </span>
           </span>
         </>
@@ -207,7 +209,9 @@ function PlayerOverview({
   totalStats: { appearances: number; goals: number; assists: number }
 }) {
   const player = game.player!
-  const latest = game.lastReport
+  const latest = game.phase.startsWith('TRANSFER_')
+    ? null
+    : game.lastReport
 
   return (
     <section className="career-overview" aria-label="球员总览">
@@ -305,7 +309,9 @@ function OverviewNumber({
 
 function CareerMeters({ game }: { game: GameState }) {
   const player = game.player!
-  const latest = game.lastReport
+  const latest = game.phase.startsWith('TRANSFER_')
+    ? null
+    : game.lastReport
   const meters = [
     ['竞技状态', player.form, latest?.states.form.delta],
     ['身体状态', player.fitness, latest?.states.fitness.delta],
@@ -353,13 +359,19 @@ function FirstTeamPath({ game }: { game: GameState }) {
         ? game.firstTeamRole
         : game.youthRole
     const promisedRole = game.contract.promisedRole
+    const transferContractLength = game.transferOffers.find(
+      (offer) =>
+        offer.clubId === game.contract?.clubId &&
+        !offer.withdrawn,
+    )?.remainingHalfYears
     const contractProgress = Math.max(
       0,
       Math.min(
         100,
         (game.contract.remainingHalfYears /
           Math.max(
-            game.professionalOffer?.remainingHalfYears ??
+            transferContractLength ??
+              game.professionalOffer?.remainingHalfYears ??
               game.contract.remainingHalfYears,
             1,
           )) *
@@ -367,7 +379,9 @@ function FirstTeamPath({ game }: { game: GameState }) {
       ),
     )
     const fulfilled =
-      game.lastReport?.contract?.promiseFulfilled ??
+      (game.phase.startsWith('TRANSFER_')
+        ? null
+        : game.lastReport?.contract?.promiseFulfilled) ??
       (game.contract.brokenPromiseWindows === 0)
 
     return (

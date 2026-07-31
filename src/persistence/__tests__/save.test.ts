@@ -44,14 +44,16 @@ function legacyIdentityState() {
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
-    expect(migrated.saveVersion).toBe(4)
-    expect(migrated.dataVersion).toBe(4)
+    expect(migrated.saveVersion).toBe(5)
+    expect(migrated.dataVersion).toBe(5)
     expect(migrated.draft.jerseyNumber).toBe(10)
     expect(migrated.draft.preferredFoot).toBe('RIGHT')
     expect(migrated.teamLevel).toBe('YOUTH')
     expect(migrated.firstTeamProgress.attention).toBe(0)
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
+    expect(migrated.transferOffers).toEqual([])
+    expect(migrated.transferDecision).toBeNull()
   })
 
   it('rejects an out-of-range jersey number', () => {
@@ -154,9 +156,11 @@ describe('save migration', () => {
       dataVersion: 3,
     })
 
-    expect(migrated.saveVersion).toBe(4)
+    expect(migrated.saveVersion).toBe(5)
     expect(migrated.firstTeamRole).toBeNull()
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
+    expect(migrated.transferOffers).toEqual([])
+    expect(migrated.selectedTransferChoiceId).toBeNull()
   })
 })

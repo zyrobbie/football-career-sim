@@ -117,5 +117,40 @@ describe('academy two-year progression', () => {
     expect(useGameStore.getState().game?.phase).toBe(
       'PRO_STAGE_COMPLETE',
     )
+
+    store.openTransferWindow()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_WINDOW')
+    expect(game?.windowIndex).toBe(5)
+    expect(game?.transferOffers).toHaveLength(3)
+    expect(game?.selectedTransferChoiceId).toBe('STAY')
+
+    const transferOffer = game!.transferOffers[0]!
+    store.selectTransferChoice(transferOffer.id)
+    store.counterTransferOffer('SALARY')
+    game = useGameStore.getState().game
+    const negotiated = game!.transferOffers.find(
+      (candidate) => candidate.id === transferOffer.id,
+    )!
+    expect(negotiated.counterUsed).toBe(true)
+
+    const signable =
+      game!.transferOffers.find((candidate) => !candidate.withdrawn) ??
+      null
+    expect(signable).not.toBeNull()
+    store.selectTransferChoice(signable!.id)
+    store.confirmTransferChoice()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_ARRIVAL')
+    expect(game?.selectedClubId).toBe(signable!.clubId)
+    expect(game?.contract?.clubId).toBe(signable!.clubId)
+
+    const cashBeforeArrival = game!.cashEuro
+    store.chooseTransferArrival('LEADERS')
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_STAGE_COMPLETE')
+    expect(game?.transferDecision?.kind).toBe('TRANSFER')
+    expect(game?.transferDecision?.arrivalChoice).toBe('LEADERS')
+    expect(game?.cashEuro).toBe(cashBeforeArrival)
   })
 })
