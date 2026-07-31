@@ -116,9 +116,41 @@ const firstTeamProgressSchema = z.object({
   ]),
 })
 
+const contractSchema = z.object({
+  type: z.enum([
+    'FIRST_PRO',
+    'PERMANENT_TRANSFER',
+    'LOAN',
+    'FREE_TRANSFER',
+    'RENEWAL',
+    'DOMESTIC_ACADEMY_TRANSFER',
+  ]),
+  clubId: z.string().min(1),
+  remainingHalfYears: z.number().int().positive(),
+  annualSalaryEuro: z.number().int().nonnegative(),
+  promisedTeamLevel: z.enum(['YOUTH', 'FIRST_TEAM']),
+  promisedRole: z
+    .enum(['FRINGE', 'SUBSTITUTE', 'ROTATION', 'STARTER', 'CORE'])
+    .nullable(),
+  releaseClauseEuro: z.number().int().nonnegative().nullable(),
+  clubOptionYears: z.number().int().min(0).max(2),
+  parentClubId: z.string().nullable(),
+  brokenPromiseWindows: z.number().int().nonnegative(),
+})
+
+const professionalOfferSchema = contractSchema.extend({
+  id: z.string().min(1),
+  counterUsed: z.boolean(),
+  counterDirection: z
+    .enum(['SALARY', 'ROLE', 'RELEASE_CLAUSE'])
+    .nullable(),
+  negotiationSucceeded: z.boolean().nullable(),
+  negotiationMessage: z.string().nullable(),
+})
+
 const stateSchema = z.object({
-  saveVersion: z.literal(3),
-  dataVersion: z.literal(3),
+  saveVersion: z.literal(4),
+  dataVersion: z.literal(4),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -132,6 +164,8 @@ const stateSchema = z.object({
     'SIMULATION_READY',
     'HALF_YEAR_REPORT',
     'CAREER_DASHBOARD',
+    'PRO_CONTRACT_OFFER',
+    'PRO_CONTRACT_COMPLETE',
   ]),
   careerSeed: z.string().min(8),
   startYear: z.number().int().min(2020).max(9999),
@@ -149,6 +183,11 @@ const stateSchema = z.object({
   selectedClubId: z.string().nullable(),
   teamLevel: z.enum(['YOUTH', 'FIRST_TEAM']),
   youthRole: z.enum(['ROTATION', 'STARTER', 'CORE']).nullable(),
+  firstTeamRole: z
+    .enum(['FRINGE', 'SUBSTITUTE', 'ROTATION', 'STARTER', 'CORE'])
+    .nullable(),
+  contract: contractSchema.nullable(),
+  professionalOffer: professionalOfferSchema.nullable(),
   arrivalChoice: z
     .enum(['COACH', 'TEAMMATES', 'OPEN_DAY', 'EXTRA_TRAINING'])
     .nullable(),
@@ -224,78 +263,96 @@ function migrateLegacyState(value: unknown): unknown {
     }
   }
 
-  if (migrated.saveVersion !== 2) return migrated
-  const clubId =
-    typeof migrated.selectedClubId === 'string'
-      ? migrated.selectedClubId
-      : null
-  const history = Array.isArray(migrated.history)
-    ? migrated.history.map((entry, index) =>
-        isRecord(entry)
-          ? {
-              ...entry,
-              developmentApproach: null,
-              firstTeamAttention: clubId
-                ? Math.min(45, 18 + (index + 1) * 8)
-                : 0,
-              teamLevel: 'YOUTH',
-            }
-          : entry,
-      )
-    : migrated.history
-  const attention =
-    Array.isArray(history) && history.length > 0
-      ? Number(
-          (history[history.length - 1] as Record<string, unknown>)
-            .firstTeamAttention ?? 18,
+  if (migrated.saveVersion === 2) {
+    const clubId =
+      typeof migrated.selectedClubId === 'string'
+        ? migrated.selectedClubId
+        : null
+    const history = Array.isArray(migrated.history)
+      ? migrated.history.map((entry, index) =>
+          isRecord(entry)
+            ? {
+                ...entry,
+                developmentApproach: null,
+                firstTeamAttention: clubId
+                  ? Math.min(45, 18 + (index + 1) * 8)
+                  : 0,
+                teamLevel: 'YOUTH',
+              }
+            : entry,
         )
-      : clubId
-        ? 18
-        : 0
-  const firstTeamProgress = {
-    clubId,
-    attention,
-    readiness: 0,
-    matchProof: 0,
-    coachBacking: 0,
-    status: attention >= 35 ? 'WATCHLIST' : 'DEVELOPING',
-  }
-  const lastReport = isRecord(migrated.lastReport)
-    ? {
-        ...migrated.lastReport,
-        firstTeam: {
-          attention: {
-            before: Math.max(0, attention - 8),
-            after: attention,
-            delta: Math.min(8, attention),
+      : migrated.history
+    const attention =
+      Array.isArray(history) && history.length > 0
+        ? Number(
+            (history[history.length - 1] as Record<string, unknown>)
+              .firstTeamAttention ?? 18,
+          )
+        : clubId
+          ? 18
+          : 0
+    const firstTeamProgress = {
+      clubId,
+      attention,
+      readiness: 0,
+      matchProof: 0,
+      coachBacking: 0,
+      status: attention >= 35 ? 'WATCHLIST' : 'DEVELOPING',
+    }
+    const lastReport = isRecord(migrated.lastReport)
+      ? {
+          ...migrated.lastReport,
+          firstTeam: {
+            attention: {
+              before: Math.max(0, attention - 8),
+              after: attention,
+              delta: Math.min(8, attention),
+            },
+            readiness: { before: 0, after: 0, delta: 0 },
+            matchProof: { before: 0, after: 0, delta: 0 },
+            coachBacking: { before: 0, after: 0, delta: 0 },
+            statusBefore: 'DEVELOPING',
+            statusAfter: firstTeamProgress.status,
+            outcomeSummary: '一线队通道数据已从旧存档安全接续。',
           },
-          readiness: { before: 0, after: 0, delta: 0 },
-          matchProof: { before: 0, after: 0, delta: 0 },
-          coachBacking: { before: 0, after: 0, delta: 0 },
-          statusBefore: 'DEVELOPING',
-          statusAfter: firstTeamProgress.status,
-          outcomeSummary: '一线队通道数据已从旧存档安全接续。',
-        },
-      }
-    : migrated.lastReport
-  const shouldContinueOldDemo =
-    migrated.phase === 'CAREER_DASHBOARD' &&
-    Array.isArray(history) &&
-    history.length < 4
+        }
+      : migrated.lastReport
+    const shouldContinueOldDemo =
+      migrated.phase === 'CAREER_DASHBOARD' &&
+      Array.isArray(history) &&
+      history.length < 4
 
-  return {
-    ...migrated,
-    saveVersion: 3,
-    dataVersion: 3,
-    phase: shouldContinueOldDemo ? 'HALF_YEAR_PLAN' : migrated.phase,
-    windowIndex: shouldContinueOldDemo ? history.length : migrated.windowIndex,
-    teamLevel: 'YOUTH',
-    trainingFocus: shouldContinueOldDemo ? null : migrated.trainingFocus,
-    developmentApproach: null,
-    firstTeamProgress,
-    lastReport,
-    history,
+    migrated = {
+      ...migrated,
+      saveVersion: 3,
+      dataVersion: 3,
+      phase: shouldContinueOldDemo ? 'HALF_YEAR_PLAN' : migrated.phase,
+      windowIndex: shouldContinueOldDemo
+        ? history.length
+        : migrated.windowIndex,
+      teamLevel: 'YOUTH',
+      trainingFocus: shouldContinueOldDemo
+        ? null
+        : migrated.trainingFocus,
+      developmentApproach: null,
+      firstTeamProgress,
+      lastReport,
+      history,
+    }
   }
+
+  if (migrated.saveVersion === 3) {
+    migrated = {
+      ...migrated,
+      saveVersion: 4,
+      dataVersion: 4,
+      firstTeamRole: null,
+      contract: null,
+      professionalOffer: null,
+    }
+  }
+
+  return migrated
 }
 
 export function validateGameState(value: unknown): GameState {
@@ -353,7 +410,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD'].includes(
+    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE'].includes(
       parsed.phase,
     ) &&
     parsed.academyOffers.length !== 3
@@ -362,10 +419,11 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD'].includes(
+    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE'].includes(
       parsed.phase,
     ) &&
-    (!parsed.selectedClubId || !parsed.youthRole)
+    (!parsed.selectedClubId ||
+      (parsed.teamLevel === 'YOUTH' && !parsed.youthRole))
   ) {
     throw new Error(`Phase ${parsed.phase} requires a selected club and role.`)
   }
@@ -375,6 +433,20 @@ export function validateGameState(value: unknown): GameState {
     (!parsed.arrivalChoice || !parsed.trainingFocus)
   ) {
     throw new Error('Simulation-ready state is missing player choices.')
+  }
+
+  if (
+    parsed.phase === 'PRO_CONTRACT_OFFER' &&
+    !parsed.professionalOffer
+  ) {
+    throw new Error('Professional-contract phase requires an offer.')
+  }
+
+  if (
+    parsed.phase === 'PRO_CONTRACT_COMPLETE' &&
+    !parsed.contract
+  ) {
+    throw new Error('Professional-contract completion requires a contract.')
   }
 
   return parsed

@@ -10,6 +10,9 @@ import { firstTeamStatusLabel } from '../ui/format'
 export function DemoCompleteScreen() {
   const game = useGameStore((state) => state.game)
   const reviewReport = useGameStore((state) => state.reviewReport)
+  const openProfessionalContract = useGameStore(
+    (state) => state.openProfessionalContract,
+  )
   const deleteCareer = useGameStore((state) => state.deleteCareer)
   if (!game?.player || !game.lastReport) return null
   const nextWindowIndex = game.windowIndex + 1
@@ -75,21 +78,28 @@ export function DemoCompleteScreen() {
             <button
               type="button"
               className="button button--primary"
-              onClick={reviewReport}
+              onClick={openProfessionalContract}
             >
-              重新查看晋升评估报告
+              查看首份职业合同
               <Icon name="arrow" />
             </button>
             <button
               type="button"
               className="button button--secondary"
+              onClick={reviewReport}
+            >
+              复查晋升评估
+            </button>
+            <button
+              type="button"
+              className="text-button text-button--danger demo-complete__delete"
               onClick={() => {
                 if (window.confirm('确定删除当前Demo生涯并返回首页吗？')) {
                   deleteCareer()
                 }
               }}
             >
-              删除并重新开始
+              删除生涯
             </button>
           </div>
         </div>

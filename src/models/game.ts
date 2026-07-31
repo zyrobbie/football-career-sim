@@ -27,7 +27,27 @@ export type Attributes = Record<AttributeKey, number>
 
 export type YouthRole = 'ROTATION' | 'STARTER' | 'CORE'
 
+export type FirstTeamRole =
+  | 'FRINGE'
+  | 'SUBSTITUTE'
+  | 'ROTATION'
+  | 'STARTER'
+  | 'CORE'
+
 export type TeamLevel = 'YOUTH' | 'FIRST_TEAM'
+
+export type ContractType =
+  | 'FIRST_PRO'
+  | 'PERMANENT_TRANSFER'
+  | 'LOAN'
+  | 'FREE_TRANSFER'
+  | 'RENEWAL'
+  | 'DOMESTIC_ACADEMY_TRANSFER'
+
+export type CounterOfferDirection =
+  | 'SALARY'
+  | 'ROLE'
+  | 'RELEASE_CLAUSE'
 
 export type FirstTeamStatus =
   | 'DEVELOPING'
@@ -73,6 +93,8 @@ export type GamePhase =
   | 'SIMULATION_READY'
   | 'HALF_YEAR_REPORT'
   | 'CAREER_DASHBOARD'
+  | 'PRO_CONTRACT_OFFER'
+  | 'PRO_CONTRACT_COMPLETE'
 
 export interface CreationDraft {
   name: string
@@ -162,6 +184,27 @@ export interface FirstTeamProgress {
   status: FirstTeamStatus
 }
 
+export interface ContractState {
+  type: ContractType
+  clubId: string
+  remainingHalfYears: number
+  annualSalaryEuro: number
+  promisedTeamLevel: TeamLevel
+  promisedRole: YouthRole | FirstTeamRole | null
+  releaseClauseEuro: number | null
+  clubOptionYears: number
+  parentClubId: string | null
+  brokenPromiseWindows: number
+}
+
+export interface ProfessionalContractOffer extends ContractState {
+  id: string
+  counterUsed: boolean
+  counterDirection: CounterOfferDirection | null
+  negotiationSucceeded: boolean | null
+  negotiationMessage: string | null
+}
+
 export interface HalfYearReport {
   fromLabel: string
   toLabel: string
@@ -213,8 +256,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 3
-  dataVersion: 3
+  saveVersion: 4
+  dataVersion: 4
   phase: GamePhase
   careerSeed: string
   startYear: number
@@ -225,6 +268,9 @@ export interface GameState {
   selectedClubId: string | null
   teamLevel: TeamLevel
   youthRole: YouthRole | null
+  firstTeamRole: FirstTeamRole | null
+  contract: ContractState | null
+  professionalOffer: ProfessionalContractOffer | null
   arrivalChoice: ArrivalChoice | null
   trainingFocus: TrainingFocus | null
   developmentApproach: DevelopmentApproach | null

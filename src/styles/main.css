@@ -4971,6 +4971,350 @@ svg {
   }
 }
 
+/* First professional contract */
+
+.contract-sheet {
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.contract-sheet > header {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gold);
+}
+
+.contract-sheet > header strong {
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 19px;
+}
+
+.contract-sheet > header span {
+  color: var(--gold-dark);
+  font-size: 12px;
+}
+
+.contract-sheet dl {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  margin: 0;
+}
+
+.contract-sheet dl div {
+  min-width: 0;
+  padding: 14px 9px;
+  border-left: 1px solid var(--line);
+  text-align: center;
+}
+
+.contract-sheet dl div:first-child {
+  border-left: 0;
+}
+
+.contract-sheet dt {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.contract-sheet dd {
+  margin: 8px 0 0;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contract-counter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+  border: 1px solid var(--line);
+}
+
+.contract-counter-grid button {
+  min-width: 0;
+  min-height: 72px;
+  padding: 11px 12px;
+  border: 0;
+  border-left: 1px solid var(--line);
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.contract-counter-grid button:first-child {
+  border-left: 0;
+}
+
+.contract-counter-grid button:hover:not(:disabled),
+.contract-counter-grid button:focus-visible {
+  background: rgba(10, 71, 56, 0.08);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.contract-counter-grid button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.contract-counter-grid strong,
+.contract-counter-grid small {
+  display: block;
+}
+
+.contract-counter-grid strong {
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 16px;
+}
+
+.contract-counter-grid small {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.contract-negotiation-result {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 9px 11px;
+  color: var(--gold-dark);
+  border: 1px solid rgba(189, 157, 86, 0.48);
+  background: rgba(189, 157, 86, 0.08);
+  font-size: 12px;
+}
+
+.contract-negotiation-result.is-success {
+  color: var(--positive);
+  border-color: rgba(39, 123, 78, 0.38);
+  background: rgba(39, 123, 78, 0.07);
+}
+
+.contract-negotiation-result svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+}
+
+.contract-actions {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.75fr) minmax(280px, 1.25fr);
+  align-items: center;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.contract-actions .button {
+  width: 100%;
+}
+
+.contract-actions p {
+  color: var(--muted);
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.contract-complete {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 20px;
+  padding-top: 6px;
+}
+
+.contract-complete__mark {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  color: #e3c57f;
+  background: var(--ink);
+  border: 1px solid var(--gold);
+}
+
+.contract-complete__mark svg {
+  width: 38px;
+  height: 38px;
+}
+
+.contract-complete h1 {
+  color: var(--ink);
+  margin: 6px 0 8px;
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1.2;
+}
+
+.contract-complete > div > p {
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.65;
+}
+
+.contract-complete .contract-sheet {
+  margin-top: 16px;
+}
+
+.contract-complete__next {
+  color: var(--gold-dark) !important;
+  margin-top: 14px !important;
+  font-family: var(--heading);
+}
+
+.demo-complete__delete {
+  align-self: center;
+  margin-left: auto;
+}
+
+@media (max-width: 720px) {
+  .contract-stage .career-panel-heading {
+    min-height: 28px;
+  }
+
+  .contract-sheet {
+    margin-top: 6px;
+  }
+
+  .contract-sheet > header {
+    min-height: 30px;
+    padding: 4px 7px;
+  }
+
+  .contract-sheet > header strong {
+    font-size: 13px;
+  }
+
+  .contract-sheet > header span {
+    font-size: 9px;
+  }
+
+  .contract-sheet dl div {
+    padding: 6px 3px;
+  }
+
+  .contract-sheet dt {
+    font-size: 8px;
+  }
+
+  .contract-sheet dd {
+    margin-top: 3px;
+    font-size: 10px;
+  }
+
+  .contract-counter-grid {
+    margin-top: 5px;
+  }
+
+  .contract-counter-grid button {
+    min-height: 48px;
+    padding: 5px;
+  }
+
+  .contract-counter-grid strong {
+    font-size: 11px;
+  }
+
+  .contract-counter-grid small {
+    margin-top: 2px;
+    font-size: 8px;
+    line-height: 1.2;
+  }
+
+  .contract-negotiation-result {
+    gap: 4px;
+    margin-top: 5px;
+    padding: 5px 6px;
+    font-size: 8px;
+  }
+
+  .contract-negotiation-result svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .contract-actions {
+    grid-template-columns: 1fr auto;
+    gap: 7px;
+    margin-top: 5px;
+  }
+
+  .contract-actions .button {
+    min-height: 34px;
+    padding: 0 8px;
+    gap: 5px;
+    font-size: 10px;
+  }
+
+  .contract-actions .button svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .contract-actions p {
+    width: min(34vw, 160px);
+    font-size: 7px;
+    line-height: 1.25;
+  }
+
+  .contract-complete {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 8px;
+    padding-top: 1px;
+  }
+
+  .contract-complete__mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .contract-complete__mark svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contract-complete .decision-kicker {
+    font-size: 9px;
+  }
+
+  .contract-complete h1 {
+    margin: 2px 0 3px;
+    font-size: 19px;
+  }
+
+  .contract-complete > div > p {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  .contract-complete .contract-sheet {
+    margin-top: 6px;
+  }
+
+  .contract-complete__next {
+    margin-top: 6px !important;
+    font-size: 9px !important;
+  }
+
+  .demo-complete__delete {
+    grid-column: 1 / -1;
+    justify-self: end;
+    min-height: 20px;
+    margin: 0;
+    font-size: 8px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

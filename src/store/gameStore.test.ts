@@ -76,5 +76,23 @@ describe('academy two-year progression', () => {
     game = useGameStore.getState().game
     expect(game?.phase).toBe('CAREER_DASHBOARD')
     expect(game?.windowIndex).toBe(3)
+
+    store.openProfessionalContract()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('PRO_CONTRACT_OFFER')
+    expect(game?.professionalOffer?.clubId).toBe(offer!.club.id)
+    expect(game?.professionalOffer?.counterUsed).toBe(false)
+
+    store.counterProfessionalOffer('SALARY')
+    game = useGameStore.getState().game
+    expect(game?.professionalOffer?.counterUsed).toBe(true)
+    expect(game?.professionalOffer?.negotiationSucceeded).not.toBeNull()
+
+    store.acceptProfessionalContract()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('PRO_CONTRACT_COMPLETE')
+    expect(game?.contract?.type).toBe('FIRST_PRO')
+    expect(game?.contract?.clubId).toBe(offer!.club.id)
+    expect(game?.contract?.annualSalaryEuro).toBeGreaterThan(0)
   })
 })

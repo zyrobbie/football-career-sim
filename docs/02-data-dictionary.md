@@ -272,6 +272,7 @@ interface ContractState {
   clubId: EntityId
   remainingHalfYears: number
   annualSalaryEuro: Euro
+  promisedTeamLevel: TeamLevel
   promisedRole: YouthRole | FirstTeamRole | null
   releaseClauseEuro: Euro | null
   clubOptionYears: number

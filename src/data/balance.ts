@@ -255,6 +255,15 @@ export const YOUTH_BENCHMARKS: Record<Club['tier'], number> = {
   6: 33,
 }
 
+export const FIRST_TEAM_BENCHMARKS: Record<Club['tier'], number> = {
+  1: 85,
+  2: 80,
+  3: 74,
+  4: 68,
+  5: 62,
+  6: 56,
+}
+
 export const FACILITY_SCORES: Record<Club['facilityTier'], number> = {
   1: 95,
   2: 88,

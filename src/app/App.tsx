@@ -7,6 +7,7 @@ import { DemoCompleteScreen } from '../screens/DemoCompleteScreen'
 import { HalfYearReportScreen } from '../screens/HalfYearReportScreen'
 import { HomeScreen } from '../screens/HomeScreen'
 import { PlayerRevealScreen } from '../screens/PlayerRevealScreen'
+import { ProfessionalContractScreen } from '../screens/ProfessionalContractScreen'
 import { TrainingPlanScreen } from '../screens/TrainingPlanScreen'
 
 export function App() {
@@ -46,6 +47,11 @@ export function App() {
       screen = <HalfYearReportScreen />
     } else if (game.phase === 'CAREER_DASHBOARD') {
       screen = <DemoCompleteScreen />
+    } else if (
+      game.phase === 'PRO_CONTRACT_OFFER' ||
+      game.phase === 'PRO_CONTRACT_COMPLETE'
+    ) {
+      screen = <ProfessionalContractScreen />
     }
   }
 

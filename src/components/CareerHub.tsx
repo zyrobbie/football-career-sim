@@ -43,7 +43,9 @@ interface LedgerRow {
 
 function visibleWindowIndex(game: GameState): number {
   return game.phase === 'HALF_YEAR_REPORT' ||
-    game.phase === 'CAREER_DASHBOARD'
+    game.phase === 'CAREER_DASHBOARD' ||
+    game.phase === 'PRO_CONTRACT_OFFER' ||
+    game.phase === 'PRO_CONTRACT_COMPLETE'
     ? game.windowIndex + 1
     : game.windowIndex
 }
@@ -69,7 +71,12 @@ function buildLedgerRows(game: GameState): LedgerRow[] {
   }))
 
   const shouldShowPending =
-    !['HALF_YEAR_REPORT', 'CAREER_DASHBOARD'].includes(game.phase) &&
+    ![
+      'HALF_YEAR_REPORT',
+      'CAREER_DASHBOARD',
+      'PRO_CONTRACT_OFFER',
+      'PRO_CONTRACT_COMPLETE',
+    ].includes(game.phase) &&
     !game.history.some((entry) => entry.windowIndex === game.windowIndex)
 
   if (shouldShowPending) {
@@ -211,7 +218,9 @@ function PlayerOverview({
         <strong>{clubName}</strong>
         <small>
           {game.teamLevel === 'FIRST_TEAM'
-            ? '一线队球员'
+            ? game.firstTeamRole
+              ? `一线队 · ${roleLabel(game.firstTeamRole)}`
+              : '一线队球员'
             : game.youthRole
               ? `青年队 · ${roleLabel(game.youthRole)}`
               : '自由球员'}

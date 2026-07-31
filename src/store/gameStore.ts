@@ -1,6 +1,11 @@
 import { create } from 'zustand'
 import { SECONDARY_POSITIONS } from '../data/balance'
 import { generateAcademyOffers } from '../engine/offers'
+import {
+  contractFromOffer,
+  generateFirstProfessionalOffer,
+  resolveFirstContractCounter,
+} from '../engine/contracts'
 import { createFirstTeamProgress } from '../engine/firstTeamPath'
 import { generatePlayer } from '../engine/player'
 import { createCareerSeed } from '../engine/random'
@@ -9,13 +14,16 @@ import { simulateHalfYear } from '../engine/simulateHalfYear'
 import type {
   ArrivalChoice,
   CareerPriority,
+  CounterOfferDirection,
   DevelopmentApproach,
+  FirstTeamRole,
   GamePhase,
   GameState,
   OverseasIntent,
   Position,
   PreferredFoot,
   TrainingFocus,
+  YouthRole,
 } from '../models/game'
 import {
   deleteSavedCareer,
@@ -51,6 +59,9 @@ interface GameStore {
   ) => void
   advanceAfterReport: () => void
   reviewReport: () => void
+  openProfessionalContract: () => void
+  counterProfessionalOffer: (direction: CounterOfferDirection) => void
+  acceptProfessionalContract: () => void
   goToPhase: (phase: GamePhase) => void
   clearError: () => void
 }
@@ -62,8 +73,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 3,
-    dataVersion: 3,
+    saveVersion: 4,
+    dataVersion: 4,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -88,6 +99,9 @@ function createInitialGame(): GameState {
     selectedClubId: null,
     teamLevel: 'YOUTH',
     youthRole: null,
+    firstTeamRole: null,
+    contract: null,
+    professionalOffer: null,
     arrivalChoice: null,
     trainingFocus: null,
     developmentApproach: null,
@@ -360,6 +374,80 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (!game?.lastReport) return
       commit({ ...game, phase: 'HALF_YEAR_REPORT' })
+    },
+
+    openProfessionalContract: () => {
+      const game = get().game
+      if (
+        !game?.player ||
+        !game.selectedClubId ||
+        !game.youthRole
+      ) {
+        set({ error: '当前生涯还不具备签署首份职业合同的条件。' })
+        return
+      }
+      const club = game.academyOffers.find(
+        (candidate) => candidate.club.id === game.selectedClubId,
+      )?.club
+      if (!club) {
+        set({ error: '当前俱乐部资料缺失，无法生成合同。' })
+        return
+      }
+      const professionalOffer =
+        game.professionalOffer ??
+        generateFirstProfessionalOffer({
+          player: game.player,
+          club,
+          youthRole: game.youthRole,
+          teamLevel: game.teamLevel,
+          firstTeamProgress: game.firstTeamProgress,
+          careerSeed: game.careerSeed,
+        })
+      commit({
+        ...game,
+        phase: 'PRO_CONTRACT_OFFER',
+        professionalOffer,
+      })
+    },
+
+    counterProfessionalOffer: (direction) => {
+      const game = get().game
+      if (!game?.player || !game.professionalOffer) return
+      try {
+        const professionalOffer = resolveFirstContractCounter({
+          offer: game.professionalOffer,
+          direction,
+          player: game.player,
+          careerSeed: game.careerSeed,
+        })
+        commit({ ...game, professionalOffer })
+      } catch (error) {
+        set({
+          error:
+            error instanceof Error
+              ? error.message
+              : '反报价没有成功提交。',
+        })
+      }
+    },
+
+    acceptProfessionalContract: () => {
+      const game = get().game
+      if (!game?.professionalOffer) return
+      const contract = contractFromOffer(game.professionalOffer)
+      const isFirstTeam = contract.promisedTeamLevel === 'FIRST_TEAM'
+      commit({
+        ...game,
+        phase: 'PRO_CONTRACT_COMPLETE',
+        contract,
+        teamLevel: contract.promisedTeamLevel,
+        youthRole: isFirstTeam
+          ? null
+          : (contract.promisedRole as YouthRole),
+        firstTeamRole: isFirstTeam
+          ? (contract.promisedRole as FirstTeamRole)
+          : null,
+      })
     },
 
     goToPhase: (phase) => {

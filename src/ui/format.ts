@@ -1,5 +1,6 @@
 import type {
   DevelopmentApproach,
+  FirstTeamRole,
   FirstTeamStatus,
   OverseasIntent,
   PreferredFoot,
@@ -13,8 +14,10 @@ export function formatEuro(value: number): string {
   }).format(value)}`
 }
 
-export function roleLabel(role: YouthRole): string {
+export function roleLabel(role: YouthRole | FirstTeamRole): string {
   return {
+    FRINGE: '边缘球员',
+    SUBSTITUTE: '替补球员',
     ROTATION: '轮换球员',
     STARTER: '主力球员',
     CORE: '核心球员',
