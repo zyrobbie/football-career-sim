@@ -34,6 +34,8 @@ export type FirstTeamRole =
   | 'STARTER'
   | 'CORE'
 
+export type SquadRole = YouthRole | FirstTeamRole
+
 export type TeamLevel = 'YOUTH' | 'FIRST_TEAM'
 
 export type ContractType =
@@ -95,6 +97,7 @@ export type GamePhase =
   | 'CAREER_DASHBOARD'
   | 'PRO_CONTRACT_OFFER'
   | 'PRO_CONTRACT_COMPLETE'
+  | 'PRO_STAGE_COMPLETE'
 
 export interface CreationDraft {
   name: string
@@ -210,8 +213,8 @@ export interface HalfYearReport {
   toLabel: string
   clubId: string
   clubName: string
-  roleBefore: YouthRole
-  roleAfter: YouthRole
+  roleBefore: SquadRole
+  roleAfter: SquadRole
   stats: HalfYearStats
   attributes: Record<AttributeKey, NumericChange>
   states: {
@@ -234,8 +237,19 @@ export interface HalfYearReport {
     outcomeSummary: string
   }
   stipendEuro: number
+  incomeLabel?: string
   expenseEuro: number
   cashAfterEuro: number
+  contract?: {
+    annualSalaryEuro: number
+    remainingHalfYears: number
+    promisedTeamLevel: TeamLevel
+    promisedRole: SquadRole | null
+    actualTeamLevel: TeamLevel
+    actualRole: SquadRole
+    promiseFulfilled: boolean
+    brokenPromiseWindows: number
+  }
   injury: InjurySummary | null
   eventSummary: string
   hints: string[]
@@ -245,7 +259,7 @@ export interface CareerHistoryEntry {
   windowIndex: number
   clubId: string
   clubName?: string
-  role: YouthRole
+  role: SquadRole
   stats: HalfYearStats
   arrivalChoice: ArrivalChoice | null
   trainingFocus: TrainingFocus

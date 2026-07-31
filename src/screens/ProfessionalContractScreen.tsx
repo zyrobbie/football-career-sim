@@ -38,6 +38,9 @@ export function ProfessionalContractScreen() {
   const acceptProfessionalContract = useGameStore(
     (state) => state.acceptProfessionalContract,
   )
+  const startProfessionalCareer = useGameStore(
+    (state) => state.startProfessionalCareer,
+  )
   if (!game?.player || !game.professionalOffer) return null
   const offer = game.professionalOffer
   const club = game.academyOffers.find(
@@ -64,8 +67,16 @@ export function ProfessionalContractScreen() {
               compact
             />
             <p className="contract-complete__next">
-              下一阶段：成年队半年模拟、合同兑现与正式转会窗口
+              下一阶段先完成首个职业半年；正式转会窗口将在这套比赛与合同逻辑稳定后开放。
             </p>
+            <button
+              type="button"
+              className="button button--primary"
+              onClick={startProfessionalCareer}
+            >
+              进入第一个职业半年
+              <Icon name="arrow" />
+            </button>
           </div>
         </section>
       </CareerHub>

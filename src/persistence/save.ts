@@ -126,7 +126,7 @@ const contractSchema = z.object({
     'DOMESTIC_ACADEMY_TRANSFER',
   ]),
   clubId: z.string().min(1),
-  remainingHalfYears: z.number().int().positive(),
+  remainingHalfYears: z.number().int().nonnegative(),
   annualSalaryEuro: z.number().int().nonnegative(),
   promisedTeamLevel: z.enum(['YOUTH', 'FIRST_TEAM']),
   promisedRole: z
@@ -166,6 +166,7 @@ const stateSchema = z.object({
     'CAREER_DASHBOARD',
     'PRO_CONTRACT_OFFER',
     'PRO_CONTRACT_COMPLETE',
+    'PRO_STAGE_COMPLETE',
   ]),
   careerSeed: z.string().min(8),
   startYear: z.number().int().min(2020).max(9999),
@@ -410,7 +411,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE'].includes(
+    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE'].includes(
       parsed.phase,
     ) &&
     parsed.academyOffers.length !== 3
@@ -419,7 +420,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE'].includes(
+    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE'].includes(
       parsed.phase,
     ) &&
     (!parsed.selectedClubId ||
@@ -443,7 +444,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    parsed.phase === 'PRO_CONTRACT_COMPLETE' &&
+    ['PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE'].includes(parsed.phase) &&
     !parsed.contract
   ) {
     throw new Error('Professional-contract completion requires a contract.')

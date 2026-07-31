@@ -94,5 +94,28 @@ describe('academy two-year progression', () => {
     expect(game?.contract?.type).toBe('FIRST_PRO')
     expect(game?.contract?.clubId).toBe(offer!.club.id)
     expect(game?.contract?.annualSalaryEuro).toBeGreaterThan(0)
+
+    const remainingHalfYears = game!.contract!.remainingHalfYears
+    store.startProfessionalCareer()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('HALF_YEAR_PLAN')
+    expect(game?.windowIndex).toBe(4)
+
+    store.chooseTraining('BALANCED', 'STEADY')
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('HALF_YEAR_REPORT')
+    expect(game?.history).toHaveLength(5)
+    expect(game?.history[4]?.windowIndex).toBe(4)
+    expect(game?.lastReport?.contract).toBeDefined()
+    expect(game?.lastReport?.incomeLabel).toBe('工资可支配收入')
+    expect(game?.contract?.remainingHalfYears).toBe(
+      remainingHalfYears - 1,
+    )
+    expect(game?.cashEuro).toBeGreaterThan(1000)
+
+    store.advanceAfterReport()
+    expect(useGameStore.getState().game?.phase).toBe(
+      'PRO_STAGE_COMPLETE',
+    )
   })
 })

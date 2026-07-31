@@ -10,8 +10,8 @@ import {
   type Attributes,
   type GameState,
   type HalfYearStats,
+  type SquadRole,
   type TeamLevel,
-  type YouthRole,
 } from '../models/game'
 import {
   firstTeamStatusLabel,
@@ -34,7 +34,7 @@ interface LedgerRow {
   key: string
   windowIndex: number
   clubName: string
-  role: YouthRole | null
+  role: SquadRole | null
   attributes: Attributes
   stats: HalfYearStats | null
   teamLevel: TeamLevel
@@ -45,7 +45,8 @@ function visibleWindowIndex(game: GameState): number {
   return game.phase === 'HALF_YEAR_REPORT' ||
     game.phase === 'CAREER_DASHBOARD' ||
     game.phase === 'PRO_CONTRACT_OFFER' ||
-    game.phase === 'PRO_CONTRACT_COMPLETE'
+    game.phase === 'PRO_CONTRACT_COMPLETE' ||
+    game.phase === 'PRO_STAGE_COMPLETE'
     ? game.windowIndex + 1
     : game.windowIndex
 }
@@ -76,6 +77,7 @@ function buildLedgerRows(game: GameState): LedgerRow[] {
       'CAREER_DASHBOARD',
       'PRO_CONTRACT_OFFER',
       'PRO_CONTRACT_COMPLETE',
+      'PRO_STAGE_COMPLETE',
     ].includes(game.phase) &&
     !game.history.some((entry) => entry.windowIndex === game.windowIndex)
 
@@ -86,7 +88,10 @@ function buildLedgerRows(game: GameState): LedgerRow[] {
       clubName: game.selectedClubId
         ? clubNameFor(game, game.selectedClubId)
         : '等待选择俱乐部',
-      role: game.youthRole,
+      role:
+        game.teamLevel === 'FIRST_TEAM'
+          ? game.firstTeamRole
+          : game.youthRole,
       attributes: game.player.attributes,
       stats: null,
       teamLevel: game.teamLevel,
@@ -239,7 +244,11 @@ function PlayerOverview({
       </div>
       <div className="career-overview__performance">
         <div className="career-overview__totals">
-          <p>生涯累计（青年队）</p>
+          <p>
+            {game.history.some((entry) => entry.teamLevel === 'FIRST_TEAM')
+              ? '生涯累计'
+              : '生涯累计（青年队）'}
+          </p>
           <dl>
             <OverviewNumber label="出场" value={totalStats.appearances} />
             <OverviewNumber label="进球" value={totalStats.goals} />
@@ -338,6 +347,72 @@ function CareerMeters({ game }: { game: GameState }) {
 }
 
 function FirstTeamPath({ game }: { game: GameState }) {
+  if (game.contract) {
+    const actualRole =
+      game.teamLevel === 'FIRST_TEAM'
+        ? game.firstTeamRole
+        : game.youthRole
+    const promisedRole = game.contract.promisedRole
+    const contractProgress = Math.max(
+      0,
+      Math.min(
+        100,
+        (game.contract.remainingHalfYears /
+          Math.max(
+            game.professionalOffer?.remainingHalfYears ??
+              game.contract.remainingHalfYears,
+            1,
+          )) *
+          100,
+      ),
+    )
+    const fulfilled =
+      game.lastReport?.contract?.promiseFulfilled ??
+      (game.contract.brokenPromiseWindows === 0)
+
+    return (
+      <section className="first-team-path" aria-label="职业合同状态">
+        <div className="first-team-path__summary">
+          <span>合同剩余</span>
+          <strong>{game.contract.remainingHalfYears / 2}</strong>
+          <small>年</small>
+          <em className={fulfilled ? 'is-positive' : 'is-negative'}>
+            {fulfilled ? '承诺正常' : '承诺未兑现'}
+          </em>
+        </div>
+        <i className="first-team-path__bar" aria-hidden="true">
+          <b style={{ width: `${contractProgress}%` }} />
+        </i>
+        <dl>
+          <div>
+            <dt>合同层级</dt>
+            <dd>
+              {game.contract.promisedTeamLevel === 'FIRST_TEAM'
+                ? '一线队'
+                : '青年队'}
+            </dd>
+          </div>
+          <div>
+            <dt>承诺角色</dt>
+            <dd>
+              {promisedRole
+                ? roleLabel(promisedRole).replace('球员', '')
+                : '无'}
+            </dd>
+          </div>
+          <div>
+            <dt>实际角色</dt>
+            <dd>
+              {actualRole
+                ? roleLabel(actualRole).replace('球员', '')
+                : '待评估'}
+            </dd>
+          </div>
+        </dl>
+      </section>
+    )
+  }
+
   const progress = game.firstTeamProgress
   const latest = game.lastReport?.firstTeam
   const metrics = [

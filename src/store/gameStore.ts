@@ -11,6 +11,7 @@ import { generatePlayer } from '../engine/player'
 import { createCareerSeed } from '../engine/random'
 import { DEMO_WINDOW_COUNT } from '../engine/careerTime'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
+import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
 import type {
   ArrivalChoice,
   CareerPriority,
@@ -62,6 +63,7 @@ interface GameStore {
   openProfessionalContract: () => void
   counterProfessionalOffer: (direction: CounterOfferDirection) => void
   acceptProfessionalContract: () => void
+  startProfessionalCareer: () => void
   goToPhase: (phase: GamePhase) => void
   clearError: () => void
 }
@@ -124,8 +126,6 @@ export const useGameStore = create<GameStore>((set, get) => {
       state.phase !== 'SIMULATION_READY' ||
       !state.player ||
       !state.selectedClubId ||
-      !state.youthRole ||
-      !state.arrivalChoice ||
       !state.trainingFocus
     ) {
       return state
@@ -134,6 +134,38 @@ export const useGameStore = create<GameStore>((set, get) => {
       (candidate) => candidate.club.id === state.selectedClubId,
     )
     if (!offer) throw new Error('Selected academy offer is missing.')
+    if (state.contract && state.windowIndex >= DEMO_WINDOW_COUNT) {
+      const result = simulateProfessionalHalfYear({ state, offer })
+      return {
+        ...state,
+        phase: 'HALF_YEAR_REPORT',
+        player: result.player,
+        teamLevel: result.teamLevel,
+        youthRole: result.youthRole,
+        firstTeamRole: result.firstTeamRole,
+        contract: result.contract,
+        firstTeamProgress: result.firstTeamProgress,
+        cashEuro: result.cashEuro,
+        lastReport: result.report,
+        history: [
+          ...state.history,
+          {
+            windowIndex: state.windowIndex,
+            clubId: offer.club.id,
+            clubName: offer.club.name,
+            role: result.report.roleAfter,
+            stats: result.report.stats,
+            arrivalChoice: null,
+            trainingFocus: state.trainingFocus,
+            developmentApproach: state.developmentApproach,
+            endingAttributes: { ...result.player.attributes },
+            firstTeamAttention: result.firstTeamProgress.attention,
+            teamLevel: result.teamLevel,
+          },
+        ],
+      } satisfies GameState
+    }
+    if (!state.youthRole || !state.arrivalChoice) return state
     const arrivalChoice =
       state.windowIndex === 0 ? state.arrivalChoice : null
     const result = simulateHalfYear({
@@ -357,6 +389,10 @@ export const useGameStore = create<GameStore>((set, get) => {
     advanceAfterReport: () => {
       const game = get().game
       if (!game) return
+      if (game.contract && game.windowIndex >= DEMO_WINDOW_COUNT) {
+        commit({ ...game, phase: 'PRO_STAGE_COMPLETE' })
+        return
+      }
       if (game.history.length >= DEMO_WINDOW_COUNT) {
         commit({ ...game, phase: 'CAREER_DASHBOARD' })
         return
@@ -447,6 +483,24 @@ export const useGameStore = create<GameStore>((set, get) => {
         firstTeamRole: isFirstTeam
           ? (contract.promisedRole as FirstTeamRole)
           : null,
+      })
+    },
+
+    startProfessionalCareer: () => {
+      const game = get().game
+      if (
+        !game?.contract ||
+        game.phase !== 'PRO_CONTRACT_COMPLETE'
+      ) {
+        set({ error: '需要先完成首份职业合同签约。' })
+        return
+      }
+      commit({
+        ...game,
+        phase: 'HALF_YEAR_PLAN',
+        windowIndex: Math.max(DEMO_WINDOW_COUNT, game.windowIndex + 1),
+        trainingFocus: null,
+        developmentApproach: null,
       })
     },
 

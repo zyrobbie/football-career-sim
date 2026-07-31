@@ -21,7 +21,10 @@ export function HalfYearReportScreen() {
   if (!game?.player || !game.lastReport) return null
   const report = game.lastReport
   const stats = report.stats
-  const isDemoComplete = game.history.length >= DEMO_WINDOW_COUNT
+  const isProfessionalWindow =
+    Boolean(game.contract) && game.windowIndex >= DEMO_WINDOW_COUNT
+  const isDemoComplete =
+    !isProfessionalWindow && game.history.length >= DEMO_WINDOW_COUNT
   const age = playerAgeAtWindow(game.windowIndex + 1)
   const reportTitle = halfYearReportTitle(game.windowIndex)
 
@@ -90,26 +93,34 @@ export function HalfYearReportScreen() {
             </section>
             <section className="report-side__finance">
               <h2>财务状况</h2>
-              <MoneyRow label="青训津贴" value={report.stipendEuro} positive />
+              <MoneyRow
+                label={report.incomeLabel ?? '青训津贴'}
+                value={report.stipendEuro}
+                positive
+              />
               <MoneyRow label="事件支出" value={report.expenseEuro} />
               <MoneyRow label="当前现金" value={report.cashAfterEuro} />
             </section>
-            <section className="first-team-report">
-              <h2>一线队通道</h2>
-              <ReportChange
-                label="综合关注度"
-                change={report.firstTeam.attention}
-              />
-              <div className="first-team-report__metrics">
-                <span>准备 {Math.round(report.firstTeam.readiness.after)}</span>
-                <span>表现 {Math.round(report.firstTeam.matchProof.after)}</span>
-                <span>推荐 {Math.round(report.firstTeam.coachBacking.after)}</span>
-              </div>
-              <strong>
-                {firstTeamStatusLabel(report.firstTeam.statusAfter)}
-              </strong>
-              <p>{report.firstTeam.outcomeSummary}</p>
-            </section>
+            {report.contract ? (
+              <ContractReport contract={report.contract} />
+            ) : (
+              <section className="first-team-report">
+                <h2>一线队通道</h2>
+                <ReportChange
+                  label="综合关注度"
+                  change={report.firstTeam.attention}
+                />
+                <div className="first-team-report__metrics">
+                  <span>准备 {Math.round(report.firstTeam.readiness.after)}</span>
+                  <span>表现 {Math.round(report.firstTeam.matchProof.after)}</span>
+                  <span>推荐 {Math.round(report.firstTeam.coachBacking.after)}</span>
+                </div>
+                <strong>
+                  {firstTeamStatusLabel(report.firstTeam.statusAfter)}
+                </strong>
+                <p>{report.firstTeam.outcomeSummary}</p>
+              </section>
+            )}
             {report.injury ? (
               <section className="injury-note">
                 <h2>身体情况</h2>
@@ -138,7 +149,9 @@ export function HalfYearReportScreen() {
             className="button button--primary"
             onClick={advanceAfterReport}
           >
-            {isDemoComplete
+            {isProfessionalWindow
+              ? '完成首个职业半年'
+              : isDemoComplete
               ? '完成青训第二年'
               : `进入${report.toLabel}窗口`}
             <Icon name="arrow" />
@@ -150,12 +163,64 @@ export function HalfYearReportScreen() {
 }
 
 function halfYearReportTitle(windowIndex: number): string {
+  if (windowIndex === DEMO_WINDOW_COUNT) {
+    return '职业生涯首个半年报告'
+  }
   return [
     '首个半年报告',
     '青训第一年总结',
     '第二年上半程报告',
     '一线队晋升评估',
   ][windowIndex] ?? `第${windowIndex + 1}份半年报告`
+}
+
+function ContractReport({
+  contract,
+}: {
+  contract: NonNullable<
+    import('../models/game').HalfYearReport['contract']
+  >
+}) {
+  return (
+    <section className="contract-window-report">
+      <h2>合同兑现</h2>
+      <dl>
+        <div>
+          <dt>合同承诺</dt>
+          <dd>
+            {contract.promisedTeamLevel === 'FIRST_TEAM'
+              ? '一线队'
+              : '青年队'}
+            {' · '}
+            {contract.promisedRole
+              ? roleLabel(contract.promisedRole).replace('球员', '')
+              : '未承诺角色'}
+          </dd>
+        </div>
+        <div>
+          <dt>实际安排</dt>
+          <dd>
+            {contract.actualTeamLevel === 'FIRST_TEAM'
+              ? '一线队'
+              : '青年队'}
+            {' · '}
+            {roleLabel(contract.actualRole).replace('球员', '')}
+          </dd>
+        </div>
+        <div>
+          <dt>剩余合同</dt>
+          <dd>{contract.remainingHalfYears / 2}年</dd>
+        </div>
+      </dl>
+      <strong
+        className={
+          contract.promiseFulfilled ? 'is-positive' : 'is-negative'
+        }
+      >
+        {contract.promiseFulfilled ? '本窗口已兑现' : '本窗口未兑现'}
+      </strong>
+    </section>
+  )
 }
 
 function Stat({ label, value }: { label: string; value: string | number }) {

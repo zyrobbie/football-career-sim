@@ -2680,6 +2680,47 @@ svg {
   background: rgba(189, 157, 86, 0.07);
 }
 
+.contract-window-report {
+  border-color: rgba(189, 157, 86, 0.55) !important;
+  background: rgba(189, 157, 86, 0.07);
+}
+
+.contract-window-report dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 12px 0;
+}
+
+.contract-window-report dl > div {
+  min-width: 0;
+  padding: 0 8px;
+  border-left: 1px solid var(--line);
+}
+
+.contract-window-report dl > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.contract-window-report dt {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.contract-window-report dd {
+  margin: 4px 0 0;
+  overflow: hidden;
+  font-family: var(--heading);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contract-window-report > strong {
+  font-family: var(--heading);
+  font-size: 13px;
+}
+
 .first-team-report__metrics {
   display: flex;
   gap: 7px;
@@ -4790,6 +4831,48 @@ svg {
     gap: 3px 6px;
   }
 
+  .career-report .contract-window-report {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 4px 7px;
+  }
+
+  .career-report .contract-window-report h2 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .career-report .contract-window-report h2::after {
+    display: none;
+  }
+
+  .career-report .contract-window-report dl {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+  }
+
+  .career-report .contract-window-report dl > div {
+    padding: 0 4px;
+  }
+
+  .career-report .contract-window-report dt {
+    font-size: 7px;
+    white-space: nowrap;
+  }
+
+  .career-report .contract-window-report dd {
+    margin-top: 1px;
+    font-size: 8px;
+  }
+
+  .career-report .contract-window-report > strong {
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
   .career-report .first-team-report h2 {
     margin: 0;
     white-space: nowrap;
@@ -5204,6 +5287,10 @@ svg {
   font-family: var(--heading);
 }
 
+.contract-complete__next + .button {
+  margin-top: 12px;
+}
+
 .demo-complete__delete {
   align-self: center;
   margin-left: auto;
@@ -5303,6 +5390,13 @@ svg {
     grid-template-columns: 34px minmax(0, 1fr);
     gap: 8px;
     padding-top: 1px;
+  }
+
+  .contract-complete__next + .button {
+    min-height: 34px;
+    margin-top: 6px;
+    padding: 0 10px;
+    font-size: 10px;
   }
 
   .contract-complete__mark {

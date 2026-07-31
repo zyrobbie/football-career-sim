@@ -8,6 +8,7 @@ import { HalfYearReportScreen } from '../screens/HalfYearReportScreen'
 import { HomeScreen } from '../screens/HomeScreen'
 import { PlayerRevealScreen } from '../screens/PlayerRevealScreen'
 import { ProfessionalContractScreen } from '../screens/ProfessionalContractScreen'
+import { ProfessionalStageCompleteScreen } from '../screens/ProfessionalStageCompleteScreen'
 import { TrainingPlanScreen } from '../screens/TrainingPlanScreen'
 
 export function App() {
@@ -52,6 +53,8 @@ export function App() {
       game.phase === 'PRO_CONTRACT_COMPLETE'
     ) {
       screen = <ProfessionalContractScreen />
+    } else if (game.phase === 'PRO_STAGE_COMPLETE') {
+      screen = <ProfessionalStageCompleteScreen />
     }
   }
 

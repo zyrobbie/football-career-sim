@@ -78,13 +78,39 @@ const approaches: Array<{
   },
 ]
 
+const professionalApproaches: typeof approaches = [
+  {
+    id: 'PUSH',
+    title: '主动争取出场',
+    description: '向教练明确表达比赛诉求，用更高训练投入争取机会。',
+    effect: '教练关系提升 · 身体负荷增加',
+  },
+  {
+    id: 'STEADY',
+    title: '稳定适应职业队',
+    description: '先适应训练、比赛准备与恢复节奏，再逐步扩大角色。',
+    effect: '竞技与身体状态更稳定',
+  },
+  {
+    id: 'TEAM_FIRST',
+    title: '接受球队安排',
+    description: '把团队需要放在个人出场诉求之前，耐心等待机会。',
+    effect: '队内关系与心理状态提升',
+  },
+]
+
 export function TrainingPlanScreen() {
   const game = useGameStore((state) => state.game)
   const chooseTraining = useGameStore((state) => state.chooseTraining)
   const [selected, setSelected] = useState<TrainingFocus>('physical')
   const [approach, setApproach] =
     useState<DevelopmentApproach>('STEADY')
-  if (!game?.player || !game.selectedClubId || !game.youthRole) return null
+  if (!game?.player || !game.selectedClubId) return null
+  const currentRole =
+    game.teamLevel === 'FIRST_TEAM'
+      ? game.firstTeamRole
+      : game.youthRole
+  if (!currentRole) return null
   const offer = game.academyOffers.find(
     (candidate) => candidate.club.id === game.selectedClubId,
   )
@@ -93,6 +119,11 @@ export function TrainingPlanScreen() {
   const currentWindow = careerWindowLabel(game.startYear, game.windowIndex)
   const nextWindow = careerWindowLabel(game.startYear, game.windowIndex + 1)
   const isSecondYear = game.windowIndex >= 2
+  const isProfessional =
+    Boolean(game.contract) && game.windowIndex >= 4
+  const activeApproaches = isProfessional
+    ? professionalApproaches
+    : approaches
   const needsRecovery =
     game.player.form < 46 ||
     game.player.fitness < 46 ||
@@ -113,7 +144,9 @@ export function TrainingPlanScreen() {
         <p className="career-panel-lead">
             {needsRecovery
               ? '俱乐部已为你的低状态安排恢复支持；你的训练选择仍会影响本阶段成长。'
-              : isSecondYear
+              : isProfessional
+                ? '首份合同已经生效。训练方向、职业队策略和实际出场将共同决定合同承诺是否兑现。'
+                : isSecondYear
                 ? '第二个青训赛季里，你的训练方向和职业策略会共同影响一线队评估。'
                 : '不同的发展方向会影响能力成长与事件概率，请谨慎选择。'}
         </p>
@@ -122,12 +155,25 @@ export function TrainingPlanScreen() {
             <header>
               <div>
                 <span>本窗口职业策略</span>
-                <h2>你准备如何面对一线队的关注？</h2>
+                <h2>
+                  {isProfessional
+                    ? '你准备怎样开始职业队生涯？'
+                    : '你准备如何面对一线队的关注？'}
+                </h2>
               </div>
-              <strong>{game.firstTeamProgress.attention}/100</strong>
+              <strong>
+                {isProfessional
+                  ? game.teamLevel === 'FIRST_TEAM'
+                    ? '一线队'
+                    : '职业青年队'
+                  : `${game.firstTeamProgress.attention}/100`}
+              </strong>
             </header>
-            <div role="radiogroup" aria-label="一线队发展策略">
-              {approaches.map((item) => (
+            <div
+              role="radiogroup"
+              aria-label={isProfessional ? '职业队策略' : '一线队发展策略'}
+            >
+              {activeApproaches.map((item) => (
                 <button
                   key={item.id}
                   type="button"
@@ -169,8 +215,16 @@ export function TrainingPlanScreen() {
                 {selected === plan.id ? <Icon name="check" /> : null}
               </span>
               <span>
-                <strong>{plan.title}</strong>
-                <small>{plan.description}</small>
+                <strong>
+                  {isProfessional && plan.id === 'ADAPTATION'
+                    ? '适应职业队节奏'
+                    : plan.title}
+                </strong>
+                <small>
+                  {isProfessional && plan.id === 'ADAPTATION'
+                    ? '优先稳定职业队训练与比赛节奏，能力成长略慢。'
+                    : plan.description}
+                </small>
               </span>
               <Icon name={plan.icon} />
             </button>
@@ -221,7 +275,8 @@ function windowHeading(windowIndex: number): string {
   if (windowIndex === 0) return '第一个半年，你准备怎样发展？'
   if (windowIndex === 1) return '第一年下半程，你准备怎样发展？'
   if (windowIndex === 2) return '青训第二年，你要怎样接近一线队？'
-  return '晋升评估前，你要怎样完成最后冲刺？'
+  if (windowIndex === 3) return '晋升评估前，你要怎样完成最后冲刺？'
+  return '职业生涯第一个半年，你准备怎样立足？'
 }
 
 const attributeKeysForPreview = ['attack', 'physical'] as const
