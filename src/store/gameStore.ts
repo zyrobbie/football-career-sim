@@ -22,6 +22,7 @@ import { DEMO_WINDOW_COUNT } from '../engine/careerTime'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
 import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
 import {
+  assessDomesticTransferOpportunity,
   applyTransferArrivalChoice,
   contractFromTransferOffer,
   generateDomesticTransferOffers,
@@ -84,6 +85,7 @@ interface GameStore {
   acceptProfessionalContract: () => void
   startProfessionalCareer: () => void
   openTransferWindow: () => void
+  continueProfessionalCareer: () => void
   selectTransferChoice: (choiceId: 'STAY' | string) => void
   counterTransferOffer: (direction: CounterOfferDirection) => void
   confirmTransferChoice: () => void
@@ -644,6 +646,15 @@ export const useGameStore = create<GameStore>((set, get) => {
         set({ error: '当前生涯还不能进入转会窗口。' })
         return
       }
+      const opportunity = assessDomesticTransferOpportunity({
+        player: game.player,
+        latestReport: game.lastReport,
+        windowIndex: game.windowIndex,
+      })
+      if (!opportunity.available) {
+        set({ error: opportunity.summary })
+        return
+      }
       const windowIndex =
         game.transferOffers.length > 0
           ? game.windowIndex
@@ -668,6 +679,41 @@ export const useGameStore = create<GameStore>((set, get) => {
           game.selectedTransferChoiceId ?? 'STAY',
         transferDecision: null,
         transferArrivalChoice: null,
+      })
+    },
+
+    continueProfessionalCareer: () => {
+      const game = get().game
+      if (
+        !game?.player ||
+        !game.contract ||
+        !game.selectedClubId ||
+        game.phase !== 'PRO_STAGE_COMPLETE'
+      ) {
+        set({ error: '需要先完成本次职业半年。' })
+        return
+      }
+      const opportunity = assessDomesticTransferOpportunity({
+        player: game.player,
+        latestReport: game.lastReport,
+        windowIndex: game.windowIndex,
+      })
+      if (opportunity.available) {
+        set({ error: '本窗口已有正式转会机会，请先完成去留决定。' })
+        return
+      }
+      commit({
+        ...game,
+        phase: 'HALF_YEAR_PLAN',
+        windowIndex: game.windowIndex + 1,
+        transferOffers: [],
+        selectedTransferChoiceId: null,
+        transferDecision: null,
+        transferArrivalChoice: null,
+        pendingCareerEventId: null,
+        trainingFocus: null,
+        developmentApproach: null,
+        trainingQualityBonus: 0,
       })
     },
 

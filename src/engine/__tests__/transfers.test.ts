@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
 import { generatePlayer } from '../player'
 import {
+  assessDomesticTransferOpportunity,
   applyTransferArrivalChoice,
   contractFromTransferOffer,
   generateDomesticTransferOffers,
@@ -35,6 +36,72 @@ function createTransferFixture() {
 }
 
 describe('domestic transfer window', () => {
+  it('reviews the market every two or three professional windows and requires good form', () => {
+    const { player } = createTransferFixture()
+    const goodReport = {
+      stats: {
+        appearances: 14,
+        starts: 12,
+        minutes: 1050,
+        goals: 3,
+        assists: 2,
+        yellowCards: 1,
+        redCards: 0,
+        averageRating: 7.1,
+      },
+    }
+    const poorReport = {
+      stats: {
+        ...goodReport.stats,
+        appearances: 6,
+        averageRating: 6.4,
+      },
+    }
+
+    expect(
+      assessDomesticTransferOpportunity({
+        player,
+        latestReport: goodReport,
+        windowIndex: 4,
+      }).available,
+    ).toBe(false)
+    expect(
+      assessDomesticTransferOpportunity({
+        player,
+        latestReport: goodReport,
+        windowIndex: 5,
+      }).available,
+    ).toBe(true)
+    expect(
+      assessDomesticTransferOpportunity({
+        player,
+        latestReport: goodReport,
+        windowIndex: 6,
+      }).available,
+    ).toBe(false)
+    expect(
+      assessDomesticTransferOpportunity({
+        player,
+        latestReport: goodReport,
+        windowIndex: 8,
+      }).available,
+    ).toBe(true)
+    expect(
+      assessDomesticTransferOpportunity({
+        player,
+        latestReport: goodReport,
+        windowIndex: 10,
+      }).available,
+    ).toBe(true)
+    expect(
+      assessDomesticTransferOpportunity({
+        player,
+        latestReport: poorReport,
+        windowIndex: 5,
+      }).available,
+    ).toBe(false)
+  })
+
   it('creates up to three deterministic offers excluding the current club', () => {
     const fixture = createTransferFixture()
     const repeated = createTransferFixture()

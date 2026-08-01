@@ -543,6 +543,7 @@ function CareerLedgerTable({
             <th>窗口</th>
             <th>年龄</th>
             <th>俱乐部</th>
+            <th>队伍级别</th>
             <th>地位</th>
             <th>能力</th>
             <th>出场</th>
@@ -561,11 +562,12 @@ function CareerLedgerTable({
               <td>{playerAgeAtWindow(row.windowIndex)}</td>
               <td>{row.clubName}</td>
               <td>
-                {row.teamLevel === 'FIRST_TEAM'
-                  ? '一线队'
-                  : row.role
-                    ? roleLabel(row.role).replace('球员', '')
-                    : '待选择'}
+                {row.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'}
+              </td>
+              <td>
+                {row.role
+                  ? roleLabel(row.role).replace('球员', '')
+                  : '待选择'}
               </td>
               <td>
                 {Math.round(

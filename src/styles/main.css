@@ -2429,7 +2429,7 @@ svg {
 .career-ledger th,
 .career-ledger td {
   height: 42px;
-  padding: 5px 8px;
+  padding: 4px;
   border-bottom: 1px dotted var(--line);
   text-align: center;
   white-space: nowrap;
@@ -2439,22 +2439,31 @@ svg {
 
 .career-ledger th {
   height: 34px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
   background: var(--paper-muted);
+  box-shadow: 0 1px 0 var(--line);
   color: #555a54;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
 }
 
 .career-ledger td {
   font-family: var(--heading);
-  font-size: 14px;
+  font-size: 11px;
 }
 
+.career-ledger th:nth-child(1) { width: 64px; }
+.career-ledger th:nth-child(2) { width: 30px; }
 .career-ledger th:nth-child(3),
 .career-ledger td:nth-child(3) {
-  width: 22%;
   text-align: left;
 }
+.career-ledger th:nth-child(4) { width: 50px; }
+.career-ledger th:nth-child(5) { width: 36px; }
+.career-ledger th:nth-child(6) { width: 34px; }
+.career-ledger th:nth-child(n + 7) { width: 30px; }
 
 .career-ledger tbody tr:last-child td {
   border-bottom: 0;
@@ -3531,8 +3540,9 @@ svg {
   .career-ledger th:nth-child(1) { width: 50px; }
   .career-ledger th:nth-child(2) { width: 34px; }
   .career-ledger th:nth-child(3) { width: 76px; }
-  .career-ledger th:nth-child(4) { width: 42px; }
-  .career-ledger th:nth-child(5) { width: 38px; }
+  .career-ledger th:nth-child(4) { width: 54px; }
+  .career-ledger th:nth-child(5) { width: 42px; }
+  .career-ledger th:nth-child(6) { width: 38px; }
 
   .career-ledger > p {
     display: none;
@@ -3917,9 +3927,10 @@ svg {
     width: auto;
     text-align: left;
   }
-  .career-ledger th:nth-child(4) { width: 34px; }
-  .career-ledger th:nth-child(5) { width: 30px; }
-  .career-ledger th:nth-child(n + 6) { width: 27px; }
+  .career-ledger th:nth-child(4) { width: 42px; }
+  .career-ledger th:nth-child(5) { width: 32px; }
+  .career-ledger th:nth-child(6) { width: 30px; }
+  .career-ledger th:nth-child(n + 7) { width: 25px; }
 
   .career-ledger__toggle {
     min-height: 16px;
@@ -4842,8 +4853,9 @@ svg {
   }
 
   .career-report .report-side__finance {
+    grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: 1.38fr .72fr .9fr;
+    grid-template-columns: 1.2fr .8fr 1fr;
     align-content: start;
     gap: 0;
   }

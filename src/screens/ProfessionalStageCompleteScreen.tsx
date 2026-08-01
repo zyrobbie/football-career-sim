@@ -1,9 +1,6 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
-import {
-  careerWindowLabel,
-  transferWindowNumber,
-} from '../engine/careerTime'
+import { assessDomesticTransferOpportunity } from '../engine/transfers'
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, roleLabel } from '../ui/format'
 
@@ -12,6 +9,9 @@ export function ProfessionalStageCompleteScreen() {
   const reviewReport = useGameStore((state) => state.reviewReport)
   const openTransferWindow = useGameStore(
     (state) => state.openTransferWindow,
+  )
+  const continueProfessionalCareer = useGameStore(
+    (state) => state.continueProfessionalCareer,
   )
   if (
     !game?.player ||
@@ -23,13 +23,12 @@ export function ProfessionalStageCompleteScreen() {
   }
   const report = game.lastReport
   const contractReport = report.contract!
-  const nextTransferIndex = game.windowIndex + 1
-  const nextTransferNumber = transferWindowNumber(nextTransferIndex)
-  const nextTransferLabel = careerWindowLabel(
-    game.startYear,
-    nextTransferIndex,
-  )
   const isFirstProfessionalWindow = game.windowIndex === 4
+  const transferOpportunity = assessDomesticTransferOpportunity({
+    player: game.player,
+    latestReport: report,
+    windowIndex: game.windowIndex,
+  })
 
   return (
     <CareerHub game={game} sectionLabel="职业半年完成">
@@ -83,15 +82,21 @@ export function ProfessionalStageCompleteScreen() {
             </div>
           </dl>
           <p className="demo-complete__next">
-            下一阶段：{nextTransferLabel}第{nextTransferNumber}个转会窗口、留队选项与最多三份报价。
+            {transferOpportunity.summary}
           </p>
           <div className="demo-complete__actions">
             <button
               type="button"
               className="button button--primary"
-              onClick={openTransferWindow}
+              onClick={
+                transferOpportunity.available
+                  ? openTransferWindow
+                  : continueProfessionalCareer
+              }
             >
-              进入第{nextTransferNumber}个转会窗口
+              {transferOpportunity.available
+                ? '查看转会报价'
+                : '进入下一职业半年'}
               <Icon name="arrow" />
             </button>
             <button

@@ -25,6 +25,7 @@ import {
 } from './offers'
 import { calculateOverall } from './player'
 import { createRandom } from './random'
+import { DEMO_WINDOW_COUNT } from './careerTime'
 
 const FIRST_TEAM_ROLE_ORDER: FirstTeamRole[] = [
   'FRINGE',
@@ -46,6 +47,69 @@ function clamp(value: number, min: number, max: number): number {
 
 function roundTo(value: number, unit: number): number {
   return Math.max(unit, Math.round(value / unit) * unit)
+}
+
+export interface TransferOpportunityAssessment {
+  available: boolean
+  cadenceQualified: boolean
+  performanceQualified: boolean
+  nextReviewInWindows: number
+  summary: string
+}
+
+function isMarketReviewWindow(completedProfessionalWindows: number): boolean {
+  if (completedProfessionalWindows < 2) return false
+  const cyclePosition = completedProfessionalWindows % 5
+  return cyclePosition === 0 || cyclePosition === 2
+}
+
+function windowsUntilNextMarketReview(
+  completedProfessionalWindows: number,
+): number {
+  for (let distance = 1; distance <= 3; distance += 1) {
+    if (isMarketReviewWindow(completedProfessionalWindows + distance)) {
+      return distance
+    }
+  }
+  return 3
+}
+
+export function assessDomesticTransferOpportunity(input: {
+  player: Player
+  latestReport: Pick<HalfYearReport, 'stats'> | null
+  windowIndex: number
+}): TransferOpportunityAssessment {
+  const { player, latestReport, windowIndex } = input
+  const completedProfessionalWindows = Math.max(
+    0,
+    windowIndex - DEMO_WINDOW_COUNT + 1,
+  )
+  const cadenceQualified = isMarketReviewWindow(
+    completedProfessionalWindows,
+  )
+  const stats = latestReport?.stats
+  const performanceQualified = Boolean(
+    stats &&
+      ((stats.appearances >= 8 && stats.averageRating >= 6.8) ||
+        (stats.appearances >= 5 && stats.averageRating >= 7.2) ||
+        (player.reputation >= 60 && stats.averageRating >= 6.7)),
+  )
+  const available = cadenceQualified && performanceQualified
+  const nextReviewInWindows = windowsUntilNextMarketReview(
+    completedProfessionalWindows,
+  )
+
+  return {
+    available,
+    cadenceQualified,
+    performanceQualified,
+    nextReviewInWindows,
+    summary: available
+      ? '你最近的稳定表现吸引了外部关注，经纪团队已经筛出值得推进的正式报价。'
+      : cadenceQualified
+        ? `本阶段表现尚未吸引到合适报价。保持出场和评分，市场将在${nextReviewInWindows}个窗口后再次集中评估。`
+        : `经纪团队正在持续观察市场。转会机会不会每半年出现，下一次集中评估约在${nextReviewInWindows}个窗口后。`,
+  }
 }
 
 function estimatedPotentialForClub(input: {

@@ -133,8 +133,40 @@ describe('academy two-year progression', () => {
 
     store.openTransferWindow()
     game = useGameStore.getState().game
-    expect(game?.phase).toBe('TRANSFER_WINDOW')
+    expect(game?.phase).toBe('PRO_STAGE_COMPLETE')
+    expect(useGameStore.getState().error).toContain('不会每半年出现')
+    store.clearError()
+    store.continueProfessionalCareer()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('HALF_YEAR_PLAN')
     expect(game?.windowIndex).toBe(5)
+
+    store.chooseTraining('attack', 'PUSH')
+    resolveSpecialEventIfPresent()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('HALF_YEAR_REPORT')
+    expect(game?.history).toHaveLength(6)
+
+    const strongPerformanceGame = game!
+    useGameStore.setState({
+      game: {
+        ...strongPerformanceGame,
+        lastReport: {
+          ...strongPerformanceGame.lastReport!,
+          stats: {
+            ...strongPerformanceGame.lastReport!.stats,
+            appearances: 14,
+            averageRating: 7.1,
+          },
+        },
+      },
+    })
+
+    store.advanceAfterReport()
+    store.openTransferWindow()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_WINDOW')
+    expect(game?.windowIndex).toBe(6)
     expect(game?.transferOffers).toHaveLength(3)
     expect(game?.selectedTransferChoiceId).toBe('STAY')
 
@@ -168,13 +200,10 @@ describe('academy two-year progression', () => {
 
     const transferredClubId = game!.selectedClubId!
     const transferredContractHalfYears = game!.contract!.remainingHalfYears
-    const firstTransferOfferIds = game!.transferOffers.map(
-      (candidate) => candidate.id,
-    )
     store.continueAfterTransfer()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_PLAN')
-    expect(game?.windowIndex).toBe(5)
+    expect(game?.windowIndex).toBe(6)
     expect(game?.selectedClubId).toBe(transferredClubId)
     expect(game?.transferOffers).toEqual([])
     expect(game?.selectedTransferChoiceId).toBeNull()
@@ -183,9 +212,9 @@ describe('academy two-year progression', () => {
     resolveSpecialEventIfPresent()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_REPORT')
-    expect(game?.history).toHaveLength(6)
-    expect(game?.history[5]?.windowIndex).toBe(5)
-    expect(game?.history[5]?.clubId).toBe(transferredClubId)
+    expect(game?.history).toHaveLength(7)
+    expect(game?.history[6]?.windowIndex).toBe(6)
+    expect(game?.history[6]?.clubId).toBe(transferredClubId)
     expect(game?.lastReport?.clubId).toBe(transferredClubId)
     expect(game?.contract?.remainingHalfYears).toBe(
       transferredContractHalfYears - 1,
@@ -197,11 +226,13 @@ describe('academy two-year progression', () => {
     )
     store.openTransferWindow()
     game = useGameStore.getState().game
-    expect(game?.phase).toBe('TRANSFER_WINDOW')
-    expect(game?.windowIndex).toBe(6)
-    expect(game?.transferOffers).toHaveLength(3)
-    expect(game?.transferOffers.map((candidate) => candidate.id)).not.toEqual(
-      firstTransferOfferIds,
-    )
+    expect(game?.phase).toBe('PRO_STAGE_COMPLETE')
+    expect(game?.transferOffers).toEqual([])
+    expect(useGameStore.getState().error).toContain('集中评估')
+    store.clearError()
+    store.continueProfessionalCareer()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('HALF_YEAR_PLAN')
+    expect(game?.windowIndex).toBe(7)
   })
 })

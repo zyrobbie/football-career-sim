@@ -12,7 +12,3 @@ export function careerWindowLabel(
 export function playerAgeAtWindow(windowIndex: number): number {
   return 13 + Math.floor(windowIndex / 2)
 }
-
-export function transferWindowNumber(windowIndex: number): number {
-  return Math.max(1, windowIndex - DEMO_WINDOW_COUNT)
-}

@@ -8,7 +8,6 @@ import {
 import {
   careerWindowLabel,
   playerAgeAtWindow,
-  transferWindowNumber,
 } from '../engine/careerTime'
 import type {
   CounterOfferDirection,
@@ -148,15 +147,14 @@ export function TransferWindowScreen() {
       game.startYear,
       game.windowIndex + 1,
     )
-    const windowNumber = transferWindowNumber(game.windowIndex)
     return (
-      <CareerHub game={game} sectionLabel="转会窗口完成">
+      <CareerHub game={game} sectionLabel="转会决定完成">
         <section className="transfer-complete">
           <div className="transfer-complete__mark">
             <Icon name="check" />
           </div>
           <div>
-            <p className="decision-kicker">第{windowNumber}个转会窗口</p>
+            <p className="decision-kicker">本次转会决定</p>
             <h1>
               {decision.kind === 'STAY'
                 ? `继续留在${clubName(decision.toClubId)}。`
@@ -228,16 +226,19 @@ export function TransferWindowScreen() {
         ) ?? null
       : null
   const currentClubName = clubName(game.selectedClubId)
-  const windowNumber = transferWindowNumber(game.windowIndex)
   const age = playerAgeAtWindow(game.windowIndex)
+  const windowLabel = careerWindowLabel(
+    game.startYear,
+    game.windowIndex,
+  )
 
   return (
-    <CareerHub game={game} sectionLabel="国内转会窗口">
+    <CareerHub game={game} sectionLabel="国内转会机会">
       <section className="transfer-window">
         <header className="career-panel-heading">
           <Icon name="history" />
-          <h1>第{windowNumber}个转会窗口</h1>
-          <span>{age}岁 · 当前版本仅限国内</span>
+          <h1>国内转会机会</h1>
+          <span>{age}岁 · {windowLabel.replace('年', '').replace('季', '')} · 国内</span>
         </header>
         <p className="career-panel-lead">
           留队最稳定；三家俱乐部根据能力、近期表现、知名度与位置需求给出不同承诺。
