@@ -568,6 +568,35 @@ function migrateLegacyState(value: unknown): unknown {
     }
   }
 
+  if (
+    migrated.saveVersion === 7 &&
+    isRecord(migrated.contract) &&
+    migrated.contract.remainingHalfYears === 0 &&
+    ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY'].includes(
+      String(migrated.phase),
+    ) &&
+    isRecord(migrated.lastReport)
+  ) {
+    const history = Array.isArray(migrated.history)
+      ? migrated.history
+      : []
+    const lastHistory = history[history.length - 1]
+    const completedWindowIndex =
+      isRecord(lastHistory) &&
+      typeof lastHistory.windowIndex === 'number'
+        ? lastHistory.windowIndex
+        : Math.max(0, Number(migrated.windowIndex) - 1)
+    migrated = {
+      ...migrated,
+      phase: 'PRO_STAGE_COMPLETE',
+      windowIndex: completedWindowIndex,
+      pendingCareerEventId: null,
+      trainingFocus: null,
+      developmentApproach: null,
+      trainingQualityBonus: 0,
+    }
+  }
+
   return migrated
 }
 

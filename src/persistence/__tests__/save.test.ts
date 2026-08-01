@@ -258,5 +258,20 @@ describe('save migration', () => {
     expect(migrated.lastReport?.contract?.promiseFulfilled).toBe(false)
     expect(migrated.contract?.brokenPromiseWindows).toBe(1)
     expect(migrated.history[0]?.role).toBe('ROTATION')
+
+    const repairedExpiredPlan = validateGameState({
+      ...migrated,
+      phase: 'HALF_YEAR_PLAN',
+      windowIndex: 5,
+      contract: {
+        ...migrated.contract!,
+        remainingHalfYears: 0,
+      },
+      trainingFocus: 'BALANCED',
+      developmentApproach: 'STEADY',
+    })
+    expect(repairedExpiredPlan.phase).toBe('PRO_STAGE_COMPLETE')
+    expect(repairedExpiredPlan.windowIndex).toBe(4)
+    expect(repairedExpiredPlan.trainingFocus).toBeNull()
   })
 })
