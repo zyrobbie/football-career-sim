@@ -9,6 +9,12 @@ import {
 import { createFirstTeamProgress } from '../engine/firstTeamPath'
 import { generatePlayer } from '../engine/player'
 import { createCareerSeed } from '../engine/random'
+import {
+  attachCareerEventToReport,
+  consumeCareerConsequences,
+  resolveCareerEventChoice,
+  selectCareerEvent,
+} from '../engine/careerEvents'
 import { DEMO_WINDOW_COUNT } from '../engine/careerTime'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
 import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
@@ -21,6 +27,7 @@ import {
 } from '../engine/transfers'
 import type {
   ArrivalChoice,
+  CareerEventChoiceId,
   CareerPriority,
   CounterOfferDirection,
   DevelopmentApproach,
@@ -66,6 +73,7 @@ interface GameStore {
     focus: TrainingFocus,
     approach?: DevelopmentApproach | null,
   ) => void
+  chooseCareerEvent: (choice: CareerEventChoiceId) => void
   advanceAfterReport: () => void
   reviewReport: () => void
   openProfessionalContract: () => void
@@ -88,8 +96,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 5,
-    dataVersion: 5,
+    saveVersion: 6,
+    dataVersion: 6,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -122,6 +130,9 @@ function createInitialGame(): GameState {
     transferDecision: null,
     arrivalChoice: null,
     transferArrivalChoice: null,
+    pendingCareerEventId: null,
+    careerEventHistory: [],
+    pendingConsequences: [],
     trainingFocus: null,
     developmentApproach: null,
     trainingQualityBonus: 0,
@@ -151,11 +162,36 @@ export const useGameStore = create<GameStore>((set, get) => {
       (candidate) => candidate.club.id === state.selectedClubId,
     )
     if (!offer) throw new Error('Selected academy offer is missing.')
-    if (state.contract && state.windowIndex >= DEMO_WINDOW_COUNT) {
-      const result = simulateProfessionalHalfYear({ state, offer })
+    const consequences = consumeCareerConsequences(state)
+    const simulationState: GameState = {
+      ...state,
+      player: consequences.player,
+      pendingConsequences: consequences.pendingConsequences,
+      trainingQualityBonus:
+        state.trainingQualityBonus + consequences.trainingBonus,
+    }
+    const currentEventRecord = [...state.careerEventHistory]
+      .reverse()
+      .find((entry) => entry.windowIndex === state.windowIndex) ?? null
+    if (
+      simulationState.contract &&
+      simulationState.windowIndex >= DEMO_WINDOW_COUNT
+    ) {
+      const result = simulateProfessionalHalfYear({
+        state: simulationState,
+        offer,
+      })
+      const report = attachCareerEventToReport({
+        report: result.report,
+        record: currentEventRecord,
+        appliedConsequenceDelta: consequences.appliedDelta,
+        consequenceSummaries: consequences.summaries,
+      })
       return {
-        ...state,
+        ...simulationState,
         phase: 'HALF_YEAR_REPORT',
+        pendingCareerEventId: null,
+        trainingQualityBonus: 0,
         player: result.player,
         teamLevel: result.teamLevel,
         youthRole: result.youthRole,
@@ -163,15 +199,15 @@ export const useGameStore = create<GameStore>((set, get) => {
         contract: result.contract,
         firstTeamProgress: result.firstTeamProgress,
         cashEuro: result.cashEuro,
-        lastReport: result.report,
+        lastReport: report,
         history: [
           ...state.history,
           {
             windowIndex: state.windowIndex,
             clubId: offer.club.id,
             clubName: offer.club.name,
-            role: result.report.roleAfter,
-            stats: result.report.stats,
+            role: report.roleAfter,
+            stats: report.stats,
             arrivalChoice: null,
             trainingFocus: state.trainingFocus,
             developmentApproach: state.developmentApproach,
@@ -182,32 +218,45 @@ export const useGameStore = create<GameStore>((set, get) => {
         ],
       } satisfies GameState
     }
-    if (!state.youthRole || !state.arrivalChoice) return state
+    if (!simulationState.youthRole || !simulationState.arrivalChoice) {
+      return state
+    }
     const arrivalChoice =
-      state.windowIndex === 0 ? state.arrivalChoice : null
+      simulationState.windowIndex === 0
+        ? simulationState.arrivalChoice
+        : null
     const result = simulateHalfYear({
-      player: state.player,
+      player: simulationState.player!,
       offer,
-      role: state.youthRole,
+      role: simulationState.youthRole,
       arrivalChoice,
-      trainingFocus: state.trainingFocus,
-      careerSeed: state.careerSeed,
-      startYear: state.startYear,
-      windowIndex: state.windowIndex,
-      cashBeforeEuro: state.cashEuro,
-      developmentApproach: state.developmentApproach,
-      firstTeamProgress: state.firstTeamProgress,
-      teamLevel: state.teamLevel,
+      trainingFocus: simulationState.trainingFocus!,
+      careerSeed: simulationState.careerSeed,
+      startYear: simulationState.startYear,
+      windowIndex: simulationState.windowIndex,
+      cashBeforeEuro: simulationState.cashEuro,
+      developmentApproach: simulationState.developmentApproach,
+      firstTeamProgress: simulationState.firstTeamProgress,
+      teamLevel: simulationState.teamLevel,
+      eventTrainingBonus: simulationState.trainingQualityBonus,
+    })
+    const report = attachCareerEventToReport({
+      report: result.report,
+      record: currentEventRecord,
+      appliedConsequenceDelta: consequences.appliedDelta,
+      consequenceSummaries: consequences.summaries,
     })
     return {
-      ...state,
+      ...simulationState,
       phase: 'HALF_YEAR_REPORT',
+      pendingCareerEventId: null,
+      trainingQualityBonus: 0,
       player: result.player,
       youthRole: result.role,
       teamLevel: result.teamLevel,
       firstTeamProgress: result.firstTeamProgress,
-      cashEuro: result.report.cashAfterEuro,
-      lastReport: result.report,
+      cashEuro: report.cashAfterEuro,
+      lastReport: report,
       history: [
         ...state.history,
         {
@@ -215,7 +264,7 @@ export const useGameStore = create<GameStore>((set, get) => {
           clubId: offer.club.id,
           clubName: offer.club.name,
           role: result.role,
-          stats: result.report.stats,
+          stats: report.stats,
           arrivalChoice,
           trainingFocus: state.trainingFocus,
           developmentApproach: state.developmentApproach,
@@ -394,11 +443,64 @@ export const useGameStore = create<GameStore>((set, get) => {
           developmentApproach:
             game.windowIndex >= 2 ? approach ?? 'STEADY' : null,
         }
+        const pendingCareerEventId = selectCareerEvent(ready)
+        if (pendingCareerEventId) {
+          commit({
+            ...ready,
+            phase: 'SPECIAL_EVENT',
+            pendingCareerEventId,
+          })
+          return
+        }
         commit(ready)
         commit(runReadySimulation(ready))
       } catch (error) {
         set({
           error: error instanceof Error ? error.message : '半年结算失败。',
+        })
+      }
+    },
+
+    chooseCareerEvent: (choiceId) => {
+      const game = get().game
+      if (
+        !game?.pendingCareerEventId ||
+        !game.player ||
+        game.phase !== 'SPECIAL_EVENT'
+      ) {
+        set({ error: '当前没有等待处理的特殊事件。' })
+        return
+      }
+      try {
+        const resolved = resolveCareerEventChoice({
+          state: game,
+          eventId: game.pendingCareerEventId,
+          choiceId,
+        })
+        const ready: GameState = {
+          ...game,
+          phase: 'SIMULATION_READY',
+          player: resolved.player,
+          cashEuro: resolved.cashEuro,
+          pendingCareerEventId: null,
+          careerEventHistory: [
+            ...game.careerEventHistory,
+            resolved.record,
+          ],
+          pendingConsequences: resolved.consequence
+            ? [...game.pendingConsequences, resolved.consequence]
+            : game.pendingConsequences,
+          trainingQualityBonus:
+            game.trainingQualityBonus + resolved.trainingBonus,
+        }
+        commit(ready)
+        commit(runReadySimulation(ready))
+      } catch (error) {
+        set({
+          error:
+            error instanceof Error
+              ? error.message
+              : '特殊事件结算失败。',
         })
       }
     },
@@ -418,6 +520,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         ...game,
         phase: 'HALF_YEAR_PLAN',
         windowIndex: game.windowIndex + 1,
+        pendingCareerEventId: null,
         trainingFocus: null,
         developmentApproach: null,
       })

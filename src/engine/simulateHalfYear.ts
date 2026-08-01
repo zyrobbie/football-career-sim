@@ -414,6 +414,7 @@ export function simulateHalfYear(input: {
   developmentApproach?: DevelopmentApproach | null
   firstTeamProgress?: FirstTeamProgress
   teamLevel?: TeamLevel
+  eventTrainingBonus?: number
 }): {
   player: Player
   report: HalfYearReport
@@ -430,6 +431,7 @@ export function simulateHalfYear(input: {
     startYear,
     windowIndex,
     developmentApproach = null,
+    eventTrainingBonus = 0,
   } = input
   const startPlayer = structuredClone(input.player)
   const windowPreparation = prepareWindow(
@@ -488,7 +490,7 @@ export function simulateHalfYear(input: {
     offer,
     role,
     trainingFocus,
-    windowPreparation.trainingBonus,
+    windowPreparation.trainingBonus + eventTrainingBonus,
     (workingPlayer.fitness + fitnessAfter) / 2,
     (workingPlayer.morale + moraleAfter) / 2,
     simulationSeed,

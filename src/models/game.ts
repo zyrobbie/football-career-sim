@@ -88,6 +88,62 @@ export type TransferArrivalChoice =
   | 'FANS'
   | 'NONE'
 
+export type CareerEventCategory =
+  | 'COACH'
+  | 'TEAM'
+  | 'MEDIA'
+  | 'HEALTH'
+  | 'CONTRACT'
+
+export type CareerEventId =
+  | 'COACH_DEFENSIVE_TASK'
+  | 'COACH_ROLE_TRIAL'
+  | 'CAPTAIN_VIDEO_REVIEW'
+  | 'TEAMMATE_RIVALRY'
+  | 'DRESSING_ROOM_DISPUTE'
+  | 'MEDIA_BREAKTHROUGH'
+  | 'ONLINE_CRITICISM'
+  | 'FAN_DAY_OR_REST'
+  | 'FITNESS_WARNING'
+  | 'KEY_MATCH_PAIN'
+  | 'CONTRACT_ROLE_TALK'
+  | 'TRANSFER_RUMOR'
+
+export type CareerEventChoiceId = 'A' | 'B' | 'C'
+
+export interface PlayerEventDelta {
+  attributes?: Partial<Attributes>
+  form?: number
+  fitness?: number
+  morale?: number
+  coachRelation?: number
+  squadRelation?: number
+  agentRelation?: number
+  fanRelation?: number
+  mediaRelation?: number
+  reputation?: number
+  clubAttachment?: number
+}
+
+export interface CareerEventRecord {
+  eventId: CareerEventId
+  choiceId: CareerEventChoiceId
+  windowIndex: number
+  choiceTitle: string
+  outcomeSummary: string
+  appliedDelta: PlayerEventDelta
+  cashDeltaEuro: number
+}
+
+export interface CareerConsequence {
+  id: string
+  sourceEventId: CareerEventId
+  applyAtWindow: number
+  playerDelta: PlayerEventDelta
+  trainingBonus: number
+  summary: string
+}
+
 export type GamePhase =
   | 'HOME'
   | 'CREATE_IDENTITY'
@@ -98,6 +154,7 @@ export type GamePhase =
   | 'ACADEMY_OFFERS'
   | 'ARRIVAL_EVENT'
   | 'HALF_YEAR_PLAN'
+  | 'SPECIAL_EVENT'
   | 'SIMULATION_READY'
   | 'HALF_YEAR_REPORT'
   | 'CAREER_DASHBOARD'
@@ -280,6 +337,13 @@ export interface HalfYearReport {
     brokenPromiseWindows: number
   }
   injury: InjurySummary | null
+  specialEvent?: {
+    eventId: CareerEventId
+    title: string
+    choiceTitle: string
+    outcomeSummary: string
+  } | null
+  consequenceSummaries?: string[]
   eventSummary: string
   hints: string[]
 }
@@ -299,8 +363,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 5
-  dataVersion: 5
+  saveVersion: 6
+  dataVersion: 6
   phase: GamePhase
   careerSeed: string
   startYear: number
@@ -319,6 +383,9 @@ export interface GameState {
   transferDecision: TransferDecision | null
   arrivalChoice: ArrivalChoice | null
   transferArrivalChoice: TransferArrivalChoice | null
+  pendingCareerEventId: CareerEventId | null
+  careerEventHistory: CareerEventRecord[]
+  pendingConsequences: CareerConsequence[]
   trainingFocus: TrainingFocus | null
   developmentApproach: DevelopmentApproach | null
   trainingQualityBonus: number

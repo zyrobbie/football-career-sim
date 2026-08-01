@@ -82,6 +82,22 @@ export function HalfYearReportScreen() {
           </section>
 
           <aside className="report-side">
+            {report.specialEvent ? (
+              <section className="special-event-result">
+                <h2>特殊事件</h2>
+                <strong>{report.specialEvent.title}</strong>
+                <span>{report.specialEvent.choiceTitle}</span>
+                <p>{report.specialEvent.outcomeSummary}</p>
+              </section>
+            ) : null}
+            {report.consequenceSummaries?.length ? (
+              <section className="consequence-result">
+                <h2>长期后果</h2>
+                {report.consequenceSummaries.map((summary) => (
+                  <p key={summary}>{summary}</p>
+                ))}
+              </section>
+            ) : null}
             <section className="report-side__states">
               <h2>状态与关系变化</h2>
               <ReportChange label="竞技状态" change={report.states.form} />

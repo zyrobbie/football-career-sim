@@ -1,6 +1,13 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { useGameStore } from './gameStore'
 
+function resolveSpecialEventIfPresent() {
+  const store = useGameStore.getState()
+  if (store.game?.phase === 'SPECIAL_EVENT') {
+    store.chooseCareerEvent('A')
+  }
+}
+
 describe('academy two-year progression', () => {
   beforeEach(() => {
     useGameStore.setState({
@@ -33,6 +40,7 @@ describe('academy two-year progression', () => {
     store.selectAcademy(offer!.club.id)
     store.chooseArrival('COACH')
     store.chooseTraining('physical')
+    resolveSpecialEventIfPresent()
 
     let game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_REPORT')
@@ -46,11 +54,13 @@ describe('academy two-year progression', () => {
     expect(game?.windowIndex).toBe(1)
 
     store.chooseTraining('mental')
+    resolveSpecialEventIfPresent()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_REPORT')
     expect(game?.history).toHaveLength(2)
     expect(game?.history[1]?.arrivalChoice).toBeNull()
     expect(game?.history[1]?.clubName).toBe(offer!.club.name)
+    expect(game?.careerEventHistory).toHaveLength(1)
 
     store.advanceAfterReport()
     game = useGameStore.getState().game
@@ -58,6 +68,7 @@ describe('academy two-year progression', () => {
     expect(game?.windowIndex).toBe(2)
 
     store.chooseTraining('BALANCED', 'PUSH')
+    resolveSpecialEventIfPresent()
     game = useGameStore.getState().game
     expect(game?.history).toHaveLength(3)
     expect(game?.history[2]?.developmentApproach).toBe('PUSH')
@@ -66,6 +77,7 @@ describe('academy two-year progression', () => {
     store.advanceAfterReport()
     expect(useGameStore.getState().game?.windowIndex).toBe(3)
     store.chooseTraining('mental', 'TEAM_FIRST')
+    resolveSpecialEventIfPresent()
     game = useGameStore.getState().game
     expect(game?.history).toHaveLength(4)
     expect(game?.history[3]?.firstTeamAttention).toBe(
@@ -102,6 +114,7 @@ describe('academy two-year progression', () => {
     expect(game?.windowIndex).toBe(4)
 
     store.chooseTraining('BALANCED', 'STEADY')
+    resolveSpecialEventIfPresent()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_REPORT')
     expect(game?.history).toHaveLength(5)

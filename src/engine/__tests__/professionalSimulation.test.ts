@@ -35,8 +35,8 @@ describe('professional half-year simulation', () => {
     })
     const contract = contractFromOffer(professionalOffer)
     const state: GameState = {
-      saveVersion: 5,
-      dataVersion: 5,
+      saveVersion: 6,
+      dataVersion: 6,
       phase: 'SIMULATION_READY',
       careerSeed,
       startYear: 2026,
@@ -55,6 +55,9 @@ describe('professional half-year simulation', () => {
       transferDecision: null,
       arrivalChoice: 'COACH',
       transferArrivalChoice: null,
+      pendingCareerEventId: null,
+      careerEventHistory: [],
+      pendingConsequences: [],
       trainingFocus: 'BALANCED',
       developmentApproach: 'STEADY',
       trainingQualityBonus: 0,

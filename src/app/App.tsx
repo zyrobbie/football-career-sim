@@ -11,6 +11,7 @@ import { ProfessionalContractScreen } from '../screens/ProfessionalContractScree
 import { ProfessionalStageCompleteScreen } from '../screens/ProfessionalStageCompleteScreen'
 import { TrainingPlanScreen } from '../screens/TrainingPlanScreen'
 import { TransferWindowScreen } from '../screens/TransferWindowScreen'
+import { SpecialEventScreen } from '../screens/SpecialEventScreen'
 
 export function App() {
   const game = useGameStore((state) => state.game)
@@ -45,6 +46,8 @@ export function App() {
       game.phase === 'SIMULATION_READY'
     ) {
       screen = <TrainingPlanScreen />
+    } else if (game.phase === 'SPECIAL_EVENT') {
+      screen = <SpecialEventScreen />
     } else if (game.phase === 'HALF_YEAR_REPORT') {
       screen = <HalfYearReportScreen />
     } else if (game.phase === 'CAREER_DASHBOARD') {

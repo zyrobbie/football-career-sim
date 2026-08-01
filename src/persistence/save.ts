@@ -169,9 +169,57 @@ const transferArrivalChoiceSchema = z.enum([
   'NONE',
 ])
 
+const careerEventIdSchema = z.enum([
+  'COACH_DEFENSIVE_TASK',
+  'COACH_ROLE_TRIAL',
+  'CAPTAIN_VIDEO_REVIEW',
+  'TEAMMATE_RIVALRY',
+  'DRESSING_ROOM_DISPUTE',
+  'MEDIA_BREAKTHROUGH',
+  'ONLINE_CRITICISM',
+  'FAN_DAY_OR_REST',
+  'FITNESS_WARNING',
+  'KEY_MATCH_PAIN',
+  'CONTRACT_ROLE_TALK',
+  'TRANSFER_RUMOR',
+])
+
+const playerEventDeltaSchema = z.object({
+  attributes: attributesSchema.partial().optional(),
+  form: z.number().finite().optional(),
+  fitness: z.number().finite().optional(),
+  morale: z.number().finite().optional(),
+  coachRelation: z.number().finite().optional(),
+  squadRelation: z.number().finite().optional(),
+  agentRelation: z.number().finite().optional(),
+  fanRelation: z.number().finite().optional(),
+  mediaRelation: z.number().finite().optional(),
+  reputation: z.number().finite().optional(),
+  clubAttachment: z.number().finite().optional(),
+})
+
+const careerEventRecordSchema = z.object({
+  eventId: careerEventIdSchema,
+  choiceId: z.enum(['A', 'B', 'C']),
+  windowIndex: z.number().int().nonnegative(),
+  choiceTitle: z.string().min(1),
+  outcomeSummary: z.string().min(1),
+  appliedDelta: playerEventDeltaSchema,
+  cashDeltaEuro: z.number().int(),
+})
+
+const careerConsequenceSchema = z.object({
+  id: z.string().min(1),
+  sourceEventId: careerEventIdSchema,
+  applyAtWindow: z.number().int().nonnegative(),
+  playerDelta: playerEventDeltaSchema,
+  trainingBonus: z.number().finite(),
+  summary: z.string().min(1),
+})
+
 const stateSchema = z.object({
-  saveVersion: z.literal(5),
-  dataVersion: z.literal(5),
+  saveVersion: z.literal(6),
+  dataVersion: z.literal(6),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -182,6 +230,7 @@ const stateSchema = z.object({
     'ACADEMY_OFFERS',
     'ARRIVAL_EVENT',
     'HALF_YEAR_PLAN',
+    'SPECIAL_EVENT',
     'SIMULATION_READY',
     'HALF_YEAR_REPORT',
     'CAREER_DASHBOARD',
@@ -238,6 +287,9 @@ const stateSchema = z.object({
     ])
     .nullable(),
   transferArrivalChoice: transferArrivalChoiceSchema.nullable(),
+  pendingCareerEventId: careerEventIdSchema.nullable(),
+  careerEventHistory: z.array(careerEventRecordSchema).max(80),
+  pendingConsequences: z.array(careerConsequenceSchema).max(16),
   developmentApproach: z
     .enum(['PUSH', 'STEADY', 'TEAM_FIRST'])
     .nullable(),
@@ -401,6 +453,17 @@ function migrateLegacyState(value: unknown): unknown {
     }
   }
 
+  if (migrated.saveVersion === 5) {
+    migrated = {
+      ...migrated,
+      saveVersion: 6,
+      dataVersion: 6,
+      pendingCareerEventId: null,
+      careerEventHistory: [],
+      pendingConsequences: [],
+    }
+  }
+
   return migrated
 }
 
@@ -459,7 +522,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
+    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
       parsed.phase,
     ) &&
     parsed.academyOffers.length !== 3
@@ -468,7 +531,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
+    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
       parsed.phase,
     ) &&
     (!parsed.selectedClubId ||
@@ -482,6 +545,13 @@ export function validateGameState(value: unknown): GameState {
     (!parsed.arrivalChoice || !parsed.trainingFocus)
   ) {
     throw new Error('Simulation-ready state is missing player choices.')
+  }
+
+  if (
+    parsed.phase === 'SPECIAL_EVENT' &&
+    (!parsed.trainingFocus || !parsed.pendingCareerEventId)
+  ) {
+    throw new Error('Special-event state is missing its event or training choice.')
   }
 
   if (

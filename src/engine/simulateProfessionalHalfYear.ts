@@ -565,7 +565,8 @@ function simulateFirstTeamHalfYear(input: {
     offer,
     role,
     focus,
-    trainingBonus: preparation.trainingBonus,
+    trainingBonus:
+      preparation.trainingBonus + state.trainingQualityBonus,
     seed,
   })
   const playerAfter: Player = {
@@ -757,6 +758,7 @@ export function simulateProfessionalHalfYear(input: {
     developmentApproach: state.developmentApproach,
     firstTeamProgress: state.firstTeamProgress,
     teamLevel: state.teamLevel,
+    eventTrainingBonus: state.trainingQualityBonus,
   })
   const actualTeamLevel = youthResult.teamLevel
   const firstTeamRole =
