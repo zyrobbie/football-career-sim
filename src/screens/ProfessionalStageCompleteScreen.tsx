@@ -1,5 +1,6 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
+import { retirementAvailabilityAfterWindow } from '../engine/careerTime'
 import { assessDomesticTransferOpportunity } from '../engine/transfers'
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, roleLabel } from '../ui/format'
@@ -23,6 +24,7 @@ export function ProfessionalStageCompleteScreen() {
   const continueProfessionalCareer = useGameStore(
     (state) => state.continueProfessionalCareer,
   )
+  const requestRetirement = useGameStore((state) => state.requestRetirement)
   if (
     !game?.player ||
     !game.lastReport ||
@@ -46,6 +48,11 @@ export function ProfessionalStageCompleteScreen() {
     latestReport: report,
     windowIndex: game.windowIndex,
   })
+  const retirementAvailability = retirementAvailabilityAfterWindow(
+    game.windowIndex,
+  )
+  const retirementMandatory = retirementAvailability === 'MANDATORY'
+  const retirementOptional = retirementAvailability === 'OPTIONAL'
 
   return (
     <CareerHub game={game} sectionLabel="职业半年完成">
@@ -100,7 +107,9 @@ export function ProfessionalStageCompleteScreen() {
             </div>
           </dl>
           <p className="demo-complete__next">
-            {contractExpired
+            {retirementMandatory
+              ? '40岁赛季已经结束。职业日历现已封闭，你需要完成退役并保存最终生涯档案。'
+              : contractExpired
               ? '合同已经到期。你必须先完成续约或接受新的自由身合同，才能进入下一职业半年。'
               : canRequestTransfer
                 ? '球队已经连续两个窗口没有兑现角色承诺。你可以正式提出转会申请，或选择再留队半年等待改善。'
@@ -111,6 +120,10 @@ export function ProfessionalStageCompleteScreen() {
               type="button"
               className="button button--primary"
               onClick={() => {
+                if (retirementMandatory) {
+                  requestRetirement()
+                  return
+                }
                 if (canRequestTransfer) {
                   openTransferWindow(true)
                   return
@@ -122,7 +135,9 @@ export function ProfessionalStageCompleteScreen() {
                 continueProfessionalCareer()
               }}
             >
-              {canRequestTransfer
+              {retirementMandatory
+                ? '结束职业生涯'
+                : canRequestTransfer
                 ? '提出转会申请'
                 : contractExpired
                 ? '处理合同到期'
@@ -131,7 +146,15 @@ export function ProfessionalStageCompleteScreen() {
                 : '进入下一职业半年'}
               <Icon name="arrow" />
             </button>
-            {canRequestTransfer ? (
+            {retirementMandatory ? (
+              <button
+                type="button"
+                className="button button--secondary"
+                onClick={reviewReport}
+              >
+                复查最后半年报告
+              </button>
+            ) : canRequestTransfer ? (
               <button
                 type="button"
                 className="button button--secondary"
@@ -149,6 +172,15 @@ export function ProfessionalStageCompleteScreen() {
               </button>
             )}
           </div>
+          {retirementOptional ? (
+            <button
+              type="button"
+              className="retirement-option"
+              onClick={requestRetirement}
+            >
+              选择在本窗口后退役
+            </button>
+          ) : null}
         </div>
       </section>
     </CareerHub>

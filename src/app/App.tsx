@@ -9,6 +9,7 @@ import { HomeScreen } from '../screens/HomeScreen'
 import { PlayerRevealScreen } from '../screens/PlayerRevealScreen'
 import { ProfessionalContractScreen } from '../screens/ProfessionalContractScreen'
 import { ProfessionalStageCompleteScreen } from '../screens/ProfessionalStageCompleteScreen'
+import { RetirementScreen } from '../screens/RetirementScreen'
 import { TrainingPlanScreen } from '../screens/TrainingPlanScreen'
 import { TransferWindowScreen } from '../screens/TransferWindowScreen'
 import { SpecialEventScreen } from '../screens/SpecialEventScreen'
@@ -59,6 +60,11 @@ export function App() {
       screen = <ProfessionalContractScreen />
     } else if (game.phase === 'PRO_STAGE_COMPLETE') {
       screen = <ProfessionalStageCompleteScreen />
+    } else if (
+      game.phase === 'RETIREMENT_DECISION' ||
+      game.phase === 'CAREER_RETIRED'
+    ) {
+      screen = <RetirementScreen />
     } else if (
       game.phase === 'TRANSFER_WINDOW' ||
       game.phase === 'TRANSFER_ARRIVAL' ||

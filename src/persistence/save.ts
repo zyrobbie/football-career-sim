@@ -1,4 +1,6 @@
 import { z } from 'zod'
+import { MAX_CAREER_AGE } from '../data/ageCurve'
+import { playerAgeAtWindow } from '../engine/careerTime'
 import {
   attributeKeys,
   positions,
@@ -218,8 +220,8 @@ const careerConsequenceSchema = z.object({
 })
 
 const stateSchema = z.object({
-  saveVersion: z.literal(7),
-  dataVersion: z.literal(7),
+  saveVersion: z.literal(8),
+  dataVersion: z.literal(8),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -240,6 +242,8 @@ const stateSchema = z.object({
     'TRANSFER_WINDOW',
     'TRANSFER_ARRIVAL',
     'TRANSFER_STAGE_COMPLETE',
+    'RETIREMENT_DECISION',
+    'CAREER_RETIRED',
   ]),
   careerSeed: z.string().min(8),
   startYear: z.number().int().min(2020).max(9999),
@@ -296,6 +300,7 @@ const stateSchema = z.object({
   trainingQualityBonus: z.number().finite(),
   firstTeamProgress: firstTeamProgressSchema,
   cashEuro: z.number().int().nonnegative(),
+  retirementReason: z.enum(['VOLUNTARY', 'AGE_LIMIT']).nullable(),
   lastReport: z.unknown().nullable(),
   history: z.array(z.unknown()),
 })
@@ -569,7 +574,7 @@ function migrateLegacyState(value: unknown): unknown {
   }
 
   if (
-    migrated.saveVersion === 7 &&
+    (migrated.saveVersion === 7 || migrated.saveVersion === 8) &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
     ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY'].includes(
@@ -594,6 +599,15 @@ function migrateLegacyState(value: unknown): unknown {
       trainingFocus: null,
       developmentApproach: null,
       trainingQualityBonus: 0,
+    }
+  }
+
+  if (migrated.saveVersion === 7) {
+    migrated = {
+      ...migrated,
+      saveVersion: 8,
+      dataVersion: 8,
+      retirementReason: null,
     }
   }
 
@@ -655,7 +669,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
+    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
       parsed.phase,
     ) &&
     parsed.academyOffers.length !== 3
@@ -664,7 +678,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(
+    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
       parsed.phase,
     ) &&
     (!parsed.selectedClubId ||
@@ -695,7 +709,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE'].includes(parsed.phase) &&
+    ['PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(parsed.phase) &&
     !parsed.contract
   ) {
     throw new Error('Professional-contract completion requires a contract.')
@@ -720,6 +734,37 @@ export function validateGameState(value: unknown): GameState {
     !parsed.transferDecision
   ) {
     throw new Error('Transfer completion requires a decision.')
+  }
+
+  if (
+    ['RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(parsed.phase) &&
+    !parsed.retirementReason
+  ) {
+    throw new Error('Retirement phase requires a retirement reason.')
+  }
+
+  if (
+    !['RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(parsed.phase) &&
+    parsed.retirementReason
+  ) {
+    throw new Error('Retirement reason is only valid during retirement.')
+  }
+
+  if (
+    playerAgeAtWindow(parsed.windowIndex) > MAX_CAREER_AGE &&
+    !['RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(parsed.phase)
+  ) {
+    return {
+      ...parsed,
+      phase: 'RETIREMENT_DECISION',
+      retirementReason: 'AGE_LIMIT',
+      pendingCareerEventId: null,
+      trainingFocus: null,
+      developmentApproach: null,
+      trainingQualityBonus: 0,
+      transferOffers: [],
+      selectedTransferChoiceId: null,
+    }
   }
 
   if (

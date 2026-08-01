@@ -44,8 +44,8 @@ function legacyIdentityState() {
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
-    expect(migrated.saveVersion).toBe(7)
-    expect(migrated.dataVersion).toBe(7)
+    expect(migrated.saveVersion).toBe(8)
+    expect(migrated.dataVersion).toBe(8)
     expect(migrated.draft.jerseyNumber).toBe(10)
     expect(migrated.draft.preferredFoot).toBe('RIGHT')
     expect(migrated.teamLevel).toBe('YOUTH')
@@ -201,7 +201,7 @@ describe('save migration', () => {
       dataVersion: 3,
     })
 
-    expect(migrated.saveVersion).toBe(7)
+    expect(migrated.saveVersion).toBe(8)
     expect(migrated.firstTeamRole).toBeNull()
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
@@ -294,7 +294,7 @@ describe('save migration', () => {
 
     const migrated = validateGameState(legacy)
 
-    expect(migrated.saveVersion).toBe(7)
+    expect(migrated.saveVersion).toBe(8)
     expect(migrated.lastReport?.contract?.actualRole).toBe('ROTATION')
     expect(migrated.lastReport?.contract?.actualTeamLevel).toBe('FIRST_TEAM')
     expect(migrated.lastReport?.contract?.promiseFulfilled).toBe(false)
@@ -315,5 +315,15 @@ describe('save migration', () => {
     expect(repairedExpiredPlan.phase).toBe('PRO_STAGE_COMPLETE')
     expect(repairedExpiredPlan.windowIndex).toBe(4)
     expect(repairedExpiredPlan.trainingFocus).toBeNull()
+
+    const repairedOverAge = validateGameState({
+      ...migrated,
+      phase: 'HALF_YEAR_PLAN',
+      windowIndex: 56,
+      trainingFocus: null,
+      developmentApproach: null,
+    })
+    expect(repairedOverAge.phase).toBe('RETIREMENT_DECISION')
+    expect(repairedOverAge.retirementReason).toBe('AGE_LIMIT')
   })
 })

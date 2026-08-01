@@ -2,6 +2,7 @@ import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
 import { ATTRIBUTE_LABELS } from '../data/balance'
 import {
+  canAdvanceBeyondWindow,
   DEMO_WINDOW_COUNT,
   playerAgeAtWindow,
 } from '../engine/careerTime'
@@ -25,7 +26,11 @@ export function HalfYearReportScreen() {
     Boolean(game.contract) && game.windowIndex >= DEMO_WINDOW_COUNT
   const isDemoComplete =
     !isProfessionalWindow && game.history.length >= DEMO_WINDOW_COUNT
-  const age = playerAgeAtWindow(game.windowIndex + 1)
+  const isCareerFinalWindow =
+    isProfessionalWindow && !canAdvanceBeyondWindow(game.windowIndex)
+  const age = playerAgeAtWindow(
+    isCareerFinalWindow ? game.windowIndex : game.windowIndex + 1,
+  )
   const reportTitle = halfYearReportTitle(game.windowIndex)
   const reportRole = report.contract?.actualRole ?? report.roleAfter
 
@@ -40,7 +45,10 @@ export function HalfYearReportScreen() {
           <Icon name="history" />
           <h1>{reportTitle}</h1>
           <span>
-            {report.fromLabel} — {report.toLabel} · {age}岁 ·{' '}
+            {isCareerFinalWindow
+              ? `${report.fromLabel} · 职业生涯终章`
+              : `${report.fromLabel} — ${report.toLabel}`}{' '}
+            · {age}岁 ·{' '}
             {roleLabel(reportRole)}
           </span>
         </header>
@@ -149,13 +157,21 @@ export function HalfYearReportScreen() {
 
         <section className="report-footer">
           <div>
-            <h2>{report.toLabel}前瞻</h2>
+            <h2>
+              {isCareerFinalWindow ? '40岁赛季结束' : `${report.toLabel}前瞻`}
+            </h2>
             <p className="event-summary">{report.eventSummary}</p>
-            <ul>
-              {report.hints.map((hint) => (
-                <li key={hint}>{hint}</li>
-              ))}
-            </ul>
+            {isCareerFinalWindow ? (
+              <ul>
+                <li>职业日历已到终点，完成报告后将进入强制退役流程。</li>
+              </ul>
+            ) : (
+              <ul>
+                {report.hints.map((hint) => (
+                  <li key={hint}>{hint}</li>
+                ))}
+              </ul>
+            )}
             <p className="autosave-line">
               <Icon name="save" />
               本阶段已自动保存
@@ -167,7 +183,9 @@ export function HalfYearReportScreen() {
             onClick={advanceAfterReport}
           >
             {isProfessionalWindow
-              ? '完成本次职业半年'
+              ? isCareerFinalWindow
+                ? '完成最后一个职业半年'
+                : '完成本次职业半年'
               : isDemoComplete
               ? '完成青训第二年'
               : `进入${report.toLabel}窗口`}

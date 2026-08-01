@@ -164,6 +164,10 @@ export type GamePhase =
   | 'TRANSFER_WINDOW'
   | 'TRANSFER_ARRIVAL'
   | 'TRANSFER_STAGE_COMPLETE'
+  | 'RETIREMENT_DECISION'
+  | 'CAREER_RETIRED'
+
+export type RetirementReason = 'VOLUNTARY' | 'AGE_LIMIT'
 
 export interface CreationDraft {
   name: string
@@ -363,8 +367,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 7
-  dataVersion: 7
+  saveVersion: 8
+  dataVersion: 8
   phase: GamePhase
   careerSeed: string
   startYear: number
@@ -391,6 +395,7 @@ export interface GameState {
   trainingQualityBonus: number
   firstTeamProgress: FirstTeamProgress
   cashEuro: number
+  retirementReason: RetirementReason | null
   lastReport: HalfYearReport | null
   history: CareerHistoryEntry[]
 }

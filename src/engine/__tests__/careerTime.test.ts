@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import {
+  canAdvanceBeyondWindow,
   careerWindowLabel,
   playerAgeAtWindow,
+  retirementAvailabilityAfterWindow,
 } from '../careerTime'
 
 describe('career window time', () => {
@@ -16,5 +18,17 @@ describe('career window time', () => {
     expect(playerAgeAtWindow(0)).toBe(13)
     expect(playerAgeAtWindow(1)).toBe(13)
     expect(playerAgeAtWindow(2)).toBe(14)
+  })
+
+  it('offers retirement on the agreed age cadence and forces it after age 40 season', () => {
+    expect(retirementAvailabilityAfterWindow(33)).toBe('UNAVAILABLE')
+    expect(retirementAvailabilityAfterWindow(34)).toBe('OPTIONAL')
+    expect(retirementAvailabilityAfterWindow(40)).toBe('UNAVAILABLE')
+    expect(retirementAvailabilityAfterWindow(41)).toBe('OPTIONAL')
+    expect(retirementAvailabilityAfterWindow(48)).toBe('OPTIONAL')
+    expect(retirementAvailabilityAfterWindow(54)).toBe('OPTIONAL')
+    expect(retirementAvailabilityAfterWindow(55)).toBe('MANDATORY')
+    expect(canAdvanceBeyondWindow(54)).toBe(true)
+    expect(canAdvanceBeyondWindow(55)).toBe(false)
   })
 })

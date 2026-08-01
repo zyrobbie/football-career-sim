@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { ATTRIBUTE_LABELS, CLUBS } from '../data/balance'
 import {
+  canAdvanceBeyondWindow,
   careerWindowLabel,
   playerAgeAtWindow,
 } from '../engine/careerTime'
@@ -42,11 +43,13 @@ interface LedgerRow {
 }
 
 function visibleWindowIndex(game: GameState): number {
-  return game.phase === 'HALF_YEAR_REPORT' ||
+  const normallyShowsNextWindow = game.phase === 'HALF_YEAR_REPORT' ||
     game.phase === 'CAREER_DASHBOARD' ||
     game.phase === 'PRO_CONTRACT_OFFER' ||
     game.phase === 'PRO_CONTRACT_COMPLETE' ||
     game.phase === 'PRO_STAGE_COMPLETE'
+  if (!normallyShowsNextWindow) return game.windowIndex
+  return canAdvanceBeyondWindow(game.windowIndex)
     ? game.windowIndex + 1
     : game.windowIndex
 }

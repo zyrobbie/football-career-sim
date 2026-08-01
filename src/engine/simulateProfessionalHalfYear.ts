@@ -23,7 +23,8 @@ import {
   type TrainingFocus,
   type YouthRole,
 } from '../models/game'
-import { careerWindowLabel } from './careerTime'
+import { developAttributesByAge } from './ageDevelopment'
+import { careerWindowLabel, playerAgeAtWindow } from './careerTime'
 import { evaluateFirstTeamRole } from './contracts'
 import {
   cashReserveLimit,
@@ -132,15 +133,6 @@ function trainingShares(
       weights[key] * 0.75 + (key === focus ? 0.25 : 0),
     ]),
   ) as unknown as Attributes
-}
-
-function gapFactor(gap: number): number {
-  if (gap >= 25) return 1
-  if (gap >= 15) return 0.8
-  if (gap >= 8) return 0.55
-  if (gap >= 3) return 0.25
-  if (gap > 0) return 0.08
-  return 0
 }
 
 function roleStepToward(
@@ -348,8 +340,9 @@ function growFirstTeamAttributes(input: {
   focus: TrainingFocus
   trainingBonus: number
   seed: string
+  windowIndex: number
 }): Attributes {
-  const { player, offer, role, focus, trainingBonus, seed } = input
+  const { player, offer, role, focus, trainingBonus, seed, windowIndex } = input
   const effectiveCoach = Math.min(
     100,
     COACH_BASE_SCORES[offer.club.tier] *
@@ -372,23 +365,13 @@ function growFirstTeamAttributes(input: {
   const shares = trainingShares(player.primaryPosition, focus)
   const random = createRandom(seed, 'professional-growth')
 
-  return Object.fromEntries(
-    attributeKeys.map((key) => {
-      const gap = player.potentials[key] - player.attributes[key]
-      const growth =
-        5.5 *
-        multiplier *
-        shares[key] *
-        gapFactor(gap) *
-        random.float(0.9, 1.1)
-      return [
-        key,
-        roundTenth(
-          Math.min(player.potentials[key], player.attributes[key] + growth),
-        ),
-      ]
-    }),
-  ) as unknown as Attributes
+  return developAttributesByAge({
+    player,
+    age: playerAgeAtWindow(windowIndex),
+    developmentMultiplier: multiplier,
+    trainingShares: shares,
+    random,
+  })
 }
 
 function promiseFulfilled(
@@ -567,6 +550,7 @@ function simulateFirstTeamHalfYear(input: {
     trainingBonus:
       preparation.trainingBonus + state.trainingQualityBonus,
     seed,
+    windowIndex: state.windowIndex,
   })
   const playerAfter: Player = {
     ...workingPlayer,

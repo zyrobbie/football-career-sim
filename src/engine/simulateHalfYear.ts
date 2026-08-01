@@ -25,7 +25,8 @@ import {
 import {
   calculateOverall,
 } from './player'
-import { careerWindowLabel } from './careerTime'
+import { developAttributesByAge } from './ageDevelopment'
+import { careerWindowLabel, playerAgeAtWindow } from './careerTime'
 import { calculateYouthSelectionScore, youthRoleFromDifference } from './offers'
 import {
   createFirstTeamProgress,
@@ -307,15 +308,6 @@ function developmentMultiplier(index: number): number {
   return 1.2
 }
 
-function gapFactor(gap: number): number {
-  if (gap >= 25) return 1
-  if (gap >= 15) return 0.8
-  if (gap >= 8) return 0.55
-  if (gap >= 3) return 0.25
-  if (gap > 0) return 0.08
-  return 0
-}
-
 function trainingShares(
   position: Player['primaryPosition'],
   focus: TrainingFocus,
@@ -339,6 +331,7 @@ function growAttributes(
   averageFitness: number,
   averageMorale: number,
   seed: string,
+  windowIndex: number,
 ): Attributes {
   const effectiveCoach = Math.min(
     100,
@@ -362,23 +355,13 @@ function growAttributes(
   const shares = trainingShares(player.primaryPosition, focus)
   const random = createRandom(seed, 'growth')
 
-  return Object.fromEntries(
-    attributeKeys.map((key) => {
-      const gap = player.potentials[key] - player.attributes[key]
-      const growth =
-        7 *
-        multiplier *
-        shares[key] *
-        gapFactor(gap) *
-        random.float(0.9, 1.1)
-      return [
-        key,
-        roundTenth(
-          Math.min(player.potentials[key], player.attributes[key] + growth),
-        ),
-      ]
-    }),
-  ) as unknown as Attributes
+  return developAttributesByAge({
+    player,
+    age: playerAgeAtWindow(windowIndex),
+    developmentMultiplier: multiplier,
+    trainingShares: shares,
+    random,
+  })
 }
 
 function roleStepToward(
@@ -494,6 +477,7 @@ export function simulateHalfYear(input: {
     (workingPlayer.fitness + fitnessAfter) / 2,
     (workingPlayer.morale + moraleAfter) / 2,
     simulationSeed,
+    windowIndex,
   )
 
   const playerAfter: Player = {

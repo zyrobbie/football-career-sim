@@ -18,7 +18,11 @@ import {
   resolveCareerEventChoice,
   selectCareerEvent,
 } from '../engine/careerEvents'
-import { DEMO_WINDOW_COUNT } from '../engine/careerTime'
+import {
+  canAdvanceBeyondWindow,
+  DEMO_WINDOW_COUNT,
+  retirementAvailabilityAfterWindow,
+} from '../engine/careerTime'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
 import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
 import {
@@ -92,6 +96,9 @@ interface GameStore {
   confirmTransferChoice: () => void
   chooseTransferArrival: (choice: TransferArrivalChoice) => void
   continueAfterTransfer: () => void
+  requestRetirement: () => void
+  cancelRetirement: () => void
+  confirmRetirement: () => void
   goToPhase: (phase: GamePhase) => void
   clearError: () => void
 }
@@ -103,8 +110,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 7,
-    dataVersion: 7,
+    saveVersion: 8,
+    dataVersion: 8,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -145,6 +152,7 @@ function createInitialGame(): GameState {
     trainingQualityBonus: 0,
     firstTeamProgress: createFirstTeamProgress(),
     cashEuro: 1000,
+    retirementReason: null,
     lastReport: null,
     history: [],
   }
@@ -648,6 +656,10 @@ export const useGameStore = create<GameStore>((set, get) => {
         set({ error: '当前生涯还不能进入转会窗口。' })
         return
       }
+      if (!canAdvanceBeyondWindow(game.windowIndex)) {
+        set({ error: '40岁赛季已经结束，职业日历不能再进入新的转会窗口。' })
+        return
+      }
       const contractExpired = game.contract.remainingHalfYears === 0
       const opportunity = assessDomesticTransferOpportunity({
         player: game.player,
@@ -727,6 +739,10 @@ export const useGameStore = create<GameStore>((set, get) => {
         game.phase !== 'PRO_STAGE_COMPLETE'
       ) {
         set({ error: '需要先完成本次职业半年。' })
+        return
+      }
+      if (!canAdvanceBeyondWindow(game.windowIndex)) {
+        set({ error: '40岁赛季已经结束，必须先完成退役。' })
         return
       }
       const opportunity = assessDomesticTransferOpportunity({
@@ -964,6 +980,10 @@ export const useGameStore = create<GameStore>((set, get) => {
         set({ error: '需要先完成本次转会窗口。' })
         return
       }
+      if (!canAdvanceBeyondWindow(game.windowIndex - 1)) {
+        set({ error: '40岁赛季已经结束，不能再进入新的职业半年。' })
+        return
+      }
       commit({
         ...game,
         phase: 'HALF_YEAR_PLAN',
@@ -974,6 +994,57 @@ export const useGameStore = create<GameStore>((set, get) => {
         developmentApproach: null,
         trainingQualityBonus: 0,
       })
+    },
+
+    requestRetirement: () => {
+      const game = get().game
+      if (!game?.player || game.phase !== 'PRO_STAGE_COMPLETE') {
+        set({ error: '只能在完成一个职业窗口后决定是否退役。' })
+        return
+      }
+      const availability = retirementAvailabilityAfterWindow(
+        game.windowIndex,
+      )
+      if (availability === 'UNAVAILABLE') {
+        set({ error: '当前年龄和职业状态还不具备主动退役条件。' })
+        return
+      }
+      commit({
+        ...game,
+        phase: 'RETIREMENT_DECISION',
+        retirementReason:
+          availability === 'MANDATORY' ? 'AGE_LIMIT' : 'VOLUNTARY',
+      })
+    },
+
+    cancelRetirement: () => {
+      const game = get().game
+      if (
+        !game ||
+        game.phase !== 'RETIREMENT_DECISION' ||
+        game.retirementReason !== 'VOLUNTARY'
+      ) {
+        set({ error: '这次退役决定已经不能撤回。' })
+        return
+      }
+      commit({
+        ...game,
+        phase: 'PRO_STAGE_COMPLETE',
+        retirementReason: null,
+      })
+    },
+
+    confirmRetirement: () => {
+      const game = get().game
+      if (
+        !game?.player ||
+        game.phase !== 'RETIREMENT_DECISION' ||
+        !game.retirementReason
+      ) {
+        set({ error: '当前没有待确认的退役决定。' })
+        return
+      }
+      commit({ ...game, phase: 'CAREER_RETIRED' })
     },
 
     goToPhase: (phase) => {

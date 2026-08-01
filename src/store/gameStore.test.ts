@@ -342,5 +342,35 @@ describe('academy two-year progression', () => {
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_PLAN')
     expect(game?.windowIndex).toBe(7)
+
+    useGameStore.setState({
+      game: {
+        ...game!,
+        phase: 'PRO_STAGE_COMPLETE',
+        windowIndex: 34,
+        retirementReason: null,
+      },
+    })
+    store.requestRetirement()
+    expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
+    expect(useGameStore.getState().game?.retirementReason).toBe('VOLUNTARY')
+    store.cancelRetirement()
+    expect(useGameStore.getState().game?.phase).toBe('PRO_STAGE_COMPLETE')
+
+    useGameStore.setState({
+      game: {
+        ...useGameStore.getState().game!,
+        windowIndex: 55,
+        retirementReason: null,
+      },
+    })
+    store.requestRetirement()
+    expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
+    store.cancelRetirement()
+    expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
+    expect(useGameStore.getState().error).toContain('不能撤回')
+    store.clearError()
+    store.confirmRetirement()
+    expect(useGameStore.getState().game?.phase).toBe('CAREER_RETIRED')
   })
 })
