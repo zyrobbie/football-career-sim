@@ -218,8 +218,8 @@ const careerConsequenceSchema = z.object({
 })
 
 const stateSchema = z.object({
-  saveVersion: z.literal(6),
-  dataVersion: z.literal(6),
+  saveVersion: z.literal(7),
+  dataVersion: z.literal(7),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -322,6 +322,26 @@ function validateRating(label: string, value: number): void {
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
+}
+
+function migratedPromiseFulfilled(
+  contract: Record<string, unknown>,
+  actualTeamLevel: string,
+  actualRole: string,
+): boolean {
+  if (
+    contract.promisedTeamLevel === 'YOUTH' &&
+    actualTeamLevel === 'FIRST_TEAM'
+  ) {
+    return true
+  }
+  if (contract.promisedTeamLevel !== actualTeamLevel) return false
+  if (typeof contract.promisedRole !== 'string') return true
+  const order =
+    actualTeamLevel === 'FIRST_TEAM'
+      ? ['FRINGE', 'SUBSTITUTE', 'ROTATION', 'STARTER', 'CORE']
+      : ['ROTATION', 'STARTER', 'CORE']
+  return order.indexOf(actualRole) >= order.indexOf(contract.promisedRole)
 }
 
 function migrateLegacyState(value: unknown): unknown {
@@ -461,6 +481,90 @@ function migrateLegacyState(value: unknown): unknown {
       pendingCareerEventId: null,
       careerEventHistory: [],
       pendingConsequences: [],
+    }
+  }
+
+  if (migrated.saveVersion === 6) {
+    const lastReport = isRecord(migrated.lastReport)
+      ? migrated.lastReport
+      : null
+    const reportContract =
+      lastReport && isRecord(lastReport.contract)
+        ? lastReport.contract
+        : null
+    const roleBefore =
+      lastReport && typeof lastReport.roleBefore === 'string'
+        ? lastReport.roleBefore
+        : null
+    const firstTeam =
+      lastReport && isRecord(lastReport.firstTeam)
+        ? lastReport.firstTeam
+        : null
+    const savedActualTeamLevel =
+      reportContract && typeof reportContract.actualTeamLevel === 'string'
+        ? reportContract.actualTeamLevel
+        : null
+    const actualTeamLevel =
+      savedActualTeamLevel === 'FIRST_TEAM' &&
+      firstTeam?.statusBefore !== 'PROMOTED'
+        ? 'YOUTH'
+        : savedActualTeamLevel
+
+    if (lastReport && reportContract && roleBefore && actualTeamLevel) {
+      const fulfilled = migratedPromiseFulfilled(
+        reportContract,
+        actualTeamLevel,
+        roleBefore,
+      )
+      const brokenPromiseWindows = fulfilled
+        ? 0
+        : Math.max(
+            1,
+            typeof reportContract.brokenPromiseWindows === 'number'
+              ? reportContract.brokenPromiseWindows
+              : 0,
+          )
+      const repairedContractReport = {
+        ...reportContract,
+        actualTeamLevel,
+        actualRole: roleBefore,
+        promiseFulfilled: fulfilled,
+        brokenPromiseWindows,
+      }
+      const history = Array.isArray(migrated.history)
+        ? migrated.history.map((entry, index, entries) =>
+            index === entries.length - 1 && isRecord(entry)
+              ? {
+                  ...entry,
+                  role: roleBefore,
+                  teamLevel: actualTeamLevel,
+                }
+              : entry,
+          )
+        : migrated.history
+      const contract = isRecord(migrated.contract)
+        ? {
+            ...migrated.contract,
+            brokenPromiseWindows,
+          }
+        : migrated.contract
+      migrated = {
+        ...migrated,
+        saveVersion: 7,
+        dataVersion: 7,
+        contract,
+        lastReport: {
+          ...lastReport,
+          contract: repairedContractReport,
+        },
+        history,
+      }
+    } else {
+      migrated = {
+        ...migrated,
+        saveVersion: 7,
+        dataVersion: 7,
+      }
     }
   }
 

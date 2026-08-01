@@ -363,8 +363,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 6
-  dataVersion: 6
+  saveVersion: 7
+  dataVersion: 7
   phase: GamePhase
   careerSeed: string
   startYear: number

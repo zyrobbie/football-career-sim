@@ -44,8 +44,8 @@ function legacyIdentityState() {
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
-    expect(migrated.saveVersion).toBe(6)
-    expect(migrated.dataVersion).toBe(6)
+    expect(migrated.saveVersion).toBe(7)
+    expect(migrated.dataVersion).toBe(7)
     expect(migrated.draft.jerseyNumber).toBe(10)
     expect(migrated.draft.preferredFoot).toBe('RIGHT')
     expect(migrated.teamLevel).toBe('YOUTH')
@@ -159,11 +159,104 @@ describe('save migration', () => {
       dataVersion: 3,
     })
 
-    expect(migrated.saveVersion).toBe(6)
+    expect(migrated.saveVersion).toBe(7)
     expect(migrated.firstTeamRole).toBeNull()
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
     expect(migrated.transferOffers).toEqual([])
     expect(migrated.selectedTransferChoiceId).toBeNull()
+  })
+
+  it('repairs version 6 contract fulfillment from the role that played the window', () => {
+    const current = validateGameState(legacyIdentityState())
+    const seed = 'legacy-role-timing-repair'
+    const draft = createDraft('CM')
+    const player = generatePlayer(draft, seed)
+    const offers = generateAcademyOffers(player, seed)
+    const offer = offers[1]!
+    const simulated = simulateHalfYear({
+      player,
+      offer,
+      role: 'ROTATION',
+      arrivalChoice: 'COACH',
+      trainingFocus: 'BALANCED',
+      careerSeed: seed,
+      startYear: 2026,
+      windowIndex: 4,
+      cashBeforeEuro: 1_000,
+    })
+    const contract = {
+      type: 'FIRST_PRO' as const,
+      clubId: offer.club.id,
+      remainingHalfYears: 6,
+      annualSalaryEuro: 80_000,
+      promisedTeamLevel: 'FIRST_TEAM' as const,
+      promisedRole: 'STARTER' as const,
+      releaseClauseEuro: 2_000_000,
+      clubOptionYears: 0,
+      parentClubId: null,
+      brokenPromiseWindows: 0,
+    }
+    const legacy = {
+      ...current,
+      saveVersion: 6,
+      dataVersion: 6,
+      phase: 'HALF_YEAR_REPORT',
+      careerSeed: seed,
+      windowIndex: 4,
+      draft,
+      player: simulated.player,
+      academyOffers: offers,
+      selectedClubId: offer.club.id,
+      teamLevel: 'FIRST_TEAM',
+      youthRole: null,
+      firstTeamRole: 'STARTER',
+      contract,
+      arrivalChoice: 'COACH',
+      lastReport: {
+        ...simulated.report,
+        roleBefore: 'ROTATION',
+        roleAfter: 'STARTER',
+        firstTeam: {
+          ...simulated.report.firstTeam,
+          statusBefore: 'PROMOTED',
+          statusAfter: 'PROMOTED',
+        },
+        contract: {
+          annualSalaryEuro: contract.annualSalaryEuro,
+          remainingHalfYears: contract.remainingHalfYears,
+          promisedTeamLevel: contract.promisedTeamLevel,
+          promisedRole: contract.promisedRole,
+          actualTeamLevel: 'FIRST_TEAM',
+          actualRole: 'STARTER',
+          promiseFulfilled: true,
+          brokenPromiseWindows: 0,
+        },
+      },
+      history: [
+        {
+          windowIndex: 4,
+          clubId: offer.club.id,
+          clubName: offer.club.name,
+          role: 'STARTER',
+          stats: simulated.report.stats,
+          arrivalChoice: null,
+          trainingFocus: 'BALANCED',
+          developmentApproach: 'STEADY',
+          endingAttributes: simulated.player.attributes,
+          firstTeamAttention: simulated.firstTeamProgress.attention,
+          teamLevel: 'FIRST_TEAM',
+        },
+      ],
+    }
+
+    const migrated = validateGameState(legacy)
+
+    expect(migrated.saveVersion).toBe(7)
+    expect(migrated.lastReport?.contract?.actualRole).toBe('ROTATION')
+    expect(migrated.lastReport?.contract?.actualTeamLevel).toBe('FIRST_TEAM')
+    expect(migrated.lastReport?.contract?.promiseFulfilled).toBe(false)
+    expect(migrated.contract?.brokenPromiseWindows).toBe(1)
+    expect(migrated.history[0]?.role).toBe('ROTATION')
   })
 })

@@ -27,6 +27,7 @@ export function HalfYearReportScreen() {
     !isProfessionalWindow && game.history.length >= DEMO_WINDOW_COUNT
   const age = playerAgeAtWindow(game.windowIndex + 1)
   const reportTitle = halfYearReportTitle(game.windowIndex)
+  const reportRole = report.contract?.actualRole ?? report.roleAfter
 
   return (
     <CareerHub
@@ -40,7 +41,7 @@ export function HalfYearReportScreen() {
           <h1>{reportTitle}</h1>
           <span>
             {report.fromLabel} — {report.toLabel} · {age}岁 ·{' '}
-            {roleLabel(report.roleAfter)}
+            {roleLabel(reportRole)}
           </span>
         </header>
         <div className="report-grid">

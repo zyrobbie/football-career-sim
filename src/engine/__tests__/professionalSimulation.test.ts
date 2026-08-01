@@ -10,62 +10,68 @@ import { generatePlayer } from '../player'
 import { simulateProfessionalHalfYear } from '../simulateProfessionalHalfYear'
 import { createDraft } from './testFixtures'
 
+function createFirstTeamState(careerSeed: string) {
+  const draft = createDraft('CAM')
+  const player = generatePlayer(draft, careerSeed)
+  const academyOffers = generateAcademyOffers(player, careerSeed)
+  const academy = academyOffers[1]!
+  const firstTeamProgress = {
+    ...createFirstTeamProgress(academy.club.id),
+    attention: 100,
+    readiness: 100,
+    matchProof: 100,
+    coachBacking: 100,
+    status: 'PROMOTED' as const,
+  }
+  const professionalOffer = generateFirstProfessionalOffer({
+    player,
+    club: academy.club,
+    youthRole: academy.expectedRole,
+    teamLevel: 'FIRST_TEAM',
+    firstTeamProgress,
+    careerSeed,
+  })
+  const contract = contractFromOffer(professionalOffer)
+  const state: GameState = {
+    saveVersion: 7,
+    dataVersion: 7,
+    phase: 'SIMULATION_READY',
+    careerSeed,
+    startYear: 2026,
+    windowIndex: 4,
+    draft,
+    player,
+    academyOffers,
+    selectedClubId: academy.club.id,
+    teamLevel: 'FIRST_TEAM',
+    youthRole: null,
+    firstTeamRole: professionalOffer.promisedRole as GameState['firstTeamRole'],
+    contract,
+    professionalOffer,
+    transferOffers: [],
+    selectedTransferChoiceId: null,
+    transferDecision: null,
+    arrivalChoice: 'COACH',
+    transferArrivalChoice: null,
+    pendingCareerEventId: null,
+    careerEventHistory: [],
+    pendingConsequences: [],
+    trainingFocus: 'BALANCED',
+    developmentApproach: 'STEADY',
+    trainingQualityBonus: 0,
+    firstTeamProgress,
+    cashEuro: 7_000,
+    lastReport: null,
+    history: [],
+  }
+  return { state, academy }
+}
+
 describe('professional half-year simulation', () => {
   it('deterministically settles first-team matches, salary and contract promise', () => {
     const careerSeed = 'professional-window-determinism'
-    const draft = createDraft('CAM')
-    const player = generatePlayer(draft, careerSeed)
-    const academyOffers = generateAcademyOffers(player, careerSeed)
-    const academy = academyOffers[1]!
-    const firstTeamProgress = {
-      ...createFirstTeamProgress(academy.club.id),
-      attention: 100,
-      readiness: 100,
-      matchProof: 100,
-      coachBacking: 100,
-      status: 'PROMOTED' as const,
-    }
-    const professionalOffer = generateFirstProfessionalOffer({
-      player,
-      club: academy.club,
-      youthRole: academy.expectedRole,
-      teamLevel: 'FIRST_TEAM',
-      firstTeamProgress,
-      careerSeed,
-    })
-    const contract = contractFromOffer(professionalOffer)
-    const state: GameState = {
-      saveVersion: 6,
-      dataVersion: 6,
-      phase: 'SIMULATION_READY',
-      careerSeed,
-      startYear: 2026,
-      windowIndex: 4,
-      draft,
-      player,
-      academyOffers,
-      selectedClubId: academy.club.id,
-      teamLevel: 'FIRST_TEAM',
-      youthRole: null,
-      firstTeamRole: professionalOffer.promisedRole as GameState['firstTeamRole'],
-      contract,
-      professionalOffer,
-      transferOffers: [],
-      selectedTransferChoiceId: null,
-      transferDecision: null,
-      arrivalChoice: 'COACH',
-      transferArrivalChoice: null,
-      pendingCareerEventId: null,
-      careerEventHistory: [],
-      pendingConsequences: [],
-      trainingFocus: 'BALANCED',
-      developmentApproach: 'STEADY',
-      trainingQualityBonus: 0,
-      firstTeamProgress,
-      cashEuro: 7_000,
-      lastReport: null,
-      history: [],
-    }
+    const { state, academy } = createFirstTeamState(careerSeed)
+    const contract = state.contract!
 
     const first = simulateProfessionalHalfYear({
       state,
@@ -88,5 +94,75 @@ describe('professional half-year simulation', () => {
       contract.remainingHalfYears - 1,
     )
     expect(first.cashEuro).toBeGreaterThanOrEqual(state.cashEuro)
+  })
+
+  it('settles a starter promise from the role that generated this window stats', () => {
+    const { state, academy } = createFirstTeamState(
+      'professional-role-demotion-regression',
+    )
+    state.firstTeamRole = 'STARTER'
+    state.contract = {
+      ...state.contract!,
+      promisedTeamLevel: 'FIRST_TEAM',
+      promisedRole: 'STARTER',
+    }
+    state.player = {
+      ...state.player!,
+      attributes: {
+        attack: 25,
+        defense: 25,
+        physical: 25,
+        mental: 25,
+      },
+      form: 35,
+      morale: 35,
+      coachRelation: 35,
+    }
+
+    const result = simulateProfessionalHalfYear({ state, offer: academy })
+
+    expect(result.report.roleBefore).toBe('STARTER')
+    expect(result.report.roleAfter).toBe('ROTATION')
+    expect(result.firstTeamRole).toBe('ROTATION')
+    expect(result.report.contract?.actualRole).toBe('STARTER')
+    expect(result.report.contract?.promiseFulfilled).toBe(true)
+  })
+
+  it('does not backdate a next-window promotion into this window promise', () => {
+    const { state, academy } = createFirstTeamState(
+      'professional-role-promotion-regression',
+    )
+    state.firstTeamRole = 'ROTATION'
+    state.contract = {
+      ...state.contract!,
+      promisedTeamLevel: 'FIRST_TEAM',
+      promisedRole: 'STARTER',
+    }
+    state.player = {
+      ...state.player!,
+      attributes: {
+        attack: 94,
+        defense: 94,
+        physical: 94,
+        mental: 94,
+      },
+      potentials: {
+        attack: 94,
+        defense: 94,
+        physical: 94,
+        mental: 94,
+      },
+      form: 100,
+      morale: 100,
+      coachRelation: 100,
+    }
+
+    const result = simulateProfessionalHalfYear({ state, offer: academy })
+
+    expect(result.report.roleBefore).toBe('ROTATION')
+    expect(result.report.roleAfter).toBe('STARTER')
+    expect(result.firstTeamRole).toBe('STARTER')
+    expect(result.report.contract?.actualRole).toBe('ROTATION')
+    expect(result.report.contract?.promiseFulfilled).toBe(false)
   })
 })

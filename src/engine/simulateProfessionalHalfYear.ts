@@ -485,7 +485,6 @@ function attachContractReport(input: {
 
   return {
     ...report,
-    roleAfter: actualRole,
     stipendEuro: incomeEuro,
     incomeLabel: '工资可支配收入',
     cashAfterEuro,
@@ -607,7 +606,7 @@ function simulateFirstTeamHalfYear(input: {
   const settlement = settleContract({
     contract: state.contract!,
     actualTeamLevel: 'FIRST_TEAM',
-    actualRole: roleAfter,
+    actualRole: role,
     cashBeforeEuro: state.cashEuro,
   })
   const nextWindowLabel = careerWindowLabel(
@@ -679,7 +678,7 @@ function simulateFirstTeamHalfYear(input: {
     contractBefore: state.contract!,
     contractAfter: settlement.contract,
     actualTeamLevel: 'FIRST_TEAM',
-    actualRole: roleAfter,
+    actualRole: role,
     incomeEuro: settlement.incomeEuro,
     cashAfterEuro: settlement.cashAfterEuro,
     promiseFulfilled: settlement.promiseFulfilled,
@@ -760,12 +759,15 @@ export function simulateProfessionalHalfYear(input: {
     teamLevel: state.teamLevel,
     eventTrainingBonus: state.trainingQualityBonus,
   })
-  const actualTeamLevel = youthResult.teamLevel
+  // 本窗口的比赛仍由窗口开始时的球队层级与角色生成；晋升与角色调整
+  // 在窗口结束后生效，只影响下一个窗口，不能倒过来参与本窗口合同结算。
+  const actualTeamLevel = state.teamLevel
+  const actualRole = state.youthRole
+  const nextTeamLevel = youthResult.teamLevel
   const firstTeamRole =
-    actualTeamLevel === 'FIRST_TEAM'
+    nextTeamLevel === 'FIRST_TEAM'
       ? evaluateFirstTeamRole(youthResult.player, offer.club)
       : null
-  const actualRole = firstTeamRole ?? youthResult.role
   const settlement = settleContract({
     contract: state.contract,
     actualTeamLevel,
@@ -786,9 +788,9 @@ export function simulateProfessionalHalfYear(input: {
   return {
     player: youthResult.player,
     report,
-    teamLevel: actualTeamLevel,
+    teamLevel: nextTeamLevel,
     youthRole:
-      actualTeamLevel === 'YOUTH' ? youthResult.role : null,
+      nextTeamLevel === 'YOUTH' ? youthResult.role : null,
     firstTeamRole,
     contract: settlement.contract,
     cashEuro: settlement.cashAfterEuro,

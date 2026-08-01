@@ -354,10 +354,16 @@ function CareerMeters({ game }: { game: GameState }) {
 
 function FirstTeamPath({ game }: { game: GameState }) {
   if (game.contract) {
-    const actualRole =
+    const currentRole =
       game.teamLevel === 'FIRST_TEAM'
         ? game.firstTeamRole
         : game.youthRole
+    const isCompletedWindow =
+      game.phase === 'HALF_YEAR_REPORT' ||
+      game.phase === 'PRO_STAGE_COMPLETE'
+    const actualRole = isCompletedWindow
+      ? game.lastReport?.contract?.actualRole ?? currentRole
+      : currentRole
     const promisedRole = game.contract.promisedRole
     const transferContractLength = game.transferOffers.find(
       (offer) =>

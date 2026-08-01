@@ -102,8 +102,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 6,
-    dataVersion: 6,
+    saveVersion: 7,
+    dataVersion: 7,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -217,14 +217,15 @@ export const useGameStore = create<GameStore>((set, get) => {
             windowIndex: state.windowIndex,
             clubId: offer.club.id,
             clubName: offer.club.name,
-            role: report.roleAfter,
+            role: report.contract?.actualRole ?? report.roleBefore,
             stats: report.stats,
             arrivalChoice: null,
             trainingFocus: state.trainingFocus,
             developmentApproach: state.developmentApproach,
             endingAttributes: { ...result.player.attributes },
             firstTeamAttention: result.firstTeamProgress.attention,
-            teamLevel: result.teamLevel,
+            teamLevel:
+              report.contract?.actualTeamLevel ?? result.teamLevel,
           },
         ],
       } satisfies GameState
