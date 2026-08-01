@@ -1,7 +1,10 @@
 import {
   CLUBS,
+  DOMESTIC_CLUBS,
   FIRST_TEAM_BENCHMARKS,
+  OVERSEAS_CLUBS,
   YOUTH_BENCHMARKS,
+  isOverseasClub,
 } from '../data/balance'
 import type {
   Club,
@@ -61,6 +64,12 @@ export interface TransferOpportunityAssessment {
   summary: string
 }
 
+export interface OverseasInterestAssessment {
+  visible: boolean
+  club: Club | null
+  summary: string
+}
+
 function isMarketReviewWindow(completedProfessionalWindows: number): boolean {
   if (completedProfessionalWindows < 2) return false
   const cyclePosition = completedProfessionalWindows % 5
@@ -113,6 +122,33 @@ export function assessDomesticTransferOpportunity(input: {
       : cadenceQualified
         ? `本阶段表现尚未吸引到合适报价。保持出场和评分，市场将在${nextReviewInWindows}个窗口后再次集中评估。`
         : `经纪团队正在持续观察市场。转会机会不会每半年出现，下一次集中评估约在${nextReviewInWindows}个窗口后。`,
+  }
+}
+
+export function assessOverseasInterest(input: {
+  player: Player
+  careerSeed: string
+  windowIndex: number
+}): OverseasInterestAssessment {
+  const { player, careerSeed, windowIndex } = input
+  const age = playerAgeAtWindow(windowIndex)
+  if (age < 16 || age >= 18 || player.overseasIntent === 'DOMESTIC') {
+    return { visible: false, club: null, summary: '' }
+  }
+
+  const preferred = OVERSEAS_CLUBS.filter((club) =>
+    player.preferredLeagues.includes(club.leagueKey),
+  )
+  const pool = preferred.length > 0 ? preferred : OVERSEAS_CLUBS
+  const club = createRandom(
+    careerSeed,
+    'underage-overseas-interest',
+    windowIndex,
+  ).pick(pool)
+  return {
+    visible: true,
+    club,
+    summary: `${club.country}的${club.name}已安排球探持续观察你。未满18岁时这只是海外关注，不会生成可签署的国际转会合同。`,
   }
 }
 
@@ -294,14 +330,40 @@ function promisedTeamAndRole(input: {
   }
 }
 
-export function generateDomesticTransferOffers(input: {
+interface GenerateTransferOffersInput {
   player: Player
   currentClubId: string
   currentTeamLevel: TeamLevel
   latestReport: HalfYearReport | null
   careerSeed: string
   windowIndex: number
-}): TransferOffer[] {
+}
+
+function overseasInterestAdjustment(player: Player, club: Club): number {
+  if (!isOverseasClub(club)) return 0
+  const preferenceIndex = player.preferredLeagues.indexOf(club.leagueKey)
+  const preferenceBonus =
+    preferenceIndex === 0
+      ? 12
+      : preferenceIndex === 1
+        ? 8
+        : preferenceIndex === 2
+          ? 5
+          : -3
+  const intentBonus =
+    player.overseasIntent === 'STRONG'
+      ? 8
+      : player.overseasIntent === 'CONDITIONAL'
+        ? 2
+        : -14
+  const eliteBarrier = club.tier <= 1 ? -6 : club.tier === 2 ? -3 : 0
+  return preferenceBonus + intentBonus + eliteBarrier
+}
+
+function generateTransferOffersFromPool(
+  input: GenerateTransferOffersInput,
+  domesticOnly: boolean,
+): TransferOffer[] {
   const {
     player,
     currentClubId,
@@ -311,7 +373,10 @@ export function generateDomesticTransferOffers(input: {
     windowIndex,
   } = input
 
-  const candidates = CLUBS.filter(
+  const playerAge = playerAgeAtWindow(windowIndex)
+  const clubPool =
+    domesticOnly || playerAge < 18 ? DOMESTIC_CLUBS : CLUBS
+  const candidates = clubPool.filter(
     (club) => club.id !== currentClubId,
   )
     .map((club) => {
@@ -321,7 +386,7 @@ export function generateDomesticTransferOffers(input: {
         careerSeed,
         windowIndex,
       })
-      const interestScore = interestForClub({
+      const baseInterestScore = interestForClub({
         player,
         club,
         estimatedPotential,
@@ -329,12 +394,19 @@ export function generateDomesticTransferOffers(input: {
         careerSeed,
         windowIndex,
       })
+      const interestScore = Math.round(
+        clamp(
+          baseInterestScore + overseasInterestAdjustment(player, club),
+          0,
+          100,
+        ),
+      )
       const promise = promisedTeamAndRole({
         player,
         club,
         currentTeamLevel,
         interestScore,
-        playerAge: playerAgeAtWindow(windowIndex),
+        playerAge,
       })
       return {
         club,
@@ -361,7 +433,46 @@ export function generateDomesticTransferOffers(input: {
         selected.push(candidate)
       }
     }
-    addCandidate(candidates[0])
+    if (!domesticOnly && playerAge >= 18) {
+      const overall = calculateOverall(
+        player.attributes,
+        player.primaryPosition,
+      )
+      const overseasCandidates = candidates.filter((candidate) => {
+        if (!isOverseasClub(candidate.club)) return false
+        const threshold = candidate.club.tier <= 2 ? 50 : 45
+        return overall >= threshold || player.reputation >= 55
+      })
+      const preferredOverseas = overseasCandidates.filter((candidate) =>
+        player.preferredLeagues.includes(candidate.club.leagueKey),
+      )
+      const overseasPool =
+        preferredOverseas.length > 0 ? preferredOverseas : overseasCandidates
+      const exceptionalDomesticPlayer =
+        player.overseasIntent === 'DOMESTIC' &&
+        (overall >= 72 || player.reputation >= 72) &&
+        createRandom(
+          careerSeed,
+          'domestic-player-overseas-chance',
+          windowIndex,
+        ).float(0, 1) < 0.25
+      const overseasTarget =
+        player.overseasIntent === 'STRONG'
+          ? 2
+          : player.overseasIntent === 'CONDITIONAL'
+            ? 1
+            : exceptionalDomesticPlayer
+              ? 1
+              : 0
+      for (const candidate of overseasPool) {
+        if (selected.length >= overseasTarget) break
+        addCandidate(candidate)
+      }
+    }
+
+    addCandidate(
+      candidates.find((candidate) => !isOverseasClub(candidate.club)),
+    )
     const marketMix = createRandom(
       careerSeed,
       'transfer-market-composition',
@@ -369,11 +480,13 @@ export function generateDomesticTransferOffers(input: {
     ).float(0, 1)
     const strongAcademyYouth = candidates.find(
       (candidate) =>
+        !isOverseasClub(candidate.club) &&
         candidate.club.academyTier <= 2 &&
         candidate.promise.teamLevel === 'YOUTH',
     )
     const lowerLeagueFirstTeam = candidates.find(
       (candidate) =>
+        !isOverseasClub(candidate.club) &&
         candidate.club.tier >= 5 &&
         candidate.promise.teamLevel === 'FIRST_TEAM',
     )
@@ -419,7 +532,9 @@ export function generateDomesticTransferOffers(input: {
 
       return {
         id: `transfer-${windowIndex}-${club.id}`,
-        type: 'DOMESTIC_ACADEMY_TRANSFER',
+        type: isOverseasClub(club)
+          ? 'PERMANENT_TRANSFER'
+          : 'DOMESTIC_ACADEMY_TRANSFER',
         clubId: club.id,
         remainingHalfYears: random.int(3, 5) * 2,
         annualSalaryEuro,
@@ -443,6 +558,18 @@ export function generateDomesticTransferOffers(input: {
       } satisfies TransferOffer
     },
   )
+}
+
+export function generateDomesticTransferOffers(
+  input: GenerateTransferOffersInput,
+): TransferOffer[] {
+  return generateTransferOffersFromPool(input, true)
+}
+
+export function generateTransferOffers(
+  input: GenerateTransferOffersInput,
+): TransferOffer[] {
+  return generateTransferOffersFromPool(input, false)
 }
 
 export function generateContractExpiryOffers(input: {
@@ -525,7 +652,7 @@ export function generateContractExpiryOffers(input: {
     negotiationMessage: null,
     withdrawn: false,
   }
-  const freeAgentOffers = generateDomesticTransferOffers({
+  const freeAgentOffers = generateTransferOffers({
     player,
     currentClubId,
     currentTeamLevel,

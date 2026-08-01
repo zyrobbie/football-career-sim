@@ -1,7 +1,10 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
 import { retirementAvailabilityAfterWindow } from '../engine/careerTime'
-import { assessDomesticTransferOpportunity } from '../engine/transfers'
+import {
+  assessDomesticTransferOpportunity,
+  assessOverseasInterest,
+} from '../engine/transfers'
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, roleLabel } from '../ui/format'
 
@@ -47,6 +50,11 @@ export function ProfessionalStageCompleteScreen() {
     player: game.player,
     latestReport: report,
     windowIndex: game.windowIndex,
+  })
+  const overseasInterest = assessOverseasInterest({
+    player: game.player,
+    careerSeed: game.careerSeed,
+    windowIndex: game.windowIndex + 1,
   })
   const retirementAvailability = retirementAvailabilityAfterWindow(
     game.windowIndex,
@@ -106,6 +114,12 @@ export function ProfessionalStageCompleteScreen() {
               </dd>
             </div>
           </dl>
+          {overseasInterest.visible ? (
+            <p className="demo-complete__overseas-interest">
+              <strong>海外关注</strong>
+              <span>{overseasInterest.summary}</span>
+            </p>
+          ) : null}
           <p className="demo-complete__next">
             {retirementMandatory
               ? '40岁赛季已经结束。职业日历现已封闭，你需要完成退役并保存最终生涯档案。'

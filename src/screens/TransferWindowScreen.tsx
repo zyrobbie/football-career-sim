@@ -1,6 +1,6 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
-import { CLUBS } from '../data/balance'
+import { CLUBS, isOverseasClub } from '../data/balance'
 import {
   canRequestHigherTransferRole,
   transferDinnerCost,
@@ -243,6 +243,11 @@ export function TransferWindowScreen() {
   const externalOffers = contractExpired
     ? game.transferOffers.filter((offer) => offer.type !== 'RENEWAL')
     : game.transferOffers
+  const overseasOfferCount = externalOffers.filter((offer) => {
+    const club = CLUBS.find((candidate) => candidate.id === offer.clubId)
+    return club ? isOverseasClub(club) : false
+  }).length
+  const marketTitle = overseasOfferCount > 0 ? '国内与海外转会机会' : '国内转会机会'
   const age = playerAgeAtWindow(game.windowIndex)
   const windowLabel = careerWindowLabel(
     game.startYear,
@@ -252,18 +257,21 @@ export function TransferWindowScreen() {
   return (
     <CareerHub
       game={game}
-      sectionLabel={contractExpired ? '合同到期决定' : '国内转会机会'}
+      sectionLabel={contractExpired ? '合同到期决定' : marketTitle}
     >
       <section className="transfer-window">
         <header className="career-panel-heading">
           <Icon name="history" />
-          <h1>{contractExpired ? '合同到期决定' : '国内转会机会'}</h1>
-          <span>{age}岁 · {windowLabel.replace('年', '').replace('季', '')} · 国内</span>
+          <h1>{contractExpired ? '合同到期决定' : marketTitle}</h1>
+          <span>
+            {age}岁 · {windowLabel.replace('年', '').replace('季', '')} ·{' '}
+            {overseasOfferCount > 0 ? `海外${overseasOfferCount}份` : '国内'}
+          </span>
         </header>
         <p className="career-panel-lead">
           {contractExpired
-            ? '原合同已经结束。横条是原俱乐部续约，三张卡片是其他俱乐部的自由身邀请。'
-            : '留队最稳定；三家俱乐部根据能力、近期表现、知名度与位置需求给出不同承诺。'}
+            ? '原合同已经结束。横条是原俱乐部续约，三张卡片是国内或海外俱乐部的自由身邀请。'
+            : '留队最稳定；三家俱乐部根据能力、表现、留洋倾向、联赛偏好与位置需求给出不同承诺。'}
         </p>
 
         {!contractExpired ? (
@@ -328,7 +336,7 @@ export function TransferWindowScreen() {
                 <span>{club?.shortMark ?? '足'}</span>
                 <strong>{club?.name ?? '未知俱乐部'}</strong>
                 <small>
-                  {club?.leagueLabel ?? '国内联赛'} ·{' '}
+                  {club?.country ?? '中国'} ·{' '}
                   {trainingLabel(club?.facilityTier ?? 6)}
                 </small>
                 <dl>
@@ -427,8 +435,8 @@ function TransferOfferDetail({
             {offer.estimatedPotential >= 83
               ? '极高潜力'
               : offer.estimatedPotential >= 76
-                ? '留洋潜力'
-                : '国内潜力'}
+                ? '高水平潜质'
+                : '职业潜质'}
           </dd>
         </div>
       </dl>

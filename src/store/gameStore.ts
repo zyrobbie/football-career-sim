@@ -30,7 +30,7 @@ import {
   applyTransferArrivalChoice,
   contractFromTransferOffer,
   generateContractExpiryOffers,
-  generateDomesticTransferOffers,
+  generateTransferOffers,
   integrationBaseForTransfer,
   resolveTransferCounter,
 } from '../engine/transfers'
@@ -110,8 +110,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 8,
-    dataVersion: 8,
+    saveVersion: 9,
+    dataVersion: 9,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -708,7 +708,7 @@ export const useGameStore = create<GameStore>((set, get) => {
             })
           : game.transferOffers.length > 0
           ? game.transferOffers
-          : generateDomesticTransferOffers({
+          : generateTransferOffers({
               player: game.player,
               currentClubId: game.selectedClubId,
               currentTeamLevel: game.teamLevel,

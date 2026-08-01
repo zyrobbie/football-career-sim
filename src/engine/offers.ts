@@ -1,5 +1,6 @@
 import {
   CLUBS,
+  DOMESTIC_CLUBS,
   YOUTH_BENCHMARKS,
   YOUTH_STIPENDS,
 } from '../data/balance'
@@ -31,7 +32,9 @@ function chooseClub(
   seed: string,
   profile: Club['profile'],
 ): Club {
-  const candidates = CLUBS.filter((club) => club.profile === profile)
+  const candidates = DOMESTIC_CLUBS.filter(
+    (club) => club.profile === profile,
+  )
   return createRandom(seed, 'academy-offer', profile).pick(candidates)
 }
 

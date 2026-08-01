@@ -19,8 +19,8 @@ function createState(windowIndex = 1): GameState {
   const academyOffers = generateAcademyOffers(player, careerSeed)
   const offer = academyOffers[0]!
   return {
-    saveVersion: 8,
-    dataVersion: 8,
+    saveVersion: 9,
+    dataVersion: 9,
     phase: 'HALF_YEAR_PLAN',
     careerSeed,
     startYear: 2026,

@@ -211,6 +211,8 @@ export interface Club {
   id: string
   name: string
   shortMark: string
+  country: string
+  leagueKey: string
   leagueLabel: string
   profile: 'ELITE' | 'BALANCED' | 'SMALL'
   tier: 1 | 2 | 3 | 4 | 5 | 6
@@ -367,8 +369,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 8
-  dataVersion: 8
+  saveVersion: 9
+  dataVersion: 9
   phase: GamePhase
   careerSeed: string
   startYear: number

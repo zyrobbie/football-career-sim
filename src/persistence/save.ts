@@ -21,6 +21,8 @@ const clubSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
   shortMark: z.string().min(1),
+  country: z.string().min(1),
+  leagueKey: z.string().min(1),
   leagueLabel: z.string().min(1),
   profile: z.enum(['ELITE', 'BALANCED', 'SMALL']),
   tier: z.union([
@@ -220,8 +222,8 @@ const careerConsequenceSchema = z.object({
 })
 
 const stateSchema = z.object({
-  saveVersion: z.literal(8),
-  dataVersion: z.literal(8),
+  saveVersion: z.literal(9),
+  dataVersion: z.literal(9),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -574,7 +576,7 @@ function migrateLegacyState(value: unknown): unknown {
   }
 
   if (
-    (migrated.saveVersion === 7 || migrated.saveVersion === 8) &&
+    [7, 8, 9].includes(Number(migrated.saveVersion)) &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
     ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY'].includes(
@@ -608,6 +610,34 @@ function migrateLegacyState(value: unknown): unknown {
       saveVersion: 8,
       dataVersion: 8,
       retirementReason: null,
+    }
+  }
+
+  if (migrated.saveVersion === 8) {
+    const academyOffers = Array.isArray(migrated.academyOffers)
+      ? migrated.academyOffers.map((offer) => {
+          if (!isRecord(offer) || !isRecord(offer.club)) return offer
+          return {
+            ...offer,
+            club: {
+              ...offer.club,
+              country:
+                typeof offer.club.country === 'string'
+                  ? offer.club.country
+                  : '中国',
+              leagueKey:
+                typeof offer.club.leagueKey === 'string'
+                  ? offer.club.leagueKey
+                  : '中国',
+            },
+          }
+        })
+      : migrated.academyOffers
+    migrated = {
+      ...migrated,
+      saveVersion: 9,
+      dataVersion: 9,
+      academyOffers,
     }
   }
 

@@ -44,8 +44,8 @@ function legacyIdentityState() {
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
-    expect(migrated.saveVersion).toBe(8)
-    expect(migrated.dataVersion).toBe(8)
+    expect(migrated.saveVersion).toBe(9)
+    expect(migrated.dataVersion).toBe(9)
     expect(migrated.draft.jerseyNumber).toBe(10)
     expect(migrated.draft.preferredFoot).toBe('RIGHT')
     expect(migrated.teamLevel).toBe('YOUTH')
@@ -67,6 +67,24 @@ describe('save migration', () => {
         draft: { ...migrated.draft, jerseyNumber: 100 },
       }),
     ).toThrow()
+  })
+
+  it('adds domestic country metadata to version 8 academy clubs', () => {
+    const current = validateGameState(legacyIdentityState())
+    const player = generatePlayer(createDraft('CM'), 'version-eight-club')
+    const offer = generateAcademyOffers(player, 'version-eight-club')[0]!
+    const { country: _country, leagueKey: _leagueKey, ...legacyClub } =
+      offer.club
+    const migrated = validateGameState({
+      ...current,
+      saveVersion: 8,
+      dataVersion: 8,
+      academyOffers: [{ ...offer, club: legacyClub }],
+    })
+
+    expect(migrated.saveVersion).toBe(9)
+    expect(migrated.academyOffers[0]?.club.country).toBe('中国')
+    expect(migrated.academyOffers[0]?.club.leagueKey).toBe('中国')
   })
 
   it('accepts one renewal plus three external contract offers', () => {
@@ -201,7 +219,7 @@ describe('save migration', () => {
       dataVersion: 3,
     })
 
-    expect(migrated.saveVersion).toBe(8)
+    expect(migrated.saveVersion).toBe(9)
     expect(migrated.firstTeamRole).toBeNull()
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
@@ -294,7 +312,7 @@ describe('save migration', () => {
 
     const migrated = validateGameState(legacy)
 
-    expect(migrated.saveVersion).toBe(8)
+    expect(migrated.saveVersion).toBe(9)
     expect(migrated.lastReport?.contract?.actualRole).toBe('ROTATION')
     expect(migrated.lastReport?.contract?.actualTeamLevel).toBe('FIRST_TEAM')
     expect(migrated.lastReport?.contract?.promiseFulfilled).toBe(false)

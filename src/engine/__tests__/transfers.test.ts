@@ -1,13 +1,15 @@
 import { describe, expect, it } from 'vitest'
-import { CLUBS } from '../../data/balance'
+import { CLUBS, isOverseasClub } from '../../data/balance'
 import type { ContractState } from '../../models/game'
 import { generatePlayer } from '../player'
 import {
   assessDomesticTransferOpportunity,
+  assessOverseasInterest,
   applyTransferArrivalChoice,
   contractFromTransferOffer,
   generateContractExpiryOffers,
   generateDomesticTransferOffers,
+  generateTransferOffers,
   integrationBaseForTransfer,
   resolveTransferCounter,
   transferDinnerCost,
@@ -38,6 +40,81 @@ function createTransferFixture() {
 }
 
 describe('domestic transfer window', () => {
+  it('shows deterministic overseas scouting at 16-17 without creating a signable offer', () => {
+    const { player, careerSeed } = createTransferFixture()
+    const first = assessOverseasInterest({
+      player,
+      careerSeed,
+      windowIndex: 6,
+    })
+    const repeated = assessOverseasInterest({
+      player,
+      careerSeed,
+      windowIndex: 6,
+    })
+
+    expect(first).toEqual(repeated)
+    expect(first.visible).toBe(true)
+    expect(first.club && isOverseasClub(first.club)).toBe(true)
+    expect(first.summary).toContain('不会生成可签署的国际转会合同')
+    expect(
+      assessOverseasInterest({ player, careerSeed, windowIndex: 4 }).visible,
+    ).toBe(false)
+    expect(
+      assessOverseasInterest({ player, careerSeed, windowIndex: 10 }).visible,
+    ).toBe(false)
+  })
+
+  it('keeps every formal offer domestic before age 18', () => {
+    const { player, currentClubId, careerSeed } = createTransferFixture()
+    player.overseasIntent = 'STRONG'
+    const offers = generateTransferOffers({
+      player,
+      currentClubId,
+      currentTeamLevel: 'FIRST_TEAM',
+      latestReport: null,
+      careerSeed,
+      windowIndex: 9,
+    })
+
+    expect(offers).toHaveLength(3)
+    expect(
+      offers.every((offer) => {
+        const club = CLUBS.find((candidate) => candidate.id === offer.clubId)
+        return club !== undefined && !isOverseasClub(club)
+      }),
+    ).toBe(true)
+  })
+
+  it('uses intent and preferred leagues in formal offers from age 18', () => {
+    const { player, currentClubId, careerSeed } = createTransferFixture()
+    player.attributes = { attack: 62, defense: 62, physical: 62, mental: 62 }
+    player.overseasIntent = 'STRONG'
+    player.preferredLeagues = ['英格兰', '德国']
+    const offers = generateTransferOffers({
+      player,
+      currentClubId,
+      currentTeamLevel: 'FIRST_TEAM',
+      latestReport: null,
+      careerSeed,
+      windowIndex: 10,
+    })
+    const overseasClubs = offers
+      .map((offer) => CLUBS.find((club) => club.id === offer.clubId))
+      .filter((club) => club && isOverseasClub(club))
+
+    expect(offers).toHaveLength(3)
+    expect(overseasClubs).toHaveLength(2)
+    expect(
+      overseasClubs.every((club) =>
+        player.preferredLeagues.includes(club!.leagueKey),
+      ),
+    ).toBe(true)
+    expect(
+      offers.filter((offer) => offer.type === 'PERMANENT_TRANSFER'),
+    ).toHaveLength(2)
+  })
+
   it('reviews the market every two or three professional windows and requires good form', () => {
     const { player } = createTransferFixture()
     const goodReport = {
