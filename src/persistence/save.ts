@@ -262,7 +262,7 @@ const stateSchema = z.object({
     .nullable(),
   contract: contractSchema.nullable(),
   professionalOffer: professionalOfferSchema.nullable(),
-  transferOffers: z.array(transferOfferSchema).max(3),
+  transferOffers: z.array(transferOfferSchema).max(4),
   selectedTransferChoiceId: z.string().nullable(),
   transferDecision: z
     .object({
@@ -720,6 +720,37 @@ export function validateGameState(value: unknown): GameState {
     !parsed.transferDecision
   ) {
     throw new Error('Transfer completion requires a decision.')
+  }
+
+  if (
+    parsed.phase === 'TRANSFER_WINDOW' &&
+    parsed.contract?.remainingHalfYears === 0
+  ) {
+    const renewals = parsed.transferOffers.filter(
+      (offer) => offer.type === 'RENEWAL',
+    )
+    const externalOffers = parsed.transferOffers.filter(
+      (offer) => offer.type === 'FREE_TRANSFER',
+    )
+    const uniqueExternalClubs = new Set(
+      externalOffers.map((offer) => offer.clubId),
+    )
+    const validExpiryMarket =
+      renewals.length === 1 &&
+      externalOffers.length === 3 &&
+      uniqueExternalClubs.size === 3
+
+    if (!validExpiryMarket) {
+      const lastHistory = parsed.history[parsed.history.length - 1]
+      return {
+        ...parsed,
+        phase: 'PRO_STAGE_COMPLETE',
+        windowIndex:
+          lastHistory?.windowIndex ?? Math.max(0, parsed.windowIndex - 1),
+        transferOffers: [],
+        selectedTransferChoiceId: null,
+      }
+    }
   }
 
   return parsed

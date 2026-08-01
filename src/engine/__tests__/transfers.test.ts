@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
+import type { ContractState } from '../../models/game'
 import { generatePlayer } from '../player'
 import {
   assessDomesticTransferOpportunity,
   applyTransferArrivalChoice,
   contractFromTransferOffer,
+  generateContractExpiryOffers,
   generateDomesticTransferOffers,
   integrationBaseForTransfer,
   resolveTransferCounter,
@@ -102,7 +104,7 @@ describe('domestic transfer window', () => {
     ).toBe(false)
   })
 
-  it('creates up to three deterministic offers excluding the current club', () => {
+  it('creates exactly three deterministic offers excluding the current club', () => {
     const fixture = createTransferFixture()
     const repeated = createTransferFixture()
 
@@ -114,6 +116,9 @@ describe('domestic transfer window', () => {
       ),
     ).toBe(true)
     expect(
+      new Set(fixture.offers.map((offer) => offer.clubId)).size,
+    ).toBe(3)
+    expect(
       fixture.offers.every(
         (offer) =>
           offer.interestScore >= 50 &&
@@ -121,6 +126,93 @@ describe('domestic transfer window', () => {
           offer.annualSalaryEuro > 0,
       ),
     ).toBe(true)
+  })
+
+  it('can place a strong academy youth offer beside a lower-league first-team offer', () => {
+    const { player, currentClubId } = createTransferFixture()
+    player.attributes = {
+      attack: 57,
+      defense: 57,
+      physical: 57,
+      mental: 57,
+    }
+
+    const windows = Array.from({ length: 20 }, (_, index) => index + 5)
+    const mixedWindow = windows
+      .map((windowIndex) =>
+        generateDomesticTransferOffers({
+          player,
+          currentClubId,
+          currentTeamLevel: 'YOUTH',
+          latestReport: null,
+          careerSeed: `role-choice-${windowIndex}`,
+          windowIndex,
+        }),
+      )
+      .find((offers) => {
+        const includesStrongAcademyYouth = offers.some((offer) => {
+          const club = CLUBS.find(
+            (candidate) => candidate.id === offer.clubId,
+          )
+          return (
+            club !== undefined &&
+            club.academyTier <= 2 &&
+            offer.promisedTeamLevel === 'YOUTH'
+          )
+        })
+        const includesLowerLeagueFirstTeam = offers.some((offer) => {
+          const club = CLUBS.find(
+            (candidate) => candidate.id === offer.clubId,
+          )
+          return (
+            club !== undefined &&
+            club.tier >= 5 &&
+            offer.promisedTeamLevel === 'FIRST_TEAM'
+          )
+        })
+        return includesStrongAcademyYouth && includesLowerLeagueFirstTeam
+      })
+
+    expect(mixedWindow).toBeDefined()
+    expect(mixedWindow).toHaveLength(3)
+  })
+
+  it('adds three external free-agent contracts to the renewal option at expiry', () => {
+    const { careerSeed, player, currentClubId } = createTransferFixture()
+    const currentContract = {
+      type: 'FIRST_PRO',
+      clubId: currentClubId,
+      remainingHalfYears: 0,
+      annualSalaryEuro: 36_000,
+      promisedTeamLevel: 'YOUTH',
+      promisedRole: 'CORE',
+      releaseClauseEuro: 500_000,
+      clubOptionYears: 0,
+      parentClubId: null,
+      brokenPromiseWindows: 0,
+    } satisfies ContractState
+    const offers = generateContractExpiryOffers({
+      player,
+      currentClubId,
+      currentTeamLevel: 'YOUTH',
+      currentRole: 'CORE',
+      currentContract,
+      latestReport: null,
+      careerSeed,
+      windowIndex: 9,
+    })
+
+    expect(offers).toHaveLength(4)
+    expect(offers[0]?.type).toBe('RENEWAL')
+    expect(
+      offers.slice(1).every(
+        (offer) =>
+          offer.type === 'FREE_TRANSFER' &&
+          offer.clubId !== currentClubId &&
+          offer.transferFeeEuro === 0,
+      ),
+    ).toBe(true)
+    expect(new Set(offers.slice(1).map((offer) => offer.clubId)).size).toBe(3)
   })
 
   it('resolves one counteroffer and always leaves an explicit final state', () => {

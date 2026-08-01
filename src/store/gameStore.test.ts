@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import { validateGameState } from '../persistence/save'
 import { useGameStore } from './gameStore'
 
 function resolveSpecialEventIfPresent() {
@@ -151,7 +152,7 @@ describe('academy two-year progression', () => {
     game = useGameStore.getState().game
     expect(game?.phase).toBe('TRANSFER_WINDOW')
     expect(game?.windowIndex).toBe(5)
-    expect(game?.transferOffers).toHaveLength(3)
+    expect(game?.transferOffers).toHaveLength(4)
     expect(game?.transferOffers[0]?.type).toBe('RENEWAL')
     expect(game?.transferOffers.slice(1).every(
       (candidate) =>
@@ -161,6 +162,22 @@ describe('academy two-year progression', () => {
     expect(game?.selectedTransferChoiceId).toBe(
       game?.transferOffers[0]?.id,
     )
+
+    const repairedDuplicateMarket = validateGameState({
+      ...game!,
+      windowIndex: game!.windowIndex + 1,
+      transferOffers: [
+        game!.transferOffers[0]!,
+        game!.transferOffers[1]!,
+        game!.transferOffers[1]!,
+        game!.transferOffers[2]!,
+      ],
+    })
+    expect(repairedDuplicateMarket.phase).toBe('PRO_STAGE_COMPLETE')
+    expect(repairedDuplicateMarket.windowIndex).toBe(
+      repairedDuplicateMarket.history.at(-1)?.windowIndex,
+    )
+    expect(repairedDuplicateMarket.transferOffers).toEqual([])
 
     store.confirmTransferChoice()
     game = useGameStore.getState().game

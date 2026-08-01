@@ -69,6 +69,48 @@ describe('save migration', () => {
     ).toThrow()
   })
 
+  it('accepts one renewal plus three external contract offers', () => {
+    const current = validateGameState(legacyIdentityState())
+    const offer = {
+      id: 'renewal-9-current-club',
+      type: 'RENEWAL' as const,
+      clubId: 'current-club',
+      remainingHalfYears: 4,
+      annualSalaryEuro: 60_000,
+      promisedTeamLevel: 'YOUTH' as const,
+      promisedRole: 'CORE' as const,
+      releaseClauseEuro: 1_000_000,
+      clubOptionYears: 0,
+      parentClubId: null,
+      brokenPromiseWindows: 0,
+      transferFeeEuro: 0,
+      interestScore: 100,
+      estimatedPotential: 80,
+      counterUsed: false,
+      counterDirection: null,
+      negotiationSucceeded: null,
+      negotiationMessage: null,
+      withdrawn: false,
+    }
+    const offers = [
+      offer,
+      ...['club-a', 'club-b', 'club-c'].map((clubId, index) => ({
+        ...offer,
+        id: `free-9-${clubId}`,
+        type: 'FREE_TRANSFER' as const,
+        clubId,
+        interestScore: 80 - index,
+      })),
+    ]
+
+    const restored = validateGameState({
+      ...current,
+      transferOffers: offers,
+    })
+
+    expect(restored.transferOffers).toHaveLength(4)
+  })
+
   it('continues a version 2 completed demo at the third window', () => {
     const seed = 'legacy-two-window-save'
     const draft = createDraft('CM')

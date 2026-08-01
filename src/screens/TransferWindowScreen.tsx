@@ -233,6 +233,16 @@ export function TransferWindowScreen() {
         ) ?? null
       : null
   const currentClubName = clubName(game.selectedClubId)
+  const renewalOffer = contractExpired
+    ? game.transferOffers.find(
+        (offer) =>
+          offer.type === 'RENEWAL' &&
+          offer.clubId === game.selectedClubId,
+      ) ?? null
+    : null
+  const externalOffers = contractExpired
+    ? game.transferOffers.filter((offer) => offer.type !== 'RENEWAL')
+    : game.transferOffers
   const age = playerAgeAtWindow(game.windowIndex)
   const windowLabel = careerWindowLabel(
     game.startYear,
@@ -252,7 +262,7 @@ export function TransferWindowScreen() {
         </header>
         <p className="career-panel-lead">
           {contractExpired
-            ? '原合同已经结束。选择当前俱乐部的续约合同，或以自由身接受其他俱乐部邀请。'
+            ? '原合同已经结束。横条是原俱乐部续约，三张卡片是其他俱乐部的自由身邀请。'
             : '留队最稳定；三家俱乐部根据能力、近期表现、知名度与位置需求给出不同承诺。'}
         </p>
 
@@ -274,10 +284,32 @@ export function TransferWindowScreen() {
               {formatEuro(game.contract.annualSalaryEuro)} / 年
             </em>
           </button>
+        ) : renewalOffer ? (
+          <button
+            type="button"
+            className={`transfer-stay${
+              game.selectedTransferChoiceId === renewalOffer.id
+                ? ' is-selected'
+                : ''
+            }`}
+            onClick={() => selectTransferChoice(renewalOffer.id)}
+          >
+            <span>
+              <strong>与 {currentClubName} 续约</strong>
+              <small>
+                新合同 {renewalOffer.remainingHalfYears / 2}年 ·{' '}
+                {roleText(renewalOffer)}
+              </small>
+            </span>
+            <em>{formatEuro(renewalOffer.annualSalaryEuro)} / 年</em>
+          </button>
         ) : null}
 
-        <div className="transfer-offer-grid" aria-label="转会报价">
-          {game.transferOffers.map((offer) => {
+        <div
+          className="transfer-offer-grid"
+          aria-label={contractExpired ? '自由身合同' : '转会报价'}
+        >
+          {externalOffers.map((offer) => {
             const club = CLUBS.find(
               (candidate) => candidate.id === offer.clubId,
             )

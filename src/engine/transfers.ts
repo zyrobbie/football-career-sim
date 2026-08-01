@@ -244,10 +244,28 @@ function promisedTeamAndRole(input: {
     player.primaryPosition,
   )
   const firstTeamRole = evaluateFirstTeamRole(player, club)
+  const firstTeamAbilityMargin: Record<Club['tier'], number> = {
+    1: 3,
+    2: 3,
+    3: 3,
+    4: 4,
+    5: 5,
+    6: 6,
+  }
+  const firstTeamInterestFloor: Record<Club['tier'], number> = {
+    1: 74,
+    2: 74,
+    3: 74,
+    4: 68,
+    5: 64,
+    6: 60,
+  }
   const canOfferFirstTeam =
     (currentTeamLevel === 'FIRST_TEAM' ||
-      overall >= FIRST_TEAM_BENCHMARKS[club.tier] - 3) &&
-    interestScore >= 74 &&
+      overall >=
+        FIRST_TEAM_BENCHMARKS[club.tier] -
+          firstTeamAbilityMargin[club.tier]) &&
+    interestScore >= firstTeamInterestFloor[club.tier] &&
     firstTeamRole !== 'FRINGE'
 
   if (canOfferFirstTeam) {
@@ -298,24 +316,71 @@ export function generateDomesticTransferOffers(input: {
         careerSeed,
         windowIndex,
       })
-      return { club, estimatedPotential, interestScore }
-    })
-    .filter((candidate) => candidate.interestScore >= 50)
-    .sort(
-      (left, right) =>
-        right.interestScore - left.interestScore ||
-        left.club.tier - right.club.tier,
-    )
-    .slice(0, 3)
-
-  return candidates.map(
-    ({ club, estimatedPotential, interestScore }) => {
       const promise = promisedTeamAndRole({
         player,
         club,
         currentTeamLevel,
         interestScore,
       })
+      return {
+        club,
+        estimatedPotential,
+        interestScore: Math.max(50, interestScore),
+        promise,
+      }
+    })
+    .sort(
+      (left, right) =>
+        right.interestScore - left.interestScore ||
+        left.club.tier - right.club.tier,
+    )
+
+  const selectedCandidates = (() => {
+    const selected: typeof candidates = []
+    const addCandidate = (
+      candidate: (typeof candidates)[number] | undefined,
+    ) => {
+      if (
+        candidate &&
+        !selected.some((item) => item.club.id === candidate.club.id)
+      ) {
+        selected.push(candidate)
+      }
+    }
+    addCandidate(candidates[0])
+    const marketMix = createRandom(
+      careerSeed,
+      'transfer-market-composition',
+      windowIndex,
+    ).float(0, 1)
+    const strongAcademyYouth = candidates.find(
+      (candidate) =>
+        candidate.club.academyTier <= 2 &&
+        candidate.promise.teamLevel === 'YOUTH',
+    )
+    const lowerLeagueFirstTeam = candidates.find(
+      (candidate) =>
+        candidate.club.tier >= 5 &&
+        candidate.promise.teamLevel === 'FIRST_TEAM',
+    )
+
+    if (marketMix < 0.65 && strongAcademyYouth) {
+      addCandidate(strongAcademyYouth)
+    }
+    if (marketMix < 0.65 && lowerLeagueFirstTeam) {
+      addCandidate(lowerLeagueFirstTeam)
+    }
+
+    for (const candidate of candidates) {
+      if (selected.length >= 3) break
+      addCandidate(candidate)
+    }
+
+    return selected.slice(0, 3)
+  })()
+
+  return selectedCandidates.map(
+    ({ club, estimatedPotential, interestScore, promise }) => {
       const random = createRandom(
         careerSeed,
         'transfer-contract',
@@ -443,7 +508,7 @@ export function generateContractExpiryOffers(input: {
     careerSeed,
     windowIndex,
   })
-    .slice(0, 2)
+    .slice(0, 3)
     .map((offer) => ({
       ...offer,
       id: `free-${windowIndex}-${offer.clubId}`,
