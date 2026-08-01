@@ -2258,6 +2258,21 @@ svg {
   font-weight: 500;
 }
 
+.first-team-path__contract-term {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.first-team-path__summary .first-team-path__contract-term small {
+  grid-column: auto;
+  margin: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: 0.52em;
+}
+
 .first-team-path__summary em {
   font-size: 12px;
   font-style: normal;
@@ -3801,7 +3816,7 @@ svg {
   }
 
   .first-team-path__summary {
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto minmax(0, 1fr);
     gap: 0 5px;
   }
 
@@ -3819,6 +3834,10 @@ svg {
 
   .first-team-path__summary small {
     margin-top: 0;
+    font-size: 9px;
+  }
+
+  .first-team-path__summary .first-team-path__contract-term small {
     font-size: 9px;
   }
 
@@ -4380,17 +4399,23 @@ svg {
   }
 
   .position-pitch {
-    height: auto;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 5px;
-    padding: 6px;
-    background: rgba(255, 255, 255, 0.2);
+    position: relative;
+    height: 190px;
+    display: block;
+    padding: 0;
+    background:
+      linear-gradient(90deg, transparent 49.8%, rgba(18, 56, 45, 0.14) 50%, transparent 50.2%),
+      rgba(255, 255, 255, 0.2);
   }
 
-  .position-pitch::before,
+  .position-pitch::before {
+    display: block;
+    width: 68px;
+    height: 68px;
+  }
+
   .position-pitch::after {
-    display: none;
+    display: block;
   }
 
   .position-pitch__slot,
@@ -4405,12 +4430,40 @@ svg {
   .position-pitch__slot--lb,
   .position-pitch__slot--cb,
   .position-pitch__slot--rb {
-    position: relative;
+    position: absolute;
     inset: auto;
-    min-width: 0;
-    min-height: 34px;
-    font-size: 13px;
+    min-width: 44px;
+    min-height: 28px;
+    padding: 0 5px;
+    font-size: 10px;
   }
+
+  .position-pitch__slot--st {
+    left: calc(50% - 22px);
+    top: 3%;
+  }
+
+  .position-pitch__slot--lw { left: 11%; top: 16%; }
+  .position-pitch__slot--rw { right: 11%; top: 16%; }
+
+  .position-pitch__slot--cam {
+    left: calc(50% - 22px);
+    top: 31%;
+  }
+
+  .position-pitch__slot--lm { left: 2%; top: 49%; }
+  .position-pitch__slot--cm { left: 27%; top: 49%; }
+  .position-pitch__slot--cdm { right: 27%; top: 49%; }
+  .position-pitch__slot--rm { right: 2%; top: 49%; }
+
+  .position-pitch__slot--lb { left: 11%; bottom: 5%; }
+
+  .position-pitch__slot--cb {
+    left: calc(50% - 22px);
+    bottom: 5%;
+  }
+
+  .position-pitch__slot--rb { right: 11%; bottom: 5%; }
 
   .position-pitch__slot svg,
   .secondary-options svg {
@@ -4790,7 +4843,7 @@ svg {
 
   .career-report .report-side__finance {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1.38fr .72fr .9fr;
     align-content: start;
     gap: 0;
   }
@@ -4821,6 +4874,10 @@ svg {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .career-report .report-side__finance .report-change span {
+    font-size: 8px;
   }
 
   .career-report .first-team-report {
@@ -4995,8 +5052,9 @@ svg {
 
   .demo-complete--hub h1 {
     margin: 0 0 5px;
-    font-size: 24px;
+    font-size: clamp(18px, 5.4vw, 21px);
     line-height: 1.2;
+    white-space: nowrap;
   }
 
   .demo-complete--hub p {

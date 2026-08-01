@@ -388,8 +388,10 @@ function FirstTeamPath({ game }: { game: GameState }) {
       <section className="first-team-path" aria-label="职业合同状态">
         <div className="first-team-path__summary">
           <span>合同剩余</span>
-          <strong>{game.contract.remainingHalfYears / 2}</strong>
-          <small>年</small>
+          <strong className="first-team-path__contract-term">
+            {game.contract.remainingHalfYears / 2}
+            <small>年</small>
+          </strong>
           <em className={fulfilled ? 'is-positive' : 'is-negative'}>
             {fulfilled ? '承诺正常' : '承诺未兑现'}
           </em>
