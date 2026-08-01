@@ -5,6 +5,11 @@ import {
   canRequestHigherTransferRole,
   transferDinnerCost,
 } from '../engine/transfers'
+import {
+  careerWindowLabel,
+  playerAgeAtWindow,
+  transferWindowNumber,
+} from '../engine/careerTime'
 import type {
   CounterOfferDirection,
   TransferArrivalChoice,
@@ -84,6 +89,9 @@ export function TransferWindowScreen() {
   const chooseTransferArrival = useGameStore(
     (state) => state.chooseTransferArrival,
   )
+  const continueAfterTransfer = useGameStore(
+    (state) => state.continueAfterTransfer,
+  )
 
   if (!game?.player || !game.contract || !game.selectedClubId) {
     return null
@@ -132,6 +140,15 @@ export function TransferWindowScreen() {
     game.transferDecision
   ) {
     const decision = game.transferDecision
+    const currentWindow = careerWindowLabel(
+      game.startYear,
+      game.windowIndex,
+    )
+    const nextWindow = careerWindowLabel(
+      game.startYear,
+      game.windowIndex + 1,
+    )
+    const windowNumber = transferWindowNumber(game.windowIndex)
     return (
       <CareerHub game={game} sectionLabel="转会窗口完成">
         <section className="transfer-complete">
@@ -139,7 +156,7 @@ export function TransferWindowScreen() {
             <Icon name="check" />
           </div>
           <div>
-            <p className="decision-kicker">第一个转会窗口</p>
+            <p className="decision-kicker">第{windowNumber}个转会窗口</p>
             <h1>
               {decision.kind === 'STAY'
                 ? `继续留在${clubName(decision.toClubId)}。`
@@ -187,8 +204,16 @@ export function TransferWindowScreen() {
               </div>
             </dl>
             <p className="transfer-complete__next">
-              本阶段已完成并自动保存。下一步将让这次去留决定进入新的职业半年。
+              下一步：进入{currentWindow}至{nextWindow}的职业半年，继续结算比赛、工资、合同和特殊事件。
             </p>
+            <button
+              type="button"
+              className="button button--primary transfer-complete__continue"
+              onClick={continueAfterTransfer}
+            >
+              开始新的职业半年
+              <Icon name="arrow" />
+            </button>
           </div>
         </section>
       </CareerHub>
@@ -203,14 +228,16 @@ export function TransferWindowScreen() {
         ) ?? null
       : null
   const currentClubName = clubName(game.selectedClubId)
+  const windowNumber = transferWindowNumber(game.windowIndex)
+  const age = playerAgeAtWindow(game.windowIndex)
 
   return (
     <CareerHub game={game} sectionLabel="国内转会窗口">
       <section className="transfer-window">
         <header className="career-panel-heading">
           <Icon name="history" />
-          <h1>第一个转会窗口</h1>
-          <span>15岁 · 仅限国内</span>
+          <h1>第{windowNumber}个转会窗口</h1>
+          <span>{age}岁 · 当前版本仅限国内</span>
         </header>
         <p className="career-panel-lead">
           留队最稳定；三家俱乐部根据能力、近期表现、知名度与位置需求给出不同承诺。

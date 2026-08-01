@@ -5718,17 +5718,19 @@ svg {
 
 .transfer-actions {
   display: grid;
-  grid-template-columns: minmax(230px, 0.8fr) minmax(220px, 1.2fr);
+  grid-template-columns: minmax(160px, 0.9fr) minmax(0, 1.1fr);
   align-items: center;
   gap: 12px;
   margin-top: 8px;
 }
 
 .transfer-actions .button {
+  min-width: 0;
   width: 100%;
 }
 
 .transfer-actions p {
+  min-width: 0;
   margin: 0;
   color: var(--muted);
   font-size: 9px;
@@ -5981,6 +5983,11 @@ svg {
 .transfer-complete__next {
   margin-top: 8px !important;
   color: var(--gold-dark) !important;
+}
+
+.transfer-complete__continue {
+  min-width: 230px;
+  margin-top: 10px;
 }
 
 @media (max-width: 720px) {
@@ -6294,6 +6301,15 @@ svg {
 
   .transfer-complete__next {
     margin-top: 4px !important;
+  }
+
+  .transfer-complete__continue {
+    width: 100%;
+    min-width: 0;
+    min-height: 32px;
+    margin-top: 5px;
+    padding: 5px 8px;
+    font-size: 10px;
   }
 }
 

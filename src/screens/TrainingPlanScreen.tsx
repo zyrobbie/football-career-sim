@@ -4,6 +4,7 @@ import { Icon, type IconName } from '../components/Icons'
 import { careerWindowLabel } from '../engine/careerTime'
 import type {
   DevelopmentApproach,
+  GameState,
   TrainingFocus,
 } from '../models/game'
 import { useGameStore } from '../store/gameStore'
@@ -111,10 +112,6 @@ export function TrainingPlanScreen() {
       ? game.firstTeamRole
       : game.youthRole
   if (!currentRole) return null
-  const offer = game.academyOffers.find(
-    (candidate) => candidate.club.id === game.selectedClubId,
-  )
-  if (!offer) return null
   const isSimulating = game.phase === 'SIMULATION_READY'
   const currentWindow = careerWindowLabel(game.startYear, game.windowIndex)
   const nextWindow = careerWindowLabel(game.startYear, game.windowIndex + 1)
@@ -138,14 +135,14 @@ export function TrainingPlanScreen() {
         <header className="career-panel-heading">
           <Icon name="mental" />
           <h1>
-            {windowHeading(game.windowIndex)}
+            {windowHeading(game)}
           </h1>
         </header>
         <p className="career-panel-lead">
             {needsRecovery
               ? '俱乐部已为你的低状态安排恢复支持；你的训练选择仍会影响本阶段成长。'
               : isProfessional
-                ? '首份合同已经生效。训练方向、职业队策略和实际出场将共同决定合同承诺是否兑现。'
+                ? '职业合同已经生效。训练方向、职业队策略和实际出场将共同决定合同承诺是否兑现。'
                 : isSecondYear
                 ? '第二个青训赛季里，你的训练方向和职业策略会共同影响一线队评估。'
                 : '不同的发展方向会影响能力成长与事件概率，请谨慎选择。'}
@@ -157,7 +154,9 @@ export function TrainingPlanScreen() {
                 <span>本窗口职业策略</span>
                 <h2>
                   {isProfessional
-                    ? '你准备怎样开始职业队生涯？'
+                    ? game.windowIndex === 4
+                      ? '你准备怎样开始职业队生涯？'
+                      : '你准备怎样应对新的职业半年？'
                     : '你准备如何面对一线队的关注？'}
                 </h2>
               </div>
@@ -271,12 +270,17 @@ export function TrainingPlanScreen() {
   )
 }
 
-function windowHeading(windowIndex: number): string {
+function windowHeading(game: GameState): string {
+  const windowIndex = game.windowIndex
   if (windowIndex === 0) return '第一个半年，你准备怎样发展？'
   if (windowIndex === 1) return '第一年下半程，你准备怎样发展？'
   if (windowIndex === 2) return '青训第二年，你要怎样接近一线队？'
   if (windowIndex === 3) return '晋升评估前，你要怎样完成最后冲刺？'
-  return '职业生涯第一个半年，你准备怎样立足？'
+  if (windowIndex === 4) return '职业生涯第一个半年，你准备怎样立足？'
+  if (game.transferDecision?.kind === 'TRANSFER') {
+    return '新俱乐部的第一个半年，你准备怎样立足？'
+  }
+  return '新的职业半年，你准备怎样发展？'
 }
 
 const attributeKeysForPreview = ['attack', 'physical'] as const

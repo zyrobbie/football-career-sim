@@ -166,7 +166,7 @@ export function HalfYearReportScreen() {
             onClick={advanceAfterReport}
           >
             {isProfessionalWindow
-              ? '完成首个职业半年'
+              ? '完成本次职业半年'
               : isDemoComplete
               ? '完成青训第二年'
               : `进入${report.toLabel}窗口`}

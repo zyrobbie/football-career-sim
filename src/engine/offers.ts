@@ -52,3 +52,22 @@ export function generateAcademyOffers(
     }
   })
 }
+
+export function buildClubSimulationOffer(
+  clubId: string,
+  expectedRole: YouthRole = 'ROTATION',
+): AcademyOffer | null {
+  const club = CLUBS.find((candidate) => candidate.id === clubId)
+  if (!club) return null
+  return {
+    club,
+    expectedRole,
+    firstTeamChance:
+      club.profile === 'ELITE'
+        ? 'HARD'
+        : club.profile === 'BALANCED'
+          ? 'NORMAL'
+          : 'FAST',
+    annualStipendEuro: YOUTH_STIPENDS[club.tier],
+  }
+}

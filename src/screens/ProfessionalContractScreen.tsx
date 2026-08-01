@@ -67,7 +67,7 @@ export function ProfessionalContractScreen() {
               compact
             />
             <p className="contract-complete__next">
-              下一阶段先完成首个职业半年；正式转会窗口将在这套比赛与合同逻辑稳定后开放。
+              下一阶段先完成首个职业半年；随后将进入正式转会窗口，评估留队或转会机会。
             </p>
             <button
               type="button"

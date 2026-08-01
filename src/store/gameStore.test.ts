@@ -165,5 +165,43 @@ describe('academy two-year progression', () => {
     expect(game?.transferDecision?.kind).toBe('TRANSFER')
     expect(game?.transferDecision?.arrivalChoice).toBe('LEADERS')
     expect(game?.cashEuro).toBe(cashBeforeArrival)
+
+    const transferredClubId = game!.selectedClubId!
+    const transferredContractHalfYears = game!.contract!.remainingHalfYears
+    const firstTransferOfferIds = game!.transferOffers.map(
+      (candidate) => candidate.id,
+    )
+    store.continueAfterTransfer()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('HALF_YEAR_PLAN')
+    expect(game?.windowIndex).toBe(5)
+    expect(game?.selectedClubId).toBe(transferredClubId)
+    expect(game?.transferOffers).toEqual([])
+    expect(game?.selectedTransferChoiceId).toBeNull()
+
+    store.chooseTraining('BALANCED', 'STEADY')
+    resolveSpecialEventIfPresent()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('HALF_YEAR_REPORT')
+    expect(game?.history).toHaveLength(6)
+    expect(game?.history[5]?.windowIndex).toBe(5)
+    expect(game?.history[5]?.clubId).toBe(transferredClubId)
+    expect(game?.lastReport?.clubId).toBe(transferredClubId)
+    expect(game?.contract?.remainingHalfYears).toBe(
+      transferredContractHalfYears - 1,
+    )
+
+    store.advanceAfterReport()
+    expect(useGameStore.getState().game?.phase).toBe(
+      'PRO_STAGE_COMPLETE',
+    )
+    store.openTransferWindow()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_WINDOW')
+    expect(game?.windowIndex).toBe(6)
+    expect(game?.transferOffers).toHaveLength(3)
+    expect(game?.transferOffers.map((candidate) => candidate.id)).not.toEqual(
+      firstTransferOfferIds,
+    )
   })
 })

@@ -1,6 +1,9 @@
 import { create } from 'zustand'
 import { SECONDARY_POSITIONS } from '../data/balance'
-import { generateAcademyOffers } from '../engine/offers'
+import {
+  buildClubSimulationOffer,
+  generateAcademyOffers,
+} from '../engine/offers'
 import {
   contractFromOffer,
   generateFirstProfessionalOffer,
@@ -85,6 +88,7 @@ interface GameStore {
   counterTransferOffer: (direction: CounterOfferDirection) => void
   confirmTransferChoice: () => void
   chooseTransferArrival: (choice: TransferArrivalChoice) => void
+  continueAfterTransfer: () => void
   goToPhase: (phase: GamePhase) => void
   clearError: () => void
 }
@@ -158,10 +162,15 @@ export const useGameStore = create<GameStore>((set, get) => {
     ) {
       return state
     }
-    const offer = state.academyOffers.find(
-      (candidate) => candidate.club.id === state.selectedClubId,
-    )
-    if (!offer) throw new Error('Selected academy offer is missing.')
+    const offer =
+      state.academyOffers.find(
+        (candidate) => candidate.club.id === state.selectedClubId,
+      ) ??
+      buildClubSimulationOffer(
+        state.selectedClubId,
+        state.youthRole ?? 'ROTATION',
+      )
+    if (!offer) throw new Error('当前俱乐部资料缺失，无法完成半年结算。')
     const consequences = consumeCareerConsequences(state)
     const simulationState: GameState = {
       ...state,
@@ -811,6 +820,29 @@ export const useGameStore = create<GameStore>((set, get) => {
           arrivalChoice: choice,
           cashSpentEuro: result.cashSpentEuro,
         },
+      })
+    },
+
+    continueAfterTransfer: () => {
+      const game = get().game
+      if (
+        !game?.player ||
+        !game.contract ||
+        !game.selectedClubId ||
+        game.phase !== 'TRANSFER_STAGE_COMPLETE'
+      ) {
+        set({ error: '需要先完成本次转会窗口。' })
+        return
+      }
+      commit({
+        ...game,
+        phase: 'HALF_YEAR_PLAN',
+        transferOffers: [],
+        selectedTransferChoiceId: null,
+        pendingCareerEventId: null,
+        trainingFocus: null,
+        developmentApproach: null,
+        trainingQualityBonus: 0,
       })
     },
 
