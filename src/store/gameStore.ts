@@ -25,6 +25,7 @@ import {
   assessDomesticTransferOpportunity,
   applyTransferArrivalChoice,
   contractFromTransferOffer,
+  generateContractExpiryOffers,
   generateDomesticTransferOffers,
   integrationBaseForTransfer,
   resolveTransferCounter,
@@ -647,21 +648,41 @@ export const useGameStore = create<GameStore>((set, get) => {
         set({ error: '当前生涯还不能进入转会窗口。' })
         return
       }
+      const contractExpired = game.contract.remainingHalfYears === 0
       const opportunity = assessDomesticTransferOpportunity({
         player: game.player,
         latestReport: game.lastReport,
         windowIndex: game.windowIndex,
       })
-      if (!opportunity.available) {
+      if (!contractExpired && !opportunity.available) {
         set({ error: opportunity.summary })
         return
       }
+      const currentRole =
+        game.teamLevel === 'FIRST_TEAM'
+          ? game.firstTeamRole
+          : game.youthRole
+      if (!currentRole) {
+        set({ error: '当前球队角色缺失，无法生成合同报价。' })
+        return
+      }
       const windowIndex =
-        game.transferOffers.length > 0
+        !contractExpired && game.transferOffers.length > 0
           ? game.windowIndex
           : game.windowIndex + 1
       const transferOffers =
-        game.transferOffers.length > 0
+        contractExpired
+          ? generateContractExpiryOffers({
+              player: game.player,
+              currentClubId: game.selectedClubId,
+              currentTeamLevel: game.teamLevel,
+              currentRole,
+              currentContract: game.contract,
+              latestReport: game.lastReport,
+              careerSeed: game.careerSeed,
+              windowIndex,
+            })
+          : game.transferOffers.length > 0
           ? game.transferOffers
           : generateDomesticTransferOffers({
               player: game.player,
@@ -677,7 +698,9 @@ export const useGameStore = create<GameStore>((set, get) => {
         windowIndex,
         transferOffers,
         selectedTransferChoiceId:
-          game.selectedTransferChoiceId ?? 'STAY',
+          contractExpired
+            ? transferOffers[0]?.id ?? null
+            : game.selectedTransferChoiceId ?? 'STAY',
         transferDecision: null,
         transferArrivalChoice: null,
       })
@@ -699,6 +722,12 @@ export const useGameStore = create<GameStore>((set, get) => {
         latestReport: game.lastReport,
         windowIndex: game.windowIndex,
       })
+      if (game.contract.remainingHalfYears === 0) {
+        set({
+          error: '合同已经到期，必须先完成续约或自由转会，不能无合同进入下一职业半年。',
+        })
+        return
+      }
       if (opportunity.available) {
         set({ error: '本窗口已有正式转会机会，请先完成去留决定。' })
         return
@@ -721,6 +750,13 @@ export const useGameStore = create<GameStore>((set, get) => {
     selectTransferChoice: (choiceId) => {
       const game = get().game
       if (!game || game.phase !== 'TRANSFER_WINDOW') return
+      if (
+        choiceId === 'STAY' &&
+        game.contract?.remainingHalfYears === 0
+      ) {
+        set({ error: '合同已经到期，不能按原合同直接留队。' })
+        return
+      }
       if (
         choiceId !== 'STAY' &&
         !game.transferOffers.some(
@@ -764,7 +800,12 @@ export const useGameStore = create<GameStore>((set, get) => {
             offer.id === updated.id ? updated : offer,
           ),
           selectedTransferChoiceId: updated.withdrawn
-            ? 'STAY'
+            ? game.contract?.remainingHalfYears === 0
+              ? game.transferOffers.find(
+                  (offer) =>
+                    offer.type === 'RENEWAL' && !offer.withdrawn,
+                )?.id ?? null
+              : 'STAY'
             : updated.id,
         })
       } catch (error) {
@@ -790,6 +831,10 @@ export const useGameStore = create<GameStore>((set, get) => {
       }
       const fromClubId = game.selectedClubId
       if (game.selectedTransferChoiceId === 'STAY') {
+        if (game.contract.remainingHalfYears === 0) {
+          set({ error: '合同已经到期，不能按原合同直接留队。' })
+          return
+        }
         commit({
           ...game,
           phase: 'TRANSFER_STAGE_COMPLETE',
@@ -816,6 +861,28 @@ export const useGameStore = create<GameStore>((set, get) => {
       const contract = contractFromTransferOffer(offer)
       const isFirstTeam =
         contract.promisedTeamLevel === 'FIRST_TEAM'
+      if (offer.type === 'RENEWAL' && offer.clubId === fromClubId) {
+        commit({
+          ...game,
+          phase: 'TRANSFER_STAGE_COMPLETE',
+          contract,
+          teamLevel: contract.promisedTeamLevel,
+          youthRole: isFirstTeam
+            ? null
+            : (contract.promisedRole as YouthRole),
+          firstTeamRole: isFirstTeam
+            ? (contract.promisedRole as FirstTeamRole)
+            : null,
+          transferDecision: {
+            kind: 'STAY',
+            fromClubId,
+            toClubId: fromClubId,
+            arrivalChoice: null,
+            cashSpentEuro: 0,
+          },
+        })
+        return
+      }
       const integration = integrationBaseForTransfer(game.player)
       commit({
         ...game,

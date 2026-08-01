@@ -10,6 +10,7 @@ import type {
   FirstTeamRole,
   HalfYearReport,
   Player,
+  SquadRole,
   TeamLevel,
   TransferArrivalChoice,
   TransferOffer,
@@ -365,6 +366,94 @@ export function generateDomesticTransferOffers(input: {
   )
 }
 
+export function generateContractExpiryOffers(input: {
+  player: Player
+  currentClubId: string
+  currentTeamLevel: TeamLevel
+  currentRole: SquadRole
+  currentContract: ContractState
+  latestReport: HalfYearReport | null
+  careerSeed: string
+  windowIndex: number
+}): TransferOffer[] {
+  const {
+    player,
+    currentClubId,
+    currentTeamLevel,
+    currentRole,
+    currentContract,
+    latestReport,
+    careerSeed,
+    windowIndex,
+  } = input
+  const currentClub = CLUBS.find((club) => club.id === currentClubId)
+  if (!currentClub) return []
+
+  const random = createRandom(
+    careerSeed,
+    'contract-expiry-renewal',
+    windowIndex,
+    currentClubId,
+  )
+  const marketSalary = salaryForOffer({
+    player,
+    role: currentRole,
+    teamLevel: currentTeamLevel,
+    careerSeed,
+    clubId: currentClubId,
+    seedNamespace: `renewal-salary-${windowIndex}`,
+  })
+  const renewalSalary = roundTo(
+    Math.max(
+      currentContract.annualSalaryEuro,
+      marketSalary,
+    ) * random.float(1, 1.12),
+    Math.max(currentContract.annualSalaryEuro, marketSalary) >= 100_000
+      ? 5_000
+      : 1_000,
+  )
+  const renewal: TransferOffer = {
+    id: `renewal-${windowIndex}-${currentClubId}`,
+    type: 'RENEWAL',
+    clubId: currentClubId,
+    remainingHalfYears: random.int(2, 4) * 2,
+    annualSalaryEuro: renewalSalary,
+    promisedTeamLevel: currentTeamLevel,
+    promisedRole: currentRole,
+    releaseClauseEuro: roundTo(renewalSalary * 24, 10_000),
+    clubOptionYears: currentClub.tier <= 3 ? 1 : 0,
+    parentClubId: null,
+    brokenPromiseWindows: 0,
+    transferFeeEuro: 0,
+    interestScore: 100,
+    estimatedPotential: Math.round(
+      calculateOverall(player.potentials, player.primaryPosition),
+    ),
+    counterUsed: false,
+    counterDirection: null,
+    negotiationSucceeded: null,
+    negotiationMessage: null,
+    withdrawn: false,
+  }
+  const freeAgentOffers = generateDomesticTransferOffers({
+    player,
+    currentClubId,
+    currentTeamLevel,
+    latestReport,
+    careerSeed,
+    windowIndex,
+  })
+    .slice(0, 2)
+    .map((offer) => ({
+      ...offer,
+      id: `free-${windowIndex}-${offer.clubId}`,
+      type: 'FREE_TRANSFER' as const,
+      transferFeeEuro: 0,
+    }))
+
+  return [renewal, ...freeAgentOffers]
+}
+
 function promoteRole(
   offer: TransferOffer,
 ): YouthRole | FirstTeamRole {
@@ -425,7 +514,7 @@ export function resolveTransferCounter(input: {
   const succeeded = random.next() * 100 < successChance
 
   if (!succeeded) {
-    const withdrawn = random.next() < 0.3
+    const withdrawn = offer.type !== 'RENEWAL' && random.next() < 0.3
     return {
       ...offer,
       counterUsed: true,

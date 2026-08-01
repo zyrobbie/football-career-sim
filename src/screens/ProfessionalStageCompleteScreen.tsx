@@ -23,6 +23,11 @@ export function ProfessionalStageCompleteScreen() {
   }
   const report = game.lastReport
   const contractReport = report.contract!
+  const completedHistory = game.history[game.history.length - 1]
+  const actualTeamLevel =
+    completedHistory?.teamLevel ?? contractReport.actualTeamLevel
+  const actualRole = completedHistory?.role ?? contractReport.actualRole
+  const contractExpired = game.contract.remainingHalfYears === 0
   const isFirstProfessionalWindow = game.windowIndex === 4
   const transferOpportunity = assessDomesticTransferOpportunity({
     player: game.player,
@@ -46,7 +51,7 @@ export function ProfessionalStageCompleteScreen() {
               : '第一个职业半年并不轻松。'}
           </h1>
           <p>
-            {game.teamLevel === 'FIRST_TEAM'
+            {actualTeamLevel === 'FIRST_TEAM'
               ? '本窗口已经使用一线队训练质量、实际角色、正式比赛出场和工资可支配收入完成结算，后续转会与续约会沿用同一份职业状态。'
               : '这一阶段已经按照职业合同结算青年队训练、比赛出场、工资可支配收入和角色承诺；你仍可继续竞争一线队席位。'}
           </p>
@@ -61,8 +66,8 @@ export function ProfessionalStageCompleteScreen() {
             <div>
               <dt>实际角色</dt>
               <dd>
-                {game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'} ·{' '}
-                {roleLabel(contractReport.actualRole).replace('球员', '')}
+                {actualTeamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'} ·{' '}
+                {roleLabel(actualRole).replace('球员', '')}
               </dd>
             </div>
             <div>
@@ -82,19 +87,23 @@ export function ProfessionalStageCompleteScreen() {
             </div>
           </dl>
           <p className="demo-complete__next">
-            {transferOpportunity.summary}
+            {contractExpired
+              ? '合同已经到期。你必须先完成续约或接受新的自由身合同，才能进入下一职业半年。'
+              : transferOpportunity.summary}
           </p>
           <div className="demo-complete__actions">
             <button
               type="button"
               className="button button--primary"
               onClick={
-                transferOpportunity.available
+                contractExpired || transferOpportunity.available
                   ? openTransferWindow
                   : continueProfessionalCareer
               }
             >
-              {transferOpportunity.available
+              {contractExpired
+                ? '处理合同到期'
+                : transferOpportunity.available
                 ? '查看转会报价'
                 : '进入下一职业半年'}
               <Icon name="arrow" />

@@ -95,6 +95,7 @@ export function TransferWindowScreen() {
   if (!game?.player || !game.contract || !game.selectedClubId) {
     return null
   }
+  const contractExpired = game.contract.remainingHalfYears === 0
 
   if (game.phase === 'TRANSFER_ARRIVAL') {
     const dinnerCost = transferDinnerCost(game.cashEuro)
@@ -147,6 +148,8 @@ export function TransferWindowScreen() {
       game.startYear,
       game.windowIndex + 1,
     )
+    const renewedCurrentClub =
+      decision.kind === 'STAY' && game.contract.type === 'RENEWAL'
     return (
       <CareerHub game={game} sectionLabel="转会决定完成">
         <section className="transfer-complete">
@@ -156,12 +159,16 @@ export function TransferWindowScreen() {
           <div>
             <p className="decision-kicker">本次转会决定</p>
             <h1>
-              {decision.kind === 'STAY'
+              {renewedCurrentClub
+                ? `与${clubName(decision.toClubId)}完成续约。`
+                : decision.kind === 'STAY'
                 ? `继续留在${clubName(decision.toClubId)}。`
                 : `正式加盟${clubName(decision.toClubId)}。`}
             </h1>
             <p>
-              {decision.kind === 'STAY'
+              {renewedCurrentClub
+                ? '新合同、球队层级和角色承诺已经写入存档，原有队内关系全部保留。'
+                : decision.kind === 'STAY'
                 ? '原合同与既有关系全部保留，下一窗口继续为当前俱乐部效力。'
                 : '新合同、角色承诺与初始关系已经写入存档；转会费由俱乐部之间结算，不占用个人现金。'}
             </p>
@@ -233,34 +240,41 @@ export function TransferWindowScreen() {
   )
 
   return (
-    <CareerHub game={game} sectionLabel="国内转会机会">
+    <CareerHub
+      game={game}
+      sectionLabel={contractExpired ? '合同到期决定' : '国内转会机会'}
+    >
       <section className="transfer-window">
         <header className="career-panel-heading">
           <Icon name="history" />
-          <h1>国内转会机会</h1>
+          <h1>{contractExpired ? '合同到期决定' : '国内转会机会'}</h1>
           <span>{age}岁 · {windowLabel.replace('年', '').replace('季', '')} · 国内</span>
         </header>
         <p className="career-panel-lead">
-          留队最稳定；三家俱乐部根据能力、近期表现、知名度与位置需求给出不同承诺。
+          {contractExpired
+            ? '原合同已经结束。选择当前俱乐部的续约合同，或以自由身接受其他俱乐部邀请。'
+            : '留队最稳定；三家俱乐部根据能力、近期表现、知名度与位置需求给出不同承诺。'}
         </p>
 
-        <button
-          type="button"
-          className={`transfer-stay${
-            game.selectedTransferChoiceId === 'STAY'
-              ? ' is-selected'
-              : ''
-          }`}
-          onClick={() => selectTransferChoice('STAY')}
-        >
-          <span>
-            <strong>留在 {currentClubName}</strong>
-            <small>保留合同、角色与全部既有关系</small>
-          </span>
-          <em>
-            {formatEuro(game.contract.annualSalaryEuro)} / 年
-          </em>
-        </button>
+        {!contractExpired ? (
+          <button
+            type="button"
+            className={`transfer-stay${
+              game.selectedTransferChoiceId === 'STAY'
+                ? ' is-selected'
+                : ''
+            }`}
+            onClick={() => selectTransferChoice('STAY')}
+          >
+            <span>
+              <strong>留在 {currentClubName}</strong>
+              <small>保留合同、角色与全部既有关系</small>
+            </span>
+            <em>
+              {formatEuro(game.contract.annualSalaryEuro)} / 年
+            </em>
+          </button>
+        ) : null}
 
         <div className="transfer-offer-grid" aria-label="转会报价">
           {game.transferOffers.map((offer) => {
@@ -291,8 +305,19 @@ export function TransferWindowScreen() {
                     <dd>{formatEuro(offer.annualSalaryEuro)}</dd>
                   </div>
                   <div>
-                    <dt>转会费</dt>
-                    <dd>{formatEuro(offer.transferFeeEuro)}</dd>
+                    <dt>
+                      {offer.type === 'RENEWAL' ||
+                      offer.type === 'FREE_TRANSFER'
+                        ? '性质'
+                        : '转会费'}
+                    </dt>
+                    <dd>
+                      {offer.type === 'RENEWAL'
+                        ? '续约'
+                        : offer.type === 'FREE_TRANSFER'
+                          ? '自由身'
+                          : formatEuro(offer.transferFeeEuro)}
+                    </dd>
                   </div>
                 </dl>
                 <em>
@@ -310,12 +335,12 @@ export function TransferWindowScreen() {
             offer={selectedOffer}
             onCounter={counterTransferOffer}
           />
-        ) : (
+        ) : !contractExpired ? (
           <p className="transfer-stay-note">
             选择留队不会触发重新谈判，原合同剩余
             {game.contract.remainingHalfYears / 2}年。
           </p>
-        )}
+        ) : null}
 
         <div className="transfer-actions">
           <button
@@ -324,12 +349,16 @@ export function TransferWindowScreen() {
             onClick={confirmTransferChoice}
           >
             {selectedOffer
-              ? `接受并加盟${clubName(selectedOffer.clubId)}`
+              ? selectedOffer.type === 'RENEWAL'
+                ? `接受${clubName(selectedOffer.clubId)}续约`
+                : `接受并加盟${clubName(selectedOffer.clubId)}`
               : `确认留在${currentClubName}`}
             <Icon name="arrow" />
           </button>
           <p>
-            每份报价仅可反报价一次；失败时有30%概率被撤回。转会费不会进入个人现金。
+            {contractExpired
+              ? '每份合同仅可反报价一次；续约原报价不会因反报价失败而撤回。'
+              : '每份报价仅可反报价一次；失败时有30%概率被撤回。转会费不会进入个人现金。'}
           </p>
         </div>
       </section>

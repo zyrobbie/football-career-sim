@@ -126,17 +126,50 @@ describe('academy two-year progression', () => {
     )
     expect(game?.cashEuro).toBeGreaterThan(1000)
 
+    useGameStore.setState({
+      game: {
+        ...game!,
+        contract: {
+          ...game!.contract!,
+          remainingHalfYears: 0,
+        },
+      },
+    })
+
     store.advanceAfterReport()
     expect(useGameStore.getState().game?.phase).toBe(
       'PRO_STAGE_COMPLETE',
     )
 
-    store.openTransferWindow()
+    store.continueProfessionalCareer()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('PRO_STAGE_COMPLETE')
-    expect(useGameStore.getState().error).toContain('不会每半年出现')
+    expect(useGameStore.getState().error).toContain('合同已经到期')
     store.clearError()
-    store.continueProfessionalCareer()
+
+    store.openTransferWindow()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_WINDOW')
+    expect(game?.windowIndex).toBe(5)
+    expect(game?.transferOffers).toHaveLength(3)
+    expect(game?.transferOffers[0]?.type).toBe('RENEWAL')
+    expect(game?.transferOffers.slice(1).every(
+      (candidate) =>
+        candidate.type === 'FREE_TRANSFER' &&
+        candidate.transferFeeEuro === 0,
+    )).toBe(true)
+    expect(game?.selectedTransferChoiceId).toBe(
+      game?.transferOffers[0]?.id,
+    )
+
+    store.confirmTransferChoice()
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_STAGE_COMPLETE')
+    expect(game?.contract?.type).toBe('RENEWAL')
+    expect(game?.contract?.remainingHalfYears).toBeGreaterThan(0)
+    expect(game?.transferDecision?.kind).toBe('STAY')
+
+    store.continueAfterTransfer()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_PLAN')
     expect(game?.windowIndex).toBe(5)
