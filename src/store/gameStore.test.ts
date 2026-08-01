@@ -220,6 +220,31 @@ describe('academy two-year progression', () => {
     expect(game?.transferOffers).toHaveLength(3)
     expect(game?.selectedTransferChoiceId).toBe('STAY')
 
+    const normalTransferGame = game!
+    const invalidEarlyRenewal = {
+      ...normalTransferGame.transferOffers[0]!,
+      id: 'invalid-early-renewal',
+      type: 'RENEWAL' as const,
+      clubId: normalTransferGame.selectedClubId!,
+      transferFeeEuro: 0,
+    }
+    useGameStore.setState({
+      game: {
+        ...normalTransferGame,
+        transferOffers: [
+          invalidEarlyRenewal,
+          ...normalTransferGame.transferOffers,
+        ],
+        selectedTransferChoiceId: invalidEarlyRenewal.id,
+      },
+    })
+    store.confirmTransferChoice()
+    expect(useGameStore.getState().game?.phase).toBe('TRANSFER_WINDOW')
+    expect(useGameStore.getState().error).toContain('原合同尚未到期')
+    store.clearError()
+    useGameStore.setState({ game: normalTransferGame })
+    game = normalTransferGame
+
     const transferOffer = game!.transferOffers[0]!
     store.selectTransferChoice(transferOffer.id)
     store.counterTransferOffer('SALARY')
@@ -280,7 +305,40 @@ describe('academy two-year progression', () => {
     expect(game?.transferOffers).toEqual([])
     expect(useGameStore.getState().error).toContain('集中评估')
     store.clearError()
-    store.continueProfessionalCareer()
+
+    useGameStore.setState({
+      game: {
+        ...game!,
+        contract: {
+          ...game!.contract!,
+          brokenPromiseWindows: 1,
+        },
+      },
+    })
+    store.openTransferWindow(true)
+    expect(useGameStore.getState().game?.phase).toBe('PRO_STAGE_COMPLETE')
+    expect(useGameStore.getState().error).toContain('连续两个窗口')
+    store.clearError()
+
+    useGameStore.setState({
+      game: {
+        ...game!,
+        contract: {
+          ...game!.contract!,
+          brokenPromiseWindows: 2,
+        },
+      },
+    })
+    store.openTransferWindow(true)
+    game = useGameStore.getState().game
+    expect(game?.phase).toBe('TRANSFER_WINDOW')
+    expect(game?.transferOffers).toHaveLength(3)
+    expect(game?.selectedTransferChoiceId).toBe('STAY')
+    store.confirmTransferChoice()
+    expect(useGameStore.getState().game?.phase).toBe(
+      'TRANSFER_STAGE_COMPLETE',
+    )
+    store.continueAfterTransfer()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_PLAN')
     expect(game?.windowIndex).toBe(7)

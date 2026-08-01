@@ -4,6 +4,16 @@ import { assessDomesticTransferOpportunity } from '../engine/transfers'
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, roleLabel } from '../ui/format'
 
+export function professionalStageHeading(
+  promiseFulfilled: boolean,
+  isFirstProfessionalWindow: boolean,
+): string {
+  if (promiseFulfilled) return '合同、训练与比赛已经开始联动。'
+  return isFirstProfessionalWindow
+    ? '第一个职业半年并不轻松。'
+    : '本次职业半年未达预期。'
+}
+
 export function ProfessionalStageCompleteScreen() {
   const game = useGameStore((state) => state.game)
   const reviewReport = useGameStore((state) => state.reviewReport)
@@ -29,6 +39,8 @@ export function ProfessionalStageCompleteScreen() {
   const actualRole = completedHistory?.role ?? contractReport.actualRole
   const contractExpired = game.contract.remainingHalfYears === 0
   const isFirstProfessionalWindow = game.windowIndex === 4
+  const canRequestTransfer =
+    !contractExpired && game.contract.brokenPromiseWindows >= 2
   const transferOpportunity = assessDomesticTransferOpportunity({
     player: game.player,
     latestReport: report,
@@ -46,9 +58,10 @@ export function ProfessionalStageCompleteScreen() {
             {isFirstProfessionalWindow ? '职业生涯正式起步' : '职业窗口完成'}
           </p>
           <h1>
-            {contractReport.promiseFulfilled
-              ? '合同、训练与比赛已经开始联动。'
-              : '第一个职业半年并不轻松。'}
+            {professionalStageHeading(
+              contractReport.promiseFulfilled,
+              isFirstProfessionalWindow,
+            )}
           </h1>
           <p>
             {actualTeamLevel === 'FIRST_TEAM'
@@ -89,32 +102,52 @@ export function ProfessionalStageCompleteScreen() {
           <p className="demo-complete__next">
             {contractExpired
               ? '合同已经到期。你必须先完成续约或接受新的自由身合同，才能进入下一职业半年。'
-              : transferOpportunity.summary}
+              : canRequestTransfer
+                ? '球队已经连续两个窗口没有兑现角色承诺。你可以正式提出转会申请，或选择再留队半年等待改善。'
+                : transferOpportunity.summary}
           </p>
           <div className="demo-complete__actions">
             <button
               type="button"
               className="button button--primary"
-              onClick={
-                contractExpired || transferOpportunity.available
-                  ? openTransferWindow
-                  : continueProfessionalCareer
-              }
+              onClick={() => {
+                if (canRequestTransfer) {
+                  openTransferWindow(true)
+                  return
+                }
+                if (contractExpired || transferOpportunity.available) {
+                  openTransferWindow()
+                  return
+                }
+                continueProfessionalCareer()
+              }}
             >
-              {contractExpired
+              {canRequestTransfer
+                ? '提出转会申请'
+                : contractExpired
                 ? '处理合同到期'
                 : transferOpportunity.available
                 ? '查看转会报价'
                 : '进入下一职业半年'}
               <Icon name="arrow" />
             </button>
-            <button
-              type="button"
-              className="button button--secondary"
-              onClick={reviewReport}
-            >
-              复查职业半年报告
-            </button>
+            {canRequestTransfer ? (
+              <button
+                type="button"
+                className="button button--secondary"
+                onClick={continueProfessionalCareer}
+              >
+                继续留队半年
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="button button--secondary"
+                onClick={reviewReport}
+              >
+                复查职业半年报告
+              </button>
+            )}
           </div>
         </div>
       </section>

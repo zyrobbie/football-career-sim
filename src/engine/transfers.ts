@@ -26,7 +26,10 @@ import {
 } from './offers'
 import { calculateOverall } from './player'
 import { createRandom } from './random'
-import { DEMO_WINDOW_COUNT } from './careerTime'
+import {
+  DEMO_WINDOW_COUNT,
+  playerAgeAtWindow,
+} from './careerTime'
 
 const FIRST_TEAM_ROLE_ORDER: FirstTeamRole[] = [
   'FRINGE',
@@ -234,16 +237,26 @@ function promisedTeamAndRole(input: {
   club: Club
   currentTeamLevel: TeamLevel
   interestScore: number
+  playerAge: number
 }): {
   teamLevel: TeamLevel
   role: YouthRole | FirstTeamRole
 } {
-  const { player, club, currentTeamLevel, interestScore } = input
+  const {
+    player,
+    club,
+    currentTeamLevel,
+    interestScore,
+    playerAge,
+  } = input
   const overall = calculateOverall(
     player.attributes,
     player.primaryPosition,
   )
   const firstTeamRole = evaluateFirstTeamRole(player, club)
+  if (playerAge >= 22) {
+    return { teamLevel: 'FIRST_TEAM', role: firstTeamRole }
+  }
   const firstTeamAbilityMargin: Record<Club['tier'], number> = {
     1: 3,
     2: 3,
@@ -321,6 +334,7 @@ export function generateDomesticTransferOffers(input: {
         club,
         currentTeamLevel,
         interestScore,
+        playerAge: playerAgeAtWindow(windowIndex),
       })
       return {
         club,
@@ -454,6 +468,17 @@ export function generateContractExpiryOffers(input: {
   const currentClub = CLUBS.find((club) => club.id === currentClubId)
   if (!currentClub) return []
 
+  const renewalPromise =
+    playerAgeAtWindow(windowIndex) >= 22
+      ? promisedTeamAndRole({
+          player,
+          club: currentClub,
+          currentTeamLevel,
+          interestScore: 100,
+          playerAge: playerAgeAtWindow(windowIndex),
+        })
+      : { teamLevel: currentTeamLevel, role: currentRole }
+
   const random = createRandom(
     careerSeed,
     'contract-expiry-renewal',
@@ -462,8 +487,8 @@ export function generateContractExpiryOffers(input: {
   )
   const marketSalary = salaryForOffer({
     player,
-    role: currentRole,
-    teamLevel: currentTeamLevel,
+    role: renewalPromise.role,
+    teamLevel: renewalPromise.teamLevel,
     careerSeed,
     clubId: currentClubId,
     seedNamespace: `renewal-salary-${windowIndex}`,
@@ -483,8 +508,8 @@ export function generateContractExpiryOffers(input: {
     clubId: currentClubId,
     remainingHalfYears: random.int(2, 4) * 2,
     annualSalaryEuro: renewalSalary,
-    promisedTeamLevel: currentTeamLevel,
-    promisedRole: currentRole,
+    promisedTeamLevel: renewalPromise.teamLevel,
+    promisedRole: renewalPromise.role,
     releaseClauseEuro: roundTo(renewalSalary * 24, 10_000),
     clubOptionYears: currentClub.tier <= 3 ? 1 : 0,
     parentClubId: null,

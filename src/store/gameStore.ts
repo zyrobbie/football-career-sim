@@ -85,7 +85,7 @@ interface GameStore {
   counterProfessionalOffer: (direction: CounterOfferDirection) => void
   acceptProfessionalContract: () => void
   startProfessionalCareer: () => void
-  openTransferWindow: () => void
+  openTransferWindow: (forcedByPromiseBreach?: boolean) => void
   continueProfessionalCareer: () => void
   selectTransferChoice: (choiceId: 'STAY' | string) => void
   counterTransferOffer: (direction: CounterOfferDirection) => void
@@ -637,7 +637,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       })
     },
 
-    openTransferWindow: () => {
+    openTransferWindow: (forcedByPromiseBreach = false) => {
       const game = get().game
       if (
         !game?.player ||
@@ -654,7 +654,19 @@ export const useGameStore = create<GameStore>((set, get) => {
         latestReport: game.lastReport,
         windowIndex: game.windowIndex,
       })
-      if (!contractExpired && !opportunity.available) {
+      const canRequestTransfer =
+        !contractExpired &&
+        forcedByPromiseBreach &&
+        game.contract.brokenPromiseWindows >= 2
+      if (forcedByPromiseBreach && !canRequestTransfer) {
+        set({ error: '只有连续两个窗口未兑现角色承诺时，才能主动提出转会申请。' })
+        return
+      }
+      if (
+        !contractExpired &&
+        !opportunity.available &&
+        !canRequestTransfer
+      ) {
         set({ error: opportunity.summary })
         return
       }
@@ -862,6 +874,10 @@ export const useGameStore = create<GameStore>((set, get) => {
       const isFirstTeam =
         contract.promisedTeamLevel === 'FIRST_TEAM'
       if (offer.type === 'RENEWAL' && offer.clubId === fromClubId) {
+        if (game.contract.remainingHalfYears > 0) {
+          set({ error: '原合同尚未到期，当前不能签署续约合同。' })
+          return
+        }
         commit({
           ...game,
           phase: 'TRANSFER_STAGE_COMPLETE',

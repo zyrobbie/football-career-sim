@@ -177,6 +177,29 @@ describe('domestic transfer window', () => {
     expect(mixedWindow).toHaveLength(3)
   })
 
+  it('never offers a youth contract from age 22 onward', () => {
+    const { player, currentClubId } = createTransferFixture()
+    player.attributes = {
+      attack: 46,
+      defense: 46,
+      physical: 46,
+      mental: 46,
+    }
+    const offers = generateDomesticTransferOffers({
+      player,
+      currentClubId,
+      currentTeamLevel: 'YOUTH',
+      latestReport: null,
+      careerSeed: 'age-22-first-team-only',
+      windowIndex: 18,
+    })
+
+    expect(offers).toHaveLength(3)
+    expect(
+      offers.every((offer) => offer.promisedTeamLevel === 'FIRST_TEAM'),
+    ).toBe(true)
+  })
+
   it('adds three external free-agent contracts to the renewal option at expiry', () => {
     const { careerSeed, player, currentClubId } = createTransferFixture()
     const currentContract = {
@@ -213,6 +236,36 @@ describe('domestic transfer window', () => {
       ),
     ).toBe(true)
     expect(new Set(offers.slice(1).map((offer) => offer.clubId)).size).toBe(3)
+  })
+
+  it('converts every expiry-market contract to first-team status after age 22', () => {
+    const { careerSeed, player, currentClubId } = createTransferFixture()
+    const currentContract = {
+      type: 'FIRST_PRO',
+      clubId: currentClubId,
+      remainingHalfYears: 0,
+      annualSalaryEuro: 36_000,
+      promisedTeamLevel: 'YOUTH',
+      promisedRole: 'CORE',
+      releaseClauseEuro: 500_000,
+      clubOptionYears: 0,
+      parentClubId: null,
+      brokenPromiseWindows: 0,
+    } satisfies ContractState
+    const offers = generateContractExpiryOffers({
+      player,
+      currentClubId,
+      currentTeamLevel: 'YOUTH',
+      currentRole: 'CORE',
+      currentContract,
+      latestReport: null,
+      careerSeed,
+      windowIndex: 24,
+    })
+
+    expect(
+      offers.every((offer) => offer.promisedTeamLevel === 'FIRST_TEAM'),
+    ).toBe(true)
   })
 
   it('resolves one counteroffer and always leaves an explicit final state', () => {

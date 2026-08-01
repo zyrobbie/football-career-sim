@@ -160,21 +160,21 @@ export function TransferWindowScreen() {
             <p className="decision-kicker">本次转会决定</p>
             <h1>
               {renewedCurrentClub
-                ? `与${clubName(decision.toClubId)}完成续约。`
+                ? `原合同到期后，与${clubName(decision.toClubId)}签下新约。`
                 : decision.kind === 'STAY'
                 ? `继续留在${clubName(decision.toClubId)}。`
                 : `正式加盟${clubName(decision.toClubId)}。`}
             </h1>
             <p>
               {renewedCurrentClub
-                ? '新合同、球队层级和角色承诺已经写入存档，原有队内关系全部保留。'
+                ? '页面上方显示的是刚刚生效的新合同期限；球队层级和角色承诺已经写入存档，原有队内关系全部保留。'
                 : decision.kind === 'STAY'
                 ? '原合同与既有关系全部保留，下一窗口继续为当前俱乐部效力。'
                 : '新合同、角色承诺与初始关系已经写入存档；转会费由俱乐部之间结算，不占用个人现金。'}
             </p>
             <dl>
               <div>
-                <dt>合同</dt>
+                <dt>{renewedCurrentClub ? '新合同' : '合同'}</dt>
                 <dd>
                   {formatEuro(game.contract.annualSalaryEuro)} / 年 ·{' '}
                   {game.contract.remainingHalfYears / 2}年
