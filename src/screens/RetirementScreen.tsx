@@ -4,6 +4,40 @@ import { playerAgeAtWindow } from '../engine/careerTime'
 import { calculateOverall } from '../engine/player'
 import { useGameStore } from '../store/gameStore'
 
+export function retirementNarrative(input: {
+  age: number
+  isFinal: boolean
+  isAgeLimit: boolean
+}): {
+  kicker: string
+  heading: string
+  summary: string
+} {
+  const { age, isFinal, isAgeLimit } = input
+  if (isFinal) {
+    return {
+      kicker: '终场之后',
+      heading: '这段绿茵岁月，已经写成了你的故事。',
+      summary:
+        '从青训营到最后一场比赛，每一次选择都已经留在履历里。球员生涯结束了，但属于你的足球故事不会消失。',
+    }
+  }
+  if (isAgeLimit) {
+    return {
+      kicker: '最后一场比赛已经结束',
+      heading: '是时候向球员生涯告别了。',
+      summary:
+        '从13岁走进青训营，到今天完成最后一个赛季，你已经走完了职业球员的全部旅程。现在，为这段生涯写下结尾。',
+    }
+  }
+  return {
+    kicker: '把决定交给你',
+    heading: `你准备在${age}岁挂靴吗？`,
+    summary:
+      '如果确认，这个赛季将成为你的最后一季；如果心里还有未完成的目标，你也可以回到球场。',
+  }
+}
+
 export function RetirementScreen() {
   const game = useGameStore((state) => state.game)
   const cancelRetirement = useGameStore((state) => state.cancelRetirement)
@@ -37,6 +71,7 @@ export function RetirementScreen() {
   const clubCount = new Set(game.history.map((entry) => entry.clubId)).size
   const isFinal = game.phase === 'CAREER_RETIRED'
   const isAgeLimit = game.retirementReason === 'AGE_LIMIT'
+  const narrative = retirementNarrative({ age, isFinal, isAgeLimit })
 
   return (
     <CareerHub
@@ -48,20 +83,10 @@ export function RetirementScreen() {
         <span className="demo-complete__number">{age}</span>
         <div>
           <p className="decision-kicker">
-            {isFinal ? '职业生涯已经结束' : '职业生涯终点'}
+            {narrative.kicker}
           </p>
-          <h1>
-            {isFinal
-              ? '你的球员生涯已经定格。'
-              : isAgeLimit
-                ? '40岁赛季结束，现在必须退役。'
-                : `你可以选择在${age}岁结束球员生涯。`}
-          </h1>
-          <p>
-            {isFinal
-              ? '日历、合同和比赛结算已经永久停止；这份本地存档将保留你的逐窗口履历与生涯数据。'
-              : '确认后职业日历将永久停止，当前存档会进入只读的退役档案。'}
-          </p>
+          <h1>{narrative.heading}</h1>
+          <p>{narrative.summary}</p>
           <dl>
             <div>
               <dt>退役年龄</dt>
@@ -86,7 +111,7 @@ export function RetirementScreen() {
           </dl>
           {isFinal ? (
             <p className="demo-complete__next">
-              荣誉、国家队与评价性标签接入后，会在同一份退役档案中补全主结局与天赋兑现率。
+              你留下的不只是数字，还有每一次坚持、转身和重新出发。
             </p>
           ) : (
             <div className="demo-complete__actions">
@@ -100,7 +125,7 @@ export function RetirementScreen() {
               </button>
               {isAgeLimit ? (
                 <span className="retirement-panel__locked">
-                  40岁强制退役，不能再进入下一窗口
+                  最后一个赛季已经落幕
                 </span>
               ) : (
                 <button

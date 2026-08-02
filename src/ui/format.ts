@@ -1,4 +1,5 @@
 import type {
+  Club,
   DevelopmentApproach,
   FirstTeamRole,
   FirstTeamStatus,
@@ -7,6 +8,17 @@ import type {
   TrainingFocus,
   YouthRole,
 } from '../models/game'
+
+export function clubLevelLabel(tier: Club['tier']): string {
+  return {
+    1: '顶级联赛豪门',
+    2: '顶级联赛强队',
+    3: '顶级联赛中游',
+    4: '顶级联赛中下游',
+    5: '次级联赛强队',
+    6: '次级联赛中下游',
+  }[tier]
+}
 
 export function formatEuro(value: number): string {
   return `€${new Intl.NumberFormat('en-US', {

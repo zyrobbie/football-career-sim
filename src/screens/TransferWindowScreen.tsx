@@ -15,7 +15,7 @@ import type {
   TransferOffer,
 } from '../models/game'
 import { useGameStore } from '../store/gameStore'
-import { formatEuro, roleLabel } from '../ui/format'
+import { clubLevelLabel, formatEuro, roleLabel } from '../ui/format'
 
 const counterChoices: Array<{
   id: CounterOfferDirection
@@ -335,8 +335,11 @@ export function TransferWindowScreen() {
               >
                 <span>{club?.shortMark ?? '足'}</span>
                 <strong>{club?.name ?? '未知俱乐部'}</strong>
-                <small>
-                  {club?.country ?? '中国'} ·{' '}
+                <small className="transfer-offer-grid__region">
+                  {club?.country ?? '中国'}
+                </small>
+                <small className="transfer-offer-grid__level">
+                  {clubLevelLabel(club?.tier ?? 6)} ·{' '}
                   {trainingLabel(club?.facilityTier ?? 6)}
                 </small>
                 <dl>

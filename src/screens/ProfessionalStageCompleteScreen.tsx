@@ -122,7 +122,7 @@ export function ProfessionalStageCompleteScreen() {
           ) : null}
           <p className="demo-complete__next">
             {retirementMandatory
-              ? '40岁赛季已经结束。职业日历现已封闭，你需要完成退役并保存最终生涯档案。'
+              ? '最后一个赛季已经落幕。现在，去为这段漫长的球员生涯写下结尾。'
               : contractExpired
               ? '合同已经到期。你必须先完成续约或接受新的自由身合同，才能进入下一职业半年。'
               : canRequestTransfer
@@ -150,7 +150,7 @@ export function ProfessionalStageCompleteScreen() {
               }}
             >
               {retirementMandatory
-                ? '结束职业生涯'
+                ? '走向退役时刻'
                 : canRequestTransfer
                 ? '提出转会申请'
                 : contractExpired

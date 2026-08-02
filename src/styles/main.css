@@ -5674,6 +5674,10 @@ svg {
   font-size: 9px;
 }
 
+.transfer-offer-grid > button > .transfer-offer-grid__level {
+  color: var(--ink-soft);
+}
+
 .transfer-offer-grid dl {
   display: grid;
   grid-template-columns: 1fr;
@@ -6115,6 +6119,15 @@ svg {
   .transfer-offer-grid > button > small,
   .transfer-offer-grid > button > em {
     font-size: 6.5px;
+  }
+
+  .transfer-offer-grid > button > .transfer-offer-grid__region {
+    margin-top: 1px;
+  }
+
+  .transfer-offer-grid > button > .transfer-offer-grid__level {
+    margin-top: 0;
+    font-size: 7px;
   }
 
   .transfer-offer-grid dl {
