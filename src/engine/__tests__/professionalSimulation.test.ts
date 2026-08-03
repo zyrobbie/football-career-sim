@@ -175,4 +175,25 @@ describe('professional half-year simulation', () => {
     expect(result.report.contract?.actualRole).toBe('ROTATION')
     expect(result.report.contract?.promiseFulfilled).toBe(false)
   })
+
+  it('cannot simulate another youth window after the player turns 22', () => {
+    const { state, academy } = createFirstTeamState(
+      'over-age-professional-simulation',
+    )
+    state.windowIndex = 20
+    state.teamLevel = 'YOUTH'
+    state.youthRole = 'CORE'
+    state.firstTeamRole = null
+    state.contract = {
+      ...state.contract!,
+      promisedTeamLevel: 'YOUTH',
+      promisedRole: 'CORE',
+    }
+
+    const result = simulateProfessionalHalfYear({ state, offer: academy })
+
+    expect(result.teamLevel).toBe('FIRST_TEAM')
+    expect(result.youthRole).toBeNull()
+    expect(result.report.contract?.actualTeamLevel).toBe('FIRST_TEAM')
+  })
 })

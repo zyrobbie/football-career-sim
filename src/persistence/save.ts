@@ -4,6 +4,7 @@ import {
   playerAgeAtWindow,
   shouldRetireAtContractExpiry,
 } from '../engine/careerTime'
+import { enforceAgeBasedFirstTeam } from '../engine/eligibility'
 import {
   attributeKeys,
   positions,
@@ -715,7 +716,9 @@ function migrateLegacyState(value: unknown): unknown {
 }
 
 export function validateGameState(value: unknown): GameState {
-  const parsed = stateSchema.parse(migrateLegacyState(value)) as GameState
+  const parsed = enforceAgeBasedFirstTeam(
+    stateSchema.parse(migrateLegacyState(value)) as GameState,
+  )
   if (parsed.draft.priorities.length !== 4) {
     throw new Error('Career priority ranking must contain four items.')
   }
@@ -987,7 +990,13 @@ export function loadGame(): GameState | null {
   const current = window.localStorage.getItem(CURRENT_KEY)
   if (current) {
     try {
-      return decode(current)
+      const decoded = decode(current)
+      const normalized = encode(decoded)
+      if (normalized !== current) {
+        window.localStorage.setItem(BACKUP_KEY, current)
+        window.localStorage.setItem(CURRENT_KEY, normalized)
+      }
+      return decoded
     } catch {
       // Fall through to the internal backup.
     }

@@ -185,6 +185,47 @@ describe('save migration', () => {
     expect(restored.retirementReason).toBe('AGE_LIMIT')
   })
 
+  it('repairs an active youth contract when an existing save is age 22 or older', () => {
+    const current = validateGameState(legacyIdentityState())
+    const careerSeed = 'saved-over-age-youth-contract'
+    const player = generatePlayer(createDraft('LW'), careerSeed)
+    const academyOffers = generateAcademyOffers(player, careerSeed)
+    const selected = academyOffers[0]!
+
+    const restored = validateGameState({
+      ...current,
+      phase: 'HALF_YEAR_PLAN',
+      careerSeed,
+      windowIndex: 20,
+      player,
+      academyOffers,
+      selectedClubId: selected.club.id,
+      teamLevel: 'YOUTH',
+      youthRole: 'CORE',
+      firstTeamRole: null,
+      contract: {
+        type: 'RENEWAL',
+        clubId: selected.club.id,
+        remainingHalfYears: 4,
+        annualSalaryEuro: 120_000,
+        promisedTeamLevel: 'YOUTH',
+        promisedRole: 'CORE',
+        releaseClauseEuro: null,
+        clubOptionYears: 0,
+        parentClubId: null,
+        brokenPromiseWindows: 0,
+      },
+      arrivalChoice: 'COACH',
+    })
+
+    expect(restored.teamLevel).toBe('FIRST_TEAM')
+    expect(restored.youthRole).toBeNull()
+    expect(restored.firstTeamRole).not.toBeNull()
+    expect(restored.contract?.promisedTeamLevel).toBe('FIRST_TEAM')
+    expect(restored.contract?.remainingHalfYears).toBe(4)
+    expect(restored.firstTeamProgress.status).toBe('PROMOTED')
+  })
+
   it('continues a version 2 completed demo at the third window', () => {
     const seed = 'legacy-two-window-save'
     const draft = createDraft('CM')

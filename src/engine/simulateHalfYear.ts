@@ -1,8 +1,5 @@
 import {
-  ACADEMY_SCORES,
   BASE_RATES,
-  COACH_BASE_SCORES,
-  FACILITY_SCORES,
   POSITION_WEIGHTS,
   YOUTH_ATTACK_FACTORS,
   YOUTH_BENCHMARKS,
@@ -34,6 +31,10 @@ import {
   evaluateFirstTeamProgress,
 } from './firstTeamPath'
 import { createRandom, poisson } from './random'
+import {
+  developmentMultiplierFromTraining,
+  trainingQualityScore,
+} from './trainingQuality'
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value))
@@ -301,15 +302,6 @@ function performanceIndex(rating: number): number {
   return 95
 }
 
-function developmentMultiplier(index: number): number {
-  if (index < 30) return 0.55
-  if (index < 45) return 0.75
-  if (index < 60) return 0.9
-  if (index < 75) return 1
-  if (index < 90) return 1.12
-  return 1.2
-}
-
 function trainingShares(
   position: Player['primaryPosition'],
   focus: TrainingFocus,
@@ -335,25 +327,20 @@ function growAttributes(
   seed: string,
   windowIndex: number,
 ): Attributes {
-  const effectiveCoach = Math.min(
-    100,
-    COACH_BASE_SCORES[offer.club.tier] *
-      (0.85 + player.coachRelation * 0.003),
-  )
-  const trainingQuality =
-    FACILITY_SCORES[offer.club.facilityTier] * 0.35 +
-    ACADEMY_SCORES[offer.club.academyTier] * 0.45 +
-    effectiveCoach * 0.2 +
-    trainingBonus
-  const developmentIndex =
-    trainingQuality * 0.4 +
-    ROLE_EXPOSURE[role] * 0.25 +
-    player.squadRelation * 0.1 +
-    averageFitness * 0.15 +
-    averageMorale * 0.1
-  const multiplier =
-    developmentMultiplier(developmentIndex) *
-    (focus === 'ADAPTATION' ? 0.9 : 1)
+  const trainingQuality = trainingQualityScore({
+    club: offer.club,
+    coachRelation: player.coachRelation,
+    teamLevel: 'YOUTH',
+    bonus: trainingBonus,
+  })
+  const multiplier = developmentMultiplierFromTraining({
+    trainingQuality,
+    roleExposure: ROLE_EXPOSURE[role],
+    squadRelation: player.squadRelation,
+    fitness: averageFitness,
+    morale: averageMorale,
+    focus,
+  })
   const shares = trainingShares(player.primaryPosition, focus)
   const random = createRandom(seed, 'growth')
 

@@ -32,6 +32,7 @@ import {
 } from '../engine/nationalTeam'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
 import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
+import { enforceAgeBasedFirstTeam } from '../engine/eligibility'
 import {
   assessDomesticTransferOpportunity,
   applyTransferArrivalChoice,
@@ -169,8 +170,9 @@ function createInitialGame(): GameState {
 
 export const useGameStore = create<GameStore>((set, get) => {
   const commit = (next: GameState) => {
-    saveGame(next)
-    set({ game: next, hasSave: true, error: null })
+    const normalized = enforceAgeBasedFirstTeam(next)
+    saveGame(normalized)
+    set({ game: normalized, hasSave: true, error: null })
   }
 
   const runReadySimulation = (state: GameState) => {

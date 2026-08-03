@@ -1,8 +1,5 @@
 import {
-  ACADEMY_SCORES,
   BASE_RATES,
-  COACH_BASE_SCORES,
-  FACILITY_SCORES,
   FIRST_TEAM_BENCHMARKS,
   POSITION_WEIGHTS,
 } from '../data/balance'
@@ -26,6 +23,7 @@ import {
 import { developAttributesByAge } from './ageDevelopment'
 import { careerWindowLabel, playerAgeAtWindow } from './careerTime'
 import { evaluateFirstTeamRole } from './contracts'
+import { enforceAgeBasedFirstTeam } from './eligibility'
 import {
   cashReserveLimit,
   halfYearDisposableIncome,
@@ -33,6 +31,10 @@ import {
 import { calculateOverall } from './player'
 import { createRandom, poisson } from './random'
 import { simulateHalfYear } from './simulateHalfYear'
+import {
+  developmentMultiplierFromTraining,
+  trainingQualityScore,
+} from './trainingQuality'
 
 const FIRST_TEAM_ROLE_ORDER: FirstTeamRole[] = [
   'FRINGE',
@@ -343,25 +345,20 @@ function growFirstTeamAttributes(input: {
   windowIndex: number
 }): Attributes {
   const { player, offer, role, focus, trainingBonus, seed, windowIndex } = input
-  const effectiveCoach = Math.min(
-    100,
-    COACH_BASE_SCORES[offer.club.tier] *
-      (0.85 + player.coachRelation * 0.003),
-  )
-  const trainingQuality =
-    FACILITY_SCORES[offer.club.facilityTier] * 0.45 +
-    ACADEMY_SCORES[offer.club.academyTier] * 0.1 +
-    effectiveCoach * 0.45 +
-    trainingBonus
-  const developmentIndex =
-    trainingQuality * 0.5 +
-    ROLE_EXPOSURE[role] * 0.22 +
-    player.squadRelation * 0.08 +
-    player.fitness * 0.12 +
-    player.morale * 0.08
-  const multiplier =
-    clamp(0.55 + developmentIndex / 120, 0.7, 1.35) *
-    (focus === 'ADAPTATION' ? 0.9 : 1)
+  const trainingQuality = trainingQualityScore({
+    club: offer.club,
+    coachRelation: player.coachRelation,
+    teamLevel: 'FIRST_TEAM',
+    bonus: trainingBonus,
+  })
+  const multiplier = developmentMultiplierFromTraining({
+    trainingQuality,
+    roleExposure: ROLE_EXPOSURE[role],
+    squadRelation: player.squadRelation,
+    fitness: player.fitness,
+    morale: player.morale,
+    focus,
+  })
   const shares = trainingShares(player.primaryPosition, focus)
   const random = createRandom(seed, 'professional-growth')
 
@@ -690,7 +687,8 @@ export function simulateProfessionalHalfYear(input: {
   cashEuro: number
   firstTeamProgress: GameState['firstTeamProgress']
 } {
-  const { state, offer } = input
+  const state = enforceAgeBasedFirstTeam(input.state)
+  const { offer } = input
   if (
     !state.player ||
     !state.contract ||
