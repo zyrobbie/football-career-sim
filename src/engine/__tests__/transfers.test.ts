@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest'
-import { CLUBS, isOverseasClub } from '../../data/balance'
-import type { ContractState } from '../../models/game'
+import {
+  ACADEMY_SCORES,
+  CLUBS,
+  COACH_BASE_SCORES,
+  FACILITY_SCORES,
+  isOverseasClub,
+} from '../../data/balance'
+import type {
+  ContractState,
+  FirstTeamRole,
+  HalfYearReport,
+} from '../../models/game'
 import { generatePlayer } from '../player'
 import {
   assessDomesticTransferOpportunity,
@@ -113,6 +123,79 @@ describe('domestic transfer window', () => {
     expect(
       offers.filter((offer) => offer.type === 'PERMANENT_TRANSFER'),
     ).toHaveLength(2)
+  })
+
+  it('offers a descending platform ladder with better roles after a player stalls at an overseas giant', () => {
+    const { player, careerSeed } = createTransferFixture()
+    player.attributes = {
+      attack: 68,
+      defense: 68,
+      physical: 68,
+      mental: 68,
+    }
+    player.form = 58
+    player.reputation = 62
+    player.overseasIntent = 'STRONG'
+    player.preferredLeagues = ['意大利', '英格兰']
+    const latestReport = {
+      roleAfter: 'FRINGE',
+      stats: {
+        appearances: 3,
+        starts: 1,
+        minutes: 118,
+        goals: 0,
+        assists: 0,
+        yellowCards: 0,
+        redCards: 0,
+        averageRating: 6.3,
+      },
+      contract: {
+        annualSalaryEuro: 135_000,
+        remainingHalfYears: 0,
+        promisedTeamLevel: 'FIRST_TEAM',
+        promisedRole: 'CORE',
+        actualTeamLevel: 'FIRST_TEAM',
+        actualRole: 'FRINGE',
+        promiseFulfilled: false,
+        brokenPromiseWindows: 2,
+      },
+    } as HalfYearReport
+    const offers = generateTransferOffers({
+      player,
+      currentClubId: 'ita_inter',
+      currentTeamLevel: 'FIRST_TEAM',
+      latestReport,
+      careerSeed,
+      windowIndex: 20,
+    })
+    const clubs = offers.map(
+      (offer) => CLUBS.find((club) => club.id === offer.clubId)!,
+    )
+    const roleOrder: FirstTeamRole[] = [
+      'FRINGE',
+      'SUBSTITUTE',
+      'ROTATION',
+      'STARTER',
+      'CORE',
+    ]
+
+    expect(offers).toHaveLength(3)
+    expect(['英格兰', '西班牙', '意大利', '德国', '法国']).toContain(
+      clubs[0]!.country,
+    )
+    expect(clubs[0]!.tier).toBeGreaterThanOrEqual(3)
+    expect(['荷兰', '葡萄牙', '比利时', '巴西', '阿根廷', '日本', '韩国']).toContain(
+      clubs[1]!.country,
+    )
+    expect(clubs[2]!.country).toBe('中国')
+    expect(clubs[2]!.profile).toBe('ELITE')
+    expect(
+      offers.every(
+        (offer) =>
+          offer.promisedTeamLevel === 'FIRST_TEAM' &&
+          roleOrder.indexOf(offer.promisedRole as FirstTeamRole) > 0,
+      ),
+    ).toBe(true)
   })
 
   it('reviews the market every two or three professional windows and requires good form', () => {
@@ -233,7 +316,7 @@ describe('domestic transfer window', () => {
           )
           return (
             club !== undefined &&
-            club.academyTier <= 2 &&
+            club.academyTier <= 3 &&
             offer.promisedTeamLevel === 'YOUTH'
           )
         })
@@ -390,7 +473,22 @@ describe('domestic transfer window', () => {
       squadRelation: 80,
       fanRelation: 80,
     }
-    const base = integrationBaseForTransfer(knownPlayer)
+    const inter = CLUBS.find((club) => club.id === 'ita_inter')!
+    const shanghai = CLUBS.find(
+      (club) => club.id === 'cn_shanghai_donggang',
+    )!
+    const yunnan = CLUBS.find(
+      (club) => club.id === 'cn_yunnan_shanhe',
+    )!
+    const base = integrationBaseForTransfer(knownPlayer, inter)
+    const domesticBase = integrationBaseForTransfer(
+      knownPlayer,
+      shanghai,
+    )
+    const lowerLeagueBase = integrationBaseForTransfer(
+      knownPlayer,
+      yunnan,
+    )
     const integrated = { ...knownPlayer, ...base }
     const cashEuro = 10_000
     const result = applyTransferArrivalChoice({
@@ -399,13 +497,39 @@ describe('domestic transfer window', () => {
       cashEuro,
     })
 
-    expect(base.squadRelation).toBeGreaterThan(34)
+    expect(base.squadRelation).toBeLessThan(domesticBase.squadRelation)
+    expect(
+      domesticBase.squadRelation - base.squadRelation,
+    ).toBeGreaterThanOrEqual(
+      lowerLeagueBase.squadRelation - domesticBase.squadRelation,
+    )
     expect(result.cashSpentEuro).toBe(
       transferDinnerCost(cashEuro),
     )
     expect(result.cashEuro).toBe(cashEuro - result.cashSpentEuro)
     expect(result.player.squadRelation).toBeGreaterThan(
       integrated.squadRelation,
+    )
+  })
+
+  it('keeps the European-giant training gap at least as large as the domestic divisional gap', () => {
+    const inter = CLUBS.find((club) => club.id === 'ita_inter')!
+    const shanghai = CLUBS.find(
+      (club) => club.id === 'cn_shanghai_donggang',
+    )!
+    const yunnan = CLUBS.find(
+      (club) => club.id === 'cn_yunnan_shanhe',
+    )!
+    const trainingScore = (club: (typeof CLUBS)[number]) =>
+      FACILITY_SCORES[club.facilityTier] * 0.45 +
+      ACADEMY_SCORES[club.academyTier] * 0.1 +
+      COACH_BASE_SCORES[club.tier] * 0.45
+
+    expect(trainingScore(inter)).toBeGreaterThan(trainingScore(shanghai))
+    expect(
+      trainingScore(inter) - trainingScore(shanghai),
+    ).toBeGreaterThanOrEqual(
+      trainingScore(shanghai) - trainingScore(yunnan),
     )
   })
 })

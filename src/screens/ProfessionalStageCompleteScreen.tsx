@@ -1,6 +1,7 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
 import { retirementAvailabilityAfterWindow } from '../engine/careerTime'
+import { playerAgeAtWindow } from '../engine/careerTime'
 import {
   assessDomesticTransferOpportunity,
   assessOverseasInterest,
@@ -28,6 +29,9 @@ export function ProfessionalStageCompleteScreen() {
     (state) => state.continueProfessionalCareer,
   )
   const requestRetirement = useGameStore((state) => state.requestRetirement)
+  const retireFromNationalTeam = useGameStore(
+    (state) => state.retireFromNationalTeam,
+  )
   if (
     !game?.player ||
     !game.lastReport ||
@@ -61,6 +65,11 @@ export function ProfessionalStageCompleteScreen() {
   )
   const retirementMandatory = retirementAvailability === 'MANDATORY'
   const retirementOptional = retirementAvailability === 'OPTIONAL'
+  const canRetireFromNationalTeam =
+    playerAgeAtWindow(game.windowIndex) >= 30 &&
+    game.nationalTeam.caps > 0 &&
+    !game.nationalTeam.retired &&
+    !retirementMandatory
 
   return (
     <CareerHub game={game} sectionLabel="职业半年完成">
@@ -193,6 +202,23 @@ export function ProfessionalStageCompleteScreen() {
               onClick={requestRetirement}
             >
               选择在本窗口后退役
+            </button>
+          ) : null}
+          {canRetireFromNationalTeam ? (
+            <button
+              type="button"
+              className="retirement-option retirement-option--national"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    '确认退出中国国家队吗？这项决定不能撤回，但俱乐部生涯仍会继续。',
+                  )
+                ) {
+                  retireFromNationalTeam()
+                }
+              }}
+            >
+              退出中国国家队
             </button>
           ) : null}
         </div>

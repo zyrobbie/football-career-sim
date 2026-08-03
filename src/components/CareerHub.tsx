@@ -261,6 +261,16 @@ function PlayerOverview({
             <OverviewNumber label="进球" value={totalStats.goals} />
             <OverviewNumber label="助攻" value={totalStats.assists} />
           </dl>
+          {game.nationalTeam.caps > 0 || game.nationalTeam.retired ? (
+            <p className="career-overview__national">
+              <strong>中国队</strong>
+              <span>
+                {game.nationalTeam.caps}场 · {game.nationalTeam.goals}球 ·{' '}
+                {game.nationalTeam.assists}助
+              </span>
+              {game.nationalTeam.retired ? <em>已退出</em> : null}
+            </p>
+          ) : null}
         </div>
         <div className="career-overview__attributes">
           <p>核心属性</p>

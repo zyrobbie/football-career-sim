@@ -221,9 +221,58 @@ const careerConsequenceSchema = z.object({
   summary: z.string().min(1),
 })
 
+const nationalTeamRoleSchema = z.enum([
+  'FRINGE',
+  'ROTATION',
+  'STARTER',
+  'CORE',
+])
+
+const nationalTeamWindowRecordSchema = z.object({
+  windowIndex: z.number().int().nonnegative(),
+  calledUp: z.boolean(),
+  role: nationalTeamRoleSchema.nullable(),
+  competition: z.enum([
+    'INTERNATIONAL_WINDOW',
+    'WORLD_CUP',
+    'ASIAN_CUP',
+  ]),
+  stage: z
+    .enum([
+      'NOT_QUALIFIED',
+      'GROUP_STAGE',
+      'ROUND_OF_16',
+      'QUARTER_FINAL',
+      'SEMI_FINAL',
+      'RUNNER_UP',
+      'CHAMPION',
+    ])
+    .nullable(),
+  appearances: z.number().int().nonnegative(),
+  starts: z.number().int().nonnegative(),
+  minutes: z.number().int().nonnegative(),
+  goals: z.number().int().nonnegative(),
+  assists: z.number().int().nonnegative(),
+  averageRating: z.number().finite().min(0).max(10).nullable(),
+  selectionScore: z.number().finite(),
+  selectionBenchmark: z.number().finite(),
+  debut: z.boolean(),
+  summary: z.string().min(1),
+})
+
+const nationalTeamStateSchema = z.object({
+  retired: z.boolean(),
+  currentRole: nationalTeamRoleSchema.nullable(),
+  caps: z.number().int().nonnegative(),
+  goals: z.number().int().nonnegative(),
+  assists: z.number().int().nonnegative(),
+  debutWindowIndex: z.number().int().nonnegative().nullable(),
+  history: z.array(nationalTeamWindowRecordSchema).max(60),
+})
+
 const stateSchema = z.object({
-  saveVersion: z.literal(9),
-  dataVersion: z.literal(9),
+  saveVersion: z.literal(10),
+  dataVersion: z.literal(10),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -302,6 +351,7 @@ const stateSchema = z.object({
   trainingQualityBonus: z.number().finite(),
   firstTeamProgress: firstTeamProgressSchema,
   cashEuro: z.number().int().nonnegative(),
+  nationalTeam: nationalTeamStateSchema,
   retirementReason: z.enum(['VOLUNTARY', 'AGE_LIMIT']).nullable(),
   lastReport: z.unknown().nullable(),
   history: z.array(z.unknown()),
@@ -576,7 +626,7 @@ function migrateLegacyState(value: unknown): unknown {
   }
 
   if (
-    [7, 8, 9].includes(Number(migrated.saveVersion)) &&
+    [7, 8, 9, 10].includes(Number(migrated.saveVersion)) &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
     ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY'].includes(
@@ -641,6 +691,23 @@ function migrateLegacyState(value: unknown): unknown {
     }
   }
 
+  if (migrated.saveVersion === 9) {
+    migrated = {
+      ...migrated,
+      saveVersion: 10,
+      dataVersion: 10,
+      nationalTeam: {
+        retired: false,
+        currentRole: null,
+        caps: 0,
+        goals: 0,
+        assists: 0,
+        debutWindowIndex: null,
+        history: [],
+      },
+    }
+  }
+
   return migrated
 }
 
@@ -651,6 +718,31 @@ export function validateGameState(value: unknown): GameState {
   }
   if (new Set(parsed.draft.priorities).size !== 4) {
     throw new Error('Career priorities must be unique.')
+  }
+
+  const nationalTotals = parsed.nationalTeam.history.reduce(
+    (total, record) => ({
+      caps: total.caps + record.appearances,
+      goals: total.goals + record.goals,
+      assists: total.assists + record.assists,
+    }),
+    { caps: 0, goals: 0, assists: 0 },
+  )
+  if (
+    nationalTotals.caps !== parsed.nationalTeam.caps ||
+    nationalTotals.goals !== parsed.nationalTeam.goals ||
+    nationalTotals.assists !== parsed.nationalTeam.assists
+  ) {
+    throw new Error('National-team career totals do not match its history.')
+  }
+  if (parsed.nationalTeam.retired && parsed.nationalTeam.currentRole) {
+    throw new Error('A retired international cannot keep an active role.')
+  }
+  const debut = parsed.nationalTeam.history.find((record) => record.debut)
+  if (
+    (debut?.windowIndex ?? null) !== parsed.nationalTeam.debutWindowIndex
+  ) {
+    throw new Error('National-team debut does not match its history.')
   }
   if (parsed.draft.preferredLeagues.length > 3) {
     throw new Error('No more than three preferred leagues are allowed.')

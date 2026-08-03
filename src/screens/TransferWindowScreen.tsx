@@ -15,7 +15,13 @@ import type {
   TransferOffer,
 } from '../models/game'
 import { useGameStore } from '../store/gameStore'
-import { clubLevelLabel, formatEuro, roleLabel } from '../ui/format'
+import {
+  clubLevelLabel,
+  formatEuro,
+  integrationDifficultyLabel,
+  roleLabel,
+  trainingQualityLabel,
+} from '../ui/format'
 
 const counterChoices: Array<{
   id: CounterOfferDirection
@@ -65,13 +71,6 @@ function roleText(offer: TransferOffer): string {
       ? roleLabel(offer.promisedRole).replace('球员', '')
       : '待定'
   }`
-}
-
-function trainingLabel(tier: number): string {
-  if (tier <= 1) return '顶尖训练'
-  if (tier <= 2) return '优秀训练'
-  if (tier <= 4) return '扎实训练'
-  return '基础训练'
 }
 
 export function TransferWindowScreen() {
@@ -339,9 +338,16 @@ export function TransferWindowScreen() {
                   {club?.country ?? '中国'}
                 </small>
                 <small className="transfer-offer-grid__level">
-                  {clubLevelLabel(club?.tier ?? 6)} ·{' '}
-                  {trainingLabel(club?.facilityTier ?? 6)}
+                  {club
+                    ? clubLevelLabel(club)
+                    : '俱乐部资料待确认'}
                 </small>
+                {club ? (
+                  <small className="transfer-offer-grid__environment">
+                    {trainingQualityLabel(club)} · 融入
+                    {integrationDifficultyLabel(club)}
+                  </small>
+                ) : null}
                 <dl>
                   <div>
                     <dt>年薪</dt>

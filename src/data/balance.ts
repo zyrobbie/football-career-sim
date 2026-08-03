@@ -309,10 +309,10 @@ export const DOMESTIC_CLUBS: Club[] = [
     leagueKey: '中国',
     leagueLabel: '顶级联赛',
     profile: 'ELITE',
-    tier: 1,
-    facilityTier: 1,
-    academyTier: 1,
-    description: '训练条件一流，但每一个位置都竞争激烈。',
+    tier: 4,
+    facilityTier: 4,
+    academyTier: 3,
+    description: '国内顶尖的训练条件，但与世界级豪门仍有明显差距。',
   },
   {
     id: 'cn_beijing_yuhua',
@@ -322,9 +322,9 @@ export const DOMESTIC_CLUBS: Club[] = [
     leagueKey: '中国',
     leagueLabel: '顶级联赛',
     profile: 'ELITE',
-    tier: 2,
-    facilityTier: 2,
-    academyTier: 1,
+    tier: 4,
+    facilityTier: 4,
+    academyTier: 3,
     description: '青训传统突出，进入一线队需要持续证明自己。',
   },
   {
@@ -335,9 +335,9 @@ export const DOMESTIC_CLUBS: Club[] = [
     leagueKey: '中国',
     leagueLabel: '顶级联赛',
     profile: 'BALANCED',
-    tier: 3,
-    facilityTier: 3,
-    academyTier: 3,
+    tier: 5,
+    facilityTier: 5,
+    academyTier: 5,
     description: '训练与出场较为平衡，承诺给予稳定的青年队机会。',
   },
   {
@@ -348,9 +348,9 @@ export const DOMESTIC_CLUBS: Club[] = [
     leagueKey: '中国',
     leagueLabel: '顶级联赛',
     profile: 'BALANCED',
-    tier: 4,
-    facilityTier: 3,
-    academyTier: 4,
+    tier: 5,
+    facilityTier: 5,
+    academyTier: 5,
     description: '重视年轻球员，竞争和成长环境相对均衡。',
   },
   {
@@ -361,9 +361,9 @@ export const DOMESTIC_CLUBS: Club[] = [
     leagueKey: '中国',
     leagueLabel: '次级联赛',
     profile: 'SMALL',
-    tier: 5,
-    facilityTier: 5,
-    academyTier: 4,
+    tier: 6,
+    facilityTier: 6,
+    academyTier: 6,
     description: '设施有限，但年轻球员更容易成为青年队核心。',
   },
   {
@@ -375,7 +375,7 @@ export const DOMESTIC_CLUBS: Club[] = [
     leagueLabel: '次级联赛',
     profile: 'SMALL',
     tier: 6,
-    facilityTier: 5,
+    facilityTier: 6,
     academyTier: 6,
     description: '竞争压力较小，一线队会更早关注表现突出的新人。',
   },
@@ -431,6 +431,56 @@ export const OVERSEAS_CLUBS: Club[] = [
     id: 'fra_monaco', name: '摩纳哥', shortMark: '摩', country: '法国', leagueKey: '法国', leagueLabel: '法国顶级联赛',
     profile: 'BALANCED', tier: 2, facilityTier: 2, academyTier: 1,
     description: '青年培养路径清晰，是进入五大联赛的重要跳板。',
+  },
+  {
+    id: 'eng_brighton', name: '布莱顿', shortMark: '鸥', country: '英格兰', leagueKey: '英格兰', leagueLabel: '英格兰顶级联赛',
+    profile: 'BALANCED', tier: 3, facilityTier: 3, academyTier: 3,
+    description: '五大联赛的稳定平台，角色竞争与成长空间更加平衡。',
+  },
+  {
+    id: 'eng_fulham', name: '富勒姆', shortMark: '富', country: '英格兰', leagueKey: '英格兰', leagueLabel: '英格兰顶级联赛',
+    profile: 'BALANCED', tier: 4, facilityTier: 4, academyTier: 4,
+    description: '立足顶级联赛，适合需要更多比赛时间的球员。',
+  },
+  {
+    id: 'esp_real_sociedad', name: '皇家社会', shortMark: '社', country: '西班牙', leagueKey: '西班牙', leagueLabel: '西班牙顶级联赛',
+    profile: 'BALANCED', tier: 3, facilityTier: 3, academyTier: 3,
+    description: '注重技术与团队配合，能为留洋球员提供更清晰的成长路径。',
+  },
+  {
+    id: 'esp_celta', name: '塞尔塔', shortMark: '塞', country: '西班牙', leagueKey: '西班牙', leagueLabel: '西班牙顶级联赛',
+    profile: 'BALANCED', tier: 4, facilityTier: 4, academyTier: 4,
+    description: '技术要求明确，但一线队机会比超级豪门更现实。',
+  },
+  {
+    id: 'ita_bologna', name: '博洛尼亚', shortMark: '博', country: '意大利', leagueKey: '意大利', leagueLabel: '意大利顶级联赛',
+    profile: 'BALANCED', tier: 3, facilityTier: 3, academyTier: 3,
+    description: '保留高水平战术环境，也能提供更实际的队内角色。',
+  },
+  {
+    id: 'ita_torino', name: '都灵', shortMark: '都', country: '意大利', leagueKey: '意大利', leagueLabel: '意大利顶级联赛',
+    profile: 'BALANCED', tier: 4, facilityTier: 4, academyTier: 4,
+    description: '对抗与战术要求不低，轮换和主力席位更值得争取。',
+  },
+  {
+    id: 'ger_frankfurt', name: '法兰克福', shortMark: '鹰', country: '德国', leagueKey: '德国', leagueLabel: '德国顶级联赛',
+    profile: 'BALANCED', tier: 3, facilityTier: 3, academyTier: 3,
+    description: '比赛强度和发展空间兼备，适合重建五大联赛竞争力。',
+  },
+  {
+    id: 'ger_mainz', name: '美因05', shortMark: '美', country: '德国', leagueKey: '德国', leagueLabel: '德国顶级联赛',
+    profile: 'BALANCED', tier: 4, facilityTier: 4, academyTier: 4,
+    description: '强调跑动与整体性，更愿意给适配体系的球员时间。',
+  },
+  {
+    id: 'fra_lille', name: '里尔', shortMark: '犬', country: '法国', leagueKey: '法国', leagueLabel: '法国顶级联赛',
+    profile: 'BALANCED', tier: 3, facilityTier: 3, academyTier: 3,
+    description: '在竞技强度与球员培养之间保持平衡。',
+  },
+  {
+    id: 'fra_strasbourg', name: '斯特拉斯堡', shortMark: '斯', country: '法国', leagueKey: '法国', leagueLabel: '法国顶级联赛',
+    profile: 'BALANCED', tier: 4, facilityTier: 4, academyTier: 4,
+    description: '年轻球员能够看到更直接的一线队通道。',
   },
   {
     id: 'ned_ajax', name: '阿贾克斯', shortMark: '阿', country: '荷兰', leagueKey: '荷兰', leagueLabel: '荷兰顶级联赛',
@@ -505,6 +555,21 @@ export const OVERSEAS_CLUBS: Club[] = [
 ]
 
 export const CLUBS: Club[] = [...DOMESTIC_CLUBS, ...OVERSEAS_CLUBS]
+
+const DOMESTIC_YOUTH_COMPETITION_TIERS: Record<string, Club['tier']> = {
+  cn_shanghai_donggang: 1,
+  cn_beijing_yuhua: 2,
+  cn_wuhan_jiangcheng: 3,
+  cn_chengdu_jincheng: 4,
+  cn_guangxi_liancheng: 5,
+  cn_yunnan_shanhe: 6,
+}
+
+export function youthCompetitionTierForClub(
+  club: Club,
+): Club['tier'] {
+  return DOMESTIC_YOUTH_COMPETITION_TIERS[club.id] ?? club.tier
+}
 
 export function isOverseasClub(club: Club): boolean {
   return club.country !== '中国'

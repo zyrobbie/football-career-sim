@@ -1,4 +1,9 @@
 import { beforeEach, describe, expect, it } from 'vitest'
+import { generateAcademyOffers } from '../engine/offers'
+import { generatePlayer } from '../engine/player'
+import { createFirstTeamProgress } from '../engine/firstTeamPath'
+import { createDraft } from '../engine/__tests__/testFixtures'
+import type { GameState } from '../models/game'
 import { validateGameState } from '../persistence/save'
 import { useGameStore } from './gameStore'
 
@@ -121,6 +126,8 @@ describe('academy two-year progression', () => {
     expect(game?.history).toHaveLength(5)
     expect(game?.history[4]?.windowIndex).toBe(4)
     expect(game?.lastReport?.contract).toBeDefined()
+    expect(game?.lastReport?.nationalTeam).toBeUndefined()
+    expect(game?.nationalTeam.history).toEqual([])
     expect(game?.lastReport?.incomeLabel).toBe('工资可支配收入')
     expect(game?.contract?.remainingHalfYears).toBe(
       remainingHalfYears - 1,
@@ -372,5 +379,96 @@ describe('academy two-year progression', () => {
     store.clearError()
     store.confirmRetirement()
     expect(useGameStore.getState().game?.phase).toBe('CAREER_RETIRED')
+  })
+
+  it('writes a senior China call-up into the professional report and save state', () => {
+    const careerSeed = 'store-national-team-integration'
+    const draft = createDraft('ST')
+    const generated = generatePlayer(draft, careerSeed)
+    const player = {
+      ...generated,
+      attributes: { attack: 82, defense: 40, physical: 80, mental: 78 },
+      potentials: { attack: 90, defense: 65, physical: 88, mental: 87 },
+      form: 78,
+      fitness: 82,
+      reputation: 72,
+    }
+    const academyOffers = generateAcademyOffers(player, careerSeed)
+    const selected = academyOffers[0]!
+    const game: GameState = {
+      saveVersion: 10,
+      dataVersion: 10,
+      phase: 'HALF_YEAR_PLAN',
+      careerSeed,
+      startYear: 2026,
+      windowIndex: 6,
+      draft,
+      player,
+      academyOffers,
+      selectedClubId: selected.club.id,
+      teamLevel: 'FIRST_TEAM',
+      youthRole: null,
+      firstTeamRole: 'CORE',
+      contract: {
+        type: 'FIRST_PRO',
+        clubId: selected.club.id,
+        remainingHalfYears: 6,
+        annualSalaryEuro: 180_000,
+        promisedTeamLevel: 'FIRST_TEAM',
+        promisedRole: 'CORE',
+        releaseClauseEuro: 3_000_000,
+        clubOptionYears: 0,
+        parentClubId: null,
+        brokenPromiseWindows: 0,
+      },
+      professionalOffer: null,
+      transferOffers: [],
+      selectedTransferChoiceId: null,
+      transferDecision: null,
+      arrivalChoice: 'COACH',
+      transferArrivalChoice: null,
+      pendingCareerEventId: null,
+      careerEventHistory: [],
+      pendingConsequences: [],
+      trainingFocus: null,
+      developmentApproach: null,
+      trainingQualityBonus: 0,
+      firstTeamProgress: {
+        ...createFirstTeamProgress(selected.club.id),
+        status: 'PROMOTED',
+      },
+      cashEuro: 20_000,
+      nationalTeam: {
+        retired: false,
+        currentRole: null,
+        caps: 0,
+        goals: 0,
+        assists: 0,
+        debutWindowIndex: null,
+        history: [],
+      },
+      retirementReason: null,
+      lastReport: null,
+      history: [],
+    }
+    useGameStore.setState({ game, error: null })
+
+    useGameStore.getState().chooseTraining('BALANCED', 'STEADY')
+    resolveSpecialEventIfPresent()
+    const completed = useGameStore.getState().game!
+
+    expect(completed.phase).toBe('HALF_YEAR_REPORT')
+    expect(completed.lastReport?.nationalTeam?.calledUp).toBe(true)
+    expect(completed.nationalTeam.history).toHaveLength(1)
+    expect(completed.nationalTeam.caps).toBe(
+      completed.lastReport?.nationalTeam?.appearances,
+    )
+
+    useGameStore.setState({
+      game: { ...completed, phase: 'PRO_STAGE_COMPLETE', windowIndex: 34 },
+    })
+    useGameStore.getState().retireFromNationalTeam()
+    expect(useGameStore.getState().game?.nationalTeam.retired).toBe(true)
+    expect(useGameStore.getState().game?.nationalTeam.currentRole).toBeNull()
   })
 })

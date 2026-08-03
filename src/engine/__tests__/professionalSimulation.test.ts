@@ -33,8 +33,8 @@ function createFirstTeamState(careerSeed: string) {
   })
   const contract = contractFromOffer(professionalOffer)
   const state: GameState = {
-    saveVersion: 9,
-    dataVersion: 9,
+    saveVersion: 10,
+    dataVersion: 10,
     phase: 'SIMULATION_READY',
     careerSeed,
     startYear: 2026,
@@ -61,6 +61,15 @@ function createFirstTeamState(careerSeed: string) {
     trainingQualityBonus: 0,
     firstTeamProgress,
     cashEuro: 7_000,
+    nationalTeam: {
+      retired: false,
+      currentRole: null,
+      caps: 0,
+      goals: 0,
+      assists: 0,
+      debutWindowIndex: null,
+      history: [],
+    },
     retirementReason: null,
     lastReport: null,
     history: [],

@@ -19,8 +19,8 @@ function createState(windowIndex = 1): GameState {
   const academyOffers = generateAcademyOffers(player, careerSeed)
   const offer = academyOffers[0]!
   return {
-    saveVersion: 9,
-    dataVersion: 9,
+    saveVersion: 10,
+    dataVersion: 10,
     phase: 'HALF_YEAR_PLAN',
     careerSeed,
     startYear: 2026,
@@ -47,6 +47,15 @@ function createState(windowIndex = 1): GameState {
     trainingQualityBonus: 0,
     firstTeamProgress: createFirstTeamProgress(offer.club.id),
     cashEuro: 1_000,
+    nationalTeam: {
+      retired: false,
+      currentRole: null,
+      caps: 0,
+      goals: 0,
+      assists: 0,
+      debutWindowIndex: null,
+      history: [],
+    },
     retirementReason: null,
     lastReport: null,
     history: [],

@@ -103,6 +103,13 @@ export function RetirementScreen() {
               </dd>
             </div>
             <div>
+              <dt>国家队数据</dt>
+              <dd>
+                {game.nationalTeam.caps}场 · {game.nationalTeam.goals}球 ·{' '}
+                {game.nationalTeam.assists}助攻
+              </dd>
+            </div>
+            <div>
               <dt>能力轨迹</dt>
               <dd>
                 巅峰{peakOverall} · 退役{finalOverall}

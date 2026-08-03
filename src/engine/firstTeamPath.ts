@@ -1,5 +1,6 @@
 import {
   YOUTH_BENCHMARKS,
+  youthCompetitionTierForClub,
 } from '../data/balance'
 import type {
   AcademyOffer,
@@ -88,7 +89,9 @@ export function evaluateFirstTeamProgress(input: {
   )
   const readiness = round(
     38 +
-      (overall - YOUTH_BENCHMARKS[offer.club.tier]) * 4 +
+      (overall -
+        YOUTH_BENCHMARKS[youthCompetitionTierForClub(offer.club)]) *
+        4 +
       (role === 'CORE' ? 10 : role === 'STARTER' ? 5 : 0) +
       Math.min(6, windowIndex * 2),
   )
@@ -126,7 +129,8 @@ export function evaluateFirstTeamProgress(input: {
     matchProof >= 55 &&
     coachBacking >= 58 &&
     role === 'CORE' &&
-    overall >= YOUTH_BENCHMARKS[offer.club.tier] + 14 &&
+    overall >=
+      YOUTH_BENCHMARKS[youthCompetitionTierForClub(offer.club)] + 14 &&
     stats.averageRating >= 7
 
   if (canPromote) {

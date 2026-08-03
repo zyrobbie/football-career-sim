@@ -5,6 +5,7 @@ import {
   OVERSEAS_CLUBS,
   YOUTH_BENCHMARKS,
   isOverseasClub,
+  youthCompetitionTierForClub,
 } from '../data/balance'
 import type {
   Club,
@@ -47,6 +48,24 @@ const YOUTH_ROLE_ORDER: YouthRole[] = [
   'STARTER',
   'CORE',
 ]
+
+const BIG_FIVE_COUNTRIES = new Set([
+  '英格兰',
+  '西班牙',
+  '意大利',
+  '德国',
+  '法国',
+])
+
+const DEVELOPMENT_LEAGUE_COUNTRIES = new Set([
+  '荷兰',
+  '葡萄牙',
+  '比利时',
+  '巴西',
+  '阿根廷',
+  '日本',
+  '韩国',
+])
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value))
@@ -200,7 +219,10 @@ function interestForClub(input: {
     club.id,
   )
   const abilityFit = clamp(
-    23 + (overall - YOUTH_BENCHMARKS[club.tier]) * 1.2,
+    23 +
+      (overall -
+        YOUTH_BENCHMARKS[youthCompetitionTierForClub(club)]) *
+        1.2,
     12,
     30,
   )
@@ -325,7 +347,7 @@ function promisedTeamAndRole(input: {
     teamLevel: 'YOUTH',
     role: youthRoleFromDifference(
       calculateYouthSelectionScore(player) -
-        YOUTH_BENCHMARKS[club.tier],
+        YOUTH_BENCHMARKS[youthCompetitionTierForClub(club)],
     ),
   }
 }
@@ -433,6 +455,79 @@ function generateTransferOffersFromPool(
         selected.push(candidate)
       }
     }
+
+    const currentClub = CLUBS.find(
+      (club) => club.id === currentClubId,
+    )
+    const actualTeamLevel =
+      latestReport?.contract?.actualTeamLevel ?? currentTeamLevel
+    const actualRole =
+      latestReport?.contract?.actualRole ?? latestReport?.roleAfter
+    const currentFirstTeamRole =
+      actualTeamLevel === 'FIRST_TEAM' &&
+      actualRole &&
+      FIRST_TEAM_ROLE_ORDER.includes(actualRole as FirstTeamRole)
+        ? (actualRole as FirstTeamRole)
+        : null
+    const currentRoleIndex = currentFirstTeamRole
+      ? FIRST_TEAM_ROLE_ORDER.indexOf(currentFirstTeamRole)
+      : -1
+    const improvesFirstTeamRole = (
+      candidate: (typeof candidates)[number],
+    ) =>
+      candidate.promise.teamLevel === 'FIRST_TEAM' &&
+      FIRST_TEAM_ROLE_ORDER.indexOf(
+        candidate.promise.role as FirstTeamRole,
+      ) > currentRoleIndex
+    const strugglingAtEliteOverseas = Boolean(
+      !domesticOnly &&
+        currentClub &&
+        isOverseasClub(currentClub) &&
+        currentClub.tier <= 2 &&
+        actualTeamLevel === 'FIRST_TEAM' &&
+        (currentFirstTeamRole === 'FRINGE' ||
+          (currentFirstTeamRole === 'SUBSTITUTE' &&
+            (latestReport?.stats.appearances ?? 0) <= 5)),
+    )
+
+    if (strugglingAtEliteOverseas) {
+      const roleImprovingCandidates = candidates.filter(
+        improvesFirstTeamRole,
+      )
+      addCandidate(
+        roleImprovingCandidates.find(
+          (candidate) =>
+            BIG_FIVE_COUNTRIES.has(candidate.club.country) &&
+            candidate.club.tier >= 3,
+        ),
+      )
+      addCandidate(
+        roleImprovingCandidates.find(
+          (candidate) =>
+            DEVELOPMENT_LEAGUE_COUNTRIES.has(
+              candidate.club.country,
+            ) && candidate.club.tier >= 3,
+        ),
+      )
+      addCandidate(
+        roleImprovingCandidates.find(
+          (candidate) =>
+            candidate.club.country === '中国' &&
+            candidate.club.profile === 'ELITE',
+        ),
+      )
+
+      for (const candidate of roleImprovingCandidates) {
+        if (selected.length >= 3) break
+        addCandidate(candidate)
+      }
+      for (const candidate of candidates) {
+        if (selected.length >= 3) break
+        addCandidate(candidate)
+      }
+      return selected.slice(0, 3)
+    }
+
     if (!domesticOnly && playerAge >= 18) {
       const overall = calculateOverall(
         player.attributes,
@@ -481,7 +576,7 @@ function generateTransferOffersFromPool(
     const strongAcademyYouth = candidates.find(
       (candidate) =>
         !isOverseasClub(candidate.club) &&
-        candidate.club.academyTier <= 2 &&
+        candidate.club.academyTier <= 3 &&
         candidate.promise.teamLevel === 'YOUTH',
     )
     const lowerLeagueFirstTeam = candidates.find(
@@ -792,15 +887,50 @@ export function contractFromTransferOffer(
 
 export function integrationBaseForTransfer(
   player: Player,
+  club: Club,
 ): Pick<
   Player,
   'coachRelation' | 'squadRelation' | 'fanRelation' | 'clubAttachment'
 > {
+  const platformPenalty = {
+    1: 22,
+    2: 16,
+    3: 10,
+    4: 4,
+    5: -2,
+    6: -8,
+  }[club.tier]
+  const overseasAdjustment = isOverseasClub(club) ? 4 : 0
+  const preferenceRelief = player.preferredLeagues.includes(
+    club.leagueKey,
+  )
+    ? 2
+    : 0
+  const integrationPenalty =
+    platformPenalty + overseasAdjustment - preferenceRelief
+
   return {
-    coachRelation: Math.round(clamp(38 + player.reputation * 0.18, 38, 58)),
-    squadRelation: Math.round(clamp(34 + player.reputation * 0.28, 34, 64)),
-    fanRelation: Math.round(clamp(30 + player.reputation * 0.34, 30, 66)),
-    clubAttachment: 28,
+    coachRelation: Math.round(
+      clamp(46 + player.reputation * 0.18 - integrationPenalty, 20, 62),
+    ),
+    squadRelation: Math.round(
+      clamp(43 + player.reputation * 0.28 - integrationPenalty, 20, 68),
+    ),
+    fanRelation: Math.round(
+      clamp(
+        38 +
+          player.reputation * 0.34 -
+          Math.max(0, integrationPenalty * 0.5),
+        24,
+        70,
+      ),
+    ),
+    clubAttachment:
+      isOverseasClub(club) && club.tier <= 1
+        ? 18
+        : isOverseasClub(club)
+          ? 24
+          : 28,
   }
 }
 

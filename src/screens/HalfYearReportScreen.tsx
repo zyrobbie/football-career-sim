@@ -11,6 +11,9 @@ import { useGameStore } from '../store/gameStore'
 import {
   firstTeamStatusLabel,
   formatEuro,
+  nationalCompetitionLabel,
+  nationalStageLabel,
+  nationalTeamRoleLabel,
   roleLabel,
 } from '../ui/format'
 
@@ -91,6 +94,9 @@ export function HalfYearReportScreen() {
           </section>
 
           <aside className="report-side">
+            {report.nationalTeam ? (
+              <NationalTeamReport record={report.nationalTeam} />
+            ) : null}
             {report.specialEvent ? (
               <section className="special-event-result">
                 <h2>特殊事件</h2>
@@ -194,6 +200,43 @@ export function HalfYearReportScreen() {
         </section>
       </article>
     </CareerHub>
+  )
+}
+
+function NationalTeamReport({
+  record,
+}: {
+  record: NonNullable<
+    import('../models/game').HalfYearReport['nationalTeam']
+  >
+}) {
+  return (
+    <section className="national-team-report">
+      <h2>中国国家队</h2>
+      {record.calledUp && record.role ? (
+        <>
+          <div className="national-team-report__summary">
+            <strong>{nationalTeamRoleLabel(record.role)}</strong>
+            <span>
+              {nationalCompetitionLabel(record.competition)}
+              {record.stage ? ` · ${nationalStageLabel(record.stage)}` : ''}
+            </span>
+          </div>
+          <dl>
+            <div><dt>出场</dt><dd>{record.appearances}</dd></div>
+            <div><dt>首发</dt><dd>{record.starts}</dd></div>
+            <div><dt>进球</dt><dd>{record.goals}</dd></div>
+            <div><dt>助攻</dt><dd>{record.assists}</dd></div>
+          </dl>
+          <p>{record.summary}</p>
+        </>
+      ) : (
+        <>
+          <strong>本期未获征召</strong>
+          <p>{record.summary}</p>
+        </>
+      )}
+    </section>
   )
 }
 

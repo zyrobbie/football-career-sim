@@ -38,6 +38,26 @@ export type SquadRole = YouthRole | FirstTeamRole
 
 export type TeamLevel = 'YOUTH' | 'FIRST_TEAM'
 
+export type NationalTeamRole =
+  | 'FRINGE'
+  | 'ROTATION'
+  | 'STARTER'
+  | 'CORE'
+
+export type NationalTeamCompetition =
+  | 'INTERNATIONAL_WINDOW'
+  | 'WORLD_CUP'
+  | 'ASIAN_CUP'
+
+export type NationalTeamStage =
+  | 'NOT_QUALIFIED'
+  | 'GROUP_STAGE'
+  | 'ROUND_OF_16'
+  | 'QUARTER_FINAL'
+  | 'SEMI_FINAL'
+  | 'RUNNER_UP'
+  | 'CHAMPION'
+
 export type ContractType =
   | 'FIRST_PRO'
   | 'PERMANENT_TRANSFER'
@@ -244,6 +264,34 @@ export interface HalfYearStats {
   averageRating: number
 }
 
+export interface NationalTeamWindowRecord {
+  windowIndex: number
+  calledUp: boolean
+  role: NationalTeamRole | null
+  competition: NationalTeamCompetition
+  stage: NationalTeamStage | null
+  appearances: number
+  starts: number
+  minutes: number
+  goals: number
+  assists: number
+  averageRating: number | null
+  selectionScore: number
+  selectionBenchmark: number
+  debut: boolean
+  summary: string
+}
+
+export interface NationalTeamState {
+  retired: boolean
+  currentRole: NationalTeamRole | null
+  caps: number
+  goals: number
+  assists: number
+  debutWindowIndex: number | null
+  history: NationalTeamWindowRecord[]
+}
+
 export interface NumericChange {
   before: number
   after: number
@@ -343,6 +391,7 @@ export interface HalfYearReport {
     brokenPromiseWindows: number
   }
   injury: InjurySummary | null
+  nationalTeam?: NationalTeamWindowRecord | null
   specialEvent?: {
     eventId: CareerEventId
     title: string
@@ -369,8 +418,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 9
-  dataVersion: 9
+  saveVersion: 10
+  dataVersion: 10
   phase: GamePhase
   careerSeed: string
   startYear: number
@@ -397,6 +446,7 @@ export interface GameState {
   trainingQualityBonus: number
   firstTeamProgress: FirstTeamProgress
   cashEuro: number
+  nationalTeam: NationalTeamState
   retirementReason: RetirementReason | null
   lastReport: HalfYearReport | null
   history: CareerHistoryEntry[]

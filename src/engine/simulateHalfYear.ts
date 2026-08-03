@@ -6,6 +6,7 @@ import {
   POSITION_WEIGHTS,
   YOUTH_ATTACK_FACTORS,
   YOUTH_BENCHMARKS,
+  youthCompetitionTierForClub,
 } from '../data/balance'
 import {
   attributeKeys,
@@ -243,7 +244,8 @@ function simulateStats(
   )
 
   const overall = calculateOverall(player.attributes, player.primaryPosition)
-  const benchmark = YOUTH_BENCHMARKS[offer.club.tier]
+  const benchmark =
+    YOUTH_BENCHMARKS[youthCompetitionTierForClub(offer.club)]
   const abilityFit = clamp((overall - benchmark) * 0.06, -0.6, 0.6)
   const stateEffect = clamp((performanceState - 1) * 2, -0.4, 0.4)
   const dataEffect = clamp(
@@ -500,7 +502,7 @@ export function simulateHalfYear(input: {
   }
   const targetRole = youthRoleFromDifference(
     calculateYouthSelectionScore(playerAfter) -
-      YOUTH_BENCHMARKS[offer.club.tier],
+      YOUTH_BENCHMARKS[youthCompetitionTierForClub(offer.club)],
   )
   const roleAfter = roleStepToward(role, targetRole)
   const firstTeamBefore =

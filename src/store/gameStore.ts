@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { SECONDARY_POSITIONS } from '../data/balance'
+import { CLUBS, SECONDARY_POSITIONS } from '../data/balance'
 import {
   buildClubSimulationOffer,
   generateAcademyOffers,
@@ -21,8 +21,14 @@ import {
 import {
   canAdvanceBeyondWindow,
   DEMO_WINDOW_COUNT,
+  playerAgeAtWindow,
   retirementAvailabilityAfterWindow,
 } from '../engine/careerTime'
+import {
+  attachNationalTeamToReport,
+  createNationalTeamState,
+  simulateNationalTeamWindow,
+} from '../engine/nationalTeam'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
 import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
 import {
@@ -99,6 +105,7 @@ interface GameStore {
   requestRetirement: () => void
   cancelRetirement: () => void
   confirmRetirement: () => void
+  retireFromNationalTeam: () => void
   goToPhase: (phase: GamePhase) => void
   clearError: () => void
 }
@@ -110,8 +117,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 9,
-    dataVersion: 9,
+    saveVersion: 10,
+    dataVersion: 10,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -152,6 +159,7 @@ function createInitialGame(): GameState {
     trainingQualityBonus: 0,
     firstTeamProgress: createFirstTeamProgress(),
     cashEuro: 1000,
+    nationalTeam: createNationalTeamState(),
     retirementReason: null,
     lastReport: null,
     history: [],
@@ -201,24 +209,45 @@ export const useGameStore = create<GameStore>((set, get) => {
         state: simulationState,
         offer,
       })
-      const report = attachCareerEventToReport({
+      const clubReport = attachCareerEventToReport({
         report: result.report,
         record: currentEventRecord,
         appliedConsequenceDelta: consequences.appliedDelta,
         consequenceSummaries: consequences.summaries,
       })
+      const actualTeamLevel =
+        clubReport.contract?.actualTeamLevel ?? result.teamLevel
+      const nationalResult = simulateNationalTeamWindow({
+        nationalTeam: simulationState.nationalTeam,
+        player: result.player,
+        club: offer.club,
+        clubStats: clubReport.stats,
+        teamLevel: actualTeamLevel,
+        injured: Boolean(clubReport.injury),
+        careerSeed: simulationState.careerSeed,
+        startYear: simulationState.startYear,
+        windowIndex: simulationState.windowIndex,
+      })
+      const report =
+        playerAgeAtWindow(simulationState.windowIndex) >= 16
+          ? attachNationalTeamToReport({
+              report: clubReport,
+              record: nationalResult.record,
+            })
+          : clubReport
       return {
         ...simulationState,
         phase: 'HALF_YEAR_REPORT',
         pendingCareerEventId: null,
         trainingQualityBonus: 0,
-        player: result.player,
+        player: nationalResult.player,
         teamLevel: result.teamLevel,
         youthRole: result.youthRole,
         firstTeamRole: result.firstTeamRole,
         contract: result.contract,
         firstTeamProgress: result.firstTeamProgress,
         cashEuro: result.cashEuro,
+        nationalTeam: nationalResult.nationalTeam,
         lastReport: report,
         history: [
           ...state.history,
@@ -231,7 +260,7 @@ export const useGameStore = create<GameStore>((set, get) => {
             arrivalChoice: null,
             trainingFocus: state.trainingFocus,
             developmentApproach: state.developmentApproach,
-            endingAttributes: { ...result.player.attributes },
+            endingAttributes: { ...nationalResult.player.attributes },
             firstTeamAttention: result.firstTeamProgress.attention,
             teamLevel:
               report.contract?.actualTeamLevel ?? result.teamLevel,
@@ -915,7 +944,17 @@ export const useGameStore = create<GameStore>((set, get) => {
         })
         return
       }
-      const integration = integrationBaseForTransfer(game.player)
+      const destinationClub = CLUBS.find(
+        (club) => club.id === offer.clubId,
+      )
+      if (!destinationClub) {
+        set({ error: '无法识别这家俱乐部，请重新选择报价。' })
+        return
+      }
+      const integration = integrationBaseForTransfer(
+        game.player,
+        destinationClub,
+      )
       commit({
         ...game,
         phase: 'TRANSFER_ARRIVAL',
@@ -1045,6 +1084,28 @@ export const useGameStore = create<GameStore>((set, get) => {
         return
       }
       commit({ ...game, phase: 'CAREER_RETIRED' })
+    },
+
+    retireFromNationalTeam: () => {
+      const game = get().game
+      if (
+        !game?.player ||
+        game.phase !== 'PRO_STAGE_COMPLETE' ||
+        playerAgeAtWindow(game.windowIndex) < 30 ||
+        game.nationalTeam.retired ||
+        game.nationalTeam.caps === 0
+      ) {
+        set({ error: '当前还不能退出国家队。' })
+        return
+      }
+      commit({
+        ...game,
+        nationalTeam: {
+          ...game.nationalTeam,
+          retired: true,
+          currentRole: null,
+        },
+      })
     },
 
     goToPhase: (phase) => {

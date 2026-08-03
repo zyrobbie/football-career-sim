@@ -44,8 +44,8 @@ function legacyIdentityState() {
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
-    expect(migrated.saveVersion).toBe(9)
-    expect(migrated.dataVersion).toBe(9)
+    expect(migrated.saveVersion).toBe(10)
+    expect(migrated.dataVersion).toBe(10)
     expect(migrated.draft.jerseyNumber).toBe(10)
     expect(migrated.draft.preferredFoot).toBe('RIGHT')
     expect(migrated.teamLevel).toBe('YOUTH')
@@ -57,6 +57,25 @@ describe('save migration', () => {
     expect(migrated.pendingCareerEventId).toBeNull()
     expect(migrated.careerEventHistory).toEqual([])
     expect(migrated.pendingConsequences).toEqual([])
+    expect(migrated.nationalTeam).toEqual({
+      retired: false,
+      currentRole: null,
+      caps: 0,
+      goals: 0,
+      assists: 0,
+      debutWindowIndex: null,
+      history: [],
+    })
+  })
+
+  it('rejects national-team totals that disagree with their history', () => {
+    const current = validateGameState(legacyIdentityState())
+    expect(() =>
+      validateGameState({
+        ...current,
+        nationalTeam: { ...current.nationalTeam, caps: 1 },
+      }),
+    ).toThrow('National-team career totals')
   })
 
   it('rejects an out-of-range jersey number', () => {
@@ -82,7 +101,7 @@ describe('save migration', () => {
       academyOffers: [{ ...offer, club: legacyClub }],
     })
 
-    expect(migrated.saveVersion).toBe(9)
+    expect(migrated.saveVersion).toBe(10)
     expect(migrated.academyOffers[0]?.club.country).toBe('中国')
     expect(migrated.academyOffers[0]?.club.leagueKey).toBe('中国')
   })
@@ -219,7 +238,7 @@ describe('save migration', () => {
       dataVersion: 3,
     })
 
-    expect(migrated.saveVersion).toBe(9)
+    expect(migrated.saveVersion).toBe(10)
     expect(migrated.firstTeamRole).toBeNull()
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
@@ -312,7 +331,7 @@ describe('save migration', () => {
 
     const migrated = validateGameState(legacy)
 
-    expect(migrated.saveVersion).toBe(9)
+    expect(migrated.saveVersion).toBe(10)
     expect(migrated.lastReport?.contract?.actualRole).toBe('ROTATION')
     expect(migrated.lastReport?.contract?.actualTeamLevel).toBe('FIRST_TEAM')
     expect(migrated.lastReport?.contract?.promiseFulfilled).toBe(false)

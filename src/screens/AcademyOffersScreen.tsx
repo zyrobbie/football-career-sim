@@ -4,9 +4,11 @@ import { Icon } from '../components/Icons'
 import type { AcademyOffer } from '../models/game'
 import { useGameStore } from '../store/gameStore'
 import {
+  academyQualityLabel,
   chanceLabel,
   formatEuro,
   roleLabel,
+  trainingQualityLabel,
 } from '../ui/format'
 
 export function AcademyOffersScreen() {
@@ -74,11 +76,11 @@ export function AcademyOffersScreen() {
               </header>
               <OfferValue
                 label="训练设施"
-                value={`${offer.club.facilityTier}级`}
+                value={trainingQualityLabel(offer.club)}
               />
               <OfferValue
                 label="青训环境"
-                value={`${offer.club.academyTier}级`}
+                value={academyQualityLabel(offer.club)}
               />
               <OfferValue
                 label="预计地位"

@@ -3,6 +3,7 @@ import {
   DOMESTIC_CLUBS,
   YOUTH_BENCHMARKS,
   YOUTH_STIPENDS,
+  youthCompetitionTierForClub,
 } from '../data/balance'
 import type {
   AcademyOffer,
@@ -45,13 +46,14 @@ export function generateAcademyOffers(
   const selectionScore = calculateYouthSelectionScore(player)
   return (['ELITE', 'BALANCED', 'SMALL'] as const).map((profile) => {
     const club = chooseClub(careerSeed, profile)
-    const difference = selectionScore - YOUTH_BENCHMARKS[club.tier]
+    const youthTier = youthCompetitionTierForClub(club)
+    const difference = selectionScore - YOUTH_BENCHMARKS[youthTier]
     return {
       club,
       expectedRole: youthRoleFromDifference(difference),
       firstTeamChance:
         profile === 'ELITE' ? 'HARD' : profile === 'BALANCED' ? 'NORMAL' : 'FAST',
-      annualStipendEuro: YOUTH_STIPENDS[club.tier],
+      annualStipendEuro: YOUTH_STIPENDS[youthTier],
     }
   })
 }
@@ -71,6 +73,7 @@ export function buildClubSimulationOffer(
         : club.profile === 'BALANCED'
           ? 'NORMAL'
           : 'FAST',
-    annualStipendEuro: YOUTH_STIPENDS[club.tier],
+    annualStipendEuro:
+      YOUTH_STIPENDS[youthCompetitionTierForClub(club)],
   }
 }
