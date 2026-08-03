@@ -38,3 +38,17 @@ export function retirementAvailabilityAfterWindow(
 export function canAdvanceBeyondWindow(windowIndex: number): boolean {
   return playerAgeAtWindow(windowIndex + 1) <= MAX_CAREER_AGE
 }
+
+export function halfYearsUntilCareerEndAfterWindow(
+  windowIndex: number,
+): number {
+  const finalWindowIndex = (MAX_CAREER_AGE - 13) * 2 + 1
+  return Math.max(0, finalWindowIndex - windowIndex)
+}
+
+export function shouldRetireAtContractExpiry(
+  windowIndex: number,
+): boolean {
+  const remainingHalfYears = halfYearsUntilCareerEndAfterWindow(windowIndex)
+  return remainingHalfYears > 0 && remainingHalfYears < 2
+}

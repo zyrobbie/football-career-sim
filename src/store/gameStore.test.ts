@@ -23,6 +23,76 @@ describe('academy two-year progression', () => {
     })
   })
 
+  it('retires directly when an expired contract leaves only half a year before age 40', () => {
+    const careerSeed = 'expiry-before-age-limit'
+    const draft = createDraft('CM')
+    const player = generatePlayer(draft, careerSeed)
+    const academyOffers = generateAcademyOffers(player, careerSeed)
+    const selected = academyOffers[0]!
+    const base: GameState = {
+      saveVersion: 10,
+      dataVersion: 10,
+      phase: 'HALF_YEAR_REPORT',
+      careerSeed,
+      startYear: 2026,
+      windowIndex: 54,
+      draft,
+      player,
+      academyOffers,
+      selectedClubId: selected.club.id,
+      teamLevel: 'FIRST_TEAM',
+      youthRole: null,
+      firstTeamRole: 'ROTATION',
+      contract: {
+        type: 'RENEWAL',
+        clubId: selected.club.id,
+        remainingHalfYears: 0,
+        annualSalaryEuro: 200_000,
+        promisedTeamLevel: 'FIRST_TEAM',
+        promisedRole: 'ROTATION',
+        releaseClauseEuro: null,
+        clubOptionYears: 0,
+        parentClubId: null,
+        brokenPromiseWindows: 0,
+      },
+      professionalOffer: null,
+      transferOffers: [],
+      selectedTransferChoiceId: null,
+      transferDecision: null,
+      arrivalChoice: 'COACH',
+      transferArrivalChoice: null,
+      pendingCareerEventId: null,
+      careerEventHistory: [],
+      pendingConsequences: [],
+      trainingFocus: null,
+      developmentApproach: null,
+      trainingQualityBonus: 0,
+      firstTeamProgress: createFirstTeamProgress(selected.club.id),
+      cashEuro: 50_000,
+      nationalTeam: {
+        retired: false,
+        currentRole: null,
+        caps: 0,
+        goals: 0,
+        assists: 0,
+        debutWindowIndex: null,
+        history: [],
+      },
+      retirementReason: null,
+      lastReport: null,
+      history: [],
+    }
+
+    useGameStore.setState({ game: base, error: null })
+    useGameStore.getState().advanceAfterReport()
+    expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
+    expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
+
+    useGameStore.setState({ game: { ...base, windowIndex: 53 }, error: null })
+    useGameStore.getState().advanceAfterReport()
+    expect(useGameStore.getState().game?.phase).toBe('PRO_STAGE_COMPLETE')
+  })
+
   it('advances through four windows and evaluates the first-team path', () => {
     const store = useGameStore.getState()
     store.startNewCareer()

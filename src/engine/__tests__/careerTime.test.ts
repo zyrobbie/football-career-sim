@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest'
 import {
   canAdvanceBeyondWindow,
   careerWindowLabel,
+  halfYearsUntilCareerEndAfterWindow,
   playerAgeAtWindow,
   retirementAvailabilityAfterWindow,
+  shouldRetireAtContractExpiry,
 } from '../careerTime'
 
 describe('career window time', () => {
@@ -30,5 +32,13 @@ describe('career window time', () => {
     expect(retirementAvailabilityAfterWindow(55)).toBe('MANDATORY')
     expect(canAdvanceBeyondWindow(54)).toBe(true)
     expect(canAdvanceBeyondWindow(55)).toBe(false)
+  })
+
+  it('retires at an expired contract only when less than one career year remains', () => {
+    expect(halfYearsUntilCareerEndAfterWindow(53)).toBe(2)
+    expect(shouldRetireAtContractExpiry(53)).toBe(false)
+    expect(halfYearsUntilCareerEndAfterWindow(54)).toBe(1)
+    expect(shouldRetireAtContractExpiry(54)).toBe(true)
+    expect(shouldRetireAtContractExpiry(55)).toBe(false)
   })
 })

@@ -6509,6 +6509,815 @@ svg {
   }
 }
 
+/* Standalone retirement archive */
+
+.retirement-archive {
+  min-height: 100vh;
+  padding-bottom: 48px;
+  background:
+    radial-gradient(circle at 84% 4%, rgba(189, 157, 86, 0.12), transparent 25%),
+    var(--shell-deep);
+}
+
+.retirement-archive__masthead {
+  min-height: 96px;
+  padding: 18px max(24px, calc((100vw - 1180px) / 2));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  border-bottom: 1px solid rgba(209, 179, 109, 0.55);
+  background: var(--shell);
+}
+
+.retirement-archive__masthead > div:last-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  color: rgba(243, 240, 232, 0.66);
+  font-size: 12px;
+}
+
+.retirement-archive__masthead > div:last-child strong {
+  color: #d1b36d;
+  font-family: var(--heading);
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.retirement-archive__paper {
+  width: min(1180px, calc(100% - 48px));
+  margin: 24px auto 0;
+  padding: 30px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
+    var(--paper);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.2);
+}
+
+.retirement-archive__hero {
+  min-height: 152px;
+  display: grid;
+  grid-template-columns: 132px minmax(220px, 1fr) minmax(300px, 0.9fr);
+  border: 1px solid var(--line);
+}
+
+.retirement-archive__ovr,
+.retirement-archive__identity,
+.retirement-archive__ending {
+  padding: 20px;
+}
+
+.retirement-archive__ovr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.retirement-archive__ovr small {
+  font-family: Georgia, serif;
+  letter-spacing: 0.22em;
+}
+
+.retirement-archive__ovr strong {
+  font-family: var(--heading);
+  font-size: 68px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.retirement-archive__identity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.retirement-archive__identity p,
+.retirement-archive__ending small {
+  margin: 0 0 5px;
+  color: var(--gold-dark, #8d6c28);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+.retirement-archive__identity h1 {
+  margin: 0 0 6px;
+  color: var(--ink);
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1;
+}
+
+.retirement-archive__identity span {
+  color: var(--muted);
+  font-family: var(--heading);
+  font-size: 17px;
+}
+
+.retirement-archive__ending {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+  background: rgba(18, 56, 45, 0.04);
+}
+
+.retirement-archive__ending strong {
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 25px;
+}
+
+.retirement-archive__ending p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.retirement-archive__snapshots {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 12px;
+  border: 1px solid var(--line);
+}
+
+.retirement-archive__snapshots > div {
+  min-width: 0;
+  padding: 13px 16px;
+  border-left: 1px solid var(--line);
+}
+
+.retirement-archive__snapshots > div:first-child {
+  border-left: 0;
+}
+
+.retirement-archive__snapshots span,
+.retirement-archive__snapshots small {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.retirement-archive__snapshots strong {
+  display: block;
+  margin: 4px 0 3px;
+  overflow: hidden;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 17px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.retirement-archive__section {
+  margin-top: 22px;
+}
+
+.retirement-archive__section-title {
+  min-height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--gold);
+}
+
+.retirement-archive__section-title > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.retirement-archive__section-title svg {
+  color: var(--gold);
+}
+
+.retirement-archive__section-title h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 23px;
+}
+
+.retirement-archive__section-title > span {
+  color: var(--muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.retirement-clubs {
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.retirement-clubs__head,
+.retirement-clubs__row {
+  display: grid;
+  grid-template-columns: 126px minmax(190px, 1fr) 120px repeat(4, 58px) minmax(126px, 0.6fr);
+  gap: 8px;
+  align-items: center;
+}
+
+.retirement-clubs__head {
+  min-height: 34px;
+  padding: 0 12px;
+  color: var(--muted);
+  background: rgba(18, 56, 45, 0.035);
+  font-size: 10px;
+}
+
+.retirement-clubs__row {
+  min-height: 54px;
+  padding: 7px 12px;
+  border-top: 1px dotted var(--line);
+  color: var(--text);
+  font-size: 12px;
+}
+
+.retirement-clubs__row > strong,
+.retirement-clubs__row > span:not(.retirement-clubs__club):not(.retirement-clubs__honor) {
+  text-align: center;
+}
+
+.retirement-clubs__service {
+  font-family: var(--heading);
+  white-space: nowrap;
+}
+
+.retirement-clubs__club {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.retirement-clubs__club strong {
+  overflow: hidden;
+  color: var(--ink);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.retirement-clubs__club small,
+.retirement-clubs__honor {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.retirement-archive__lower-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 18px;
+}
+
+.retirement-evaluation,
+.retirement-honors {
+  min-width: 0;
+}
+
+.retirement-evaluation__score {
+  min-height: 84px;
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.retirement-evaluation__score > strong {
+  text-align: center;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.retirement-evaluation__score > div {
+  padding: 10px 14px;
+  border-left: 1px solid var(--line);
+}
+
+.retirement-evaluation__score span,
+.retirement-evaluation__score small {
+  display: block;
+}
+
+.retirement-evaluation__score span {
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 20px;
+}
+
+.retirement-evaluation__score small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.retirement-evaluation dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.retirement-evaluation dl div {
+  padding: 8px 10px;
+  border-left: 1px solid var(--line);
+}
+
+.retirement-evaluation dl div:first-child {
+  border-left: 0;
+}
+
+.retirement-evaluation dt,
+.retirement-evaluation dd {
+  margin: 0;
+}
+
+.retirement-evaluation dt {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.retirement-evaluation dd {
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 15px;
+}
+
+.retirement-evaluation > p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.45;
+}
+
+.retirement-honors__placeholder {
+  min-height: 137px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-top: 0;
+  background: rgba(189, 157, 86, 0.045);
+}
+
+.retirement-honors__placeholder span,
+.retirement-honors__placeholder small {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.retirement-honors__placeholder strong {
+  margin: 5px 0;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 20px;
+}
+
+.retirement-tags__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--line);
+  border-top: 0;
+}
+
+.retirement-tags__list > div {
+  min-width: 0;
+  min-height: 72px;
+  padding: 11px 13px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+  border-top: 1px dotted var(--line);
+}
+
+.retirement-tags__list > div:nth-child(4n + 1) {
+  border-left: 0;
+}
+
+.retirement-tags__list > div:nth-child(-n + 4) {
+  border-top: 0;
+}
+
+.retirement-tags__list strong {
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 17px;
+}
+
+.retirement-tags__list span {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.4;
+}
+
+.retirement-archive__talent {
+  margin-top: 18px;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 110px) 1fr;
+  align-items: center;
+  border: 1px solid var(--gold);
+  background: rgba(18, 56, 45, 0.045);
+}
+
+.retirement-archive__talent > div {
+  min-height: 42px;
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+}
+
+.retirement-archive__talent > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.retirement-archive__talent span {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.retirement-archive__talent strong {
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 22px;
+}
+
+.retirement-archive__talent p {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.retirement-archive__footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+@media (max-width: 760px) {
+  .retirement-archive {
+    padding-bottom: 0;
+    background: var(--paper);
+  }
+
+  .retirement-archive__masthead {
+    min-height: 64px;
+    padding: 10px 14px;
+  }
+
+  .retirement-archive__masthead .brand__name {
+    font-size: 22px;
+  }
+
+  .retirement-archive__masthead > div:last-child {
+    font-size: 8px;
+  }
+
+  .retirement-archive__masthead > div:last-child strong {
+    font-size: 12px;
+  }
+
+  .retirement-archive__paper {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .retirement-archive__hero {
+    min-height: 104px;
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .retirement-archive__ovr,
+  .retirement-archive__identity,
+  .retirement-archive__ending {
+    padding: 10px;
+  }
+
+  .retirement-archive__ovr strong {
+    font-size: 42px;
+  }
+
+  .retirement-archive__ovr small {
+    font-size: 7px;
+  }
+
+  .retirement-archive__identity p {
+    font-size: 8px;
+  }
+
+  .retirement-archive__identity h1 {
+    font-size: 26px;
+  }
+
+  .retirement-archive__identity span {
+    font-size: 12px;
+  }
+
+  .retirement-archive__ending {
+    grid-column: 1 / -1;
+    padding: 8px 10px;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    gap: 7px;
+    align-items: center;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .retirement-archive__ending small {
+    margin: 0;
+    font-size: 7px;
+  }
+
+  .retirement-archive__ending strong {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .retirement-archive__ending p {
+    margin: 0;
+    overflow: hidden;
+    font-size: 8px;
+    line-height: 1.35;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .retirement-archive__snapshots {
+    grid-template-columns: 1fr 1fr;
+    margin-top: 6px;
+  }
+
+  .retirement-archive__snapshots > div {
+    padding: 7px 8px;
+    border-top: 1px solid var(--line);
+  }
+
+  .retirement-archive__snapshots > div:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .retirement-archive__snapshots > div:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .retirement-archive__snapshots span,
+  .retirement-archive__snapshots small {
+    font-size: 7px;
+  }
+
+  .retirement-archive__snapshots strong {
+    margin: 2px 0;
+    font-size: 12px;
+  }
+
+  .retirement-archive__section {
+    margin-top: 11px;
+  }
+
+  .retirement-archive__section-title {
+    min-height: 29px;
+  }
+
+  .retirement-archive__section-title h2 {
+    font-size: 17px;
+  }
+
+  .retirement-archive__section-title > span {
+    font-size: 8px;
+  }
+
+  .retirement-clubs__head {
+    display: none;
+  }
+
+  .retirement-clubs__row {
+    min-height: 78px;
+    padding: 6px 7px;
+    grid-template-columns: 62px minmax(0, 1fr) repeat(4, 31px);
+    grid-template-rows: auto auto auto;
+    gap: 3px;
+    font-size: 9px;
+  }
+
+  .retirement-clubs__service {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: left !important;
+    font-size: 8px;
+  }
+
+  .retirement-clubs__club {
+    grid-column: 2 / 7;
+    grid-row: 1;
+  }
+
+  .retirement-clubs__club strong {
+    font-size: 11px;
+  }
+
+  .retirement-clubs__club small {
+    font-size: 7px;
+  }
+
+  .retirement-clubs__row > span:nth-child(3) {
+    grid-column: 1 / 3;
+    grid-row: 2;
+    text-align: left !important;
+    color: var(--muted);
+    font-size: 8px;
+  }
+
+  .retirement-clubs__row > strong:nth-child(4),
+  .retirement-clubs__row > strong:nth-child(5),
+  .retirement-clubs__row > strong:nth-child(6),
+  .retirement-clubs__row > strong:nth-child(7) {
+    grid-row: 2;
+    position: relative;
+    padding-top: 8px;
+  }
+
+  .retirement-clubs__row > strong:nth-child(4) { grid-column: 3; }
+  .retirement-clubs__row > strong:nth-child(5) { grid-column: 4; }
+  .retirement-clubs__row > strong:nth-child(6) { grid-column: 5; }
+  .retirement-clubs__row > strong:nth-child(7) { grid-column: 6; }
+
+  .retirement-clubs__row > strong:nth-child(4)::before { content: "场"; }
+  .retirement-clubs__row > strong:nth-child(5)::before { content: "球"; }
+  .retirement-clubs__row > strong:nth-child(6)::before { content: "助"; }
+  .retirement-clubs__row > strong:nth-child(7)::before { content: "峰"; }
+
+  .retirement-clubs__row > strong:nth-child(n + 4)::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: var(--muted);
+    font-size: 6px;
+    font-weight: 400;
+  }
+
+  .retirement-clubs__honor {
+    grid-column: 1 / 7;
+    grid-row: 3;
+    font-size: 7px;
+  }
+
+  .retirement-clubs__honor::before {
+    content: "荣誉：";
+    color: var(--gold-dark, #8d6c28);
+  }
+
+  .retirement-archive__lower-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .retirement-evaluation__score {
+    min-height: 58px;
+    grid-template-columns: 58px 1fr;
+  }
+
+  .retirement-evaluation__score > strong {
+    font-size: 34px;
+  }
+
+  .retirement-evaluation__score > div {
+    padding: 6px 8px;
+  }
+
+  .retirement-evaluation__score span {
+    font-size: 15px;
+  }
+
+  .retirement-evaluation__score small {
+    font-size: 7px;
+  }
+
+  .retirement-evaluation dl div {
+    padding: 5px;
+  }
+
+  .retirement-evaluation dt {
+    font-size: 7px;
+  }
+
+  .retirement-evaluation dd {
+    font-size: 11px;
+  }
+
+  .retirement-evaluation > p {
+    font-size: 8px;
+  }
+
+  .retirement-honors__placeholder {
+    min-height: 72px;
+    padding: 10px;
+  }
+
+  .retirement-honors__placeholder span,
+  .retirement-honors__placeholder small {
+    font-size: 7px;
+  }
+
+  .retirement-honors__placeholder strong {
+    margin: 3px 0;
+    font-size: 14px;
+  }
+
+  .retirement-tags__list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .retirement-tags__list > div {
+    min-height: 52px;
+    padding: 7px;
+  }
+
+  .retirement-tags__list > div:nth-child(4n + 1) {
+    border-left: 1px solid var(--line);
+  }
+
+  .retirement-tags__list > div:nth-child(2n + 1) {
+    border-left: 0;
+  }
+
+  .retirement-tags__list > div:nth-child(-n + 4) {
+    border-top: 1px dotted var(--line);
+  }
+
+  .retirement-tags__list > div:nth-child(-n + 2) {
+    border-top: 0;
+  }
+
+  .retirement-tags__list strong {
+    font-size: 13px;
+  }
+
+  .retirement-tags__list span {
+    margin-top: 2px;
+    font-size: 7px;
+  }
+
+  .retirement-archive__talent {
+    margin-top: 10px;
+    padding: 7px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .retirement-archive__talent > div {
+    min-height: 32px;
+    padding: 0 7px;
+  }
+
+  .retirement-archive__talent span {
+    font-size: 7px;
+  }
+
+  .retirement-archive__talent strong {
+    font-size: 17px;
+  }
+
+  .retirement-archive__talent p {
+    grid-column: 1 / -1;
+    margin-top: 6px;
+    padding: 6px 0 0;
+    border-top: 1px solid var(--line);
+    font-size: 8px;
+  }
+
+  .retirement-archive__footer {
+    margin-top: 10px;
+    font-size: 8px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

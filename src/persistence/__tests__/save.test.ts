@@ -148,6 +148,43 @@ describe('save migration', () => {
     expect(restored.transferOffers).toHaveLength(4)
   })
 
+  it('repairs an expired late-career contract into the final retirement decision', () => {
+    const current = validateGameState(legacyIdentityState())
+    const careerSeed = 'late-expiry-save-repair'
+    const player = generatePlayer(createDraft('CM'), careerSeed)
+    const academyOffers = generateAcademyOffers(player, careerSeed)
+    const selected = academyOffers[0]!
+
+    const restored = validateGameState({
+      ...current,
+      phase: 'PRO_STAGE_COMPLETE',
+      careerSeed,
+      windowIndex: 54,
+      player,
+      academyOffers,
+      selectedClubId: selected.club.id,
+      teamLevel: 'FIRST_TEAM',
+      youthRole: null,
+      firstTeamRole: 'ROTATION',
+      contract: {
+        type: 'RENEWAL',
+        clubId: selected.club.id,
+        remainingHalfYears: 0,
+        annualSalaryEuro: 180_000,
+        promisedTeamLevel: 'FIRST_TEAM',
+        promisedRole: 'ROTATION',
+        releaseClauseEuro: null,
+        clubOptionYears: 0,
+        parentClubId: null,
+        brokenPromiseWindows: 0,
+      },
+      retirementReason: null,
+    })
+
+    expect(restored.phase).toBe('RETIREMENT_DECISION')
+    expect(restored.retirementReason).toBe('AGE_LIMIT')
+  })
+
   it('continues a version 2 completed demo at the third window', () => {
     const seed = 'legacy-two-window-save'
     const draft = createDraft('CM')

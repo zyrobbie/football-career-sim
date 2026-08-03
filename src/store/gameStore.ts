@@ -23,6 +23,7 @@ import {
   DEMO_WINDOW_COUNT,
   playerAgeAtWindow,
   retirementAvailabilityAfterWindow,
+  shouldRetireAtContractExpiry,
 } from '../engine/careerTime'
 import {
   attachNationalTeamToReport,
@@ -559,6 +560,19 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (!game) return
       if (game.contract && game.windowIndex >= DEMO_WINDOW_COUNT) {
+        if (
+          game.contract.remainingHalfYears === 0 &&
+          shouldRetireAtContractExpiry(game.windowIndex)
+        ) {
+          commit({
+            ...game,
+            phase: 'RETIREMENT_DECISION',
+            retirementReason: 'AGE_LIMIT',
+            transferOffers: [],
+            selectedTransferChoiceId: null,
+          })
+          return
+        }
         commit({ ...game, phase: 'PRO_STAGE_COMPLETE' })
         return
       }
@@ -690,6 +704,19 @@ export const useGameStore = create<GameStore>((set, get) => {
         return
       }
       const contractExpired = game.contract.remainingHalfYears === 0
+      if (
+        contractExpired &&
+        shouldRetireAtContractExpiry(game.windowIndex)
+      ) {
+        commit({
+          ...game,
+          phase: 'RETIREMENT_DECISION',
+          retirementReason: 'AGE_LIMIT',
+          transferOffers: [],
+          selectedTransferChoiceId: null,
+        })
+        return
+      }
       const opportunity = assessDomesticTransferOpportunity({
         player: game.player,
         latestReport: game.lastReport,
