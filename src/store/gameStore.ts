@@ -33,6 +33,7 @@ import {
 } from '../engine/nationalTeam'
 import { simulateHalfYear } from '../engine/simulateHalfYear'
 import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalfYear'
+import { settleHonorsForWindow } from '../engine/honors'
 import { enforceAgeBasedFirstTeam } from '../engine/eligibility'
 import {
   assessDomesticTransferOpportunity,
@@ -232,19 +233,45 @@ export const useGameStore = create<GameStore>((set, get) => {
         startYear: simulationState.startYear,
         windowIndex: simulationState.windowIndex,
       })
-      const report =
+      const reportWithNationalTeam =
         playerAgeAtWindow(simulationState.windowIndex) >= 16
           ? attachNationalTeamToReport({
               report: clubReport,
               record: nationalResult.record,
             })
           : clubReport
+      const honorSettlement = settleHonorsForWindow({
+        player: nationalResult.player,
+        club: offer.club,
+        stats: clubReport.stats,
+        teamLevel: actualTeamLevel,
+        careerSeed: simulationState.careerSeed,
+        startYear: simulationState.startYear,
+        windowIndex: simulationState.windowIndex,
+        history: state.history,
+        nationalRecord:
+          playerAgeAtWindow(simulationState.windowIndex) >= 16
+            ? nationalResult.record
+            : null,
+      })
+      const settledPlayer = {
+        ...nationalResult.player,
+        reputation: Math.min(
+          100,
+          nationalResult.player.reputation + honorSettlement.reputationDelta,
+        ),
+      }
+      const report = {
+        ...reportWithNationalTeam,
+        clubSeason: honorSettlement.clubSeason,
+        honors: honorSettlement.honors,
+      }
       return {
         ...simulationState,
         phase: 'HALF_YEAR_REPORT',
         pendingCareerEventId: null,
         trainingQualityBonus: 0,
-        player: nationalResult.player,
+        player: settledPlayer,
         teamLevel: result.teamLevel,
         youthRole: result.youthRole,
         firstTeamRole: result.firstTeamRole,
@@ -264,10 +291,12 @@ export const useGameStore = create<GameStore>((set, get) => {
             arrivalChoice: null,
             trainingFocus: state.trainingFocus,
             developmentApproach: state.developmentApproach,
-            endingAttributes: { ...nationalResult.player.attributes },
+            endingAttributes: { ...settledPlayer.attributes },
             firstTeamAttention: result.firstTeamProgress.attention,
             teamLevel:
               report.contract?.actualTeamLevel ?? result.teamLevel,
+            clubSeason: honorSettlement.clubSeason,
+            honors: honorSettlement.honors,
           },
         ],
       } satisfies GameState
@@ -325,6 +354,8 @@ export const useGameStore = create<GameStore>((set, get) => {
           endingAttributes: { ...result.player.attributes },
           firstTeamAttention: result.firstTeamProgress.attention,
           teamLevel: result.teamLevel,
+          clubSeason: null,
+          honors: [],
         },
       ],
     } satisfies GameState

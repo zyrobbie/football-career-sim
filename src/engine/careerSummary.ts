@@ -1,6 +1,8 @@
 import { CLUBS } from '../data/balance'
 import type {
   CareerHistoryEntry,
+  CareerHonor,
+  CareerHonorType,
   Club,
   GameState,
   HalfYearStats,
@@ -11,6 +13,7 @@ import type {
 import { clubLevelLabel } from '../ui/format'
 import { careerWindowLabel, playerAgeAtWindow } from './careerTime'
 import { calculateOverall } from './player'
+import { careerHonors } from './honors'
 
 interface CareerTotals {
   appearances: number
@@ -60,13 +63,15 @@ export interface CareerEvaluation {
   summary: string
   provisionalScore: number
   completedPoints: number
-  completedPointsMaximum: 60
-  reservedPoints: 40
+  completedPointsMaximum: 100
+  reservedPoints: 0
   dimensions: {
     clubPerformance: number
     nationalTeam: number
     peakAndPlatform: number
     longevity: number
+    collectiveHonors: number
+    personalHonors: number
   }
 }
 
@@ -84,6 +89,7 @@ export interface RetirementSummary {
   youthTotals: CareerTotals
   seniorTotals: CareerTotals
   nationalTeam: NationalCareerSummary
+  honors: CareerHonor[]
   clubs: ClubCareerSummary[]
   clubCount: number
   tags: CareerTag[]
@@ -118,6 +124,18 @@ const NATIONAL_STAGE_RANK: Record<NationalTeamStage, number> = {
   SEMI_FINAL: 4,
   RUNNER_UP: 5,
   CHAMPION: 6,
+}
+
+const HONOR_POINTS: Record<CareerHonorType, number> = {
+  LEAGUE_TITLE: 4,
+  DOMESTIC_CUP: 2,
+  CONTINENTAL_TITLE: 7,
+  WORLD_CUP: 10,
+  ASIAN_CUP: 6,
+  GOLDEN_BOOT: 3,
+  TEAM_OF_SEASON: 2,
+  LEAGUE_PLAYER_OF_YEAR: 5,
+  BALLON_DOR: 10,
 }
 
 function clamp(value: number, min: number, max: number): number {
@@ -296,7 +314,12 @@ function aggregateClubs(game: GameState): ClubCareerSummary[] {
         ...levels,
         ...group.totals,
         peakOverall: group.peakOverall,
-        honors: [],
+        honors: group.entries
+          .flatMap((entry) => entry.honors ?? [])
+          .filter(
+            (item) => item.scope === 'CLUB' && item.clubId === clubId,
+          )
+          .map((item) => item.label),
       }
     })
     .sort((a, b) => a.firstWindowIndex - b.firstWindowIndex)
@@ -309,8 +332,17 @@ function buildTags(input: {
   peakOverall: number
   peakAge: number
   fulfillmentPercent: number
+  honors: CareerHonor[]
 }): CareerTag[] {
-  const { game, clubs, seniorTotals, peakOverall, peakAge, fulfillmentPercent } = input
+  const {
+    game,
+    clubs,
+    seniorTotals,
+    peakOverall,
+    peakAge,
+    fulfillmentPercent,
+    honors,
+  } = input
   const player = game.player!
   const seniorWindows = game.history.filter((entry) => entry.teamLevel === 'FIRST_TEAM').length
   const totalWindows = game.history.length
@@ -346,6 +378,19 @@ function buildTags(input: {
   }
   if (game.nationalTeam.goals + game.nationalTeam.assists >= 30) {
     add('NATIONAL_HERO', '国家队英雄', '在国家队贡献了大量关键进球与助攻', 88)
+  }
+  const collectiveHonorCount = honors.filter(
+    (item) => item.scope !== 'INDIVIDUAL',
+  ).length
+  if (honors.some((item) => item.type === 'BALLON_DOR')) {
+    add('BALLON_DOR_WINNER', '金球先生', '登上世界个人荣誉的最高领奖台', 99)
+  }
+  if (honors.some((item) => item.type === 'WORLD_CUP')) {
+    add('WORLD_CHAMPION', '世界冠军', '随中国国家队捧起世界杯冠军奖杯', 98)
+  } else if (collectiveHonorCount >= 5) {
+    add('SERIAL_WINNER', '冠军收割者', `球员生涯赢得${collectiveHonorCount}项集体荣誉`, 90)
+  } else if (collectiveHonorCount >= 2) {
+    add('WINNER', '冠军球员', `球员生涯赢得${collectiveHonorCount}项集体荣誉`, 78)
   }
   if (playerAgeAtWindow(game.windowIndex) >= 37 && seniorWindows >= 30) {
     add('EVERGREEN', '常青树', '保持竞争力直至生涯暮年', 86)
@@ -405,8 +450,9 @@ function buildEvaluation(input: {
   seniorTotals: CareerTotals
   peakOverall: number
   fulfillmentPercent: number
+  honors: CareerHonor[]
 }): CareerEvaluation {
-  const { game, clubs, seniorTotals, peakOverall, fulfillmentPercent } = input
+  const { game, clubs, seniorTotals, peakOverall, fulfillmentPercent, honors } = input
   const seniorEntries = game.history.filter((entry) => entry.teamLevel === 'FIRST_TEAM')
   const averageRating = seniorEntries.length
     ? seniorEntries.reduce((sum, entry) => sum + entry.stats.averageRating, 0) / seniorEntries.length
@@ -438,14 +484,35 @@ function buildEvaluation(input: {
     15,
   )
   const longevity = clamp((seniorEntries.length / 40) * 5, 0, 5)
-  const completedPoints = clubPerformance + nationalTeam + peakAndPlatform + longevity
-  // Honors account for the remaining 40 points. Until that system is connected,
-  // show the points actually earned instead of inflating 53/60 into 89/100.
-  const provisionalScore = Math.round(completedPoints)
+  const collectiveHonors = clamp(
+    honors
+      .filter((item) => item.scope !== 'INDIVIDUAL')
+      .reduce((sum, item) => sum + HONOR_POINTS[item.type], 0),
+    0,
+    25,
+  )
+  const personalHonors = clamp(
+    honors
+      .filter((item) => item.scope === 'INDIVIDUAL')
+      .reduce((sum, item) => sum + HONOR_POINTS[item.type], 0),
+    0,
+    15,
+  )
+  const completedPoints =
+    clubPerformance +
+    nationalTeam +
+    peakAndPlatform +
+    longevity +
+    collectiveHonors +
+    personalHonors
+  const provisionalScore = Math.min(100, Math.round(completedPoints))
 
   let title = '坚实职业生涯'
   let summary = '你在职业足球中留下了清晰、完整而可信的足迹。'
-  if (peakOverall >= 85 && bestTier <= 2) {
+  if (
+    honors.some((item) => item.type === 'BALLON_DOR') ||
+    (peakOverall >= 85 && bestTier <= 2)
+  ) {
     title = '世界级名将'
     summary = '你在最高水平的舞台兑现了天赋，成为这个时代的重要名字。'
   } else if (game.nationalTeam.caps >= 60 && peakOverall >= 75) {
@@ -457,7 +524,7 @@ function buildEvaluation(input: {
   } else if (fulfillmentPercent < 78 && peakOverall >= 60) {
     title = '天赋未竟'
     summary = '你曾让人看见更高的可能，也留下了值得反复回想的遗憾。'
-  } else if (completedPoints >= 45) {
+  } else if (completedPoints >= 70) {
     title = '卓越职业生涯'
     summary = '长期表现、平台高度与职业寿命共同写成了一段出色生涯。'
   }
@@ -466,14 +533,16 @@ function buildEvaluation(input: {
     title,
     summary,
     provisionalScore,
-    completedPoints: Math.round(completedPoints),
-    completedPointsMaximum: 60,
-    reservedPoints: 40,
+    completedPoints: provisionalScore,
+    completedPointsMaximum: 100,
+    reservedPoints: 0,
     dimensions: {
       clubPerformance: Math.round(clubPerformance),
       nationalTeam: Math.round(nationalTeam),
       peakAndPlatform: Math.round(peakAndPlatform),
       longevity: Math.round(longevity),
+      collectiveHonors: Math.round(collectiveHonors),
+      personalHonors: Math.round(personalHonors),
     },
   }
 }
@@ -525,8 +594,24 @@ export function buildRetirementSummary(game: GameState): RetirementSummary {
     candidate.value > best.value ? candidate : best,
   )
   const fulfillmentPercent = clamp(Math.round((peakOverall / Math.max(1, potentialOverall)) * 100), 0, 100)
-  const evaluation = buildEvaluation({ game, clubs, seniorTotals, peakOverall, fulfillmentPercent })
-  const tags = buildTags({ game, clubs, seniorTotals, peakOverall, peakAge, fulfillmentPercent })
+  const honors = careerHonors(game.history)
+  const evaluation = buildEvaluation({
+    game,
+    clubs,
+    seniorTotals,
+    peakOverall,
+    fulfillmentPercent,
+    honors,
+  })
+  const tags = buildTags({
+    game,
+    clubs,
+    seniorTotals,
+    peakOverall,
+    peakAge,
+    fulfillmentPercent,
+    honors,
+  })
 
   return {
     age: playerAgeAtWindow(game.windowIndex),
@@ -548,6 +633,7 @@ export function buildRetirementSummary(game: GameState): RetirementSummary {
       worldCupBest: bestNationalStage(game, 'WORLD_CUP'),
       asianCupBest: bestNationalStage(game, 'ASIAN_CUP'),
     },
+    honors,
     clubs,
     clubCount: clubs.length,
     tags,

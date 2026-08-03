@@ -58,6 +58,49 @@ export type NationalTeamStage =
   | 'RUNNER_UP'
   | 'CHAMPION'
 
+export type ClubCompetitionStage =
+  | 'NOT_ENTERED'
+  | 'EARLY_EXIT'
+  | 'ROUND_OF_16'
+  | 'QUARTER_FINAL'
+  | 'SEMI_FINAL'
+  | 'RUNNER_UP'
+  | 'CHAMPION'
+
+export type CareerHonorType =
+  | 'LEAGUE_TITLE'
+  | 'DOMESTIC_CUP'
+  | 'CONTINENTAL_TITLE'
+  | 'WORLD_CUP'
+  | 'ASIAN_CUP'
+  | 'GOLDEN_BOOT'
+  | 'TEAM_OF_SEASON'
+  | 'LEAGUE_PLAYER_OF_YEAR'
+  | 'BALLON_DOR'
+
+export interface CareerHonor {
+  id: string
+  type: CareerHonorType
+  scope: 'CLUB' | 'NATIONAL' | 'INDIVIDUAL'
+  label: string
+  competitionLabel: string
+  seasonLabel: string
+  windowIndex: number
+  clubId: string | null
+  clubName: string | null
+}
+
+export interface ClubSeasonResult {
+  seasonLabel: string
+  leagueLabel: string
+  leaguePosition: number
+  leagueTeams: number
+  domesticCupStage: ClubCompetitionStage
+  continentalLabel: string | null
+  continentalStage: ClubCompetitionStage
+  summary: string
+}
+
 export type ContractType =
   | 'FIRST_PRO'
   | 'PERMANENT_TRANSFER'
@@ -392,6 +435,8 @@ export interface HalfYearReport {
   }
   injury: InjurySummary | null
   nationalTeam?: NationalTeamWindowRecord | null
+  clubSeason?: ClubSeasonResult | null
+  honors?: CareerHonor[]
   specialEvent?: {
     eventId: CareerEventId
     title: string
@@ -415,6 +460,8 @@ export interface CareerHistoryEntry {
   endingAttributes: Attributes
   firstTeamAttention: number
   teamLevel: TeamLevel
+  clubSeason?: ClubSeasonResult | null
+  honors?: CareerHonor[]
 }
 
 export interface GameState {

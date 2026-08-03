@@ -63,6 +63,30 @@ function retirementGame(): GameState {
       endingAttributes: { attack: 82, defense: 40, physical: 77, mental: 76 },
       firstTeamAttention: 88,
       teamLevel: 'FIRST_TEAM',
+      honors: [
+        {
+          id: 'CONTINENTAL_TITLE:20:ita_inter',
+          type: 'CONTINENTAL_TITLE',
+          scope: 'CLUB',
+          label: '2036赛季欧洲冠军联赛冠军',
+          competitionLabel: '欧洲冠军联赛',
+          seasonLabel: '2036赛季',
+          windowIndex: 20,
+          clubId: 'ita_inter',
+          clubName: '国际米兰',
+        },
+        {
+          id: 'TEAM_OF_SEASON:20:ita_inter',
+          type: 'TEAM_OF_SEASON',
+          scope: 'INDIVIDUAL',
+          label: '2036赛季意大利顶级联赛赛季最佳阵容',
+          competitionLabel: '意大利顶级联赛',
+          seasonLabel: '2036赛季',
+          windowIndex: 20,
+          clubId: 'ita_inter',
+          clubName: '国际米兰',
+        },
+      ],
     },
   ]
 
@@ -184,6 +208,10 @@ describe('retirement career summary', () => {
     expect(summary.peakMarketValueEuro).toBeGreaterThan(summary.finalMarketValueEuro)
     expect(summary.nationalTeam.worldCupBest).toBe('QUARTER_FINAL')
     expect(summary.nationalTeam.asianCupBest).toBe('RUNNER_UP')
+    expect(summary.honors).toHaveLength(2)
+    expect(summary.clubs[1]?.honors).toEqual([
+      '2036赛季欧洲冠军联赛冠军',
+    ])
   })
 
   it('keeps return spells separate while aggregating club totals once', () => {
@@ -216,10 +244,12 @@ describe('retirement career summary', () => {
     expect(second).toEqual(first)
     expect(first.tags.length).toBeGreaterThanOrEqual(3)
     expect(first.tags.length).toBeLessThanOrEqual(8)
-    expect(first.evaluation.completedPointsMaximum).toBe(60)
-    expect(first.evaluation.reservedPoints).toBe(40)
+    expect(first.evaluation.completedPointsMaximum).toBe(100)
+    expect(first.evaluation.reservedPoints).toBe(0)
     expect(first.evaluation.provisionalScore).toBe(first.evaluation.completedPoints)
-    expect(first.evaluation.provisionalScore).toBeLessThanOrEqual(60)
+    expect(first.evaluation.provisionalScore).toBeLessThanOrEqual(100)
+    expect(first.evaluation.dimensions.collectiveHonors).toBe(7)
+    expect(first.evaluation.dimensions.personalHonors).toBe(2)
   })
 
   it('keeps the market-value estimate monotonic for equal age and platform', () => {

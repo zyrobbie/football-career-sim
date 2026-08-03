@@ -7,6 +7,11 @@ import {
   playerAgeAtWindow,
 } from '../engine/careerTime'
 import { attributeKeys } from '../models/game'
+import type {
+  CareerHonor,
+  ClubCompetitionStage,
+  ClubSeasonResult,
+} from '../models/game'
 import { useGameStore } from '../store/gameStore'
 import {
   firstTeamStatusLabel,
@@ -94,6 +99,12 @@ export function HalfYearReportScreen() {
           </section>
 
           <aside className="report-side">
+            {report.clubSeason || report.honors?.length ? (
+              <SeasonHonorsReport
+                season={report.clubSeason ?? null}
+                honors={report.honors ?? []}
+              />
+            ) : null}
             {report.nationalTeam ? (
               <NationalTeamReport record={report.nationalTeam} />
             ) : null}
@@ -200,6 +211,55 @@ export function HalfYearReportScreen() {
         </section>
       </article>
     </CareerHub>
+  )
+}
+
+function clubStageLabel(stage: ClubCompetitionStage): string {
+  return {
+    NOT_ENTERED: '未参赛',
+    EARLY_EXIT: '早期出局',
+    ROUND_OF_16: '16强',
+    QUARTER_FINAL: '8强',
+    SEMI_FINAL: '4强',
+    RUNNER_UP: '亚军',
+    CHAMPION: '冠军',
+  }[stage]
+}
+
+function SeasonHonorsReport({
+  season,
+  honors,
+}: {
+  season: ClubSeasonResult | null
+  honors: CareerHonor[]
+}) {
+  return (
+    <section className="season-honors-report">
+      <h2>{season?.seasonLabel ?? '本期荣誉'}</h2>
+      {season ? (
+        <dl className="season-honors-report__results">
+          <div>
+            <dt>联赛</dt>
+            <dd>第{season.leaguePosition}名</dd>
+          </div>
+          <div>
+            <dt>国内杯赛</dt>
+            <dd>{clubStageLabel(season.domesticCupStage)}</dd>
+          </div>
+          <div>
+            <dt>{season.continentalLabel ?? '洲际赛事'}</dt>
+            <dd>{clubStageLabel(season.continentalStage)}</dd>
+          </div>
+        </dl>
+      ) : null}
+      <div className="season-honors-report__awards">
+        {honors.length > 0 ? (
+          honors.map((item) => <strong key={item.id}>{item.label}</strong>)
+        ) : (
+          <span>本赛季没有新增荣誉</span>
+        )}
+      </div>
+    </section>
   )
 }
 

@@ -49,6 +49,13 @@ function RetirementArchive() {
     isFinal: true,
     isAgeLimit: game.retirementReason === 'AGE_LIMIT',
   })
+  const clubHonors = summary.honors.filter((item) => item.scope === 'CLUB')
+  const nationalHonors = summary.honors.filter(
+    (item) => item.scope === 'NATIONAL',
+  )
+  const personalHonors = summary.honors.filter(
+    (item) => item.scope === 'INDIVIDUAL',
+  )
 
   return (
     <main className="retirement-archive">
@@ -155,7 +162,7 @@ function RetirementArchive() {
                 <strong>{club.assists}</strong>
                 <strong>{club.peakOverall}</strong>
                 <span className="retirement-clubs__honor">
-                  {club.honors.length > 0 ? club.honors.join('、') : '待荣誉系统接入'}
+                  {club.honors.length > 0 ? club.honors.join('、') : '尚无'}
                 </span>
               </div>
             ))}
@@ -169,13 +176,13 @@ function RetirementArchive() {
                 <Icon name="career" />
                 <h2>生涯评价</h2>
               </div>
-              <span>现阶段评分</span>
+              <span>最终评分</span>
             </div>
             <div className="retirement-evaluation__score">
               <strong>{summary.evaluation.provisionalScore}</strong>
               <div>
                 <span>{summary.evaluation.title}</span>
-                <small>当前 {summary.evaluation.provisionalScore}/100 · 已完成维度 {summary.evaluation.completedPoints}/{summary.evaluation.completedPointsMaximum}</small>
+                <small>{summary.evaluation.completedPoints}/{summary.evaluation.completedPointsMaximum} 分</small>
               </div>
             </div>
             <dl>
@@ -183,8 +190,10 @@ function RetirementArchive() {
               <div><dt>国家队表现</dt><dd>{summary.evaluation.dimensions.nationalTeam}/15</dd></div>
               <div><dt>巅峰与平台</dt><dd>{summary.evaluation.dimensions.peakAndPlatform}/15</dd></div>
               <div><dt>职业寿命</dt><dd>{summary.evaluation.dimensions.longevity}/5</dd></div>
+              <div><dt>集体荣誉</dt><dd>{summary.evaluation.dimensions.collectiveHonors}/25</dd></div>
+              <div><dt>个人荣誉</dt><dd>{summary.evaluation.dimensions.personalHonors}/15</dd></div>
             </dl>
-            <p>集体荣誉与个人荣誉共 {summary.evaluation.reservedPoints} 分已预留；荣誉系统完成后将形成最终百分制评价。</p>
+            <p>表现、国家队、平台、职业寿命与荣誉共同构成最终百分制评价。</p>
           </section>
 
           <section className="retirement-archive__section retirement-honors">
@@ -193,12 +202,12 @@ function RetirementArchive() {
                 <Icon name="check" />
                 <h2>荣誉室</h2>
               </div>
-              <span>预留模块</span>
+              <span>{summary.honors.length}项</span>
             </div>
-            <div className="retirement-honors__placeholder">
-              <span>奖杯、个人奖项与国家队荣誉</span>
-              <strong>将在荣誉系统接入后陈列于此</strong>
-              <small>本页结构已经预留，不会影响现有存档。</small>
+            <div className="retirement-honors__list">
+              <HonorGroup label="俱乐部" honors={clubHonors} />
+              <HonorGroup label="国家队" honors={nationalHonors} />
+              <HonorGroup label="个人" honors={personalHonors} />
             </div>
           </section>
         </div>
@@ -243,6 +252,25 @@ function RetirementArchive() {
         </footer>
       </article>
     </main>
+  )
+}
+
+function HonorGroup({
+  label,
+  honors,
+}: {
+  label: string
+  honors: import('../models/game').CareerHonor[]
+}) {
+  return (
+    <div>
+      <span>{label}</span>
+      <p>
+        {honors.length > 0
+          ? honors.map((item) => item.label).join('、')
+          : '尚无'}
+      </p>
+    </div>
   )
 }
 

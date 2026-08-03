@@ -2780,6 +2780,67 @@ svg {
   padding-right: 0;
 }
 
+.season-honors-report {
+  border-color: rgba(189, 157, 86, 0.62) !important;
+  background: rgba(189, 157, 86, 0.06);
+}
+
+.season-honors-report__results {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 8px 0 0;
+}
+
+.season-honors-report__results > div {
+  min-width: 0;
+  padding: 0 8px;
+  border-left: 1px solid var(--line);
+}
+
+.season-honors-report__results > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.season-honors-report__results dt,
+.season-honors-report__results dd {
+  overflow: hidden;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.season-honors-report__results dt {
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.season-honors-report__results dd {
+  margin-top: 2px;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 13px;
+}
+
+.season-honors-report__awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 7px;
+}
+
+.season-honors-report__awards strong,
+.season-honors-report__awards span {
+  color: var(--gold-dark, #8d6c28);
+  font-size: 9px;
+}
+
+.season-honors-report__awards strong {
+  padding: 2px 5px;
+  border: 1px solid rgba(189, 157, 86, 0.5);
+  background: rgba(255, 255, 255, 0.32);
+}
+
 .first-team-report {
   border-color: rgba(189, 157, 86, 0.55) !important;
   background: rgba(189, 157, 86, 0.07);
@@ -6863,7 +6924,7 @@ svg {
 
 .retirement-evaluation dl {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   margin: 0;
   border: 1px solid var(--line);
   border-top: 0;
@@ -6874,7 +6935,7 @@ svg {
   border-left: 1px solid var(--line);
 }
 
-.retirement-evaluation dl div:first-child {
+.retirement-evaluation dl div:nth-child(3n + 1) {
   border-left: 0;
 }
 
@@ -6902,28 +6963,40 @@ svg {
   line-height: 1.45;
 }
 
-.retirement-honors__placeholder {
+.retirement-honors__list {
   min-height: 137px;
-  padding: 22px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   border: 1px solid var(--line);
   border-top: 0;
   background: rgba(189, 157, 86, 0.045);
 }
 
-.retirement-honors__placeholder span,
-.retirement-honors__placeholder small {
-  color: var(--muted);
-  font-size: 10px;
+.retirement-honors__list > div {
+  min-height: 45px;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  align-items: center;
+  border-top: 1px dotted var(--line);
 }
 
-.retirement-honors__placeholder strong {
-  margin: 5px 0;
+.retirement-honors__list > div:first-child {
+  border-top: 0;
+}
+
+.retirement-honors__list span {
+  padding: 0 9px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+.retirement-honors__list p {
+  min-width: 0;
+  margin: 0;
+  padding: 7px 9px;
+  border-left: 1px solid var(--line);
   color: var(--ink);
   font-family: var(--heading);
-  font-size: 20px;
+  font-size: 12px;
+  line-height: 1.4;
 }
 
 .retirement-tags__list {
@@ -7279,19 +7352,23 @@ svg {
     font-size: 8px;
   }
 
-  .retirement-honors__placeholder {
+  .retirement-honors__list {
     min-height: 72px;
-    padding: 10px;
   }
 
-  .retirement-honors__placeholder span,
-  .retirement-honors__placeholder small {
+  .retirement-honors__list > div {
+    min-height: 28px;
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .retirement-honors__list span {
+    padding: 0 5px;
     font-size: 7px;
   }
 
-  .retirement-honors__placeholder strong {
-    margin: 3px 0;
-    font-size: 14px;
+  .retirement-honors__list p {
+    padding: 4px 5px;
+    font-size: 8px;
   }
 
   .retirement-tags__list {
@@ -7369,5 +7446,47 @@ svg {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .career-report .season-honors-report {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) minmax(92px, auto);
+    align-items: center;
+    gap: 4px 7px;
+  }
+
+  .career-report .season-honors-report h2 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .career-report .season-honors-report__results {
+    margin: 0;
+  }
+
+  .career-report .season-honors-report__results > div {
+    padding: 0 4px;
+  }
+
+  .career-report .season-honors-report__results dt {
+    font-size: 7px;
+  }
+
+  .career-report .season-honors-report__results dd {
+    margin-top: 0;
+    font-size: 9px;
+  }
+
+  .career-report .season-honors-report__awards {
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+
+  .career-report .season-honors-report__awards strong,
+  .career-report .season-honors-report__awards span {
+    font-size: 7px;
   }
 }

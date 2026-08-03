@@ -481,6 +481,8 @@ interface HalfYearReport {
   relationChanges: Record<RelationKey, number>
   cashChangeEuro: Euro
   eventSummaries: EventHistoryRecord[]
+  clubSeason?: ClubSeasonResult | null
+  honors?: CareerHonor[]
   nextWindowHints: ReportHint[]
 }
 ```
@@ -491,7 +493,6 @@ interface HalfYearReport {
 interface CareerHistory {
   windows: WindowHistoryRecord[]
   clubExits: ClubExitRecord[]
-  honors: HonorRecord[]
   injuries: InjuryHistoryRecord[]
   milestones: MilestoneRecord[]
 }
@@ -507,6 +508,8 @@ interface WindowHistoryRecord {
     choiceId: EntityId
   }>
   endingAttributes: AttributeValues
+  clubSeason?: ClubSeasonResult | null
+  honors?: CareerHonor[]
   endingStates: {
     form: number
     fitness: number
@@ -514,6 +517,8 @@ interface WindowHistoryRecord {
   }
 }
 ```
+
+荣誉与产生它的赛季窗口一起写入半年报告和压缩履历，不维护第二套可漂移的全局荣誉列表。退役档案通过履历纯计算汇总。新增字段均为可选，因此版本10旧存档可直接读取；旧窗口不会补造荣誉。
 
 完整事件正文、俱乐部定义和所有派生总计不写入历史。
 

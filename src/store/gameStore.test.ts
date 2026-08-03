@@ -274,6 +274,11 @@ describe('academy two-year progression', () => {
     game = useGameStore.getState().game
     expect(game?.phase).toBe('HALF_YEAR_REPORT')
     expect(game?.history).toHaveLength(6)
+    expect(game?.lastReport?.clubSeason).toBeNull()
+    expect(game?.history[5]?.clubSeason).toEqual(
+      game?.lastReport?.clubSeason,
+    )
+    expect(game?.history[5]?.honors).toEqual(game?.lastReport?.honors)
 
     const strongPerformanceGame = game!
     useGameStore.setState({
