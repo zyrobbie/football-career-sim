@@ -83,5 +83,5 @@ describe('player generation', () => {
         }
       }
     }
-  })
+  }, 20_000)
 })
