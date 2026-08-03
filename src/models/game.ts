@@ -194,6 +194,7 @@ export interface CareerEventRecord {
   windowIndex: number
   choiceTitle: string
   outcomeSummary: string
+  outcomeLabel?: string
   appliedDelta: PlayerEventDelta
   cashDeltaEuro: number
 }
@@ -218,6 +219,7 @@ export type GamePhase =
   | 'ARRIVAL_EVENT'
   | 'HALF_YEAR_PLAN'
   | 'SPECIAL_EVENT'
+  | 'SPECIAL_EVENT_RESULT'
   | 'SIMULATION_READY'
   | 'HALF_YEAR_REPORT'
   | 'CAREER_DASHBOARD'

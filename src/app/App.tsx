@@ -47,7 +47,10 @@ export function App() {
       game.phase === 'SIMULATION_READY'
     ) {
       screen = <TrainingPlanScreen />
-    } else if (game.phase === 'SPECIAL_EVENT') {
+    } else if (
+      game.phase === 'SPECIAL_EVENT' ||
+      game.phase === 'SPECIAL_EVENT_RESULT'
+    ) {
       screen = <SpecialEventScreen />
     } else if (game.phase === 'HALF_YEAR_REPORT') {
       screen = <HalfYearReportScreen />

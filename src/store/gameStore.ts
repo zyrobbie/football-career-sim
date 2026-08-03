@@ -93,6 +93,7 @@ interface GameStore {
     approach?: DevelopmentApproach | null,
   ) => void
   chooseCareerEvent: (choice: CareerEventChoiceId) => void
+  continueAfterCareerEvent: () => void
   advanceAfterReport: () => void
   reviewReport: () => void
   openProfessionalContract: () => void
@@ -564,22 +565,22 @@ export const useGameStore = create<GameStore>((set, get) => {
         })
         const ready: GameState = {
           ...game,
-          phase: 'SIMULATION_READY',
+          phase: 'SPECIAL_EVENT_RESULT',
           player: resolved.player,
           cashEuro: resolved.cashEuro,
-          pendingCareerEventId: null,
+          pendingCareerEventId: game.pendingCareerEventId,
           careerEventHistory: [
             ...game.careerEventHistory,
             resolved.record,
           ],
-          pendingConsequences: resolved.consequence
-            ? [...game.pendingConsequences, resolved.consequence]
-            : game.pendingConsequences,
+          pendingConsequences: [
+            ...game.pendingConsequences,
+            ...resolved.consequences,
+          ],
           trainingQualityBonus:
             game.trainingQualityBonus + resolved.trainingBonus,
         }
         commit(ready)
-        commit(runReadySimulation(ready))
       } catch (error) {
         set({
           error:
@@ -588,6 +589,21 @@ export const useGameStore = create<GameStore>((set, get) => {
               : '特殊事件结算失败。',
         })
       }
+    },
+
+    continueAfterCareerEvent: () => {
+      const game = get().game
+      if (!game || game.phase !== 'SPECIAL_EVENT_RESULT') {
+        set({ error: '当前没有等待确认的特殊事件结果。' })
+        return
+      }
+      const ready: GameState = {
+        ...game,
+        phase: 'SIMULATION_READY',
+        pendingCareerEventId: null,
+      }
+      commit(ready)
+      commit(runReadySimulation(ready))
     },
 
     advanceAfterReport: () => {

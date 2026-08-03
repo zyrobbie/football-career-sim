@@ -11,6 +11,7 @@ function resolveSpecialEventIfPresent() {
   const store = useGameStore.getState()
   if (store.game?.phase === 'SPECIAL_EVENT') {
     store.chooseCareerEvent('A')
+    useGameStore.getState().continueAfterCareerEvent()
   }
 }
 

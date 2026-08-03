@@ -6036,6 +6036,17 @@ svg {
   border: 1px solid var(--line);
 }
 
+.special-event__choices--draw {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.special-event__draw-hint {
+  margin: 7px 0 0;
+  color: var(--gold-dark);
+  font-size: 10px;
+  text-align: center;
+}
+
 .special-event__choices button {
   position: relative;
   min-width: 0;
@@ -6123,6 +6134,62 @@ svg {
   width: 14px;
   height: 14px;
   flex: 0 0 auto;
+}
+
+.special-event__reveal {
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid var(--gold);
+  background: rgba(195, 157, 69, 0.08);
+}
+
+.special-event__reveal-label {
+  color: var(--gold-dark);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.special-event__reveal h2 {
+  margin: 3px 0 5px;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 20px;
+}
+
+.special-event__reveal p {
+  margin: 0;
+  color: var(--text);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.special-event__deltas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 9px;
+}
+
+.special-event__deltas span {
+  padding: 3px 6px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font-size: 9px;
+}
+
+.special-event__deltas .is-positive {
+  color: var(--positive);
+}
+
+.special-event__deltas .is-negative {
+  color: var(--negative);
+}
+
+.special-event__continue {
+  width: 100%;
+  min-height: 42px;
+  margin-top: 10px;
 }
 
 .special-event-result,

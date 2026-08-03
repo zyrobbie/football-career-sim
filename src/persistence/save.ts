@@ -213,6 +213,7 @@ const careerEventRecordSchema = z.object({
   windowIndex: z.number().int().nonnegative(),
   choiceTitle: z.string().min(1),
   outcomeSummary: z.string().min(1),
+  outcomeLabel: z.string().min(1).optional(),
   appliedDelta: playerEventDeltaSchema,
   cashDeltaEuro: z.number().int(),
 })
@@ -289,6 +290,7 @@ const stateSchema = z.object({
     'ARRIVAL_EVENT',
     'HALF_YEAR_PLAN',
     'SPECIAL_EVENT',
+    'SPECIAL_EVENT_RESULT',
     'SIMULATION_READY',
     'HALF_YEAR_REPORT',
     'CAREER_DASHBOARD',
@@ -634,7 +636,7 @@ function migrateLegacyState(value: unknown): unknown {
     [7, 8, 9, 10].includes(Number(migrated.saveVersion)) &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
-    ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY'].includes(
+    ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY'].includes(
       String(migrated.phase),
     ) &&
     isRecord(migrated.lastReport)
@@ -798,7 +800,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
+    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
       parsed.phase,
     ) &&
     parsed.academyOffers.length !== 3
@@ -807,7 +809,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
+    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
       parsed.phase,
     ) &&
     (!parsed.selectedClubId ||
@@ -824,7 +826,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    parsed.phase === 'SPECIAL_EVENT' &&
+    ['SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT'].includes(parsed.phase) &&
     (!parsed.trainingFocus || !parsed.pendingCareerEventId)
   ) {
     throw new Error('Special-event state is missing its event or training choice.')

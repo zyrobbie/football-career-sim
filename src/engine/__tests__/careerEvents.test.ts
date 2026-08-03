@@ -117,8 +117,8 @@ describe('career events', () => {
     const state = createState(2)
     const result = resolveCareerEventChoice({
       state,
-      eventId: 'FITNESS_WARNING',
-      choiceId: 'C',
+      eventId: 'COACH_DEFENSIVE_TASK',
+      choiceId: 'A',
     })
     expect(result.consequence?.applyAtWindow).toBe(3)
 
@@ -131,8 +131,39 @@ describe('career events', () => {
     const consumed = consumeCareerConsequences(nextState)
 
     expect(consumed.pendingConsequences).toEqual([])
-    expect(consumed.appliedDelta.fitness).toBeLessThan(0)
-    expect(consumed.trainingBonus).toBe(-1)
+    expect(consumed.appliedDelta.coachRelation).toBeGreaterThan(0)
+    expect(consumed.trainingBonus).toBe(1)
     expect(consumed.summaries).toHaveLength(1)
+  })
+
+  it('keeps random outcomes deterministic for the same save and choice', () => {
+    const state = createState(6)
+    const first = resolveCareerEventChoice({
+      state,
+      eventId: 'MEDIA_BREAKTHROUGH',
+      choiceId: 'B',
+    })
+    const second = resolveCareerEventChoice({
+      state,
+      eventId: 'MEDIA_BREAKTHROUGH',
+      choiceId: 'B',
+    })
+
+    expect(first.record.outcomeLabel).toBeTruthy()
+    expect(first.record).toEqual(second.record)
+    expect(first.consequences).toEqual(second.consequences)
+  })
+
+  it('supports two-card draw events without a third choice', () => {
+    const event = getCareerEvent('KEY_MATCH_PAIN')
+    expect(event.presentation).toBe('DRAW')
+    expect(event.choices).toHaveLength(2)
+
+    const result = resolveCareerEventChoice({
+      state: createState(4),
+      eventId: 'KEY_MATCH_PAIN',
+      choiceId: 'A',
+    })
+    expect(result.record.outcomeLabel).toBeTruthy()
   })
 })
