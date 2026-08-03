@@ -100,11 +100,8 @@ export function SpecialEventScreen() {
         ) : (
           <>
             <p className="career-panel-lead">{event.description}</p>
-            {event.presentation === 'DRAW' ? (
-              <p className="special-event__draw-hint">二选一抽签 · 翻开前无法得知具体结果</p>
-            ) : null}
             <div
-              className={`special-event__choices${event.presentation === 'DRAW' ? ' special-event__choices--draw' : ''}`}
+              className="special-event__choices"
               role="group"
               aria-label="特殊事件选择"
             >
@@ -116,7 +113,7 @@ export function SpecialEventScreen() {
                     chooseCareerEvent(choice.id as CareerEventChoiceId)
                   }
                 >
-                  <span>{event.presentation === 'DRAW' ? '?' : choice.id}</span>
+                  <span>{choice.id}</span>
                   <strong>{choice.title}</strong>
                   <small>{choice.description}</small>
                   <em>{choice.effectPreview}</em>

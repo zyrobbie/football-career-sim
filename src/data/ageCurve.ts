@@ -3,12 +3,12 @@ import type { AttributeKey } from '../models/game'
 export const MAX_CAREER_AGE = 40
 
 export const AGE_GROWTH_POOLS = [
-  { minAge: 13, maxAge: 15, pool: 7 },
-  { minAge: 16, maxAge: 18, pool: 6 },
-  { minAge: 19, maxAge: 21, pool: 5 },
-  { minAge: 22, maxAge: 24, pool: 4 },
-  { minAge: 25, maxAge: 27, pool: 2.5 },
-  { minAge: 28, maxAge: 30, pool: 1.2 },
+  { minAge: 13, maxAge: 15, pool: 7.5 },
+  { minAge: 16, maxAge: 18, pool: 6.5 },
+  { minAge: 19, maxAge: 21, pool: 5.5 },
+  { minAge: 22, maxAge: 24, pool: 4.5 },
+  { minAge: 25, maxAge: 27, pool: 2.8 },
+  { minAge: 28, maxAge: 30, pool: 1.4 },
   { minAge: 31, maxAge: 33, pool: 0.8 },
 ] as const
 

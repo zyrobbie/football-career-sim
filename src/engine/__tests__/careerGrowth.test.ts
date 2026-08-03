@@ -50,4 +50,39 @@ describe('career growth distribution', () => {
     expect(percentile(fulfillment, 0.5)).toBeGreaterThan(97)
     expect(percentile(peaks, 0.9)).toBeLessThanOrEqual(percentile(potentials, 0.9) + 0.5)
   })
+
+  it('lets a normal professional pathway realize most of its potential', () => {
+    const peaks: number[] = []
+    const fulfillment: number[] = []
+
+    for (let index = 0; index < 500; index += 1) {
+      const position = positions[index % positions.length] as Position
+      const seed = `normal-career-growth-${index}`
+      let player = generatePlayer(createDraft(position), seed)
+      const potential = calculateOverall(player.potentials, position)
+      let peak = calculateOverall(player.attributes, position)
+
+      for (let windowIndex = 0; windowIndex <= 35; windowIndex += 1) {
+        const age = 13 + Math.floor(windowIndex / 2)
+        player = {
+          ...player,
+          attributes: developAttributesByAge({
+            player,
+            age,
+            developmentMultiplier: 0.95,
+            trainingShares: POSITION_WEIGHTS[position],
+            random: createRandom(seed, 'normal-career-growth', windowIndex),
+          }),
+        }
+        peak = Math.max(peak, calculateOverall(player.attributes, position))
+      }
+
+      peaks.push(peak)
+      fulfillment.push((peak / potential) * 100)
+    }
+
+    expect(percentile(fulfillment, 0.5)).toBeGreaterThan(94)
+    expect(peaks.filter((value) => value >= 80).length / peaks.length).toBeGreaterThanOrEqual(0.22)
+    expect(peaks.filter((value) => value >= 85).length / peaks.length).toBeGreaterThanOrEqual(0.04)
+  })
 })

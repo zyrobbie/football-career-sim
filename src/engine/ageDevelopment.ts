@@ -12,11 +12,11 @@ import {
 import type { RandomSource } from './random'
 
 function gapFactor(gap: number): number {
-  if (gap >= 25) return 1
-  if (gap >= 15) return 0.95
-  if (gap >= 8) return 0.85
-  if (gap >= 3) return 0.7
-  if (gap > 0) return 0.35
+  if (gap >= 25) return 1.08
+  if (gap >= 15) return 1.03
+  if (gap >= 8) return 0.95
+  if (gap >= 3) return 0.85
+  if (gap > 0) return 0.6
   return 0
 }
 

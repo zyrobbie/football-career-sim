@@ -154,15 +154,19 @@ describe('career events', () => {
     expect(first.consequences).toEqual(second.consequences)
   })
 
-  it('supports two-card draw events without a third choice', () => {
+  it('keeps injury events as informed three-way decisions', () => {
     const event = getCareerEvent('KEY_MATCH_PAIN')
-    expect(event.presentation).toBe('DRAW')
-    expect(event.choices).toHaveLength(2)
+    expect(event.choices).toHaveLength(3)
+    expect(event.choices.map((choice) => choice.title)).toEqual([
+      '立即报告队医',
+      '申请限制出场时间',
+      '咬牙踢满全场',
+    ])
 
     const result = resolveCareerEventChoice({
       state: createState(4),
       eventId: 'KEY_MATCH_PAIN',
-      choiceId: 'A',
+      choiceId: 'B',
     })
     expect(result.record.outcomeLabel).toBeTruthy()
   })

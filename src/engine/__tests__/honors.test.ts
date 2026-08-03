@@ -1,14 +1,19 @@
 import { describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
 import type {
+  CareerHistoryEntry,
   HalfYearStats,
   NationalTeamWindowRecord,
 } from '../../models/game'
-import { settleHonorsForWindow } from '../honors'
+import {
+  competitionLabelsForClub,
+  settleHonorsForWindow,
+} from '../honors'
 import { generatePlayer } from '../player'
 import { createDraft } from './testFixtures'
 
 const inter = CLUBS.find((club) => club.id === 'ita_inter')!
+const arsenal = CLUBS.find((club) => club.id === 'eng_arsenal')!
 
 const eliteStats: HalfYearStats = {
   appearances: 28,
@@ -115,5 +120,77 @@ describe('career honors settlement', () => {
         ),
       ).toBe(false)
     }
+  })
+
+  it('uses real competition names for each country and continental level', () => {
+    expect(competitionLabelsForClub(inter)).toEqual({
+      league: '意甲',
+      domesticCup: '意大利杯',
+      continental: '欧冠',
+    })
+    expect(competitionLabelsForClub(arsenal)).toEqual({
+      league: '英超',
+      domesticCup: '英格兰足总杯',
+      continental: '欧冠',
+    })
+  })
+
+  it('shares every club title with a player who made one seasonal appearance', () => {
+    const cameoStats: HalfYearStats = {
+      ...eliteStats,
+      appearances: 1,
+      starts: 0,
+      minutes: 12,
+      goals: 0,
+      assists: 0,
+      averageRating: 6.4,
+    }
+    let titleSeasons = 0
+
+    for (let index = 0; index < 160; index += 1) {
+      const result = settle({ stats: cameoStats, careerSeed: `cameo-${index}` })
+      const season = result.clubSeason!
+      const expected = [
+        season.leaguePosition === 1 ? 'LEAGUE_TITLE' : null,
+        season.domesticCupStage === 'CHAMPION' ? 'DOMESTIC_CUP' : null,
+        season.continentalStage === 'CHAMPION' ? 'CONTINENTAL_TITLE' : null,
+      ].filter(Boolean)
+      if (expected.length > 0) titleSeasons += 1
+      for (const type of expected) {
+        expect(result.honors.some((item) => item.type === type)).toBe(true)
+      }
+    }
+
+    expect(titleSeasons).toBeGreaterThan(0)
+  })
+
+  it('keeps a former club title when the player appeared before a mid-season transfer', () => {
+    const priorEntry: CareerHistoryEntry = {
+      windowIndex: 8,
+      clubId: arsenal.id,
+      clubName: arsenal.name,
+      role: 'FRINGE',
+      stats: { ...eliteStats, appearances: 1, starts: 0, minutes: 18, goals: 0, assists: 0 },
+      arrivalChoice: null,
+      trainingFocus: 'BALANCED',
+      developmentApproach: 'STEADY',
+      endingAttributes: elitePlayer().attributes,
+      firstTeamAttention: 80,
+      teamLevel: 'FIRST_TEAM',
+    }
+    let foundFormerClubTitle = false
+
+    for (let index = 0; index < 240; index += 1) {
+      const result = settle({
+        careerSeed: `former-club-${index}`,
+        history: [priorEntry],
+      })
+      if (result.honors.some((item) => item.clubId === arsenal.id)) {
+        foundFormerClubTitle = true
+        break
+      }
+    }
+
+    expect(foundFormerClubTitle).toBe(true)
   })
 })

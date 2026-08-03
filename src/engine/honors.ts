@@ -10,6 +10,7 @@ import type {
   Player,
   TeamLevel,
 } from '../models/game'
+import { CLUBS } from '../data/balance'
 import { calculateOverall } from './player'
 import { createRandom, weightedPick } from './random'
 
@@ -36,11 +37,62 @@ function seasonLabel(startYear: number, windowIndex: number): string {
   return `${startYear + Math.floor(windowIndex / 2)}赛季`
 }
 
+export function competitionLabelsForClub(club: Club): {
+  league: string
+  domesticCup: string
+  continental: string | null
+} {
+  const league = {
+    英格兰: '英超',
+    西班牙: '西甲',
+    意大利: '意甲',
+    德国: '德甲',
+    法国: '法甲',
+    荷兰: '荷甲',
+    葡萄牙: '葡超',
+    比利时: '比甲',
+    中国: '中超',
+    日本: 'J1联赛',
+    韩国: 'K1联赛',
+    巴西: '巴甲',
+    阿根廷: '阿甲',
+  }[club.country] ?? club.leagueLabel
+  const domesticCup = {
+    英格兰: '英格兰足总杯',
+    西班牙: '国王杯',
+    意大利: '意大利杯',
+    德国: '德国杯',
+    法国: '法国杯',
+    荷兰: '荷兰杯',
+    葡萄牙: '葡萄牙杯',
+    比利时: '比利时杯',
+    中国: '中国足协杯',
+    日本: '天皇杯',
+    韩国: '韩国杯',
+    巴西: '巴西杯',
+    阿根廷: '阿根廷杯',
+  }[club.country] ?? '国内杯赛'
+  let continental: string | null = null
+  if (EUROPE.has(club.country)) {
+    continental = club.tier <= 2 ? '欧冠' : '欧联杯'
+  } else if (ASIA.has(club.country)) {
+    continental = '亚冠精英联赛'
+  } else if (SOUTH_AMERICA.has(club.country)) {
+    continental = '解放者杯'
+  }
+  return { league, domesticCup, continental }
+}
+
+function leagueCompetitionLabel(club: Club): string {
+  return competitionLabelsForClub(club).league
+}
+
+function domesticCupLabel(club: Club): string {
+  return competitionLabelsForClub(club).domesticCup
+}
+
 function continentalLabel(club: Club): string | null {
-  if (EUROPE.has(club.country)) return '欧洲冠军联赛'
-  if (ASIA.has(club.country)) return '亚洲冠军联赛'
-  if (SOUTH_AMERICA.has(club.country)) return '南美解放者杯'
-  return null
+  return competitionLabelsForClub(club).continental
 }
 
 function isTopDivision(club: Club): boolean {
@@ -164,8 +216,8 @@ function clubSeasonResult(input: {
     ? knockoutStage(strength - 9, random)
     : 'NOT_ENTERED'
   const achievements = [
-    leaguePosition === 1 ? '联赛冠军' : `联赛第${leaguePosition}名`,
-    domesticCupStage === 'CHAMPION' ? '国内杯赛冠军' : null,
+    leaguePosition === 1 ? `${leagueCompetitionLabel(club)}冠军` : `联赛第${leaguePosition}名`,
+    domesticCupStage === 'CHAMPION' ? `${domesticCupLabel(club)}冠军` : null,
     continentalStage === 'CHAMPION' && continental ? `${continental}冠军` : null,
   ].filter((item): item is string => Boolean(item))
 
@@ -177,8 +229,32 @@ function clubSeasonResult(input: {
     domesticCupStage,
     continentalLabel: continental,
     continentalStage,
-    summary: `${club.name}以${achievements.join('、')}结束本赛季；国内杯赛${stageLabel(domesticCupStage)}${continental ? `，${continental}${stageLabel(continentalStage)}` : ''}。`,
+    summary: `${club.name}以${achievements.join('、')}结束本赛季；${domesticCupLabel(club)}${stageLabel(domesticCupStage)}${continental ? `，${continental}${stageLabel(continentalStage)}` : ''}。`,
   }
+}
+
+function clubTeamHonors(input: {
+  season: ClubSeasonResult
+  club: Club
+  label: string
+  windowIndex: number
+  participated: boolean
+}): CareerHonor[] {
+  const { season, club, label, windowIndex, participated } = input
+  if (!participated) return []
+  const honors: CareerHonor[] = []
+  const league = leagueCompetitionLabel(club)
+  const cup = domesticCupLabel(club)
+  if (season.leaguePosition === 1) {
+    honors.push(honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', label: `${label}${league}冠军`, competitionLabel: league, seasonLabel: label, windowIndex, club }))
+  }
+  if (season.domesticCupStage === 'CHAMPION') {
+    honors.push(honor({ type: 'DOMESTIC_CUP', scope: 'CLUB', label: `${label}${cup}冠军`, competitionLabel: cup, seasonLabel: label, windowIndex, club }))
+  }
+  if (season.continentalStage === 'CHAMPION' && season.continentalLabel) {
+    honors.push(honor({ type: 'CONTINENTAL_TITLE', scope: 'CLUB', label: `${label}${season.continentalLabel}冠军`, competitionLabel: season.continentalLabel, seasonLabel: label, windowIndex, club }))
+  }
+  return honors
 }
 
 function reputationForHonor(type: CareerHonorType): number {
@@ -225,7 +301,7 @@ export function settleHonorsForWindow(input: {
   const honors: CareerHonor[] = []
   let season: ClubSeasonResult | null = null
 
-  if (teamLevel === 'FIRST_TEAM' && windowIndex % 2 === 1) {
+  if (windowIndex % 2 === 1 && teamLevel === 'FIRST_TEAM') {
     const totals = seasonStats({ history, windowIndex, clubId: club.id, current: stats })
     season = clubSeasonResult({
       player,
@@ -235,36 +311,57 @@ export function settleHonorsForWindow(input: {
       startYear,
       windowIndex,
     })
-    const eligibleForTeamHonor = totals.appearances >= 8 || totals.minutes >= 600
-    if (eligibleForTeamHonor && season.leaguePosition === 1) {
-      honors.push(honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', label: `${label}${club.leagueLabel}冠军`, competitionLabel: club.leagueLabel, seasonLabel: label, windowIndex, club }))
-    }
-    if (eligibleForTeamHonor && season.domesticCupStage === 'CHAMPION') {
-      honors.push(honor({ type: 'DOMESTIC_CUP', scope: 'CLUB', label: `${label}国内杯赛冠军`, competitionLabel: '国内杯赛', seasonLabel: label, windowIndex, club }))
-    }
-    if (eligibleForTeamHonor && season.continentalStage === 'CHAMPION' && season.continentalLabel) {
-      honors.push(honor({ type: 'CONTINENTAL_TITLE', scope: 'CLUB', label: `${label}${season.continentalLabel}冠军`, competitionLabel: season.continentalLabel, seasonLabel: label, windowIndex, club }))
-    }
+    honors.push(...clubTeamHonors({ season, club, label, windowIndex, participated: totals.appearances > 0 }))
 
     const awardRandom = createRandom(careerSeed, 'personal-honors', windowIndex, club.id)
     const overall = calculateOverall(player.attributes, player.primaryPosition)
     const production = totals.goals + totals.assists
     const topDivision = isTopDivision(club)
     if (topDivision && totals.goals >= awardRandom.int(14, 22)) {
-      honors.push(honor({ type: 'GOLDEN_BOOT', scope: 'INDIVIDUAL', label: `${label}${club.leagueLabel}金靴`, competitionLabel: club.leagueLabel, seasonLabel: label, windowIndex, club }))
+      honors.push(honor({ type: 'GOLDEN_BOOT', scope: 'INDIVIDUAL', label: `${label}${leagueCompetitionLabel(club)}金靴`, competitionLabel: leagueCompetitionLabel(club), seasonLabel: label, windowIndex, club }))
     }
     const teamOfSeasonScore = totals.averageRating * 10 + totals.appearances * 0.25 + overall * 0.15
     if (topDivision && totals.appearances >= 20 && teamOfSeasonScore >= awardRandom.float(87, 94)) {
-      honors.push(honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', label: `${label}${club.leagueLabel}赛季最佳阵容`, competitionLabel: club.leagueLabel, seasonLabel: label, windowIndex, club }))
+      honors.push(honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', label: `${label}${leagueCompetitionLabel(club)}赛季最佳阵容`, competitionLabel: leagueCompetitionLabel(club), seasonLabel: label, windowIndex, club }))
     }
     const playerOfYearScore = totals.averageRating * 10 + production * 0.45 + overall * 0.12 + (season.leaguePosition <= 4 ? 5 : 0)
     if (topDivision && totals.appearances >= 24 && playerOfYearScore >= awardRandom.float(96, 106)) {
-      honors.push(honor({ type: 'LEAGUE_PLAYER_OF_YEAR', scope: 'INDIVIDUAL', label: `${label}${club.leagueLabel}最佳球员`, competitionLabel: club.leagueLabel, seasonLabel: label, windowIndex, club }))
+      honors.push(honor({ type: 'LEAGUE_PLAYER_OF_YEAR', scope: 'INDIVIDUAL', label: `${label}${leagueCompetitionLabel(club)}最佳球员`, competitionLabel: leagueCompetitionLabel(club), seasonLabel: label, windowIndex, club }))
     }
     const majorTitleBonus = honors.some((item) => item.type === 'CONTINENTAL_TITLE') ? 8 : honors.some((item) => item.type === 'LEAGUE_TITLE') ? 4 : 0
     const ballonScore = totals.averageRating * 10 + production * 0.35 + overall * 0.25 + majorTitleBonus
     if (club.tier <= 2 && totals.appearances >= 24 && overall >= 84 && ballonScore >= awardRandom.float(114, 124)) {
       honors.push(honor({ type: 'BALLON_DOR', scope: 'INDIVIDUAL', label: `${label}金球奖`, competitionLabel: '金球奖', seasonLabel: label, windowIndex, club }))
+    }
+  }
+
+  if (windowIndex % 2 === 1) {
+    const priorClubEntry = history.find(
+      (entry) =>
+        entry.windowIndex === windowIndex - 1 &&
+        entry.teamLevel === 'FIRST_TEAM' &&
+        entry.clubId !== club.id &&
+        entry.stats.appearances > 0,
+    )
+    const priorClub = priorClubEntry
+      ? CLUBS.find((candidate) => candidate.id === priorClubEntry.clubId)
+      : null
+    if (priorClubEntry && priorClub) {
+      const priorSeason = clubSeasonResult({
+        player,
+        club: priorClub,
+        stats: priorClubEntry.stats,
+        careerSeed,
+        startYear,
+        windowIndex,
+      })
+      honors.push(...clubTeamHonors({
+        season: priorSeason,
+        club: priorClub,
+        label,
+        windowIndex,
+        participated: true,
+      }))
     }
   }
 

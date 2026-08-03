@@ -42,8 +42,6 @@ interface CareerEventOutcome {
   delayed?: CareerEventDelayed | readonly CareerEventDelayed[]
 }
 
-export type CareerEventPresentation = 'CHOICE' | 'DRAW'
-
 export interface CareerEventDefinition {
   id: CareerEventId
   category: CareerEventCategory
@@ -51,7 +49,6 @@ export interface CareerEventDefinition {
   title: string
   description: string
   weight: number
-  presentation?: CareerEventPresentation
   isEligible: (state: GameState) => boolean
   choices: readonly CareerEventChoice[]
 }
@@ -613,33 +610,40 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     eyebrow: '身体 · 赛前不适',
     title: '关键比赛前，你感到脚踝轻微不适。',
     description:
-      '检查没有明确结论。如果决定出战，你只能从两张封闭的比赛方案中翻开一张。',
+      '检查结果并不严重，但是否如实报告、是否坚持比赛，将由你自己决定。',
     weight: 7,
-    presentation: 'DRAW',
     isEligible: (state) =>
       state.history.length >= 2 || Boolean(state.contract),
     choices: [
       {
         id: 'A',
-        title: '翻开左侧方案',
-        description: '结果已经写入存档，翻开后才会揭晓。',
-        effectPreview: '可能控制住负荷，也可能让不适加重',
-        outcomeSummary: '比赛方案已经揭晓。',
-        playerDelta: {},
+        title: '立即报告队医',
+        description: '接受完整评估，即使可能错过部分比赛。',
+        effectPreview: '身体 +4 · 教练关系 +3 · 竞技状态 -2',
+        outcomeSummary: '你第一时间报告不适。出场准备受到影响，但俱乐部认可你的职业态度。',
+        playerDelta: { fitness: 4, coachRelation: 3, form: -2 },
+      },
+      {
+        id: 'B',
+        title: '申请限制出场时间',
+        description: '愿意出场，但请教练在60分钟左右换下你。',
+        effectPreview: '75%安全完成 · 25%不适加重',
+        outcomeSummary: '你和教练约定控制负荷，既保留出场机会，也没有完全忽视风险。',
+        playerDelta: { coachRelation: 1 },
         outcomes: [
           {
             id: 'MANAGED',
             label: '负荷控制成功',
-            weight: 58,
-            summary: '教练及时换下了你。你完成了任务，脚踝也没有出现进一步反应。',
-            playerDelta: { form: 4, fitness: -1, coachRelation: 2, morale: 2 },
+            weight: 75,
+            summary: '教练按约定及时换下了你。你完成比赛任务，脚踝也没有进一步反应。',
+            playerDelta: { form: 3, fitness: -1, morale: 2 },
           },
           {
             id: 'PAIN',
             label: '不适明显加重',
-            weight: 42,
+            weight: 25,
             summary: '比赛强度超出预期，脚踝在一次对抗后明显加重，你只能提前离场。',
-            playerDelta: { form: -2, fitness: -7, morale: -2 },
+            playerDelta: { form: -2, fitness: -6, morale: -2 },
             delayed: {
               delayWindows: 1,
               playerDelta: { fitness: -4 },
@@ -650,19 +654,19 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         ],
       },
       {
-        id: 'B',
-        title: '翻开右侧方案',
-        description: '结果已经写入存档，翻开后才会揭晓。',
-        effectPreview: '两张签机会相同，但具体结果由存档种子决定',
-        outcomeSummary: '比赛方案已经揭晓。',
-        playerDelta: {},
+        id: 'C',
+        title: '咬牙踢满全场',
+        description: '把关键比赛放在身体风险之前，不主动要求换下。',
+        effectPreview: '35%成为英雄 · 65%付出明显身体代价',
+        outcomeSummary: '你决定把比赛放在身体风险之前。',
+        playerDelta: { squadRelation: 1 },
         outcomes: [
           {
             id: 'HERO',
             label: '带伤完成关键表现',
-            weight: 42,
+            weight: 35,
             summary: '脚踝没有拖住你。你在关键时刻完成决定性表现，赢得了更衣室的尊重。',
-            playerDelta: { form: 6, fitness: -4, morale: 4, squadRelation: 3, reputation: 2 },
+            playerDelta: { form: 6, fitness: -4, morale: 4, squadRelation: 2, reputation: 2 },
             delayed: {
               delayWindows: 1,
               playerDelta: { fitness: -3 },
@@ -671,15 +675,15 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
           },
           {
             id: 'PAIN',
-            label: '不适明显加重',
-            weight: 58,
+            label: '伤势明显加重',
+            weight: 65,
             summary: '一次急停让脚踝的不适迅速加剧，你没有等到终场就被迫离开比赛。',
-            playerDelta: { form: -3, fitness: -8, morale: -3 },
+            playerDelta: { form: -3, fitness: -9, morale: -3 },
             delayed: {
               delayWindows: 1,
               playerDelta: { fitness: -5 },
               trainingBonus: -1,
-              summary: '关键比赛留下的脚踝负担再次显现，恢复计划被迫延长。',
+              summary: '带伤踢满的决定延长了恢复周期，本窗口训练计划被迫下调。',
             },
           },
         ],

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   INITIAL_OVR_DISTRIBUTION,
+  POTENTIAL_DISTRIBUTION,
 } from '../../data/balance'
 import {
   attributeKeys,
@@ -16,6 +17,7 @@ describe('10,000-player first-window distribution', () => {
   it('produces no invariant failures and tracks the intended OVR curve', () => {
     const samples = 10_000
     const overallCounts = new Map<number, number>()
+    const potentialCounts = new Map<string, number>()
     const roleCounts = new Map<string, number>()
     let invariantFailures = 0
     let totalGrowth = 0
@@ -28,7 +30,22 @@ describe('10,000-player first-window distribution', () => {
       const overall = Math.round(
         calculateOverall(player.attributes, player.primaryPosition),
       )
+      const potential = calculateOverall(
+        player.potentials,
+        player.primaryPosition,
+      )
       overallCounts.set(overall, (overallCounts.get(overall) ?? 0) + 1)
+      const potentialTier = POTENTIAL_DISTRIBUTION.find(
+        (item) => potential <= item.max + 0.6,
+      )
+      if (!potentialTier) {
+        invariantFailures += 1
+      } else {
+        potentialCounts.set(
+          potentialTier.label,
+          (potentialCounts.get(potentialTier.label) ?? 0) + 1,
+        )
+      }
 
       const offers = generateAcademyOffers(player, seed)
       if (
@@ -87,6 +104,14 @@ describe('10,000-player first-window distribution', () => {
 
     for (const expected of INITIAL_OVR_DISTRIBUTION) {
       const actualShare = (overallCounts.get(expected.value) ?? 0) / samples
+      expect(actualShare).toBeGreaterThan(
+        Math.max(0, expected.weight / 100 - 0.025),
+      )
+      expect(actualShare).toBeLessThan(expected.weight / 100 + 0.025)
+    }
+
+    for (const expected of POTENTIAL_DISTRIBUTION) {
+      const actualShare = (potentialCounts.get(expected.label) ?? 0) / samples
       expect(actualShare).toBeGreaterThan(
         Math.max(0, expected.weight / 100 - 0.025),
       )

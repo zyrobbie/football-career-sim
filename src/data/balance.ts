@@ -143,11 +143,11 @@ export const INITIAL_OVR_DISTRIBUTION = [
 ] as const
 
 export const POTENTIAL_DISTRIBUTION = [
-  { min: 65, max: 68, weight: 15, label: '普通职业球员' },
-  { min: 69, max: 75, weight: 25, label: '国内优秀球员' },
+  { min: 65, max: 68, weight: 10, label: '普通职业球员' },
+  { min: 69, max: 75, weight: 15, label: '国内优秀球员' },
   { min: 76, max: 82, weight: 30, label: '高水平留洋球员' },
-  { min: 83, max: 88, weight: 20, label: '世界级潜质' },
-  { min: 89, max: 94, weight: 10, label: '历史级潜质' },
+  { min: 83, max: 88, weight: 30, label: '世界级潜质' },
+  { min: 89, max: 94, weight: 15, label: '历史级潜质' },
 ] as const
 
 export const POTENTIAL_OFFSETS: Record<
