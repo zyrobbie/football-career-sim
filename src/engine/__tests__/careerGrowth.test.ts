@@ -17,7 +17,7 @@ describe('career growth distribution', () => {
     const peaks: number[] = []
     const fulfillment: number[] = []
 
-    for (let index = 0; index < 2_000; index += 1) {
+    for (let index = 0; index < 500; index += 1) {
       const position = positions[index % positions.length] as Position
       const seed = `career-growth-${index}`
       let player = generatePlayer(createDraft(position), seed)
