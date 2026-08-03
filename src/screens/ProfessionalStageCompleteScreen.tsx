@@ -1,7 +1,10 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
-import { retirementAvailabilityAfterWindow } from '../engine/careerTime'
-import { playerAgeAtWindow } from '../engine/careerTime'
+import {
+  canOpenTransferMarketAfterWindow,
+  playerAgeAtWindow,
+  retirementAvailabilityAfterWindow,
+} from '../engine/careerTime'
 import {
   assessDomesticTransferOpportunity,
   assessOverseasInterest,
@@ -48,8 +51,13 @@ export function ProfessionalStageCompleteScreen() {
   const actualRole = completedHistory?.role ?? contractReport.actualRole
   const contractExpired = game.contract.remainingHalfYears === 0
   const isFirstProfessionalWindow = game.windowIndex === 4
+  const transferMarketOpen = canOpenTransferMarketAfterWindow(
+    game.windowIndex,
+  )
   const canRequestTransfer =
-    !contractExpired && game.contract.brokenPromiseWindows >= 2
+    transferMarketOpen &&
+    !contractExpired &&
+    game.contract.brokenPromiseWindows >= 2
   const transferOpportunity = assessDomesticTransferOpportunity({
     player: game.player,
     latestReport: report,
@@ -123,7 +131,7 @@ export function ProfessionalStageCompleteScreen() {
               </dd>
             </div>
           </dl>
-          {overseasInterest.visible ? (
+          {transferMarketOpen && overseasInterest.visible ? (
             <p className="demo-complete__overseas-interest">
               <strong>海外关注</strong>
               <span>{overseasInterest.summary}</span>
@@ -132,6 +140,8 @@ export function ProfessionalStageCompleteScreen() {
           <p className="demo-complete__next">
             {retirementMandatory
               ? '最后一个赛季已经落幕。现在，去为这段漫长的球员生涯写下结尾。'
+              : !transferMarketOpen
+              ? '职业生涯已经进入最后一年。你将履行现有合同完成最后赛季，不再开启新的转会或续约谈判。'
               : contractExpired
               ? '合同已经到期。你必须先完成续约或接受新的自由身合同，才能进入下一职业半年。'
               : canRequestTransfer
@@ -151,7 +161,10 @@ export function ProfessionalStageCompleteScreen() {
                   openTransferWindow(true)
                   return
                 }
-                if (contractExpired || transferOpportunity.available) {
+                if (
+                  transferMarketOpen &&
+                  (contractExpired || transferOpportunity.available)
+                ) {
                   openTransferWindow()
                   return
                 }
@@ -164,7 +177,7 @@ export function ProfessionalStageCompleteScreen() {
                 ? '提出转会申请'
                 : contractExpired
                 ? '处理合同到期'
-                : transferOpportunity.available
+                : transferMarketOpen && transferOpportunity.available
                 ? '查看转会报价'
                 : '进入下一职业半年'}
               <Icon name="arrow" />

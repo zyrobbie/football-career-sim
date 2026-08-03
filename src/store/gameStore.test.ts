@@ -23,7 +23,7 @@ describe('academy two-year progression', () => {
     })
   })
 
-  it('retires directly when an expired contract leaves only half a year before age 40', () => {
+  it('retires directly when an expired contract would require a new age-40 deal', () => {
     const careerSeed = 'expiry-before-age-limit'
     const draft = createDraft('CM')
     const player = generatePlayer(draft, careerSeed)
@@ -90,7 +90,8 @@ describe('academy two-year progression', () => {
 
     useGameStore.setState({ game: { ...base, windowIndex: 53 }, error: null })
     useGameStore.getState().advanceAfterReport()
-    expect(useGameStore.getState().game?.phase).toBe('PRO_STAGE_COMPLETE')
+    expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
+    expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
   })
 
   it('advances through four windows and evaluates the first-team path', () => {

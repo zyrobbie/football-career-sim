@@ -19,6 +19,7 @@ import {
   selectCareerEvent,
 } from '../engine/careerEvents'
 import {
+  canOpenTransferMarketAfterWindow,
   canAdvanceBeyondWindow,
   DEMO_WINDOW_COUNT,
   playerAgeAtWindow,
@@ -705,6 +706,10 @@ export const useGameStore = create<GameStore>((set, get) => {
         set({ error: '40岁赛季已经结束，职业日历不能再进入新的转会窗口。' })
         return
       }
+      if (!canOpenTransferMarketAfterWindow(game.windowIndex)) {
+        set({ error: '职业生涯最后一年不再开启新的合同或转会谈判。' })
+        return
+      }
       const contractExpired = game.contract.remainingHalfYears === 0
       if (
         contractExpired &&
@@ -808,13 +813,16 @@ export const useGameStore = create<GameStore>((set, get) => {
         latestReport: game.lastReport,
         windowIndex: game.windowIndex,
       })
+      const transferMarketOpen = canOpenTransferMarketAfterWindow(
+        game.windowIndex,
+      )
       if (game.contract.remainingHalfYears === 0) {
         set({
           error: '合同已经到期，必须先完成续约或自由转会，不能无合同进入下一职业半年。',
         })
         return
       }
-      if (opportunity.available) {
+      if (transferMarketOpen && opportunity.available) {
         set({ error: '本窗口已有正式转会机会，请先完成去留决定。' })
         return
       }

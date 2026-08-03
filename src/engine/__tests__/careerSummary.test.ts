@@ -128,7 +128,42 @@ function retirementGame(): GameState {
       goals: 24,
       assists: 13,
       debutWindowIndex: 12,
-      history: [],
+      history: [
+        {
+          windowIndex: 30,
+          calledUp: true,
+          role: 'STARTER',
+          competition: 'WORLD_CUP',
+          stage: 'QUARTER_FINAL',
+          appearances: 5,
+          starts: 5,
+          minutes: 450,
+          goals: 2,
+          assists: 1,
+          averageRating: 7.2,
+          selectionScore: 82,
+          selectionBenchmark: 70,
+          debut: false,
+          summary: '世界杯八强',
+        },
+        {
+          windowIndex: 34,
+          calledUp: true,
+          role: 'CORE',
+          competition: 'ASIAN_CUP',
+          stage: 'RUNNER_UP',
+          appearances: 6,
+          starts: 6,
+          minutes: 540,
+          goals: 3,
+          assists: 2,
+          averageRating: 7.5,
+          selectionScore: 88,
+          selectionBenchmark: 72,
+          debut: false,
+          summary: '亚洲杯亚军',
+        },
+      ],
     },
     retirementReason: 'AGE_LIMIT',
     lastReport: null,
@@ -147,6 +182,30 @@ describe('retirement career summary', () => {
     expect(summary.seniorTotals.appearances).toBe(30)
     expect(summary.peakOverall).toBeGreaterThan(summary.finalOverall)
     expect(summary.peakMarketValueEuro).toBeGreaterThan(summary.finalMarketValueEuro)
+    expect(summary.nationalTeam.worldCupBest).toBe('QUARTER_FINAL')
+    expect(summary.nationalTeam.asianCupBest).toBe('RUNNER_UP')
+  })
+
+  it('keeps return spells separate while aggregating club totals once', () => {
+    const game = retirementGame()
+    const domestic = game.history[0]!
+    const overseas = game.history[2]!
+    game.history = [
+      { ...domestic, windowIndex: 0 },
+      { ...domestic, windowIndex: 1 },
+      { ...overseas, windowIndex: 2 },
+      { ...domestic, windowIndex: 3 },
+      { ...domestic, windowIndex: 4 },
+    ]
+
+    const summary = buildRetirementSummary(game)
+    const club = summary.clubs.find((candidate) => candidate.clubId === domestic.clubId)!
+
+    expect(club.serviceSpells.map((spell) => spell.label)).toEqual([
+      '2026夏—2026冬',
+      '2027冬—2028夏',
+    ])
+    expect(club.appearances).toBe(domestic.stats.appearances * 4)
   })
 
   it('derives a stable evaluation and three to eight player-facing tags', () => {
@@ -159,6 +218,8 @@ describe('retirement career summary', () => {
     expect(first.tags.length).toBeLessThanOrEqual(8)
     expect(first.evaluation.completedPointsMaximum).toBe(60)
     expect(first.evaluation.reservedPoints).toBe(40)
+    expect(first.evaluation.provisionalScore).toBe(first.evaluation.completedPoints)
+    expect(first.evaluation.provisionalScore).toBeLessThanOrEqual(60)
   })
 
   it('keeps the market-value estimate monotonic for equal age and platform', () => {

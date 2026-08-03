@@ -398,6 +398,45 @@ describe('domestic transfer window', () => {
     expect(new Set(offers.slice(1).map((offer) => offer.clubId)).size).toBe(3)
   })
 
+  it('never creates a new transfer or renewal contract for the age-40 season', () => {
+    const { careerSeed, player, currentClubId } = createTransferFixture()
+    const currentContract = {
+      type: 'RENEWAL',
+      clubId: currentClubId,
+      remainingHalfYears: 0,
+      annualSalaryEuro: 180_000,
+      promisedTeamLevel: 'FIRST_TEAM',
+      promisedRole: 'ROTATION',
+      releaseClauseEuro: null,
+      clubOptionYears: 0,
+      parentClubId: null,
+      brokenPromiseWindows: 0,
+    } satisfies ContractState
+
+    expect(
+      generateTransferOffers({
+        player,
+        currentClubId,
+        currentTeamLevel: 'FIRST_TEAM',
+        latestReport: null,
+        careerSeed,
+        windowIndex: 54,
+      }),
+    ).toEqual([])
+    expect(
+      generateContractExpiryOffers({
+        player,
+        currentClubId,
+        currentTeamLevel: 'FIRST_TEAM',
+        currentRole: 'ROTATION',
+        currentContract,
+        latestReport: null,
+        careerSeed,
+        windowIndex: 54,
+      }),
+    ).toEqual([])
+  })
+
   it('converts every expiry-market contract to first-team status after age 22', () => {
     const { careerSeed, player, currentClubId } = createTransferFixture()
     const currentContract = {

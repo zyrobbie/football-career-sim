@@ -4,6 +4,7 @@ import type {
   Club,
   GameState,
   HalfYearStats,
+  NationalTeamCompetition,
   NationalTeamStage,
   TeamLevel,
 } from '../models/game'
@@ -28,10 +29,23 @@ export interface ClubCareerSummary extends CareerTotals {
   lastWindowIndex: number
   windows: number
   serviceLabel: string
+  serviceSpells: Array<{
+    firstWindowIndex: number
+    lastWindowIndex: number
+    label: string
+  }>
   teamLevels: TeamLevel[]
   teamLevelLabel: string
   peakOverall: number
   honors: string[]
+}
+
+export interface NationalCareerSummary {
+  appearances: number
+  goals: number
+  assists: number
+  worldCupBest: NationalTeamStage | null
+  asianCupBest: NationalTeamStage | null
 }
 
 export interface CareerTag {
@@ -69,6 +83,7 @@ export interface RetirementSummary {
   totals: CareerTotals
   youthTotals: CareerTotals
   seniorTotals: CareerTotals
+  nationalTeam: NationalCareerSummary
   clubs: ClubCareerSummary[]
   clubCount: number
   tags: CareerTag[]
@@ -201,6 +216,34 @@ function teamLevelSummary(levels: Set<TeamLevel>): {
   }
 }
 
+function serviceSpellsForEntries(
+  startYear: number,
+  entries: CareerHistoryEntry[],
+): ClubCareerSummary['serviceSpells'] {
+  const sorted = [...entries].sort((a, b) => a.windowIndex - b.windowIndex)
+  const spells: Array<{ firstWindowIndex: number; lastWindowIndex: number }> = []
+
+  for (const entry of sorted) {
+    const current = spells.at(-1)
+    if (current && entry.windowIndex === current.lastWindowIndex + 1) {
+      current.lastWindowIndex = entry.windowIndex
+    } else {
+      spells.push({
+        firstWindowIndex: entry.windowIndex,
+        lastWindowIndex: entry.windowIndex,
+      })
+    }
+  }
+
+  return spells.map((spell) => ({
+    ...spell,
+    label:
+      spell.firstWindowIndex === spell.lastWindowIndex
+        ? compactWindowLabel(startYear, spell.firstWindowIndex)
+        : `${compactWindowLabel(startYear, spell.firstWindowIndex)}—${compactWindowLabel(startYear, spell.lastWindowIndex)}`,
+  }))
+}
+
 function aggregateClubs(game: GameState): ClubCareerSummary[] {
   const player = game.player!
   const grouped = new Map<
@@ -236,6 +279,10 @@ function aggregateClubs(game: GameState): ClubCareerSummary[] {
       const lastWindowIndex = Math.max(...group.entries.map((entry) => entry.windowIndex))
       const club = clubForHistory(game, clubId)
       const levels = teamLevelSummary(group.levels)
+      const serviceSpells = serviceSpellsForEntries(
+        game.startYear,
+        group.entries,
+      )
       return {
         clubId,
         clubName: club?.name ?? group.entries.at(-1)?.clubName ?? '未知俱乐部',
@@ -244,10 +291,8 @@ function aggregateClubs(game: GameState): ClubCareerSummary[] {
         firstWindowIndex,
         lastWindowIndex,
         windows: group.entries.length,
-        serviceLabel:
-          firstWindowIndex === lastWindowIndex
-            ? compactWindowLabel(game.startYear, firstWindowIndex)
-            : `${compactWindowLabel(game.startYear, firstWindowIndex)}—${compactWindowLabel(game.startYear, lastWindowIndex)}`,
+        serviceLabel: serviceSpells.map((spell) => spell.label).join('、'),
+        serviceSpells,
         ...levels,
         ...group.totals,
         peakOverall: group.peakOverall,
@@ -340,8 +385,12 @@ function buildTags(input: {
   return [...unique.values()].slice(0, 8)
 }
 
-function bestNationalStage(game: GameState): NationalTeamStage | null {
+function bestNationalStage(
+  game: GameState,
+  competition?: NationalTeamCompetition,
+): NationalTeamStage | null {
   return game.nationalTeam.history.reduce<NationalTeamStage | null>((best, record) => {
+    if (competition && record.competition !== competition) return best
     if (!record.stage) return best
     if (!best || NATIONAL_STAGE_RANK[record.stage] > NATIONAL_STAGE_RANK[best]) {
       return record.stage
@@ -390,7 +439,9 @@ function buildEvaluation(input: {
   )
   const longevity = clamp((seniorEntries.length / 40) * 5, 0, 5)
   const completedPoints = clubPerformance + nationalTeam + peakAndPlatform + longevity
-  const provisionalScore = Math.round((completedPoints / 60) * 100)
+  // Honors account for the remaining 40 points. Until that system is connected,
+  // show the points actually earned instead of inflating 53/60 into 89/100.
+  const provisionalScore = Math.round(completedPoints)
 
   let title = '坚实职业生涯'
   let summary = '你在职业足球中留下了清晰、完整而可信的足迹。'
@@ -406,7 +457,7 @@ function buildEvaluation(input: {
   } else if (fulfillmentPercent < 78 && peakOverall >= 60) {
     title = '天赋未竟'
     summary = '你曾让人看见更高的可能，也留下了值得反复回想的遗憾。'
-  } else if (provisionalScore >= 70) {
+  } else if (completedPoints >= 45) {
     title = '卓越职业生涯'
     summary = '长期表现、平台高度与职业寿命共同写成了一段出色生涯。'
   }
@@ -490,6 +541,13 @@ export function buildRetirementSummary(game: GameState): RetirementSummary {
     totals,
     youthTotals,
     seniorTotals,
+    nationalTeam: {
+      appearances: game.nationalTeam.caps,
+      goals: game.nationalTeam.goals,
+      assists: game.nationalTeam.assists,
+      worldCupBest: bestNationalStage(game, 'WORLD_CUP'),
+      asianCupBest: bestNationalStage(game, 'ASIAN_CUP'),
+    },
     clubs,
     clubCount: clubs.length,
     tags,

@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import {
   canAdvanceBeyondWindow,
+  canOpenTransferMarketAfterWindow,
+  canSignNewContractAtWindow,
   careerWindowLabel,
   halfYearsUntilCareerEndAfterWindow,
   playerAgeAtWindow,
@@ -34,11 +36,15 @@ describe('career window time', () => {
     expect(canAdvanceBeyondWindow(55)).toBe(false)
   })
 
-  it('retires at an expired contract only when less than one career year remains', () => {
+  it('closes new contracts before the age-40 season and retires on a late expiry', () => {
     expect(halfYearsUntilCareerEndAfterWindow(53)).toBe(2)
-    expect(shouldRetireAtContractExpiry(53)).toBe(false)
+    expect(shouldRetireAtContractExpiry(53)).toBe(true)
     expect(halfYearsUntilCareerEndAfterWindow(54)).toBe(1)
     expect(shouldRetireAtContractExpiry(54)).toBe(true)
     expect(shouldRetireAtContractExpiry(55)).toBe(false)
+    expect(canSignNewContractAtWindow(53)).toBe(true)
+    expect(canSignNewContractAtWindow(54)).toBe(false)
+    expect(canOpenTransferMarketAfterWindow(52)).toBe(true)
+    expect(canOpenTransferMarketAfterWindow(53)).toBe(false)
   })
 })

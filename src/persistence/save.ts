@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { MAX_CAREER_AGE } from '../data/ageCurve'
 import {
+  canSignNewContractAtWindow,
   playerAgeAtWindow,
   shouldRetireAtContractExpiry,
 } from '../engine/careerTime'
@@ -904,6 +905,35 @@ export function validateGameState(value: unknown): GameState {
       ...parsed,
       phase: 'RETIREMENT_DECISION',
       retirementReason: 'AGE_LIMIT',
+      transferOffers: [],
+      selectedTransferChoiceId: null,
+    }
+  }
+
+  if (
+    parsed.phase === 'TRANSFER_WINDOW' &&
+    !canSignNewContractAtWindow(parsed.windowIndex)
+  ) {
+    const lastHistory = parsed.history[parsed.history.length - 1]
+    const completedWindowIndex =
+      lastHistory?.windowIndex ?? Math.max(0, parsed.windowIndex - 1)
+    if (
+      parsed.contract?.remainingHalfYears === 0 &&
+      shouldRetireAtContractExpiry(completedWindowIndex)
+    ) {
+      return {
+        ...parsed,
+        phase: 'RETIREMENT_DECISION',
+        windowIndex: completedWindowIndex,
+        retirementReason: 'AGE_LIMIT',
+        transferOffers: [],
+        selectedTransferChoiceId: null,
+      }
+    }
+    return {
+      ...parsed,
+      phase: 'PRO_STAGE_COMPLETE',
+      windowIndex: completedWindowIndex,
       transferOffers: [],
       selectedTransferChoiceId: null,
     }

@@ -4,7 +4,7 @@ import { Icon } from '../components/Icons'
 import { buildRetirementSummary } from '../engine/careerSummary'
 import { playerAgeAtWindow } from '../engine/careerTime'
 import { useGameStore } from '../store/gameStore'
-import { formatEuro } from '../ui/format'
+import { formatEuro, nationalStageLabel } from '../ui/format'
 
 export function retirementNarrative(input: {
   age: number
@@ -85,11 +85,6 @@ function RetirementArchive() {
             <small>另有青年队 {summary.youthTotals.appearances} 场</small>
           </div>
           <div>
-            <span>国家队生涯</span>
-            <strong>{game.nationalTeam.caps}场 · {game.nationalTeam.goals}球 · {game.nationalTeam.assists}助</strong>
-            <small>{game.nationalTeam.retired ? '已退出国家队' : '随球员生涯一同谢幕'}</small>
-          </div>
-          <div>
             <span>能力轨迹</span>
             <strong>巅峰 {summary.peakOverall} · 退役 {summary.finalOverall}</strong>
             <small>{summary.peakAge}岁抵达巅峰</small>
@@ -99,6 +94,29 @@ function RetirementArchive() {
             <strong>巅峰 {formatEuro(summary.peakMarketValueEuro)}</strong>
             <small>{summary.peakMarketValueAge}岁巅峰 · 退役 {formatEuro(summary.finalMarketValueEuro)}</small>
           </div>
+        </section>
+
+        <section className="retirement-archive__section retirement-national">
+          <div className="retirement-archive__section-title">
+            <div>
+              <Icon name="player" />
+              <h2>国家队生涯</h2>
+            </div>
+            <span>中国国家队</span>
+          </div>
+          <dl>
+            <div><dt>出场</dt><dd>{summary.nationalTeam.appearances}</dd></div>
+            <div><dt>进球</dt><dd>{summary.nationalTeam.goals}</dd></div>
+            <div><dt>助攻</dt><dd>{summary.nationalTeam.assists}</dd></div>
+            <div>
+              <dt>世界杯最佳</dt>
+              <dd>{summary.nationalTeam.worldCupBest ? nationalStageLabel(summary.nationalTeam.worldCupBest) : '无正赛记录'}</dd>
+            </div>
+            <div>
+              <dt>亚洲杯最佳</dt>
+              <dd>{summary.nationalTeam.asianCupBest ? nationalStageLabel(summary.nationalTeam.asianCupBest) : '无正赛记录'}</dd>
+            </div>
+          </dl>
         </section>
 
         <section className="retirement-archive__section">
@@ -122,7 +140,11 @@ function RetirementArchive() {
             </div>
             {summary.clubs.map((club) => (
               <div className="retirement-clubs__row" role="row" key={club.clubId}>
-                <span className="retirement-clubs__service">{club.serviceLabel}</span>
+                <span className="retirement-clubs__service">
+                  {club.serviceSpells.map((spell) => (
+                    <span key={`${club.clubId}-${spell.firstWindowIndex}`}>{spell.label}</span>
+                  ))}
+                </span>
                 <span className="retirement-clubs__club">
                   <strong>{club.clubName}</strong>
                   <small>{club.country} · {club.levelLabel}</small>
@@ -153,7 +175,7 @@ function RetirementArchive() {
               <strong>{summary.evaluation.provisionalScore}</strong>
               <div>
                 <span>{summary.evaluation.title}</span>
-                <small>已完成维度 {summary.evaluation.completedPoints}/{summary.evaluation.completedPointsMaximum} 分</small>
+                <small>当前 {summary.evaluation.provisionalScore}/100 · 已完成维度 {summary.evaluation.completedPoints}/{summary.evaluation.completedPointsMaximum}</small>
               </div>
             </div>
             <dl>

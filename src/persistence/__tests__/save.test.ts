@@ -183,6 +183,43 @@ describe('save migration', () => {
 
     expect(restored.phase).toBe('RETIREMENT_DECISION')
     expect(restored.retirementReason).toBe('AGE_LIMIT')
+
+    const repairedAge40Market = validateGameState({
+      ...restored,
+      phase: 'TRANSFER_WINDOW',
+      windowIndex: 54,
+      retirementReason: null,
+      history: [
+        {
+          windowIndex: 53,
+          clubId: selected.club.id,
+          clubName: selected.club.name,
+          role: 'ROTATION',
+          stats: {
+            appearances: 10,
+            starts: 5,
+            minutes: 600,
+            goals: 1,
+            assists: 2,
+            yellowCards: 1,
+            redCards: 0,
+            averageRating: 6.8,
+          },
+          arrivalChoice: null,
+          trainingFocus: 'BALANCED',
+          developmentApproach: 'STEADY',
+          endingAttributes: player.attributes,
+          firstTeamAttention: 70,
+          teamLevel: 'FIRST_TEAM',
+        },
+      ],
+      transferOffers: [],
+      selectedTransferChoiceId: 'STAY',
+    })
+
+    expect(repairedAge40Market.phase).toBe('RETIREMENT_DECISION')
+    expect(repairedAge40Market.windowIndex).toBe(53)
+    expect(repairedAge40Market.transferOffers).toEqual([])
   })
 
   it('repairs an active youth contract when an existing save is age 22 or older', () => {

@@ -31,6 +31,7 @@ import {
 import { calculateOverall } from './player'
 import { createRandom } from './random'
 import {
+  canSignNewContractAtWindow,
   DEMO_WINDOW_COUNT,
   playerAgeAtWindow,
 } from './careerTime'
@@ -395,6 +396,8 @@ function generateTransferOffersFromPool(
     windowIndex,
   } = input
 
+  if (!canSignNewContractAtWindow(windowIndex)) return []
+
   const playerAge = playerAgeAtWindow(windowIndex)
   const clubPool =
     domesticOnly || playerAge < 18 ? DOMESTIC_CLUBS : CLUBS
@@ -687,6 +690,7 @@ export function generateContractExpiryOffers(input: {
     careerSeed,
     windowIndex,
   } = input
+  if (!canSignNewContractAtWindow(windowIndex)) return []
   const currentClub = CLUBS.find((club) => club.id === currentClubId)
   if (!currentClub) return []
 
