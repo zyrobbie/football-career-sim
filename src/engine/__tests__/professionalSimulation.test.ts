@@ -8,6 +8,7 @@ import { createFirstTeamProgress } from '../firstTeamPath'
 import { generateAcademyOffers } from '../offers'
 import { generatePlayer } from '../player'
 import { simulateProfessionalHalfYear } from '../simulateProfessionalHalfYear'
+import { createCareerStoryState } from '../careerStory'
 import { createDraft } from './testFixtures'
 
 function createFirstTeamState(careerSeed: string) {
@@ -33,8 +34,8 @@ function createFirstTeamState(careerSeed: string) {
   })
   const contract = contractFromOffer(professionalOffer)
   const state: GameState = {
-    saveVersion: 10,
-    dataVersion: 10,
+    saveVersion: 11,
+    dataVersion: 11,
     phase: 'SIMULATION_READY',
     careerSeed,
     startYear: 2026,
@@ -53,9 +54,10 @@ function createFirstTeamState(careerSeed: string) {
     transferDecision: null,
     arrivalChoice: 'COACH',
     transferArrivalChoice: null,
-    pendingCareerEventId: null,
+    pendingCareerEvent: null,
     careerEventHistory: [],
     pendingConsequences: [],
+    careerStory: createCareerStoryState(academy.club.id),
     trainingFocus: 'BALANCED',
     developmentApproach: 'STEADY',
     trainingQualityBonus: 0,

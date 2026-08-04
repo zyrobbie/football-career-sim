@@ -4,6 +4,7 @@ import { generatePlayer } from '../player'
 import type { CareerHistoryEntry, GameState, HalfYearStats } from '../../models/game'
 import { createDraft } from './testFixtures'
 import { buildRetirementSummary, estimateMarketValueEuro } from '../careerSummary'
+import { createCareerStoryState } from '../careerStory'
 
 function stats(appearances: number, goals: number, assists: number, rating: number): HalfYearStats {
   return {
@@ -91,8 +92,8 @@ function retirementGame(): GameState {
   ]
 
   return {
-    saveVersion: 10,
-    dataVersion: 10,
+    saveVersion: 11,
+    dataVersion: 11,
     phase: 'CAREER_RETIRED',
     careerSeed,
     startYear: 2026,
@@ -130,9 +131,10 @@ function retirementGame(): GameState {
     transferDecision: null,
     arrivalChoice: 'COACH',
     transferArrivalChoice: null,
-    pendingCareerEventId: null,
+    pendingCareerEvent: null,
     careerEventHistory: [],
     pendingConsequences: [],
+    careerStory: createCareerStoryState(academyOffers[0]!.club.id),
     trainingFocus: null,
     developmentApproach: null,
     trainingQualityBonus: 0,

@@ -1,3 +1,18 @@
+import type {
+  CareerEventCategory,
+  CareerEventId,
+  CareerEventInteractionKind,
+} from '../data/careerEventIds'
+
+export type {
+  CareerEventCategory,
+  CareerEventId,
+  CareerEventInteractionKind,
+} from '../data/careerEventIds'
+
+export const SAVE_VERSION = 11 as const
+export const DATA_VERSION = 11 as const
+
 export const positions = [
   'ST',
   'LW',
@@ -151,28 +166,46 @@ export type TransferArrivalChoice =
   | 'FANS'
   | 'NONE'
 
-export type CareerEventCategory =
-  | 'COACH'
-  | 'TEAM'
-  | 'MEDIA'
-  | 'HEALTH'
-  | 'CONTRACT'
+export type CareerEventChoiceId = string
 
-export type CareerEventId =
-  | 'COACH_DEFENSIVE_TASK'
-  | 'COACH_ROLE_TRIAL'
-  | 'CAPTAIN_VIDEO_REVIEW'
-  | 'TEAMMATE_RIVALRY'
-  | 'DRESSING_ROOM_DISPUTE'
-  | 'MEDIA_BREAKTHROUGH'
-  | 'ONLINE_CRITICISM'
-  | 'FAN_DAY_OR_REST'
-  | 'FITNESS_WARNING'
-  | 'KEY_MATCH_PAIN'
-  | 'CONTRACT_ROLE_TALK'
-  | 'TRANSFER_RUMOR'
+export type ClubLeadershipState = 'NONE' | 'CANDIDATE' | 'CAPTAIN'
+export type ClubRivalryState = 'NONE' | 'HEALTHY' | 'HOSTILE'
+export type ClubMentorshipState = 'NONE' | 'MENTEE' | 'MENTOR'
+export type PublicPersona =
+  | 'NEUTRAL'
+  | 'LOW_KEY'
+  | 'TEAM_FIRST'
+  | 'OUTSPOKEN'
 
-export type CareerEventChoiceId = 'A' | 'B' | 'C'
+export interface CareerStoryState {
+  club: {
+    clubId: string | null
+    leadership: ClubLeadershipState
+    rivalry: ClubRivalryState
+    mentorship: ClubMentorshipState
+  }
+  publicPersona: PublicPersona
+  tendencies: {
+    leadership: number
+    diplomacy: number
+    professionalism: number
+    clutch: number
+  }
+}
+
+export interface CareerStoryEffect {
+  club?: Partial<Omit<CareerStoryState['club'], 'clubId'>>
+  publicPersona?: PublicPersona
+  tendencyDelta?: Partial<CareerStoryState['tendencies']>
+}
+
+export interface PendingCareerEvent {
+  eventId: CareerEventId
+  interactionKind: CareerEventInteractionKind
+  stepIndex: number
+  selections: CareerEventChoiceId[]
+  variantId: string | null
+}
 
 export interface PlayerEventDelta {
   attributes?: Partial<Attributes>
@@ -197,6 +230,7 @@ export interface CareerEventRecord {
   outcomeLabel?: string
   appliedDelta: PlayerEventDelta
   cashDeltaEuro: number
+  storyEffect?: CareerStoryEffect
 }
 
 export interface CareerConsequence {
@@ -467,8 +501,8 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
-  saveVersion: 10
-  dataVersion: 10
+  saveVersion: typeof SAVE_VERSION
+  dataVersion: typeof DATA_VERSION
   phase: GamePhase
   careerSeed: string
   startYear: number
@@ -487,9 +521,10 @@ export interface GameState {
   transferDecision: TransferDecision | null
   arrivalChoice: ArrivalChoice | null
   transferArrivalChoice: TransferArrivalChoice | null
-  pendingCareerEventId: CareerEventId | null
+  pendingCareerEvent: PendingCareerEvent | null
   careerEventHistory: CareerEventRecord[]
   pendingConsequences: CareerConsequence[]
+  careerStory: CareerStoryState
   trainingFocus: TrainingFocus | null
   developmentApproach: DevelopmentApproach | null
   trainingQualityBonus: number

@@ -4,12 +4,24 @@ import type {
   CareerEventChoiceId,
   CareerEventId,
   CareerEventRecord,
+  CareerStoryEffect,
   GameState,
   HalfYearReport,
   Player,
   PlayerEventDelta,
 } from '../models/game'
+import {
+  CAREER_EVENT_IDS,
+  interactionProtocolFor,
+  type CareerEventInteractionKind,
+} from '../data/careerEventIds'
+import {
+  applyCareerStoryEffect,
+  ensureStoryClub,
+} from './careerStory'
 import { createRandom, weightedPick } from './random'
+
+export type CareerEventPriority = 'P0' | 'P1' | 'P2' | 'P3' | 'P4'
 
 export interface CareerEventChoice {
   id: CareerEventChoiceId
@@ -22,6 +34,7 @@ export interface CareerEventChoice {
   trainingBonus?: number
   delayed?: CareerEventDelayed | readonly CareerEventDelayed[]
   outcomes?: readonly CareerEventOutcome[]
+  storyEffect?: CareerStoryEffect
 }
 
 interface CareerEventDelayed {
@@ -40,11 +53,16 @@ interface CareerEventOutcome {
   cashDeltaEuro?: number
   trainingBonus?: number
   delayed?: CareerEventDelayed | readonly CareerEventDelayed[]
+  storyEffect?: CareerStoryEffect
 }
 
 export interface CareerEventDefinition {
   id: CareerEventId
+  groupId: string
   category: CareerEventCategory
+  priority: CareerEventPriority
+  cooldownWindows: number
+  interactionKind: CareerEventInteractionKind
   eyebrow: string
   title: string
   description: string
@@ -94,6 +112,30 @@ function combineRequestedDelta(
   return combined
 }
 
+function combineStoryEffects(
+  first?: CareerStoryEffect,
+  second?: CareerStoryEffect,
+): CareerStoryEffect | undefined {
+  if (!first) return second
+  if (!second) return first
+  const tendencyDelta: NonNullable<CareerStoryEffect['tendencyDelta']> = {
+    ...first.tendencyDelta,
+  }
+  for (const [key, value] of Object.entries(second.tendencyDelta ?? {})) {
+    const tendency = key as keyof typeof tendencyDelta
+    tendencyDelta[tendency] =
+      (tendencyDelta[tendency] ?? 0) + (value ?? 0)
+  }
+  const combined: CareerStoryEffect = { ...first, ...second }
+  if (first.club || second.club) {
+    combined.club = { ...first.club, ...second.club }
+  }
+  if (Object.keys(tendencyDelta).length > 0) {
+    combined.tendencyDelta = tendencyDelta
+  }
+  return combined
+}
+
 const always = () => true
 const hasContract = (state: GameState) => Boolean(state.contract)
 const latestRating = (state: GameState) =>
@@ -102,7 +144,11 @@ const latestRating = (state: GameState) =>
 export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   {
     id: 'COACH_DEFENSIVE_TASK',
+    groupId: 'COACH_TRAINING_REQUEST',
     category: 'COACH',
+    priority: 'P2',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '教练 · 战术要求',
     title: '球队需要你补上防守训练。',
     description:
@@ -156,7 +202,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'COACH_ROLE_TRIAL',
+    groupId: 'COACH_ROLE_EXPERIMENT',
     category: 'COACH',
+    priority: 'P2',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '教练 · 临场试验',
     title: '教练想在下一场改变你的场上职责。',
     description:
@@ -208,7 +258,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'CAPTAIN_VIDEO_REVIEW',
+    groupId: 'CLUB_LEADERSHIP',
     category: 'TEAM',
+    priority: 'P3',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '更衣室 · 队长邀请',
     title: '队长邀请你参加赛后录像复盘。',
     description:
@@ -228,6 +282,9 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
           squadRelation: 5,
           fitness: -1,
         },
+        storyEffect: {
+          tendencyDelta: { leadership: 1, professionalism: 1 },
+        },
       },
       {
         id: 'B',
@@ -237,6 +294,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你认真听完了复盘。没有抢镜，但队长认可你的学习态度。',
         playerDelta: { squadRelation: 3, coachRelation: 1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
       },
       {
         id: 'C',
@@ -251,7 +309,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'TEAMMATE_RIVALRY',
+    groupId: 'POSITION_RIVALRY',
     category: 'TEAM',
+    priority: 'P3',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '更衣室 · 位置竞争',
     title: '同位置队友开始公开与你竞争。',
     description:
@@ -293,7 +355,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'DRESSING_ROOM_DISPUTE',
+    groupId: 'DRESSING_ROOM_CONFLICT',
     category: 'TEAM',
+    priority: 'P3',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '更衣室 · 内部矛盾',
     title: '一次训练冲突让更衣室气氛紧张。',
     description:
@@ -309,6 +375,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你帮助双方把话说开。过程消耗精力，却让更多队友开始信任你。',
         playerDelta: { squadRelation: 4, coachRelation: 2, morale: -2 },
+        storyEffect: { tendencyDelta: { diplomacy: 1, leadership: 1 } },
       },
       {
         id: 'B',
@@ -361,7 +428,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'MEDIA_BREAKTHROUGH',
+    groupId: 'MEDIA_PROFILE',
     category: 'MEDIA',
+    priority: 'P3',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '舆论 · 突然走红',
     title: '一段比赛集锦让你受到额外关注。',
     description:
@@ -379,6 +450,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你把话题拉回训练和球队。报道不算轰动，但俱乐部认可你的分寸。',
         playerDelta: { mediaRelation: 2, coachRelation: 2, reputation: 1 },
+        storyEffect: { publicPersona: 'LOW_KEY' },
       },
       {
         id: 'B',
@@ -425,12 +497,20 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你的回答让球迷和队友都很受用，个人热度也转化为对俱乐部的认同。',
         playerDelta: { fanRelation: 5, clubAttachment: 4, mediaRelation: 1 },
+        storyEffect: {
+          publicPersona: 'TEAM_FIRST',
+          tendencyDelta: { diplomacy: 1 },
+        },
       },
     ],
   },
   {
     id: 'ONLINE_CRITICISM',
+    groupId: 'MEDIA_PRESSURE',
     category: 'MEDIA',
+    priority: 'P3',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '舆论 · 网络质疑',
     title: '连续几场普通表现引来网络批评。',
     description:
@@ -496,7 +576,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'FAN_DAY_OR_REST',
+    groupId: 'FAN_OBLIGATION',
     category: 'MEDIA',
+    priority: 'P3',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '球迷 · 公开活动',
     title: '球迷见面会与恢复训练撞期。',
     description:
@@ -535,11 +619,15 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'FITNESS_WARNING',
+    groupId: 'FITNESS_MANAGEMENT',
     category: 'HEALTH',
+    priority: 'P2',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '身体 · 负荷警报',
     title: '体能团队发现你的疲劳指标偏高。',
     description:
-      '目前还不是伤病，但继续维持高负荷可能影响接下来几周的训练质量。',
+      '目前还不是伤病，但如果继续维持高负荷，本窗口后半程的训练质量会受到影响。',
     weight: 11,
     isEligible: (state) =>
       Boolean(state.player) &&
@@ -567,7 +655,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         id: 'C',
         title: '隐瞒疲劳继续练',
         description: '不想错过竞争机会，维持原有强度。',
-        effectPreview: '短期状态上升 · 65%出现后续身体代价',
+        effectPreview: '短期状态上升 · 65%当窗遭遇身体反噬',
         outcomeSummary:
           '你维持了训练强度，短期状态更锐利，但疲劳没有真正消失。',
         playerDelta: { form: 3, fitness: -2, morale: 2 },
@@ -584,21 +672,9 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
             id: 'RELAPSE',
             label: '疲劳反噬',
             weight: 65,
-            summary: '高负荷让状态短暂变好，恢复指标却继续恶化，体能团队已经注意到异常。',
-            playerDelta: { fitness: -2 },
-            delayed: [
-              {
-                delayWindows: 1,
-                playerDelta: { fitness: -7, morale: -1 },
-                trainingBonus: -1,
-                summary: '此前被隐瞒的疲劳重新出现，体能团队被迫降低训练负荷。',
-              },
-              {
-                delayWindows: 2,
-                playerDelta: { coachRelation: -2 },
-                summary: '体能团队向教练提交了负荷记录，教练对你隐瞒状况感到不满。',
-              },
-            ],
+            summary: '高负荷让状态短暂变好，随后训练质量和恢复指标一同下滑，教练也得知你隐瞒了疲劳。',
+            playerDelta: { fitness: -8, morale: -1, coachRelation: -2 },
+            trainingBonus: -1,
           },
         ],
       },
@@ -606,7 +682,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'KEY_MATCH_PAIN',
+    groupId: 'MATCH_AVAILABILITY',
     category: 'HEALTH',
+    priority: 'P2',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '身体 · 赛前不适',
     title: '关键比赛前，你感到脚踝轻微不适。',
     description:
@@ -642,14 +722,9 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
             id: 'PAIN',
             label: '不适明显加重',
             weight: 25,
-            summary: '比赛强度超出预期，脚踝在一次对抗后明显加重，你只能提前离场。',
-            playerDelta: { form: -2, fitness: -6, morale: -2 },
-            delayed: {
-              delayWindows: 1,
-              playerDelta: { fitness: -4 },
-              trainingBonus: -0.5,
-              summary: '关键比赛留下的脚踝不适仍在影响恢复，本窗口训练负荷受到限制。',
-            },
+            summary: '比赛强度超出预期，脚踝在一次对抗后明显不适，你只能提前离场并下调本窗口训练量。',
+            playerDelta: { form: -2, fitness: -10, morale: -2 },
+            trainingBonus: -0.5,
           },
         ],
       },
@@ -665,26 +740,16 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
             id: 'HERO',
             label: '带伤完成关键表现',
             weight: 35,
-            summary: '脚踝没有拖住你。你在关键时刻完成决定性表现，赢得了更衣室的尊重。',
-            playerDelta: { form: 6, fitness: -4, morale: 4, squadRelation: 2, reputation: 2 },
-            delayed: {
-              delayWindows: 1,
-              playerDelta: { fitness: -3 },
-              summary: '带伤出战的消耗仍然存在，你需要额外时间恢复到正常负荷。',
-            },
+            summary: '脚踝没有拖住你。你在关键时刻完成决定性表现，赢得尊重，也付出了当窗恢复变慢的代价。',
+            playerDelta: { form: 6, fitness: -7, morale: 4, squadRelation: 2, reputation: 2 },
           },
           {
             id: 'PAIN',
-            label: '伤势明显加重',
+            label: '不适明显加重',
             weight: 65,
-            summary: '一次急停让脚踝的不适迅速加剧，你没有等到终场就被迫离开比赛。',
-            playerDelta: { form: -3, fitness: -9, morale: -3 },
-            delayed: {
-              delayWindows: 1,
-              playerDelta: { fitness: -5 },
-              trainingBonus: -1,
-              summary: '带伤踢满的决定延长了恢复周期，本窗口训练计划被迫下调。',
-            },
+            summary: '一次急停让脚踝的不适迅速加剧，你没有等到终场就被迫离开，余下训练也随即降量。',
+            playerDelta: { form: -3, fitness: -14, morale: -3 },
+            trainingBonus: -1,
           },
         ],
       },
@@ -692,7 +757,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'CONTRACT_ROLE_TALK',
+    groupId: 'CONTRACT_ROLE',
     category: 'CONTRACT',
+    priority: 'P1',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '合同 · 角色沟通',
     title: '你的实际角色与合同承诺出现落差。',
     description:
@@ -737,7 +806,11 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
   {
     id: 'TRANSFER_RUMOR',
+    groupId: 'TRANSFER_MEDIA',
     category: 'CONTRACT',
+    priority: 'P3',
+    cooldownWindows: 2,
+    interactionKind: 'CHOICE',
     eyebrow: '转会 · 传闻发酵',
     title: '媒体突然把你与另一家俱乐部联系起来。',
     description:
@@ -798,6 +871,67 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
 ]
 
+export function validateCareerEventDefinitions(
+  definitions: readonly CareerEventDefinition[] = CAREER_EVENTS,
+): string[] {
+  const errors: string[] = []
+  const ids = new Set<string>()
+  const declaredIds = new Set<string>(CAREER_EVENT_IDS)
+
+  for (const event of definitions) {
+    if (ids.has(event.id)) errors.push(`事件ID重复：${event.id}`)
+    ids.add(event.id)
+    if (!declaredIds.has(event.id)) errors.push(`事件ID未登记：${event.id}`)
+    if (!event.groupId.trim()) errors.push(`事件缺少分组：${event.id}`)
+    if (event.weight <= 0) errors.push(`事件权重无效：${event.id}`)
+    if (event.cooldownWindows < 0) errors.push(`事件冷却无效：${event.id}`)
+    if (event.choices.length < 2 || event.choices.length > 5) {
+      errors.push(`事件选项数量必须为2至5：${event.id}`)
+    }
+    const choiceIds = new Set<string>()
+    for (const choice of event.choices) {
+      if (choiceIds.has(choice.id)) {
+        errors.push(`事件选项ID重复：${event.id}/${choice.id}`)
+      }
+      choiceIds.add(choice.id)
+      if (!choice.title.trim() || !choice.description.trim()) {
+        errors.push(`事件选项文案不完整：${event.id}/${choice.id}`)
+      }
+      if (choice.outcomes?.some((outcome) => outcome.weight <= 0)) {
+        errors.push(`事件随机结果权重无效：${event.id}/${choice.id}`)
+      }
+      if (
+        event.category === 'HEALTH' &&
+        (choice.delayed || choice.outcomes?.some((outcome) => outcome.delayed))
+      ) {
+        errors.push(`健康事件不得创建跨窗口后果：${event.id}/${choice.id}`)
+      }
+    }
+    if (
+      event.choices.some((choice) => (choice.cashDeltaEuro ?? 0) < 0) &&
+      !event.choices.some((choice) => (choice.cashDeltaEuro ?? 0) >= 0)
+    ) {
+      errors.push(`付费事件缺少免费选项：${event.id}`)
+    }
+    if (
+      event.interactionKind === 'CHOICE' &&
+      interactionProtocolFor(event.interactionKind) !== 'SINGLE_STAGE'
+    ) {
+      errors.push(`普通选择事件协议错误：${event.id}`)
+    }
+  }
+
+  for (const id of CAREER_EVENT_IDS) {
+    if (!ids.has(id)) errors.push(`已登记事件缺少定义：${id}`)
+  }
+  return errors
+}
+
+const definitionErrors = validateCareerEventDefinitions()
+if (definitionErrors.length > 0) {
+  throw new Error(`特殊事件定义无效：${definitionErrors.join('；')}`)
+}
+
 const eventMap = new Map(CAREER_EVENTS.map((event) => [event.id, event]))
 
 export function getCareerEvent(id: CareerEventId): CareerEventDefinition {
@@ -808,10 +942,6 @@ export function getCareerEvent(id: CareerEventId): CareerEventDefinition {
 
 export function selectCareerEvent(state: GameState): CareerEventId | null {
   if (!state.player || state.windowIndex === 0) return null
-  const recentHistory = state.careerEventHistory.filter(
-    (entry) => state.windowIndex - entry.windowIndex <= 10,
-  )
-  const recentIds = new Set(recentHistory.map((entry) => entry.eventId))
   const lastTwoCategories = state.careerEventHistory
     .slice(-2)
     .map((entry) => getCareerEvent(entry.eventId).category)
@@ -821,34 +951,27 @@ export function selectCareerEvent(state: GameState): CareerEventId | null {
       ? lastTwoCategories[0]
       : null
   const baseEligible = CAREER_EVENTS.filter((event) => event.isEligible(state))
-  let eligible = baseEligible.filter(
+  const eligible = baseEligible.filter(
     (event) =>
-      !recentIds.has(event.id) && event.category !== blockedCategory,
+      !state.careerEventHistory.some(
+        (entry) =>
+          entry.eventId === event.id &&
+          state.windowIndex - entry.windowIndex <= event.cooldownWindows,
+      ) && event.category !== blockedCategory,
   )
-  if (eligible.length === 0) {
-    const fallbackIds = new Set(
-      state.careerEventHistory
-        .filter((entry) => state.windowIndex - entry.windowIndex <= 4)
-        .map((entry) => entry.eventId),
-    )
-    eligible = baseEligible.filter(
-      (event) =>
-        !fallbackIds.has(event.id) && event.category !== blockedCategory,
-    )
-  }
   if (eligible.length === 0) return null
 
   const lastWindow = state.careerEventHistory.at(-1)?.windowIndex ?? -99
   const guaranteed =
     state.windowIndex === 1 ||
     (Boolean(state.contract) && state.windowIndex === 4) ||
-    state.windowIndex - lastWindow >= 2
+    state.windowIndex - lastWindow >= 3
   const random = createRandom(
     state.careerSeed,
     'career-event',
     state.windowIndex,
   )
-  const triggerChance = state.contract ? 0.8 : 0.7
+  const triggerChance = state.transferDecision ? 0.5 : 0.7
   if (!guaranteed && random.next() > triggerChance) return null
 
   return weightedPick(
@@ -898,11 +1021,19 @@ function applyPlayerDelta(
     'reputation',
     'clubAttachment',
   ] as const
+  const relationshipKeys = new Set<(typeof ratingKeys)[number]>([
+    'coachRelation',
+    'squadRelation',
+    'agentRelation',
+    'fanRelation',
+    'mediaRelation',
+  ])
   for (const key of ratingKeys) {
     const delta = requested[key]
     if (delta === undefined) continue
     const before = next[key]
-    const after = roundTenth(clamp(before + delta))
+    const minimum = delta < 0 && relationshipKeys.has(key) ? 35 : 0
+    const after = roundTenth(clamp(before + delta, minimum))
     next[key] = after
     applied[key] = roundTenth(after - before)
   }
@@ -916,6 +1047,7 @@ export function resolveCareerEventChoice(input: {
   choiceId: CareerEventChoiceId
 }): {
   player: Player
+  careerStory: GameState['careerStory']
   cashEuro: number
   trainingBonus: number
   record: CareerEventRecord
@@ -951,6 +1083,10 @@ export function resolveCareerEventChoice(input: {
   const requestedCashDelta =
     (choice.cashDeltaEuro ?? 0) + (outcome?.cashDeltaEuro ?? 0)
   const cashDeltaEuro = Math.max(-state.cashEuro, requestedCashDelta)
+  const storyEffect = combineStoryEffects(
+    choice.storyEffect,
+    outcome?.storyEffect,
+  )
   const record: CareerEventRecord = {
     eventId,
     choiceId,
@@ -960,6 +1096,7 @@ export function resolveCareerEventChoice(input: {
     ...(outcome ? { outcomeLabel: outcome.label } : {}),
     appliedDelta: resolved.appliedDelta,
     cashDeltaEuro,
+    ...(storyEffect ? { storyEffect } : {}),
   }
   const delayed = [
     ...delayedList(choice.delayed),
@@ -976,6 +1113,10 @@ export function resolveCareerEventChoice(input: {
 
   return {
     player: resolved.player,
+    careerStory: applyCareerStoryEffect(
+      ensureStoryClub(state.careerStory, state.selectedClubId),
+      record.storyEffect,
+    ),
     cashEuro: state.cashEuro + cashDeltaEuro,
     trainingBonus:
       (choice.trainingBonus ?? 0) + (outcome?.trainingBonus ?? 0),

@@ -1,14 +1,22 @@
 import { z } from 'zod'
 import { MAX_CAREER_AGE } from '../data/ageCurve'
 import {
+  CAREER_EVENT_IDS,
+  CAREER_EVENT_INTERACTION_KINDS,
+} from '../data/careerEventIds'
+import {
   canSignNewContractAtWindow,
   playerAgeAtWindow,
   shouldRetireAtContractExpiry,
 } from '../engine/careerTime'
 import { enforceAgeBasedFirstTeam } from '../engine/eligibility'
+import { createCareerStoryState } from '../engine/careerStory'
+import { getCareerEvent } from '../engine/careerEvents'
 import {
   attributeKeys,
+  DATA_VERSION,
   positions,
+  SAVE_VERSION,
   type GameState,
 } from '../models/game'
 
@@ -178,20 +186,42 @@ const transferArrivalChoiceSchema = z.enum([
   'NONE',
 ])
 
-const careerEventIdSchema = z.enum([
-  'COACH_DEFENSIVE_TASK',
-  'COACH_ROLE_TRIAL',
-  'CAPTAIN_VIDEO_REVIEW',
-  'TEAMMATE_RIVALRY',
-  'DRESSING_ROOM_DISPUTE',
-  'MEDIA_BREAKTHROUGH',
-  'ONLINE_CRITICISM',
-  'FAN_DAY_OR_REST',
-  'FITNESS_WARNING',
-  'KEY_MATCH_PAIN',
-  'CONTRACT_ROLE_TALK',
-  'TRANSFER_RUMOR',
-])
+const careerEventIdSchema = z.enum(CAREER_EVENT_IDS)
+const careerEventInteractionKindSchema = z.enum(
+  CAREER_EVENT_INTERACTION_KINDS,
+)
+
+const storyTendenciesSchema = z.object({
+  leadership: z.number().int().min(0).max(5),
+  diplomacy: z.number().int().min(0).max(5),
+  professionalism: z.number().int().min(0).max(5),
+  clutch: z.number().int().min(0).max(5),
+})
+
+const careerStoryEffectSchema = z.object({
+  club: z
+    .object({
+      leadership: z.enum(['NONE', 'CANDIDATE', 'CAPTAIN']).optional(),
+      rivalry: z.enum(['NONE', 'HEALTHY', 'HOSTILE']).optional(),
+      mentorship: z.enum(['NONE', 'MENTEE', 'MENTOR']).optional(),
+    })
+    .optional(),
+  publicPersona: z
+    .enum(['NEUTRAL', 'LOW_KEY', 'TEAM_FIRST', 'OUTSPOKEN'])
+    .optional(),
+  tendencyDelta: storyTendenciesSchema.partial().optional(),
+})
+
+const careerStorySchema = z.object({
+  club: z.object({
+    clubId: z.string().min(1).nullable(),
+    leadership: z.enum(['NONE', 'CANDIDATE', 'CAPTAIN']),
+    rivalry: z.enum(['NONE', 'HEALTHY', 'HOSTILE']),
+    mentorship: z.enum(['NONE', 'MENTEE', 'MENTOR']),
+  }),
+  publicPersona: z.enum(['NEUTRAL', 'LOW_KEY', 'TEAM_FIRST', 'OUTSPOKEN']),
+  tendencies: storyTendenciesSchema,
+})
 
 const playerEventDeltaSchema = z.object({
   attributes: attributesSchema.partial().optional(),
@@ -209,13 +239,14 @@ const playerEventDeltaSchema = z.object({
 
 const careerEventRecordSchema = z.object({
   eventId: careerEventIdSchema,
-  choiceId: z.enum(['A', 'B', 'C']),
+  choiceId: z.string().min(1).max(32),
   windowIndex: z.number().int().nonnegative(),
   choiceTitle: z.string().min(1),
   outcomeSummary: z.string().min(1),
   outcomeLabel: z.string().min(1).optional(),
   appliedDelta: playerEventDeltaSchema,
   cashDeltaEuro: z.number().int(),
+  storyEffect: careerStoryEffectSchema.optional(),
 })
 
 const careerConsequenceSchema = z.object({
@@ -277,8 +308,8 @@ const nationalTeamStateSchema = z.object({
 })
 
 const stateSchema = z.object({
-  saveVersion: z.literal(10),
-  dataVersion: z.literal(10),
+  saveVersion: z.literal(SAVE_VERSION),
+  dataVersion: z.literal(DATA_VERSION),
   phase: z.enum([
     'HOME',
     'CREATE_IDENTITY',
@@ -349,9 +380,18 @@ const stateSchema = z.object({
     ])
     .nullable(),
   transferArrivalChoice: transferArrivalChoiceSchema.nullable(),
-  pendingCareerEventId: careerEventIdSchema.nullable(),
+  pendingCareerEvent: z
+    .object({
+      eventId: careerEventIdSchema,
+      interactionKind: careerEventInteractionKindSchema,
+      stepIndex: z.number().int().min(0).max(8),
+      selections: z.array(z.string().min(1).max(32)).max(8),
+      variantId: z.string().min(1).max(64).nullable(),
+    })
+    .nullable(),
   careerEventHistory: z.array(careerEventRecordSchema).max(80),
   pendingConsequences: z.array(careerConsequenceSchema).max(16),
+  careerStory: careerStorySchema,
   developmentApproach: z
     .enum(['PUSH', 'STEADY', 'TEAM_FIRST'])
     .nullable(),
@@ -633,7 +673,7 @@ function migrateLegacyState(value: unknown): unknown {
   }
 
   if (
-    [7, 8, 9, 10].includes(Number(migrated.saveVersion)) &&
+    [7, 8, 9, 10, 11].includes(Number(migrated.saveVersion)) &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
     ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY'].includes(
@@ -655,6 +695,7 @@ function migrateLegacyState(value: unknown): unknown {
       phase: 'PRO_STAGE_COMPLETE',
       windowIndex: completedWindowIndex,
       pendingCareerEventId: null,
+      pendingCareerEvent: null,
       trainingFocus: null,
       developmentApproach: null,
       trainingQualityBonus: 0,
@@ -715,6 +756,32 @@ function migrateLegacyState(value: unknown): unknown {
     }
   }
 
+  if (migrated.saveVersion === 10) {
+    const pendingCareerEventId =
+      typeof migrated.pendingCareerEventId === 'string'
+        ? migrated.pendingCareerEventId
+        : null
+    const selectedClubId =
+      typeof migrated.selectedClubId === 'string'
+        ? migrated.selectedClubId
+        : null
+    migrated = {
+      ...migrated,
+      saveVersion: SAVE_VERSION,
+      dataVersion: DATA_VERSION,
+      pendingCareerEvent: pendingCareerEventId
+        ? {
+            eventId: pendingCareerEventId,
+            interactionKind: 'CHOICE',
+            stepIndex: 0,
+            selections: [],
+            variantId: null,
+          }
+        : null,
+      careerStory: createCareerStoryState(selectedClubId),
+    }
+  }
+
   return migrated
 }
 
@@ -727,6 +794,23 @@ export function validateGameState(value: unknown): GameState {
   }
   if (new Set(parsed.draft.priorities).size !== 4) {
     throw new Error('Career priorities must be unique.')
+  }
+  if (parsed.careerStory.club.clubId !== parsed.selectedClubId) {
+    throw new Error('Club story state does not match the current club.')
+  }
+  const isCareerEventPhase = [
+    'SPECIAL_EVENT',
+    'SPECIAL_EVENT_RESULT',
+  ].includes(parsed.phase)
+  if (isCareerEventPhase !== Boolean(parsed.pendingCareerEvent)) {
+    throw new Error('Game phase does not match its pending career event.')
+  }
+  if (
+    parsed.pendingCareerEvent &&
+    getCareerEvent(parsed.pendingCareerEvent.eventId).interactionKind !==
+      parsed.pendingCareerEvent.interactionKind
+  ) {
+    throw new Error('Pending career-event interaction type is invalid.')
   }
 
   const nationalTotals = parsed.nationalTeam.history.reduce(
@@ -827,7 +911,7 @@ export function validateGameState(value: unknown): GameState {
 
   if (
     ['SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT'].includes(parsed.phase) &&
-    (!parsed.trainingFocus || !parsed.pendingCareerEventId)
+    (!parsed.trainingFocus || !parsed.pendingCareerEvent)
   ) {
     throw new Error('Special-event state is missing its event or training choice.')
   }
@@ -889,7 +973,7 @@ export function validateGameState(value: unknown): GameState {
       ...parsed,
       phase: 'RETIREMENT_DECISION',
       retirementReason: 'AGE_LIMIT',
-      pendingCareerEventId: null,
+      pendingCareerEvent: null,
       trainingFocus: null,
       developmentApproach: null,
       trainingQualityBonus: 0,

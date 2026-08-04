@@ -4,6 +4,7 @@ import { generatePlayer } from '../../engine/player'
 import { simulateHalfYear } from '../../engine/simulateHalfYear'
 import { createDraft } from '../../engine/__tests__/testFixtures'
 import { validateGameState } from '../save'
+import { createCareerStoryState } from '../../engine/careerStory'
 
 function legacyIdentityState() {
   return {
@@ -44,8 +45,8 @@ function legacyIdentityState() {
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
-    expect(migrated.saveVersion).toBe(10)
-    expect(migrated.dataVersion).toBe(10)
+    expect(migrated.saveVersion).toBe(11)
+    expect(migrated.dataVersion).toBe(11)
     expect(migrated.draft.jerseyNumber).toBe(10)
     expect(migrated.draft.preferredFoot).toBe('RIGHT')
     expect(migrated.teamLevel).toBe('YOUTH')
@@ -54,9 +55,10 @@ describe('save migration', () => {
     expect(migrated.professionalOffer).toBeNull()
     expect(migrated.transferOffers).toEqual([])
     expect(migrated.transferDecision).toBeNull()
-    expect(migrated.pendingCareerEventId).toBeNull()
+    expect(migrated.pendingCareerEvent).toBeNull()
     expect(migrated.careerEventHistory).toEqual([])
     expect(migrated.pendingConsequences).toEqual([])
+    expect(migrated.careerStory.club.clubId).toBeNull()
     expect(migrated.nationalTeam).toEqual({
       retired: false,
       currentRole: null,
@@ -66,6 +68,47 @@ describe('save migration', () => {
       debutWindowIndex: null,
       history: [],
     })
+  })
+
+  it('migrates a version 10 pending event into the version 11 decision state', () => {
+    const current = validateGameState(legacyIdentityState())
+    const careerSeed = 'version-ten-pending-event'
+    const draft = createDraft('CM')
+    const player = generatePlayer(draft, careerSeed)
+    const academyOffers = generateAcademyOffers(player, careerSeed)
+    const selected = academyOffers[0]!
+    const {
+      careerStory: _careerStory,
+      pendingCareerEvent: _pendingCareerEvent,
+      ...legacyBase
+    } = current
+
+    const migrated = validateGameState({
+      ...legacyBase,
+      saveVersion: 10,
+      dataVersion: 10,
+      phase: 'SPECIAL_EVENT',
+      careerSeed,
+      windowIndex: 1,
+      draft,
+      player,
+      academyOffers,
+      selectedClubId: selected.club.id,
+      careerStory: createCareerStoryState(selected.club.id),
+      youthRole: selected.expectedRole,
+      arrivalChoice: 'COACH',
+      trainingFocus: 'BALANCED',
+      pendingCareerEventId: 'CAPTAIN_VIDEO_REVIEW',
+    })
+
+    expect(migrated.pendingCareerEvent).toEqual({
+      eventId: 'CAPTAIN_VIDEO_REVIEW',
+      interactionKind: 'CHOICE',
+      stepIndex: 0,
+      selections: [],
+      variantId: null,
+    })
+    expect(migrated.careerStory.club.clubId).toBe(selected.club.id)
   })
 
   it('rejects national-team totals that disagree with their history', () => {
@@ -101,7 +144,7 @@ describe('save migration', () => {
       academyOffers: [{ ...offer, club: legacyClub }],
     })
 
-    expect(migrated.saveVersion).toBe(10)
+    expect(migrated.saveVersion).toBe(11)
     expect(migrated.academyOffers[0]?.club.country).toBe('中国')
     expect(migrated.academyOffers[0]?.club.leagueKey).toBe('中国')
   })
@@ -163,6 +206,7 @@ describe('save migration', () => {
       player,
       academyOffers,
       selectedClubId: selected.club.id,
+      careerStory: createCareerStoryState(selected.club.id),
       teamLevel: 'FIRST_TEAM',
       youthRole: null,
       firstTeamRole: 'ROTATION',
@@ -237,6 +281,7 @@ describe('save migration', () => {
       player,
       academyOffers,
       selectedClubId: selected.club.id,
+      careerStory: createCareerStoryState(selected.club.id),
       teamLevel: 'YOUTH',
       youthRole: 'CORE',
       firstTeamRole: null,
@@ -353,7 +398,7 @@ describe('save migration', () => {
       dataVersion: 3,
     })
 
-    expect(migrated.saveVersion).toBe(10)
+    expect(migrated.saveVersion).toBe(11)
     expect(migrated.firstTeamRole).toBeNull()
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
@@ -446,7 +491,7 @@ describe('save migration', () => {
 
     const migrated = validateGameState(legacy)
 
-    expect(migrated.saveVersion).toBe(10)
+    expect(migrated.saveVersion).toBe(11)
     expect(migrated.lastReport?.contract?.actualRole).toBe('ROTATION')
     expect(migrated.lastReport?.contract?.actualTeamLevel).toBe('FIRST_TEAM')
     expect(migrated.lastReport?.contract?.promiseFulfilled).toBe(false)

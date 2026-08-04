@@ -12,9 +12,11 @@ import { useGameStore } from '../store/gameStore'
 const categoryIcons: Record<CareerEventCategory, IconName> = {
   COACH: 'coach',
   TEAM: 'team',
+  MATCH: 'career',
   MEDIA: 'fans',
   HEALTH: 'physical',
   CONTRACT: 'career',
+  NATIONAL: 'career',
 }
 
 const deltaLabels: Record<string, string> = {
@@ -55,8 +57,8 @@ export function SpecialEventScreen() {
   const continueAfterCareerEvent = useGameStore(
     (state) => state.continueAfterCareerEvent,
   )
-  if (!game?.player || !game.pendingCareerEventId) return null
-  const event = getCareerEvent(game.pendingCareerEventId)
+  if (!game?.player || !game.pendingCareerEvent) return null
+  const event = getCareerEvent(game.pendingCareerEvent.eventId)
   const windowLabel = careerWindowLabel(game.startYear, game.windowIndex)
   const isResult = game.phase === 'SPECIAL_EVENT_RESULT'
   const record = isResult ? game.careerEventHistory.at(-1) : null

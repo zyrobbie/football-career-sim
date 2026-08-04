@@ -15,9 +15,14 @@ import { createCareerSeed } from '../engine/random'
 import {
   attachCareerEventToReport,
   consumeCareerConsequences,
+  getCareerEvent,
   resolveCareerEventChoice,
   selectCareerEvent,
 } from '../engine/careerEvents'
+import {
+  createCareerStoryState,
+  resetClubStory,
+} from '../engine/careerStory'
 import {
   canOpenTransferMarketAfterWindow,
   canAdvanceBeyondWindow,
@@ -60,6 +65,7 @@ import type {
   TransferArrivalChoice,
   YouthRole,
 } from '../models/game'
+import { DATA_VERSION, SAVE_VERSION } from '../models/game'
 import {
   deleteSavedCareer,
   hasSavedCareer,
@@ -122,8 +128,8 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
-    saveVersion: 10,
-    dataVersion: 10,
+    saveVersion: SAVE_VERSION,
+    dataVersion: DATA_VERSION,
     phase: 'CREATE_IDENTITY',
     careerSeed: createCareerSeed(),
     startYear,
@@ -156,9 +162,10 @@ function createInitialGame(): GameState {
     transferDecision: null,
     arrivalChoice: null,
     transferArrivalChoice: null,
-    pendingCareerEventId: null,
+    pendingCareerEvent: null,
     careerEventHistory: [],
     pendingConsequences: [],
+    careerStory: createCareerStoryState(),
     trainingFocus: null,
     developmentApproach: null,
     trainingQualityBonus: 0,
@@ -270,7 +277,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       return {
         ...simulationState,
         phase: 'HALF_YEAR_REPORT',
-        pendingCareerEventId: null,
+        pendingCareerEvent: null,
         trainingQualityBonus: 0,
         player: settledPlayer,
         teamLevel: result.teamLevel,
@@ -333,7 +340,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     return {
       ...simulationState,
       phase: 'HALF_YEAR_REPORT',
-      pendingCareerEventId: null,
+      pendingCareerEvent: null,
       trainingQualityBonus: 0,
       player: result.player,
       youthRole: result.role,
@@ -505,6 +512,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         teamLevel: 'YOUTH',
         youthRole: offer.expectedRole,
         firstTeamProgress: createFirstTeamProgress(clubId),
+        careerStory: resetClubStory(game.careerStory, clubId),
       })
     },
 
@@ -531,10 +539,17 @@ export const useGameStore = create<GameStore>((set, get) => {
         }
         const pendingCareerEventId = selectCareerEvent(ready)
         if (pendingCareerEventId) {
+          const event = getCareerEvent(pendingCareerEventId)
           commit({
             ...ready,
             phase: 'SPECIAL_EVENT',
-            pendingCareerEventId,
+            pendingCareerEvent: {
+              eventId: pendingCareerEventId,
+              interactionKind: event.interactionKind,
+              stepIndex: 0,
+              selections: [],
+              variantId: null,
+            },
           })
           return
         }
@@ -550,7 +565,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     chooseCareerEvent: (choiceId) => {
       const game = get().game
       if (
-        !game?.pendingCareerEventId ||
+        !game?.pendingCareerEvent ||
         !game.player ||
         game.phase !== 'SPECIAL_EVENT'
       ) {
@@ -560,15 +575,19 @@ export const useGameStore = create<GameStore>((set, get) => {
       try {
         const resolved = resolveCareerEventChoice({
           state: game,
-          eventId: game.pendingCareerEventId,
+          eventId: game.pendingCareerEvent.eventId,
           choiceId,
         })
         const ready: GameState = {
           ...game,
           phase: 'SPECIAL_EVENT_RESULT',
           player: resolved.player,
+          careerStory: resolved.careerStory,
           cashEuro: resolved.cashEuro,
-          pendingCareerEventId: game.pendingCareerEventId,
+          pendingCareerEvent: {
+            ...game.pendingCareerEvent,
+            selections: [...game.pendingCareerEvent.selections, choiceId],
+          },
           careerEventHistory: [
             ...game.careerEventHistory,
             resolved.record,
@@ -600,7 +619,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const ready: GameState = {
         ...game,
         phase: 'SIMULATION_READY',
-        pendingCareerEventId: null,
+        pendingCareerEvent: null,
       }
       commit(ready)
       commit(runReadySimulation(ready))
@@ -634,7 +653,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         ...game,
         phase: 'HALF_YEAR_PLAN',
         windowIndex: game.windowIndex + 1,
-        pendingCareerEventId: null,
+        pendingCareerEvent: null,
         trainingFocus: null,
         developmentApproach: null,
       })
@@ -881,7 +900,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         selectedTransferChoiceId: null,
         transferDecision: null,
         transferArrivalChoice: null,
-        pendingCareerEventId: null,
+        pendingCareerEvent: null,
         trainingFocus: null,
         developmentApproach: null,
         trainingQualityBonus: 0,
@@ -1053,6 +1072,7 @@ export const useGameStore = create<GameStore>((set, get) => {
           ? (contract.promisedRole as FirstTeamRole)
           : null,
         firstTeamProgress: createFirstTeamProgress(offer.clubId),
+        careerStory: resetClubStory(game.careerStory, offer.clubId),
         transferDecision: {
           kind: 'TRANSFER',
           fromClubId,
@@ -1112,7 +1132,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         phase: 'HALF_YEAR_PLAN',
         transferOffers: [],
         selectedTransferChoiceId: null,
-        pendingCareerEventId: null,
+        pendingCareerEvent: null,
         trainingFocus: null,
         developmentApproach: null,
         trainingQualityBonus: 0,

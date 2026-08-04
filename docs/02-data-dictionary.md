@@ -259,10 +259,11 @@ interface PlayerWorldState {
   isCaptain: boolean
   positionCompetitionModifier: -4 | -2 | 0 | 3 | 6
   contract: ContractState | null
-  currentInjury: InjuryState | null
-  latestRecurringInjury: RecurrenceState | null
+  windowInjury: WindowInjuryRecord | null
 }
 ```
+
+`windowInjury`仅存在于当前窗口报告数据，不进入下一窗口的长期球员状态。
 
 ## 7. 合同
 
@@ -313,33 +314,13 @@ interface FinanceState {
 ## 9. 伤病
 
 ```ts
-interface InjuryState {
-  category:
-    | 'MUSCLE'
-    | 'KNEE'
-    | 'ANKLE'
-    | 'FOOT'
-    | 'FRACTURE'
-    | 'BACK'
-    | 'OTHER'
-  severity: InjurySeverity
-  remainingWeeks: number
-  treatment: 'STANDARD' | 'FULL_REHAB' | 'RUSHED' | 'SPECIALIST'
-  pendingRecoveryImpact: InjuryRecoveryImpact
-}
-
-interface InjuryRecoveryImpact {
-  physicalDelta: number
-  potentialDelta: number
-}
-
-interface RecurrenceState {
-  category: InjuryState['category']
-  remainingWindows: number
+interface WindowInjuryRecord {
+  category: 'MUSCLE' | 'KNEE' | 'ANKLE' | 'FOOT' | 'BACK' | 'OTHER'
+  weeks: number
 }
 ```
 
-每半年最多生成一次记录性伤病。
+每半年最多生成一次记录性短期伤病，只用于结算本窗口缺阵周数、出场与身体状态。它不会进入下一窗口，不保存治疗方案、伤病史、复发状态、永久能力影响或康复进度。
 
 ## 10. 事件
 
@@ -380,35 +361,41 @@ interface EventChoiceDefinition {
 存档事件状态：
 
 ```ts
-interface EventState {
-  pendingDecision: PendingDecision | null
-  recentEventIds: EntityId[]
-  cooldowns: Record<EntityId, number>
-  counters: Record<EntityId, number>
-  activeCommitments: ActiveCommitment[]
-}
-
-interface PendingDecision {
+interface PendingCareerEvent {
   eventId: EntityId
-  generatedAtWindow: WindowIndex
-  optionIds: EntityId[]
-  chosenOptionId: EntityId | null
-  decisionSeed: string
+  interactionKind:
+    | 'CHOICE'
+    | 'DIALOGUE'
+    | 'RISK'
+    | 'ALLOCATION'
+    | 'RANKING'
+    | 'PERSON_TONE'
+  stepIndex: number
+  selections: EntityId[]
+  variantId: EntityId | null
 }
 
-interface ActiveCommitment {
-  type: string
-  relatedEntityId: EntityId | null
-  createdAtWindow: WindowIndex
-  remainingWindows: number
-  status: 'ACTIVE' | 'FULFILLED' | 'BROKEN'
+interface CareerStoryState {
+  club: {
+    clubId: EntityId | null
+    leadership: 'NONE' | 'CANDIDATE' | 'CAPTAIN'
+    rivalry: 'NONE' | 'HEALTHY' | 'HOSTILE'
+    mentorship: 'NONE' | 'MENTEE' | 'MENTOR'
+  }
+  publicPersona: 'NEUTRAL' | 'LOW_KEY' | 'TEAM_FIRST' | 'OUTSPOKEN'
+  tendencies: {
+    leadership: 0 | 1 | 2 | 3 | 4 | 5
+    diplomacy: 0 | 1 | 2 | 3 | 4 | 5
+    professionalism: 0 | 1 | 2 | 3 | 4 | 5
+    clutch: 0 | 1 | 2 | 3 | 4 | 5
+  }
 }
 ```
 
 约束：
 
-- `recentEventIds`最多6项；
-- `activeCommitments`最多5项；
+- 事件ID只在一个静态清单登记，事件定义和存档校验共同引用；
+- 俱乐部内剧情状态随转会重置，公众形象与四项长期倾向保留；
 - 事件选项生成后必须持久化，刷新不能重抽；
 - 同一窗口最多需要玩家处理两个事件；
 - 无特殊事件时必须提供半年发展计划。
@@ -421,7 +408,7 @@ interface ActiveCommitment {
 - 最近两个窗口出现过的同一事件不会再次抽中；
 - 选择结果保存事件ID、选项ID、结果摘要与实际数值变化，不复制静态正文；
 - 允许保存下一窗口生效的一次性后果，结算后立即移除；
-- 版本6存档增加待处理事件、事件履历和未结算后果，版本1至5顺序迁移。
+- 版本6存档增加待处理事件、事件履历和未结算后果，版本11将待处理事件升级为可承载多阶段互动的结构，并增加精简剧情状态；版本1至10均顺序迁移。
 
 完整版允许同一窗口保留两个不同优先级事件；测试版限制为一个，是为了先验证选择、读档、报告和长期后果的完整闭环。
 

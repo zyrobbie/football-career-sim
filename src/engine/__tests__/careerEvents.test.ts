@@ -5,7 +5,9 @@ import {
   getCareerEvent,
   resolveCareerEventChoice,
   selectCareerEvent,
+  validateCareerEventDefinitions,
 } from '../careerEvents'
+import { createCareerStoryState } from '../careerStory'
 import { createFirstTeamProgress } from '../firstTeamPath'
 import { generateAcademyOffers } from '../offers'
 import { generatePlayer } from '../player'
@@ -19,8 +21,8 @@ function createState(windowIndex = 1): GameState {
   const academyOffers = generateAcademyOffers(player, careerSeed)
   const offer = academyOffers[0]!
   return {
-    saveVersion: 10,
-    dataVersion: 10,
+    saveVersion: 11,
+    dataVersion: 11,
     phase: 'HALF_YEAR_PLAN',
     careerSeed,
     startYear: 2026,
@@ -39,9 +41,10 @@ function createState(windowIndex = 1): GameState {
     transferDecision: null,
     arrivalChoice: 'COACH',
     transferArrivalChoice: null,
-    pendingCareerEventId: null,
+    pendingCareerEvent: null,
     careerEventHistory: [],
     pendingConsequences: [],
+    careerStory: createCareerStoryState(offer.club.id),
     trainingFocus: 'BALANCED',
     developmentApproach: null,
     trainingQualityBonus: 0,
@@ -71,6 +74,10 @@ describe('career events', () => {
     expect(first).toBe(second)
   })
 
+  it('keeps every registered event definition structurally valid', () => {
+    expect(validateCareerEventDefinitions()).toEqual([])
+  })
+
   it('applies an event choice and records the exact outcome', () => {
     const state = createState(1)
     const eventId = selectCareerEvent(state)!
@@ -88,17 +95,23 @@ describe('career events', () => {
     expect(result.cashEuro).toBeGreaterThanOrEqual(0)
   })
 
-  it('restores the same pending event from a version 6 save', () => {
+  it('restores the same pending event from a version 11 save', () => {
     const state = createState(1)
     const pendingCareerEventId = selectCareerEvent(state)!
     const restored = validateGameState({
       ...state,
       phase: 'SPECIAL_EVENT',
-      pendingCareerEventId,
+      pendingCareerEvent: {
+        eventId: pendingCareerEventId,
+        interactionKind: 'CHOICE',
+        stepIndex: 0,
+        selections: [],
+        variantId: null,
+      },
     })
 
     expect(restored.phase).toBe('SPECIAL_EVENT')
-    expect(restored.pendingCareerEventId).toBe(pendingCareerEventId)
+    expect(restored.pendingCareerEvent?.eventId).toBe(pendingCareerEventId)
   })
 
   it('caps event spending at available cash', () => {
@@ -154,6 +167,31 @@ describe('career events', () => {
     expect(first.consequences).toEqual(second.consequences)
   })
 
+  it('records compact story tendencies without changing the visible event flow', () => {
+    const result = resolveCareerEventChoice({
+      state: createState(4),
+      eventId: 'CAPTAIN_VIDEO_REVIEW',
+      choiceId: 'A',
+    })
+
+    expect(result.careerStory.tendencies.leadership).toBe(1)
+    expect(result.careerStory.tendencies.professionalism).toBe(1)
+    expect(result.record.storyEffect).toBeDefined()
+  })
+
+  it('does not let a negative event push a relationship below 35', () => {
+    const state = createState(4)
+    state.player!.squadRelation = 36
+    const result = resolveCareerEventChoice({
+      state,
+      eventId: 'CAPTAIN_VIDEO_REVIEW',
+      choiceId: 'C',
+    })
+
+    expect(result.player.squadRelation).toBe(35)
+    expect(result.record.appliedDelta.squadRelation).toBe(-1)
+  })
+
   it('keeps injury events as informed three-way decisions', () => {
     const event = getCareerEvent('KEY_MATCH_PAIN')
     expect(event.choices).toHaveLength(3)
@@ -169,5 +207,82 @@ describe('career events', () => {
       choiceId: 'B',
     })
     expect(result.record.outcomeLabel).toBeTruthy()
+    expect(event.choices.every((choice) => !choice.delayed)).toBe(true)
+    expect(
+      event.choices.every((choice) =>
+        choice.outcomes?.every((outcome) => !outcome.delayed) ?? true,
+      ),
+    ).toBe(true)
+  })
+
+  it('keeps the full-career ordinary-event rate close to 70 percent', () => {
+    let eligibleWindows = 0
+    let eventWindows = 0
+
+    for (let career = 0; career < 500; career += 1) {
+      let state = {
+        ...createState(1),
+        careerSeed: `event-frequency-${career}`,
+      }
+      for (let windowIndex = 1; windowIndex <= 53; windowIndex += 1) {
+        state = {
+          ...state,
+          windowIndex,
+          transferDecision:
+            windowIndex % 6 === 0
+              ? {
+                  kind: 'STAY' as const,
+                  fromClubId: state.selectedClubId!,
+                  toClubId: state.selectedClubId!,
+                  arrivalChoice: null,
+                  cashSpentEuro: 0,
+                }
+              : null,
+        }
+        eligibleWindows += 1
+        const eventId = selectCareerEvent(state)
+        if (!eventId) continue
+        eventWindows += 1
+        state = {
+          ...state,
+          careerEventHistory: [
+            ...state.careerEventHistory,
+            {
+              eventId,
+              choiceId: 'A',
+              windowIndex,
+              choiceTitle: '频率测试',
+              outcomeSummary: '频率测试',
+              appliedDelta: {},
+              cashDeltaEuro: 0,
+            },
+          ],
+        }
+      }
+    }
+
+    const rate = eventWindows / eligibleWindows
+    expect(rate).toBeGreaterThan(0.68)
+    expect(rate).toBeLessThan(0.72)
+  })
+
+  it('keeps a full event history comfortably below the 200KB save budget', () => {
+    const state = createState(53)
+    const eventId = 'CAPTAIN_VIDEO_REVIEW' as const
+    const careerEventHistory = Array.from({ length: 54 }, (_, windowIndex) => ({
+      eventId,
+      choiceId: 'A',
+      windowIndex,
+      choiceTitle: '主动承担分析',
+      outcomeSummary: '你完成了这次职业选择，结果已经写入本窗口档案。',
+      appliedDelta: { squadRelation: 3, morale: 1 },
+      cashDeltaEuro: 0,
+      storyEffect: { tendencyDelta: { leadership: 1 } },
+    }))
+
+    const bytes = new TextEncoder().encode(
+      JSON.stringify({ ...state, careerEventHistory }),
+    ).byteLength
+    expect(bytes).toBeLessThan(200 * 1024)
   })
 })

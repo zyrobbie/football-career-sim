@@ -5,6 +5,7 @@ import { createFirstTeamProgress } from '../firstTeamPath'
 import { generateAcademyOffers } from '../offers'
 import { generatePlayer } from '../player'
 import { enforceAgeBasedFirstTeam } from '../eligibility'
+import { createCareerStoryState } from '../careerStory'
 import { createDraft } from './testFixtures'
 
 function createOverAgeYouthState(): GameState {
@@ -15,8 +16,8 @@ function createOverAgeYouthState(): GameState {
   const inter = CLUBS.find((club) => club.id === 'ita_inter')!
 
   return {
-    saveVersion: 10,
-    dataVersion: 10,
+    saveVersion: 11,
+    dataVersion: 11,
     phase: 'HALF_YEAR_PLAN',
     careerSeed,
     startYear: 2026,
@@ -46,9 +47,10 @@ function createOverAgeYouthState(): GameState {
     transferDecision: null,
     arrivalChoice: 'COACH',
     transferArrivalChoice: null,
-    pendingCareerEventId: null,
+    pendingCareerEvent: null,
     careerEventHistory: [],
     pendingConsequences: [],
+    careerStory: createCareerStoryState(inter.id),
     trainingFocus: null,
     developmentApproach: null,
     trainingQualityBonus: 0,

@@ -2,6 +2,7 @@ import { beforeEach, describe, expect, it } from 'vitest'
 import { generateAcademyOffers } from '../engine/offers'
 import { generatePlayer } from '../engine/player'
 import { createFirstTeamProgress } from '../engine/firstTeamPath'
+import { createCareerStoryState } from '../engine/careerStory'
 import { createDraft } from '../engine/__tests__/testFixtures'
 import type { GameState } from '../models/game'
 import { validateGameState } from '../persistence/save'
@@ -31,8 +32,8 @@ describe('academy two-year progression', () => {
     const academyOffers = generateAcademyOffers(player, careerSeed)
     const selected = academyOffers[0]!
     const base: GameState = {
-      saveVersion: 10,
-      dataVersion: 10,
+      saveVersion: 11,
+      dataVersion: 11,
       phase: 'HALF_YEAR_REPORT',
       careerSeed,
       startYear: 2026,
@@ -62,9 +63,10 @@ describe('academy two-year progression', () => {
       transferDecision: null,
       arrivalChoice: 'COACH',
       transferArrivalChoice: null,
-      pendingCareerEventId: null,
+      pendingCareerEvent: null,
       careerEventHistory: [],
       pendingConsequences: [],
+      careerStory: createCareerStoryState(selected.club.id),
       trainingFocus: null,
       developmentApproach: null,
       trainingQualityBonus: 0,
@@ -473,8 +475,8 @@ describe('academy two-year progression', () => {
     const academyOffers = generateAcademyOffers(player, careerSeed)
     const selected = academyOffers[0]!
     const game: GameState = {
-      saveVersion: 10,
-      dataVersion: 10,
+      saveVersion: 11,
+      dataVersion: 11,
       phase: 'HALF_YEAR_PLAN',
       careerSeed,
       startYear: 2026,
@@ -504,9 +506,10 @@ describe('academy two-year progression', () => {
       transferDecision: null,
       arrivalChoice: 'COACH',
       transferArrivalChoice: null,
-      pendingCareerEventId: null,
+      pendingCareerEvent: null,
       careerEventHistory: [],
       pendingConsequences: [],
+      careerStory: createCareerStoryState(selected.club.id),
       trainingFocus: null,
       developmentApproach: null,
       trainingQualityBonus: 0,
