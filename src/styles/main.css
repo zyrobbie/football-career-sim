@@ -6783,13 +6783,15 @@ svg {
 .retirement-archive__snapshots strong {
   display: block;
   margin: 4px 0 3px;
-  overflow: hidden;
+  overflow: visible;
   color: var(--ink);
   font-family: var(--heading);
   font-size: 17px;
   font-weight: 600;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .retirement-archive__section {

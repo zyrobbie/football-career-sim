@@ -10,8 +10,10 @@ import {
   playerAgeAtWindow,
 } from '../engine/careerTime'
 import type {
+  ContractType,
   CounterOfferDirection,
   TransferArrivalChoice,
+  TransferDecision,
   TransferOffer,
 } from '../models/game'
 import { useGameStore } from '../store/gameStore'
@@ -71,6 +73,19 @@ function roleText(offer: TransferOffer): string {
       ? roleLabel(offer.promisedRole).replace('球员', '')
       : '待定'
   }`
+}
+
+export function isCompletedRenewal(input: {
+  decisionKind: TransferDecision['kind']
+  contractType: ContractType
+  selectedTransferChoiceId: 'STAY' | string | null
+}): boolean {
+  return (
+    input.decisionKind === 'STAY' &&
+    input.contractType === 'RENEWAL' &&
+    Boolean(input.selectedTransferChoiceId) &&
+    input.selectedTransferChoiceId !== 'STAY'
+  )
 }
 
 export function TransferWindowScreen() {
@@ -148,7 +163,11 @@ export function TransferWindowScreen() {
       game.windowIndex + 1,
     )
     const renewedCurrentClub =
-      decision.kind === 'STAY' && game.contract.type === 'RENEWAL'
+      isCompletedRenewal({
+        decisionKind: decision.kind,
+        contractType: game.contract.type,
+        selectedTransferChoiceId: game.selectedTransferChoiceId,
+      })
     return (
       <CareerHub game={game} sectionLabel="转会决定完成">
         <section className="transfer-complete">
