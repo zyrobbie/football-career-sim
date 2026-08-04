@@ -3,15 +3,29 @@ import { generateAcademyOffers } from '../engine/offers'
 import { generatePlayer } from '../engine/player'
 import { createFirstTeamProgress } from '../engine/firstTeamPath'
 import { createCareerStoryState } from '../engine/careerStory'
+import { getCareerEvent } from '../engine/careerEvents'
 import { createDraft } from '../engine/__tests__/testFixtures'
 import type { GameState } from '../models/game'
 import { validateGameState } from '../persistence/save'
 import { useGameStore } from './gameStore'
 
 function resolveSpecialEventIfPresent() {
-  const store = useGameStore.getState()
-  if (store.game?.phase === 'SPECIAL_EVENT') {
-    store.chooseCareerEvent('A')
+  let store = useGameStore.getState()
+  while (store.game?.phase === 'SPECIAL_EVENT') {
+    const event = getCareerEvent(store.game.pendingCareerEvent!.eventId)
+    const pending = store.game.pendingCareerEvent!
+    if (event.setup && pending.stepIndex === 0) {
+      store.chooseCareerEvent(event.setup.options[0]!.id)
+    } else {
+      const route = event.setup?.options.find(
+        (option) => option.id === pending.variantId,
+      )
+      const choiceId = route?.choiceIds[0] ?? event.choices[0]!.id
+      store.chooseCareerEvent(choiceId)
+    }
+    store = useGameStore.getState()
+  }
+  if (store.game?.phase === 'SPECIAL_EVENT_RESULT') {
     useGameStore.getState().continueAfterCareerEvent()
   }
 }
@@ -95,6 +109,62 @@ describe('academy two-year progression', () => {
     useGameStore.getState().advanceAfterReport()
     expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
     expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
+  })
+
+  it('persists the first route before resolving a multi-stage career event', () => {
+    const store = useGameStore.getState()
+    store.startNewCareer()
+    store.submitIdentity({
+      name: '陈启明',
+      jerseyNumber: 8,
+      preferredFoot: 'RIGHT',
+    })
+    store.submitPosition('CM', 'CAM')
+    store.submitPriorities([
+      'PLAYING_TIME',
+      'COMPETITIVE_LEVEL',
+      'STABILITY',
+      'SALARY',
+    ])
+    store.submitPreferences('CONDITIONAL', [])
+    store.confirmPlayer()
+    const clubId = useGameStore.getState().game!.academyOffers[0]!.club.id
+    store.selectAcademy(clubId)
+    store.chooseArrival('COACH')
+
+    const game = useGameStore.getState().game!
+    useGameStore.setState({
+      game: {
+        ...game,
+        windowIndex: 3,
+        phase: 'SPECIAL_EVENT',
+        pendingCareerEvent: {
+          eventId: 'COACH_TACTICAL_MEETING',
+          interactionKind: 'DIALOGUE',
+          stepIndex: 0,
+          selections: [],
+          variantId: null,
+        },
+      },
+      error: null,
+    })
+
+    useGameStore.getState().chooseCareerEvent('PRIVATE')
+    let pending = useGameStore.getState().game!
+    expect(pending.phase).toBe('SPECIAL_EVENT')
+    expect(pending.pendingCareerEvent).toMatchObject({
+      stepIndex: 1,
+      selections: ['PRIVATE'],
+      variantId: 'PRIVATE',
+    })
+
+    useGameStore.getState().chooseCareerEvent('A')
+    pending = useGameStore.getState().game!
+    expect(pending.phase).toBe('SPECIAL_EVENT_RESULT')
+    expect(pending.pendingCareerEvent?.selections).toEqual(['PRIVATE', 'A'])
+    expect(pending.careerEventHistory.at(-1)?.eventId).toBe(
+      'COACH_TACTICAL_MEETING',
+    )
   })
 
   it('advances through four windows and evaluates the first-team path', () => {

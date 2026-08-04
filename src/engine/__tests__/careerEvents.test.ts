@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { GameState } from '../../models/game'
 import {
+  CAREER_EVENTS,
   consumeCareerConsequences,
   getCareerEvent,
   resolveCareerEventChoice,
@@ -76,6 +77,34 @@ describe('career events', () => {
 
   it('keeps every registered event definition structurally valid', () => {
     expect(validateCareerEventDefinitions()).toEqual([])
+    expect(CAREER_EVENTS).toHaveLength(21)
+  })
+
+  it('routes multi-stage events through valid setup choices', () => {
+    const event = getCareerEvent('COACH_TACTICAL_MEETING')
+    expect(event.interactionKind).toBe('DIALOGUE')
+    expect(event.setup?.options).toHaveLength(2)
+    expect(event.setup?.options[0]?.choiceIds).toEqual(['A', 'B'])
+    expect(event.setup?.options[1]?.choiceIds).toEqual(['C', 'D'])
+  })
+
+  it('stops the captain review invitation after the player becomes captain', () => {
+    const state = createState(12)
+    state.careerStory.club.leadership = 'CAPTAIN'
+    expect(getCareerEvent('CAPTAIN_VIDEO_REVIEW').isEligible(state)).toBe(false)
+    expect(getCareerEvent('CAPTAIN_ARMBAND_OFFER').isEligible(state)).toBe(false)
+  })
+
+  it('keeps every visible random outcome normalized to one hundred percent', () => {
+    for (const event of CAREER_EVENTS) {
+      for (const choice of event.choices) {
+        if (!choice.outcomes) continue
+        expect(
+          choice.outcomes.reduce((total, outcome) => total + outcome.weight, 0),
+          `${event.id}/${choice.id}`,
+        ).toBe(100)
+      }
+    }
   })
 
   it('applies an event choice and records the exact outcome', () => {
@@ -213,6 +242,17 @@ describe('career events', () => {
         choice.outcomes?.every((outcome) => !outcome.delayed) ?? true,
       ),
     ).toBe(true)
+  })
+
+  it('forbids delayed consequences in every health event', () => {
+    for (const event of CAREER_EVENTS.filter((entry) => entry.category === 'HEALTH')) {
+      expect(event.choices.every((choice) => !choice.delayed)).toBe(true)
+      expect(
+        event.choices.every((choice) =>
+          choice.outcomes?.every((outcome) => !outcome.delayed) ?? true,
+        ),
+      ).toBe(true)
+    }
   })
 
   it('keeps the full-career ordinary-event rate close to 70 percent', () => {

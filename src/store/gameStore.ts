@@ -573,6 +573,33 @@ export const useGameStore = create<GameStore>((set, get) => {
         return
       }
       try {
+        const event = getCareerEvent(game.pendingCareerEvent.eventId)
+        if (event.setup && game.pendingCareerEvent.stepIndex === 0) {
+          const setupOption = event.setup.options.find(
+            (candidate) => candidate.id === choiceId,
+          )
+          if (!setupOption) {
+            throw new Error('这个特殊事件的第一步选择不存在。')
+          }
+          commit({
+            ...game,
+            pendingCareerEvent: {
+              ...game.pendingCareerEvent,
+              stepIndex: 1,
+              selections: [setupOption.id],
+              variantId: setupOption.id,
+            },
+          })
+          return
+        }
+        if (event.setup) {
+          const route = event.setup.options.find(
+            (candidate) => candidate.id === game.pendingCareerEvent!.variantId,
+          )
+          if (!route?.choiceIds.includes(choiceId)) {
+            throw new Error('这个选项不属于当前特殊事件路线。')
+          }
+        }
         const resolved = resolveCareerEventChoice({
           state: game,
           eventId: game.pendingCareerEvent.eventId,

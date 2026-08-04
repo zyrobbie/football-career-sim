@@ -812,6 +812,50 @@ export function validateGameState(value: unknown): GameState {
   ) {
     throw new Error('Pending career-event interaction type is invalid.')
   }
+  if (parsed.pendingCareerEvent) {
+    const pending = parsed.pendingCareerEvent
+    const event = getCareerEvent(pending.eventId)
+    if (event.setup) {
+      const route = event.setup.options.find(
+        (option) => option.id === pending.variantId,
+      )
+      if (pending.stepIndex === 0) {
+        if (pending.variantId !== null || pending.selections.length !== 0) {
+          throw new Error('Pending career-event setup state is invalid.')
+        }
+      } else if (
+        pending.stepIndex !== 1 ||
+        !route ||
+        pending.selections[0] !== route.id
+      ) {
+        throw new Error('Pending career-event route is invalid.')
+      }
+      if (parsed.phase === 'SPECIAL_EVENT_RESULT') {
+        const finalChoiceId = pending.selections[1]
+        if (
+          pending.selections.length !== 2 ||
+          !finalChoiceId ||
+          !route?.choiceIds.includes(finalChoiceId)
+        ) {
+          throw new Error('Resolved career-event route is invalid.')
+        }
+      } else if (pending.stepIndex === 1 && pending.selections.length !== 1) {
+        throw new Error('Pending career-event route has extra selections.')
+      }
+    } else {
+      if (pending.stepIndex !== 0 || pending.variantId !== null) {
+        throw new Error('Single-stage career-event state is invalid.')
+      }
+      if (
+        (parsed.phase === 'SPECIAL_EVENT' && pending.selections.length !== 0) ||
+        (parsed.phase === 'SPECIAL_EVENT_RESULT' &&
+          (pending.selections.length !== 1 ||
+            !event.choices.some((choice) => choice.id === pending.selections[0])))
+      ) {
+        throw new Error('Single-stage career-event selections are invalid.')
+      }
+    }
+  }
 
   const nationalTotals = parsed.nationalTeam.history.reduce(
     (total, record) => ({

@@ -42,6 +42,28 @@ function legacyIdentityState() {
   }
 }
 
+function eventReadyState() {
+  const current = validateGameState(legacyIdentityState())
+  const careerSeed = 'multi-stage-save-event'
+  const draft = createDraft('CM')
+  const player = generatePlayer(draft, careerSeed)
+  const academyOffers = generateAcademyOffers(player, careerSeed)
+  const selected = academyOffers[0]!
+  return {
+    ...current,
+    careerSeed,
+    windowIndex: 3,
+    draft,
+    player,
+    academyOffers,
+    selectedClubId: selected.club.id,
+    youthRole: selected.expectedRole,
+    arrivalChoice: 'COACH' as const,
+    trainingFocus: 'BALANCED' as const,
+    careerStory: createCareerStoryState(selected.club.id),
+  }
+}
+
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
@@ -109,6 +131,41 @@ describe('save migration', () => {
       variantId: null,
     })
     expect(migrated.careerStory.club.clubId).toBe(selected.club.id)
+  })
+
+  it('restores a valid second step of a multi-stage event', () => {
+    const current = eventReadyState()
+    const restored = validateGameState({
+      ...current,
+      phase: 'SPECIAL_EVENT',
+      pendingCareerEvent: {
+        eventId: 'COACH_TACTICAL_MEETING',
+        interactionKind: 'DIALOGUE',
+        stepIndex: 1,
+        selections: ['PRIVATE'],
+        variantId: 'PRIVATE',
+      },
+    })
+
+    expect(restored.pendingCareerEvent?.stepIndex).toBe(1)
+    expect(restored.pendingCareerEvent?.variantId).toBe('PRIVATE')
+  })
+
+  it('rejects a multi-stage event whose saved route does not exist', () => {
+    const current = eventReadyState()
+    expect(() =>
+      validateGameState({
+        ...current,
+        phase: 'SPECIAL_EVENT',
+        pendingCareerEvent: {
+          eventId: 'COACH_TACTICAL_MEETING',
+          interactionKind: 'DIALOGUE',
+          stepIndex: 1,
+          selections: ['UNKNOWN'],
+          variantId: 'UNKNOWN',
+        },
+      }),
+    ).toThrow('route')
   })
 
   it('rejects national-team totals that disagree with their history', () => {

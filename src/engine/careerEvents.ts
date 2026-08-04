@@ -20,6 +20,7 @@ import {
   ensureStoryClub,
 } from './careerStory'
 import { createRandom, weightedPick } from './random'
+import { playerAgeAtWindow } from './careerTime'
 
 export type CareerEventPriority = 'P0' | 'P1' | 'P2' | 'P3' | 'P4'
 
@@ -35,6 +36,18 @@ export interface CareerEventChoice {
   delayed?: CareerEventDelayed | readonly CareerEventDelayed[]
   outcomes?: readonly CareerEventOutcome[]
   storyEffect?: CareerStoryEffect
+}
+
+export interface CareerEventSetupOption {
+  id: string
+  title: string
+  description: string
+  choiceIds: readonly CareerEventChoiceId[]
+}
+
+export interface CareerEventSetup {
+  prompt: string
+  options: readonly CareerEventSetupOption[]
 }
 
 interface CareerEventDelayed {
@@ -68,6 +81,7 @@ export interface CareerEventDefinition {
   description: string
   weight: number
   isEligible: (state: GameState) => boolean
+  setup?: CareerEventSetup
   choices: readonly CareerEventChoice[]
 }
 
@@ -257,6 +271,226 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     ],
   },
   {
+    id: 'COACH_TACTICAL_MEETING',
+    groupId: 'COACH_TACTICAL_DIALOGUE',
+    category: 'COACH',
+    priority: 'P2',
+    cooldownWindows: 3,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '教练 · 战术沟通',
+    title: '教练组希望听听你对最近战术的看法。',
+    description: '你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。',
+    weight: 8,
+    isEligible: (state) => state.windowIndex >= 3,
+    setup: {
+      prompt: '你准备在哪里谈这件事？',
+      options: [
+        {
+          id: 'PRIVATE',
+          title: '训练后单独沟通',
+          description: '避免公开挑战教练权威。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'GROUP',
+          title: '战术会上当面发言',
+          description: '让全队一起参与讨论。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '用录像说明问题',
+        description: '拿具体回合支持自己的判断。',
+        effectPreview: '心理能力、教练关系上升',
+        outcomeSummary: '你用几个清楚的比赛回合说明观点。教练没有全部采纳，但认可了你的准备和判断。',
+        playerDelta: { attributes: { mental: 0.6 }, coachRelation: 4 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '只询问自己的职责',
+        description: '把讨论限制在如何完成角色。',
+        effectPreview: '教练关系、竞技状态小幅上升',
+        outcomeSummary: '你没有评价全队战术，只把个人职责问得更加清楚，下一阶段执行起来更有把握。',
+        playerDelta: { coachRelation: 2, form: 2 },
+      },
+      {
+        id: 'C',
+        title: '提出整体调整',
+        description: '公开说明球队攻守衔接的问题。',
+        effectPreview: '50%获得认可 · 50%被视为越界',
+        outcomeSummary: '你在战术会上明确提出了整体调整建议。',
+        playerDelta: { morale: 1 },
+        outcomes: [
+          {
+            id: 'ACCEPTED',
+            label: '建议得到认可',
+            weight: 50,
+            summary: '教练把你的建议写上战术板，队友也开始把你视作能参与比赛设计的人。',
+            playerDelta: { coachRelation: 5, squadRelation: 3, reputation: 1 },
+            storyEffect: { tendencyDelta: { leadership: 1 } },
+          },
+          {
+            id: 'OVERSTEP',
+            label: '被认为越过边界',
+            weight: 50,
+            summary: '意见本身并非毫无道理，但公开表达让教练觉得你越过了角色边界。',
+            playerDelta: { coachRelation: -4, squadRelation: -1 },
+          },
+        ],
+      },
+      {
+        id: 'D',
+        title: '先邀请队友补充',
+        description: '把发言变成一次共同讨论。',
+        effectPreview: '队内关系、领导倾向上升',
+        outcomeSummary: '你没有把讨论变成个人演讲，而是让不同位置的队友共同补充，会议气氛明显更开放。',
+        playerDelta: { squadRelation: 5, coachRelation: 1 },
+        storyEffect: { tendencyDelta: { diplomacy: 1, leadership: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'COACH_SET_PIECE_DUTY',
+    groupId: 'COACH_SPECIALIST_TRAINING',
+    category: 'COACH',
+    priority: 'P2',
+    cooldownWindows: 3,
+    interactionKind: 'ALLOCATION',
+    eyebrow: '教练 · 训练分配',
+    title: '教练给了你一份额外定位球训练额度。',
+    description: '额外训练时间有限，你必须决定如何分配，无法同时获得全部收益。',
+    weight: 7,
+    isEligible: (state) => state.windowIndex >= 2,
+    choices: [
+      {
+        id: 'A',
+        title: '70%主罚 · 30%体能',
+        description: '把大部分时间用于直接进攻贡献。',
+        effectPreview: '进攻明显上升 · 身体小幅下降',
+        outcomeSummary: '你把训练重点放在主罚技术上，进攻细节更成熟，但额外训练消耗了恢复时间。',
+        playerDelta: { attributes: { attack: 0.8 }, fitness: -2, coachRelation: 1 },
+      },
+      {
+        id: 'B',
+        title: '40%主罚 · 60%战术',
+        description: '兼顾脚法和定位球跑位理解。',
+        effectPreview: '进攻、心理能力均衡上升',
+        outcomeSummary: '你没有只练脚法，而是把更多时间用于战术配合，能力提升更均衡。',
+        playerDelta: { attributes: { attack: 0.4, mental: 0.5 }, coachRelation: 2 },
+      },
+      {
+        id: 'C',
+        title: '20%主罚 · 80%恢复',
+        description: '保留专项感觉，优先维护身体。',
+        effectPreview: '身体状态明显上升 · 专项成长较少',
+        outcomeSummary: '你只完成必要的专项训练，把大部分额度用于恢复，身体指标因此明显改善。',
+        playerDelta: { attributes: { attack: 0.2 }, fitness: 5 },
+      },
+    ],
+  },
+  {
+    id: 'COACH_ROTATION_WARNING',
+    groupId: 'COACH_ROLE_PRESSURE',
+    category: 'COACH',
+    priority: 'P2',
+    cooldownWindows: 3,
+    interactionKind: 'RISK',
+    eyebrow: '教练 · 位置压力',
+    title: '教练提醒你：近期位置并不稳固。',
+    description: '你要先决定把这次谈话当作风险控制，还是一次主动翻盘的机会。',
+    weight: 8,
+    isEligible: (state) => Boolean(state.contract) && latestRating(state) < 7.1,
+    setup: {
+      prompt: '你准备采取哪种风险态度？',
+      options: [
+        {
+          id: 'CONTROL',
+          title: '先保住轮换位置',
+          description: '降低波动，争取稳定信任。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'ATTACK',
+          title: '主动争夺更高位置',
+          description: '承担更大失败代价。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '接受简化职责',
+        description: '先把最基础的战术要求做到稳定。',
+        effectPreview: '教练关系上升 · 竞技状态小幅下降',
+        outcomeSummary: '你接受了更清晰、更简单的职责，短期表现不抢眼，但重新获得了教练的基本信任。',
+        playerDelta: { coachRelation: 5, form: -1, morale: 1 },
+      },
+      {
+        id: 'B',
+        title: '申请逐场复盘',
+        description: '用持续沟通减少判断偏差。',
+        effectPreview: '心理能力、教练关系小幅上升',
+        outcomeSummary: '你主动要求逐场复盘，教练看到了改进意愿，你也更清楚问题在哪里。',
+        playerDelta: { attributes: { mental: 0.4 }, coachRelation: 3 },
+      },
+      {
+        id: 'C',
+        title: '要求下一场首发',
+        description: '直接用比赛证明警告没有必要。',
+        effectPreview: '40%强势回应 · 60%压力反噬',
+        outcomeSummary: '你要求用一场首发来决定自己的位置。',
+        playerDelta: { morale: 2 },
+        outcomes: [
+          {
+            id: 'RESPONSE',
+            label: '强势回应',
+            weight: 40,
+            summary: '你抓住机会完成了有说服力的表现，教练重新评估了你的竞争顺位。',
+            playerDelta: { form: 7, coachRelation: 4, reputation: 2 },
+            storyEffect: { tendencyDelta: { clutch: 1 } },
+          },
+          {
+            id: 'PRESSURE',
+            label: '压力反噬',
+            weight: 60,
+            summary: '急于证明自己让动作变得僵硬，这场表现反而强化了教练的担忧。',
+            playerDelta: { form: -6, morale: -4, coachRelation: -3 },
+          },
+        ],
+      },
+      {
+        id: 'D',
+        title: '公开增加训练量',
+        description: '让所有人看到你对竞争的回应。',
+        effectPreview: '65%赢得认可 · 35%身体透支',
+        outcomeSummary: '你公开增加了训练量，希望用投入改变竞争局面。',
+        playerDelta: { fitness: -2 },
+        outcomes: [
+          {
+            id: 'NOTICE',
+            label: '投入得到认可',
+            weight: 65,
+            summary: '训练质量和态度都保持在线，教练组认可了你的回应。',
+            playerDelta: { form: 4, coachRelation: 3 },
+            trainingBonus: 0.5,
+          },
+          {
+            id: 'OVERLOAD',
+            label: '身体出现透支',
+            weight: 35,
+            summary: '训练投入超过了恢复能力，本窗口后半程状态明显下滑。',
+            playerDelta: { fitness: -7, form: -2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: 'CAPTAIN_VIDEO_REVIEW',
     groupId: 'CLUB_LEADERSHIP',
     category: 'TEAM',
@@ -268,7 +502,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     description:
       '这不是强制活动，但资深球员都在观察年轻人愿不愿意参与球队讨论。',
     weight: 10,
-    isEligible: always,
+    isEligible: (state) => state.careerStory.club.leadership !== 'CAPTAIN',
     choices: [
       {
         id: 'A',
@@ -283,6 +517,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
           fitness: -1,
         },
         storyEffect: {
+          club: { leadership: 'CANDIDATE' },
           tendencyDelta: { leadership: 1, professionalism: 1 },
         },
       },
@@ -304,6 +539,127 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你选择优先恢复身体。状态得到改善，但队友觉得你仍有些游离。',
         playerDelta: { fitness: 3, squadRelation: -3 },
+      },
+    ],
+  },
+  {
+    id: 'CAPTAIN_ARMBAND_OFFER',
+    groupId: 'CLUB_LEADERSHIP',
+    category: 'TEAM',
+    priority: 'P2',
+    cooldownWindows: 4,
+    interactionKind: 'RISK',
+    eyebrow: '更衣室 · 队长袖标',
+    title: '教练问你是否愿意在下一场戴上队长袖标。',
+    description: '这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。',
+    weight: 5,
+    isEligible: (state) =>
+      state.windowIndex >= 6 &&
+      state.careerStory.club.leadership === 'CANDIDATE' &&
+      Boolean(state.player) &&
+      state.player!.squadRelation >= 58,
+    setup: {
+      prompt: '你准备以什么方式接过袖标？',
+      options: [
+        {
+          id: 'STEADY',
+          title: '把它当作团队责任',
+          description: '先稳住更衣室和比赛秩序。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'STATEMENT',
+          title: '把它当作领袖宣言',
+          description: '主动留下属于自己的印记。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '赛前逐一沟通',
+        description: '先听清每名队友需要什么。',
+        effectPreview: '75%顺利完成 · 25%沟通过度',
+        outcomeSummary: '你在赛前花时间逐一了解队友的状态。',
+        playerDelta: { morale: 1 },
+        outcomes: [
+          {
+            id: 'CAPTAIN',
+            label: '首次带队成功',
+            weight: 75,
+            summary: '沟通让球队在困难阶段保持一致。比赛结束后，教练确认你会继续担任队长。',
+            playerDelta: { squadRelation: 7, coachRelation: 4, reputation: 3 },
+            storyEffect: { club: { leadership: 'CAPTAIN' }, tendencyDelta: { leadership: 2, diplomacy: 1 } },
+          },
+          {
+            id: 'OVERTHINK',
+            label: '沟通过度',
+            weight: 25,
+            summary: '你试图照顾所有人的想法，反而让临场指令失去重点。袖标暂时仍只是一次试用。',
+            playerDelta: { squadRelation: 2, morale: -2 },
+            storyEffect: { tendencyDelta: { diplomacy: 1 } },
+          },
+        ],
+      },
+      {
+        id: 'B',
+        title: '延续原有秩序',
+        description: '尊重老队长留下的规则。',
+        effectPreview: '队内、教练关系稳定上升',
+        outcomeSummary: '你没有急着改变更衣室，而是让球队平稳度过交接。教练决定继续信任你。',
+        playerDelta: { squadRelation: 5, coachRelation: 4, clubAttachment: 2 },
+        storyEffect: { club: { leadership: 'CAPTAIN' }, tendencyDelta: { leadership: 1, professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '发表强硬赛前讲话',
+        description: '用情绪和目标把所有人拉到一起。',
+        effectPreview: '45%点燃球队 · 55%显得用力过猛',
+        outcomeSummary: '你选择用一段强硬讲话开启自己的队长时刻。',
+        playerDelta: { morale: 2 },
+        outcomes: [
+          {
+            id: 'INSPIRE',
+            label: '点燃球队',
+            weight: 45,
+            summary: '讲话正好击中了球队情绪，你也用表现兑现了承诺，袖标从试用变成正式责任。',
+            playerDelta: { form: 6, squadRelation: 6, reputation: 5 },
+            storyEffect: { club: { leadership: 'CAPTAIN' }, publicPersona: 'OUTSPOKEN', tendencyDelta: { leadership: 2, clutch: 1 } },
+          },
+          {
+            id: 'FORCED',
+            label: '显得用力过猛',
+            weight: 55,
+            summary: '讲话没有得到预期回应，几名资深队友认为你太急于证明领袖身份。',
+            playerDelta: { squadRelation: -5, morale: -3, reputation: 1 },
+          },
+        ],
+      },
+      {
+        id: 'D',
+        title: '主动承担关键责任',
+        description: '在场上要求最难处理的任务。',
+        effectPreview: '50%确立领袖地位 · 50%表现受压',
+        outcomeSummary: '你没有多说，而是主动接下比赛中最困难的责任。',
+        playerDelta: { fitness: -2 },
+        outcomes: [
+          {
+            id: 'DELIVER',
+            label: '关键责任兑现',
+            weight: 50,
+            summary: '你在最需要的时候完成任务，更衣室用最直接的方式接受了你。',
+            playerDelta: { form: 7, squadRelation: 5, reputation: 4 },
+            storyEffect: { club: { leadership: 'CAPTAIN' }, tendencyDelta: { leadership: 2, clutch: 1 } },
+          },
+          {
+            id: 'MISS',
+            label: '表现受压',
+            weight: 50,
+            summary: '承担责任的意愿没有问题，但表现没有跟上，教练暂时收回了长期任命。',
+            playerDelta: { form: -5, morale: -4, squadRelation: 1 },
+          },
+        ],
       },
     ],
   },
@@ -332,6 +688,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
           attributes: { mental: 0.4 },
           squadRelation: 5,
         },
+        storyEffect: { club: { rivalry: 'HEALTHY' } },
       },
       {
         id: 'B',
@@ -341,6 +698,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你把竞争带进每一堂训练课。状态被激活，但彼此之间的距离也变大了。',
         playerDelta: { form: 4, squadRelation: -2, fitness: -1 },
+        storyEffect: { club: { rivalry: 'HOSTILE' } },
       },
       {
         id: 'C',
@@ -350,6 +708,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你要求教练明确竞争规则，内心更踏实，但队友认为你把问题带出了更衣室。',
         playerDelta: { coachRelation: 2, morale: 2, squadRelation: -2 },
+        storyEffect: { club: { rivalry: 'HEALTHY' }, tendencyDelta: { professionalism: 1 } },
       },
     ],
   },
@@ -422,6 +781,151 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
               summary: '此前聚餐建立的信任仍在延续，队友更愿意在场上与你配合。',
             },
           },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'YOUNG_TEAMMATE_MENTOR',
+    groupId: 'CLUB_MENTORSHIP',
+    category: 'TEAM',
+    priority: 'P3',
+    cooldownWindows: 4,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '更衣室 · 年轻队友',
+    title: '一名刚进入一线队的年轻队友向你求助。',
+    description: '他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。',
+    weight: 6,
+    isEligible: (state) =>
+      state.teamLevel === 'FIRST_TEAM' &&
+      playerAgeAtWindow(state.windowIndex) >= 23 &&
+      state.careerStory.club.mentorship !== 'MENTOR',
+    setup: {
+      prompt: '你先从哪一件事谈起？',
+      options: [
+        {
+          id: 'FOOTBALL',
+          title: '先谈训练和比赛',
+          description: '从职业要求建立信任。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'LIFE',
+          title: '先谈生活和融入',
+          description: '先解决场外的不安。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '陪他完成额外训练',
+        description: '直接示范职业训练节奏。',
+        effectPreview: '队内关系、领导倾向上升 · 身体略降',
+        outcomeSummary: '你陪他完成了几次额外训练。年轻队友逐渐跟上节奏，也开始把你当作真正的导师。',
+        playerDelta: { squadRelation: 5, fitness: -2, coachRelation: 2 },
+        storyEffect: { club: { mentorship: 'MENTOR' }, tendencyDelta: { leadership: 1, professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '整理一份比赛笔记',
+        description: '把经验转化为清楚的方法。',
+        effectPreview: '心理能力、队内关系上升',
+        outcomeSummary: '你把训练和比赛经验整理成一份简洁笔记，帮助他更快理解一线队要求。',
+        playerDelta: { attributes: { mental: 0.5 }, squadRelation: 4 },
+        storyEffect: { club: { mentorship: 'MENTOR' }, tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '带他认识更衣室成员',
+        description: '主动把他带进日常交流。',
+        effectPreview: '队内关系、外交倾向上升',
+        outcomeSummary: '你没有让他独自摸索，而是带他认识不同小组的队友，他很快放松下来。',
+        playerDelta: { squadRelation: 6, morale: 2 },
+        storyEffect: { club: { mentorship: 'MENTOR' }, tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'D',
+        title: '分享自己的低谷经历',
+        description: '告诉他不适应并不代表失败。',
+        effectPreview: '心理状态、队内关系上升',
+        outcomeSummary: '你的坦诚让他意识到困难并不可耻，也让更多队友看见了你愿意承担照顾新人的责任。',
+        playerDelta: { morale: 4, squadRelation: 4, reputation: 1 },
+        storyEffect: { club: { mentorship: 'MENTOR' }, tendencyDelta: { leadership: 1, diplomacy: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'TEAM_SOCIAL_CLIQUE',
+    groupId: 'DRESSING_ROOM_CULTURE',
+    category: 'TEAM',
+    priority: 'P3',
+    cooldownWindows: 3,
+    interactionKind: 'PERSON_TONE',
+    eyebrow: '更衣室 · 小团体',
+    title: '更衣室里的两个小圈子都在拉拢你。',
+    description: '你要先决定和谁谈，再选择自己的表达方式；这会影响队友如何理解你的立场。',
+    weight: 7,
+    isEligible: (state) => Boolean(state.player) && state.player!.squadRelation < 78,
+    setup: {
+      prompt: '你准备先和谁沟通？',
+      options: [
+        {
+          id: 'CAPTAIN_GROUP',
+          title: '先找资深球员',
+          description: '理解更衣室原有秩序。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'YOUNG_GROUP',
+          title: '先找年轻球员',
+          description: '听清被忽视一方的想法。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '尊重传统但保持中立',
+        description: '认可秩序，不加入排他立场。',
+        effectPreview: '队内关系、职业倾向上升',
+        outcomeSummary: '你表达了对资深球员的尊重，也明确不会参与排斥。双方接受了你的边界。',
+        playerDelta: { squadRelation: 4, coachRelation: 1 },
+        storyEffect: { tendencyDelta: { professionalism: 1, diplomacy: 1 } },
+      },
+      {
+        id: 'B',
+        title: '明确站在资深一方',
+        description: '用清晰站队换取核心圈信任。',
+        effectPreview: '60%进入核心圈 · 40%矛盾加深',
+        outcomeSummary: '你选择公开站在资深球员一边。',
+        playerDelta: { clubAttachment: 1 },
+        outcomes: [
+          { id: 'INNER', label: '进入核心圈', weight: 60, summary: '资深球员开始主动照应你，你在更衣室获得了更直接的话语权。', playerDelta: { squadRelation: 6, reputation: 2 } },
+          { id: 'DIVIDE', label: '矛盾加深', weight: 40, summary: '站队让另一部分队友明显疏远你，更衣室分歧反而扩大。', playerDelta: { squadRelation: -6, morale: -2 } },
+        ],
+      },
+      {
+        id: 'C',
+        title: '温和听完他们的不满',
+        description: '先让年轻球员把话说完整。',
+        effectPreview: '队内关系、外交倾向上升',
+        outcomeSummary: '你没有急着评判，而是完整听完年轻队友的不满，再帮助他们把问题说得更具体。',
+        playerDelta: { squadRelation: 5, morale: 1 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'D',
+        title: '鼓励他们公开表达',
+        description: '把私下抱怨带到正式会议。',
+        effectPreview: '45%推动改变 · 55%引发反弹',
+        outcomeSummary: '你鼓励年轻球员把问题带到全队会议上。',
+        playerDelta: { morale: 1 },
+        outcomes: [
+          { id: 'CHANGE', label: '推动更衣室改变', weight: 45, summary: '讨论虽然尖锐，却促成了新的相处规则，你也被视作敢于推动改变的人。', playerDelta: { squadRelation: 7, reputation: 3 }, storyEffect: { tendencyDelta: { leadership: 1, diplomacy: 1 } } },
+          { id: 'BACKLASH', label: '资深球员反弹', weight: 55, summary: '资深球员认为你在背后组织挑战，短期内对你的态度明显转冷。', playerDelta: { squadRelation: -5, coachRelation: -2 } },
         ],
       },
     ],
@@ -614,6 +1118,179 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
         outcomeSummary:
           '你选择留在基地恢复。体能团队满意，一部分等待已久的球迷却感到失望。',
         playerDelta: { fitness: 4, fanRelation: -3 },
+      },
+    ],
+  },
+  {
+    id: 'PENALTY_SHOOTOUT_ORDER',
+    groupId: 'MATCH_PRESSURE',
+    category: 'MATCH',
+    priority: 'P2',
+    cooldownWindows: 3,
+    interactionKind: 'RISK',
+    eyebrow: '比赛 · 点球顺位',
+    title: '淘汰赛进入点球大战，教练让你选择主罚顺位。',
+    description: '你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。',
+    weight: 6,
+    isEligible: (state) => Boolean(state.contract) && state.windowIndex >= 5,
+    setup: {
+      prompt: '你愿意承担多大的关键球责任？',
+      options: [
+        { id: 'CONTROL', title: '控制风险', description: '选择相对稳定的中段顺位。', choiceIds: ['A', 'B'] },
+        { id: 'DECIDE', title: '主动决定比赛', description: '争取最受关注的关键顺位。', choiceIds: ['C', 'D'] },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '第三顺位主罚',
+        description: '在压力升高前完成任务。',
+        effectPreview: '78%罚进 · 22%罚失',
+        outcomeSummary: '你选择在第三顺位走向点球点。',
+        playerDelta: {},
+        outcomes: [
+          { id: 'SCORE', label: '稳稳罚进', weight: 78, summary: '你按照训练方式完成射门，为球队保持了点球大战节奏。', playerDelta: { form: 4, morale: 3 } },
+          { id: 'MISS', label: '射门被扑', weight: 22, summary: '射门角度不够刁钻，但球队仍有时间弥补，你承受了有限的舆论压力。', playerDelta: { form: -3, morale: -3 } },
+        ],
+      },
+      {
+        id: 'B',
+        title: '第四顺位主罚',
+        description: '承担更高压力，同时避免最后一罚。',
+        effectPreview: '70%罚进 · 30%罚失',
+        outcomeSummary: '你选择第四顺位，压力和决定性都明显提高。',
+        playerDelta: {},
+        outcomes: [
+          { id: 'SCORE', label: '顶住压力', weight: 70, summary: '你在压力最重的阶段罚进点球，队友和教练记住了这次冷静。', playerDelta: { form: 5, morale: 4, squadRelation: 2 }, storyEffect: { tendencyDelta: { clutch: 1 } } },
+          { id: 'MISS', label: '关键罚失', weight: 30, summary: '你没有躲避责任，但点球偏出，失落感持续了整个窗口。', playerDelta: { form: -5, morale: -5 } },
+        ],
+      },
+      {
+        id: 'C',
+        title: '第一顺位开场',
+        description: '用第一罚给全队定下基调。',
+        effectPreview: '68%带来好开局 · 32%让球队先陷入被动',
+        outcomeSummary: '你主动要求第一个站上点球点。',
+        playerDelta: { reputation: 1 },
+        outcomes: [
+          { id: 'LEAD', label: '带来好开局', weight: 68, summary: '第一罚干净命中，队友从你的冷静中获得了信心。', playerDelta: { form: 6, squadRelation: 4, morale: 3 }, storyEffect: { tendencyDelta: { leadership: 1, clutch: 1 } } },
+          { id: 'MISS', label: '开场罚失', weight: 32, summary: '第一罚被扑让球队立即陷入被动，你也成为赛后讨论的焦点。', playerDelta: { form: -6, morale: -5, mediaRelation: -2 } },
+        ],
+      },
+      {
+        id: 'D',
+        title: '第五顺位终结',
+        description: '等待可能决定胜负的最后一罚。',
+        effectPreview: '55%成为英雄 · 45%承担失利',
+        outcomeSummary: '你选择最可能决定比赛的第五顺位。',
+        playerDelta: { reputation: 1 },
+        outcomes: [
+          { id: 'HERO', label: '终结比赛', weight: 55, summary: '你罚进了决定胜负的一球，庆祝画面迅速成为这段赛季的代表时刻。', playerDelta: { form: 9, morale: 6, reputation: 6, fanRelation: 5 }, storyEffect: { tendencyDelta: { clutch: 2 } } },
+          { id: 'MISS', label: '承担失利', weight: 45, summary: '最后一罚没有命中。你主动承担责任，却仍要面对漫长的失落和质疑。', playerDelta: { form: -8, morale: -7, mediaRelation: -3 }, storyEffect: { tendencyDelta: { clutch: 1 } } },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'LATE_SUBSTITUTION_BRIEF',
+    groupId: 'MATCH_ROLE_DECISION',
+    category: 'MATCH',
+    priority: 'P2',
+    cooldownWindows: 3,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '比赛 · 临场指令',
+    title: '比赛还剩十五分钟，助教让你准备替补出场。',
+    description: '场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。',
+    weight: 8,
+    isEligible: (state) => state.teamLevel === 'FIRST_TEAM' && Boolean(state.contract),
+    setup: {
+      prompt: '你先向助教确认什么？',
+      options: [
+        { id: 'SCORE', title: '先问比分任务', description: '确认球队要冒险还是控场。', choiceIds: ['A', 'B'] },
+        { id: 'ROLE', title: '先问个人职责', description: '确认自己在体系中的具体位置。', choiceIds: ['C', 'D'] },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '主动压上争胜',
+        description: '用高风险跑动冲击对手防线。',
+        effectPreview: '45%制造关键机会 · 55%无功而返',
+        outcomeSummary: '你带着明确的争胜任务进入比赛。',
+        playerDelta: { fitness: -2 },
+        outcomes: [
+          { id: 'IMPACT', label: '制造关键机会', weight: 45, summary: '你的跑动打乱了对手防线，球队在最后阶段创造了决定性机会。', playerDelta: { form: 7, coachRelation: 3, reputation: 2 }, storyEffect: { tendencyDelta: { clutch: 1 } } },
+          { id: 'QUIET', label: '无功而返', weight: 55, summary: '你积极投入，但有限时间里没有得到合适机会，比赛平静结束。', playerDelta: { form: -1 } },
+        ],
+      },
+      {
+        id: 'B',
+        title: '帮助球队控住局面',
+        description: '先减少失误，保证阵型稳定。',
+        effectPreview: '教练关系、心理能力小幅上升',
+        outcomeSummary: '你没有追求抢镜，而是帮助球队稳住最后阶段，教练认可这份比赛理解。',
+        playerDelta: { attributes: { mental: 0.4 }, coachRelation: 3, form: 1 },
+      },
+      {
+        id: 'C',
+        title: '严格执行指定跑位',
+        description: '不擅自扩大自己的活动范围。',
+        effectPreview: '教练关系上升 · 个人表现平稳',
+        outcomeSummary: '你把临场指令执行得很干净，没有留下华丽镜头，却让战术保持完整。',
+        playerDelta: { coachRelation: 4, squadRelation: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'D',
+        title: '根据场面自由判断',
+        description: '保留临场改变跑位的权利。',
+        effectPreview: '50%改变比赛 · 50%打乱部署',
+        outcomeSummary: '你选择在基本职责之外保留临场判断空间。',
+        playerDelta: { morale: 1 },
+        outcomes: [
+          { id: 'READ', label: '判断改变比赛', weight: 50, summary: '一次提前判断让你出现在最关键的位置，球队因此完成了最后阶段的改变。', playerDelta: { form: 7, reputation: 3, coachRelation: 2 }, storyEffect: { tendencyDelta: { clutch: 1 } } },
+          { id: 'BREAK', label: '打乱原有部署', weight: 50, summary: '你的自由跑动和队友发生重叠，教练对这次擅自改变安排并不满意。', playerDelta: { form: -4, coachRelation: -4 } },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'CUP_ROTATION_START',
+    groupId: 'MATCH_OPPORTUNITY',
+    category: 'MATCH',
+    priority: 'P2',
+    cooldownWindows: 3,
+    interactionKind: 'RANKING',
+    eyebrow: '比赛 · 杯赛机会',
+    title: '杯赛首发前，教练让你明确自己的比赛优先级。',
+    description: '你必须在个人表现、战术纪律和身体管理之间排出先后顺序。',
+    weight: 7,
+    isEligible: (state) => state.teamLevel === 'FIRST_TEAM' && Boolean(state.contract),
+    choices: [
+      {
+        id: 'A',
+        title: '表现 ＞ 纪律 ＞ 身体',
+        description: '优先抓住少有的展示机会。',
+        effectPreview: '竞技状态明显上升 · 身体消耗增加',
+        outcomeSummary: '你把个人表现放在第一位，整场保持高投入，成功让更多人记住了这次首发。',
+        playerDelta: { form: 6, reputation: 3, fitness: -5 },
+      },
+      {
+        id: 'B',
+        title: '纪律 ＞ 表现 ＞ 身体',
+        description: '先完成教练交代的全部职责。',
+        effectPreview: '教练、队内关系稳定上升',
+        outcomeSummary: '你没有为了数据破坏战术，教练和队友都认可这是一场可靠的杯赛表现。',
+        playerDelta: { coachRelation: 5, squadRelation: 3, form: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '身体 ＞ 纪律 ＞ 表现',
+        description: '控制强度，确保后续窗口稳定。',
+        effectPreview: '身体状态上升 · 舆论关注下降',
+        outcomeSummary: '你用更克制的方式完成比赛，没有制造太多话题，但为后续赛程保留了身体。',
+        playerDelta: { fitness: 5, form: -1, mediaRelation: -1 },
       },
     ],
   },
@@ -907,6 +1584,40 @@ export function validateCareerEventDefinitions(
         errors.push(`健康事件不得创建跨窗口后果：${event.id}/${choice.id}`)
       }
     }
+    const protocol = interactionProtocolFor(event.interactionKind)
+    if (protocol === 'MULTI_STAGE' && !event.setup) {
+      errors.push(`多阶段事件缺少首阶段：${event.id}`)
+    }
+    if (event.setup) {
+      if (event.setup.options.length < 2 || event.setup.options.length > 3) {
+        errors.push(`事件首阶段选项数量必须为2至3：${event.id}`)
+      }
+      const setupIds = new Set<string>()
+      const routedChoiceIds = new Set<string>()
+      for (const option of event.setup.options) {
+        if (setupIds.has(option.id)) {
+          errors.push(`事件首阶段选项ID重复：${event.id}/${option.id}`)
+        }
+        setupIds.add(option.id)
+        if (!option.title.trim() || !option.description.trim()) {
+          errors.push(`事件首阶段文案不完整：${event.id}/${option.id}`)
+        }
+        if (option.choiceIds.length < 2 || option.choiceIds.length > 3) {
+          errors.push(`事件路线必须包含2至3个最终选项：${event.id}/${option.id}`)
+        }
+        for (const choiceId of option.choiceIds) {
+          routedChoiceIds.add(choiceId)
+          if (!choiceIds.has(choiceId)) {
+            errors.push(`事件路线指向未知选项：${event.id}/${option.id}/${choiceId}`)
+          }
+        }
+      }
+      for (const choiceId of choiceIds) {
+        if (!routedChoiceIds.has(choiceId)) {
+          errors.push(`事件最终选项未被路线覆盖：${event.id}/${choiceId}`)
+        }
+      }
+    }
     if (
       event.choices.some((choice) => (choice.cashDeltaEuro ?? 0) < 0) &&
       !event.choices.some((choice) => (choice.cashDeltaEuro ?? 0) >= 0)
@@ -915,7 +1626,7 @@ export function validateCareerEventDefinitions(
     }
     if (
       event.interactionKind === 'CHOICE' &&
-      interactionProtocolFor(event.interactionKind) !== 'SINGLE_STAGE'
+      protocol !== 'SINGLE_STAGE'
     ) {
       errors.push(`普通选择事件协议错误：${event.id}`)
     }
