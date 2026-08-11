@@ -383,6 +383,63 @@ function overseasInterestAdjustment(player: Player, club: Club): number {
   return preferenceBonus + intentBonus + eliteBarrier
 }
 
+export function careerPreferenceFit(input: {
+  player: Player
+  club: Club
+  promisedTeamLevel: TeamLevel
+  promisedRole: YouthRole | FirstTeamRole
+}): number {
+  const { player, club, promisedTeamLevel, promisedRole } = input
+  const roleIndex =
+    promisedTeamLevel === 'FIRST_TEAM'
+      ? FIRST_TEAM_ROLE_ORDER.indexOf(promisedRole as FirstTeamRole)
+      : YOUTH_ROLE_ORDER.indexOf(promisedRole as YouthRole)
+  const roleMaximum = promisedTeamLevel === 'FIRST_TEAM' ? 4 : 2
+  const playingTime = clamp(
+    20 + (Math.max(0, roleIndex) / roleMaximum) * 80,
+    20,
+    100,
+  )
+  const competitiveLevel = clamp(105 - club.tier * 14, 20, 95)
+  const salaryPotential = clamp(
+    competitiveLevel * 0.72 + playingTime * 0.28,
+    20,
+    100,
+  )
+  const leaguePreferred = player.preferredLeagues.includes(club.leagueKey)
+  const locationFit = isOverseasClub(club)
+    ? player.overseasIntent === 'STRONG'
+      ? 82
+      : player.overseasIntent === 'CONDITIONAL'
+        ? 68
+        : 42
+    : player.overseasIntent === 'DOMESTIC'
+      ? 88
+      : 66
+  const stability = clamp(
+    locationFit + (leaguePreferred ? 10 : 0) + (club.profile === 'ELITE' ? 3 : 0),
+    25,
+    100,
+  )
+  const factors = {
+    PLAYING_TIME: playingTime,
+    COMPETITIVE_LEVEL: competitiveLevel,
+    SALARY: salaryPotential,
+    STABILITY: stability,
+  }
+  const totalWeight = Object.values(player.priorityValues).reduce(
+    (total, value) => total + value,
+    0,
+  )
+  return Math.round(
+    Object.entries(player.priorityValues).reduce(
+      (total, [priority, weight]) =>
+        total + factors[priority as keyof typeof factors] * weight,
+      0,
+    ) / totalWeight,
+  )
+}
+
 function generateTransferOffersFromPool(
   input: GenerateTransferOffersInput,
   domesticOnly: boolean,
@@ -438,11 +495,18 @@ function generateTransferOffersFromPool(
         estimatedPotential,
         interestScore: Math.max(50, interestScore),
         promise,
+        preferenceFit: careerPreferenceFit({
+          player,
+          club,
+          promisedTeamLevel: promise.teamLevel,
+          promisedRole: promise.role,
+        }),
       }
     })
     .sort(
       (left, right) =>
-        right.interestScore - left.interestScore ||
+        right.interestScore * 0.65 + right.preferenceFit * 0.35 -
+          (left.interestScore * 0.65 + left.preferenceFit * 0.35) ||
         left.club.tier - right.club.tier,
     )
 

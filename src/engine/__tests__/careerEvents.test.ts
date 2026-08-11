@@ -102,6 +102,68 @@ function establishFirstTeamRole(
   }))
 }
 
+function establishProfessionalContract(state: GameState) {
+  state.contract = {
+    type: 'RENEWAL',
+    clubId: state.selectedClubId!,
+    remainingHalfYears: 4,
+    annualSalaryEuro: 300_000,
+    promisedTeamLevel: 'FIRST_TEAM',
+    promisedRole: 'STARTER',
+    releaseClauseEuro: null,
+    clubOptionYears: 0,
+    parentClubId: null,
+    brokenPromiseWindows: 0,
+  }
+}
+
+function establishFourthBatchState(
+  mode: 'STRUGGLING' | 'STRONG' | 'NATIONAL' = 'STRUGGLING',
+) {
+  const state = createState(20)
+  state.selectedClubId = 'ita_inter'
+  state.careerStory = createCareerStoryState('ita_inter')
+  establishFirstTeamRole(state, 'STARTER', 4)
+  establishProfessionalContract(state)
+  state.player!.squadRelation = 70
+  state.player!.coachRelation = 70
+  state.player!.fitness = 68
+  const strong = mode === 'STRONG'
+  const national = mode === 'NATIONAL'
+  state.lastReport = {
+    stats: {
+      appearances: 12,
+      starts: 8,
+      minutes: 820,
+      goals: strong ? 5 : 1,
+      assists: strong ? 3 : 1,
+      yellowCards: 1,
+      redCards: 0,
+      averageRating: strong ? 7.3 : 6.7,
+    },
+    nationalTeam: national
+      ? {
+          windowIndex: 20,
+          calledUp: true,
+          role: 'STARTER',
+          competition: 'ASIAN_CUP',
+          stage: 'GROUP_STAGE',
+          appearances: 3,
+          starts: 2,
+          minutes: 210,
+          goals: 0,
+          assists: 1,
+          averageRating: 6.6,
+          selectionScore: 72,
+          selectionBenchmark: 64,
+          debut: false,
+          summary: '国家队小组赛出局',
+        }
+      : null,
+  } as NonNullable<GameState['lastReport']>
+  return state
+}
+
 describe('career events', () => {
   it('skips the arrival window and deterministically selects the next event', () => {
     expect(selectCareerEvent(createState(0))).toBeNull()
@@ -113,7 +175,7 @@ describe('career events', () => {
 
   it('keeps every registered event definition structurally valid', () => {
     expect(validateCareerEventDefinitions()).toEqual([])
-    expect(CAREER_EVENTS).toHaveLength(51)
+    expect(CAREER_EVENTS).toHaveLength(66)
   })
 
   it('routes multi-stage events through valid setup choices', () => {
@@ -400,6 +462,106 @@ describe('career events', () => {
       cashSpentEuro: 0,
     }
     expect(getCareerEvent('LONG_SERVICE_FAREWELL').isEligible(farewell)).toBe(true)
+  })
+
+  it('makes all fourth-batch events reachable from supported career state', () => {
+    const struggling = establishFourthBatchState('STRUGGLING')
+    const broadlyEligible = [
+      'DRESSING_ROOM_DEFEAT_REVIEW',
+      'PLAYER_COUNCIL_VOTE',
+      'TEAMMATE_CONTRACT_TENSION',
+      'OVERSEAS_COMMUNICATION_PLAN',
+      'EARLY_SUBSTITUTION_REACTION',
+      'TEMPORARY_TACTICAL_ROLE',
+      'PROTECT_LEAD_OR_CHASE_STATS',
+      'CONGESTED_SCHEDULE_PRIORITIES',
+      'OLD_SOCIAL_POST_REVISITED',
+      'TEAMMATE_RANKING_INTERVIEW',
+      'SETTLE_IN_CURRENT_CITY',
+      'THREE_YEAR_CAREER_DIRECTION',
+    ] as const
+    for (const eventId of broadlyEligible) {
+      expect(getCareerEvent(eventId).isEligible(struggling), eventId).toBe(true)
+    }
+
+    const strong = establishFourthBatchState('STRONG')
+    expect(getCareerEvent('FAN_EXPECTATION_SURGE').isEligible(strong)).toBe(true)
+
+    const national = establishFourthBatchState('NATIONAL')
+    expect(getCareerEvent('NATIONAL_ROLE_MISMATCH').isEligible(national)).toBe(true)
+    expect(getCareerEvent('NATIONAL_DEFEAT_RESPONSE').isEligible(national)).toBe(true)
+  })
+
+  it('keeps player-council and overseas events realistic', () => {
+    const teenager = createState(10)
+    establishFirstTeamRole(teenager, 'SUBSTITUTE', 4)
+    teenager.player!.squadRelation = 90
+    expect(getCareerEvent('PLAYER_COUNCIL_VOTE').isEligible(teenager)).toBe(false)
+
+    const established = establishFourthBatchState('STRONG')
+    expect(getCareerEvent('PLAYER_COUNCIL_VOTE').isEligible(established)).toBe(true)
+    expect(getCareerEvent('OVERSEAS_COMMUNICATION_PLAN').isEligible(established)).toBe(true)
+
+    established.selectedClubId = 'cn_beijing_yuhua'
+    expect(getCareerEvent('OVERSEAS_COMMUNICATION_PLAN').isEligible(established)).toBe(false)
+  })
+
+  it('changes the existing career-priority model without adding new save state', () => {
+    const state = establishFourthBatchState('STRONG')
+    const result = resolveCareerEventChoice({
+      state,
+      eventId: 'THREE_YEAR_CAREER_DIRECTION',
+      choiceId: 'B',
+    })
+
+    expect(result.player.priorities).toEqual([
+      'COMPETITIVE_LEVEL',
+      'PLAYING_TIME',
+      'STABILITY',
+      'SALARY',
+    ])
+    expect(result.player.priorityValues).toEqual({
+      COMPETITIVE_LEVEL: 85,
+      PLAYING_TIME: 70,
+      STABILITY: 55,
+      SALARY: 40,
+    })
+    expect(validateGameState({ ...state, player: result.player }).player?.priorities)
+      .toEqual(result.player.priorities)
+  })
+
+  it('gives simultaneously eligible fourth-batch events similar draw rates', () => {
+    const fourthBatchIds = new Set([
+      'DRESSING_ROOM_DEFEAT_REVIEW',
+      'PLAYER_COUNCIL_VOTE',
+      'TEAMMATE_CONTRACT_TENSION',
+      'OVERSEAS_COMMUNICATION_PLAN',
+      'EARLY_SUBSTITUTION_REACTION',
+      'TEMPORARY_TACTICAL_ROLE',
+      'PROTECT_LEAD_OR_CHASE_STATS',
+      'CONGESTED_SCHEDULE_PRIORITIES',
+      'OLD_SOCIAL_POST_REVISITED',
+      'TEAMMATE_RANKING_INTERVIEW',
+      'SETTLE_IN_CURRENT_CITY',
+      'THREE_YEAR_CAREER_DIRECTION',
+    ])
+    const counts = new Map<string, number>()
+    const baseState = establishFourthBatchState('STRUGGLING')
+
+    for (let sample = 0; sample < 10_000; sample += 1) {
+      const state = {
+        ...baseState,
+        careerSeed: `fourth-batch-distribution-${sample}`,
+      }
+      const eventId = selectCareerEvent(state)
+      if (eventId && fourthBatchIds.has(eventId)) {
+        counts.set(eventId, (counts.get(eventId) ?? 0) + 1)
+      }
+    }
+
+    expect(counts.size).toBe(fourthBatchIds.size)
+    const appearances = [...counts.values()]
+    expect(Math.min(...appearances) / Math.max(...appearances)).toBeGreaterThan(0.65)
   })
 
   it('keeps every visible random outcome normalized to one hundred percent', () => {

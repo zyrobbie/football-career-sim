@@ -16,6 +16,7 @@ import {
   assessDomesticTransferOpportunity,
   assessOverseasInterest,
   applyTransferArrivalChoice,
+  careerPreferenceFit,
   contractFromTransferOffer,
   generateContractExpiryOffers,
   generateDomesticTransferOffers,
@@ -50,6 +51,55 @@ function createTransferFixture() {
 }
 
 describe('domestic transfer window', () => {
+  it('uses career priorities when the agent filters sporting platforms and roles', () => {
+    const { player } = createTransferFixture()
+    const eliteClub = CLUBS.find((club) => club.id === 'ita_inter')!
+    const smallerClub = CLUBS.find((club) => club.tier >= 5)!
+
+    player.priorities = ['COMPETITIVE_LEVEL', 'PLAYING_TIME', 'STABILITY', 'SALARY']
+    player.priorityValues = {
+      COMPETITIVE_LEVEL: 85,
+      PLAYING_TIME: 70,
+      STABILITY: 55,
+      SALARY: 40,
+    }
+    const platformElite = careerPreferenceFit({
+      player,
+      club: eliteClub,
+      promisedTeamLevel: 'FIRST_TEAM',
+      promisedRole: 'FRINGE',
+    })
+    const platformStarter = careerPreferenceFit({
+      player,
+      club: smallerClub,
+      promisedTeamLevel: 'FIRST_TEAM',
+      promisedRole: 'STARTER',
+    })
+
+    player.priorities = ['PLAYING_TIME', 'STABILITY', 'SALARY', 'COMPETITIVE_LEVEL']
+    player.priorityValues = {
+      PLAYING_TIME: 85,
+      STABILITY: 70,
+      SALARY: 55,
+      COMPETITIVE_LEVEL: 40,
+    }
+    const playingElite = careerPreferenceFit({
+      player,
+      club: eliteClub,
+      promisedTeamLevel: 'FIRST_TEAM',
+      promisedRole: 'FRINGE',
+    })
+    const playingStarter = careerPreferenceFit({
+      player,
+      club: smallerClub,
+      promisedTeamLevel: 'FIRST_TEAM',
+      promisedRole: 'STARTER',
+    })
+
+    expect(platformElite).toBeGreaterThan(platformStarter)
+    expect(playingStarter).toBeGreaterThan(playingElite)
+  })
+
   it('shows deterministic overseas scouting at 16-17 without creating a signable offer', () => {
     const { player, careerSeed } = createTransferFixture()
     const first = assessOverseasInterest({
