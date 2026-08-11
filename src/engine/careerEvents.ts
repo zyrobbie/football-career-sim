@@ -221,6 +221,81 @@ function hasPlayedForAnotherClub(state: GameState): boolean {
   )
 }
 
+function completedFirstTeamHistory(state: GameState) {
+  return state.history.filter(
+    (entry) =>
+      entry.windowIndex < state.windowIndex &&
+      entry.teamLevel === 'FIRST_TEAM' &&
+      entry.stats.appearances > 0,
+  )
+}
+
+function firstTeamCareerTotals(state: GameState) {
+  return completedFirstTeamHistory(state).reduce(
+    (totals, entry) => ({
+      appearances: totals.appearances + entry.stats.appearances,
+      goals: totals.goals + entry.stats.goals,
+      assists: totals.assists + entry.stats.assists,
+    }),
+    { appearances: 0, goals: 0, assists: 0 },
+  )
+}
+
+function latestCompletedFirstTeamWindows(
+  state: GameState,
+  count: number,
+) {
+  return completedFirstTeamHistory(state).slice(-count)
+}
+
+function currentClubTenureWindows(state: GameState): number {
+  if (!state.selectedClubId) return 0
+  let windows = 0
+  for (let index = state.history.length - 1; index >= 0; index -= 1) {
+    const entry = state.history[index]
+    if (!entry || entry.clubId !== state.selectedClubId) break
+    windows += 1
+  }
+  return windows
+}
+
+function careerHonors(state: GameState) {
+  return [
+    ...state.history.flatMap((entry) => entry.honors ?? []),
+    ...(state.lastReport?.honors ?? []),
+  ]
+}
+
+function hasCareerHonor(
+  state: GameState,
+  types: readonly string[],
+): boolean {
+  return careerHonors(state).some((honor) => types.includes(honor.type))
+}
+
+function isReturnTransfer(state: GameState): boolean {
+  const decision = state.transferDecision
+  if (
+    decision?.kind !== 'TRANSFER' ||
+    decision.toClubId !== state.selectedClubId
+  ) {
+    return false
+  }
+  return state.history.some(
+    (entry) =>
+      entry.windowIndex < state.windowIndex &&
+      entry.clubId === decision.toClubId,
+  )
+}
+
+function departedClubTenureWindows(state: GameState): number {
+  const decision = state.transferDecision
+  if (decision?.kind !== 'TRANSFER') return 0
+  return state.history.filter(
+    (entry) => entry.clubId === decision.fromClubId,
+  ).length
+}
+
 function latestNationalWindow(state: GameState) {
   return state.lastReport?.nationalTeam ?? null
 }
@@ -2691,6 +2766,965 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
       },
     ],
   },
+  {
+    id: 'FIRST_TEAM_DEBUT_REFLECTION',
+    groupId: 'FIRST_TEAM_DEBUT',
+    category: 'MILESTONE',
+    priority: 'P2',
+    cooldownWindows: 53,
+    interactionKind: 'CHOICE',
+    eyebrow: '里程碑 · 一线队首秀',
+    title: '你的一线队首秀已经写入生涯履历。',
+    description: '第一次正式登场不必完美，但你可以决定怎样保存这段起点。',
+    weight: 7,
+    isEligible: (state) =>
+      firstTeamCareerTotals(state).appearances > 0 &&
+      !hasCareerEvent(state, 'FIRST_TEAM_DEBUT_REFLECTION'),
+    choices: [
+      {
+        id: 'A',
+        title: '完整复盘首秀',
+        description: '把每次触球和跑位重新看一遍。',
+        effectPreview: '心理能力、教练关系上升',
+        outcomeSummary: '你把首秀从纪念日变成了一堂比赛课，教练也看见了你的职业态度。',
+        playerDelta: { attributes: { mental: 0.5 }, coachRelation: 3, morale: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '收藏首秀球衣',
+        description: '留下一件只属于自己的纪念品。',
+        effectPreview: '心理状态、俱乐部归属感上升',
+        outcomeSummary: '你收起了首秀球衣，也记住了真正踏入职业赛场时的紧张和兴奋。',
+        playerDelta: { morale: 6, clubAttachment: 3 },
+      },
+      {
+        id: 'C',
+        title: '感谢帮助过你的人',
+        description: '把首秀归功于教练和队友的支持。',
+        effectPreview: '教练、队内与球迷关系上升',
+        outcomeSummary: '你没有把首秀包装成个人英雄故事，公开感谢让身边的人感到被尊重。',
+        playerDelta: { coachRelation: 3, squadRelation: 4, fanRelation: 2 },
+        storyEffect: { publicPersona: 'TEAM_FIRST' },
+      },
+    ],
+  },
+  {
+    id: 'FIRST_SENIOR_GOAL_REACTION',
+    groupId: 'FIRST_SENIOR_GOAL',
+    category: 'MILESTONE',
+    priority: 'P2',
+    cooldownWindows: 53,
+    interactionKind: 'CHOICE',
+    eyebrow: '里程碑 · 职业首球',
+    title: '你的第一粒一线队进球已经被记入数据。',
+    description: '这个进球属于职业生涯，也属于参与其中的整支球队。',
+    weight: 7,
+    isEligible: (state) =>
+      firstTeamCareerTotals(state).goals > 0 &&
+      !hasCareerEvent(state, 'FIRST_SENIOR_GOAL_REACTION'),
+    choices: [
+      {
+        id: 'A',
+        title: '把比赛用球带回家',
+        description: '保留这次突破的实体记忆。',
+        effectPreview: '心理状态明显上升',
+        outcomeSummary: '比赛用球被安静地收藏起来。以后每次看见它，你都会想起第一球来得多么不容易。',
+        playerDelta: { morale: 7, reputation: 1 },
+      },
+      {
+        id: 'B',
+        title: '感谢送出助攻的队友',
+        description: '把进球的功劳分享出去。',
+        effectPreview: '队内关系、团队形象上升',
+        outcomeSummary: '你第一时间提到送出助攻的队友，这个进球因此成为了更衣室共同的快乐。',
+        playerDelta: { squadRelation: 6, fanRelation: 2, morale: 3 },
+        storyEffect: { publicPersona: 'TEAM_FIRST' },
+      },
+      {
+        id: 'C',
+        title: '公开设定下一个目标',
+        description: '把首球当作竞争更高位置的开始。',
+        effectPreview: '55%延续势头 · 45%增加压力',
+        outcomeSummary: '你没有停留在首球庆祝中，而是立刻谈到了下一阶段。',
+        playerDelta: { reputation: 3 },
+        outcomes: [
+          {
+            id: 'MOMENTUM',
+            label: '目标转化为动力',
+            weight: 55,
+            summary: '清晰目标让训练更有方向，首球带来的信心延续到了后续比赛。',
+            playerDelta: { form: 6, morale: 4, fanRelation: 3 },
+          },
+          {
+            id: 'PRESSURE',
+            label: '外界期待迅速升高',
+            weight: 45,
+            summary: '媒体开始用进球数字衡量你，下一场没有破门便引来了不必要的议论。',
+            playerDelta: { morale: -3, mediaRelation: -2, reputation: 2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'SCORING_DROUGHT_RESPONSE',
+    groupId: 'MATCH_FORM_PRESSURE',
+    category: 'MATCH',
+    priority: 'P2',
+    cooldownWindows: 6,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '比赛 · 进球荒',
+    title: '连续两个阶段没有进球，外界开始讨论你的效率。',
+    description: '你需要先确定问题来自比赛方式还是心理压力，再决定怎样回应。',
+    weight: 7,
+    isEligible: (state) => {
+      const windows = latestCompletedFirstTeamWindows(state, 2)
+      return Boolean(
+        state.player &&
+          ['ST', 'LW', 'RW', 'CAM', 'LM', 'RM'].includes(
+            state.player.primaryPosition,
+          ) &&
+          windows.length === 2 &&
+          windows.every(
+            (entry) =>
+              entry.stats.appearances >= 6 && entry.stats.goals === 0,
+          ),
+      )
+    },
+    setup: {
+      prompt: '你认为最需要先处理什么？',
+      options: [
+        {
+          id: 'FOOTBALL',
+          title: '先调整比赛方式',
+          description: '从跑位、射门选择和配合入手。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'MIND',
+          title: '先减轻心理压力',
+          description: '停止让每次触球都背负进球任务。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '增加禁区终结训练',
+        description: '把额外时间集中到最直接的射门场景。',
+        effectPreview: '进攻、竞技状态上升 · 身体消耗增加',
+        outcomeSummary: '重复终结训练让动作重新变得自然，但额外负荷也带来了一些疲劳。',
+        playerDelta: { attributes: { attack: 0.6 }, form: 4, fitness: -3 },
+      },
+      {
+        id: 'B',
+        title: '扩大无球和助攻贡献',
+        description: '不把价值只压在进球数字上。',
+        effectPreview: '心理能力、队内关系上升',
+        outcomeSummary: '你开始用跑动和配合帮助全队，进球压力下降，整体比赛影响力反而更加稳定。',
+        playerDelta: { attributes: { mental: 0.5 }, squadRelation: 4, morale: 3 },
+      },
+      {
+        id: 'C',
+        title: '暂时停止阅读评论',
+        description: '把外界声音隔离在训练场之外。',
+        effectPreview: '心理状态明显恢复 · 媒体关系下降',
+        outcomeSummary: '你退出了进球荒的舆论循环，训练和比赛重新回到自己的节奏。',
+        playerDelta: { morale: 7, form: 2, mediaRelation: -2 },
+      },
+      {
+        id: 'D',
+        title: '公开承担进球责任',
+        description: '不回避压力，承诺用表现回应。',
+        effectPreview: '45%强势反弹 · 55%压力继续累积',
+        outcomeSummary: '你在采访中明确承担了进球责任。',
+        playerDelta: { reputation: 2 },
+        outcomes: [
+          {
+            id: 'REBOUND',
+            label: '责任激活竞争心',
+            weight: 45,
+            summary: '公开承诺没有压垮你，反而让比赛专注度明显提高。',
+            playerDelta: { form: 7, morale: 4, fanRelation: 3 },
+          },
+          {
+            id: 'HEAVIER',
+            label: '压力继续累积',
+            weight: 55,
+            summary: '每次射门都被放大讨论，进球荒暂时变成了更沉重的心理负担。',
+            playerDelta: { morale: -5, form: -3, mediaRelation: -2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'SUSTAINED_HIGH_FORM',
+    groupId: 'MATCH_FORM_REWARD',
+    category: 'MATCH',
+    priority: 'P2',
+    cooldownWindows: 6,
+    interactionKind: 'ALLOCATION',
+    eyebrow: '比赛 · 连续高光',
+    title: '连续两个阶段表现出色，额外关注和比赛负荷同时到来。',
+    description: '时间和体能有限，你必须决定如何在比赛、恢复和公众活动之间分配精力。',
+    weight: 7,
+    isEligible: (state) => {
+      const windows = latestCompletedFirstTeamWindows(state, 2)
+      return (
+        windows.length === 2 &&
+        windows.every(
+          (entry) =>
+            entry.stats.appearances >= 8 &&
+            entry.stats.averageRating >= 7.1,
+        )
+      )
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '比赛60% · 恢复40%',
+        description: '继续冲击数据，但保证基本恢复。',
+        effectPreview: '竞技、知名度上升 · 身体消耗增加',
+        outcomeSummary: '你延续了高投入比赛节奏，状态仍然醒目，身体负荷也开始接近上限。',
+        playerDelta: { form: 6, reputation: 4, fitness: -4 },
+      },
+      {
+        id: 'B',
+        title: '比赛45% · 恢复45% · 活动10%',
+        description: '尽量维持竞技和公众影响的平衡。',
+        effectPreview: '状态、关系与知名度均衡上升',
+        outcomeSummary: '你没有把全部筹码压在数据上，竞技节奏、恢复和公众联系都保持了稳定。',
+        playerDelta: { form: 3, fitness: 3, fanRelation: 3, reputation: 2 },
+      },
+      {
+        id: 'C',
+        title: '恢复60% · 比赛40%',
+        description: '主动降低额外安排，为后续赛程蓄力。',
+        effectPreview: '身体、心理状态明显上升',
+        outcomeSummary: '你没有追逐短期热度，而是利用高光期建立更稳定的身体和心理基础。',
+        playerDelta: { fitness: 7, morale: 5, form: -1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'IMPACT_SUBSTITUTE_RECOGNITION',
+    groupId: 'MATCH_ROLE_REWARD',
+    category: 'MATCH',
+    priority: 'P2',
+    cooldownWindows: 5,
+    interactionKind: 'RISK',
+    eyebrow: '比赛 · 替补建功',
+    title: '有限出场时间里连续制造进球，教练开始重新评估你。',
+    description: '你可以稳步扩大角色，也可以利用这次表现直接要求更多首发机会。',
+    weight: 7,
+    isEligible: (state) => {
+      const latest = latestCompletedFirstTeamWindows(state, 1)[0]
+      return Boolean(
+        latest &&
+          ['SUBSTITUTE', 'ROTATION'].includes(latest.role) &&
+          latest.stats.appearances >= 5 &&
+          latest.stats.starts < latest.stats.appearances &&
+          latest.stats.goals + latest.stats.assists >= 2 &&
+          latest.stats.averageRating >= 6.8,
+      )
+    },
+    setup: {
+      prompt: '你准备先通过哪种方式表达诉求？',
+      options: [
+        {
+          id: 'PRIVATE',
+          title: '先与教练私下沟通',
+          description: '把近期贡献放进球队内部讨论。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'PUBLIC',
+          title: '先回应外界关注',
+          description: '让球迷和媒体知道你已经准备好。',
+          choiceIds: ['B', 'C'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '继续接受替补任务',
+        description: '先证明这种贡献可以持续。',
+        effectPreview: '教练、队内关系稳定上升',
+        outcomeSummary: '你没有急着改变身份，而是继续把替补时间踢出价值，教练对你的信任更加稳定。',
+        playerDelta: { coachRelation: 5, squadRelation: 3, morale: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '私下争取更多首发',
+        description: '用近期数据要求扩大比赛责任。',
+        effectPreview: '60%获得积极回应 · 40%被要求继续等待',
+        outcomeSummary: '你带着比赛数据与教练讨论了下一阶段角色。',
+        playerDelta: { morale: 1 },
+        outcomes: [
+          {
+            id: 'EXPAND',
+            label: '角色得到扩大',
+            weight: 60,
+            summary: '教练认可你的替补效率，开始在更多比赛计划中考虑首发使用。',
+            playerDelta: { coachRelation: 5, form: 5, reputation: 2 },
+          },
+          {
+            id: 'WAIT',
+            label: '仍需继续等待',
+            weight: 40,
+            summary: '教练肯定了贡献，却认为目前的替补角色仍最适合球队。',
+            playerDelta: { coachRelation: 1, morale: -3, form: 1 },
+          },
+        ],
+      },
+      {
+        id: 'C',
+        title: '公开表达首发愿望',
+        description: '让外界知道你已经准备好承担更多。',
+        effectPreview: '35%形成舆论支持 · 65%被认为施压',
+        outcomeSummary: '你把首发愿望带到了公开采访中。',
+        playerDelta: { reputation: 3 },
+        outcomes: [
+          {
+            id: 'SUPPORT',
+            label: '球迷支持扩大角色',
+            weight: 35,
+            summary: '近期表现为发言提供了依据，球迷开始期待你获得更多首发。',
+            playerDelta: { fanRelation: 5, mediaRelation: 3, morale: 4 },
+          },
+          {
+            id: 'PRESSURE',
+            label: '被认为向教练施压',
+            weight: 65,
+            summary: '公开表达让内部角色讨论变成新闻，教练不满你绕过了私下沟通。',
+            playerDelta: { coachRelation: -5, squadRelation: -2, mediaRelation: 2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'FIRST_LEAGUE_TITLE_REACTION',
+    groupId: 'FIRST_LEAGUE_TITLE',
+    category: 'MILESTONE',
+    priority: 'P2',
+    cooldownWindows: 53,
+    interactionKind: 'RANKING',
+    eyebrow: '荣誉 · 首次联赛夺冠',
+    title: '你的第一座联赛冠军已经写入荣誉室。',
+    description: '庆祝、感谢和重新设定目标都很重要，你要决定这三件事的先后。',
+    weight: 7,
+    isEligible: (state) =>
+      hasCareerHonor(state, ['LEAGUE_TITLE']) &&
+      !hasCareerEvent(state, 'FIRST_LEAGUE_TITLE_REACTION'),
+    choices: [
+      {
+        id: 'A',
+        title: '球队庆祝 ＞ 感谢 ＞ 新目标',
+        description: '先完整享受共同赢得的冠军。',
+        effectPreview: '队内、球迷与心理状态上升',
+        outcomeSummary: '你把自己完全放进球队庆祝中，这座冠军因此首先成为一段共同记忆。',
+        playerDelta: { squadRelation: 6, fanRelation: 5, morale: 6 },
+        storyEffect: { publicPersona: 'TEAM_FIRST' },
+      },
+      {
+        id: 'B',
+        title: '感谢 ＞ 球队庆祝 ＞ 新目标',
+        description: '先向教练、队友和家人表达感谢。',
+        effectPreview: '教练、队内与公众关系上升',
+        outcomeSummary: '你先感谢所有帮助过自己的人，冠军采访因此没有变成个人表功。',
+        playerDelta: { coachRelation: 4, squadRelation: 4, mediaRelation: 3, fanRelation: 3 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'C',
+        title: '新目标 ＞ 庆祝 ＞ 感谢',
+        description: '立即把注意力转向更高舞台。',
+        effectPreview: '竞技、知名度上升 · 队友略感扫兴',
+        outcomeSummary: '你在冠军之夜就谈到下一座奖杯，进取心赢得关注，也让部分队友觉得庆祝被匆忙跳过。',
+        playerDelta: { form: 4, reputation: 4, squadRelation: -2, morale: 2 },
+        storyEffect: { tendencyDelta: { leadership: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'FIRST_CUP_TITLE_REACTION',
+    groupId: 'FIRST_CUP_TITLE',
+    category: 'MILESTONE',
+    priority: 'P2',
+    cooldownWindows: 53,
+    interactionKind: 'CHOICE',
+    eyebrow: '荣誉 · 首次杯赛夺冠',
+    title: '你第一次随队赢得了杯赛或洲际赛事冠军。',
+    description: '淘汰赛冠军往往浓缩了许多关键时刻，你可以决定如何理解自己的贡献。',
+    weight: 7,
+    isEligible: (state) =>
+      hasCareerHonor(state, ['DOMESTIC_CUP', 'CONTINENTAL_TITLE']) &&
+      !hasCareerEvent(state, 'FIRST_CUP_TITLE_REACTION'),
+    choices: [
+      {
+        id: 'A',
+        title: '复盘关键比赛',
+        description: '把冠军过程转化为大赛经验。',
+        effectPreview: '心理能力、大赛倾向上升',
+        outcomeSummary: '你重新看完淘汰赛的关键片段，冠军带来的不只是奖牌，还有处理压力的经验。',
+        playerDelta: { attributes: { mental: 0.7 }, morale: 3 },
+        storyEffect: { tendencyDelta: { clutch: 1, professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '与球迷共享奖杯',
+        description: '参加完整的公开庆祝活动。',
+        effectPreview: '球迷关系、知名度明显上升',
+        outcomeSummary: '你把奖杯带到球迷面前，这段庆祝成为了彼此长期记住的画面。',
+        playerDelta: { fanRelation: 7, reputation: 5, fitness: -2 },
+      },
+      {
+        id: 'C',
+        title: '安静陪伴替补队友',
+        description: '关注那些贡献不容易被看见的人。',
+        effectPreview: '队内关系、领导倾向明显上升',
+        outcomeSummary: '你在庆祝中照顾到出场较少的队友，更衣室记住了这份体谅。',
+        playerDelta: { squadRelation: 7, coachRelation: 2, morale: 3 },
+        storyEffect: { tendencyDelta: { leadership: 1, diplomacy: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'FINAL_DEFEAT_RESPONSE',
+    groupId: 'SEASON_FINAL_RESULT',
+    category: 'MATCH',
+    priority: 'P2',
+    cooldownWindows: 6,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '赛季 · 决赛失利',
+    title: '球队在决赛中失利，赛季以距离奖杯一步之遥结束。',
+    description: '失望是真实的，但你仍要决定先面对队友还是公众，再选择具体表达。',
+    weight: 7,
+    isEligible: (state) =>
+      state.lastReport?.clubSeason?.domesticCupStage === 'RUNNER_UP' ||
+      state.lastReport?.clubSeason?.continentalStage === 'RUNNER_UP',
+    setup: {
+      prompt: '你准备先面对谁？',
+      options: [
+        {
+          id: 'TEAM',
+          title: '先回到更衣室',
+          description: '把注意力留给共同经历失利的队友。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'PUBLIC',
+          title: '先面对球迷和媒体',
+          description: '不让球队在失利后失去公开回应。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '承担失利责任',
+        description: '先说自己可以做得更好。',
+        effectPreview: '队内、领导倾向上升 · 心理承压',
+        outcomeSummary: '你没有把责任推给任何人，更衣室因此更容易从相互指责中走出来。',
+        playerDelta: { squadRelation: 6, morale: -3, reputation: 2 },
+        storyEffect: { tendencyDelta: { leadership: 1 } },
+      },
+      {
+        id: 'B',
+        title: '让大家先停止复盘',
+        description: '情绪最重的时候不急着寻找罪人。',
+        effectPreview: '心理、队内关系稳定恢复',
+        outcomeSummary: '你提议暂时停止争论，让所有人先从决赛情绪中恢复，再做完整复盘。',
+        playerDelta: { morale: 5, squadRelation: 4, fitness: 2 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'C',
+        title: '向球迷公开致歉',
+        description: '承认结果令人失望，不寻找借口。',
+        effectPreview: '球迷、媒体关系上升',
+        outcomeSummary: '你的回应直接而克制，失望没有消失，但球迷认可球队没有逃避。',
+        playerDelta: { fanRelation: 6, mediaRelation: 3, morale: -1 },
+      },
+      {
+        id: 'D',
+        title: '强调球队值得骄傲',
+        description: '保护整个赛季的努力不被一场比赛抹掉。',
+        effectPreview: '50%鼓舞球队 · 50%被批回避失败',
+        outcomeSummary: '你在采访中强调球队走到决赛已经证明了价值。',
+        playerDelta: { squadRelation: 2 },
+        outcomes: [
+          {
+            id: 'INSPIRE',
+            label: '表达鼓舞了球队',
+            weight: 50,
+            summary: '队友和球迷理解了你的本意，整个赛季没有被最后一场完全否定。',
+            playerDelta: { morale: 5, squadRelation: 4, fanRelation: 3 },
+          },
+          {
+            id: 'AVOID',
+            label: '被批评回避失败',
+            weight: 50,
+            summary: '部分媒体认为你淡化了决赛结果，公开讨论继续围绕责任展开。',
+            playerDelta: { mediaRelation: -4, fanRelation: -2, morale: -2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'INDIVIDUAL_AWARD_REACTION',
+    groupId: 'SEASON_INDIVIDUAL_AWARD',
+    category: 'MEDIA',
+    priority: 'P2',
+    cooldownWindows: 4,
+    interactionKind: 'PERSON_TONE',
+    eyebrow: '荣誉 · 个人奖项',
+    title: '赛季个人奖项公布，你的名字出现在获奖名单中。',
+    description: '关注集中到你身上，你要先确定感谢对象，再选择表达方式。',
+    weight: 7,
+    isEligible: (state) =>
+      Boolean(
+        state.lastReport?.honors?.some(
+          (honor) => honor.scope === 'INDIVIDUAL',
+        ),
+      ),
+    setup: {
+      prompt: '你希望先感谢谁？',
+      options: [
+        {
+          id: 'TEAM',
+          title: '先感谢球队',
+          description: '强调奖项来自共同创造的环境。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'SELF',
+          title: '先谈个人付出',
+          description: '诚实说明自己为此做出的努力。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '把奖项归于全队',
+        description: '不突出自己的决定性作用。',
+        effectPreview: '队内、球迷关系明显上升',
+        outcomeSummary: '你把个人奖项称为团队工作的结果，队友愿意共同分享这份荣誉。',
+        playerDelta: { squadRelation: 6, fanRelation: 4, reputation: 3 },
+        storyEffect: { publicPersona: 'TEAM_FIRST' },
+      },
+      {
+        id: 'B',
+        title: '逐一感谢关键队友',
+        description: '具体说出帮助过你的人。',
+        effectPreview: '队内、媒体与外交倾向上升',
+        outcomeSummary: '具体而真实的感谢让颁奖采访更有内容，也避免了空泛的客套。',
+        playerDelta: { squadRelation: 5, mediaRelation: 4, reputation: 2 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'C',
+        title: '坦率谈论长期努力',
+        description: '承认自己确实为奖项付出了很多。',
+        effectPreview: '知名度、心理状态上升',
+        outcomeSummary: '你没有假装奖项毫无意义，而是坦率谈到背后的训练和坚持。',
+        playerDelta: { reputation: 5, morale: 5, mediaRelation: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'D',
+        title: '宣布追逐更高奖项',
+        description: '把这次获奖定义为下一阶段起点。',
+        effectPreview: '45%强化巨星形象 · 55%被批过度自信',
+        outcomeSummary: '你在领奖时公开谈到下一个更高目标。',
+        playerDelta: { reputation: 4 },
+        outcomes: [
+          {
+            id: 'STAR',
+            label: '巨星形象得到强化',
+            weight: 45,
+            summary: '自信表达与赛季表现相互支撑，外界开始用更高标准看待你。',
+            playerDelta: { fanRelation: 5, mediaRelation: 4, morale: 4 },
+            storyEffect: { publicPersona: 'OUTSPOKEN' },
+          },
+          {
+            id: 'ARROGANT',
+            label: '被批评过度自信',
+            weight: 55,
+            summary: '部分评论认为你还没有资格提前谈论更高荣誉，领奖后的争议超过了奖项本身。',
+            playerDelta: { mediaRelation: -4, squadRelation: -2, morale: -2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'STRONG_SEASON_WITHOUT_TROPHY',
+    groupId: 'SEASON_REVIEW',
+    category: 'MATCH',
+    priority: 'P3',
+    cooldownWindows: 4,
+    interactionKind: 'RANKING',
+    eyebrow: '赛季 · 高水平无冠',
+    title: '个人表现出色，但球队赛季结束时没有赢得冠军。',
+    description: '你要在个人进步、球队差距和未来目标之间排出复盘顺序。',
+    weight: 7,
+    isEligible: (state) => {
+      const report = state.lastReport
+      const collectiveHonor = report?.honors?.some(
+        (honor) => honor.scope !== 'INDIVIDUAL',
+      )
+      return Boolean(
+        report?.clubSeason &&
+          report.stats.appearances >= 10 &&
+          report.stats.averageRating >= 7.2 &&
+          !collectiveHonor,
+      )
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '球队差距 ＞ 个人进步 ＞ 未来',
+        description: '先研究为什么好表现没有变成奖杯。',
+        effectPreview: '心理能力、教练关系上升',
+        outcomeSummary: '你从球队整体差距开始复盘，个人数据被放回了更完整的比赛背景。',
+        playerDelta: { attributes: { mental: 0.5 }, coachRelation: 4, morale: 1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '个人进步 ＞ 未来 ＞ 球队差距',
+        description: '先确认这个赛季建立了什么能力。',
+        effectPreview: '竞技、心理状态上升',
+        outcomeSummary: '你承认赛季没有奖杯，也没有否定真实进步，下一阶段目标因此更加稳定。',
+        playerDelta: { form: 4, morale: 5, reputation: 2 },
+      },
+      {
+        id: 'C',
+        title: '未来 ＞ 球队差距 ＞ 个人进步',
+        description: '立即判断当前平台能否满足目标。',
+        effectPreview: '经纪人、进取倾向上升 · 归属感下降',
+        outcomeSummary: '你开始认真评估下一阶段平台，职业目标变得更清晰，俱乐部归属感却有所减弱。',
+        playerDelta: { agentRelation: 4, clubAttachment: -3, reputation: 2 },
+      },
+    ],
+  },
+  {
+    id: 'FIRST_TEAM_100_APPEARANCES',
+    groupId: 'CAREER_APPEARANCE_MILESTONE',
+    category: 'MILESTONE',
+    priority: 'P2',
+    cooldownWindows: 53,
+    interactionKind: 'CHOICE',
+    eyebrow: '里程碑 · 一线队百场',
+    title: '你已经完成职业生涯第100次一线队出场。',
+    description: '从首秀到百场，稳定本身已经成为一种职业能力。',
+    weight: 7,
+    isEligible: (state) =>
+      firstTeamCareerTotals(state).appearances >= 100 &&
+      !hasCareerEvent(state, 'FIRST_TEAM_100_APPEARANCES'),
+    choices: [
+      {
+        id: 'A',
+        title: '整理百场比赛档案',
+        description: '回看角色和比赛方式的变化。',
+        effectPreview: '心理能力、职业倾向上升',
+        outcomeSummary: '你没有只挑选高光时刻，而是看见了自己如何从每一种角色中成长。',
+        playerDelta: { attributes: { mental: 0.6 }, morale: 4 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '邀请队友共同纪念',
+        description: '让百场不只是个人数字。',
+        effectPreview: '队内、球迷关系明显上升',
+        outcomeSummary: '百场纪念变成了球队共同参与的小型仪式，这个数字因此更有温度。',
+        playerDelta: { squadRelation: 6, fanRelation: 5, morale: 4 },
+        storyEffect: { publicPersona: 'TEAM_FIRST' },
+      },
+      {
+        id: 'C',
+        title: '把纪念留到退役后',
+        description: '现在仍然只专注下一场比赛。',
+        effectPreview: '竞技、教练关系上升',
+        outcomeSummary: '你没有安排额外庆祝，百场只在更衣室短暂停留，随后注意力回到了下一场。',
+        playerDelta: { form: 4, coachRelation: 3, morale: 2 },
+      },
+    ],
+  },
+  {
+    id: 'LONG_SERVICE_RECOGNITION',
+    groupId: 'CLUB_LONG_SERVICE',
+    category: 'MILESTONE',
+    priority: 'P3',
+    cooldownWindows: 16,
+    interactionKind: 'ALLOCATION',
+    eyebrow: '里程碑 · 长期效力',
+    title: '俱乐部准备为你的长期效力安排一次纪念活动。',
+    description: '活动时间有限，你可以把重点留给球迷、青训球员或昔日队友。',
+    weight: 7,
+    isEligible: (state) =>
+      currentClubTenureWindows(state) >= 16 &&
+      Boolean(state.player) &&
+      state.player!.clubAttachment >= 60,
+    choices: [
+      {
+        id: 'A',
+        title: '球迷60% · 青训25% · 故人15%',
+        description: '把活动重点留给长期支持球队的人。',
+        effectPreview: '球迷、俱乐部归属感明显上升',
+        outcomeSummary: '你花最多时间与球迷交流，长期效力因此与看台记忆紧密联系在一起。',
+        playerDelta: { fanRelation: 7, clubAttachment: 6, reputation: 3 },
+      },
+      {
+        id: 'B',
+        title: '青训50% · 球迷30% · 故人20%',
+        description: '把经历分享给正在起步的年轻球员。',
+        effectPreview: '队内、领导倾向明显上升',
+        outcomeSummary: '你把纪念日的大部分时间留给青训球员，长期效力转化成了可以传递的经验。',
+        playerDelta: { squadRelation: 6, coachRelation: 3, reputation: 2 },
+        storyEffect: { tendencyDelta: { leadership: 1 } },
+      },
+      {
+        id: 'C',
+        title: '故人45% · 球迷35% · 青训20%',
+        description: '邀请多位昔日队友回到俱乐部。',
+        effectPreview: '心理、媒体与球迷关系上升',
+        outcomeSummary: '旧队友的到来让纪念活动拥有完整时间线，也让你重新看见共同走过的阶段。',
+        playerDelta: { morale: 6, mediaRelation: 4, fanRelation: 4 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'RETURN_TO_FORMER_CLUB',
+    groupId: 'CLUB_RETURN',
+    category: 'MILESTONE',
+    priority: 'P1',
+    cooldownWindows: 12,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '里程碑 · 重返旧主',
+    title: '转会完成后，你重新走进了曾经熟悉的俱乐部。',
+    description: '过去的关系和现在的角色并不相同，你要先决定如何面对这次回归。',
+    weight: 7,
+    isEligible: (state) => isReturnTransfer(state),
+    setup: {
+      prompt: '你希望回归首先意味着什么？',
+      options: [
+        {
+          id: 'PAST',
+          title: '先回应过去',
+          description: '承认离开、成长和重逢的完整经历。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'PRESENT',
+          title: '先面对现在',
+          description: '不依靠旧关系，重新争取位置。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '公开感谢俱乐部接纳',
+        description: '承认过去的联系仍然重要。',
+        effectPreview: '球迷、归属感明显上升',
+        outcomeSummary: '你没有回避这段共同历史，回归发布因此迅速恢复了与球迷的情感联系。',
+        playerDelta: { fanRelation: 7, clubAttachment: 7, morale: 4 },
+      },
+      {
+        id: 'B',
+        title: '先联系昔日队友',
+        description: '从仍在队中的熟人重新进入更衣室。',
+        effectPreview: '队内、外交倾向上升',
+        outcomeSummary: '旧关系帮助你理解球队已经发生的变化，回归没有停留在怀旧中。',
+        playerDelta: { squadRelation: 6, coachRelation: 2, morale: 3 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'C',
+        title: '把自己当作全新球员',
+        description: '不要求任何基于旧履历的优待。',
+        effectPreview: '教练、职业倾向上升',
+        outcomeSummary: '你从第一次训练开始重新证明自己，教练认可这种不依赖旧声望的态度。',
+        playerDelta: { coachRelation: 5, form: 3, morale: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'D',
+        title: '提出承担更高责任',
+        description: '希望把外面的成长带回球队。',
+        effectPreview: '50%赢得信任 · 50%被要求先证明',
+        outcomeSummary: '你明确表示这次回来不是重复过去，而是准备承担更高责任。',
+        playerDelta: { reputation: 2 },
+        outcomes: [
+          {
+            id: 'TRUST',
+            label: '成长得到认可',
+            weight: 50,
+            summary: '俱乐部认可你在外积累的经验，愿意让你参与更多球队事务。',
+            playerDelta: { coachRelation: 5, squadRelation: 4, morale: 4 },
+            storyEffect: { tendencyDelta: { leadership: 1 } },
+          },
+          {
+            id: 'PROVE',
+            label: '被要求重新证明',
+            weight: 50,
+            summary: '回归带来的情感欢迎没有转化成角色承诺，你仍要从比赛表现开始。',
+            playerDelta: { coachRelation: 1, morale: -2, form: 2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'LONG_SERVICE_FAREWELL',
+    groupId: 'CLUB_FAREWELL',
+    category: 'MILESTONE',
+    priority: 'P1',
+    cooldownWindows: 10,
+    interactionKind: 'PERSON_TONE',
+    eyebrow: '里程碑 · 告别旧主',
+    title: '长期效力之后，你需要正式告别上一家俱乐部。',
+    description: '转会已经完成，你可以先决定告别对象，再选择表达方式。',
+    weight: 7,
+    isEligible: (state) =>
+      state.transferDecision?.kind === 'TRANSFER' &&
+      !isReturnTransfer(state) &&
+      departedClubTenureWindows(state) >= 10,
+    setup: {
+      prompt: '你准备先向谁告别？',
+      options: [
+        {
+          id: 'FANS',
+          title: '先向球迷告别',
+          description: '回应长期支持和共同记忆。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'CLUB',
+          title: '先向俱乐部内部告别',
+          description: '把话留给教练、队友和工作人员。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '发布完整告别信',
+        description: '认真回顾共同经历，不回避离开。',
+        effectPreview: '球迷、媒体关系明显上升',
+        outcomeSummary: '告别信具体而克制，球迷虽然遗憾，仍愿意把这段效力视作共同的好时光。',
+        playerDelta: { fanRelation: 7, mediaRelation: 4, morale: 2 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'B',
+        title: '只发布简短感谢',
+        description: '不解释转会细节，保留私人边界。',
+        effectPreview: '风险较低 · 关系基本稳定',
+        outcomeSummary: '你没有把转会过程公开化，告别不算轰动，也没有制造新的冲突。',
+        playerDelta: { fanRelation: 2, mediaRelation: 1, morale: 2 },
+      },
+      {
+        id: 'C',
+        title: '逐一感谢队友和员工',
+        description: '把最重要的话留在俱乐部内部。',
+        effectPreview: '队内、心理与职业倾向上升',
+        outcomeSummary: '你认真完成了每一次私人告别，离开没有切断长期建立的关系。',
+        playerDelta: { squadRelation: 6, morale: 5, reputation: 1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'D',
+        title: '坦率说明离开原因',
+        description: '希望外界理解这次职业选择。',
+        effectPreview: '40%获得理解 · 60%引发旧账讨论',
+        outcomeSummary: '你在告别时谈到了决定离开的真实原因。',
+        playerDelta: { reputation: 2 },
+        outcomes: [
+          {
+            id: 'UNDERSTOOD',
+            label: '选择得到理解',
+            weight: 40,
+            summary: '坦率说明没有攻击任何人，球迷理解职业生涯需要新的方向。',
+            playerDelta: { fanRelation: 5, mediaRelation: 3, morale: 4 },
+          },
+          {
+            id: 'OLD_WOUNDS',
+            label: '旧矛盾重新被讨论',
+            weight: 60,
+            summary: '部分表述被截取放大，告别迅速变成了对旧问题的追问。',
+            playerDelta: { mediaRelation: -4, fanRelation: -3, morale: -2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'VETERAN_ROLE_ADJUSTMENT',
+    groupId: 'VETERAN_ROLE',
+    category: 'COACH',
+    priority: 'P2',
+    cooldownWindows: 6,
+    interactionKind: 'ALLOCATION',
+    eyebrow: '生涯 · 老将角色',
+    title: '进入生涯后期，教练希望重新分配你的比赛和恢复时间。',
+    description: '你仍然能够贡献，但必须在出场数量、关键比赛和身体恢复之间做出取舍。',
+    weight: 7,
+    isEligible: (state) => {
+      const role = latestActualFirstTeamRole(state)
+      return Boolean(
+        state.player &&
+          playerAgeAtWindow(state.windowIndex) >= 32 &&
+          role &&
+          ['FRINGE', 'SUBSTITUTE', 'ROTATION'].includes(role) &&
+          completedFirstTeamHistory(state).length > 0,
+      )
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '出场55% · 恢复30% · 指导15%',
+        description: '继续争取尽可能多的比赛时间。',
+        effectPreview: '竞技、知名度上升 · 身体消耗增加',
+        outcomeSummary: '你仍把比赛放在首位，出场竞争力得到保持，恢复空间却更加有限。',
+        playerDelta: { form: 5, reputation: 2, fitness: -4 },
+      },
+      {
+        id: 'B',
+        title: '关键比赛40% · 恢复40% · 指导20%',
+        description: '减少普通消耗，把状态留给重要场次。',
+        effectPreview: '身体、心理与大赛倾向上升',
+        outcomeSummary: '你接受了更有选择的使用方式，常规出场减少，但重要比赛的准备更加完整。',
+        playerDelta: { fitness: 6, morale: 3, form: 2 },
+        storyEffect: { tendencyDelta: { clutch: 1, professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '指导45% · 恢复35% · 出场20%',
+        description: '逐步把更多价值转向经验传递。',
+        effectPreview: '队内、教练与领导倾向上升',
+        outcomeSummary: '你开始接受角色变化，比赛数量不再是唯一价值，年轻队友也更愿意听取建议。',
+        playerDelta: { squadRelation: 7, coachRelation: 5, fitness: 3, morale: 2 },
+        storyEffect: { club: { mentorship: 'MENTOR' }, tendencyDelta: { leadership: 1 } },
+      },
+    ],
+  },
 ]
 
 export function validateCareerEventDefinitions(
@@ -2811,6 +3845,21 @@ export function careerEventIsOnCooldown(
   })
 }
 
+export function leastSeenCareerEventPool(
+  state: GameState,
+  eligible: readonly CareerEventDefinition[],
+): readonly CareerEventDefinition[] {
+  if (eligible.length === 0) return []
+  const counts = new Map<CareerEventId, number>()
+  for (const entry of state.careerEventHistory) {
+    counts.set(entry.eventId, (counts.get(entry.eventId) ?? 0) + 1)
+  }
+  const minimum = Math.min(
+    ...eligible.map((event) => counts.get(event.id) ?? 0),
+  )
+  return eligible.filter((event) => (counts.get(event.id) ?? 0) === minimum)
+}
+
 export function selectCareerEvent(state: GameState): CareerEventId | null {
   if (!state.player || state.windowIndex === 0) return null
   const lastTwoCategories = state.careerEventHistory
@@ -2842,9 +3891,10 @@ export function selectCareerEvent(state: GameState): CareerEventId | null {
   const triggerChance = state.transferDecision ? 0.5 : 0.7
   if (!guaranteed && random.next() > triggerChance) return null
 
+  const balancedPool = leastSeenCareerEventPool(state, eligible)
   return weightedPick(
     random,
-    eligible.map((event) => ({ value: event.id, weight: event.weight })),
+    balancedPool.map((event) => ({ value: event.id, weight: 1 })),
   )
 }
 

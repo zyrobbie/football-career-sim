@@ -17,6 +17,7 @@ const categoryIcons: Record<CareerEventCategory, IconName> = {
   HEALTH: 'physical',
   CONTRACT: 'career',
   NATIONAL: 'career',
+  MILESTONE: 'career',
 }
 
 const interactionLabels = {

@@ -5,6 +5,7 @@ import {
   careerEventIsOnCooldown,
   consumeCareerConsequences,
   getCareerEvent,
+  leastSeenCareerEventPool,
   resolveCareerEventChoice,
   selectCareerEvent,
   validateCareerEventDefinitions,
@@ -112,7 +113,7 @@ describe('career events', () => {
 
   it('keeps every registered event definition structurally valid', () => {
     expect(validateCareerEventDefinitions()).toEqual([])
-    expect(CAREER_EVENTS).toHaveLength(36)
+    expect(CAREER_EVENTS).toHaveLength(51)
   })
 
   it('routes multi-stage events through valid setup choices', () => {
@@ -220,6 +221,185 @@ describe('career events', () => {
         getCareerEvent('DEADLINE_DAY_SPECULATION'),
       ),
     ).toBe(true)
+  })
+
+  it('prioritizes eligible events that have appeared least often', () => {
+    const state = createState(20)
+    const repeated = getCareerEvent('COACH_DEFENSIVE_TASK')
+    const seenOnce = getCareerEvent('TEAMMATE_RIVALRY')
+    const unseen = getCareerEvent('MEDIA_BREAKTHROUGH')
+    state.careerEventHistory = [
+      ...Array.from({ length: 3 }, (_, index) => ({
+        eventId: repeated.id,
+        choiceId: 'A',
+        windowIndex: index + 1,
+        choiceTitle: '测试',
+        outcomeSummary: '测试',
+        appliedDelta: {},
+        cashDeltaEuro: 0,
+      })),
+      {
+        eventId: seenOnce.id,
+        choiceId: 'A',
+        windowIndex: 4,
+        choiceTitle: '测试',
+        outcomeSummary: '测试',
+        appliedDelta: {},
+        cashDeltaEuro: 0,
+      },
+    ]
+
+    expect(
+      leastSeenCareerEventPool(state, [repeated, seenOnce, unseen]).map(
+        (event) => event.id,
+      ),
+    ).toEqual([unseen.id])
+  })
+
+  it('does not repeat a seen event while unseen eligible events remain', () => {
+    const state = createState(20)
+    state.careerEventHistory = [
+      {
+        eventId: 'COACH_DEFENSIVE_TASK',
+        choiceId: 'A',
+        windowIndex: 15,
+        choiceTitle: '测试',
+        outcomeSummary: '测试',
+        appliedDelta: {},
+        cashDeltaEuro: 0,
+      },
+    ]
+    const selected = selectCareerEvent(state)
+
+    expect(selected).not.toBeNull()
+    expect(selected).not.toBe('COACH_DEFENSIVE_TASK')
+  })
+
+  it('makes every new match-performance event reachable from real history', () => {
+    const milestone = createState(20)
+    establishFirstTeamRole(milestone, 'STARTER', 2)
+    milestone.history.forEach((entry) => {
+      entry.stats.averageRating = 7.3
+    })
+    expect(getCareerEvent('FIRST_TEAM_DEBUT_REFLECTION').isEligible(milestone)).toBe(true)
+    expect(getCareerEvent('FIRST_SENIOR_GOAL_REACTION').isEligible(milestone)).toBe(true)
+    expect(getCareerEvent('SUSTAINED_HIGH_FORM').isEligible(milestone)).toBe(true)
+
+    const drought = createState(20)
+    establishFirstTeamRole(drought, 'STARTER', 2)
+    drought.history.forEach((entry) => {
+      entry.stats.goals = 0
+    })
+    expect(getCareerEvent('SCORING_DROUGHT_RESPONSE').isEligible(drought)).toBe(true)
+
+    const substitute = createState(20)
+    establishFirstTeamRole(substitute, 'SUBSTITUTE', 1)
+    substitute.history[0]!.stats.goals = 2
+    substitute.history[0]!.stats.averageRating = 7
+    expect(getCareerEvent('IMPACT_SUBSTITUTE_RECOGNITION').isEligible(substitute)).toBe(true)
+  })
+
+  it('makes season-result events depend on recorded results and honors', () => {
+    const state = createState(20)
+    establishFirstTeamRole(state, 'STARTER', 2)
+    state.history[0]!.honors = [
+      {
+        id: 'league-title',
+        type: 'LEAGUE_TITLE',
+        scope: 'CLUB',
+        label: '测试联赛冠军',
+        competitionLabel: '测试联赛',
+        seasonLabel: '测试赛季',
+        windowIndex: 18,
+        clubId: state.selectedClubId,
+        clubName: '测试俱乐部',
+      },
+      {
+        id: 'cup-title',
+        type: 'DOMESTIC_CUP',
+        scope: 'CLUB',
+        label: '测试杯赛冠军',
+        competitionLabel: '测试杯赛',
+        seasonLabel: '测试赛季',
+        windowIndex: 18,
+        clubId: state.selectedClubId,
+        clubName: '测试俱乐部',
+      },
+    ]
+    state.lastReport = {
+      stats: {
+        appearances: 16,
+        starts: 14,
+        minutes: 1_200,
+        goals: 8,
+        assists: 5,
+        yellowCards: 1,
+        redCards: 0,
+        averageRating: 7.4,
+      },
+      honors: [
+        {
+          id: 'individual-award',
+          type: 'TEAM_OF_SEASON',
+          scope: 'INDIVIDUAL',
+          label: '赛季最佳阵容',
+          competitionLabel: '测试联赛',
+          seasonLabel: '测试赛季',
+          windowIndex: 19,
+          clubId: state.selectedClubId,
+          clubName: '测试俱乐部',
+        },
+      ],
+      clubSeason: {
+        seasonLabel: '测试赛季',
+        leagueLabel: '测试联赛',
+        leaguePosition: 2,
+        leagueTeams: 16,
+        domesticCupStage: 'RUNNER_UP',
+        continentalLabel: null,
+        continentalStage: 'NOT_ENTERED',
+        summary: '测试赛季结果',
+      },
+    } as NonNullable<GameState['lastReport']>
+
+    expect(getCareerEvent('FIRST_LEAGUE_TITLE_REACTION').isEligible(state)).toBe(true)
+    expect(getCareerEvent('FIRST_CUP_TITLE_REACTION').isEligible(state)).toBe(true)
+    expect(getCareerEvent('FINAL_DEFEAT_RESPONSE').isEligible(state)).toBe(true)
+    expect(getCareerEvent('INDIVIDUAL_AWARD_REACTION').isEligible(state)).toBe(true)
+    expect(getCareerEvent('STRONG_SEASON_WITHOUT_TROPHY').isEligible(state)).toBe(true)
+  })
+
+  it('makes career-stage events depend on appearances, tenure and transfers', () => {
+    const veteran = createState(40)
+    establishFirstTeamRole(veteran, 'ROTATION', 16)
+    veteran.player!.clubAttachment = 75
+    expect(getCareerEvent('FIRST_TEAM_100_APPEARANCES').isEligible(veteran)).toBe(true)
+    expect(getCareerEvent('LONG_SERVICE_RECOGNITION').isEligible(veteran)).toBe(true)
+    expect(getCareerEvent('VETERAN_ROLE_ADJUSTMENT').isEligible(veteran)).toBe(true)
+
+    const returned = createState(24)
+    establishFirstTeamRole(returned, 'STARTER', 4)
+    returned.transferDecision = {
+      kind: 'TRANSFER',
+      fromClubId: 'other-club',
+      toClubId: returned.selectedClubId!,
+      arrivalChoice: 'LEADERS',
+      cashSpentEuro: 0,
+    }
+    expect(getCareerEvent('RETURN_TO_FORMER_CLUB').isEligible(returned)).toBe(true)
+
+    const farewell = createState(24)
+    establishFirstTeamRole(farewell, 'STARTER', 10)
+    const oldClubId = farewell.selectedClubId!
+    farewell.selectedClubId = 'new-club'
+    farewell.transferDecision = {
+      kind: 'TRANSFER',
+      fromClubId: oldClubId,
+      toClubId: 'new-club',
+      arrivalChoice: 'LEADERS',
+      cashSpentEuro: 0,
+    }
+    expect(getCareerEvent('LONG_SERVICE_FAREWELL').isEligible(farewell)).toBe(true)
   })
 
   it('keeps every visible random outcome normalized to one hundred percent', () => {
