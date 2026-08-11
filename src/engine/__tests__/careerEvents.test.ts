@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import type { GameState } from '../../models/game'
 import {
   CAREER_EVENTS,
+  careerEventIsOnCooldown,
   consumeCareerConsequences,
   getCareerEvent,
   resolveCareerEventChoice,
@@ -66,6 +67,40 @@ function createState(windowIndex = 1): GameState {
   }
 }
 
+function establishFirstTeamRole(
+  state: GameState,
+  role: NonNullable<GameState['firstTeamRole']>,
+  windows = 0,
+) {
+  state.teamLevel = 'FIRST_TEAM'
+  state.youthRole = null
+  state.firstTeamRole = role
+  state.history = Array.from({ length: windows }, (_, index) => ({
+    windowIndex: state.windowIndex - windows + index,
+    clubId: state.selectedClubId!,
+    clubName: '测试俱乐部',
+    role,
+    stats: {
+      appearances: 12,
+      starts: role === 'STARTER' || role === 'CORE' ? 10 : 3,
+      minutes: 720,
+      goals: 2,
+      assists: 2,
+      yellowCards: 1,
+      redCards: 0,
+      averageRating: 6.9,
+    },
+    arrivalChoice: null,
+    trainingFocus: 'BALANCED',
+    developmentApproach: 'STEADY',
+    endingAttributes: { ...state.player!.attributes },
+    firstTeamAttention: 70,
+    teamLevel: 'FIRST_TEAM' as const,
+    clubSeason: null,
+    honors: [],
+  }))
+}
+
 describe('career events', () => {
   it('skips the arrival window and deterministically selects the next event', () => {
     expect(selectCareerEvent(createState(0))).toBeNull()
@@ -77,7 +112,7 @@ describe('career events', () => {
 
   it('keeps every registered event definition structurally valid', () => {
     expect(validateCareerEventDefinitions()).toEqual([])
-    expect(CAREER_EVENTS).toHaveLength(21)
+    expect(CAREER_EVENTS).toHaveLength(36)
   })
 
   it('routes multi-stage events through valid setup choices', () => {
@@ -93,6 +128,98 @@ describe('career events', () => {
     state.careerStory.club.leadership = 'CAPTAIN'
     expect(getCareerEvent('CAPTAIN_VIDEO_REVIEW').isEligible(state)).toBe(false)
     expect(getCareerEvent('CAPTAIN_ARMBAND_OFFER').isEligible(state)).toBe(false)
+  })
+
+  it('never offers the captain armband to an 18-year-old substitute', () => {
+    const state = createState(10)
+    establishFirstTeamRole(state, 'SUBSTITUTE', 4)
+    state.careerStory.club.leadership = 'CANDIDATE'
+    state.careerStory.tendencies.leadership = 5
+    state.player!.squadRelation = 90
+    state.player!.coachRelation = 90
+
+    expect(getCareerEvent('CAPTAIN_ARMBAND_OFFER').isEligible(state)).toBe(false)
+  })
+
+  it('offers the captain armband only to an established mature regular', () => {
+    const state = createState(22)
+    establishFirstTeamRole(state, 'STARTER', 4)
+    state.careerStory.club.leadership = 'CANDIDATE'
+    state.careerStory.tendencies.leadership = 2
+    state.player!.squadRelation = 74
+    state.player!.coachRelation = 68
+
+    expect(getCareerEvent('CAPTAIN_ARMBAND_OFFER').isEligible(state)).toBe(true)
+  })
+
+  it('blocks senior match and leadership events for youth players', () => {
+    const state = createState(12)
+    state.player!.attributes.attack = 70
+    state.player!.attributes.mental = 70
+
+    expect(getCareerEvent('CAPTAIN_VIDEO_REVIEW').isEligible(state)).toBe(false)
+    expect(getCareerEvent('PENALTY_SHOOTOUT_ORDER').isEligible(state)).toBe(false)
+    expect(getCareerEvent('CUP_ROTATION_START').isEligible(state)).toBe(false)
+  })
+
+  it('does not let a substitute act as a senior mentor', () => {
+    const state = createState(22)
+    establishFirstTeamRole(state, 'SUBSTITUTE', 4)
+
+    expect(getCareerEvent('YOUNG_TEAMMATE_MENTOR').isEligible(state)).toBe(false)
+
+    establishFirstTeamRole(state, 'STARTER', 4)
+    expect(getCareerEvent('YOUNG_TEAMMATE_MENTOR').isEligible(state)).toBe(true)
+  })
+
+  it('requires real national-team context for every national event', () => {
+    const state = createState(20)
+    establishFirstTeamRole(state, 'STARTER', 4)
+    state.nationalTeam.history = [
+      {
+        windowIndex: 10,
+        calledUp: true,
+        role: 'STARTER',
+        competition: 'ASIAN_CUP',
+        stage: 'CHAMPION',
+        appearances: 6,
+        starts: 6,
+        minutes: 500,
+        goals: 2,
+        assists: 1,
+        averageRating: 7.2,
+        selectionScore: 80,
+        selectionBenchmark: 64,
+        debut: true,
+        summary: '旧国家队记录',
+      },
+    ]
+
+    for (const event of CAREER_EVENTS.filter((entry) => entry.category === 'NATIONAL')) {
+      expect(event.isEligible(state), event.id).toBe(false)
+    }
+  })
+
+  it('applies cooldown across related events in the same story group', () => {
+    const state = createState(20)
+    state.careerEventHistory = [
+      {
+        eventId: 'TRANSFER_RUMOR',
+        choiceId: 'A',
+        windowIndex: 19,
+        choiceTitle: '明确否认传闻',
+        outcomeSummary: '测试记录',
+        appliedDelta: {},
+        cashDeltaEuro: 0,
+      },
+    ]
+
+    expect(
+      careerEventIsOnCooldown(
+        state,
+        getCareerEvent('DEADLINE_DAY_SPECULATION'),
+      ),
+    ).toBe(true)
   })
 
   it('keeps every visible random outcome normalized to one hundred percent', () => {

@@ -5,6 +5,7 @@ import type {
   CareerEventId,
   CareerEventRecord,
   CareerStoryEffect,
+  FirstTeamRole,
   GameState,
   HalfYearReport,
   Player,
@@ -155,6 +156,88 @@ const hasContract = (state: GameState) => Boolean(state.contract)
 const latestRating = (state: GameState) =>
   state.lastReport?.stats.averageRating ?? 6.6
 
+const FIRST_TEAM_ROLE_ORDER: readonly FirstTeamRole[] = [
+  'FRINGE',
+  'SUBSTITUTE',
+  'ROTATION',
+  'STARTER',
+  'CORE',
+]
+
+function latestActualTeamLevel(state: GameState) {
+  const latestHistory = state.history.at(-1)
+  if (latestHistory?.clubId === state.selectedClubId) {
+    return latestHistory.teamLevel
+  }
+  return state.teamLevel
+}
+
+function latestActualFirstTeamRole(
+  state: GameState,
+): FirstTeamRole | null {
+  if (latestActualTeamLevel(state) !== 'FIRST_TEAM') return null
+  const latestHistory = state.history.at(-1)
+  const role =
+    latestHistory?.clubId === state.selectedClubId
+      ? latestHistory.role
+      : state.firstTeamRole
+  return FIRST_TEAM_ROLE_ORDER.includes(role as FirstTeamRole)
+    ? (role as FirstTeamRole)
+    : null
+}
+
+function hasFirstTeamRole(
+  state: GameState,
+  minimumRole: FirstTeamRole,
+): boolean {
+  const role = latestActualFirstTeamRole(state)
+  return Boolean(
+    role &&
+      FIRST_TEAM_ROLE_ORDER.indexOf(role) >=
+        FIRST_TEAM_ROLE_ORDER.indexOf(minimumRole),
+  )
+}
+
+function currentClubFirstTeamWindows(state: GameState): number {
+  if (!state.selectedClubId) return 0
+  let windows = 0
+  for (let index = state.history.length - 1; index >= 0; index -= 1) {
+    const entry = state.history[index]
+    if (!entry || entry.clubId !== state.selectedClubId) break
+    if (entry.teamLevel === 'FIRST_TEAM' && entry.stats.appearances > 0) {
+      windows += 1
+    }
+  }
+  return windows
+}
+
+function hasCareerEvent(state: GameState, eventId: CareerEventId): boolean {
+  return state.careerEventHistory.some((entry) => entry.eventId === eventId)
+}
+
+function hasPlayedForAnotherClub(state: GameState): boolean {
+  return state.history.some(
+    (entry) => entry.clubId !== state.selectedClubId,
+  )
+}
+
+function latestNationalWindow(state: GameState) {
+  return state.lastReport?.nationalTeam ?? null
+}
+
+function isEstablishedFirstTeamLeader(state: GameState): boolean {
+  return Boolean(
+    state.player &&
+      playerAgeAtWindow(state.windowIndex) >= 23 &&
+      hasFirstTeamRole(state, 'STARTER') &&
+      currentClubFirstTeamWindows(state) >= 4 &&
+      state.player.squadRelation >= 72 &&
+      state.player.coachRelation >= 65 &&
+      state.careerStory.club.leadership === 'CANDIDATE' &&
+      state.careerStory.tendencies.leadership >= 2,
+  )
+}
+
 export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   {
     id: 'COACH_DEFENSIVE_TASK',
@@ -281,7 +364,9 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     title: '教练组希望听听你对最近战术的看法。',
     description: '你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。',
     weight: 8,
-    isEligible: (state) => state.windowIndex >= 3,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 16 &&
+      (hasFirstTeamRole(state, 'ROTATION') || state.youthRole === 'CORE'),
     setup: {
       prompt: '你准备在哪里谈这件事？',
       options: [
@@ -502,7 +587,10 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     description:
       '这不是强制活动，但资深球员都在观察年轻人愿不愿意参与球队讨论。',
     weight: 10,
-    isEligible: (state) => state.careerStory.club.leadership !== 'CAPTAIN',
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 17 &&
+      hasFirstTeamRole(state, 'SUBSTITUTE') &&
+      state.careerStory.club.leadership !== 'CAPTAIN',
     choices: [
       {
         id: 'A',
@@ -553,11 +641,7 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     title: '教练问你是否愿意在下一场戴上队长袖标。',
     description: '这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。',
     weight: 5,
-    isEligible: (state) =>
-      state.windowIndex >= 6 &&
-      state.careerStory.club.leadership === 'CANDIDATE' &&
-      Boolean(state.player) &&
-      state.player!.squadRelation >= 58,
+    isEligible: isEstablishedFirstTeamLeader,
     setup: {
       prompt: '你准备以什么方式接过袖标？',
       options: [
@@ -724,7 +808,10 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     description:
       '两名队友互相指责，队长希望有人让大家重新把注意力放回比赛。',
     weight: 7,
-    isEligible: (state) => Boolean(state.player) && state.player!.squadRelation < 68,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 17 &&
+      Boolean(state.player) &&
+      state.player!.squadRelation < 68,
     choices: [
       {
         id: 'A',
@@ -797,8 +884,9 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     description: '他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。',
     weight: 6,
     isEligible: (state) =>
-      state.teamLevel === 'FIRST_TEAM' &&
-      playerAgeAtWindow(state.windowIndex) >= 23 &&
+      playerAgeAtWindow(state.windowIndex) >= 24 &&
+      hasFirstTeamRole(state, 'STARTER') &&
+      currentClubFirstTeamWindows(state) >= 2 &&
       state.careerStory.club.mentorship !== 'MENTOR',
     setup: {
       prompt: '你先从哪一件事谈起？',
@@ -1132,7 +1220,15 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     title: '淘汰赛进入点球大战，教练让你选择主罚顺位。',
     description: '你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。',
     weight: 6,
-    isEligible: (state) => Boolean(state.contract) && state.windowIndex >= 5,
+    isEligible: (state) =>
+      Boolean(state.contract) &&
+      playerAgeAtWindow(state.windowIndex) >= 16 &&
+      hasFirstTeamRole(state, 'SUBSTITUTE') &&
+      Boolean(
+        state.player &&
+          (state.player.attributes.attack >= 55 ||
+            state.player.attributes.mental >= 60),
+      ),
     setup: {
       prompt: '你愿意承担多大的关键球责任？',
       options: [
@@ -1202,7 +1298,8 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     title: '比赛还剩十五分钟，助教让你准备替补出场。',
     description: '场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。',
     weight: 8,
-    isEligible: (state) => state.teamLevel === 'FIRST_TEAM' && Boolean(state.contract),
+    isEligible: (state) =>
+      Boolean(state.contract) && hasFirstTeamRole(state, 'SUBSTITUTE'),
     setup: {
       prompt: '你先向助教确认什么？',
       options: [
@@ -1265,7 +1362,8 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
     title: '杯赛首发前，教练让你明确自己的比赛优先级。',
     description: '你必须在个人表现、战术纪律和身体管理之间排出先后顺序。',
     weight: 7,
-    isEligible: (state) => state.teamLevel === 'FIRST_TEAM' && Boolean(state.contract),
+    isEligible: (state) =>
+      Boolean(state.contract) && hasFirstTeamRole(state, 'SUBSTITUTE'),
     choices: [
       {
         id: 'A',
@@ -1546,6 +1644,1053 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
       },
     ],
   },
+  {
+    id: 'NATIONAL_DEBUT_REVIEW',
+    groupId: 'NATIONAL_ENTRY',
+    category: 'NATIONAL',
+    priority: 'P2',
+    cooldownWindows: 8,
+    interactionKind: 'CHOICE',
+    eyebrow: '国家队 · 首秀复盘',
+    title: '国家队首秀结束后，教练组单独留下了你。',
+    description: '第一次穿上国家队球衣已经成为履历的一部分，现在要决定如何理解这次起点。',
+    weight: 9,
+    isEligible: (state) =>
+      Boolean(latestNationalWindow(state)?.debut) &&
+      !hasCareerEvent(state, 'NATIONAL_DEBUT_REVIEW'),
+    choices: [
+      {
+        id: 'A',
+        title: '逐回合复盘表现',
+        description: '先弄清自己与国家队要求的差距。',
+        effectPreview: '心理能力、职业倾向上升',
+        outcomeSummary: '你没有沉浸在首秀光环里，而是把每次处理球重新看了一遍，下一次集训目标变得清晰。',
+        playerDelta: { attributes: { mental: 0.5 }, morale: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '把球衣送给家人',
+        description: '用一个私人仪式记住职业起点。',
+        effectPreview: '心理状态、国家声誉上升',
+        outcomeSummary: '家人收藏了你的首秀球衣。这个时刻没有制造太多新闻，却让你更加确定继续前进的意义。',
+        playerDelta: { morale: 5, reputation: 2 },
+      },
+      {
+        id: 'C',
+        title: '接受完整媒体采访',
+        description: '主动谈论首秀和未来目标。',
+        effectPreview: '65%扩大关注 · 35%被认为言之过早',
+        outcomeSummary: '你选择让第一次国家队经历成为公众认识你的窗口。',
+        playerDelta: { reputation: 1 },
+        outcomes: [
+          {
+            id: 'WELCOME',
+            label: '表达赢得认可',
+            weight: 65,
+            summary: '采访真诚而克制，球迷开始把你视作值得期待的新面孔。',
+            playerDelta: { fanRelation: 5, mediaRelation: 4, reputation: 4 },
+            storyEffect: { publicPersona: 'LOW_KEY' },
+          },
+          {
+            id: 'EARLY',
+            label: '目标被指过早',
+            weight: 35,
+            summary: '媒体把你的长期目标放大成即时承诺，首秀后的喜悦很快混入了质疑。',
+            playerDelta: { mediaRelation: -3, morale: -2, reputation: 2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'NATIONAL_ROLE_MEETING',
+    groupId: 'NATIONAL_ROLE',
+    category: 'NATIONAL',
+    priority: 'P2',
+    cooldownWindows: 6,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '国家队 · 队内定位',
+    title: '国家队教练与你讨论下一阶段的队内定位。',
+    description: '你已经不再是第一次报到的新人，可以先决定谈话重点，再表达自己的诉求。',
+    weight: 7,
+    isEligible: (state) =>
+      state.nationalTeam.caps >= 8 &&
+      !state.nationalTeam.retired &&
+      Boolean(state.nationalTeam.currentRole) &&
+      hasFirstTeamRole(state, 'ROTATION'),
+    setup: {
+      prompt: '你希望先谈哪一部分？',
+      options: [
+        {
+          id: 'ROLE',
+          title: '先谈比赛角色',
+          description: '确认自己在体系中的具体任务。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'TEAM',
+          title: '先谈球队目标',
+          description: '从团队需要出发再谈个人。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '争取稳定首发',
+        description: '用俱乐部表现要求更明确的位置。',
+        effectPreview: '45%获得认可 · 55%被要求继续证明',
+        outcomeSummary: '你明确提出希望成为稳定首发。',
+        playerDelta: { morale: 1 },
+        outcomes: [
+          {
+            id: 'TRUST',
+            label: '诉求获得认可',
+            weight: 45,
+            summary: '教练认可你的进步，也给出了更明确的比赛责任。',
+            playerDelta: { form: 4, reputation: 3, morale: 3 },
+            storyEffect: { tendencyDelta: { leadership: 1 } },
+          },
+          {
+            id: 'PROVE',
+            label: '仍需继续证明',
+            weight: 55,
+            summary: '教练没有否定你，但要求先把俱乐部状态稳定在更高水平。',
+            playerDelta: { morale: -2, form: 1 },
+          },
+        ],
+      },
+      {
+        id: 'B',
+        title: '接受功能型角色',
+        description: '先提高在不同比赛中的可用性。',
+        effectPreview: '心理能力、竞技状态上升',
+        outcomeSummary: '你接受了更具体的功能型任务，出场承诺没有增加，但教练更清楚何时可以使用你。',
+        playerDelta: { attributes: { mental: 0.5 }, form: 3, morale: 1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '询问如何帮助全队',
+        description: '把个人位置放到球队目标之后。',
+        effectPreview: '队内关系、外交倾向上升',
+        outcomeSummary: '你先问球队需要什么，再讨论自己能承担什么，谈话因此变得务实。',
+        playerDelta: { squadRelation: 4, morale: 2, reputation: 1 },
+        storyEffect: { publicPersona: 'TEAM_FIRST', tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'D',
+        title: '主动承担关键球',
+        description: '愿意在压力最大的时刻站出来。',
+        effectPreview: '大赛倾向上升 · 心理压力增加',
+        outcomeSummary: '你主动表示愿意承担关键责任。教练记住了这句话，外界期待也随之提高。',
+        playerDelta: { reputation: 3, morale: -1 },
+        storyEffect: { tendencyDelta: { clutch: 1, leadership: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'NATIONAL_SQUAD_OMISSION',
+    groupId: 'NATIONAL_SELECTION',
+    category: 'NATIONAL',
+    priority: 'P2',
+    cooldownWindows: 4,
+    interactionKind: 'CHOICE',
+    eyebrow: '国家队 · 名单落选',
+    title: '有过国家队经历的你，这次没有进入集训名单。',
+    description: '落选不是生涯失败，但公开反应和接下来的训练方式会影响你重返名单的路径。',
+    weight: 8,
+    isEligible: (state) => {
+      const record = latestNationalWindow(state)
+      return Boolean(
+        record &&
+          !record.calledUp &&
+          !state.nationalTeam.retired &&
+          state.nationalTeam.caps >= 3 &&
+          record.selectionScore >= record.selectionBenchmark - 10,
+      )
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '私下询问改进方向',
+        description: '不公开抱怨，只向教练组索取反馈。',
+        effectPreview: '心理能力、职业倾向上升',
+        outcomeSummary: '你拿到了一份具体反馈，落选仍然失望，但训练不再没有方向。',
+        playerDelta: { attributes: { mental: 0.5 }, morale: 1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '用俱乐部比赛回应',
+        description: '把情绪全部转化为场上投入。',
+        effectPreview: '60%状态反弹 · 40%训练过载',
+        outcomeSummary: '你决定不通过媒体回应，把注意力放回俱乐部。',
+        playerDelta: { fitness: -2 },
+        outcomes: [
+          {
+            id: 'REBOUND',
+            label: '状态明显反弹',
+            weight: 60,
+            summary: '落选激活了竞争心，你在俱乐部重新拿出有说服力的表现。',
+            playerDelta: { form: 7, morale: 4, reputation: 2 },
+          },
+          {
+            id: 'OVERLOAD',
+            label: '投入超过恢复',
+            weight: 40,
+            summary: '急于证明自己让训练负荷过高，状态没有立刻转化成比赛表现。',
+            playerDelta: { fitness: -6, form: -2, morale: -2 },
+          },
+        ],
+      },
+      {
+        id: 'C',
+        title: '公开表示尊重决定',
+        description: '承认竞争结果，同时保留回归目标。',
+        effectPreview: '媒体、球迷关系上升',
+        outcomeSummary: '你的回应没有制造争议，也让球迷看见了重返名单的决心。',
+        playerDelta: { mediaRelation: 3, fanRelation: 3, morale: 2 },
+        storyEffect: { publicPersona: 'LOW_KEY', tendencyDelta: { diplomacy: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'NATIONAL_CLUB_LOAD_CONFLICT',
+    groupId: 'NATIONAL_LOAD',
+    category: 'NATIONAL',
+    priority: 'P2',
+    cooldownWindows: 4,
+    interactionKind: 'ALLOCATION',
+    eyebrow: '国家队 · 负荷协调',
+    title: '俱乐部和国家队对你的训练负荷产生分歧。',
+    description: '两边都希望你保持状态，但恢复时间有限，必须明确这一阶段的分配方式。',
+    weight: 6,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 18 &&
+      Boolean(latestNationalWindow(state)?.calledUp) &&
+      hasFirstTeamRole(state, 'ROTATION') &&
+      Boolean(
+        state.player &&
+          (state.player.fitness < 80 ||
+            (state.lastReport?.stats.appearances ?? 0) >= 12),
+      ),
+    choices: [
+      {
+        id: 'A',
+        title: '俱乐部60% · 国家队40%',
+        description: '优先保证日常联赛和俱乐部位置。',
+        effectPreview: '教练关系、身体状态上升',
+        outcomeSummary: '你把大部分恢复资源留给俱乐部，国家队训练有所收缩，但长期比赛节奏更加稳定。',
+        playerDelta: { coachRelation: 4, fitness: 4, reputation: -1 },
+      },
+      {
+        id: 'B',
+        title: '两边各50%',
+        description: '要求两套团队共享全部负荷数据。',
+        effectPreview: '身体、外交倾向稳定上升',
+        outcomeSummary: '双方共享了训练数据，你没有完全满足任何一边，却避免了重复负荷。',
+        playerDelta: { fitness: 3, coachRelation: 1, morale: 2 },
+        storyEffect: { tendencyDelta: { diplomacy: 1, professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '国家队65% · 俱乐部35%',
+        description: '把国家队比赛视为当前最高优先级。',
+        effectPreview: '国家声誉上升 · 俱乐部关系承压',
+        outcomeSummary: '你明确优先国家队任务，公众认可这份投入，俱乐部教练却担心日常安排被打乱。',
+        playerDelta: { reputation: 4, fanRelation: 2, coachRelation: -3, fitness: -1 },
+      },
+    ],
+  },
+  {
+    id: 'NATIONAL_TOURNAMENT_REACTION',
+    groupId: 'NATIONAL_TOURNAMENT',
+    category: 'NATIONAL',
+    priority: 'P2',
+    cooldownWindows: 8,
+    interactionKind: 'RANKING',
+    eyebrow: '国家队 · 大赛之后',
+    title: '国家队大赛结束，所有人都在总结这段经历。',
+    description: '无论成绩好坏，你都要决定把公众责任、个人复盘和身体恢复放在怎样的顺序。',
+    weight: 7,
+    isEligible: (state) => {
+      const record = latestNationalWindow(state)
+      return Boolean(
+        record?.calledUp &&
+          record.competition !== 'INTERNATIONAL_WINDOW' &&
+          record.stage,
+      )
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '复盘 ＞ 公众 ＞ 恢复',
+        description: '先分析比赛，再承担公开回应。',
+        effectPreview: '心理能力、国家声誉上升',
+        outcomeSummary: '你先完成了完整复盘，再面对媒体谈论得失，表达因此更有内容。',
+        playerDelta: { attributes: { mental: 0.7 }, mediaRelation: 3, reputation: 3, fitness: -2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '公众 ＞ 恢复 ＞ 复盘',
+        description: '第一时间回应球迷和媒体。',
+        effectPreview: '球迷、媒体关系明显上升',
+        outcomeSummary: '你没有在赛后消失，而是第一时间承担了公开责任，球迷记住了你的态度。',
+        playerDelta: { fanRelation: 6, mediaRelation: 4, reputation: 3, morale: -1 },
+        storyEffect: { tendencyDelta: { leadership: 1, diplomacy: 1 } },
+      },
+      {
+        id: 'C',
+        title: '恢复 ＞ 复盘 ＞ 公众',
+        description: '先让身体和情绪回到稳定区间。',
+        effectPreview: '身体、心理状态明显恢复',
+        outcomeSummary: '你暂时远离舆论，先完成身体和情绪恢复，再以更平静的方式总结比赛。',
+        playerDelta: { fitness: 7, morale: 5, mediaRelation: -2 },
+      },
+    ],
+  },
+  {
+    id: 'AGENT_MARKET_CHECK',
+    groupId: 'AGENT_MARKET_STRATEGY',
+    category: 'CONTRACT',
+    priority: 'P3',
+    cooldownWindows: 5,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '经纪人 · 市场评估',
+    title: '经纪人建议在合同期内做一次非正式市场评估。',
+    description: '这不会立刻产生转会报价，只是帮助你判断外界位置；你要先确定谈话方向。',
+    weight: 7,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 18 &&
+      hasFirstTeamRole(state, 'SUBSTITUTE') &&
+      Boolean(
+        state.contract &&
+          state.contract.remainingHalfYears >= 3 &&
+          state.player &&
+          state.player.reputation >= 25,
+      ),
+    setup: {
+      prompt: '你希望经纪人优先评估什么？',
+      options: [
+        {
+          id: 'CAREER',
+          title: '先看竞技平台',
+          description: '比较联赛、球队角色和成长空间。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'CONTRACT',
+          title: '先看合同价值',
+          description: '比较工资、年限和市场位置。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '只评估稳定主力机会',
+        description: '拒绝只有名气、没有出场空间的方向。',
+        effectPreview: '经纪人关系、职业判断上升',
+        outcomeSummary: '经纪人把筛选重点放在真实出场空间，市场报告更短，却更符合你的职业目标。',
+        playerDelta: { agentRelation: 3, morale: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '优先了解更高平台',
+        description: '即使角色较低，也想知道上限在哪里。',
+        effectPreview: '声誉、进取倾向上升 · 心理承压',
+        outcomeSummary: '经纪人把范围扩大到更高平台，你看见了可能性，也意识到竞争会比现在更激烈。',
+        playerDelta: { reputation: 3, morale: -1, agentRelation: 2 },
+      },
+      {
+        id: 'C',
+        title: '核对合理工资区间',
+        description: '避免未来谈判脱离真实市场。',
+        effectPreview: '经纪人关系、心理状态上升',
+        outcomeSummary: '你拿到了一份克制的市场区间，未来谈判有了参照，不再只听传闻。',
+        playerDelta: { agentRelation: 4, morale: 2 },
+      },
+      {
+        id: 'D',
+        title: '要求制造市场声量',
+        description: '希望更多俱乐部和媒体注意到你。',
+        effectPreview: '55%扩大关注 · 45%引发现队反感',
+        outcomeSummary: '你授权经纪人主动扩大市场声量。',
+        playerDelta: { agentRelation: 2 },
+        outcomes: [
+          {
+            id: 'BUZZ',
+            label: '关注明显增加',
+            weight: 55,
+            summary: '几家媒体开始讨论你的市场位置，个人知名度随之提高。',
+            playerDelta: { mediaRelation: 4, reputation: 5 },
+            delayed: {
+              delayWindows: 2,
+              playerDelta: { reputation: 2 },
+              summary: '此前的市场评估继续被外界引用，你仍在多家俱乐部的观察范围内。',
+            },
+          },
+          {
+            id: 'ANNOY',
+            label: '俱乐部产生反感',
+            weight: 45,
+            summary: '俱乐部认为经纪团队在合同期内制造压力，教练也开始追问你的真实态度。',
+            playerDelta: { coachRelation: -4, fanRelation: -2, reputation: 1 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'RENEWAL_EXPECTATION_TALK',
+    groupId: 'CONTRACT_FUTURE',
+    category: 'CONTRACT',
+    priority: 'P2',
+    cooldownWindows: 5,
+    interactionKind: 'CHOICE',
+    eyebrow: '合同 · 续约预期',
+    title: '俱乐部提前询问你对下一份合同的基本态度。',
+    description: '这不是正式续约，也不会改变当前合同，只是双方在谈判前交换预期。',
+    weight: 7,
+    isEligible: (state) =>
+      Boolean(
+        state.contract &&
+          state.contract.remainingHalfYears >= 2 &&
+          state.contract.remainingHalfYears <= 4,
+      ) &&
+      playerAgeAtWindow(state.windowIndex) < 39 &&
+      currentClubFirstTeamWindows(state) >= 2,
+    choices: [
+      {
+        id: 'A',
+        title: '优先谈清球队角色',
+        description: '出场定位比工资数字更重要。',
+        effectPreview: '教练、经纪人关系上升',
+        outcomeSummary: '你把角色放在谈判首位，俱乐部知道未来必须给出清晰的竞技计划。',
+        playerDelta: { coachRelation: 3, agentRelation: 2, morale: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '表达长期留下意愿',
+        description: '只要计划合理，愿意继续共同成长。',
+        effectPreview: '忠诚度、球迷关系明显上升',
+        outcomeSummary: '你没有在非正式谈话中索要承诺，而是先表达留下意愿，俱乐部和球迷都感到安心。',
+        playerDelta: { clubAttachment: 6, fanRelation: 5, morale: 2 },
+        storyEffect: { publicPersona: 'TEAM_FIRST' },
+      },
+      {
+        id: 'C',
+        title: '暂不承诺任何方向',
+        description: '等正式报价和赛季结果出来再决定。',
+        effectPreview: '保留主动权 · 俱乐部关系小幅下降',
+        outcomeSummary: '你礼貌地保留了全部选择，谈判空间更大，俱乐部却无法确认你的长期态度。',
+        playerDelta: { agentRelation: 3, coachRelation: -2, clubAttachment: -1 },
+      },
+    ],
+  },
+  {
+    id: 'RELEASE_CLAUSE_BRIEFING',
+    groupId: 'CONTRACT_TERMS',
+    category: 'CONTRACT',
+    priority: 'P3',
+    cooldownWindows: 8,
+    interactionKind: 'CHOICE',
+    eyebrow: '合同 · 解约条款',
+    title: '经纪人重新向你解释合同里的解约金条款。',
+    description: '条款本身不会在这次谈话中改变，但你可以决定未来谈判更重视自由、稳定还是收入。',
+    weight: 5,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 18 &&
+      hasFirstTeamRole(state, 'ROTATION') &&
+      Boolean(state.contract?.releaseClauseEuro),
+    choices: [
+      {
+        id: 'A',
+        title: '未来争取降低解约金',
+        description: '为可能的生涯跃升保留通道。',
+        effectPreview: '经纪人关系上升 · 忠诚度下降',
+        outcomeSummary: '你明确告诉经纪人，未来合同必须保留合理的流动空间。',
+        playerDelta: { agentRelation: 4, clubAttachment: -2, morale: 2 },
+      },
+      {
+        id: 'B',
+        title: '接受稳定合同逻辑',
+        description: '只要俱乐部计划可靠，不把离队放在首位。',
+        effectPreview: '忠诚度、心理状态上升',
+        outcomeSummary: '你接受条款所代表的长期稳定，至少在当前阶段不把转会当作唯一目标。',
+        playerDelta: { clubAttachment: 4, morale: 3, fanRelation: 2 },
+      },
+      {
+        id: 'C',
+        title: '未来用高薪交换高条款',
+        description: '如果流动受限，就要求合同体现价值。',
+        effectPreview: '经纪人、市场倾向上升 · 球迷关系下降',
+        outcomeSummary: '你把未来谈判原则说得很直接：限制越强，俱乐部就必须支付相应代价。',
+        playerDelta: { agentRelation: 5, reputation: 2, fanRelation: -2 },
+        storyEffect: { publicPersona: 'OUTSPOKEN' },
+      },
+    ],
+  },
+  {
+    id: 'DEADLINE_DAY_SPECULATION',
+    groupId: 'TRANSFER_MEDIA',
+    category: 'CONTRACT',
+    priority: 'P3',
+    cooldownWindows: 4,
+    interactionKind: 'PERSON_TONE',
+    eyebrow: '转会 · 截止日前',
+    title: '转会截止日前，记者堵住了你的离场通道。',
+    description: '没有正式报价需要处理，但一句话就可能改变俱乐部和市场对你的判断。',
+    weight: 6,
+    isEligible: (state) =>
+      Boolean(state.contract && state.contract.remainingHalfYears > 0) &&
+      hasFirstTeamRole(state, 'ROTATION') &&
+      Boolean(state.player && state.player.reputation >= 35) &&
+      !state.transferDecision,
+    setup: {
+      prompt: '你准备先回应谁的关切？',
+      options: [
+        {
+          id: 'CLUB',
+          title: '先回应现俱乐部球迷',
+          description: '把稳定和投入放在第一位。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'MARKET',
+          title: '先回应外部市场',
+          description: '保留未来可能性。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '明确本窗口不会离队',
+        description: '直接结束所有截止日猜测。',
+        effectPreview: '球迷、教练关系明显上升',
+        outcomeSummary: '你的回答没有留下模糊空间，转会话题迅速降温，球队也更容易专注比赛。',
+        playerDelta: { fanRelation: 6, coachRelation: 4, clubAttachment: 3 },
+      },
+      {
+        id: 'B',
+        title: '只强调当前比赛',
+        description: '不谈长期未来，也不制造离队暗示。',
+        effectPreview: '媒体、职业倾向小幅上升',
+        outcomeSummary: '你把所有问题拉回下一场比赛，记者没有得到标题，俱乐部也接受了这种克制。',
+        playerDelta: { mediaRelation: 2, coachRelation: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1, diplomacy: 1 } },
+      },
+      {
+        id: 'C',
+        title: '承认愿意听取机会',
+        description: '说明职业球员不会关闭所有可能。',
+        effectPreview: '55%提升市场热度 · 45%激怒现队球迷',
+        outcomeSummary: '你承认愿意了解合适的机会。',
+        playerDelta: { agentRelation: 2 },
+        outcomes: [
+          {
+            id: 'INTEREST',
+            label: '市场热度上升',
+            weight: 55,
+            summary: '坦率回应让外界确认你并非完全不可接触，更多球队开始关注后续窗口。',
+            playerDelta: { reputation: 5, mediaRelation: 4 },
+          },
+          {
+            id: 'ANGER',
+            label: '现队球迷反感',
+            weight: 45,
+            summary: '回答在截止日气氛中被理解为逼宫，主场球迷对你的态度明显转冷。',
+            playerDelta: { fanRelation: -6, coachRelation: -3, reputation: 2 },
+          },
+        ],
+      },
+      {
+        id: 'D',
+        title: '用玩笑回避问题',
+        description: '缓和现场气氛，不提供实质答案。',
+        effectPreview: '媒体关系上升 · 未来仍有猜测',
+        outcomeSummary: '一句玩笑让现场轻松下来，但没有真正结束外界对未来的讨论。',
+        playerDelta: { mediaRelation: 4, morale: 2, reputation: 1 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'INTERVIEW_MISQUOTE',
+    groupId: 'MEDIA_INTERVIEW_CRISIS',
+    category: 'MEDIA',
+    priority: 'P3',
+    cooldownWindows: 4,
+    interactionKind: 'RISK',
+    eyebrow: '媒体 · 采访失真',
+    title: '一段采访被剪成了与你原意不同的标题。',
+    description: '俱乐部允许你回应，但越强硬的处理越可能延长争议。',
+    weight: 7,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 18 &&
+      Boolean(state.player && state.player.reputation >= 25),
+    setup: {
+      prompt: '你准备把风险控制在什么范围？',
+      options: [
+        {
+          id: 'QUIET',
+          title: '先私下修正',
+          description: '尽量不让争议继续扩散。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'PUBLIC',
+          title: '公开夺回话语权',
+          description: '承担更高热度，直接说明原意。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '要求媒体更正全文',
+        description: '由新闻官提供录音和原始语境。',
+        effectPreview: '80%安静更正 · 20%媒体拒绝',
+        outcomeSummary: '俱乐部新闻官正式联系了媒体。',
+        playerDelta: {},
+        outcomes: [
+          {
+            id: 'CORRECTED',
+            label: '报道完成更正',
+            weight: 80,
+            summary: '完整语境被补回，争议很快失去热度，你也没有亲自卷入争吵。',
+            playerDelta: { mediaRelation: 3, coachRelation: 2, morale: 2 },
+          },
+          {
+            id: 'REFUSED',
+            label: '媒体拒绝更正',
+            weight: 20,
+            summary: '对方坚持标题没有错误，争议没有扩大，却留下了一些误解。',
+            playerDelta: { mediaRelation: -3, morale: -2 },
+          },
+        ],
+      },
+      {
+        id: 'B',
+        title: '让话题自然过去',
+        description: '不回应，不给标题第二次传播机会。',
+        effectPreview: '竞技、心理状态小幅恢复',
+        outcomeSummary: '你没有继续喂养争议，几天后话题降温，训练注意力也重新集中。',
+        playerDelta: { form: 2, morale: 3, mediaRelation: -1 },
+        storyEffect: { publicPersona: 'LOW_KEY' },
+      },
+      {
+        id: 'C',
+        title: '发布完整原话视频',
+        description: '直接让公众判断谁改变了语境。',
+        effectPreview: '60%扭转舆论 · 40%冲突升级',
+        outcomeSummary: '你发布了没有剪辑的完整回答。',
+        playerDelta: { reputation: 1 },
+        outcomes: [
+          {
+            id: 'TURN',
+            label: '舆论明显反转',
+            weight: 60,
+            summary: '完整视频证明原报道过度剪辑，公众开始支持你的回应。',
+            playerDelta: { mediaRelation: 5, fanRelation: 4, reputation: 5, morale: 3 },
+          },
+          {
+            id: 'ESCALATE',
+            label: '媒体公开反击',
+            weight: 40,
+            summary: '双方围绕语境继续争执，你赢得一部分支持，也让话题停留得更久。',
+            playerDelta: { mediaRelation: -5, fanRelation: 2, morale: -3, reputation: 3 },
+          },
+        ],
+      },
+      {
+        id: 'D',
+        title: '召开一次说明采访',
+        description: '用更完整的交流解释立场。',
+        effectPreview: '媒体关系、外交倾向上升',
+        outcomeSummary: '你没有攻击记者，而是把原本想说的内容重新讲清，争议逐渐变成一次正常讨论。',
+        playerDelta: { mediaRelation: 4, reputation: 3, morale: 1 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 }, publicPersona: 'OUTSPOKEN' },
+      },
+    ],
+  },
+  {
+    id: 'SPONSOR_APPEARANCE',
+    groupId: 'COMMERCIAL_OBLIGATION',
+    category: 'MEDIA',
+    priority: 'P4',
+    cooldownWindows: 6,
+    interactionKind: 'ALLOCATION',
+    eyebrow: '商业 · 公开邀约',
+    title: '一家品牌邀请你参加半天的公开活动。',
+    description: '这是一笔真实可支配收入，但活动、训练和恢复无法同时占满时间。',
+    weight: 5,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 18 &&
+      Boolean(state.player && state.player.reputation >= 40),
+    choices: [
+      {
+        id: 'A',
+        title: '活动70% · 训练30%',
+        description: '完整履约，接受更高曝光。',
+        effectPreview: '现金+€6,000 · 声誉上升 · 身体下降',
+        outcomeSummary: '你完成了完整商业活动，收入和曝光都很可观，但当天恢复时间明显不足。',
+        playerDelta: { reputation: 5, mediaRelation: 4, fitness: -4 },
+        cashDeltaEuro: 6_000,
+      },
+      {
+        id: 'B',
+        title: '活动40% · 训练60%',
+        description: '只参加核心拍摄和球迷互动。',
+        effectPreview: '现金+€3,500 · 关系与状态平衡',
+        outcomeSummary: '品牌接受了精简安排，你保留了训练完整性，也完成了必要的公众露面。',
+        playerDelta: { reputation: 2, mediaRelation: 2, form: 1, fitness: -1 },
+        cashDeltaEuro: 3_500,
+      },
+      {
+        id: 'C',
+        title: '婉拒活动 · 完整训练',
+        description: '不接这笔收入，维持竞技节奏。',
+        effectPreview: '竞技、教练关系上升 · 无额外收入',
+        outcomeSummary: '你放弃了商业收入，把完整时间留给训练。俱乐部认可这种阶段性取舍。',
+        playerDelta: { form: 4, coachRelation: 3, mediaRelation: -1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'AWAY_FAN_CONFRONTATION',
+    groupId: 'FAN_CONFLICT',
+    category: 'MEDIA',
+    priority: 'P3',
+    cooldownWindows: 5,
+    interactionKind: 'PERSON_TONE',
+    eyebrow: '球迷 · 客场冲突',
+    title: '客场离场时，一群球迷在通道旁激烈挑衅。',
+    description: '安保人员已经介入，你仍要决定先照顾谁的情绪，以及采用什么态度。',
+    weight: 5,
+    isEligible: (state) =>
+      hasFirstTeamRole(state, 'SUBSTITUTE') &&
+      Boolean(
+        state.player &&
+          state.player.reputation >= 25 &&
+          (state.lastReport?.stats.appearances ?? 0) > 0,
+      ),
+    setup: {
+      prompt: '你准备先回应哪一边？',
+      options: [
+        {
+          id: 'OWN_FANS',
+          title: '先安抚随队球迷',
+          description: '保护支持球队远征的人。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'SECURITY',
+          title: '先配合安保离场',
+          description: '避免任何直接对峙。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '停下感谢随队支持',
+        description: '不回应挑衅，只向本队看台鼓掌。',
+        effectPreview: '球迷、媒体关系上升',
+        outcomeSummary: '你把注意力完全留给随队球迷，冲突没有升级，本队支持者也感到被尊重。',
+        playerDelta: { fanRelation: 6, mediaRelation: 2, morale: 2 },
+        storyEffect: { tendencyDelta: { diplomacy: 1 } },
+      },
+      {
+        id: 'B',
+        title: '示意全队一起致谢',
+        description: '把个人回应变成团队行动。',
+        effectPreview: '队内、球迷关系明显上升',
+        outcomeSummary: '你拉上队友共同向远征球迷致谢，现场情绪被团队动作重新引导。',
+        playerDelta: { squadRelation: 5, fanRelation: 5, reputation: 2 },
+        storyEffect: { tendencyDelta: { leadership: 1 } },
+      },
+      {
+        id: 'C',
+        title: '完全听从安保安排',
+        description: '不在高风险通道停留。',
+        effectPreview: '风险最低 · 关系基本稳定',
+        outcomeSummary: '你没有给冲突留下继续升级的机会，顺利离场，事件也很快结束。',
+        playerDelta: { morale: 1, coachRelation: 1 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'D',
+        title: '回头做出强硬回应',
+        description: '用动作告诉对方挑衅没有效果。',
+        effectPreview: '35%成为个性名场面 · 65%引发纪律争议',
+        outcomeSummary: '你在离场前回头回应了挑衅。',
+        playerDelta: { morale: 2 },
+        outcomes: [
+          {
+            id: 'ICONIC',
+            label: '成为个性名场面',
+            weight: 35,
+            summary: '动作没有越界，反而成为球迷喜欢的强硬画面，你的个人形象更加鲜明。',
+            playerDelta: { fanRelation: 5, reputation: 6, mediaRelation: 3 },
+            storyEffect: { publicPersona: 'OUTSPOKEN' },
+          },
+          {
+            id: 'DISCIPLINE',
+            label: '引发纪律争议',
+            weight: 65,
+            summary: '回应被解读为挑衅，俱乐部不得不公开降温，教练对你的判断感到不满。',
+            playerDelta: { mediaRelation: -5, coachRelation: -4, fanRelation: -2, reputation: 2 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'COACH_PROGRESS_REVIEW',
+    groupId: 'COACH_REVIEW',
+    category: 'COACH',
+    priority: 'P2',
+    cooldownWindows: 10,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '教练 · 阶段面谈',
+    title: '教练安排了一次阶段个人面谈。',
+    description: '教练希望重新核对你的场上特点和职业目标，你可以先决定这次谈话从哪里开始。',
+    weight: 5,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 15 &&
+      state.history.length >= 4 &&
+      Boolean(state.player),
+    setup: {
+      prompt: '你准备先介绍自己的哪一面？',
+      options: [
+        {
+          id: 'FOOTBALL',
+          title: '先谈场上特点',
+          description: '让教练理解你的使用方式。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'CAREER',
+          title: '先谈职业目标',
+          description: '让教练理解你的长期诉求。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '展示最擅长的职责',
+        description: '先争取在熟悉位置证明自己。',
+        effectPreview: '竞技、教练关系上升',
+        outcomeSummary: '你用清楚的比赛片段说明自己的强项，教练重新确认了最合适的使用方式。',
+        playerDelta: { form: 4, coachRelation: 4, morale: 2 },
+      },
+      {
+        id: 'B',
+        title: '强调战术适应能力',
+        description: '愿意尝试不同职责，但不学习新位置。',
+        effectPreview: '心理能力、职业倾向上升',
+        outcomeSummary: '你表达了对不同任务的开放态度，教练把你列入了更多战术方案。',
+        playerDelta: { attributes: { mental: 0.5 }, coachRelation: 3 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '明确争取更高角色',
+        description: '说明自己希望承担更多比赛责任。',
+        effectPreview: '50%赢得欣赏 · 50%被要求先证明',
+        outcomeSummary: '你向教练明确提出了下一阶段的角色目标。',
+        playerDelta: { morale: 1 },
+        outcomes: [
+          {
+            id: 'IMPRESSED',
+            label: '主动性得到欣赏',
+            weight: 50,
+            summary: '教练欣赏你的清晰和自信，愿意在训练中认真评估更高角色。',
+            playerDelta: { coachRelation: 5, form: 3, reputation: 2 },
+          },
+          {
+            id: 'EARN',
+            label: '被要求先证明',
+            weight: 50,
+            summary: '教练没有接受口头承诺，要求你先用训练和比赛重新建立位置。',
+            playerDelta: { coachRelation: -1, morale: -2, form: 1 },
+          },
+        ],
+      },
+      {
+        id: 'D',
+        title: '先询问球队计划',
+        description: '不急着谈自己，先理解新周期方向。',
+        effectPreview: '教练关系、外交倾向上升',
+        outcomeSummary: '你先听完下一阶段的球队计划，再寻找自己的位置，谈话因此保持了良好节奏。',
+        playerDelta: { coachRelation: 4, morale: 2 },
+        storyEffect: { tendencyDelta: { diplomacy: 1, professionalism: 1 } },
+      },
+    ],
+  },
+  {
+    id: 'FORMER_TEAMMATE_REUNION',
+    groupId: 'CAREER_REUNION',
+    category: 'TEAM',
+    priority: 'P4',
+    cooldownWindows: 8,
+    interactionKind: 'CHOICE',
+    eyebrow: '关系 · 故人重逢',
+    title: '赛后通道里，你遇见了一名昔日队友。',
+    description: '你们如今效力不同俱乐部，这次重逢可以只停留在寒暄，也可以重新建立联系。',
+    weight: 5,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 20 &&
+      hasPlayedForAnotherClub(state) &&
+      Boolean(state.player),
+    choices: [
+      {
+        id: 'A',
+        title: '赛后认真叙旧',
+        description: '聊一聊各自离开后的经历。',
+        effectPreview: '心理、队内关系上升',
+        outcomeSummary: '一次没有镜头的长谈让你重新想起职业起点，也缓解了近期积累的压力。',
+        playerDelta: { morale: 5, squadRelation: 2 },
+      },
+      {
+        id: 'B',
+        title: '交换比赛观察',
+        description: '把重逢变成一次职业交流。',
+        effectPreview: '心理能力、职业倾向上升',
+        outcomeSummary: '你们交换了对比赛和联赛的观察，旧关系转化成了新的职业经验。',
+        playerDelta: { attributes: { mental: 0.4 }, morale: 2 },
+        storyEffect: { tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'C',
+        title: '邀请公开合影',
+        description: '让球迷看见旧队友情仍然存在。',
+        effectPreview: '60%收获好评 · 40%被质疑不够专注',
+        outcomeSummary: '你主动邀请旧队友合影。',
+        playerDelta: { reputation: 1 },
+        outcomes: [
+          {
+            id: 'WARM',
+            label: '旧友情获得好评',
+            weight: 60,
+            summary: '照片被视为职业足球里难得的温暖画面，两边球迷都给予积极回应。',
+            playerDelta: { fanRelation: 4, mediaRelation: 3, reputation: 3 },
+          },
+          {
+            id: 'FOCUS',
+            label: '被质疑比赛不专注',
+            weight: 40,
+            summary: '失利后的合影引发争议，一部分球迷认为你没有充分理解比赛结果。',
+            playerDelta: { fanRelation: -4, mediaRelation: -2, morale: -1 },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'YOUNG_CHALLENGER_ARRIVES',
+    groupId: 'POSITION_RIVALRY',
+    category: 'TEAM',
+    priority: 'P2',
+    cooldownWindows: 6,
+    interactionKind: 'DIALOGUE',
+    eyebrow: '更衣室 · 新人挑战',
+    title: '一名年轻新援公开表示，希望竞争你的位置。',
+    description: '你已经是球队稳定成员，可以先决定把他视作竞争者还是后辈，再选择具体回应。',
+    weight: 6,
+    isEligible: (state) =>
+      playerAgeAtWindow(state.windowIndex) >= 23 &&
+      hasFirstTeamRole(state, 'STARTER') &&
+      currentClubFirstTeamWindows(state) >= 3 &&
+      state.careerStory.club.rivalry === 'NONE',
+    setup: {
+      prompt: '你准备如何定义这段关系？',
+      options: [
+        {
+          id: 'RIVAL',
+          title: '先当作位置竞争',
+          description: '明确首发必须靠表现争取。',
+          choiceIds: ['A', 'B'],
+        },
+        {
+          id: 'JUNIOR',
+          title: '先当作年轻后辈',
+          description: '竞争之外保留帮助和交流。',
+          choiceIds: ['C', 'D'],
+        },
+      ],
+    },
+    choices: [
+      {
+        id: 'A',
+        title: '训练场正面回应',
+        description: '提高训练强度，不进行口头争执。',
+        effectPreview: '竞技状态上升 · 身体消耗增加',
+        outcomeSummary: '你用连续高质量训练回应挑战，竞争迅速升温，却仍保持在职业范围内。',
+        playerDelta: { form: 5, fitness: -3, squadRelation: 1 },
+        storyEffect: { club: { rivalry: 'HEALTHY' }, tendencyDelta: { professionalism: 1 } },
+      },
+      {
+        id: 'B',
+        title: '公开强调现有地位',
+        description: '提醒外界首发位置不是一句话就能拿走。',
+        effectPreview: '45%稳住权威 · 55%制造更衣室对立',
+        outcomeSummary: '你选择公开回应年轻球员的挑战。',
+        playerDelta: { reputation: 2 },
+        outcomes: [
+          {
+            id: 'AUTHORITY',
+            label: '权威得到确认',
+            weight: 45,
+            summary: '随后比赛表现支撑了你的发言，队内竞争顺位暂时没有变化。',
+            playerDelta: { form: 6, squadRelation: 3, fanRelation: 3 },
+            storyEffect: { club: { rivalry: 'HEALTHY' }, publicPersona: 'OUTSPOKEN' },
+          },
+          {
+            id: 'DIVIDE',
+            label: '更衣室出现对立',
+            weight: 55,
+            summary: '公开回应让竞争变成人际冲突，队友开始被迫选择立场。',
+            playerDelta: { squadRelation: -6, coachRelation: -3, morale: -2 },
+            storyEffect: { club: { rivalry: 'HOSTILE' }, publicPersona: 'OUTSPOKEN' },
+          },
+        ],
+      },
+      {
+        id: 'C',
+        title: '主动分享球队经验',
+        description: '帮助他理解战术和更衣室规则。',
+        effectPreview: '队内关系、领导倾向上升',
+        outcomeSummary: '你没有回避竞争，却主动帮助新人适应球队，关系逐渐变成相互推动。',
+        playerDelta: { squadRelation: 6, coachRelation: 2, morale: 2 },
+        storyEffect: { club: { rivalry: 'HEALTHY', mentorship: 'MENTOR' }, tendencyDelta: { leadership: 1 } },
+      },
+      {
+        id: 'D',
+        title: '保持礼貌但不额外帮助',
+        description: '尊重新人，把全部精力留给自己。',
+        effectPreview: '竞技、心理状态稳定上升',
+        outcomeSummary: '你没有制造敌意，也没有主动扮演导师，竞争保持清楚而克制。',
+        playerDelta: { form: 3, morale: 3, squadRelation: 1 },
+        storyEffect: { club: { rivalry: 'HEALTHY' } },
+      },
+    ],
+  },
 ]
 
 export function validateCareerEventDefinitions(
@@ -1651,6 +2796,21 @@ export function getCareerEvent(id: CareerEventId): CareerEventDefinition {
   return event
 }
 
+export function careerEventIsOnCooldown(
+  state: GameState,
+  event: CareerEventDefinition,
+): boolean {
+  return state.careerEventHistory.some((entry) => {
+    const previousEvent = getCareerEvent(entry.eventId)
+    const isSameStoryGroup = previousEvent.groupId === event.groupId
+    const isSameEvent = entry.eventId === event.id
+    return (
+      (isSameEvent || isSameStoryGroup) &&
+      state.windowIndex - entry.windowIndex <= event.cooldownWindows
+    )
+  })
+}
+
 export function selectCareerEvent(state: GameState): CareerEventId | null {
   if (!state.player || state.windowIndex === 0) return null
   const lastTwoCategories = state.careerEventHistory
@@ -1664,11 +2824,8 @@ export function selectCareerEvent(state: GameState): CareerEventId | null {
   const baseEligible = CAREER_EVENTS.filter((event) => event.isEligible(state))
   const eligible = baseEligible.filter(
     (event) =>
-      !state.careerEventHistory.some(
-        (entry) =>
-          entry.eventId === event.id &&
-          state.windowIndex - entry.windowIndex <= event.cooldownWindows,
-      ) && event.category !== blockedCategory,
+      !careerEventIsOnCooldown(state, event) &&
+      event.category !== blockedCategory,
   )
   if (eligible.length === 0) return null
 
