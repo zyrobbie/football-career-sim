@@ -1,7 +1,10 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon, type IconName } from '../components/Icons'
 import { careerWindowLabel } from '../engine/careerTime'
-import { getCareerEvent } from '../engine/careerEvents'
+import {
+  eligibleCareerEventChoices,
+  getCareerEvent,
+} from '../engine/careerEvents'
 import type {
   CareerEventCategory,
   CareerEventChoiceId,
@@ -78,9 +81,10 @@ export function SpecialEventScreen() {
   const selectedRoute = setup?.options.find(
     (option) => option.id === game.pendingCareerEvent?.variantId,
   )
+  const contextChoices = eligibleCareerEventChoices(game, event)
   const visibleChoices = selectedRoute
-    ? event.choices.filter((choice) => selectedRoute.choiceIds.includes(choice.id))
-    : event.choices
+    ? contextChoices.filter((choice) => selectedRoute.choiceIds.includes(choice.id))
+    : contextChoices
   const interactionClass = event.interactionKind.toLowerCase()
 
   return (

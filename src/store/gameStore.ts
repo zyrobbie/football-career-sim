@@ -14,7 +14,9 @@ import { generatePlayer } from '../engine/player'
 import { createCareerSeed } from '../engine/random'
 import {
   attachCareerEventToReport,
+  careerEventIsEligible,
   consumeCareerConsequences,
+  eligibleCareerEventChoices,
   getCareerEvent,
   resolveCareerEventChoice,
   selectCareerEvent,
@@ -389,7 +391,21 @@ export const useGameStore = create<GameStore>((set, get) => {
           set({ hasSave: false, error: '没有找到可继续的生涯。' })
           return
         }
-        const resumed = runReadySimulation(loaded)
+        const pendingEvent = loaded.pendingCareerEvent
+          ? getCareerEvent(loaded.pendingCareerEvent.eventId)
+          : null
+        const normalized =
+          loaded.phase === 'SPECIAL_EVENT' &&
+          loaded.pendingCareerEvent?.selections.length === 0 &&
+          pendingEvent?.timing === 'TRANSITION' &&
+          !careerEventIsEligible(loaded, pendingEvent)
+            ? {
+                ...loaded,
+                phase: 'SIMULATION_READY' as const,
+                pendingCareerEvent: null,
+              }
+            : loaded
+        const resumed = runReadySimulation(normalized)
         if (resumed !== loaded) saveGame(resumed)
         set({ game: resumed, hasSave: true, error: null })
       } catch (error) {
@@ -574,6 +590,21 @@ export const useGameStore = create<GameStore>((set, get) => {
       }
       try {
         const event = getCareerEvent(game.pendingCareerEvent.eventId)
+        if (
+          game.phase === 'SPECIAL_EVENT' &&
+          game.pendingCareerEvent.selections.length === 0 &&
+          event.timing === 'TRANSITION' &&
+          !careerEventIsEligible(game, event)
+        ) {
+          const ready: GameState = {
+            ...game,
+            phase: 'SIMULATION_READY',
+            pendingCareerEvent: null,
+          }
+          commit(ready)
+          commit(runReadySimulation(ready))
+          return
+        }
         if (event.setup && game.pendingCareerEvent.stepIndex === 0) {
           const setupOption = event.setup.options.find(
             (candidate) => candidate.id === choiceId,
@@ -599,6 +630,13 @@ export const useGameStore = create<GameStore>((set, get) => {
           if (!route?.choiceIds.includes(choiceId)) {
             throw new Error('这个选项不属于当前特殊事件路线。')
           }
+        }
+        if (
+          !eligibleCareerEventChoices(game, event).some(
+            (candidate) => candidate.id === choiceId,
+          )
+        ) {
+          throw new Error('这个选项不符合球员当前的职业情境。')
         }
         const resolved = resolveCareerEventChoice({
           state: game,

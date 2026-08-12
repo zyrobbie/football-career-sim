@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest'
 import type { GameState } from '../../models/game'
 import {
   CAREER_EVENTS,
+  careerEventIsEligible,
   careerEventIsOnCooldown,
   consumeCareerConsequences,
+  eligibleCareerEventChoices,
   getCareerEvent,
   leastSeenCareerEventPool,
   resolveCareerEventChoice,
@@ -102,6 +104,21 @@ function establishFirstTeamRole(
   }))
 }
 
+function syncLastReportToLatestHistory(state: GameState) {
+  const latest = state.history.at(-1)
+  if (!latest) {
+    state.lastReport = null
+    return
+  }
+  state.lastReport = {
+    clubId: latest.clubId,
+    clubName: latest.clubName ?? '测试俱乐部',
+    stats: latest.stats,
+    honors: latest.honors ?? [],
+    clubSeason: latest.clubSeason ?? null,
+  } as NonNullable<GameState['lastReport']>
+}
+
 function establishProfessionalContract(state: GameState) {
   state.contract = {
     type: 'RENEWAL',
@@ -175,7 +192,7 @@ describe('career events', () => {
 
   it('keeps every registered event definition structurally valid', () => {
     expect(validateCareerEventDefinitions()).toEqual([])
-    expect(CAREER_EVENTS).toHaveLength(66)
+    expect(CAREER_EVENTS).toHaveLength(84)
   })
 
   it('routes multi-stage events through valid setup choices', () => {
@@ -339,13 +356,22 @@ describe('career events', () => {
 
   it('makes every new match-performance event reachable from real history', () => {
     const milestone = createState(20)
-    establishFirstTeamRole(milestone, 'STARTER', 2)
+    establishFirstTeamRole(milestone, 'STARTER', 1)
     milestone.history.forEach((entry) => {
       entry.stats.averageRating = 7.3
+      entry.stats.goals = 0
     })
     expect(getCareerEvent('FIRST_TEAM_DEBUT_REFLECTION').isEligible(milestone)).toBe(true)
+    milestone.history[0]!.stats.goals = 2
     expect(getCareerEvent('FIRST_SENIOR_GOAL_REACTION').isEligible(milestone)).toBe(true)
-    expect(getCareerEvent('SUSTAINED_HIGH_FORM').isEligible(milestone)).toBe(true)
+    expect(getCareerEvent('FIRST_TEAM_DEBUT_REFLECTION').isEligible(milestone)).toBe(false)
+
+    const sustained = createState(20)
+    establishFirstTeamRole(sustained, 'STARTER', 2)
+    sustained.history.forEach((entry) => {
+      entry.stats.averageRating = 7.3
+    })
+    expect(getCareerEvent('SUSTAINED_HIGH_FORM').isEligible(sustained)).toBe(true)
 
     const drought = createState(20)
     establishFirstTeamRole(drought, 'STARTER', 2)
@@ -364,7 +390,7 @@ describe('career events', () => {
   it('makes season-result events depend on recorded results and honors', () => {
     const state = createState(20)
     establishFirstTeamRole(state, 'STARTER', 2)
-    state.history[0]!.honors = [
+    state.history[1]!.honors = [
       {
         id: 'league-title',
         type: 'LEAGUE_TITLE',
@@ -372,7 +398,7 @@ describe('career events', () => {
         label: '测试联赛冠军',
         competitionLabel: '测试联赛',
         seasonLabel: '测试赛季',
-        windowIndex: 18,
+        windowIndex: 19,
         clubId: state.selectedClubId,
         clubName: '测试俱乐部',
       },
@@ -383,12 +409,24 @@ describe('career events', () => {
         label: '测试杯赛冠军',
         competitionLabel: '测试杯赛',
         seasonLabel: '测试赛季',
-        windowIndex: 18,
+        windowIndex: 19,
         clubId: state.selectedClubId,
         clubName: '测试俱乐部',
       },
     ]
+    state.history[1]!.clubSeason = {
+      seasonLabel: '测试赛季',
+      leagueLabel: '测试联赛',
+      leaguePosition: 2,
+      leagueTeams: 16,
+      domesticCupStage: 'RUNNER_UP',
+      continentalLabel: null,
+      continentalStage: 'NOT_ENTERED',
+      summary: '测试赛季结果',
+    }
     state.lastReport = {
+      clubId: state.selectedClubId,
+      clubName: '测试俱乐部',
       stats: {
         appearances: 16,
         starts: 14,
@@ -412,16 +450,7 @@ describe('career events', () => {
           clubName: '测试俱乐部',
         },
       ],
-      clubSeason: {
-        seasonLabel: '测试赛季',
-        leagueLabel: '测试联赛',
-        leaguePosition: 2,
-        leagueTeams: 16,
-        domesticCupStage: 'RUNNER_UP',
-        continentalLabel: null,
-        continentalStage: 'NOT_ENTERED',
-        summary: '测试赛季结果',
-      },
+      clubSeason: state.history[1]!.clubSeason,
     } as NonNullable<GameState['lastReport']>
 
     expect(getCareerEvent('FIRST_LEAGUE_TITLE_REACTION').isEligible(state)).toBe(true)
@@ -434,6 +463,9 @@ describe('career events', () => {
   it('makes career-stage events depend on appearances, tenure and transfers', () => {
     const veteran = createState(40)
     establishFirstTeamRole(veteran, 'ROTATION', 16)
+    veteran.history.forEach((entry, index) => {
+      entry.stats.appearances = index < 7 ? 0 : index === 15 ? 12 : 11
+    })
     veteran.player!.clubAttachment = 75
     expect(getCareerEvent('FIRST_TEAM_100_APPEARANCES').isEligible(veteran)).toBe(true)
     expect(getCareerEvent('LONG_SERVICE_RECOGNITION').isEligible(veteran)).toBe(true)
@@ -441,6 +473,7 @@ describe('career events', () => {
 
     const returned = createState(24)
     establishFirstTeamRole(returned, 'STARTER', 4)
+    returned.history.at(-1)!.clubId = 'other-club'
     returned.transferDecision = {
       kind: 'TRANSFER',
       fromClubId: 'other-club',
@@ -462,6 +495,108 @@ describe('career events', () => {
       cashSpentEuro: 0,
     }
     expect(getCareerEvent('LONG_SERVICE_FAREWELL').isEligible(farewell)).toBe(true)
+  })
+
+  it('expires first-team debut and first-goal milestones after their real window', () => {
+    const state = createState(20)
+    establishFirstTeamRole(state, 'STARTER', 3)
+    state.history[0]!.stats.goals = 2
+    state.history[1]!.stats.goals = 0
+    state.history[2]!.stats.goals = 0
+
+    expect(getCareerEvent('FIRST_TEAM_DEBUT_REFLECTION').isEligible(state)).toBe(false)
+    expect(getCareerEvent('FIRST_SENIOR_GOAL_REACTION').isEligible(state)).toBe(false)
+  })
+
+  it('does not let ordinary category balancing suppress a fresh milestone', () => {
+    const state = createState(20)
+    establishFirstTeamRole(state, 'STARTER', 1)
+    state.history[0]!.stats.goals = 0
+    state.careerEventHistory = [
+      {
+        eventId: 'FIRST_LEAGUE_TITLE_REACTION',
+        choiceId: 'A',
+        windowIndex: 15,
+        choiceTitle: '测试',
+        outcomeSummary: '测试',
+        appliedDelta: {},
+        cashDeltaEuro: 0,
+      },
+      {
+        eventId: 'FIRST_CUP_TITLE_REACTION',
+        choiceId: 'A',
+        windowIndex: 17,
+        choiceTitle: '测试',
+        outcomeSummary: '测试',
+        appliedDelta: {},
+        cashDeltaEuro: 0,
+      },
+    ]
+
+    expect(selectCareerEvent(state)).toBe('FIRST_TEAM_DEBUT_REFLECTION')
+  })
+
+  it('requires the first senior goal to be scored in the latest settled window', () => {
+    const state = createState(20)
+    establishFirstTeamRole(state, 'STARTER', 3)
+    state.history[0]!.stats.goals = 0
+    state.history[1]!.stats.goals = 2
+    state.history[2]!.stats.goals = 0
+
+    expect(getCareerEvent('FIRST_SENIOR_GOAL_REACTION').isEligible(state)).toBe(false)
+    state.history[1]!.stats.goals = 0
+    state.history[2]!.stats.goals = 2
+    expect(getCareerEvent('FIRST_SENIOR_GOAL_REACTION').isEligible(state)).toBe(true)
+  })
+
+  it('shows domestic and overseas transfer-rumor responses in the right context', () => {
+    const state = createState(20)
+    establishProfessionalContract(state)
+    state.player!.reputation = 50
+    const event = getCareerEvent('TRANSFER_RUMOR')
+
+    state.selectedClubId = 'cn_beijing_yuhua'
+    state.contract!.clubId = state.selectedClubId
+    state.careerStory = createCareerStoryState(state.selectedClubId)
+    expect(eligibleCareerEventChoices(state, event).map((choice) => choice.id))
+      .toEqual(['A', 'B', 'C'])
+
+    state.selectedClubId = 'ita_inter'
+    state.contract!.clubId = state.selectedClubId
+    state.careerStory = createCareerStoryState(state.selectedClubId)
+    state.player!.reputation = 50
+    expect(eligibleCareerEventChoices(state, event).map((choice) => choice.id))
+      .toEqual(['A', 'B', 'D'])
+  })
+
+  it('rejects a context-hidden choice during event resolution', () => {
+    const state = createState(20)
+    establishProfessionalContract(state)
+    state.selectedClubId = 'ita_inter'
+    state.contract!.clubId = state.selectedClubId
+    state.careerStory = createCareerStoryState(state.selectedClubId)
+    state.player!.reputation = 50
+
+    expect(careerEventIsEligible(state, getCareerEvent('TRANSFER_RUMOR'))).toBe(true)
+    expect(() => resolveCareerEventChoice({
+      state,
+      eventId: 'TRANSFER_RUMOR',
+      choiceId: 'C',
+    })).toThrow('选项不存在')
+  })
+
+  it('does not reuse the previous club report for current-club events after a transfer', () => {
+    const state = createState(20)
+    establishFirstTeamRole(state, 'STARTER', 2)
+    syncLastReportToLatestHistory(state)
+    state.lastReport!.stats.averageRating = 7.5
+    state.selectedClubId = 'ita_inter'
+    state.teamLevel = 'FIRST_TEAM'
+    state.firstTeamRole = 'FRINGE'
+    state.careerStory = createCareerStoryState(state.selectedClubId)
+
+    expect(getCareerEvent('SUSTAINED_HIGH_FORM').isEligible(state)).toBe(false)
+    expect(getCareerEvent('FAN_EXPECTATION_SURGE').isEligible(state)).toBe(false)
   })
 
   it('makes all fourth-batch events reachable from supported career state', () => {
@@ -562,6 +697,167 @@ describe('career events', () => {
     expect(counts.size).toBe(fourthBatchIds.size)
     const appearances = [...counts.values()]
     expect(Math.min(...appearances) / Math.max(...appearances)).toBeGreaterThan(0.65)
+  })
+
+  it('makes all fifth-batch events reachable only from supported facts', () => {
+    const roleLost = createState(20)
+    establishFirstTeamRole(roleLost, 'STARTER', 2)
+    roleLost.history[1]!.role = 'ROTATION'
+    expect(getCareerEvent('STARTING_ROLE_LOST').isEligible(roleLost)).toBe(true)
+    roleLost.history[0]!.role = 'ROTATION'
+    expect(getCareerEvent('STARTING_ROLE_LOST').isEligible(roleLost)).toBe(false)
+
+    const roleSecured = createState(20)
+    establishFirstTeamRole(roleSecured, 'ROTATION', 2)
+    roleSecured.history[1]!.role = 'STARTER'
+    expect(getCareerEvent('FIRST_TEAM_ROLE_SECURED').isEligible(roleSecured)).toBe(true)
+    roleSecured.history[0]!.role = 'STARTER'
+    expect(getCareerEvent('FIRST_TEAM_ROLE_SECURED').isEligible(roleSecured)).toBe(false)
+
+    const eliteFringe = createState(20)
+    eliteFringe.selectedClubId = 'ita_inter'
+    eliteFringe.careerStory = createCareerStoryState('ita_inter')
+    establishFirstTeamRole(eliteFringe, 'FRINGE', 2)
+    eliteFringe.history.forEach((entry) => { entry.stats.appearances = 4 })
+    expect(getCareerEvent('ELITE_CLUB_FRINGE_REVIEW').isEligible(eliteFringe)).toBe(true)
+    eliteFringe.selectedClubId = 'cn_beijing_yuhua'
+    expect(getCareerEvent('ELITE_CLUB_FRINGE_REVIEW').isEligible(eliteFringe)).toBe(false)
+
+    const senior = createState(20)
+    establishFirstTeamRole(senior, 'STARTER', 4)
+    senior.player!.coachRelation = 55
+    senior.player!.squadRelation = 75
+    senior.player!.reputation = 65
+    senior.player!.mediaRelation = 65
+    expect(getCareerEvent('CORE_TACTICAL_DISAGREEMENT').isEligible(senior)).toBe(true)
+    senior.firstTeamRole = 'SUBSTITUTE'
+    senior.history.at(-1)!.role = 'SUBSTITUTE'
+    expect(getCareerEvent('CORE_TACTICAL_DISAGREEMENT').isEligible(senior)).toBe(false)
+
+    senior.firstTeamRole = 'STARTER'
+    senior.history.at(-1)!.role = 'STARTER'
+    senior.careerStory.club.leadership = 'CAPTAIN'
+    expect(getCareerEvent('CAPTAIN_PUBLIC_CONFLICT').isEligible(senior)).toBe(true)
+    senior.careerStory.club.leadership = 'NONE'
+    expect(getCareerEvent('CAPTAIN_PUBLIC_CONFLICT').isEligible(senior)).toBe(false)
+
+    senior.careerStory.club.rivalry = 'HOSTILE'
+    expect(getCareerEvent('RIVALRY_CROSSROADS').isEligible(senior)).toBe(true)
+    senior.careerStory.club.rivalry = 'HEALTHY'
+    expect(getCareerEvent('RIVALRY_CROSSROADS').isEligible(senior)).toBe(false)
+
+    senior.careerStory.club.mentorship = 'MENTOR'
+    expect(getCareerEvent('MENTEE_BREAKTHROUGH').isEligible(senior)).toBe(true)
+    senior.careerStory.club.mentorship = 'NONE'
+    expect(getCareerEvent('MENTEE_BREAKTHROUGH').isEligible(senior)).toBe(false)
+
+    syncLastReportToLatestHistory(senior)
+    senior.lastReport!.stats.yellowCards = 5
+    expect(getCareerEvent('DISCIPLINE_AFFECTS_SELECTION').isEligible(senior)).toBe(true)
+    senior.lastReport!.stats.yellowCards = 1
+    expect(getCareerEvent('DISCIPLINE_AFFECTS_SELECTION').isEligible(senior)).toBe(false)
+
+    senior.careerStory.tendencies.clutch = 3
+    expect(getCareerEvent('CLUTCH_EXPECTATION_PRESSURE').isEligible(senior)).toBe(true)
+    senior.careerStory.tendencies.clutch = 2
+    expect(getCareerEvent('CLUTCH_EXPECTATION_PRESSURE').isEligible(senior)).toBe(false)
+
+    senior.history.at(-2)!.stats.averageRating = 6.4
+    senior.history.at(-1)!.stats.averageRating = 7.4
+    expect(getCareerEvent('FORM_REBOUND_WINDOW').isEligible(senior)).toBe(true)
+    senior.history.at(-2)!.stats.averageRating = 6.9
+    expect(getCareerEvent('FORM_REBOUND_WINDOW').isEligible(senior)).toBe(false)
+
+    senior.careerStory.publicPersona = 'TEAM_FIRST'
+    expect(getCareerEvent('TEAM_SPOKESPERSON_REQUEST').isEligible(senior)).toBe(true)
+    senior.player!.squadRelation = 50
+    expect(getCareerEvent('TEAM_SPOKESPERSON_REQUEST').isEligible(senior)).toBe(false)
+
+    senior.careerStory.publicPersona = 'LOW_KEY'
+    expect(getCareerEvent('LOW_KEY_COMMERCIAL_EXPOSURE').isEligible(senior)).toBe(true)
+    senior.careerStory.publicPersona = 'NEUTRAL'
+    expect(getCareerEvent('LOW_KEY_COMMERCIAL_EXPOSURE').isEligible(senior)).toBe(false)
+
+    senior.careerStory.publicPersona = 'OUTSPOKEN'
+    expect(getCareerEvent('OUTSPOKEN_PERSONA_REVIEW').isEligible(senior)).toBe(true)
+    senior.careerStory.publicPersona = 'NEUTRAL'
+    expect(getCareerEvent('OUTSPOKEN_PERSONA_REVIEW').isEligible(senior)).toBe(false)
+
+    senior.selectedClubId = 'ita_inter'
+    senior.careerStory = createCareerStoryState('ita_inter')
+    senior.player!.reputation = 65
+    senior.cashEuro = 80_000
+    expect(getCareerEvent('HOMETOWN_CHARITY_INVITATION').isEligible(senior)).toBe(true)
+    expect(eligibleCareerEventChoices(
+      senior,
+      getCareerEvent('HOMETOWN_CHARITY_INVITATION'),
+    ).map((choice) => choice.id)).toEqual(['A', 'B', 'C'])
+    senior.cashEuro = 30_000
+    expect(eligibleCareerEventChoices(
+      senior,
+      getCareerEvent('HOMETOWN_CHARITY_INVITATION'),
+    ).map((choice) => choice.id)).toEqual(['B', 'C'])
+    senior.cashEuro = 20_000
+    expect(getCareerEvent('HOMETOWN_CHARITY_INVITATION').isEligible(senior)).toBe(false)
+
+    const veteran = createState(36)
+    establishFirstTeamRole(veteran, 'STARTER', 2)
+    establishProfessionalContract(veteran)
+    veteran.contract!.remainingHalfYears = 2
+    expect(getCareerEvent('FINAL_MAJOR_CONTRACT_PRIORITIES').isEligible(veteran)).toBe(true)
+    veteran.contract!.remainingHalfYears = 3
+    expect(getCareerEvent('FINAL_MAJOR_CONTRACT_PRIORITIES').isEligible(veteran)).toBe(false)
+  })
+
+  it('ties fifth-batch national and Ballon dOr milestones to the exact window', () => {
+    const state = createState(20)
+    establishFirstTeamRole(state, 'STARTER', 2)
+    syncLastReportToLatestHistory(state)
+    const national = {
+      windowIndex: 19,
+      calledUp: true,
+      role: 'STARTER' as const,
+      competition: 'INTERNATIONAL_WINDOW' as const,
+      stage: null,
+      appearances: 1,
+      starts: 1,
+      minutes: 90,
+      goals: 1,
+      assists: 0,
+      averageRating: 7.2,
+      selectionScore: 75,
+      selectionBenchmark: 65,
+      debut: false,
+      summary: '国家队比赛',
+    }
+    state.nationalTeam.history = [national]
+    state.lastReport!.nationalTeam = national
+    expect(getCareerEvent('FIRST_NATIONAL_GOAL_REACTION').isEligible(state)).toBe(true)
+
+    state.windowIndex = 21
+    expect(getCareerEvent('FIRST_NATIONAL_GOAL_REACTION').isEligible(state)).toBe(false)
+
+    state.windowIndex = 20
+    const priorNational = { ...national, windowIndex: 18, appearances: 49, goals: 0 }
+    state.nationalTeam.history = [priorNational, national]
+    expect(getCareerEvent('NATIONAL_FIFTY_CAPS').isEligible(state)).toBe(true)
+
+    const ballon = {
+      id: 'ballon-test',
+      type: 'BALLON_DOR' as const,
+      scope: 'INDIVIDUAL' as const,
+      label: '金球奖',
+      competitionLabel: '金球奖',
+      seasonLabel: '测试赛季',
+      windowIndex: 19,
+      clubId: state.selectedClubId,
+      clubName: '测试俱乐部',
+    }
+    state.history.at(-1)!.honors = [ballon]
+    state.lastReport!.honors = [ballon]
+    expect(getCareerEvent('FIRST_BALLON_DOR_NIGHT').isEligible(state)).toBe(true)
+    expect(getCareerEvent('INDIVIDUAL_AWARD_REACTION').isEligible(state)).toBe(false)
+    expect(selectCareerEvent(state)).toBe('FIRST_BALLON_DOR_NIGHT')
   })
 
   it('keeps every visible random outcome normalized to one hundred percent', () => {
