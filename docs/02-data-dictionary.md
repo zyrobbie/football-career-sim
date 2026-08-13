@@ -226,9 +226,15 @@ interface ClubDefinition {
   academyTier: 1 | 2 | 3 | 4 | 5 | 6
   salaryLevel: number
   prestige: Rating100
+  firstTeamThreshold: Rating100
+  youthDevelopmentBias: Rating100
+  crestKey: string | null
+  shortMark: string
   isFictional: boolean
 }
 ```
+
+队徽图片地址、来源页、许可备注和审核状态属于可替换资源清单，不进入`ClubDefinition`和玩家存档。`crestKey`只负责稳定关联，资源缺失或未通过审核时统一回退到`shortMark`。
 
 静态联赛：
 

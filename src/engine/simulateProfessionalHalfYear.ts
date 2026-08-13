@@ -33,6 +33,8 @@ import { createRandom, poisson } from './random'
 import { simulateHalfYear } from './simulateHalfYear'
 import {
   developmentMultiplierFromTraining,
+  developmentMultiplierWithMatchExperience,
+  firstTeamMatchExperienceBonusForRuntimeClub,
   trainingQualityScore,
 } from './trainingQuality'
 
@@ -341,17 +343,18 @@ function growFirstTeamAttributes(input: {
   role: FirstTeamRole
   focus: TrainingFocus
   trainingBonus: number
+  minutes: number
   seed: string
   windowIndex: number
 }): Attributes {
-  const { player, offer, role, focus, trainingBonus, seed, windowIndex } = input
+  const { player, offer, role, focus, trainingBonus, minutes, seed, windowIndex } = input
   const trainingQuality = trainingQualityScore({
     club: offer.club,
     coachRelation: player.coachRelation,
     teamLevel: 'FIRST_TEAM',
     bonus: trainingBonus,
   })
-  const multiplier = developmentMultiplierFromTraining({
+  const trainingMultiplier = developmentMultiplierFromTraining({
     trainingQuality,
     roleExposure: ROLE_EXPOSURE[role],
     squadRelation: player.squadRelation,
@@ -359,6 +362,10 @@ function growFirstTeamAttributes(input: {
     morale: player.morale,
     focus,
   })
+  const multiplier = developmentMultiplierWithMatchExperience(
+    trainingMultiplier,
+    firstTeamMatchExperienceBonusForRuntimeClub({ club: offer.club, minutes }),
+  )
   const shares = trainingShares(player.primaryPosition, focus)
   const random = createRandom(seed, 'professional-growth')
 
@@ -546,6 +553,7 @@ function simulateFirstTeamHalfYear(input: {
     focus,
     trainingBonus:
       preparation.trainingBonus + state.trainingQualityBonus,
+    minutes: stats.minutes,
     seed,
     windowIndex: state.windowIndex,
   })

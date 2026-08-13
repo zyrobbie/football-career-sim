@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import type { GameState } from '../../models/game'
+import { CLUBS } from '../../data/balance'
+import type { Club, GameState } from '../../models/game'
 import {
   contractFromOffer,
   generateFirstProfessionalOffer,
@@ -11,11 +12,18 @@ import { simulateProfessionalHalfYear } from '../simulateProfessionalHalfYear'
 import { createCareerStoryState } from '../careerStory'
 import { createDraft } from './testFixtures'
 
-function createFirstTeamState(careerSeed: string) {
+function createFirstTeamState(
+  careerSeed: string,
+  clubOverride?: Club,
+) {
   const draft = createDraft('CAM')
   const player = generatePlayer(draft, careerSeed)
-  const academyOffers = generateAcademyOffers(player, careerSeed)
-  const academy = academyOffers[1]!
+  const generatedOffers = generateAcademyOffers(player, careerSeed)
+  const generatedAcademy = generatedOffers[1]!
+  const academy = clubOverride
+    ? { ...generatedAcademy, club: clubOverride }
+    : generatedAcademy
+  const academyOffers = clubOverride ? [academy] : generatedOffers
   const firstTeamProgress = {
     ...createFirstTeamProgress(academy.club.id),
     attention: 100,
@@ -80,6 +88,20 @@ function createFirstTeamState(careerSeed: string) {
 }
 
 describe('professional half-year simulation', () => {
+  it('keeps the default fixture academy offers and club-linked state aligned', () => {
+    const { state, academy } = createFirstTeamState(
+      'professional-default-fixture-offers',
+    )
+
+    expect(state.academyOffers).toHaveLength(3)
+    expect(state.academyOffers[1]).toBe(academy)
+    expect(state.selectedClubId).toBe(academy.club.id)
+    expect(state.contract?.clubId).toBe(academy.club.id)
+    expect(state.professionalOffer?.clubId).toBe(academy.club.id)
+    expect(state.firstTeamProgress.clubId).toBe(academy.club.id)
+    expect(state.careerStory.club.clubId).toBe(academy.club.id)
+  })
+
   it('deterministically settles first-team matches, salary and contract promise', () => {
     const careerSeed = 'professional-window-determinism'
     const { state, academy } = createFirstTeamState(careerSeed)
@@ -197,5 +219,53 @@ describe('professional half-year simulation', () => {
     expect(result.teamLevel).toBe('FIRST_TEAM')
     expect(result.youthRole).toBeNull()
     expect(result.report.contract?.actualTeamLevel).toBe('FIRST_TEAM')
+  })
+
+  it('keeps 50 fixed-seed first-team settlements deterministic and within potential caps', () => {
+    for (let index = 0; index < 50; index += 1) {
+      const { state, academy } = createFirstTeamState(`professional-growth-${index}`)
+      const first = simulateProfessionalHalfYear({ state, offer: academy })
+      const second = simulateProfessionalHalfYear({ state, offer: academy })
+      expect(first).toEqual(second)
+      for (const key of ['attack', 'defense', 'physical', 'mental'] as const) {
+        expect(first.player.attributes[key]).toBeLessThanOrEqual(state.player!.potentials[key])
+      }
+    }
+  })
+
+  it('职业半年结算会将实际比赛分钟计入能力成长', () => {
+    const ajax = CLUBS.find((club) => club.id === 'ned_ajax')!
+    const { state, academy } = createFirstTeamState(
+      'professional-minutes-growth-wiring',
+      ajax,
+    )
+    state.windowIndex = 8
+    state.firstTeamRole = 'ROTATION'
+    state.player = {
+      ...state.player!,
+      attributes: { attack: 42, defense: 42, physical: 42, mental: 42 },
+      potentials: { attack: 90, defense: 90, physical: 90, mental: 90 },
+      form: 70,
+      fitness: 70,
+      morale: 70,
+      coachRelation: 50,
+      squadRelation: 50,
+    }
+
+    expect(academy.club.id).toBe('ned_ajax')
+    expect(state.selectedClubId).toBe('ned_ajax')
+    expect(state.contract?.clubId).toBe('ned_ajax')
+    expect(state.professionalOffer?.clubId).toBe('ned_ajax')
+    expect(state.firstTeamProgress.clubId).toBe('ned_ajax')
+    expect(state.careerStory.club.clubId).toBe('ned_ajax')
+    expect(state.academyOffers.map((offer) => offer.club.id)).toEqual(['ned_ajax'])
+
+    const result = simulateProfessionalHalfYear({ state, offer: academy })
+    // This locks the complete path: simulated stats.minutes (497) is consumed
+    // by firstTeamMatchExperienceBonusForRuntimeClub before age growth.
+    expect({ minutes: result.report.stats.minutes, attributes: result.player.attributes }).toEqual({
+      minutes: 497,
+      attributes: { attack: 45.9, defense: 42.9, physical: 44.1, mental: 44.9 },
+    })
   })
 })
