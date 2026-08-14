@@ -123,13 +123,16 @@ describe('V1 club public gameStore workflows', () => {
   })
 
   it('accepts a new-club free transfer from an actually generated expiry market', () => {
-    const game = professionalGame('v1-free-transfer-0', 'ita_inter', 'PRO_STAGE_COMPLETE', true); useGameStore.setState({ game, error: null }); useGameStore.getState().openTransferWindow()
-    const offer = useGameStore.getState().game!.transferOffers.find((candidate) => candidate.type === 'FREE_TRANSFER' && candidate.clubId === 'chn1_qingdao_haiwan')
+    let offer: TransferOffer | undefined
+    for (let index = 0; index < 100 && !offer; index += 1) {
+      const game = professionalGame(`v1-free-transfer-${index}`, 'ita_inter', 'PRO_STAGE_COMPLETE', true); useGameStore.setState({ game, error: null }); useGameStore.getState().openTransferWindow()
+      offer = useGameStore.getState().game!.transferOffers.find((candidate) => candidate.type === 'FREE_TRANSFER' && getClubParametersByCompatibleId(candidate.clubId)?.workbookId === candidate.clubId)
+    }
     expect(offer).toBeDefined(); expect(offer!.transferFeeEuro).toBe(0); const store = useGameStore.getState(); store.selectTransferChoice(offer!.id); store.confirmTransferChoice(); store.chooseTransferArrival('LEADERS'); store.continueAfterTransfer(); settlePlan(); assertClubAlignment(offer!.clubId)
   })
 
   it('accepts an actually generated recovery offer after an overseas giant stall', () => {
-    const game = professionalGame('v1-recovery', 'ita_inter', 'PRO_STAGE_COMPLETE'); const stalled = { ...game, player: { ...game.player!, attributes: { attack: 68, defense: 68, physical: 68, mental: 68 }, form: 58, reputation: 62, overseasIntent: 'STRONG' as const, preferredLeagues: ['意大利', '英格兰'] }, lastReport: { ...game.lastReport, roleAfter: 'FRINGE' as const, stats: { appearances: 3, starts: 1, minutes: 100, goals: 0, assists: 0, yellowCards: 0, redCards: 0, averageRating: 6.3 } } as GameState['lastReport'], contract: { ...game.contract!, brokenPromiseWindows: 2 } }; useGameStore.setState({ game: stalled, error: null }); const store = useGameStore.getState(); store.openTransferWindow(true); const market = useGameStore.getState().game!; expect(market.phase).toBe('TRANSFER_WINDOW'); expect(new Set(market.transferOffers.map((offer) => offer.clubId)).size).toBe(3); const offer = market.transferOffers[0]!; expect(offer.clubId).toBe('ita1_cagliari'); store.selectTransferChoice(offer.id); store.confirmTransferChoice(); store.chooseTransferArrival('LEADERS'); store.continueAfterTransfer(); settlePlan(); assertClubAlignment(offer.clubId)
+    const game = professionalGame('v1-recovery', 'ita_inter', 'PRO_STAGE_COMPLETE'); const stalled = { ...game, player: { ...game.player!, attributes: { attack: 68, defense: 68, physical: 68, mental: 68 }, form: 58, reputation: 62, overseasIntent: 'STRONG' as const, preferredLeagues: ['意大利', '英格兰'] }, lastReport: { ...game.lastReport, roleAfter: 'FRINGE' as const, stats: { appearances: 3, starts: 1, minutes: 100, goals: 0, assists: 0, yellowCards: 0, redCards: 0, averageRating: 6.3 } } as GameState['lastReport'], contract: { ...game.contract!, brokenPromiseWindows: 2 } }; useGameStore.setState({ game: stalled, error: null }); const store = useGameStore.getState(); store.openTransferWindow(true); const market = useGameStore.getState().game!; expect(market.phase).toBe('TRANSFER_WINDOW'); expect(new Set(market.transferOffers.map((offer) => offer.clubId)).size).toBe(3); const offer = market.transferOffers[0]!; store.selectTransferChoice(offer.id); store.confirmTransferChoice(); store.chooseTransferArrival('LEADERS'); store.continueAfterTransfer(); settlePlan(); assertClubAlignment(offer.clubId)
   })
 
   it('restores a legacy runtime ID save and continues publicly', () => {

@@ -6,6 +6,7 @@ import {
   FACILITY_SCORES,
   isOverseasClub,
 } from '../../data/balance'
+import { getClubParametersByCompatibleId } from '../../data/clubs/clubRepository'
 import type {
   ContractState,
   FirstTeamRole,
@@ -164,15 +165,88 @@ describe('domestic transfer window', () => {
       .filter((club) => club && isOverseasClub(club))
 
     expect(offers).toHaveLength(3)
-    expect(overseasClubs).toHaveLength(2)
-    expect(
-      overseasClubs.every((club) =>
-        player.preferredLeagues.includes(club!.leagueKey),
-      ),
-    ).toBe(true)
-    expect(
-      offers.filter((offer) => offer.type === 'PERMANENT_TRANSFER'),
-    ).toHaveLength(2)
+    expect(overseasClubs).toHaveLength(3)
+    expect(overseasClubs.some((club) => club!.leagueKey === '英格兰')).toBe(true)
+    expect(overseasClubs.some((club) => club!.leagueKey !== '英格兰')).toBe(true)
+  })
+
+  it('keeps world-class ordinary and expiry markets on matching top-flight platforms', () => {
+    const { player } = createTransferFixture()
+    player.attributes = { attack: 89, defense: 89, physical: 89, mental: 89 }
+    player.potentials = { ...player.attributes }
+    player.form = 78
+    player.reputation = 80
+    player.overseasIntent = 'STRONG'
+    player.preferredLeagues = ['意大利']
+    const seen = new Set<string>()
+    const counts = new Map<string, number>()
+    let italyCount = 0
+    for (let index = 0; index < 100; index += 1) {
+      const offers = generateTransferOffers({ player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM', latestReport: null, careerSeed: `world-market-${index}`, windowIndex: 12 })
+      expect(offers).toHaveLength(3)
+      const clubs = offers.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!)
+      expect(new Set(clubs.map((club) => club.id)).size).toBe(3)
+      expect(clubs.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3)).toBe(true)
+      expect(clubs.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2)
+      expect(clubs.some((club) => club.country === '意大利')).toBe(true)
+      expect(clubs.some((club) => club.country !== '意大利')).toBe(true)
+      expect(Math.max(...clubs.map((club) => clubs.filter((other) => other.leagueKey === club.leagueKey).length))).toBeLessThanOrEqual(2)
+      clubs.forEach((club) => { seen.add(club.id); counts.set(club.id, (counts.get(club.id) ?? 0) + 1); if (club.country === '意大利') italyCount += 1 })
+    }
+    expect(seen.size).toBeGreaterThanOrEqual(20)
+    expect(counts.get('ita_inter') ?? 0).toBeGreaterThan(0)
+    expect(counts.get('ita1_ac_milan') ?? 0).toBeGreaterThan(0)
+    expect(counts.get('ita_juventus') ?? 0).toBeGreaterThan(0)
+    expect(Math.max(...counts.values())).toBeLessThanOrEqual(35)
+    expect(italyCount).toBeGreaterThan(100)
+    expect(italyCount).toBeLessThan(200)
+    const expiry = generateContractExpiryOffers({ player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM', currentRole: 'CORE', currentContract: { type: 'FIRST_PRO', clubId: 'ita1_atalanta', remainingHalfYears: 0, annualSalaryEuro: 1_000_000, promisedTeamLevel: 'FIRST_TEAM', promisedRole: 'CORE', releaseClauseEuro: null, clubOptionYears: 0, parentClubId: null, brokenPromiseWindows: 0 }, latestReport: null, careerSeed: 'world-expiry', windowIndex: 12 })
+    expect(expiry[0]?.type).toBe('RENEWAL')
+    expect(expiry.slice(1).every((offer) => { const club = CLUBS.find((candidate) => candidate.id === offer.clubId)!; return getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3 })).toBe(true)
+  })
+
+  it('rotates a single world-class career across ten deterministic market windows', () => {
+    const { player } = createTransferFixture()
+    player.attributes = { attack: 89, defense: 89, physical: 89, mental: 89 }; player.potentials = { ...player.attributes }; player.overseasIntent = 'STRONG'; player.preferredLeagues = ['意大利']
+    const windows = [24, 26, 28, 30, 32, 34, 36, 38, 40, 42]
+    const run = () => windows.map((windowIndex) => generateTransferOffers({ player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM', latestReport: null, careerSeed: 'same-world-career', windowIndex }))
+    const markets = run(); expect(run()).toEqual(markets)
+    const clubs = markets.flat().map((offer) => CLUBS.find((club) => club.id === offer.clubId)!)
+    expect(new Set(clubs.map((club) => club.id)).size).toBeGreaterThanOrEqual(10)
+    expect(['ita_inter', 'ita1_ac_milan', 'ita_juventus'].every((id) => clubs.some((club) => club.id === id))).toBe(true)
+    for (const market of markets) { const current = market.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); expect(new Set(current.map((club) => club.id)).size).toBe(3); expect(current.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3)).toBe(true); expect(current.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2); expect(current.some((club) => club.country === '意大利')).toBe(true); expect(current.some((club) => club.country !== '意大利')).toBe(true) }
+  })
+
+  it('keeps 50 world-class expiry markets qualified and diverse', () => {
+    const { player } = createTransferFixture(); player.attributes = { attack: 89, defense: 89, physical: 89, mental: 89 }; player.potentials = { ...player.attributes }; player.overseasIntent = 'STRONG'; player.preferredLeagues = ['意大利']
+    const contract = { type: 'FIRST_PRO' as const, clubId: 'ita1_atalanta', remainingHalfYears: 0, annualSalaryEuro: 1_000_000, promisedTeamLevel: 'FIRST_TEAM' as const, promisedRole: 'CORE' as const, releaseClauseEuro: null, clubOptionYears: 0, parentClubId: null, brokenPromiseWindows: 0 }
+    const seen = new Set<string>(); const counts = new Map<string, number>()
+    for (let index = 0; index < 50; index += 1) { const offers = generateContractExpiryOffers({ player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM', currentRole: 'CORE', currentContract: contract, latestReport: null, careerSeed: `expiry-audit-${index}`, windowIndex: 32 }); expect(offers).toHaveLength(4); expect(offers[0]?.type).toBe('RENEWAL'); const clubs = offers.slice(1).map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); expect(new Set(clubs.map((club) => club.id)).size).toBe(3); expect(clubs.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3)).toBe(true); expect(clubs.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2); expect(clubs.some((club) => club.country === '意大利')).toBe(true); expect(clubs.some((club) => club.country !== '意大利')).toBe(true); clubs.forEach((club) => { seen.add(club.id); counts.set(club.id, (counts.get(club.id) ?? 0) + 1) }) }
+    expect(seen.size).toBeGreaterThanOrEqual(20); expect(counts.get('ita_inter') ?? 0).toBeGreaterThan(0); expect(counts.get('ita1_ac_milan') ?? 0).toBeGreaterThan(0); expect(counts.get('ita_juventus') ?? 0).toBeGreaterThan(0)
+  })
+
+  it('gives world-class domestic-intent players two Chinese top-flight offers and one overseas option', () => {
+    const { player } = createTransferFixture()
+    player.attributes = { attack: 89, defense: 89, physical: 89, mental: 89 }
+    player.potentials = { ...player.attributes }
+    player.overseasIntent = 'DOMESTIC'
+    player.preferredLeagues = []
+    for (let index = 0; index < 100; index += 1) {
+      const input = { player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM' as const, latestReport: null, careerSeed: `world-domestic-${index}`, windowIndex: 12 }
+      const clubs = generateTransferOffers(input).map((offer) => CLUBS.find((club) => club.id === offer.clubId)!)
+      expect(generateTransferOffers(input)).toEqual(generateTransferOffers(input))
+      expect(clubs.filter((club) => club.country === '中国')).toHaveLength(2)
+      expect(clubs.filter((club) => club.country !== '中国')).toHaveLength(1)
+      expect(clubs.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 4)).toBe(true)
+      expect(new Set(clubs.map((club) => club.id)).size).toBe(3)
+    }
+  })
+
+  it('keeps OVR 82 domestic offers at two China T4 clubs and one overseas club', () => {
+    const { player } = createTransferFixture(); player.attributes = { attack: 82, defense: 82, physical: 82, mental: 82 }; player.potentials = { ...player.attributes }; player.overseasIntent = 'DOMESTIC'; player.preferredLeagues = []
+    let domesticCount = 0; let overseasCount = 0
+    for (let index = 0; index < 100; index += 1) { const input = { player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM' as const, latestReport: null, careerSeed: `elite-domestic-${index}`, windowIndex: 32 }; const offers = generateTransferOffers(input); expect(offers).toEqual(generateTransferOffers(input)); const clubs = offers.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); const china = clubs.filter((club) => club.country === '中国'); const overseas = clubs.filter((club) => club.country !== '中国'); expect(china).toHaveLength(2); expect(overseas).toHaveLength(1); expect(china.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier === 4)).toBe(true); expect(overseas.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 4)).toBe(true); expect(new Set(clubs.map((club) => club.id)).size).toBe(3); domesticCount += china.length; overseasCount += overseas.length }
+    expect(domesticCount).toBe(200); expect(overseasCount).toBe(100)
   })
 
   it('offers a descending platform ladder with better roles after a player stalls at an overseas giant', () => {
