@@ -16,8 +16,8 @@ function club(id: string) {
 }
 
 describe('training quality', () => {
-  it('uses V1 continuous facility, academy and platform data for all 40 runtime clubs', () => {
-    expect(CLUBS).toHaveLength(40)
+  it('uses V1 continuous facility, academy and platform data for all 366 runtime clubs', () => {
+    expect(CLUBS).toHaveLength(366)
     for (const runtimeClub of CLUBS) {
       expect(usesLegacyTrainingFallback(runtimeClub)).toBe(false)
     }

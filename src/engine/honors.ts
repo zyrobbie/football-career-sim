@@ -11,6 +11,7 @@ import type {
   TeamLevel,
 } from '../models/game'
 import { CLUBS } from '../data/balance'
+import { getClubParametersByCompatibleId } from '../data/clubs/clubRepository'
 import { calculateOverall } from './player'
 import { createRandom, weightedPick } from './random'
 
@@ -37,12 +38,21 @@ function seasonLabel(startYear: number, windowIndex: number): string {
   return `${startYear + Math.floor(windowIndex / 2)}赛季`
 }
 
+function divisionLevelForClub(club: Club): 1 | 2 | null {
+  return getClubParametersByCompatibleId(club.id)?.divisionLevel ?? null
+}
+
+function isTopDivision(club: Club): boolean {
+  const divisionLevel = divisionLevelForClub(club)
+  return divisionLevel === 1 || (divisionLevel === null && !club.leagueLabel.includes('次级'))
+}
+
 export function competitionLabelsForClub(club: Club): {
   league: string
   domesticCup: string
   continental: string | null
 } {
-  const league = {
+  const topLeague = {
     英格兰: '英超',
     西班牙: '西甲',
     意大利: '意甲',
@@ -57,6 +67,17 @@ export function competitionLabelsForClub(club: Club): {
     巴西: '巴甲',
     阿根廷: '阿甲',
   }[club.country] ?? club.leagueLabel
+  const secondLeague = {
+    英格兰: '英冠',
+    西班牙: '西乙',
+    意大利: '意乙',
+    德国: '德乙',
+    法国: '法乙',
+    中国: '中甲',
+  }[club.country]
+  const league = divisionLevelForClub(club) === 2
+    ? secondLeague ?? club.leagueLabel
+    : topLeague
   const domesticCup = {
     英格兰: '英格兰足总杯',
     西班牙: '国王杯',
@@ -73,7 +94,9 @@ export function competitionLabelsForClub(club: Club): {
     阿根廷: '阿根廷杯',
   }[club.country] ?? '国内杯赛'
   let continental: string | null = null
-  if (EUROPE.has(club.country)) {
+  if (!isTopDivision(club)) {
+    continental = null
+  } else if (EUROPE.has(club.country)) {
     continental = club.tier <= 2 ? '欧冠' : '欧联杯'
   } else if (ASIA.has(club.country)) {
     continental = '亚冠精英联赛'
@@ -93,10 +116,6 @@ function domesticCupLabel(club: Club): string {
 
 function continentalLabel(club: Club): string | null {
   return competitionLabelsForClub(club).continental
-}
-
-function isTopDivision(club: Club): boolean {
-  return !club.leagueLabel.includes('次级')
 }
 
 function stageLabel(stage: ClubCompetitionStage): string {
@@ -233,7 +252,7 @@ function clubSeasonResult(input: {
   }
 }
 
-function clubTeamHonors(input: {
+export function clubTeamHonors(input: {
   season: ClubSeasonResult
   club: Club
   label: string

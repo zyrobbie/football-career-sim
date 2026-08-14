@@ -5,6 +5,12 @@ import type {
   Club,
   Position,
 } from '../models/game'
+import {
+  CLUBS as RUNTIME_CLUBS,
+  DOMESTIC_CLUBS as RUNTIME_DOMESTIC_CLUBS,
+  OVERSEAS_CLUBS as RUNTIME_OVERSEAS_CLUBS,
+} from './clubs/runtimeClubCatalog'
+import { getClubParametersByCompatibleId } from './clubs/clubRepository'
 
 export const POSITION_LABELS: Record<Position, string> = {
   ST: '中锋',
@@ -300,7 +306,7 @@ export const YOUTH_STIPENDS: Record<Club['tier'], number> = {
   6: 3000,
 }
 
-export const DOMESTIC_CLUBS: Club[] = [
+const LEGACY_DOMESTIC_CLUBS: Club[] = [
   {
     id: 'cn_shanghai_donggang',
     name: '上海东港',
@@ -381,7 +387,7 @@ export const DOMESTIC_CLUBS: Club[] = [
   },
 ]
 
-export const OVERSEAS_CLUBS: Club[] = [
+const LEGACY_OVERSEAS_CLUBS: Club[] = [
   {
     id: 'eng_arsenal', name: '阿森纳', shortMark: '枪', country: '英格兰', leagueKey: '英格兰', leagueLabel: '英格兰顶级联赛',
     profile: 'ELITE', tier: 1, facilityTier: 1, academyTier: 1,
@@ -554,7 +560,12 @@ export const OVERSEAS_CLUBS: Club[] = [
   },
 ]
 
-export const CLUBS: Club[] = [...DOMESTIC_CLUBS, ...OVERSEAS_CLUBS]
+const LEGACY_CLUBS: Club[] = [...LEGACY_DOMESTIC_CLUBS, ...LEGACY_OVERSEAS_CLUBS]
+
+/** Runtime catalog derived from Club Parameters V1. Legacy arrays remain only as historical source text. */
+export const CLUBS: readonly Club[] = RUNTIME_CLUBS
+export const DOMESTIC_CLUBS: readonly Club[] = RUNTIME_DOMESTIC_CLUBS
+export const OVERSEAS_CLUBS: readonly Club[] = RUNTIME_OVERSEAS_CLUBS
 
 const DOMESTIC_YOUTH_COMPETITION_TIERS: Record<string, Club['tier']> = {
   cn_shanghai_donggang: 1,
@@ -568,7 +579,12 @@ const DOMESTIC_YOUTH_COMPETITION_TIERS: Record<string, Club['tier']> = {
 export function youthCompetitionTierForClub(
   club: Club,
 ): Club['tier'] {
-  return DOMESTIC_YOUTH_COMPETITION_TIERS[club.id] ?? club.tier
+  const legacy = DOMESTIC_YOUTH_COMPETITION_TIERS[club.id]
+  if (legacy) return legacy
+  const academy = getClubParametersByCompatibleId(club.id)?.academy
+  return academy === undefined
+    ? club.tier
+    : academy >= 90 ? 1 : academy >= 82 ? 2 : academy >= 74 ? 3 : academy >= 66 ? 4 : academy >= 58 ? 5 : 6
 }
 
 export function isOverseasClub(club: Club): boolean {

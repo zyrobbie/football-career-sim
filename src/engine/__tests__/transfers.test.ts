@@ -248,6 +248,45 @@ describe('domestic transfer window', () => {
     ).toBe(true)
   })
 
+  it('varies all three recovery-offer tiers across 100 fixed seeds without losing their order', () => {
+    const { player } = createTransferFixture()
+    player.attributes = { attack: 68, defense: 68, physical: 68, mental: 68 }
+    player.form = 58
+    player.reputation = 62
+    player.overseasIntent = 'STRONG'
+    player.preferredLeagues = ['意大利', '英格兰']
+    const latestReport = {
+      roleAfter: 'FRINGE',
+      stats: { appearances: 3, starts: 1, minutes: 118, goals: 0, assists: 0, yellowCards: 0, redCards: 0, averageRating: 6.3 },
+      contract: { annualSalaryEuro: 135_000, remainingHalfYears: 0, promisedTeamLevel: 'FIRST_TEAM', promisedRole: 'CORE', actualTeamLevel: 'FIRST_TEAM', actualRole: 'FRINGE', promiseFulfilled: false, brokenPromiseWindows: 2 },
+    } as HalfYearReport
+    const samples = Array.from({ length: 100 }, (_, index) => generateTransferOffers({
+      player, currentClubId: 'ita_inter', currentTeamLevel: 'FIRST_TEAM', latestReport,
+      careerSeed: `recovery-distribution-${index}`, windowIndex: 20,
+    }))
+    expect(samples).toEqual(Array.from({ length: 100 }, (_, index) => generateTransferOffers({
+      player, currentClubId: 'ita_inter', currentTeamLevel: 'FIRST_TEAM', latestReport,
+      careerSeed: `recovery-distribution-${index}`, windowIndex: 20,
+    })))
+    const groups = [new Map<string, number>(), new Map<string, number>(), new Map<string, number>()]
+    for (const offers of samples) {
+      expect(offers).toHaveLength(3)
+      expect(new Set(offers.map((offer) => offer.clubId)).size).toBe(3)
+      offers.forEach((offer, index) => groups[index]!.set(offer.clubId, (groups[index]!.get(offer.clubId) ?? 0) + 1))
+      const clubs = offers.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!)
+      expect(['英格兰', '西班牙', '意大利', '德国', '法国']).toContain(clubs[0]!.country)
+      expect(['荷兰', '葡萄牙', '比利时', '巴西', '阿根廷', '日本', '韩国']).toContain(clubs[1]!.country)
+      expect(clubs[2]!.country).toBe('中国')
+      expect(offers.every((offer) => offer.promisedTeamLevel === 'FIRST_TEAM' && offer.promisedRole !== 'FRINGE')).toBe(true)
+    }
+    for (const group of groups) {
+      expect(group.size).toBeGreaterThanOrEqual(5)
+      expect(Math.max(...group.values())).toBeLessThanOrEqual(35)
+    }
+    expect(groups[0]!.get('eng2_coventry_city') ?? 0).toBeLessThan(100)
+    expect(groups[2]!.get('cn_shanghai_donggang') ?? 0).toBeLessThan(100)
+  })
+
   it('reviews the market every two or three professional windows and requires good form', () => {
     const { player } = createTransferFixture()
     const goodReport = {

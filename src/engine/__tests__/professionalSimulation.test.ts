@@ -233,6 +233,27 @@ describe('professional half-year simulation', () => {
     }
   })
 
+  it('settles professional half-year simulations for ten fixed V1 clubs', () => {
+    const clubIds = [
+      'chn1_shandong_taiyue', 'chn1_tianjin_jinmen', 'eng1_chelsea', 'ita1_ac_milan',
+      'eng2_burnley', 'ita2_cremonese', 'ned1_feyenoord', 'por1_sporting_cp',
+      'ita_inter', 'chn2_liaoning_tiecheng',
+    ]
+    for (const [index, clubId] of clubIds.entries()) {
+      const club = CLUBS.find((candidate) => candidate.id === clubId)!
+      const { state, academy } = createFirstTeamState(`v1-workflow-${index}`, club)
+      expect(state.selectedClubId).toBe(clubId)
+      expect(state.academyOffers).toEqual([academy])
+      expect(state.contract?.clubId).toBe(clubId)
+      expect(state.firstTeamProgress.clubId).toBe(clubId)
+      expect(state.careerStory.club.clubId).toBe(clubId)
+      const result = simulateProfessionalHalfYear({ state, offer: academy })
+      expect(result.report.clubId).toBe(clubId)
+      expect(result.contract.clubId).toBe(clubId)
+      expect(CLUBS.find((candidate) => candidate.id === clubId)).toBe(club)
+    }
+  })
+
   it('职业半年结算会将实际比赛分钟计入能力成长', () => {
     const ajax = CLUBS.find((club) => club.id === 'ned_ajax')!
     const { state, academy } = createFirstTeamState(

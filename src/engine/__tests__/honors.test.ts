@@ -6,6 +6,7 @@ import type {
   NationalTeamWindowRecord,
 } from '../../models/game'
 import {
+  clubTeamHonors,
   competitionLabelsForClub,
   settleHonorsForWindow,
 } from '../honors'
@@ -133,6 +134,35 @@ describe('career honors settlement', () => {
       domesticCup: '英格兰足总杯',
       continental: '欧冠',
     })
+  })
+
+  it('uses division level for second-tier names and suppresses continental competition', () => {
+    const clubs = [
+      ['eng2_burnley', '英冠', '英格兰足总杯'],
+      ['ita2_cremonese', '意乙', '意大利杯'],
+      ['esp2_almeria', '西乙', '国王杯'],
+      ['ger2_bochum', '德乙', '德国杯'],
+      ['fra2_metz', '法乙', '法国杯'],
+      ['chn2_liaoning_tiecheng', '中甲', '中国足协杯'],
+    ] as const
+    for (const [clubId, league, domesticCup] of clubs) {
+      const club = CLUBS.find((candidate) => candidate.id === clubId)!
+      expect(competitionLabelsForClub(club)).toEqual({ league, domesticCup, continental: null })
+      const result = settle({ club, careerSeed: `second-tier-${clubId}` })
+      expect(result.clubSeason?.continentalLabel).toBeNull()
+      expect(result.clubSeason?.continentalStage).toBe('NOT_ENTERED')
+      expect(result.clubSeason?.summary).not.toMatch(/欧冠未参赛|欧联杯未参赛|亚冠未参赛/)
+    }
+  })
+
+  it('awards a second-tier title using its real league name', () => {
+    const burnley = CLUBS.find((club) => club.id === 'eng2_burnley')!
+    const honors = clubTeamHonors({
+      club: burnley, label: '2030赛季', windowIndex: 9, participated: true,
+      season: { seasonLabel: '2030赛季', leagueLabel: burnley.leagueLabel, leaguePosition: 1, leagueTeams: 18, domesticCupStage: 'EARLY_EXIT', continentalLabel: null, continentalStage: 'NOT_ENTERED', summary: '' },
+    })
+    expect(honors).toContainEqual(expect.objectContaining({ type: 'LEAGUE_TITLE', competitionLabel: '英冠' }))
+    expect(honors.some((honor) => honor.label.includes('英超'))).toBe(false)
   })
 
   it('shares every club title with a player who made one seasonal appearance', () => {

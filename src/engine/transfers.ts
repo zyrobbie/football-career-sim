@@ -7,6 +7,7 @@ import {
   isOverseasClub,
   youthCompetitionTierForClub,
 } from '../data/balance'
+import { getClubParametersByCompatibleId } from '../data/clubs/clubRepository'
 import type {
   Club,
   ContractState,
@@ -236,6 +237,11 @@ function interestForClub(input: {
   )
   const reputation = clamp(player.reputation * 0.1, 3, 10)
   const budget = 11 - club.tier
+  const parameters = getClubParametersByCompatibleId(club.id)
+  const youthPreference = playerAgeAtWindow(windowIndex) <= 21
+    ? ((parameters?.youthPlayerPreference ?? 50) - 50) * 0.16
+    : 0
+  const exposure = ((parameters?.exposure ?? 50) - 50) * 0.08
 
   return Math.round(
     clamp(
@@ -244,7 +250,7 @@ function interestForClub(input: {
         potential +
         recentPerformance +
         reputation +
-        budget,
+        budget + youthPreference + exposure,
       0,
       100,
     ),
@@ -503,15 +509,20 @@ function generateTransferOffersFromPool(
         }),
       }
     })
-    .sort(
-      (left, right) =>
-        right.interestScore * 0.65 + right.preferenceFit * 0.35 -
-          (left.interestScore * 0.65 + left.preferenceFit * 0.35) ||
-        left.club.tier - right.club.tier,
-    )
 
   const selectedCandidates = (() => {
     const selected: typeof candidates = []
+    const pickWeighted = (pool: typeof candidates, slot: string) => {
+      const available = pool.filter((candidate) => !selected.some((item) => item.club.id === candidate.club.id))
+      const total = available.reduce((sum, candidate) => sum + Math.max(1, candidate.interestScore * 0.65 + candidate.preferenceFit * 0.35), 0)
+      if (total === 0) return undefined
+      let cursor = createRandom(careerSeed, 'transfer-market-slot', windowIndex, slot).float(0, total)
+      for (const candidate of available) {
+        cursor -= Math.max(1, candidate.interestScore * 0.65 + candidate.preferenceFit * 0.35)
+        if (cursor <= 0) return candidate
+      }
+      return available[available.length - 1]
+    }
     const addCandidate = (
       candidate: (typeof candidates)[number] | undefined,
     ) => {
@@ -561,36 +572,20 @@ function generateTransferOffersFromPool(
       const roleImprovingCandidates = candidates.filter(
         improvesFirstTeamRole,
       )
-      addCandidate(
-        roleImprovingCandidates.find(
-          (candidate) =>
-            BIG_FIVE_COUNTRIES.has(candidate.club.country) &&
-            candidate.club.tier >= 3,
-        ),
+      const firstTier = roleImprovingCandidates.filter(
+        (candidate) => BIG_FIVE_COUNTRIES.has(candidate.club.country) && candidate.club.tier >= 3,
       )
-      addCandidate(
-        roleImprovingCandidates.find(
-          (candidate) =>
-            DEVELOPMENT_LEAGUE_COUNTRIES.has(
-              candidate.club.country,
-            ) && candidate.club.tier >= 3,
-        ),
+      const secondTier = roleImprovingCandidates.filter(
+        (candidate) => DEVELOPMENT_LEAGUE_COUNTRIES.has(candidate.club.country) && candidate.club.tier >= 3,
       )
-      addCandidate(
-        roleImprovingCandidates.find(
-          (candidate) =>
-            candidate.club.country === '中国' &&
-            candidate.club.profile === 'ELITE',
-        ),
+      const thirdTier = roleImprovingCandidates.filter(
+        (candidate) => candidate.club.country === '中国' && candidate.club.profile === 'ELITE',
       )
-
-      for (const candidate of roleImprovingCandidates) {
-        if (selected.length >= 3) break
-        addCandidate(candidate)
-      }
-      for (const candidate of candidates) {
-        if (selected.length >= 3) break
-        addCandidate(candidate)
+      addCandidate(pickWeighted(firstTier, 'recovery-big-five') ?? pickWeighted(roleImprovingCandidates, 'recovery-big-five-fallback'))
+      addCandidate(pickWeighted(secondTier, 'recovery-development') ?? pickWeighted(roleImprovingCandidates, 'recovery-development-fallback'))
+      addCandidate(pickWeighted(thirdTier, 'recovery-domestic') ?? pickWeighted(roleImprovingCandidates, 'recovery-domestic-fallback'))
+      for (let slot = selected.length; slot < 3; slot += 1) {
+        addCandidate(pickWeighted(roleImprovingCandidates, `recovery-fill-${slot}`))
       }
       return selected.slice(0, 3)
     }
@@ -626,32 +621,29 @@ function generateTransferOffersFromPool(
             : exceptionalDomesticPlayer
               ? 1
               : 0
-      for (const candidate of overseasPool) {
-        if (selected.length >= overseasTarget) break
-        addCandidate(candidate)
+      for (let slot = 0; slot < overseasTarget; slot += 1) {
+        addCandidate(pickWeighted(overseasPool, `overseas-${slot}`))
       }
     }
 
-    addCandidate(
-      candidates.find((candidate) => !isOverseasClub(candidate.club)),
-    )
+    addCandidate(pickWeighted(candidates.filter((candidate) => !isOverseasClub(candidate.club)), 'domestic'))
     const marketMix = createRandom(
       careerSeed,
       'transfer-market-composition',
       windowIndex,
     ).float(0, 1)
-    const strongAcademyYouth = candidates.find(
+    const strongAcademyYouth = pickWeighted(candidates.filter(
       (candidate) =>
         !isOverseasClub(candidate.club) &&
         candidate.club.academyTier <= 3 &&
         candidate.promise.teamLevel === 'YOUTH',
-    )
-    const lowerLeagueFirstTeam = candidates.find(
+    ), 'academy')
+    const lowerLeagueFirstTeam = pickWeighted(candidates.filter(
       (candidate) =>
         !isOverseasClub(candidate.club) &&
         candidate.club.tier >= 5 &&
         candidate.promise.teamLevel === 'FIRST_TEAM',
-    )
+    ), 'first-team')
 
     if (marketMix < 0.65 && strongAcademyYouth) {
       addCandidate(strongAcademyYouth)
@@ -660,9 +652,9 @@ function generateTransferOffersFromPool(
       addCandidate(lowerLeagueFirstTeam)
     }
 
-    for (const candidate of candidates) {
+    for (let slot = selected.length; slot < 3; slot += 1) {
       if (selected.length >= 3) break
-      addCandidate(candidate)
+      addCandidate(pickWeighted(candidates, `fill-${slot}`))
     }
 
     return selected.slice(0, 3)

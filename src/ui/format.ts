@@ -11,6 +11,7 @@ import type {
   TrainingFocus,
   YouthRole,
 } from '../models/game'
+import { getClubParametersByCompatibleId } from '../data/clubs/clubRepository'
 
 const BIG_FIVE = new Set([
   '英格兰',
@@ -27,11 +28,10 @@ const EUROPEAN_DEVELOPMENT_LEAGUES = new Set([
 ])
 
 export function clubLevelLabel(club: Club): string {
+  const divisionLevel = getClubParametersByCompatibleId(club.id)?.divisionLevel
   if (club.country === '中国') {
-    if (club.leagueLabel === '次级联赛') {
-      return club.id === 'cn_guangxi_liancheng'
-        ? '中国次级强队'
-        : '中国次级中下游'
+    if (divisionLevel === 2) {
+      return club.tier <= 4 ? '中国次级联赛强队' : '中国次级联赛平台'
     }
     return club.profile === 'ELITE'
       ? '中国顶级豪门'
@@ -39,6 +39,9 @@ export function clubLevelLabel(club: Club): string {
   }
 
   if (BIG_FIVE.has(club.country)) {
+    if (divisionLevel === 2) {
+      return club.tier <= 4 ? '五大次级联赛强队' : '五大次级联赛普通球队'
+    }
     if (club.tier === 1) return '世界级豪门'
     if (club.tier === 2) return '五大联赛强队'
     if (club.tier === 3) return '五大联赛中游'

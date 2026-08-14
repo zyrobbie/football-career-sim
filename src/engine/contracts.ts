@@ -1,4 +1,5 @@
 import { FIRST_TEAM_BENCHMARKS } from '../data/balance'
+import { getClubParametersByCompatibleId } from '../data/clubs/clubRepository'
 import type {
   Club,
   ContractState,
@@ -69,7 +70,8 @@ export function evaluateFirstTeamRole(
     (player.form - 50) * 0.06 +
     (player.coachRelation - 50) * 0.04 +
     (player.morale - 50) * 0.02
-  const difference = selectionScore - FIRST_TEAM_BENCHMARKS[club.tier]
+  const threshold = getClubParametersByCompatibleId(club.id)?.firstTeamThreshold ?? FIRST_TEAM_BENCHMARKS[club.tier]
+  const difference = selectionScore - threshold
 
   if (difference >= 7) return 'CORE'
   if (difference >= 3) return 'STARTER'
@@ -112,12 +114,14 @@ export function salaryForOffer(input: {
           ? 0.32
           : 0.22
       : 1
+  const wage = getClubParametersByCompatibleId(clubId)?.wage
+  const clubWageMultiplier = wage === undefined ? 1 : 0.62 + wage * 0.008
   const salary =
     baseSalaryForOverall(overall) *
     ROLE_WAGE_MULTIPLIER[role] *
     reputationMultiplier *
     seedMultiplier *
-    youthMultiplier
+    youthMultiplier * clubWageMultiplier
 
   return roundTo(salary, salary >= 100_000 ? 5_000 : 1_000)
 }

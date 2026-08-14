@@ -14,6 +14,22 @@ import { simulateHalfYear } from '../simulateHalfYear'
 import { createDraft } from './testFixtures'
 
 describe('10,000-player first-window distribution', () => {
+  it('draws three distinct Chinese academy offers from the expanded catalog deterministically', () => {
+    const observed = new Set<string>()
+    for (let index = 0; index < 100; index += 1) {
+      const player = generatePlayer(createDraft('CM'), `academy-catalog-${index}`)
+      const first = generateAcademyOffers(player, `academy-catalog-${index}`)
+      const second = generateAcademyOffers(player, `academy-catalog-${index}`)
+      expect(first).toEqual(second)
+      expect(first).toHaveLength(3)
+      expect(new Set(first.map((offer) => offer.club.id)).size).toBe(3)
+      expect(first.every((offer) => offer.club.country === '中国')).toBe(true)
+      for (const offer of first) observed.add(offer.club.id)
+    }
+    expect(observed.size).toBeGreaterThanOrEqual(12)
+    expect([...observed].some((id) => !['cn_shanghai_donggang', 'cn_beijing_yuhua', 'cn_wuhan_jiangcheng', 'cn_chengdu_jincheng', 'cn_guangxi_liancheng', 'cn_yunnan_shanhe'].includes(id))).toBe(true)
+  })
+
   it('produces no invariant failures and tracks the intended OVR curve', () => {
     const samples = 10_000
     const overallCounts = new Map<number, number>()
