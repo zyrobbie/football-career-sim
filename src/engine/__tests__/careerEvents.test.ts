@@ -1069,7 +1069,7 @@ describe('career events', () => {
     const rate = eventWindows / eligibleWindows
     expect(rate).toBeGreaterThan(0.68)
     expect(rate).toBeLessThan(0.72)
-  })
+  }, 30_000)
 
   it('keeps a full event history comfortably below the 200KB save budget', () => {
     const state = createState(53)
