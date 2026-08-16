@@ -1,6 +1,6 @@
 # 俱乐部与联赛数据库 V1 审核清单
 
-> 状态：待产品审核，尚未接入代码
+> 状态：数据已审核并接入运行时目录、训练成长与转会市场；完整固定种子压力测试见 [第 10 号审计](10-full-career-balance-audit.md)。
 > 数据快照：2026-08-13
 > 范围：欧洲五大联赛前两级；荷兰、葡萄牙、比利时、日本、韩国、巴西、阿根廷顶级联赛；中国两级虚构联赛。
 
@@ -210,10 +210,11 @@
 - 巴西：[CBF Série A 2026俱乐部](https://www.cbf.com.br/futebol-brasileiro/times/campeonato-brasileiro/serie-a/2026)
 - 阿根廷：[AFA 2026赛季30队规模](https://assets1.afa.com.ar/2026/BOLETINES/Boletin-6845-Complementario-01-x-Reglamento-del-Torneo-de-Categorias-Juveniles-LPF-2026-%281%29.pdf)、[2026赛程参赛名单](https://www.espn.com.ar/futbol/argentina/nota/_/id/16067897/el-fixture-de-torneo-apertura-2026-fecha-hora-y-resultados-de-los-partidos)
 
-## 18. 审核后才进入的下一步
+## 18. 已完成接入与 V1 边界
 
-1. 根据反馈调整遗漏、队名和档位；
-2. 先审核`docs/08-club-parameter-samples-v1.md`中的12家样板，再为366家俱乐部补齐设施、青训、工资、曝光、一线队门槛和年轻球员倾向；
-3. 建立联赛质量与一线队比赛经验成长参数；
-4. 最后再转成静态TypeScript数据并接入转会市场；
-5. 队徽资产单独审核、分批加入，不与逻辑接入绑在一起。
+1. 已完成名单、队名和六档平台审核。
+2. 已完成 12 家样板及 366 家俱乐部六项参数。
+3. 已建立联赛质量和一线队比赛经验成长参数。
+4. 已转换为只读 TypeScript 数据，并接入运行时目录、训练成长、合同与转会市场。
+5. 已完成公开 gameStore 工作流回归和 36 局固定种子完整生涯审计。
+6. 队徽、真实阵容、真实赛程和动态升降级不属于 V1。
