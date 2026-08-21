@@ -2126,6 +2126,39 @@ svg {
   font-size: 18px;
 }
 
+.club-crest {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  color: #e3c57f;
+  background: var(--ink);
+  font-family: var(--heading);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.club-crest img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.career-overview__club {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.club-crest--overview {
+  width: 30px;
+  height: 30px;
+}
+
 .career-overview__identity small {
   color: var(--muted);
   margin-top: 7px;
@@ -2540,6 +2573,22 @@ svg {
 .career-ledger th:nth-child(3),
 .career-ledger td:nth-child(3) {
   text-align: left;
+}
+
+.career-ledger__club {
+  display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  gap: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+.club-crest--ledger {
+  width: 18px;
+  height: 18px;
+  font-size: 9px;
 }
 .career-ledger th:nth-child(4) { width: 50px; }
 .career-ledger th:nth-child(5) { width: 36px; }
@@ -5819,7 +5868,7 @@ svg {
   opacity: 0.42;
 }
 
-.transfer-offer-grid > button > span {
+.transfer-offer-grid > button > span:not(.club-crest) {
   width: 28px;
   height: 28px;
   display: grid;
@@ -5830,6 +5879,10 @@ svg {
   background: var(--ink);
   font-family: var(--heading);
   font-size: 13px;
+}
+
+.club-crest--transfer {
+  margin: 0 auto 4px;
 }
 
 .transfer-offer-grid > button > strong,
@@ -6392,7 +6445,8 @@ svg {
     padding: 5px 3px 4px;
   }
 
-  .transfer-offer-grid > button > span {
+  .transfer-offer-grid > button > span:not(.club-crest),
+  .club-crest--transfer {
     width: 20px;
     height: 20px;
     margin-bottom: 2px;
@@ -6993,6 +7047,18 @@ svg {
   font-size: 13px;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.retirement-clubs__club strong {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.club-crest--retirement {
+  width: 24px;
+  height: 24px;
+  font-size: 11px;
 }
 
 .retirement-clubs__club small,

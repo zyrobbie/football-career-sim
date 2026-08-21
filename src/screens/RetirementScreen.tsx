@@ -1,6 +1,8 @@
 import { Brand } from '../components/Brand'
 import { CareerHub } from '../components/CareerHub'
+import { ClubCrest } from '../components/ClubCrest'
 import { Icon } from '../components/Icons'
+import { runtimeClubById } from '../data/clubs/runtimeClubCatalog'
 import { buildRetirementSummary } from '../engine/careerSummary'
 import { playerAgeAtWindow } from '../engine/careerTime'
 import { useGameStore } from '../store/gameStore'
@@ -38,6 +40,13 @@ export function retirementNarrative(input: {
     summary:
       '如果确认，这个赛季将成为你的最后一季；如果心里还有未完成的目标，你也可以回到球场。',
   }
+}
+
+export function retirementClubShortMarkFor(
+  clubId: string,
+  clubName: string,
+): string {
+  return runtimeClubById.get(clubId)?.shortMark ?? clubName.slice(0, 1)
 }
 
 function RetirementArchive() {
@@ -153,7 +162,17 @@ function RetirementArchive() {
                   ))}
                 </span>
                 <span className="retirement-clubs__club">
-                  <strong>{club.clubName}</strong>
+                  <strong>
+                    <ClubCrest
+                      clubId={club.clubId}
+                      shortMark={retirementClubShortMarkFor(
+                        club.clubId,
+                        club.clubName,
+                      )}
+                      className="club-crest--retirement"
+                    />
+                    {club.clubName}
+                  </strong>
                   <small>{club.country} · {club.levelLabel}</small>
                 </span>
                 <span>{club.teamLevelLabel}</span>

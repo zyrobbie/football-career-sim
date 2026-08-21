@@ -1,4 +1,5 @@
 import { CareerHub } from '../components/CareerHub'
+import { ClubCrest } from '../components/ClubCrest'
 import { Icon } from '../components/Icons'
 import { CLUBS, isOverseasClub } from '../data/balance'
 import {
@@ -351,7 +352,11 @@ export function TransferWindowScreen() {
                 disabled={offer.withdrawn}
                 onClick={() => selectTransferChoice(offer.id)}
               >
-                <span>{club?.shortMark ?? '足'}</span>
+                <ClubCrest
+                  clubId={club?.id}
+                  shortMark={club?.shortMark ?? '足'}
+                  className="club-crest--transfer"
+                />
                 <strong>{club?.name ?? '未知俱乐部'}</strong>
                 <small className="transfer-offer-grid__region">
                   {club?.country ?? '中国'}

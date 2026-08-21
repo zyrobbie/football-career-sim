@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { ATTRIBUTE_LABELS, CLUBS } from '../data/balance'
+import { ClubCrest } from './ClubCrest'
 import {
   canAdvanceBeyondWindow,
   careerWindowLabel,
@@ -33,8 +34,10 @@ interface CareerHubProps {
 
 interface LedgerRow {
   key: string
+  clubId: string
   windowIndex: number
   clubName: string
+  shortMark: string
   role: SquadRole | null
   attributes: Attributes
   stats: HalfYearStats | null
@@ -62,18 +65,31 @@ function clubNameFor(game: GameState, clubId: string): string {
   )
 }
 
+function clubShortMarkFor(game: GameState, clubId: string, clubName: string): string {
+  return (
+    CLUBS.find((club) => club.id === clubId)?.shortMark ??
+    game.academyOffers.find((offer) => offer.club.id === clubId)?.club.shortMark ??
+    clubName.slice(0, 1)
+  )
+}
+
 function buildLedgerRows(game: GameState): LedgerRow[] {
   if (!game.player) return []
-  const rows: LedgerRow[] = game.history.map((entry, index) => ({
-    key: `${entry.windowIndex}-${entry.clubId}-${index}`,
-    windowIndex: entry.windowIndex,
-    clubName: entry.clubName ?? clubNameFor(game, entry.clubId),
-    role: entry.role,
-    attributes: entry.endingAttributes,
-    stats: entry.stats,
-    teamLevel: entry.teamLevel ?? 'YOUTH',
-    current: index === game.history.length - 1,
-  }))
+  const rows: LedgerRow[] = game.history.map((entry, index) => {
+    const clubName = entry.clubName ?? clubNameFor(game, entry.clubId)
+    return {
+      key: `${entry.windowIndex}-${entry.clubId}-${index}`,
+      clubId: entry.clubId,
+      windowIndex: entry.windowIndex,
+      clubName,
+      shortMark: clubShortMarkFor(game, entry.clubId, clubName),
+      role: entry.role,
+      attributes: entry.endingAttributes,
+      stats: entry.stats,
+      teamLevel: entry.teamLevel ?? 'YOUTH',
+      current: index === game.history.length - 1,
+    }
+  })
 
   const shouldShowPending =
     ![
@@ -86,12 +102,16 @@ function buildLedgerRows(game: GameState): LedgerRow[] {
     !game.history.some((entry) => entry.windowIndex === game.windowIndex)
 
   if (shouldShowPending) {
+    const clubId = game.selectedClubId ?? ''
+    const clubName = clubId
+      ? clubNameFor(game, clubId)
+      : '等待选择俱乐部'
     rows.push({
       key: `pending-${game.windowIndex}`,
+      clubId,
       windowIndex: game.windowIndex,
-      clubName: game.selectedClubId
-        ? clubNameFor(game, game.selectedClubId)
-        : '等待选择俱乐部',
+      clubName,
+      shortMark: clubShortMarkFor(game, clubId, clubName),
       role:
         game.teamLevel === 'FIRST_TEAM'
           ? game.firstTeamRole
@@ -174,6 +194,8 @@ export function CareerHub({
         <PlayerOverview
           game={game}
           age={playerAgeAtWindow(currentWindowIndex)}
+          clubId={currentClub?.id ?? null}
+          clubShortMark={currentClub?.shortMark ?? '足'}
           clubName={clubName}
           overall={overall}
           totalStats={totalStats}
@@ -201,12 +223,16 @@ export function CareerHub({
 function PlayerOverview({
   game,
   age,
+  clubId,
+  clubShortMark,
   clubName,
   overall,
   totalStats,
 }: {
   game: GameState
   age: number
+  clubId: string | null
+  clubShortMark: string
   clubName: string
   overall: number
   totalStats: { appearances: number; goals: number; assists: number }
@@ -227,7 +253,10 @@ function PlayerOverview({
         <p>
           {age}岁 · #{player.jerseyNumber} · {player.primaryPosition}
         </p>
-        <strong>{clubName}</strong>
+        <strong className="career-overview__club">
+          <ClubCrest clubId={clubId} shortMark={clubShortMark} className="club-crest--overview" />
+          {clubName}
+        </strong>
         <small>
           {game.teamLevel === 'FIRST_TEAM'
             ? game.firstTeamRole
@@ -579,7 +608,12 @@ function CareerLedgerTable({
                   .replace('季', '')}
               </td>
               <td>{playerAgeAtWindow(row.windowIndex)}</td>
-              <td>{row.clubName}</td>
+              <td>
+                <span className="career-ledger__club">
+                  <ClubCrest clubId={row.clubId} shortMark={row.shortMark} className="club-crest--ledger" />
+                  {row.clubName}
+                </span>
+              </td>
               <td>
                 {row.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'}
               </td>

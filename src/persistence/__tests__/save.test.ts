@@ -204,6 +204,7 @@ describe('save migration', () => {
     expect(migrated.saveVersion).toBe(11)
     expect(migrated.academyOffers[0]?.club.country).toBe('中国')
     expect(migrated.academyOffers[0]?.club.leagueKey).toBe('中国')
+    expect('crestKey' in migrated.academyOffers[0]!.club).toBe(false)
   })
 
   it('accepts one renewal plus three external contract offers', () => {

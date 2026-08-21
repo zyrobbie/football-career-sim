@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { retirementNarrative } from '../RetirementScreen'
+import { retirementClubShortMarkFor, retirementNarrative } from '../RetirementScreen'
 
 describe('retirement player-facing copy', () => {
   it('uses a career-finale narrative instead of exposing system rules', () => {
@@ -23,5 +23,11 @@ describe('retirement player-facing copy', () => {
 
     expect(copy.heading).toContain('35岁')
     expect(copy.summary).toContain('回到球场')
+  })
+
+  it('uses the runtime catalog short mark before falling back to the club name', () => {
+    expect(retirementClubShortMarkFor('ita_inter', '国际米兰')).toBe('国')
+    expect(retirementClubShortMarkFor('cn_shanghai_donggang', '上海东港')).toBe('沪')
+    expect(retirementClubShortMarkFor('unknown-club', '未知俱乐部')).toBe('未')
   })
 })
