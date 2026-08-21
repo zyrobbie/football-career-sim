@@ -11,19 +11,28 @@
     "test:run": "vitest run",
     "simulate": "vitest run src/engine/__tests__/simulation.distribution.test.ts",
     "generate:clubs": "node scripts/generate-club-parameters.mjs",
-    "generate:clubs:check": "node scripts/generate-club-parameters.mjs --check"
+    "generate:clubs:check": "node scripts/generate-club-parameters.mjs --check",
+    "generate:retirement-qr": "node scripts/generate-retirement-qr.mjs",
+    "verify:retirement-qr": "node scripts/verify-retirement-qr.mjs"
   },
   "dependencies": {
+    "html2canvas": "^1.4.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "zod": "4.4.3",
     "zustand": "5.0.14"
   },
+  "overrides": {
+    "nanoid": "3.3.18"
+  },
   "devDependencies": {
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.4",
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4",
     "read-excel-file": "^5.8.8",
+    "sharp": "^0.35.3",
     "typescript": "7.0.2",
     "vite": "8.1.5",
     "vitest": "4.1.10"

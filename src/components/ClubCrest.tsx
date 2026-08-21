@@ -42,7 +42,7 @@ export function ClubCrest({
 
   if (presentation.assetPath) {
     return (
-      <span className={classes} data-crest-state="asset">
+      <span className={classes} data-crest-state="asset" data-short-mark={shortMark}>
         <img
           alt=""
           src={presentation.assetPath}
@@ -54,7 +54,7 @@ export function ClubCrest({
   }
 
   return (
-    <span className={classes} data-crest-state="fallback" aria-label={`${shortMark}俱乐部短标`}>
+    <span className={classes} data-crest-state="fallback" data-short-mark={shortMark} aria-label={`${shortMark}俱乐部短标`}>
       {presentation.fallbackShortMark}
     </span>
   )

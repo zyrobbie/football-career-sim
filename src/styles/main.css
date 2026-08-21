@@ -7286,6 +7286,217 @@ svg {
   font-size: 10px;
 }
 
+.retirement-export-qr {
+  display: none;
+}
+
+.retirement-export-actions {
+  padding: 0 24px max(32px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: var(--shell-deep);
+}
+
+.retirement-export-actions > .button {
+  min-width: min(360px, 100%);
+}
+
+.retirement-export-actions > p {
+  max-width: 520px;
+  margin: 0;
+  color: #f0c7be;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.retirement-export-preview {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+  display: grid;
+  place-items: center;
+  background: rgba(5, 34, 27, 0.82);
+}
+
+.retirement-export-preview__panel {
+  width: min(760px, 100%);
+  max-height: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: auto;
+  border: 1px solid var(--gold);
+  background: var(--paper);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.retirement-export-preview__panel > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.retirement-export-preview__panel header span,
+.retirement-export-preview__panel header strong {
+  display: block;
+}
+
+.retirement-export-preview__panel header span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.retirement-export-preview__panel header strong {
+  margin-top: 3px;
+  color: var(--ink);
+  font-family: var(--heading);
+  font-size: 18px;
+}
+
+.retirement-export-preview__panel header button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: transparent;
+  cursor: pointer;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.retirement-export-preview__image {
+  min-height: 140px;
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: #d8d4ca;
+}
+
+.retirement-export-preview__image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.retirement-export-preview__panel > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.retirement-export-preview__actions {
+  display: flex;
+  gap: 10px;
+}
+
+.retirement-export-preview__actions .button {
+  flex: 1;
+  min-width: 0;
+}
+
+.retirement-export-target.is-exporting {
+  width: 1180px !important;
+  min-height: 0 !important;
+  padding-bottom: 30px !important;
+  background: var(--shell-deep) !important;
+}
+
+.retirement-export-target.is-exporting .retirement-archive__masthead {
+  min-height: 96px !important;
+  padding: 18px 24px !important;
+}
+
+.retirement-export-target.is-exporting .retirement-archive__paper {
+  width: calc(100% - 48px) !important;
+  margin: 24px auto 0 !important;
+  padding: 30px !important;
+  border: 1px solid var(--line) !important;
+  box-shadow: none !important;
+}
+
+.retirement-export-target.is-exporting .retirement-archive__hero {
+  min-height: 152px !important;
+  grid-template-columns: 132px minmax(220px, 1fr) minmax(300px, 0.9fr) !important;
+}
+
+.retirement-export-target.is-exporting .retirement-archive__ending {
+  display: flex !important;
+  grid-column: auto !important;
+  padding: 20px !important;
+  border-top: 0 !important;
+  border-left: 1px solid var(--line) !important;
+}
+
+.retirement-export-target.is-exporting .retirement-clubs__head {
+  display: grid !important;
+}
+
+.retirement-export-target.is-exporting .retirement-clubs__row {
+  min-height: 54px !important;
+  padding: 7px 12px !important;
+  grid-template-columns: 126px minmax(190px, 1fr) 120px repeat(4, 58px) minmax(126px, 0.6fr) !important;
+  grid-template-rows: none !important;
+  gap: 8px !important;
+  font-size: 12px !important;
+}
+
+.retirement-export-target.is-exporting .retirement-archive__lower-grid {
+  grid-template-columns: 1.08fr 0.92fr !important;
+  gap: 18px !important;
+}
+
+.retirement-export-target.is-exporting .retirement-tags__list {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+
+.retirement-export-target.is-exporting .retirement-archive__talent {
+  grid-template-columns: repeat(3, 110px) 1fr !important;
+}
+
+.retirement-export-target.is-exporting .retirement-export-qr {
+  width: calc(100% - 48px);
+  margin: 20px auto 0;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  border: 1px solid rgba(209, 179, 109, 0.7);
+  color: #f3f0e8;
+  background: var(--shell);
+}
+
+.retirement-export-target.is-exporting .retirement-export-qr img,
+.retirement-export-target.is-exporting .retirement-export-qr canvas {
+  width: 112px;
+  height: 112px;
+  padding: 8px;
+  background: #fff;
+}
+
+.retirement-export-target.is-exporting .retirement-export-qr strong,
+.retirement-export-target.is-exporting .retirement-export-qr small {
+  display: block;
+}
+
+.retirement-export-target.is-exporting .retirement-export-qr strong {
+  color: #d9bc75;
+  font-family: var(--heading);
+  font-size: 22px;
+}
+
+.retirement-export-target.is-exporting .retirement-export-qr small {
+  margin-top: 6px;
+  color: rgba(243, 240, 232, 0.68);
+  font-size: 12px;
+}
+
 @media (max-width: 760px) {
   .retirement-archive {
     padding-bottom: 0;

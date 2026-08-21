@@ -1,10 +1,13 @@
+import { useRef } from 'react'
 import { Brand } from '../components/Brand'
 import { CareerHub } from '../components/CareerHub'
 import { ClubCrest } from '../components/ClubCrest'
 import { Icon } from '../components/Icons'
+import { RetirementRecordExportActions } from '../components/RetirementRecordExportActions'
 import { runtimeClubById } from '../data/clubs/runtimeClubCatalog'
 import { buildRetirementSummary } from '../engine/careerSummary'
 import { playerAgeAtWindow } from '../engine/careerTime'
+import { RETIREMENT_QR_ASSET_PATH, RETIREMENT_RECORD_URL } from '../export/retirementRecord'
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, nationalStageLabel } from '../ui/format'
 
@@ -50,6 +53,7 @@ export function retirementClubShortMarkFor(
 }
 
 function RetirementArchive() {
+  const exportTargetRef = useRef<HTMLElement>(null)
   const game = useGameStore((state) => state.game)!
   const player = game.player!
   const summary = buildRetirementSummary(game)
@@ -67,7 +71,8 @@ function RetirementArchive() {
   )
 
   return (
-    <main className="retirement-archive">
+    <>
+    <main className="retirement-archive" ref={exportTargetRef} data-retirement-export-target>
       <header className="retirement-archive__masthead">
         <Brand compact />
         <div>
@@ -270,7 +275,20 @@ function RetirementArchive() {
           <span>退役档案已写入本地生涯存档</span>
         </footer>
       </article>
+      <footer className="retirement-export-qr" aria-hidden="true">
+        <img src={RETIREMENT_QR_ASSET_PATH} alt="" data-export-required="qr" />
+        <div>
+          <strong>扫码开启你的球员生涯</strong>
+          <small>{RETIREMENT_RECORD_URL.replace('https://', '')}</small>
+        </div>
+      </footer>
     </main>
+    <RetirementRecordExportActions
+      targetRef={exportTargetRef}
+      playerName={player.name}
+      retirementYear={game.startYear + Math.floor(game.windowIndex / 2)}
+    />
+    </>
   )
 }
 
@@ -330,4 +348,8 @@ export function RetirementScreen() {
       </section>
     </CareerHub>
   )
+}
+
+export function canExportRetirementRecord(phase: string): boolean {
+  return phase === 'CAREER_RETIRED'
 }
