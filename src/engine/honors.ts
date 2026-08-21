@@ -199,6 +199,42 @@ function honor(input: {
   }
 }
 
+/**
+ * Ballon d'Or honors are evaluated only after this season's club and personal
+ * honors have settled. Team of the Season intentionally has no extra weight:
+ * its main signal is already represented by the seasonal rating.
+ */
+export function ballonDorHonorBonus(honors: readonly CareerHonor[]): number {
+  const hasLeagueTitle = honors.some((honor) => honor.type === 'LEAGUE_TITLE')
+  const hasContinentalTitle = honors.some(
+    (honor) => honor.type === 'CONTINENTAL_TITLE',
+  )
+  const titleBonus = hasContinentalTitle
+    ? hasLeagueTitle
+      ? 14
+      : 12
+    : hasLeagueTitle
+      ? 6
+      : 0
+  const goldenBootBonus = honors.some((honor) => honor.type === 'GOLDEN_BOOT')
+    ? 4
+    : 0
+  const playerOfYearBonus = honors.some(
+    (honor) => honor.type === 'LEAGUE_PLAYER_OF_YEAR',
+  )
+    ? 5
+    : 0
+  return titleBonus + goldenBootBonus + playerOfYearBonus
+}
+
+export function isBallonDorEligible(input: {
+  club: Club
+  appearances: number
+  overall: number
+}): boolean {
+  return input.club.tier <= 2 && input.appearances >= 24 && input.overall >= 84
+}
+
 function clubSeasonResult(input: {
   player: Player
   club: Club
@@ -347,9 +383,12 @@ export function settleHonorsForWindow(input: {
     if (topDivision && totals.appearances >= 24 && playerOfYearScore >= awardRandom.float(96, 106)) {
       honors.push(honor({ type: 'LEAGUE_PLAYER_OF_YEAR', scope: 'INDIVIDUAL', label: `${label}${leagueCompetitionLabel(club)}最佳球员`, competitionLabel: leagueCompetitionLabel(club), seasonLabel: label, windowIndex, club }))
     }
-    const majorTitleBonus = honors.some((item) => item.type === 'CONTINENTAL_TITLE') ? 8 : honors.some((item) => item.type === 'LEAGUE_TITLE') ? 4 : 0
-    const ballonScore = totals.averageRating * 10 + production * 0.35 + overall * 0.25 + majorTitleBonus
-    if (club.tier <= 2 && totals.appearances >= 24 && overall >= 84 && ballonScore >= awardRandom.float(114, 124)) {
+    const ballonScore =
+      totals.averageRating * 10 +
+      production * 0.35 +
+      overall * 0.25 +
+      ballonDorHonorBonus(honors)
+    if (isBallonDorEligible({ club, appearances: totals.appearances, overall }) && ballonScore >= awardRandom.float(114, 124)) {
       honors.push(honor({ type: 'BALLON_DOR', scope: 'INDIVIDUAL', label: `${label}金球奖`, competitionLabel: '金球奖', seasonLabel: label, windowIndex, club }))
     }
   }
