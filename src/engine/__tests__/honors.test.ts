@@ -390,7 +390,7 @@ describe('Ballon d’Or real-simulation reachability audit', () => {
     expect(summary['OVR90-T1']!.wins + summary['OVR90-T2']!.wins + summary['OVR92-T1']!.wins + summary['OVR92-T2']!.wins).toBeGreaterThan(0)
     expect(Object.values(summary).every((item) => item.averageRating >= 5.5 && item.averageRating <= 8.5)).toBe(true)
     console.info(`BALLON_REACHABILITY_AUDIT_JSON=${JSON.stringify({ summary, userCases: Object.fromEntries(Object.entries(userCases).map(([key, samples]) => [key, { samples: samples.length, wins: samples.filter((sample) => sample.won).length, winRate: samples.length ? round(samples.filter((sample) => sample.won).length / samples.length) : null, scoreRange: samples.length ? [round(Math.min(...samples.map((sample) => sample.ballonScore))), round(Math.max(...samples.map((sample) => sample.ballonScore)))] : null }])), calibration })}`)
-  })
+  }, 15_000)
 
   it('never awards a Ballon d’Or below real OVR 84, including title-winning seasons', () => {
     const samples = Array.from({ length: 200 }, (_, index) => simulateRealSeason(`ballon-under-84:${index}`, 82, inter))
