@@ -7381,23 +7381,10 @@ svg {
   display: block;
   width: 100%;
   height: auto;
-}
-
-.retirement-export-preview__panel > p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.retirement-export-preview__actions {
-  display: flex;
-  gap: 10px;
-}
-
-.retirement-export-preview__actions .button {
-  flex: 1;
-  min-width: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: default;
 }
 
 .retirement-export-target.is-exporting {

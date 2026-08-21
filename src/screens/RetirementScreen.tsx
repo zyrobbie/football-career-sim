@@ -286,7 +286,6 @@ function RetirementArchive() {
     <RetirementRecordExportActions
       targetRef={exportTargetRef}
       playerName={player.name}
-      retirementYear={game.startYear + Math.floor(game.windowIndex / 2)}
     />
     </>
   )
