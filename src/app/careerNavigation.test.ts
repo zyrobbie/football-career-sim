@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import type { GamePhase } from '../models/game'
 import {
   canUseCareerNavigation,
   careerNavigationKey,
@@ -20,14 +21,35 @@ describe('career navigation V1', () => {
     expect(nextCareerNav('HISTORY', 'SETTINGS')).toBe('SETTINGS')
   })
 
-  it('opens player navigation only on phases that already render CareerHub', () => {
-    expect(canUseCareerNavigation('HALF_YEAR_PLAN')).toBe(true)
-    expect(canUseCareerNavigation('SPECIAL_EVENT')).toBe(true)
-    expect(canUseCareerNavigation('TRANSFER_WINDOW')).toBe(true)
-    expect(canUseCareerNavigation('RETIREMENT_DECISION')).toBe(true)
-    expect(canUseCareerNavigation('CREATE_IDENTITY')).toBe(false)
-    expect(canUseCareerNavigation('PLAYER_REVEAL')).toBe(false)
-    expect(canUseCareerNavigation('CAREER_RETIRED')).toBe(false)
+  it('opens all four view-only destinations only on phases that already render CareerHub', () => {
+    const navigablePhases: GamePhase[] = [
+      'ACADEMY_OFFERS',
+      'ARRIVAL_EVENT',
+      'HALF_YEAR_PLAN',
+      'SPECIAL_EVENT',
+      'SPECIAL_EVENT_RESULT',
+      'SIMULATION_READY',
+      'HALF_YEAR_REPORT',
+      'CAREER_DASHBOARD',
+      'PRO_CONTRACT_OFFER',
+      'PRO_CONTRACT_COMPLETE',
+      'PRO_STAGE_COMPLETE',
+      'TRANSFER_WINDOW',
+      'TRANSFER_ARRIVAL',
+      'TRANSFER_STAGE_COMPLETE',
+      'RETIREMENT_DECISION',
+    ]
+    navigablePhases.forEach((phase) => expect(canUseCareerNavigation(phase)).toBe(true))
+
+    const standalonePhases: GamePhase[] = [
+      'CREATE_IDENTITY',
+      'CREATE_POSITION',
+      'CREATE_PRIORITIES',
+      'CREATE_PREFERENCES',
+      'PLAYER_REVEAL',
+      'CAREER_RETIRED',
+    ]
+    standalonePhases.forEach((phase) => expect(canUseCareerNavigation(phase)).toBe(false))
   })
 
   it('keeps active and aria-current presentation aligned for both navigation surfaces', () => {
