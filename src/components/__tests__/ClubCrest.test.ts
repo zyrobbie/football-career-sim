@@ -19,7 +19,7 @@ describe('club crest presentation fallback', () => {
     )
 
     expect(new Set(spells.map((spell) => spell.assetPath))).toEqual(
-      new Set(['/assets/clubs/crests/cn-chengdu-jincheng.svg']),
+      new Set([expect.stringMatching(/assets\/clubs\/crests\/cn-chengdu-jincheng\.svg$/)]),
     )
   })
 
@@ -39,10 +39,10 @@ describe('club crest presentation fallback', () => {
       failedAssetPath: shanghai.assetPath,
     })
 
-    expect(shanghai.assetPath).toBe('/assets/clubs/crests/cn-shanghai-donggang.svg')
+    expect(shanghai.assetPath).toMatch(/assets\/clubs\/crests\/cn-shanghai-donggang\.svg$/)
     expect(afterShanghaiFailure).toEqual({ assetPath: null, fallbackShortMark: '沪' })
     expect(beijingAfterShanghaiFailure).toEqual({
-      assetPath: '/assets/clubs/crests/cn-beijing-yuhua.svg',
+      assetPath: expect.stringMatching(/assets\/clubs\/crests\/cn-beijing-yuhua\.svg$/),
       fallbackShortMark: '京',
     })
     expect(

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   CLUB_CREST_MANIFEST,
+  clubCrestAssetPath,
   getClubCrestByCompatibleId,
   getClubCrestManifestRecordByCompatibleId,
 } from '../clubCrests'
@@ -19,6 +20,15 @@ describe('club crest V1 manifest', () => {
       rightsStatus: 'ORIGINAL_GAME_ASSET',
     })
     expect(Object.isFrozen(byCanonicalId)).toBe(true)
+  })
+
+  it('keeps local crest URLs inside the configured Pages base path', () => {
+    expect(clubCrestAssetPath('cn-shanghai-donggang.svg', './')).toBe(
+      './assets/clubs/crests/cn-shanghai-donggang.svg',
+    )
+    expect(clubCrestAssetPath('cn-shanghai-donggang.svg', '/football-career-sim/')).toBe(
+      '/football-career-sim/assets/clubs/crests/cn-shanghai-donggang.svg',
+    )
   })
 
   it('retains auditable real-club references while returning null without a cleared local asset', () => {
@@ -48,7 +58,7 @@ describe('club crest V1 manifest', () => {
       expect(crest.attribution.length).toBeGreaterThan(0)
       expect(crest.lastReviewedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/)
       if (crest.assetPath) {
-        expect(crest.assetPath).toMatch(/^\/assets\/clubs\/crests\/[a-z0-9-]+\.svg$/)
+        expect(crest.assetPath).toMatch(/(?:^|\/)assets\/clubs\/crests\/[a-z0-9-]+\.svg$/)
         expect(crest.rightsStatus).toBe('ORIGINAL_GAME_ASSET')
       } else {
         expect(crest.rightsStatus).toBe('TRADEMARK_ASSET_PENDING_CLEARANCE')

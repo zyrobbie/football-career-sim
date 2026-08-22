@@ -11,6 +11,7 @@ import {
   canShareRetirementRecord,
   chooseRetirementRecordDelivery,
   isShareCancellation,
+  measureRetirementExportHeight,
   prepareExportCloneImages,
   retirementExportErrorMessage,
   safeRetirementRecordFilename,
@@ -50,6 +51,26 @@ describe('retirement record export V1', () => {
     expect(longCareer).toBeLessThan(ordinary)
     expect(canvasPixels(RETIREMENT_EXPORT_WIDTH, 26000, longCareer)).toBeLessThanOrEqual(RETIREMENT_MAX_CANVAS_PIXELS)
     expect(calculateRetirementExportScale({ width: RETIREMENT_EXPORT_WIDTH, height: 180000 })).toBeNull()
+  })
+
+  it('crops the export at the last visible content instead of inherited scroll-height whitespace', () => {
+    const rect = (top: number, bottom: number, width = 1180) => ({
+      top,
+      bottom,
+      width,
+      height: bottom - top,
+    }) as DOMRect
+    const target = {
+      scrollHeight: 2_400,
+      getBoundingClientRect: () => rect(100, 2_500),
+      children: [
+        { getBoundingClientRect: () => rect(100, 196) },
+        { getBoundingClientRect: () => rect(220, 1_440) },
+        { getBoundingClientRect: () => rect(1_460, 1_620) },
+      ],
+    }
+
+    expect(measureRetirementExportHeight(target as unknown as HTMLElement)).toBe(1_550)
   })
 
   it('chooses system share only when file sharing is explicitly supported', () => {

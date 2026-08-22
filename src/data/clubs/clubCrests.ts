@@ -25,6 +25,14 @@ export interface ClubCrestAsset extends ClubCrestManifestRecord {
 
 const REVIEWED_AT = '2026-08-21'
 
+export function clubCrestAssetPath(
+  filename: string,
+  baseUrl = import.meta.env.BASE_URL,
+): string {
+  const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`
+  return `${normalizedBaseUrl}assets/clubs/crests/${filename}`
+}
+
 /**
  * V1 only contains locally authored artwork. Real-club rows remain auditable
  * references until a distribution licence is cleared; they intentionally have
@@ -82,25 +90,25 @@ export const CLUB_CREST_MANIFEST: readonly Readonly<ClubCrestManifestRecord>[] =
     },
     {
       canonicalClubId: 'cn_shanghai_donggang', crestKey: 'shanghai-donggang-original',
-      assetPath: '/assets/clubs/crests/cn-shanghai-donggang.svg',
+      assetPath: clubCrestAssetPath('cn-shanghai-donggang.svg'),
       sourceUrl: 'local://club-crest-v1/cn-shanghai-donggang', sourceType: 'ORIGINAL_GAME_ARTWORK',
       rightsStatus: 'ORIGINAL_GAME_ASSET', attribution: 'Original fictional club crest created for this game.', lastReviewedAt: REVIEWED_AT,
     },
     {
       canonicalClubId: 'cn_beijing_yuhua', crestKey: 'beijing-yuhua-original',
-      assetPath: '/assets/clubs/crests/cn-beijing-yuhua.svg',
+      assetPath: clubCrestAssetPath('cn-beijing-yuhua.svg'),
       sourceUrl: 'local://club-crest-v1/cn-beijing-yuhua', sourceType: 'ORIGINAL_GAME_ARTWORK',
       rightsStatus: 'ORIGINAL_GAME_ASSET', attribution: 'Original fictional club crest created for this game.', lastReviewedAt: REVIEWED_AT,
     },
     {
       canonicalClubId: 'chn1_shandong_taiyue', crestKey: 'shandong-taiyue-original',
-      assetPath: '/assets/clubs/crests/cn-shandong-taiyue.svg',
+      assetPath: clubCrestAssetPath('cn-shandong-taiyue.svg'),
       sourceUrl: 'local://club-crest-v1/cn-shandong-taiyue', sourceType: 'ORIGINAL_GAME_ARTWORK',
       rightsStatus: 'ORIGINAL_GAME_ASSET', attribution: 'Original fictional club crest created for this game.', lastReviewedAt: REVIEWED_AT,
     },
     {
       canonicalClubId: 'cn_chengdu_jincheng', crestKey: 'chengdu-jincheng-original',
-      assetPath: '/assets/clubs/crests/cn-chengdu-jincheng.svg',
+      assetPath: clubCrestAssetPath('cn-chengdu-jincheng.svg'),
       sourceUrl: 'local://club-crest-v1/cn-chengdu-jincheng', sourceType: 'ORIGINAL_GAME_ARTWORK',
       rightsStatus: 'ORIGINAL_GAME_ASSET', attribution: 'Original fictional club crest created for this game.', lastReviewedAt: REVIEWED_AT,
     },

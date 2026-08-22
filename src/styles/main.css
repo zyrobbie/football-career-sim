@@ -7389,7 +7389,10 @@ svg {
 
 .retirement-export-target.is-exporting {
   width: 1180px !important;
+  height: auto !important;
   min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
   padding-bottom: 30px !important;
   background: var(--shell-deep) !important;
 }

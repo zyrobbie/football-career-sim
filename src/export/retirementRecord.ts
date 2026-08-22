@@ -171,18 +171,32 @@ function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
   })
 }
 
+export function measureRetirementExportHeight(
+  target: HTMLElement,
+  bottomPadding = 30,
+): number {
+  const targetTop = target.getBoundingClientRect().top
+  const contentBottom = [...target.children]
+    .map((child) => child.getBoundingClientRect())
+    .filter((rect) => rect.width > 0 && rect.height > 0)
+    .reduce((bottom, rect) => Math.max(bottom, rect.bottom), targetTop)
+
+  if (contentBottom <= targetTop) return Math.max(1, Math.ceil(target.scrollHeight))
+  return Math.max(1, Math.ceil(contentBottom - targetTop + bottomPadding))
+}
+
 export async function renderRetirementRecordPng(target: HTMLElement): Promise<Blob> {
   await waitForExportFonts(document.fonts)
   const clone = target.cloneNode(true) as HTMLElement
   clone.classList.add('retirement-export-target', 'is-exporting')
-  clone.style.cssText = `position:fixed;left:-20000px;top:0;width:${RETIREMENT_EXPORT_WIDTH}px;pointer-events:none;`
+  clone.style.cssText = `position:absolute;left:-20000px;top:0;width:${RETIREMENT_EXPORT_WIDTH}px;height:auto;min-height:0;max-height:none;overflow:visible;pointer-events:none;`
   document.body.append(clone)
 
   try {
     await waitForExportImages(clone)
     rasterizeRequiredExportImages(clone)
     const width = RETIREMENT_EXPORT_WIDTH
-    const height = Math.ceil(clone.scrollHeight)
+    const height = measureRetirementExportHeight(clone)
     const scale = calculateRetirementExportScale({ width, height })
     if (!scale) throw new Error('Canvas size exceeds memory budget.')
     const html2canvas = (await import('html2canvas')).default
