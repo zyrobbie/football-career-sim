@@ -15,13 +15,13 @@ describe('runtime Club Parameters V1 catalog', () => {
   })
 
   it.each([
-    ['eng1_chelsea', 'Chelsea', '英格兰', 'Premier League（20）'],
-    ['eng1_manchester_city', 'Manchester City', '英格兰', 'Premier League（20）'],
-    ['ita1_ac_milan', 'AC Milan', '意大利', 'Serie A（20）'],
-    ['ned1_feyenoord', 'Feyenoord', '荷兰', 'Eredivisie（18）'],
-    ['por1_sporting_cp', 'Sporting CP', '葡萄牙', 'Liga Portugal（18）'],
-    ['jpn1_kashima_antlers', 'Kashima Antlers', '日本', 'J1 League（20）'],
-  ])('keeps generated sample %s visible in runtime data', (id, name, country, leagueLabel) => {
+    ['eng1_chelsea', '切尔西', '英格兰', 'Premier League（20）'],
+    ['eng1_manchester_city', '曼城', '英格兰', 'Premier League（20）'],
+    ['ita1_ac_milan', 'AC米兰', '意大利', 'Serie A（20）'],
+    ['ned1_feyenoord', '费耶诺德', '荷兰', 'Eredivisie（18）'],
+    ['por1_sporting_cp', '葡萄牙体育', '葡萄牙', 'Liga Portugal（18）'],
+    ['jpn1_kashima_antlers', '鹿岛鹿角', '日本', 'J1 League（20）'],
+  ])('uses the Chinese display name for runtime sample %s', (id, name, country, leagueLabel) => {
     expect(CLUBS.find((club) => club.id === id)).toMatchObject({ id, name, country, leagueLabel })
   })
 })

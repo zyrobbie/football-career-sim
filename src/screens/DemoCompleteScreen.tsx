@@ -1,5 +1,6 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
 import {
   careerWindowLabel,
   playerAgeAtWindow,
@@ -54,7 +55,10 @@ export function DemoCompleteScreen() {
             <div>
               <dt>当前俱乐部</dt>
               <dd>
-                {game.lastReport.clubName}
+                {clubDisplayNameForCompatibleId(
+                  game.lastReport.clubId,
+                  game.lastReport.clubName,
+                )}
                 {game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'}
               </dd>
             </div>

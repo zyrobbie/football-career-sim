@@ -13,6 +13,7 @@ import {
   isShareCancellation,
   measureRetirementExportHeight,
   prepareExportCloneImages,
+  rasterizeExportImages,
   retirementExportErrorMessage,
   safeRetirementRecordFilename,
   shareRetirementRecord,
@@ -150,6 +151,88 @@ describe('retirement record export V1', () => {
       parentElement: { dataset: {}, textContent: '' },
     })
     await expect(waitForExportImage(qrImage as unknown as HTMLImageElement, 1)).rejects.toThrow('Required export image failed')
+  })
+
+  it('rasterizes cloned crest and QR images at double internal resolution before export', () => {
+    const originalDocument = globalThis.document
+    const crestCanvas = {
+      width: 0,
+      height: 0,
+      className: '',
+      style: { cssText: '', width: '', height: '' },
+      getContext: () => ({ drawImage: (..._args: unknown[]) => undefined }),
+    }
+    const qrCanvas = {
+      width: 0,
+      height: 0,
+      className: '',
+      style: { cssText: '', width: '', height: '' },
+      getContext: () => ({ drawImage: (..._args: unknown[]) => undefined }),
+    }
+    const canvases = [crestCanvas, qrCanvas]
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: { createElement: () => canvases.shift() },
+    })
+
+    const replaced: unknown[] = []
+    const image = (dataset: Record<string, string>, width: number, height: number) => ({
+      dataset,
+      className: 'club-crest--retirement',
+      style: { cssText: 'display:block' },
+      getBoundingClientRect: () => ({ width, height }),
+      replaceWith: (canvas: unknown) => replaced.push(canvas),
+    })
+    const crest = image({ exportRasterize: 'club-crest' }, 37.5, 42.2)
+    const qr = image({ exportRequired: 'qr' }, 76, 76)
+    const target = {
+      querySelectorAll: (selector: string) => {
+        expect(selector).toContain('data-export-rasterize="club-crest"')
+        expect(selector).toContain('data-export-required="qr"')
+        return [crest, qr]
+      },
+    }
+
+    try {
+      rasterizeExportImages(target as unknown as HTMLElement)
+    } finally {
+      Object.defineProperty(globalThis, 'document', {
+        configurable: true,
+        value: originalDocument,
+      })
+    }
+
+    expect(replaced).toEqual([crestCanvas, qrCanvas])
+    expect(crestCanvas).toMatchObject({ width: 76, height: 86, className: 'club-crest--retirement' })
+    expect(crestCanvas.style).toMatchObject({ cssText: 'display:block', width: '38px', height: '43px' })
+    expect(qrCanvas).toMatchObject({ width: 152, height: 152 })
+  })
+
+  it('falls back on crest rasterization failure but rejects a required QR rasterization failure', () => {
+    const originalDocument = globalThis.document
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: { createElement: () => ({ style: {}, getContext: () => null }) },
+    })
+    const crestParent = { dataset: { shortMark: '京' }, textContent: '' }
+    const crest = {
+      dataset: { exportRasterize: 'club-crest' }, className: '', style: { cssText: '' }, parentElement: crestParent,
+      getBoundingClientRect: () => ({ width: 20, height: 20 }), replaceWith: () => undefined,
+    }
+    const qr = {
+      dataset: { exportRequired: 'qr' }, className: '', style: { cssText: '' }, parentElement: { dataset: {}, textContent: '' },
+      getBoundingClientRect: () => ({ width: 20, height: 20 }), replaceWith: () => undefined,
+    }
+    try {
+      rasterizeExportImages({ querySelectorAll: () => [crest] } as unknown as HTMLElement)
+      expect(crestParent.textContent).toBe('京')
+      expect(() => rasterizeExportImages({ querySelectorAll: () => [qr] } as unknown as HTMLElement)).toThrow('Unable to rasterize export image')
+    } finally {
+      Object.defineProperty(globalThis, 'document', {
+        configurable: true,
+        value: originalDocument,
+      })
+    }
   })
 
   it('bounds image and font waits instead of leaving export generation pending', async () => {

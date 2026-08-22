@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { resolveClubCrestPresentation } from '../ClubCrest'
+import {
+  CLUB_CREST_EXPORT_RASTERIZE,
+  clubCrestAssetExportAttributes,
+  resolveClubCrestPresentation,
+} from '../ClubCrest'
 
 describe('club crest presentation fallback', () => {
   it('keeps a mixed three-card invitation set renderable with local assets and short marks', () => {
@@ -21,6 +25,17 @@ describe('club crest presentation fallback', () => {
     expect(new Set(spells.map((spell) => spell.assetPath))).toEqual(
       new Set([expect.stringMatching(/assets\/clubs\/crests\/cn-chengdu-jincheng\.svg$/)]),
     )
+  })
+
+  it('marks only real crest assets for export-clone rasterization', () => {
+    const asset = resolveClubCrestPresentation({
+      clubId: 'cn_beijing_yuhua',
+      shortMark: '京',
+    })
+    expect(clubCrestAssetExportAttributes(asset.assetPath)).toEqual({
+      'data-export-rasterize': CLUB_CREST_EXPORT_RASTERIZE,
+    })
+    expect(clubCrestAssetExportAttributes(null)).toEqual({})
   })
 
   it('isolates an image failure to its asset path and retries a different club asset', () => {

@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { ATTRIBUTE_LABELS, CLUBS } from '../data/balance'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
 import { ClubCrest } from './ClubCrest'
 import { careerWindowLabel, playerAgeAtWindow } from '../engine/careerTime'
 import { calculateOverall } from '../engine/player'
@@ -44,11 +45,11 @@ interface LedgerRow {
 }
 
 function clubNameFor(game: GameState, clubId: string): string {
-  return (
+  const fallback =
     CLUBS.find((club) => club.id === clubId)?.name ??
     game.academyOffers.find((offer) => offer.club.id === clubId)?.club.name ??
     '未知俱乐部'
-  )
+  return clubDisplayNameForCompatibleId(clubId, fallback)
 }
 
 function clubShortMarkFor(game: GameState, clubId: string, clubName: string): string {
@@ -62,7 +63,10 @@ function clubShortMarkFor(game: GameState, clubId: string, clubName: string): st
 function buildLedgerRows(game: GameState): LedgerRow[] {
   if (!game.player) return []
   const rows: LedgerRow[] = game.history.map((entry, index) => {
-    const clubName = entry.clubName ?? clubNameFor(game, entry.clubId)
+    const clubName = clubDisplayNameForCompatibleId(
+      entry.clubId,
+      entry.clubName ?? clubNameFor(game, entry.clubId),
+    )
     return {
       key: `${entry.windowIndex}-${entry.clubId}-${index}`,
       clubId: entry.clubId,

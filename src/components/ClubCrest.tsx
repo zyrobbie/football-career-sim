@@ -6,6 +6,16 @@ export interface ClubCrestPresentation {
   fallbackShortMark: string
 }
 
+export const CLUB_CREST_EXPORT_RASTERIZE = 'club-crest'
+
+export function clubCrestAssetExportAttributes(
+  assetPath: string | null,
+): Readonly<Record<'data-export-rasterize', string>> | Readonly<Record<string, never>> {
+  return assetPath
+    ? Object.freeze({ 'data-export-rasterize': CLUB_CREST_EXPORT_RASTERIZE })
+    : Object.freeze({})
+}
+
 export function resolveClubCrestPresentation(input: {
   clubId: string | null | undefined
   shortMark: string
@@ -47,6 +57,7 @@ export function ClubCrest({
           alt=""
           src={presentation.assetPath}
           loading="lazy"
+          {...clubCrestAssetExportAttributes(presentation.assetPath)}
           onError={() => setFailedAssetPath(presentation.assetPath)}
         />
       </span>

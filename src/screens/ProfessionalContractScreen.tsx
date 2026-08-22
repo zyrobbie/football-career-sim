@@ -1,5 +1,6 @@
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
 import { canRequestHigherRole } from '../engine/contracts'
 import type {
   CounterOfferDirection,
@@ -47,6 +48,7 @@ export function ProfessionalContractScreen() {
     (candidate) => candidate.club.id === offer.clubId,
   )?.club
   if (!club) return null
+  const clubName = clubDisplayNameForCompatibleId(club.id, club.name)
 
   if (game.phase === 'PRO_CONTRACT_COMPLETE' && game.contract) {
     return (
@@ -59,11 +61,11 @@ export function ProfessionalContractScreen() {
             <p className="decision-kicker">首份职业合同</p>
             <h1>签字完成，职业生涯正式开始。</h1>
             <p>
-              {club.name}已完成注册。合同与角色承诺会从下一窗口开始影响收入、出场和续约判断。
+              {clubName}已完成注册。合同与角色承诺会从下一窗口开始影响收入、出场和续约判断。
             </p>
             <ContractTerms
               offer={offer}
-              clubName={club.name}
+              clubName={clubName}
               compact
             />
             <p className="contract-complete__next">
@@ -99,7 +101,7 @@ export function ProfessionalContractScreen() {
             : '你将以职业球员身份留在青年队，继续竞争一线队席位。'}
         </p>
 
-        <ContractTerms offer={offer} clubName={club.name} />
+        <ContractTerms offer={offer} clubName={clubName} />
 
         {offer.negotiationMessage ? (
           <p

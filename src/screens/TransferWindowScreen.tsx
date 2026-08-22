@@ -2,6 +2,7 @@ import { CareerHub } from '../components/CareerHub'
 import { ClubCrest } from '../components/ClubCrest'
 import { Icon } from '../components/Icons'
 import { CLUBS, isOverseasClub } from '../data/balance'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
 import {
   canRequestHigherTransferRole,
   transferDinnerCost,
@@ -63,7 +64,10 @@ const arrivalChoices: Array<{
 ]
 
 function clubName(clubId: string): string {
-  return CLUBS.find((club) => club.id === clubId)?.name ?? '未知俱乐部'
+  return clubDisplayNameForCompatibleId(
+    clubId,
+    CLUBS.find((club) => club.id === clubId)?.name ?? '未知俱乐部',
+  )
 }
 
 function roleText(offer: TransferOffer): string {

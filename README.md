@@ -4,7 +4,7 @@
 
 在线试玩：[https://zyrobbie.github.io/football-career-sim/](https://zyrobbie.github.io/football-career-sim/)
 
-当前 V1 已完成从建档到退役的可玩生涯闭环，覆盖：
+当前正式版本为 **V1.0.0**，已完成从建档到退役的可玩生涯闭环，覆盖：
 
 > 建档 → 生成球员与留洋偏好 → 三份青训邀请 → 入队事件 → 青训与一线队晋升 → 职业合同 → 连续职业半年 → 国内与海外转会、续约或自由转会 → 国家队与荣誉 → 退役档案 → 带二维码的生涯图片导出
 
@@ -43,7 +43,7 @@ npm run build
 - [俱乐部参数样例](docs/08-club-parameter-samples-v1.md)
 - [俱乐部参数工作簿审核](docs/09-club-parameters-v1-review.md)
 - [36 局完整生涯平衡审计](docs/10-full-career-balance-audit.md)
-- [V1 发布候选版审计](docs/13-v1-release-candidate-audit.md)
+- [V1 正式版发布审计](docs/13-v1-release-candidate-audit.md)
 
 ## 开发原则
 

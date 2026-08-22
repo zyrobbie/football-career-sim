@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
 import type { AcademyOffer } from '../models/game'
 import { useGameStore } from '../store/gameStore'
 import {
@@ -63,7 +64,7 @@ export function AcademyOffersScreen() {
               <header>
                 <span className="club-monogram">{offer.club.shortMark}</span>
                 <span>
-                  <strong>{offer.club.name}</strong>
+                  <strong>{clubDisplayNameForCompatibleId(offer.club.id, offer.club.name)}</strong>
                   <small>{offer.club.leagueLabel}</small>
                   <small>
                     {offer.club.profile === 'ELITE'
@@ -101,7 +102,7 @@ export function AcademyOffersScreen() {
         <section className="offer-confirmation">
           <span className="offer-confirmation__number">01</span>
           <div>
-            <h2>{selected.club.name}</h2>
+            <h2>{clubDisplayNameForCompatibleId(selected.club.id, selected.club.name)}</h2>
             <p>{selected.club.description}</p>
           </div>
           <div className="offer-confirmation__actions">
@@ -110,7 +111,7 @@ export function AcademyOffersScreen() {
               className="button button--primary"
               onClick={() => selectAcademy(selected.club.id)}
             >
-              接受{selected.club.name}的邀请
+              接受{clubDisplayNameForCompatibleId(selected.club.id, selected.club.name)}的邀请
               <Icon name="arrow" />
             </button>
             <button

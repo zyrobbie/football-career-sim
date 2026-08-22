@@ -148,20 +148,38 @@ export async function waitForExportImages(
   await Promise.all(prepareExportCloneImages(target).map((image) => waitForExportImage(image, timeoutMs)))
 }
 
-function rasterizeRequiredExportImages(target: HTMLElement): void {
-  for (const image of target.querySelectorAll<HTMLImageElement>('img[data-export-required="qr"]')) {
+const EXPORT_IMAGE_RASTER_SCALE = 2
+
+function rasterizeExportImage(image: HTMLImageElement): void {
+  const isRequired = image.dataset.exportRequired === 'qr'
+  try {
     const rect = image.getBoundingClientRect()
     const cssWidth = Math.max(1, Math.ceil(rect.width))
     const cssHeight = Math.max(1, Math.ceil(rect.height))
     const canvas = document.createElement('canvas')
-    canvas.width = cssWidth * 2
-    canvas.height = cssHeight * 2
+    canvas.width = cssWidth * EXPORT_IMAGE_RASTER_SCALE
+    canvas.height = cssHeight * EXPORT_IMAGE_RASTER_SCALE
     canvas.className = image.className
-    canvas.style.cssText = `width:${cssWidth}px;height:${cssHeight}px;`
+    canvas.style.cssText = image.style.cssText
+    canvas.style.width = `${cssWidth}px`
+    canvas.style.height = `${cssHeight}px`
     const context = canvas.getContext('2d')
-    if (!context) throw new Error('Unable to rasterize required export image.')
+    if (!context) throw new Error('Unable to rasterize export image.')
     context.drawImage(image, 0, 0, canvas.width, canvas.height)
     image.replaceWith(canvas)
+  } catch (error) {
+    if (!isRequired && replaceExportImageWithShortMark(image)) return
+    throw error instanceof Error
+      ? error
+      : new Error('Unable to rasterize required export image.')
+  }
+}
+
+export function rasterizeExportImages(target: HTMLElement): void {
+  for (const image of target.querySelectorAll<HTMLImageElement>(
+    'img[data-export-rasterize="club-crest"], img[data-export-required="qr"]',
+  )) {
+    rasterizeExportImage(image)
   }
 }
 
@@ -194,7 +212,7 @@ export async function renderRetirementRecordPng(target: HTMLElement): Promise<Bl
 
   try {
     await waitForExportImages(clone)
-    rasterizeRequiredExportImages(clone)
+    rasterizeExportImages(clone)
     const width = RETIREMENT_EXPORT_WIDTH
     const height = measureRetirementExportHeight(clone)
     const scale = calculateRetirementExportScale({ width, height })

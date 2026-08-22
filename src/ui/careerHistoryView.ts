@@ -1,4 +1,5 @@
 import { runtimeClubById } from '../data/clubs/runtimeClubCatalog'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
 import { buildRetirementSummary } from '../engine/careerSummary'
 import { careerWindowLabel, playerAgeAtWindow } from '../engine/careerTime'
 import { calculateOverall } from '../engine/player'
@@ -91,7 +92,10 @@ export function buildCareerHistoryView(game: GameState): CareerHistoryView {
         windowLabel: careerWindowLabel(game.startYear, entry.windowIndex),
         age: playerAgeAtWindow(entry.windowIndex),
         clubId: entry.clubId,
-        clubName: runtimeClubById.get(entry.clubId)?.name ?? entry.clubName ?? '未知俱乐部',
+        clubName: clubDisplayNameForCompatibleId(
+          entry.clubId,
+          runtimeClubById.get(entry.clubId)?.name ?? entry.clubName ?? '未知俱乐部',
+        ),
         teamLevel: entry.teamLevel,
         role: entry.role,
         overall: Math.round(calculateOverall(entry.endingAttributes, player.primaryPosition)),
@@ -101,7 +105,7 @@ export function buildCareerHistoryView(game: GameState): CareerHistoryView {
       })),
     clubs: summary.clubs.map((club) => ({
       clubId: club.clubId,
-      clubName: club.clubName,
+      clubName: clubDisplayNameForCompatibleId(club.clubId, club.clubName),
       shortMark: runtimeClubById.get(club.clubId)?.shortMark ?? club.clubName.slice(0, 1),
       country: club.country,
       levelLabel: club.levelLabel,

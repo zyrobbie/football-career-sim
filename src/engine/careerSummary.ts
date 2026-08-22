@@ -1,4 +1,6 @@
-import { CLUBS } from '../data/balance'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
+import { resolveClubParametersId } from '../data/clubs/clubRepository'
+import { CLUBS, runtimeClubById } from '../data/clubs/runtimeClubCatalog'
 import type {
   CareerHistoryEntry,
   CareerHonor,
@@ -207,9 +209,11 @@ export function estimateMarketValueEuro(input: {
 }
 
 function clubForHistory(game: GameState, clubId: string): Club | null {
+  const canonicalId = resolveClubParametersId(clubId) ?? clubId
   return (
-    game.academyOffers.find((offer) => offer.club.id === clubId)?.club ??
-    CLUBS.find((club) => club.id === clubId) ??
+    game.academyOffers.find((offer) => offer.club.id === canonicalId)?.club ??
+    runtimeClubById.get(canonicalId) ??
+    CLUBS.find((club) => club.id === canonicalId) ??
     null
   )
 }
@@ -303,7 +307,10 @@ function aggregateClubs(game: GameState): ClubCareerSummary[] {
       )
       return {
         clubId,
-        clubName: club?.name ?? group.entries.at(-1)?.clubName ?? '未知俱乐部',
+        clubName: clubDisplayNameForCompatibleId(
+          clubId,
+          club?.name ?? group.entries.at(-1)?.clubName ?? '未知俱乐部',
+        ),
         country: club?.country ?? '—',
         levelLabel: club ? clubLevelLabel(club) : '俱乐部级别待补充',
         firstWindowIndex,

@@ -137,4 +137,21 @@ describe('career history view', () => {
     expect(serialized).not.toContain('transferFee')
     expect(serialized).not.toContain('transferType')
   })
+
+  it('resolves legacy English snapshot club names only in the derived view and retirement summary', () => {
+    const game = historyGame()
+    const legacyGame = {
+      ...game,
+      history: game.history.map((item, index) => index === 2
+        ? { ...item, clubId: 'ita1_ac_milan', clubName: 'AC Milan' }
+        : item),
+    }
+    const before = structuredClone(legacyGame)
+    const view = buildCareerHistoryView(legacyGame)
+    const summary = buildRetirementSummary(legacyGame)
+
+    expect(view.windows.find((entry) => entry.clubId === 'ita1_ac_milan')?.clubName).toBe('AC米兰')
+    expect(summary.clubs.find((club) => club.clubId === 'ita1_ac_milan')?.clubName).toBe('AC米兰')
+    expect(legacyGame).toEqual(before)
+  })
 })

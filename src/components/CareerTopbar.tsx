@@ -1,4 +1,6 @@
 import { CLUBS } from '../data/balance'
+import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
+import { resolveClubParametersId } from '../data/clubs/clubRepository'
 import { careerWindowLabel } from '../engine/careerTime'
 import type { Club, GameState } from '../models/game'
 import { visibleCareerWindowIndex } from '../ui/careerView'
@@ -6,8 +8,9 @@ import { Icon } from './Icons'
 
 export function currentCareerClub(game: GameState): Club | null {
   if (!game.selectedClubId) return null
-  return CLUBS.find((club) => club.id === game.selectedClubId) ??
-    game.academyOffers.find((offer) => offer.club.id === game.selectedClubId)?.club ??
+  const canonicalId = resolveClubParametersId(game.selectedClubId) ?? game.selectedClubId
+  return CLUBS.find((club) => club.id === canonicalId) ??
+    game.academyOffers.find((offer) => offer.club.id === canonicalId)?.club ??
     null
 }
 
@@ -21,7 +24,7 @@ export function CareerTopbar({
   const windowIndex = visibleCareerWindowIndex(game)
   const currentClub = currentCareerClub(game)
   const clubName = currentClub
-    ? `${currentClub.name}${game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'}`
+    ? `${clubDisplayNameForCompatibleId(currentClub.id, currentClub.name)}${game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'}`
     : null
   const windowLabel = careerWindowLabel(game.startYear, windowIndex)
 
@@ -44,7 +47,7 @@ export function CareerTopbar({
           {clubName ? `当前俱乐部：${clubName}` : sectionLabel}
         </span>
         <span className="topbar__label--compact">
-          {currentClub ? currentClub.name : sectionLabel}
+          {currentClub ? clubDisplayNameForCompatibleId(currentClub.id, currentClub.name) : sectionLabel}
         </span>
       </span>
     </>
