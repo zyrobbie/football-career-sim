@@ -1,11 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { ATTRIBUTE_LABELS, CLUBS } from '../data/balance'
 import { ClubCrest } from './ClubCrest'
-import {
-  canAdvanceBeyondWindow,
-  careerWindowLabel,
-  playerAgeAtWindow,
-} from '../engine/careerTime'
+import { careerWindowLabel, playerAgeAtWindow } from '../engine/careerTime'
 import { calculateOverall } from '../engine/player'
 import {
   attributeKeys,
@@ -21,7 +17,9 @@ import {
   roleLabel,
 } from '../ui/format'
 import { AppShell } from './AppShell'
+import { CareerTopbar, currentCareerClub } from './CareerTopbar'
 import { Icon } from './Icons'
+import { visibleCareerWindowIndex } from '../ui/careerView'
 
 type CareerHubLayout = 'split' | 'stack'
 
@@ -43,18 +41,6 @@ interface LedgerRow {
   stats: HalfYearStats | null
   teamLevel: TeamLevel
   current: boolean
-}
-
-function visibleWindowIndex(game: GameState): number {
-  const normallyShowsNextWindow = game.phase === 'HALF_YEAR_REPORT' ||
-    game.phase === 'CAREER_DASHBOARD' ||
-    game.phase === 'PRO_CONTRACT_OFFER' ||
-    game.phase === 'PRO_CONTRACT_COMPLETE' ||
-    game.phase === 'PRO_STAGE_COMPLETE'
-  if (!normallyShowsNextWindow) return game.windowIndex
-  return canAdvanceBeyondWindow(game.windowIndex)
-    ? game.windowIndex + 1
-    : game.windowIndex
 }
 
 function clubNameFor(game: GameState, clubId: string): string {
@@ -137,13 +123,8 @@ export function CareerHub({
 }: CareerHubProps) {
   if (!game.player) return null
   const player = game.player
-  const currentWindowIndex = visibleWindowIndex(game)
-  const currentClub = game.selectedClubId
-    ? CLUBS.find((club) => club.id === game.selectedClubId) ??
-      game.academyOffers.find(
-        (offer) => offer.club.id === game.selectedClubId,
-      )?.club
-    : null
+  const currentWindowIndex = visibleCareerWindowIndex(game)
+  const currentClub = currentCareerClub(game)
   const clubName = currentClub
     ? `${currentClub.name}${
         game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'
@@ -161,34 +142,9 @@ export function CareerHub({
     calculateOverall(player.attributes, player.primaryPosition),
   )
   const ledgerRows = buildLedgerRows(game)
-  const windowLabel = careerWindowLabel(game.startYear, currentWindowIndex)
-
   return (
     <AppShell
-      topbar={
-        <>
-          <span className="topbar__time">
-            <Icon name="calendar" />
-            <span className="topbar__label--full">{windowLabel}窗口</span>
-            <span className="topbar__label--compact">
-              {windowLabel.replace('年', '').replace('季', '')}
-            </span>
-          </span>
-          <span className="topbar__save-state">
-            <i aria-hidden="true" />
-            <span className="topbar__label--full">自动保存中</span>
-            <span className="topbar__label--compact">已保存</span>
-          </span>
-          <span className="topbar__context">
-            <span className="topbar__label--full">
-              {currentClub ? `当前俱乐部：${clubName}` : sectionLabel}
-            </span>
-            <span className="topbar__label--compact">
-              {currentClub ? currentClub.name : sectionLabel}
-            </span>
-          </span>
-        </>
-      }
+      topbar={<CareerTopbar game={game} sectionLabel={sectionLabel} />}
     >
       <div className="career-hub">
         <PlayerOverview

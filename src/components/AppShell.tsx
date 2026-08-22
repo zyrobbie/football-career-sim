@@ -1,13 +1,38 @@
 import type { ReactNode } from 'react'
 import { Brand } from './Brand'
-import { Icon, type IconName } from './Icons'
+import { Icon } from './Icons'
+import {
+  careerNavPresentation,
+  CAREER_NAV_ITEMS,
+  useCareerNavigation,
+} from '../app/careerNavigation'
 
-const navItems: Array<{ label: string; icon: IconName; active?: boolean }> = [
-  { label: '生涯', icon: 'career', active: true },
-  { label: '球员', icon: 'player' },
-  { label: '履历', icon: 'history' },
-  { label: '设置', icon: 'settings' },
-]
+function NavigationButton({
+  item,
+  mobile = false,
+}: {
+  item: (typeof CAREER_NAV_ITEMS)[number]
+  mobile?: boolean
+}) {
+  const { activeNav, selectNav } = useCareerNavigation()
+  const active = activeNav === item.key
+  const presentation = careerNavPresentation(activeNav, item)
+  const className = mobile
+    ? active ? 'is-active' : ''
+    : `sidebar__item${active ? ' is-active' : ''}`
+  return (
+    <button
+      type="button"
+      className={className}
+      disabled={presentation.disabled}
+      aria-current={presentation.ariaCurrent}
+      onClick={() => selectNav(item.key)}
+    >
+      <Icon name={item.icon} />
+      <span>{item.label}</span>
+    </button>
+  )
+}
 
 export function AppShell({
   topbar,
@@ -21,17 +46,7 @@ export function AppShell({
       <aside className="sidebar">
         <Brand />
         <nav aria-label="游戏导航" className="sidebar__nav">
-          {navItems.map((item) => (
-            <button
-              key={item.label}
-              type="button"
-              className={`sidebar__item${item.active ? ' is-active' : ''}`}
-              disabled={!item.active}
-            >
-              <Icon name={item.icon} />
-              <span>{item.label}</span>
-            </button>
-          ))}
+          {CAREER_NAV_ITEMS.map((item) => <NavigationButton key={item.key} item={item} />)}
         </nav>
         <div className="sidebar__pitch" aria-hidden="true">
           <span />
@@ -46,17 +61,7 @@ export function AppShell({
         {children}
       </section>
       <nav className="mobile-nav" aria-label="手机游戏导航">
-        {navItems.map((item) => (
-          <button
-            key={item.label}
-            type="button"
-            className={item.active ? 'is-active' : ''}
-            disabled={!item.active}
-          >
-            <Icon name={item.icon} />
-            <span>{item.label}</span>
-          </button>
-        ))}
+        {CAREER_NAV_ITEMS.map((item) => <NavigationButton key={item.key} item={item} mobile />)}
       </nav>
     </main>
   )

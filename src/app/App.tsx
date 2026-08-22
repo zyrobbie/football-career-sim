@@ -13,12 +13,22 @@ import { RetirementScreen } from '../screens/RetirementScreen'
 import { TrainingPlanScreen } from '../screens/TrainingPlanScreen'
 import { TransferWindowScreen } from '../screens/TransferWindowScreen'
 import { SpecialEventScreen } from '../screens/SpecialEventScreen'
+import { PlayerScreen } from '../screens/PlayerScreen'
+import { CareerHistoryScreen } from '../screens/CareerHistoryScreen'
+import { SettingsScreen } from '../screens/SettingsScreen'
+import {
+  canUseCareerNavigation,
+  careerNavigationKey,
+  CareerNavigationProvider,
+  useCareerNavigation,
+} from './careerNavigation'
 
-export function App() {
+function AppContent() {
   const game = useGameStore((state) => state.game)
   const error = useGameStore((state) => state.error)
   const clearError = useGameStore((state) => state.clearError)
   const phase = game?.phase
+  const { activeNav } = useCareerNavigation()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -27,7 +37,13 @@ export function App() {
   let screen = <HomeScreen />
 
   if (game) {
-    if (
+    if (canUseCareerNavigation(game.phase) && activeNav === 'PLAYER') {
+      screen = <PlayerScreen game={game} />
+    } else if (canUseCareerNavigation(game.phase) && activeNav === 'HISTORY') {
+      screen = <CareerHistoryScreen game={game} />
+    } else if (canUseCareerNavigation(game.phase) && activeNav === 'SETTINGS') {
+      screen = <SettingsScreen game={game} />
+    } else if (
       [
         'CREATE_IDENTITY',
         'CREATE_POSITION',
@@ -89,5 +105,14 @@ export function App() {
         </div>
       ) : null}
     </>
+  )
+}
+
+export function App() {
+  const careerKey = useGameStore((state) => careerNavigationKey(state.game?.careerSeed))
+  return (
+    <CareerNavigationProvider careerKey={careerKey}>
+      <AppContent />
+    </CareerNavigationProvider>
   )
 }
