@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   RETIREMENT_EXPORT_WIDTH,
+  RETIREMENT_EXPORT_BOTTOM_PADDING,
   RETIREMENT_EXPORT_FONT_TIMEOUT_MS,
   RETIREMENT_EXPORT_IMAGE_TIMEOUT_MS,
   RETIREMENT_MAX_CANVAS_PIXELS,
@@ -12,11 +13,13 @@ import {
   chooseRetirementRecordDelivery,
   isShareCancellation,
   measureRetirementExportHeight,
+  lockRetirementExportHeight,
   prepareExportCloneImages,
   rasterizeExportImages,
   retirementExportErrorMessage,
   safeRetirementRecordFilename,
   shareRetirementRecord,
+  waitForRetirementExportLayout,
   waitForExportFonts,
   waitForExportImage,
 } from '../retirementRecord'
@@ -71,7 +74,57 @@ describe('retirement record export V1', () => {
       ],
     }
 
-    expect(measureRetirementExportHeight(target as unknown as HTMLElement)).toBe(1_550)
+    expect(measureRetirementExportHeight(target as unknown as HTMLElement)).toBe(1_548)
+  })
+
+  it('uses the QR footer as the explicit visual export boundary and locks the clone to it', () => {
+    const rect = (top: number, bottom: number, width = 1180) => ({
+      top,
+      bottom,
+      width,
+      height: bottom - top,
+    }) as DOMRect
+    const end = { getBoundingClientRect: () => rect(1_640, 1_820) }
+    const style = {} as CSSStyleDeclaration
+    const target = {
+      scrollHeight: 4_000,
+      style,
+      getBoundingClientRect: () => rect(100, 4_100),
+      querySelector: (selector: string) => {
+        expect(selector).toBe('[data-retirement-export-end]')
+        return end
+      },
+      children: [],
+    }
+
+    const height = measureRetirementExportHeight(target as unknown as HTMLElement)
+    expect(height).toBe(1_720 + RETIREMENT_EXPORT_BOTTOM_PADDING)
+    lockRetirementExportHeight(target as unknown as HTMLElement, height)
+    expect(style).toMatchObject({
+      height: `${height}px`, minHeight: '0', maxHeight: `${height}px`, paddingBottom: '0', overflow: 'hidden',
+    })
+  })
+
+  it('waits one layout frame after rasterizing images before using export geometry', async () => {
+    const originalAnimationFrame = globalThis.requestAnimationFrame
+    let scheduled = false
+    Object.defineProperty(globalThis, 'requestAnimationFrame', {
+      configurable: true,
+      value: (callback: FrameRequestCallback) => {
+        scheduled = true
+        callback(16)
+        return 1
+      },
+    })
+    try {
+      await waitForRetirementExportLayout()
+      expect(scheduled).toBe(true)
+    } finally {
+      Object.defineProperty(globalThis, 'requestAnimationFrame', {
+        configurable: true,
+        value: originalAnimationFrame,
+      })
+    }
   })
 
   it('chooses system share only when file sharing is explicitly supported', () => {

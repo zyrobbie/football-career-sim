@@ -275,7 +275,7 @@ function RetirementArchive() {
           <span>退役档案已写入本地生涯存档</span>
         </footer>
       </article>
-      <footer className="retirement-export-qr" aria-hidden="true">
+      <footer className="retirement-export-qr" aria-hidden="true" data-retirement-export-end>
         <img src={RETIREMENT_QR_ASSET_PATH} alt="" data-export-required="qr" />
         <div>
           <strong>扫码开启你的球员生涯</strong>

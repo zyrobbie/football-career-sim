@@ -2,6 +2,7 @@ export const RETIREMENT_RECORD_URL = 'https://zyrobbie.github.io/football-career
 export const RETIREMENT_QR_ASSET_PATH = `${import.meta.env.BASE_URL}assets/retirement-career-qr.svg`
 export const RETIREMENT_EXPORT_WIDTH = 1180
 export const RETIREMENT_MAX_CANVAS_PIXELS = 12_000_000
+export const RETIREMENT_EXPORT_BOTTOM_PADDING = 28
 const MAX_EXPORT_SCALE = 2
 const MIN_EXPORT_SCALE = 0.25
 export const RETIREMENT_EXPORT_IMAGE_TIMEOUT_MS = 5_000
@@ -191,9 +192,17 @@ function canvasToBlob(canvas: HTMLCanvasElement): Promise<Blob> {
 
 export function measureRetirementExportHeight(
   target: HTMLElement,
-  bottomPadding = 30,
+  bottomPadding = RETIREMENT_EXPORT_BOTTOM_PADDING,
 ): number {
-  const targetTop = target.getBoundingClientRect().top
+  const targetRect = target.getBoundingClientRect()
+  const targetTop = targetRect.top
+  const exportEnd = typeof target.querySelector === 'function'
+    ? target.querySelector<HTMLElement>('[data-retirement-export-end]')
+    : null
+  const exportEndRect = exportEnd?.getBoundingClientRect()
+  if (exportEndRect && exportEndRect.width > 0 && exportEndRect.height > 0) {
+    return Math.max(1, Math.ceil(exportEndRect.bottom - targetTop + bottomPadding))
+  }
   const contentBottom = [...target.children]
     .map((child) => child.getBoundingClientRect())
     .filter((rect) => rect.width > 0 && rect.height > 0)
@@ -201,6 +210,20 @@ export function measureRetirementExportHeight(
 
   if (contentBottom <= targetTop) return Math.max(1, Math.ceil(target.scrollHeight))
   return Math.max(1, Math.ceil(contentBottom - targetTop + bottomPadding))
+}
+
+/** Locks the off-screen clone to its measured visual content boundary. */
+export function lockRetirementExportHeight(target: HTMLElement, height: number): void {
+  target.style.height = `${height}px`
+  target.style.minHeight = '0'
+  target.style.maxHeight = `${height}px`
+  target.style.paddingBottom = '0'
+  target.style.overflow = 'hidden'
+}
+
+/** Lets replacement canvases participate in layout before their geometry is measured. */
+export function waitForRetirementExportLayout(): Promise<void> {
+  return new Promise((resolve) => requestAnimationFrame(() => resolve()))
 }
 
 export async function renderRetirementRecordPng(target: HTMLElement): Promise<Blob> {
@@ -213,8 +236,10 @@ export async function renderRetirementRecordPng(target: HTMLElement): Promise<Bl
   try {
     await waitForExportImages(clone)
     rasterizeExportImages(clone)
+    await waitForRetirementExportLayout()
     const width = RETIREMENT_EXPORT_WIDTH
     const height = measureRetirementExportHeight(clone)
+    lockRetirementExportHeight(clone, height)
     const scale = calculateRetirementExportScale({ width, height })
     if (!scale) throw new Error('Canvas size exceeds memory budget.')
     const html2canvas = (await import('html2canvas')).default
