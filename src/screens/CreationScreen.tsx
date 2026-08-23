@@ -65,7 +65,6 @@ function IdentityStep() {
             maxLength={12}
             autoComplete="off"
             placeholder="输入2至12个字符"
-            autoFocus
           />
         </label>
         <div className="identity-traits">

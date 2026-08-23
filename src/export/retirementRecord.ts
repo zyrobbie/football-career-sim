@@ -11,8 +11,17 @@ export const RETIREMENT_EXPORT_FONT_TIMEOUT_MS = 5_000
 export type RecordDelivery = 'SHARE' | 'DOWNLOAD'
 export type RecordShareResult = 'SHARED' | 'CANCELLED' | 'FALLBACK'
 
+export function retirementExportCanvasDimensions(width: number, height: number, scale: number): {
+  width: number
+  height: number
+} {
+  // Canvas bitmap dimensions are integer-truncated by the browser, including html2canvas.
+  return { width: Math.floor(width * scale), height: Math.floor(height * scale) }
+}
+
 export function canvasPixels(width: number, height: number, scale: number): number {
-  return Math.ceil(width * scale) * Math.ceil(height * scale)
+  const dimensions = retirementExportCanvasDimensions(width, height, scale)
+  return dimensions.width * dimensions.height
 }
 
 export function calculateRetirementExportScale(input: {
@@ -217,13 +226,34 @@ export function lockRetirementExportHeight(target: HTMLElement, height: number):
   target.style.height = `${height}px`
   target.style.minHeight = '0'
   target.style.maxHeight = `${height}px`
-  target.style.paddingBottom = '0'
+  target.style.boxSizing = 'border-box'
+  target.style.paddingBottom = `${RETIREMENT_EXPORT_BOTTOM_PADDING}px`
   target.style.overflow = 'hidden'
 }
 
 /** Lets replacement canvases participate in layout before their geometry is measured. */
 export function waitForRetirementExportLayout(): Promise<void> {
   return new Promise((resolve) => requestAnimationFrame(() => resolve()))
+}
+
+/**
+ * Returns the source canvas when it already matches the measured sheet.
+ * Mobile Safari may instead return a page-sized canvas; that case is cropped
+ * by geometry only, without inspecting pixels.
+ */
+export function cropRetirementExportCanvas(source: HTMLCanvasElement, width: number, height: number, scale: number): HTMLCanvasElement {
+  const { width: outputWidth, height: outputHeight } = retirementExportCanvasDimensions(width, height, scale)
+  if (source.width === outputWidth && source.height === outputHeight) return source
+  if (source.width < outputWidth || source.height < outputHeight) {
+    throw new Error('Rendered canvas is smaller than the measured retirement sheet.')
+  }
+  const output = document.createElement('canvas')
+  output.width = outputWidth
+  output.height = outputHeight
+  const context = output.getContext('2d')
+  if (!context) throw new Error('Unable to crop retirement record canvas.')
+  context.drawImage(source, 0, 0, outputWidth, outputHeight, 0, 0, outputWidth, outputHeight)
+  return output
 }
 
 export async function renderRetirementRecordPng(target: HTMLElement): Promise<Blob> {
@@ -254,14 +284,30 @@ export async function renderRetirementRecordPng(target: HTMLElement): Promise<Bl
           useCORS: false,
           width,
           height,
-          windowWidth: width,
-          windowHeight: height,
+          // Keep html2canvas in the same media-query viewport as the native
+          // clone measurement; only the export sheet itself is fixed at 1180px.
+          windowWidth: document.documentElement.clientWidth,
+          windowHeight: document.documentElement.clientHeight,
         })
+        let output: HTMLCanvasElement | null = null
+        let sourceReleased = false
         try {
-          return await canvasToBlob(canvas)
+          output = cropRetirementExportCanvas(canvas, width, height, attemptScale)
+          if (output !== canvas) {
+            canvas.width = 0
+            canvas.height = 0
+            sourceReleased = true
+          }
+          return await canvasToBlob(output)
         } finally {
-          canvas.width = 0
-          canvas.height = 0
+          if (output && output !== canvas) {
+            output.width = 0
+            output.height = 0
+          }
+          if (!sourceReleased) {
+            canvas.width = 0
+            canvas.height = 0
+          }
         }
       } catch (error) {
         lastError = error

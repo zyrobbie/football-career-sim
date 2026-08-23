@@ -10,6 +10,7 @@ import {
   calculateRetirementExportScale,
   canvasPixels,
   canShareRetirementRecord,
+  cropRetirementExportCanvas,
   chooseRetirementRecordDelivery,
   isShareCancellation,
   measureRetirementExportHeight,
@@ -17,6 +18,7 @@ import {
   prepareExportCloneImages,
   rasterizeExportImages,
   retirementExportErrorMessage,
+  retirementExportCanvasDimensions,
   safeRetirementRecordFilename,
   shareRetirementRecord,
   waitForRetirementExportLayout,
@@ -101,8 +103,54 @@ describe('retirement record export V1', () => {
     expect(height).toBe(1_720 + RETIREMENT_EXPORT_BOTTOM_PADDING)
     lockRetirementExportHeight(target as unknown as HTMLElement, height)
     expect(style).toMatchObject({
-      height: `${height}px`, minHeight: '0', maxHeight: `${height}px`, paddingBottom: '0', overflow: 'hidden',
+      height: `${height}px`, minHeight: '0', maxHeight: `${height}px`, boxSizing: 'border-box', paddingBottom: `${RETIREMENT_EXPORT_BOTTOM_PADDING}px`, overflow: 'hidden',
     })
+  })
+
+  it('geometrically crops an oversized source canvas to the measured QR boundary', () => {
+    const originalDocument = globalThis.document
+    const drawImage = (...args: unknown[]) => args
+    const output = { width: 0, height: 0, getContext: () => ({ drawImage }) }
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: { createElement: () => output },
+    })
+    try {
+      const source = { width: 2360, height: 9000 } as HTMLCanvasElement
+      const cropped = cropRetirementExportCanvas(source, 1180, 3200, 2)
+      expect(cropped).toBe(output)
+      expect(output).toMatchObject({ width: 2360, height: 6400 })
+      expect(drawImage(source, 0, 0, 2360, 6400, 0, 0, 2360, 6400)).toEqual([source, 0, 0, 2360, 6400, 0, 0, 2360, 6400])
+    } finally {
+      Object.defineProperty(globalThis, 'document', { configurable: true, value: originalDocument })
+    }
+  })
+
+  it('reuses a correctly sized source canvas without allocating a second canvas', () => {
+    const source = { width: 2360, height: 6400 } as HTMLCanvasElement
+    const originalDocument = globalThis.document
+    let allocations = 0
+    Object.defineProperty(globalThis, 'document', {
+      configurable: true,
+      value: { createElement: () => { allocations += 1; return {} } },
+    })
+    try {
+      expect(cropRetirementExportCanvas(source, 1180, 3200, 2)).toBe(source)
+      expect(allocations).toBe(0)
+    } finally {
+      Object.defineProperty(globalThis, 'document', { configurable: true, value: originalDocument })
+    }
+  })
+
+  it('rejects a source canvas smaller than the geometric export boundary', () => {
+    expect(() => cropRetirementExportCanvas({ width: 2359, height: 6400 } as HTMLCanvasElement, 1180, 3200, 2))
+      .toThrow('smaller than the measured retirement sheet')
+  })
+
+  it('uses one browser-canvas pixel-dimension calculation for budgets and cropping', () => {
+    const dimensions = retirementExportCanvasDimensions(1180, 3200.1, 1.37)
+    expect(dimensions).toEqual({ width: 1616, height: 4384 })
+    expect(canvasPixels(1180, 3200.1, 1.37)).toBe(dimensions.width * dimensions.height)
   })
 
   it('waits one layout frame after rasterizing images before using export geometry', async () => {

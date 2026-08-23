@@ -53,7 +53,7 @@ export function retirementClubShortMarkFor(
 }
 
 function RetirementArchive() {
-  const exportTargetRef = useRef<HTMLElement>(null)
+  const exportTargetRef = useRef<HTMLDivElement>(null)
   const game = useGameStore((state) => state.game)!
   const player = game.player!
   const summary = buildRetirementSummary(game)
@@ -72,7 +72,8 @@ function RetirementArchive() {
 
   return (
     <>
-    <main className="retirement-archive" ref={exportTargetRef} data-retirement-export-target>
+    <main className="retirement-archive">
+      <div className="retirement-export-sheet" ref={exportTargetRef} data-retirement-export-target>
       <header className="retirement-archive__masthead">
         <Brand compact />
         <div>
@@ -275,13 +276,16 @@ function RetirementArchive() {
           <span>退役档案已写入本地生涯存档</span>
         </footer>
       </article>
-      <footer className="retirement-export-qr" aria-hidden="true" data-retirement-export-end>
-        <img src={RETIREMENT_QR_ASSET_PATH} alt="" data-export-required="qr" />
-        <div>
-          <strong>扫码开启你的球员生涯</strong>
-          <small>{RETIREMENT_RECORD_URL.replace('https://', '')}</small>
+      <footer className="retirement-export-qr" aria-hidden="true">
+        <div className="retirement-export-qr__sheet" data-retirement-export-end>
+          <img src={RETIREMENT_QR_ASSET_PATH} alt="" data-export-required="qr" />
+          <div>
+            <strong>扫码开启你的球员生涯</strong>
+            <small>{RETIREMENT_RECORD_URL.replace('https://', '')}</small>
+          </div>
         </div>
       </footer>
+      </div>
     </main>
     <RetirementRecordExportActions
       targetRef={exportTargetRef}

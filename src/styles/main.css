@@ -380,6 +380,8 @@ svg {
 
 .setup-shell {
   min-height: 100vh;
+  min-width: 0;
+  max-width: 100%;
   background: var(--paper);
 }
 
@@ -390,6 +392,8 @@ svg {
   color: #f4f0e8;
   padding: 30px max(32px, calc((100vw - 1180px) / 2));
   border-bottom: 1px solid var(--gold);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .setup-header__pitch {
@@ -481,6 +485,8 @@ svg {
   width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
   padding: 52px 0 72px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .setup-intro {
@@ -511,6 +517,8 @@ svg {
 .field {
   display: grid;
   gap: 9px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .field > span,
@@ -523,6 +531,8 @@ svg {
 
 .field input,
 .field select {
+  width: 100%;
+  min-width: 0;
   min-height: 52px;
   border: 1px solid #8d8c84;
   border-radius: 2px;
@@ -551,6 +561,8 @@ svg {
   grid-template-columns: minmax(180px, 0.7fr) minmax(260px, 1.3fr);
   gap: 20px;
   align-items: end;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .foot-selector {
@@ -561,6 +573,7 @@ svg {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
+  max-width: 100%;
 }
 
 .foot-selector legend {
@@ -606,6 +619,8 @@ svg {
   display: flex;
   justify-content: space-between;
   gap: 16px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .setup-actions--end {
@@ -639,6 +654,8 @@ svg {
   background:
     linear-gradient(90deg, transparent 49.9%, rgba(18, 56, 45, 0.14) 50%, transparent 50.1%),
     rgba(255, 255, 255, 0.2);
+  min-width: 0;
+  max-width: 100%;
 }
 
 .position-pitch::before {
@@ -715,6 +732,8 @@ svg {
   display: grid;
   grid-template-columns: 150px 1fr;
   gap: 30px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .position-detail__name {
@@ -4557,7 +4576,13 @@ svg {
   .field select,
   .foot-option {
     min-height: 40px;
-    font-size: 14px;
+    font-size: 16px;
+  }
+
+  .field textarea {
+    width: 100%;
+    min-width: 0;
+    font-size: 16px;
   }
 
   .field input,
@@ -6761,6 +6786,10 @@ svg {
     var(--shell-deep);
 }
 
+.retirement-export-sheet {
+  width: 100%;
+}
+
 .retirement-archive__masthead {
   min-height: 96px;
   padding: 18px max(24px, calc((100vw - 1180px) / 2));
@@ -7391,8 +7420,10 @@ svg {
   width: 1180px !important;
   min-height: 0 !important;
   max-height: none;
-  overflow: visible;
-  padding-bottom: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  padding-bottom: 28px !important;
   background: var(--shell-deep) !important;
 }
 
@@ -7449,6 +7480,10 @@ svg {
 }
 
 .retirement-export-target.is-exporting .retirement-export-qr {
+  display: block;
+}
+
+.retirement-export-target.is-exporting .retirement-export-qr__sheet {
   width: calc(100% - 48px);
   margin: 20px auto 0;
   padding: 20px 24px;
@@ -7461,26 +7496,26 @@ svg {
   background: var(--shell);
 }
 
-.retirement-export-target.is-exporting .retirement-export-qr img,
-.retirement-export-target.is-exporting .retirement-export-qr canvas {
+.retirement-export-target.is-exporting .retirement-export-qr__sheet img,
+.retirement-export-target.is-exporting .retirement-export-qr__sheet canvas {
   width: 112px;
   height: 112px;
   padding: 8px;
   background: #fff;
 }
 
-.retirement-export-target.is-exporting .retirement-export-qr strong,
-.retirement-export-target.is-exporting .retirement-export-qr small {
+.retirement-export-target.is-exporting .retirement-export-qr__sheet strong,
+.retirement-export-target.is-exporting .retirement-export-qr__sheet small {
   display: block;
 }
 
-.retirement-export-target.is-exporting .retirement-export-qr strong {
+.retirement-export-target.is-exporting .retirement-export-qr__sheet strong {
   color: #d9bc75;
   font-family: var(--heading);
   font-size: 22px;
 }
 
-.retirement-export-target.is-exporting .retirement-export-qr small {
+.retirement-export-target.is-exporting .retirement-export-qr__sheet small {
   margin-top: 6px;
   color: rgba(243, 240, 232, 0.68);
   font-size: 12px;
