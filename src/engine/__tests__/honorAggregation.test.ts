@@ -89,6 +89,23 @@ describe('honor aggregation and visual registry', () => {
     ]))
   })
 
+  it('keeps the league identity in aggregated golden-boot and team-of-season labels', () => {
+    const grouped = aggregateCareerHonors([
+      honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', competitionLabel: '意甲', seasonLabel: '2030赛季', windowIndex: 8 }),
+      honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', competitionLabel: '意甲', seasonLabel: '2031赛季', windowIndex: 10 }),
+      honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', competitionLabel: '中甲', seasonLabel: '2032赛季', windowIndex: 12 }),
+      honor({ type: 'GOLDEN_BOOT', scope: 'INDIVIDUAL', competitionLabel: '意甲', seasonLabel: '2033赛季', windowIndex: 14 }),
+      honor({ type: 'GOLDEN_BOOT', scope: 'INDIVIDUAL', competitionLabel: '中甲', seasonLabel: '2034赛季', windowIndex: 16 }),
+    ])
+
+    expect(grouped).toEqual(expect.arrayContaining([
+      expect.objectContaining({ type: 'TEAM_OF_SEASON', competitionLabel: '意甲', displayLabel: '意甲最佳阵容', count: 2 }),
+      expect.objectContaining({ type: 'TEAM_OF_SEASON', competitionLabel: '中甲', displayLabel: '中甲最佳阵容', count: 1 }),
+      expect.objectContaining({ type: 'GOLDEN_BOOT', competitionLabel: '意甲', displayLabel: '意甲金靴', count: 1 }),
+      expect.objectContaining({ type: 'GOLDEN_BOOT', competitionLabel: '中甲', displayLabel: '中甲金靴', count: 1 }),
+    ]))
+  })
+
   it('keeps club, national, and individual honors in separate groups', () => {
     const grouped = aggregateCareerHonors([
       honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', competitionLabel: '意甲' }),

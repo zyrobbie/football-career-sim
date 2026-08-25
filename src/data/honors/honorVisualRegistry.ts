@@ -89,6 +89,18 @@ export interface HonorVisualMatch {
   readonly displayLabel: string
 }
 
+function contextualDisplayLabel(
+  honor: Pick<CareerHonor, 'type' | 'competitionLabel' | 'label'>,
+  visual: HonorVisual | null,
+): string {
+  if (!visual) return honor.label
+  const competitionLabel = honor.competitionLabel.trim()
+  if (!competitionLabel) return visual.displayLabel
+  if (honor.type === 'GOLDEN_BOOT') return `${competitionLabel}金靴`
+  if (honor.type === 'TEAM_OF_SEASON') return `${competitionLabel}最佳阵容`
+  return visual.displayLabel
+}
+
 const FALLBACK_MARK_BY_TYPE: Readonly<Record<CareerHonorType, string>> = Object.freeze({
   LEAGUE_TITLE: '联',
   DOMESTIC_CUP: '杯',
@@ -109,6 +121,6 @@ export function matchHonorVisual(honor: Pick<CareerHonor, 'type' | 'competitionL
   return Object.freeze({
     visual,
     fallbackMark: FALLBACK_MARK_BY_TYPE[honor.type],
-    displayLabel: visual?.displayLabel ?? honor.label,
+    displayLabel: contextualDisplayLabel(honor, visual),
   })
 }
