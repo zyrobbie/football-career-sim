@@ -35,7 +35,7 @@ export interface CareerHistoryClubView {
   goals: number
   assists: number
   peakOverall: number
-  honors: string[]
+  honors: CareerHonor[]
 }
 
 export interface CareerHistoryView {
@@ -115,7 +115,9 @@ export function buildCareerHistoryView(game: GameState): CareerHistoryView {
       goals: club.goals,
       assists: club.assists,
       peakOverall: club.peakOverall,
-      honors: [...club.honors],
+      honors: game.history
+        .flatMap((entry) => entry.honors ?? [])
+        .filter((honor) => honor.scope === 'CLUB' && honor.clubId === club.clubId),
     })),
     nationalTeam: {
       appearances: summary.nationalTeam.appearances,

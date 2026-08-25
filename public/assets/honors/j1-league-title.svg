@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs><radialGradient id="silver" cx="35%" cy="26%" r="78%"><stop stop-color="#FFF"/><stop offset=".44" stop-color="#AAB9BA"/><stop offset=".75" stop-color="#E6ECE9"/><stop offset="1" stop-color="#708485"/></radialGradient></defs>
+  <circle cx="64" cy="64" r="50" fill="url(#silver)" stroke="#153C32" stroke-width="4"/><circle cx="64" cy="64" r="41" fill="#D8E0DF" stroke="#153C32" stroke-width="3"/><circle cx="64" cy="64" r="19" fill="#1E5B4B" stroke="#153C32" stroke-width="3"/>
+  <!-- Path-only J: vertical stroke and unmistakable leftward hook. -->
+  <path d="M72 46h13v20c0 17-10 25-25 25-10 0-17-4-22-12l11-7c3 6 6 8 11 8 7 0 12-5 12-14V56H62V46Z" transform="translate(16.08 10.58) scale(.78)" fill="#D5AD46" stroke="#153C32" stroke-width="3.8" stroke-linejoin="round"/>
+  <g fill="#D3DAD8" stroke="#153C32" stroke-width="2"><circle cx="64" cy="27" r="6"/><circle cx="86" cy="34" r="6"/><circle cx="99" cy="52" r="6"/><circle cx="99" cy="76" r="6"/><circle cx="86" cy="94" r="6"/><circle cx="64" cy="101" r="6"/><circle cx="42" cy="94" r="6"/><circle cx="29" cy="76" r="6"/><circle cx="29" cy="52" r="6"/><circle cx="42" cy="34" r="6"/></g>
+</svg>

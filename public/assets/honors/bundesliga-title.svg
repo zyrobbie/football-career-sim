@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs><radialGradient id="steel" cx="34%" cy="26%" r="78%"><stop stop-color="#FFF"/><stop offset=".38" stop-color="#B8C5C4"/><stop offset=".72" stop-color="#ECF2F0"/><stop offset="1" stop-color="#768A8B"/></radialGradient><radialGradient id="gem" cx="35%" cy="25%" r="76%"><stop stop-color="#B6E6A9"/><stop offset=".45" stop-color="#3B9366"/><stop offset="1" stop-color="#174A37"/></radialGradient></defs>
+  <circle cx="64" cy="64" r="50" fill="url(#steel)" stroke="#153C32" stroke-width="4"/>
+  <circle cx="64" cy="64" r="41" fill="none" stroke="#153C32" stroke-width="3"/><circle cx="64" cy="64" r="30" fill="#DCE5E3" stroke="#153C32" stroke-width="3"/><circle cx="64" cy="64" r="18" fill="#D3AD48" stroke="#153C32" stroke-width="4"/><circle cx="64" cy="64" r="7" fill="#1E5B4B" stroke="#153C32" stroke-width="3"/>
+  <!-- Exactly five large green metal-set anchors, matching the Meisterschale's five-point structure. -->
+  <g fill="url(#gem)" stroke="#A87A2C" stroke-width="3"><circle cx="64" cy="24" r="6"/><circle cx="95" cy="45" r="6"/><circle cx="83" cy="88" r="6"/><circle cx="44" cy="88" r="6"/><circle cx="29" cy="52" r="6"/></g>
+  <g fill="#E5C564"><circle cx="64" cy="24" r="2"/><circle cx="95" cy="45" r="2"/><circle cx="83" cy="88" r="2"/><circle cx="44" cy="88" r="2"/><circle cx="29" cy="52" r="2"/></g>
+  <path d="M45 55c7-8 18-9 25-2M47 71c9 6 19 7 34 0" stroke="#FFF" stroke-opacity=".72" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

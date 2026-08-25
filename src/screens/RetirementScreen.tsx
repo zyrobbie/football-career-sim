@@ -2,10 +2,12 @@ import { useRef } from 'react'
 import { Brand } from '../components/Brand'
 import { CareerHub } from '../components/CareerHub'
 import { ClubCrest } from '../components/ClubCrest'
+import { HonorBadge } from '../components/HonorBadge'
 import { Icon } from '../components/Icons'
 import { RetirementRecordExportActions } from '../components/RetirementRecordExportActions'
 import { runtimeClubById } from '../data/clubs/runtimeClubCatalog'
 import { buildRetirementSummary } from '../engine/careerSummary'
+import { aggregateCareerHonors, aggregateClubCareerHonors } from '../engine/honorAggregation'
 import { playerAgeAtWindow } from '../engine/careerTime'
 import { RETIREMENT_QR_ASSET_PATH, RETIREMENT_RECORD_URL } from '../export/retirementRecord'
 import { useGameStore } from '../store/gameStore'
@@ -187,7 +189,12 @@ function RetirementArchive() {
                 <strong>{club.assists}</strong>
                 <strong>{club.peakOverall}</strong>
                 <span className="retirement-clubs__honor">
-                  {club.honors.length > 0 ? club.honors.join('、') : '尚无'}
+                  {(() => {
+                    const honors = aggregateClubCareerHonors(summary.honors, club.clubId)
+                    return honors.length > 0
+                      ? honors.map((honor) => <span className="retirement-honor-chip" key={honor.key}><HonorBadge honor={{ type: honor.type, competitionLabel: honor.competitionLabel, label: honor.displayLabel }} />{honor.displayLabel} ×{honor.count}</span>)
+                      : '尚无'
+                  })()}
                 </span>
               </div>
             ))}
@@ -302,12 +309,13 @@ function HonorGroup({
   label: string
   honors: import('../models/game').CareerHonor[]
 }) {
+  const grouped = aggregateCareerHonors(honors)
   return (
     <div>
       <span>{label}</span>
       <p>
-        {honors.length > 0
-          ? honors.map((item) => item.label).join('、')
+        {grouped.length > 0
+          ? grouped.map((item) => <span className="retirement-honor-chip" key={item.key}><HonorBadge honor={{ type: item.type, competitionLabel: item.competitionLabel, label: item.displayLabel }} size={24} />{item.displayLabel} ×{item.count}</span>)
           : '尚无'}
       </p>
     </div>

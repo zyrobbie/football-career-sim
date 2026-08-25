@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest'
-// @ts-expect-error Vitest executes this file in Node; the app build intentionally omits Node globals.
 import { readFileSync } from 'node:fs'
 
 const stylesheet = readFileSync(new URL('../main.css', import.meta.url), 'utf8')

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs><radialGradient id="silver" cx="34%" cy="26%" r="78%"><stop stop-color="#FFF"/><stop offset=".4" stop-color="#BFCACA"/><stop offset=".72" stop-color="#EAEFEC"/><stop offset="1" stop-color="#76898A"/></radialGradient><linearGradient id="lion" x1="43" y1="35" x2="87" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#FFD36A"/><stop offset=".5" stop-color="#E88619"/><stop offset="1" stop-color="#A64F0D"/></linearGradient></defs>
+  <circle cx="64" cy="64" r="50" fill="url(#silver)" stroke="#153C32" stroke-width="4"/><circle cx="64" cy="64" r="41" fill="none" stroke="#153C32" stroke-width="3"/><circle cx="64" cy="64" r="26" fill="#D5DEDD" stroke="#153C32" stroke-width="3"/>
+  <!-- Independent Dutch-lion redraw: crown, left-facing head, body, and rightward mane/tail. -->
+  <path d="m58 39 4-7 4 6 4-6 4 8-5 5-6-1-5 2Z" fill="url(#lion)" stroke="#153C32" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M47 54c-7 0-11 4-12 9l7 2-3 5 9 2 7-5 13 2 10 7 13 1-8-6 11 1-10-8 11-2-13-5-9-8-11-1-7 4Z" fill="url(#lion)" stroke="#153C32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="m54 66-6 13 8-4 3 8 6-13M68 69l6 12 3-8 9 4-10-12" fill="url(#lion)" stroke="#153C32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M43 58h5m1-2 2 1M70 52c8 2 15 5 22 10M68 58c9 4 15 8 22 15M66 63c8 5 14 11 19 18" stroke="#FFF0A0" stroke-width="2.5" stroke-linecap="round"/>
+  <g fill="#A3B0AF"><circle cx="31" cy="46" r="3"/><circle cx="41" cy="30" r="3"/><circle cx="87" cy="30" r="3"/><circle cx="97" cy="46" r="3"/><circle cx="97" cy="78" r="3"/><circle cx="87" cy="94" r="3"/><circle cx="41" cy="94" r="3"/><circle cx="31" cy="78" r="3"/></g>
+</svg>

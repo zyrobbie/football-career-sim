@@ -254,9 +254,16 @@ describe('retirement record export V1', () => {
     await expect(waitForExportImage(qrImage as unknown as HTMLImageElement, 1)).rejects.toThrow('Required export image failed')
   })
 
-  it('rasterizes cloned crest and QR images at double internal resolution before export', () => {
+  it('rasterizes cloned crest, honor badge, and QR images at double internal resolution before export', () => {
     const originalDocument = globalThis.document
     const crestCanvas = {
+      width: 0,
+      height: 0,
+      className: '',
+      style: { cssText: '', width: '', height: '' },
+      getContext: () => ({ drawImage: (..._args: unknown[]) => undefined }),
+    }
+    const honorCanvas = {
       width: 0,
       height: 0,
       className: '',
@@ -270,7 +277,7 @@ describe('retirement record export V1', () => {
       style: { cssText: '', width: '', height: '' },
       getContext: () => ({ drawImage: (..._args: unknown[]) => undefined }),
     }
-    const canvases = [crestCanvas, qrCanvas]
+    const canvases = [crestCanvas, honorCanvas, qrCanvas]
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
       value: { createElement: () => canvases.shift() },
@@ -285,12 +292,14 @@ describe('retirement record export V1', () => {
       replaceWith: (canvas: unknown) => replaced.push(canvas),
     })
     const crest = image({ exportRasterize: 'club-crest' }, 37.5, 42.2)
+    const honor = image({ exportRasterize: 'honor-badge' }, 24, 24)
     const qr = image({ exportRequired: 'qr' }, 76, 76)
     const target = {
       querySelectorAll: (selector: string) => {
         expect(selector).toContain('data-export-rasterize="club-crest"')
+        expect(selector).toContain('data-export-rasterize="honor-badge"')
         expect(selector).toContain('data-export-required="qr"')
-        return [crest, qr]
+        return [crest, honor, qr]
       },
     }
 
@@ -303,9 +312,10 @@ describe('retirement record export V1', () => {
       })
     }
 
-    expect(replaced).toEqual([crestCanvas, qrCanvas])
+    expect(replaced).toEqual([crestCanvas, honorCanvas, qrCanvas])
     expect(crestCanvas).toMatchObject({ width: 76, height: 86, className: 'club-crest--retirement' })
     expect(crestCanvas.style).toMatchObject({ cssText: 'display:block', width: '38px', height: '43px' })
+    expect(honorCanvas).toMatchObject({ width: 48, height: 48 })
     expect(qrCanvas).toMatchObject({ width: 152, height: 152 })
   })
 

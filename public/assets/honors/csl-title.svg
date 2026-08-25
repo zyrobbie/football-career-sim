@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <linearGradient id="gold" x1="31" y1="12" x2="93" y2="108" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF4B1"/><stop offset=".24" stop-color="#D89828"/><stop offset=".52" stop-color="#F8CE57"/><stop offset=".75" stop-color="#A15D12"/><stop offset="1" stop-color="#F0B942"/>
+    </linearGradient>
+    <linearGradient id="darkGold" x1="48" y1="42" x2="84" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#9D5710"/><stop offset=".46" stop-color="#E6A12B"/><stop offset="1" stop-color="#7E440D"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="35%" cy="27%" r="72%">
+      <stop stop-color="#FFF9C8"/><stop offset=".4" stop-color="#E6A530"/><stop offset="1" stop-color="#8C4A0A"/>
+    </radialGradient>
+  </defs>
+  <!-- The crown is deliberately irregular: interlocking sculptural panels hold the ball. -->
+  <path d="M43 18C46 9 58 6 68 10c7 2 14 9 18 17l-9 12-15 5-17-6-9-11c1-3 4-6 7-9Z" fill="url(#gold)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M44 19c8-5 18-5 27 0l-8 8 3 14-14-3-7-10Z" fill="url(#orb)" stroke="#153C32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M70 13c10 3 17 10 20 19l-11 10-4-16Z" fill="url(#darkGold)" stroke="#153C32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M40 25c-5 7-4 16 4 24l14-8-6-15Z" fill="#C57D1A" stroke="#153C32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M49 42c-7 8-9 17-7 27l9 27h30l-7-28c-2-9 2-18 7-25l-14 6-8 20-10-27Z" fill="url(#gold)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Uneven climbing ribbons create the upward, twisted support rather than two mirrored petals. -->
+  <path d="M48 48c11 7 15 16 12 28l-4 19H44l-5-27c-2-12 1-22 9-30Z" fill="#A45A0E" stroke="#153C32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M62 44c9 9 12 18 9 30l-5 21h15l6-27c3-12-1-22-10-29l-7 16Z" fill="#F8D76B" stroke="#153C32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="m46 56 15 18M43 68l15 13M78 53 67 75m15-8-14 15" stroke="#FFF0A1" stroke-opacity=".68" stroke-width="3" stroke-linecap="round"/>
+  <path d="M40 96h45l8 9H33Z" fill="#C98A20" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M25 105h72l-7 14H32Z" fill="#153C32" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M35 109h52l-3 6H38Z" fill="#1E5B4B"/><path d="M44 112h36" stroke="#D9B44D" stroke-width="2" stroke-linecap="round"/>
+</svg>

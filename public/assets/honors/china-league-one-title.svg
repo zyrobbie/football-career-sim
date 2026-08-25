@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs><linearGradient id="cloGold" x1="39" y1="12" x2="89" y2="113" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF2A1"/><stop offset=".32" stop-color="#E1AE29"/><stop offset=".62" stop-color="#9D650D"/><stop offset=".82" stop-color="#F6D15D"/><stop offset="1" stop-color="#AD7216"/></linearGradient></defs>
+  <path d="m43 15 12-7 9 8 9-8 12 7-4 15H47Z" fill="url(#cloGold)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/><path d="m48 19 8-5 8 7 8-7 8 5" stroke="#FFF2A1" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M47 30h34l6 60H41Z" fill="url(#cloGold)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/><path d="M50 35v48m8-50v53m12-53v53m8-51v48" stroke="#FFF2A1" stroke-opacity=".7" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M40 90h48l6 10H34Z" fill="url(#cloGold)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/><path d="M38 100h52v15H38Z" fill="url(#cloGold)" stroke="#153C32" stroke-width="4"/><path d="M44 104h40" stroke="#8B590D" stroke-width="2" stroke-linecap="round"/><g fill="#F9E195" stroke="#153C32" stroke-width="1.8"><circle cx="48" cy="108" r="2.5"/><circle cx="64" cy="108" r="2.5"/><circle cx="80" cy="108" r="2.5"/></g><path d="M31 115h66v8H31Z" fill="#5A3021" stroke="#153C32" stroke-width="3"/>
+</svg>

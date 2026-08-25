@@ -1,4 +1,5 @@
 import { CareerHub } from '../components/CareerHub'
+import { HonorBadge } from '../components/HonorBadge'
 import { Icon } from '../components/Icons'
 import { ATTRIBUTE_LABELS } from '../data/balance'
 import {
@@ -254,7 +255,7 @@ function SeasonHonorsReport({
       ) : null}
       <div className="season-honors-report__awards">
         {honors.length > 0 ? (
-          honors.map((item) => <strong key={item.id}>{item.label}</strong>)
+          honors.map((item) => <strong key={item.id}><HonorBadge honor={item} size={24} />{item.label}</strong>)
         ) : (
           <span>本赛季没有新增荣誉</span>
         )}

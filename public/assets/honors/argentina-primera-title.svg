@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 132 132" fill="none">
+  <defs>
+    <linearGradient id="arSilver" x1="36" y1="14" x2="92" y2="114" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF"/><stop offset=".24" stop-color="#C5D4D4"/><stop offset=".54" stop-color="#657C80"/><stop offset=".74" stop-color="#F4FAF5"/><stop offset="1" stop-color="#80989B"/></linearGradient>
+  </defs>
+  <path d="M37 38c-14 11-18 28-14 45 3 13 14 23 29 29M91 38c14 11 18 28 14 45-3 13-14 23-29 29" stroke="#153C32" stroke-width="6" stroke-linecap="round"/>
+  <path d="M38 42c-10 10-13 24-10 37m62-37c10 10 13 24 10 37" stroke="#EAF6F3" stroke-opacity=".8" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="64" cy="22" r="14" fill="url(#arSilver)" stroke="#153C32" stroke-width="4"/>
+  <path d="m64 11 6 4-2 7-4 3-4-3-2-7 6-4Zm-10 10 6 2m14 0-6 2m-10 4 6 4m6-4-6 4" stroke="#FFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M46 35c4-5 32-5 36 0l5 5c-3 5-9 7-23 7s-20-2-23-7Z" fill="url(#arSilver)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M44 45c6 4 13 5 20 5s14-1 20-5c-1 12 1 25-2 37-3 12-9 20-18 25-9-5-15-13-18-25-3-12-1-25-2-37Z" fill="url(#arSilver)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M51 53c3 4 7 5 13 5s10-1 13-5M52 65c5 3 19 3 24 0" stroke="#FFF" stroke-opacity=".78" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M51 97h26l7 8H44Z" fill="#D7E4E1" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m44 105 12-6h16l12 6v15l-10 6H54l-10-6Z" fill="#657B80" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/><path d="M52 110h24v8H52Z" fill="#A8BEC0"/>
+</svg>

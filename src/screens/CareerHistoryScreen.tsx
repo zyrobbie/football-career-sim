@@ -1,6 +1,8 @@
 import { AppShell } from '../components/AppShell'
 import { CareerTopbar } from '../components/CareerTopbar'
 import { ClubCrest } from '../components/ClubCrest'
+import { HonorBadge } from '../components/HonorBadge'
+import { aggregateCareerHonors } from '../engine/honorAggregation'
 import { Icon } from '../components/Icons'
 import type { CareerHonor, GameState, TeamLevel } from '../models/game'
 import { nationalStageLabel, roleLabel } from '../ui/format'
@@ -11,11 +13,12 @@ function teamLevelLabel(level: TeamLevel): string {
 }
 
 function HonorGroup({ label, honors }: { label: string; honors: CareerHonor[] }) {
+  const grouped = aggregateCareerHonors(honors)
   return (
     <section className="history-honors__group">
       <h3>{label}</h3>
-      {honors.length > 0 ? (
-        <ul>{honors.map((honor) => <li key={honor.id}>{honor.label}</li>)}</ul>
+      {grouped.length > 0 ? (
+        <ul>{grouped.map((honor) => <li key={honor.key}><HonorBadge honor={{ type: honor.type, competitionLabel: honor.competitionLabel, label: honor.displayLabel }} />{honor.displayLabel} ×{honor.count}<small>{honor.seasons.join('、')}</small></li>)}</ul>
       ) : <p>尚无</p>}
     </section>
   )
@@ -77,7 +80,7 @@ export function CareerHistoryScreen({ game }: { game: GameState }) {
                   <header><ClubCrest clubId={club.clubId} shortMark={club.shortMark} className="club-crest--overview" /><div><h3>{club.clubName}</h3><p>{club.country} · {club.levelLabel} · {club.teamLevelLabel}</p></div></header>
                   <p className="history-clubs__spells">{club.serviceSpells.map((spell) => <span key={`${club.clubId}-${spell.firstWindowIndex}`}>{spell.label}</span>)}</p>
                   <dl><div><dt>出场</dt><dd>{club.appearances}</dd></div><div><dt>进球</dt><dd>{club.goals}</dd></div><div><dt>助攻</dt><dd>{club.assists}</dd></div><div><dt>峰值 OVR</dt><dd>{club.peakOverall}</dd></div></dl>
-                  <p className="history-clubs__honors">{club.honors.length > 0 ? `俱乐部荣誉：${club.honors.join('、')}` : '俱乐部荣誉：尚无'}</p>
+                  <div className="history-clubs__honors">{club.honors.length > 0 ? <><span>俱乐部荣誉：</span>{aggregateCareerHonors(club.honors).map((honor) => <span className="history-clubs__honor" key={honor.key}><HonorBadge honor={{ type: honor.type, competitionLabel: honor.competitionLabel, label: honor.displayLabel }} />{honor.displayLabel} ×{honor.count}</span>)}</> : '俱乐部荣誉：尚无'}</div>
                 </article>
               ))}
             </div>

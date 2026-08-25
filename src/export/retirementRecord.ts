@@ -187,7 +187,7 @@ function rasterizeExportImage(image: HTMLImageElement): void {
 
 export function rasterizeExportImages(target: HTMLElement): void {
   for (const image of target.querySelectorAll<HTMLImageElement>(
-    'img[data-export-rasterize="club-crest"], img[data-export-required="qr"]',
+    'img[data-export-rasterize="club-crest"], img[data-export-rasterize="honor-badge"], img[data-export-required="qr"]',
   )) {
     rasterizeExportImage(image)
   }

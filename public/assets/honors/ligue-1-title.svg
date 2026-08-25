@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs><linearGradient id="gold" x1="36" y1="10" x2="93" y2="111" gradientUnits="userSpaceOnUse"><stop stop-color="#FFF4BB"/><stop offset=".33" stop-color="#D28D22"/><stop offset=".58" stop-color="#F6D46C"/><stop offset="1" stop-color="#915112"/></linearGradient><radialGradient id="orb" cx="34%" cy="24%" r="76%"><stop stop-color="#FFF9D2"/><stop offset=".47" stop-color="#E5A633"/><stop offset="1" stop-color="#95510B"/></radialGradient></defs>
+  <circle cx="64" cy="24" r="16" fill="url(#orb)" stroke="#153C32" stroke-width="4"/>
+  <!-- Three hard-edged structural beams: no petals or human curves. -->
+  <path d="M41 43 54 31l9 52-19 15 3-31-11-9Z" fill="url(#gold)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m59 31 13 9-2 43-14 15 6-41-9-13Z" fill="#B86A13" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="m74 32 14 15-7 18 4 33-20-15 9-40-8-10Z" fill="url(#gold)" stroke="#153C32" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M48 48 58 82m11-40 1 41m10-34-7 34" stroke="#FFF0A0" stroke-opacity=".7" stroke-width="3" stroke-linecap="round"/>
+  <path d="M37 98h54l-5 10H42Z" fill="#D3AE5B" stroke="#153C32" stroke-width="4"/><path d="M31 108h66v11H31Z" fill="#153C32"/><path d="M43 112h42" stroke="#E9C973" stroke-width="3" stroke-linecap="round"/>
+</svg>
