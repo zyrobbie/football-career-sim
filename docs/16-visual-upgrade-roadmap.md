@@ -5,8 +5,8 @@
 > 后续每个视觉批次开始、返工、验收、提交或发布时，都必须同步更新本文。
 
 最后更新：2026-08-25<br>
-当前基线：`4cc2907`（`origin/main`）<br>
-当前进行阶段：**中国 32 家原创队徽 V1——READY_TO_COMMIT**<br>
+当前功能基线：`4b5acb5`（已推送至 `origin/main`）<br>
+当前进行阶段：**中国 32 家原创队徽 V1——SHIPPED**<br>
 下一主阶段：**随当前俱乐部变化的界面主题系统**
 
 ## 1. 这次视觉升级要解决什么
@@ -40,7 +40,7 @@
 | --- | --- | --- | --- | --- |
 | V0 | 建档移动适配与退役 PNG 稳定导出 | `SHIPPED` | `2fcc853`；正式 PNG、二维码、长生涯与响应式验收通过 | 仅做回归维护 |
 | V1 | 42 项荣誉图标、聚合与联赛限定文案 | `SHIPPED` | `e52c38b`、`4cc2907`；42 SVG；[专项验收](14-honor-visual-system-v1-audit.md) | 仅做回归维护 |
-| V2 | 32 家中国虚构俱乐部原创队徽 | `READY_TO_COMMIT` | 32 个本地 SVG、40 条清单记录；合法状态、正式 DOM、正式 PNG、完整命令与 Git 范围审计全部通过 | 经用户授权后精确提交并推送，排除 `outputs/` |
+| V2 | 32 家中国虚构俱乐部原创队徽 | `SHIPPED` | 32 个本地 SVG、40 条清单记录；合法状态、正式 DOM、正式 PNG、完整命令与 Git 范围审计全部通过；`4b5acb5` 已推送 | 仅做回归维护 |
 | V3 | 俱乐部主题 Token 与切换底座 | `NOT_STARTED` | — | V2 提交后先做只读审计与 4 个主题样板 |
 | V4 | 中国 32 家主题覆盖 | `NOT_STARTED` | — | 从已审核队徽色板派生，并逐批验收 |
 | V5 | 海外 334 家主题覆盖 | `NOT_STARTED` | — | 建立轻量色板注册表，按联赛分批完成 |
@@ -83,7 +83,7 @@
 
 ### V2：中国 32 家原创队徽 V1 收口
 
-状态：`READY_TO_COMMIT`
+状态：`SHIPPED`
 
 已经完成：
 
@@ -101,7 +101,7 @@
 - 用户最终视觉确认；
 - 精确提交并推送，排除既有 `outputs/019facd8-3fee-7b80-bfcd-2d1d35e522ba/`。
 
-完成定义：上述验收已经全部通过，当前为 `READY_TO_COMMIT`；推送后改为 `SHIPPED`。
+完成定义：上述验收已经全部通过，功能提交 `4b5acb5` 已推送至 `origin/main`，当前为 `SHIPPED`。
 
 第一次正式页面验收尝试于 2026-08-25 停止：隔离 origin `4207` 能启动正式应用，但仓库没有可直接复用的 32 家合法退休状态入口。执行者没有伪造 DOM 或 PNG 结论，且已关闭标签页和服务、清除临时代码。当前缺口是**验收基础设施**，不是已发现的队徽资产故障。
 
@@ -123,7 +123,7 @@
    - **QA-B2 已完成**：完整工程验收链和 Git 范围审计通过；44 个测试文件、325 项测试通过，typecheck、build、俱乐部生成检查、二维码验证、依赖安全与 diff check 均通过；
    - 最终候选范围为 32 个 SVG、清单、两项既有队徽测试、可复用状态工厂及其测试、README、第 15 号审计与本文，共 40 项；
    - `outputs/019facd8-3fee-7b80-bfcd-2d1d35e522ba/` 明确排除且未触碰；
-   - V2 已达到 `READY_TO_COMMIT`，等待用户授权提交与推送。
+   - V2 已以 `4b5acb5` 提交并推送至 `origin/main`，`outputs/` 未进入提交。
 
 ### V3：主题系统前置审计与 4 个样板
 
@@ -262,6 +262,7 @@
 
 | 日期 | 阶段 | 变化 | 状态变化 | 证据 |
 | --- | --- | --- | --- | --- |
+| 2026-08-25 | V2 发布 | 40 项中国队徽、清单、测试基础设施与文档完成精确提交并推送；既有 `outputs/` 保持未跟踪且未纳入 | `READY_TO_COMMIT → SHIPPED` | `4b5acb5` |
 | 2026-08-25 | V2-QA-B2 | 32 SVG／40 条清单、兼容 ID、静态安全、完整测试、typecheck、build、数据、二维码、依赖与 Git 范围审计全部通过；候选提交排除 `outputs/` | `WAITING_QA → READY_TO_COMMIT` | 44 文件／325 测试；0 vulnerabilities；执行报告 |
 | 2026-08-25 | V2-QA-B1 | 正式按钮链路生成 32 家退役 PNG；Sharp RGBA、jsQR、像素预算、首末项与约 28.9px 收尾全部通过；临时环境已清理 | 进入 QA-B2 | `/tmp/china-club-crests-v1-retirement-audit.png` |
 | 2026-08-25 | V2-QA-A3 | 正式履历／退役页在 390×844 与 1280×720 完成 32 家 DOM 验收；asset 32、fallback 0、加载 32、无溢出及控制台问题 | QA-A 通过，进入 QA-B | `/tmp/china-club-crests-*.png` 与逐项执行报告 |
@@ -277,13 +278,12 @@
 
 检查日期：2026-08-25。
 
-- `HEAD` 与 `origin/main`：`4cc2907`；
+- 中国原创队徽功能提交：`4b5acb5`，已推送至 `origin/main`；
 - 中国本地原创队徽文件：32 个；
-- 中国队徽改动、清单、测试与第 15 号审计文档仍在工作区，尚未提交；
+- 中国队徽、清单、测试基础设施、README 与第 15 号审计文档已经提交；
 - 合法退休工厂、边界测试和 QA-A 正式 DOM 已完成；
 - QA-A 审核图位于 `/tmp/china-club-crests-history-390.png`、`/tmp/china-club-crests-retirement-390.png` 与 `/tmp/china-club-crests-retirement-1280.png`；
 - QA-B1 正式 PNG 位于 `/tmp/china-club-crests-v1-retirement-audit.png`；
-- QA-B2 完整命令与 Git 范围审计已通过，V2 当前为 `READY_TO_COMMIT`；
-- 下一动作只能在用户明确授权后执行精确提交与推送；候选提交必须排除既有 `outputs/`；
+- QA-B2 完整命令与 Git 范围审计已通过，V2 当前为 `SHIPPED`；
+- 下一主阶段为 V3 主题系统前置审计与四个主题样板；开始前仍需用户确认；
 - 既有 `outputs/019facd8-3fee-7b80-bfcd-2d1d35e522ba/` 为未跟踪审核输出，必须保留且不得进入提交；
-- 下一步只完成 V2 的隔离正式页面与退役 PNG 验收，不进入 V3。
