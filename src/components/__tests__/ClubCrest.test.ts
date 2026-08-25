@@ -38,6 +38,16 @@ describe('club crest presentation fallback', () => {
     expect(clubCrestAssetExportAttributes(null)).toEqual({})
   })
 
+  it('uses local SVG resources for both Chinese crest batches', () => {
+    for (const clubId of ['cn_wuhan_jiangcheng', 'chn1_tianjin_jinmen', 'cn_guangxi_liancheng', 'chn2_liaoning_tiecheng', 'chn2_hohhot_qingcheng']) {
+      const presentation = resolveClubCrestPresentation({ clubId, shortMark: '测' })
+      expect(presentation.assetPath).toMatch(/assets\/clubs\/crests\/cn-[a-z-]+\.svg$/)
+      expect(presentation.fallbackShortMark).toBe('测')
+    }
+    expect(resolveClubCrestPresentation({ clubId: 'unknown-china-club', shortMark: '测' }))
+      .toEqual({ assetPath: null, fallbackShortMark: '测' })
+  })
+
   it('isolates an image failure to its asset path and retries a different club asset', () => {
     const shanghai = resolveClubCrestPresentation({
       clubId: 'cn_shanghai_donggang',
