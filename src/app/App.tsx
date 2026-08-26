@@ -22,6 +22,7 @@ import {
   CareerNavigationProvider,
   useCareerNavigation,
 } from './careerNavigation'
+import { ClubVisualThemeProvider } from './ClubVisualThemeProvider'
 
 function AppContent() {
   const game = useGameStore((state) => state.game)
@@ -110,9 +111,12 @@ function AppContent() {
 
 export function App() {
   const careerKey = useGameStore((state) => careerNavigationKey(state.game?.careerSeed))
+  const game = useGameStore((state) => state.game)
   return (
     <CareerNavigationProvider careerKey={careerKey}>
-      <AppContent />
+      <ClubVisualThemeProvider game={game}>
+        <AppContent />
+      </ClubVisualThemeProvider>
     </CareerNavigationProvider>
   )
 }

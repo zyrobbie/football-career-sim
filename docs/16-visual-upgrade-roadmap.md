@@ -4,10 +4,10 @@
 > 初始设计原则见 [04-visual-direction.md](04-visual-direction.md)；已经完成的专项验收见 [14-honor-visual-system-v1-audit.md](14-honor-visual-system-v1-audit.md) 与 [15-china-club-crest-source-audit.md](15-china-club-crest-source-audit.md)。<br>
 > 后续每个视觉批次开始、返工、验收、提交或发布时，都必须同步更新本文。
 
-最后更新：2026-08-25<br>
+最后更新：2026-08-26<br>
 当前功能基线：`4b5acb5`（已推送至 `origin/main`）<br>
-当前进行阶段：**中国 32 家原创队徽 V1——SHIPPED**<br>
-下一主阶段：**随当前俱乐部变化的界面主题系统**
+当前进行阶段：**V3 俱乐部动态主题——READY_TO_COMMIT**<br>
+下一主阶段：**用户决定是否提交 V3，随后再评估中国 32 家主题覆盖**
 
 ## 1. 这次视觉升级要解决什么
 
@@ -40,8 +40,8 @@
 | --- | --- | --- | --- | --- |
 | V0 | 建档移动适配与退役 PNG 稳定导出 | `SHIPPED` | `2fcc853`；正式 PNG、二维码、长生涯与响应式验收通过 | 仅做回归维护 |
 | V1 | 42 项荣誉图标、聚合与联赛限定文案 | `SHIPPED` | `e52c38b`、`4cc2907`；42 SVG；[专项验收](14-honor-visual-system-v1-audit.md) | 仅做回归维护 |
-| V2 | 32 家中国虚构俱乐部原创队徽 | `SHIPPED` | 32 个本地 SVG、40 条清单记录；合法状态、正式 DOM、正式 PNG、完整命令与 Git 范围审计全部通过；`4b5acb5` 已推送 | 仅做回归维护 |
-| V3 | 俱乐部主题 Token 与切换底座 | `NOT_STARTED` | — | V2 提交后先做只读审计与 4 个主题样板 |
+| V2 | 32 家中国虚构俱乐部原创队徽 | `SHIPPED` | 32 个本地 SVG、40 条清单记录；合法状态、正式 DOM、正式 PNG、完整命令与 Git 范围审计全部通过；`4b5acb5` 已推送；用户后续测试通过 | 仅做回归维护 |
+| V3 | 俱乐部主题 Token 与切换底座 | `READY_TO_COMMIT` | B1 色板已确认；B2 的 18 个 phase × 2 个视口、四项导航、正式转会、固定退休档案与 PNG 均通过 | 等待用户决定是否提交 |
 | V4 | 中国 32 家主题覆盖 | `NOT_STARTED` | — | 从已审核队徽色板派生，并逐批验收 |
 | V5 | 海外 334 家主题覆盖 | `NOT_STARTED` | — | 建立轻量色板注册表，按联赛分批完成 |
 | V6 | 全局界面统一性与细节反馈 | `NOT_STARTED` | — | 在主题系统稳定后处理导航、身份带与动效 |
@@ -127,9 +127,18 @@
 
 ### V3：主题系统前置审计与 4 个样板
 
-状态：`NOT_STARTED`
+状态：`READY_TO_COMMIT`（视觉方向未变，B2 正式流程、转会、退休与工程验收通过）
 
-先做只读审计，不直接铺开 366 家：
+V3-A 已锁定结论：
+
+- 当前俱乐部唯一事实源为 `game.selectedClubId`，须经兼容查询层解析；不得使用 `lastReport`；
+- 主题 Provider 位于 `App` 顶层，动态 CSS 变量只挂到 `.app-frame`，避免污染首页、建档与退休档案；
+- `CAREER_RETIRED` 和退役 PNG 继续使用固定档案绿金主题；
+- 俱乐部身份色与成功、危险、警告、禁用、荣誉等固定语义色必须分离；
+- 国际米兰、北京御华、上海东港、AC 米兰四套样板的关键文字组合均已完成 WCAG AA 对比度校准；
+- `--gold-dark`、`--gold-soft`、`--ink-soft`、`--negative` 存在引用但未定义，B1 必须用明确 Token 收口，不能继续叠加无定义变量。
+
+已完成的只读审计范围：
 
 1. 找出当前 CSS 中所有硬编码的绿色、金色、纸张色与 active 状态；
 2. 确认主题挂载边界，应优先位于 `AppShell` 或其上层展示容器；
@@ -140,6 +149,26 @@
    - 北京御华：绿黄；
    - 上海东港：蓝红双色；
    - 一支浅色或红黑俱乐部，用于验证反差边界。
+
+V3-B1 实际完成：
+
+- 新增只读 `ClubVisualTheme` 注册表与同步解析器；只读取 `game.selectedClubId`，先通过运行时兼容查询解析为 canonical ID；未注册、未知、无俱乐部与 `CAREER_RETIRED` 均回退默认主题；
+- App 顶层 Provider 同步派生主题，只有 `AppShell` 的 `.app-frame` 获得 `data-club-theme` 和 `--club-*` 变量；不写入 `GameState`、store、localStorage 或文档根节点；
+- 国际米兰、北京御华、上海东港、AC 米兰四个样板已接入；上海保持深蓝正文承载面、红色第二强调和低透明度双色纹理，不混成紫色；
+- `.app-frame` 内的侧栏、顶栏、移动底栏、导航 active、主按钮、浅底标题、表格边线、状态条、队徽短标衬底及焦点环使用主题 Token；成功、危险、警告、禁用、删除、错误 toast、纸张和荣誉徽章仍是固定语义；
+- 已完成纯函数、CSS 边界、兼容 ID、AA 对比度测试，以及 390×844 / 1280×720 隔离浏览器样板烟雾检查。该检查不等同于 B2 的青年队、合同、转会、报告、四项导航和退役导出完整流程验收；
+- 审核图：`/tmp/club-theme-v3-b1-review.png`。真实 iPhone Safari 与 Android Chrome 仍待后续发布验收。
+- 2026-08-26 用户确认四个样板视觉方向通过；不再返工 B1 色板，正式进入 B2。
+
+V3-B2 实际完成：
+
+- 使用隔离 origin 的合法状态夹具挂载正式 `App`、`AppShell` 与流程页面；18 个要求 phase 在 390×844、1280×720 共 36 次检查均命中预期主题或固定边界，`clientWidth === scrollWidth`；
+- 正式导航按钮验证北京御华、国际米兰、上海东港、AC 米兰的生涯／球员／履历／设置往返，`data-club-theme` 不变，`aria-current` 与 3px focus-visible 轮廓正确，流程状态指纹完全一致；
+- 上海东港 → AC 米兰使用正式报价卡、接受、融入与继续职业半年动作；属性观察序列精确为 `CN_SHANGHAI_DONGGANG → ITA_AC_MILAN`，无 `DEFAULT` 或旧主题延迟；
+- 发现并修复职业合同页在桌面侧栏下的真实 CSS 收缩遗漏：`.contract-actions` 的两列改为 `minmax(0, …)`，1280px 从 `scrollWidth 1404` 恢复为 `1280`，不改变色板或页面结构；
+- `CAREER_RETIRED` 无 `.app-frame`，固定绿金档案未受 AC 米兰主题污染。正式“保存我的生涯记录”预览在两种视口均为单张图片、可关闭并再次生成；最终正式 Blob `/tmp/club-theme-v3-b2-retirement-audit.png` 为 2360×2850、6,726,000 像素、579,911 bytes，Sharp RGBA 解码 26,904,000 bytes，jsQR 为 `https://zyrobbie.github.io/football-career-sim/`；二维码、页脚和约 28px 收尾完整，无大块白边或深绿边；
+- 浏览器实际支持 `color-mix()` 与 `--club-*` 自定义属性；上海东港双色 pattern 已计算；仅过渡 color、background-color、border-color，无 `transition: all`。成功、危险、禁用和荣誉仍为固定语义。真实 iPhone Safari、Android Chrome 仍是发布前实机风险。
+- 审核图：`/tmp/club-theme-v3-b2-flow-review.png`、`/tmp/club-theme-v3-b2-transfer-review.png`、`/tmp/club-theme-v3-b2-retirement-review.png`。
 
 建议的最小 Token：
 
@@ -262,6 +291,11 @@
 
 | 日期 | 阶段 | 变化 | 状态变化 | 证据 |
 | --- | --- | --- | --- | --- |
+| 2026-08-26 | V3-B2 正式流程与退休验收 | 18 个 phase × 两种视口、四项导航、上海东港→AC 米兰正式转会、固定退休档案与正式 PNG 均通过；修复职业合同页桌面网格收缩遗漏 | `WAITING_QA → READY_TO_COMMIT` | 三张 `/tmp/club-theme-v3-b2-*.png` 审核图；正式 PNG Sharp/jsQR；完整工程命令链 |
+| 2026-08-26 | V3-B1 用户视觉审核 | 用户确认国际米兰、北京御华、上海东港、AC 米兰四套样板通过，同意进入 B2 | `WAITING_VISUAL_REVIEW → WAITING_QA` | 用户审核反馈；`/tmp/club-theme-v3-b1-review.png` |
+| 2026-08-26 | V3-B1 主题样板 | 新增只读主题注册表、同步 Provider 与 AppShell scoped CSS Token；国际米兰、北京御华、上海东港、AC 米兰样板在隔离浏览器完成 390×844 与 1280×720 烟雾检查 | `IN_PROGRESS → WAITING_VISUAL_REVIEW` | `/tmp/club-theme-v3-b1-review.png`；主题定向与完整工程命令均通过 |
+| 2026-08-26 | V3-A 主题前置审计 | 确认 `selectedClubId` 为唯一事实源、Provider 位于 App、变量限定在 AppShell；完成颜色清单、四样板 AA 色板、退休隔离与实施/验收矩阵 | `NOT_STARTED → IN_PROGRESS` | Terra 只读审计报告；仓库零改动 |
+| 2026-08-25 | V2 用户验收 | 用户在推送后完成实际测试并确认通过；未报告新增队徽、布局或导出问题 | 保持 `SHIPPED` | 用户验收反馈 |
 | 2026-08-25 | V2 发布 | 40 项中国队徽、清单、测试基础设施与文档完成精确提交并推送；既有 `outputs/` 保持未跟踪且未纳入 | `READY_TO_COMMIT → SHIPPED` | `4b5acb5` |
 | 2026-08-25 | V2-QA-B2 | 32 SVG／40 条清单、兼容 ID、静态安全、完整测试、typecheck、build、数据、二维码、依赖与 Git 范围审计全部通过；候选提交排除 `outputs/` | `WAITING_QA → READY_TO_COMMIT` | 44 文件／325 测试；0 vulnerabilities；执行报告 |
 | 2026-08-25 | V2-QA-B1 | 正式按钮链路生成 32 家退役 PNG；Sharp RGBA、jsQR、像素预算、首末项与约 28.9px 收尾全部通过；临时环境已清理 | 进入 QA-B2 | `/tmp/china-club-crests-v1-retirement-audit.png` |
@@ -276,14 +310,15 @@
 
 ## 9. 最近一次检查点
 
-检查日期：2026-08-25。
+检查日期：2026-08-26。
 
 - 中国原创队徽功能提交：`4b5acb5`，已推送至 `origin/main`；
+- 用户已在推送后完成测试并确认通过；
 - 中国本地原创队徽文件：32 个；
 - 中国队徽、清单、测试基础设施、README 与第 15 号审计文档已经提交；
 - 合法退休工厂、边界测试和 QA-A 正式 DOM 已完成；
 - QA-A 审核图位于 `/tmp/china-club-crests-history-390.png`、`/tmp/china-club-crests-retirement-390.png` 与 `/tmp/china-club-crests-retirement-1280.png`；
 - QA-B1 正式 PNG 位于 `/tmp/china-club-crests-v1-retirement-audit.png`；
 - QA-B2 完整命令与 Git 范围审计已通过，V2 当前为 `SHIPPED`；
-- 下一主阶段为 V3 主题系统前置审计与四个主题样板；开始前仍需用户确认；
+- V3-A、B1、B2 已完成；四套样板视觉未变，当前为 `READY_TO_COMMIT`，尚未提交或推送；
 - 既有 `outputs/019facd8-3fee-7b80-bfcd-2d1d35e522ba/` 为未跟踪审核输出，必须保留且不得进入提交；

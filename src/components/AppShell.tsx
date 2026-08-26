@@ -6,6 +6,8 @@ import {
   CAREER_NAV_ITEMS,
   useCareerNavigation,
 } from '../app/careerNavigation'
+import { useClubVisualTheme } from '../app/ClubVisualThemeProvider'
+import { themeCssProperties } from '../ui/clubVisualTheme'
 
 function NavigationButton({
   item,
@@ -41,8 +43,13 @@ export function AppShell({
   topbar: ReactNode
   children: ReactNode
 }) {
+  const theme = useClubVisualTheme()
   return (
-    <main className="app-frame">
+    <main
+      className="app-frame"
+      data-club-theme={theme.key}
+      style={themeCssProperties(theme)}
+    >
       <aside className="sidebar">
         <Brand />
         <nav aria-label="游戏导航" className="sidebar__nav">

@@ -18,6 +18,15 @@
   --line: #c9c0ad;
   --positive: #1f6b43;
   --danger: #93483f;
+  --semantic-success: #1f6b43;
+  --semantic-danger: #93483f;
+  --semantic-warning: #8d6c28;
+  --semantic-disabled-text: #6f716a;
+  --semantic-disabled-surface: #d7d3c9;
+  --gold-dark: var(--semantic-warning);
+  --gold-soft: color-mix(in srgb, var(--gold) 40%, var(--paper));
+  --ink-soft: #50544e;
+  --negative: var(--semantic-danger);
   --heading:
     "Songti SC", "STSong", "Noto Serif SC", "Times New Roman", serif;
 }
@@ -1045,6 +1054,154 @@ svg {
   grid-template-columns: 220px 1fr;
   background: var(--paper);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.24);
+}
+
+/* Club identity colors are scoped to the live career shell. The archive stays fixed. */
+.app-frame {
+  --shell: var(--club-shell);
+  --shell-deep: var(--club-shell-deep);
+  --ink: var(--club-paper-ink);
+  --muted: var(--club-paper-muted);
+  --gold: var(--club-accent);
+  --line: var(--club-line-tint);
+  --gold-dark: color-mix(in srgb, var(--club-accent) 72%, var(--club-paper-ink));
+  --gold-soft: color-mix(in srgb, var(--club-accent) 32%, var(--paper));
+  --ink-soft: var(--club-paper-muted);
+  --negative: var(--semantic-danger);
+  background-color: var(--paper);
+  color: var(--text);
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.app-frame button:focus-visible,
+.app-frame input:focus-visible,
+.app-frame select:focus-visible {
+  outline-color: var(--club-focus-ring);
+}
+
+.app-frame .sidebar,
+.app-frame .topbar,
+.app-frame .mobile-nav {
+  background-color: var(--club-shell);
+  background-image: var(--club-shell-pattern);
+  color: var(--club-shell-text);
+  border-color: color-mix(in srgb, var(--club-accent) 45%, transparent);
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.app-frame .sidebar {
+  border-right-color: color-mix(in srgb, var(--club-accent) 45%, transparent);
+}
+
+.app-frame .sidebar > .brand,
+.app-frame .topbar,
+.app-frame .topbar > span + span {
+  border-color: color-mix(in srgb, var(--club-accent) 35%, transparent);
+}
+
+.app-frame .sidebar__item,
+.app-frame .mobile-nav button {
+  color: var(--club-shell-muted);
+}
+
+.app-frame .sidebar__item.is-active,
+.app-frame .mobile-nav button.is-active {
+  color: var(--club-active-text);
+  background-color: var(--club-active-surface);
+}
+
+.app-frame .sidebar__item.is-active::before {
+  background-color: var(--club-accent);
+}
+
+.app-frame .sidebar__pitch,
+.app-frame .sidebar__pitch::before,
+.app-frame .sidebar__pitch span {
+  border-color: color-mix(in srgb, var(--club-accent) 45%, transparent);
+}
+
+.app-frame .sidebar__save,
+.app-frame .topbar__time {
+  color: var(--club-accent);
+}
+
+.app-frame .sidebar__save small {
+  color: var(--club-shell-muted);
+}
+
+.app-frame .app-surface {
+  background-color: var(--paper);
+}
+
+.app-frame .button--primary {
+  background-color: var(--club-button-primary);
+  color: var(--club-button-primary-text);
+  border-color: var(--club-accent);
+  box-shadow:
+    inset 0 0 0 2px var(--club-button-primary),
+    inset 0 0 0 3px var(--club-accent);
+}
+
+.app-frame .button--primary:hover:not(:disabled) {
+  background-color: var(--club-accent-alt);
+}
+
+.app-frame .button--secondary:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--club-paper-ink) 7%, transparent);
+}
+
+.app-frame .button--secondary.button--on-dark {
+  color: var(--club-shell-text);
+  border-color: color-mix(in srgb, var(--club-shell-text) 78%, transparent);
+}
+
+.app-frame .button--secondary.button--on-dark:hover:not(:disabled) {
+  background-color: color-mix(in srgb, var(--club-shell-text) 10%, transparent);
+  border-color: var(--club-shell-text);
+}
+
+.app-frame .player-screen__title,
+.app-frame .player-screen__section > header,
+.app-frame .history-screen__title,
+.app-frame .settings-screen__title,
+.app-frame .history-screen__overview strong,
+.app-frame .player-screen__attributes dd,
+.app-frame .player-screen__contract-grid dd,
+.app-frame .player-screen__pathway-grid dd {
+  color: var(--club-paper-ink);
+}
+
+.app-frame .player-screen__attributes > div,
+.app-frame .history-honors__group {
+  background-color: color-mix(in srgb, var(--club-paper-ink) 6%, transparent);
+}
+
+.app-frame .player-screen__meter i {
+  background-color: color-mix(in srgb, var(--club-paper-ink) 13%, transparent);
+}
+
+.app-frame .player-screen__meter b {
+  background-color: var(--club-accent);
+}
+
+.app-frame .history-windows__row,
+.app-frame .history-windows__mobile article,
+.app-frame .history-clubs > article {
+  border-color: color-mix(in srgb, var(--club-paper-ink) 16%, transparent);
+}
+
+.app-frame .history-windows__row:nth-child(even) {
+  background-color: color-mix(in srgb, var(--club-accent) 7%, transparent);
+}
+
+.app-frame .history-clubs__spells span {
+  color: var(--club-paper-ink);
+  background-color: color-mix(in srgb, var(--club-accent) 32%, var(--paper));
+}
+
+.app-frame .club-crest[data-crest-state="fallback"] {
+  background-color: var(--club-crest-backdrop);
+  color: var(--club-shell-text);
 }
 
 .sidebar {
@@ -5604,7 +5761,7 @@ svg {
 
 .contract-actions {
   display: grid;
-  grid-template-columns: minmax(260px, 0.75fr) minmax(280px, 1.25fr);
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
   align-items: center;
   gap: 18px;
   margin-top: 12px;
@@ -8158,6 +8315,23 @@ svg {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* Keep the theme precedence after responsive shell rules without affecting archive styles. */
+.app-frame .mobile-nav {
+  background-color: var(--club-shell);
+  background-image: var(--club-shell-pattern);
+  border-top-color: color-mix(in srgb, var(--club-accent) 50%, transparent);
+}
+
+.app-frame .mobile-nav button {
+  color: var(--club-shell-muted);
+}
+
+.app-frame .mobile-nav button.is-active {
+  color: var(--club-active-text);
+  background-color: var(--club-active-surface);
+  box-shadow: inset 0 3px 0 var(--club-accent);
 }
 
 @media (max-width: 760px) {
