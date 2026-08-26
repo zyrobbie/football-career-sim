@@ -8334,22 +8334,32 @@ svg {
   box-shadow: inset 0 3px 0 var(--club-accent);
 }
 
+/* Strategy effects are body information, not a gold decoration. */
+.app-frame .path-choice button em {
+  color: var(--club-paper-ink);
+}
+
 @media (max-width: 760px) {
   .career-report .season-honors-report {
     grid-column: 1 / -1;
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr) minmax(92px, auto);
+    grid-template-columns: auto minmax(0, 1fr);
     align-items: center;
-    gap: 4px 7px;
+    gap: 6px 8px;
   }
 
   .career-report .season-honors-report h2 {
     margin: 0;
     white-space: nowrap;
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .career-report .season-honors-report__results {
     margin: 0;
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
   }
 
   .career-report .season-honors-report__results > div {
@@ -8366,12 +8376,27 @@ svg {
   }
 
   .career-report .season-honors-report__awards {
-    justify-content: flex-end;
+    grid-column: 1 / -1;
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    justify-content: initial;
     margin-top: 0;
+  }
+
+  .career-report .season-honors-report__awards strong {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .career-report .season-honors-report__awards strong,
   .career-report .season-honors-report__awards span {
     font-size: 7px;
+  }
+
+  .career-report .season-honors-report__awards > span,
+  .career-report .season-honors-report__awards > strong:only-child {
+    grid-column: 1 / -1;
   }
 }

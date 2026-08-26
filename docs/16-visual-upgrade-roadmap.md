@@ -6,8 +6,8 @@
 
 最后更新：2026-08-26<br>
 当前功能基线：`49a716e`（已推送至 `origin/main`）<br>
-当前进行阶段：**V3 俱乐部动态主题——SHIPPED**<br>
-下一主阶段：**用户完成线上测试后，评估 V4 中国 32 家主题覆盖**
+当前进行阶段：**V3.0.1 线上视觉补丁——READY_TO_COMMIT**<br>
+下一主阶段：**等待补丁提交后继续 V4 中国 32 家主题覆盖的产品审核**
 
 ## 1. 这次视觉升级要解决什么
 
@@ -41,7 +41,7 @@
 | V0 | 建档移动适配与退役 PNG 稳定导出 | `SHIPPED` | `2fcc853`；正式 PNG、二维码、长生涯与响应式验收通过 | 仅做回归维护 |
 | V1 | 42 项荣誉图标、聚合与联赛限定文案 | `SHIPPED` | `e52c38b`、`4cc2907`；42 SVG；[专项验收](14-honor-visual-system-v1-audit.md) | 仅做回归维护 |
 | V2 | 32 家中国虚构俱乐部原创队徽 | `SHIPPED` | 32 个本地 SVG、40 条清单记录；合法状态、正式 DOM、正式 PNG、完整命令与 Git 范围审计全部通过；`4b5acb5` 已推送；用户后续测试通过 | 仅做回归维护 |
-| V3 | 俱乐部主题 Token 与切换底座 | `SHIPPED` | B1 色板已确认；B2 完整验收通过；功能提交 `49a716e` 已推送至 `origin/main` | 等待用户线上测试，再决定是否进入 V4 |
+| V3 | 俱乐部主题 Token 与切换底座 | `SHIPPED` | 功能提交 `49a716e` 已推送；V3.0.1 两项线上视觉补丁已完成并达到 `READY_TO_COMMIT` | 等待提交 V3.0.1 补丁 |
 | V4 | 中国 32 家主题覆盖 | `NOT_STARTED` | — | 从已审核队徽色板派生，并逐批验收 |
 | V5 | 海外 334 家主题覆盖 | `NOT_STARTED` | — | 建立轻量色板注册表，按联赛分批完成 |
 | V6 | 全局界面统一性与细节反馈 | `NOT_STARTED` | — | 在主题系统稳定后处理导航、身份带与动效 |
@@ -170,6 +170,13 @@ V3-B2 实际完成：
 - 浏览器实际支持 `color-mix()` 与 `--club-*` 自定义属性；上海东港双色 pattern 已计算；仅过渡 color、background-color、border-color，无 `transition: all`。成功、危险、禁用和荣誉仍为固定语义。真实 iPhone Safari、Android Chrome 仍是发布前实机风险。
 - 审核图：`/tmp/club-theme-v3-b2-flow-review.png`、`/tmp/club-theme-v3-b2-transfer-review.png`、`/tmp/club-theme-v3-b2-retirement-review.png`。
 
+V3.0.1 线上视觉补丁实际完成：
+
+- 根因一：策略卡 10px 效果说明沿用金色装饰 token；在北京御华等浅纸张主题中不适合作为正文信息。`.app-frame .path-choice button em` 现只使用既有高对比 `--club-paper-ink`，不修改任何主题色板，也不影响金色标题、图标和边框；默认、国际米兰、北京御华、上海东港、AC 米兰的实测最低对比度均高于 4.5:1。
+- 根因二：移动端 `.season-honors-report` 将赛季表现和荣誉卡排在同一行，荣誉的固有宽度会压缩三项赛季表现。小于等于 760px 时改为两列、两行：赛季名称与三项表现位于第一行，荣誉区跨整行并使用两列可收缩网格；无荣誉与单项荣誉跨整行，两项等宽，三项自动换行。
+- 隔离浏览器正式组件验收覆盖北京御华 `TrainingPlanScreen`、国际米兰 `HalfYearReportScreen`：320×568、390×844、1280×720 均无横向溢出；0／1／2／3 项荣誉矩阵保持首行表现完整、名称不省略、底部导航不遮挡，控制台无新增 error/warn。审核图：`/tmp/v3-0-1-visual-fixes-390.png`、`/tmp/v3-0-1-visual-fixes-1280.png`。
+- 本补丁为 `READY_TO_COMMIT`，尚未标记 `SHIPPED`；真实 iPhone Safari 与 Android Chrome 仍需在发布前实机复核。
+
 建议的最小 Token：
 
 | Token | 用途 |
@@ -291,6 +298,8 @@ V3-B2 实际完成：
 
 | 日期 | 阶段 | 变化 | 状态变化 | 证据 |
 | --- | --- | --- | --- | --- |
+| 2026-08-26 | V3.0.1 视觉补丁 | 策略效果说明改用高对比 paper ink；移动赛季荣誉改为首行表现、次行两列荣誉，0／1／2／3 项矩阵及三种视口通过 | `等待修复 → READY_TO_COMMIT` | `/tmp/v3-0-1-visual-fixes-390.png`、`/tmp/v3-0-1-visual-fixes-1280.png`；47 文件／339 测试 |
+| 2026-08-26 | V3.0.1 线上视觉反馈 | 北京御华主题下策略效果说明为米黄底金字、对比不足；移动端同赛季获得两个荣誉时，荣誉卡的固有宽度挤压赛季表现栏 | `SHIPPED` 后补丁待修复 | 用户线上截图；定位至 `.path-choice button em` 与移动端 `.season-honors-report` 网格 |
 | 2026-08-26 | V3 发布 | Theme Token、四个主题样板、正式流程与转会切换修复完成精确提交并推送；既有 `outputs/` 保持未跟踪且未纳入 | `READY_TO_COMMIT → SHIPPED` | `49a716e` |
 | 2026-08-26 | V3-B2 正式流程与退休验收 | 18 个 phase × 两种视口、四项导航、上海东港→AC 米兰正式转会、固定退休档案与正式 PNG 均通过；修复职业合同页桌面网格收缩遗漏 | `WAITING_QA → READY_TO_COMMIT` | 三张 `/tmp/club-theme-v3-b2-*.png` 审核图；正式 PNG Sharp/jsQR；完整工程命令链 |
 | 2026-08-26 | V3-B1 用户视觉审核 | 用户确认国际米兰、北京御华、上海东港、AC 米兰四套样板通过，同意进入 B2 | `WAITING_VISUAL_REVIEW → WAITING_QA` | 用户审核反馈；`/tmp/club-theme-v3-b1-review.png` |
@@ -322,4 +331,5 @@ V3-B2 实际完成：
 - QA-B1 正式 PNG 位于 `/tmp/china-club-crests-v1-retirement-audit.png`；
 - QA-B2 完整命令与 Git 范围审计已通过，V2 当前为 `SHIPPED`；
 - V3-A、B1、B2 已完成；四套样板视觉未变，功能提交 `49a716e` 已推送至 `origin/main`，当前为 `SHIPPED`；
+- V3.0.1 已修复策略说明文字对比不足与移动端双荣誉卡挤压赛季表现，当前为 `READY_TO_COMMIT`，尚未提交或推送；
 - 既有 `outputs/019facd8-3fee-7b80-bfcd-2d1d35e522ba/` 为未跟踪审核输出，必须保留且不得进入提交；
