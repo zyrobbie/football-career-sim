@@ -24,6 +24,7 @@ export interface ClubCrestAsset extends ClubCrestManifestRecord {
 }
 
 const REVIEWED_AT = '2026-08-21'
+const OVERSEAS_SAMPLE_REVIEWED_AT = '2026-08-27'
 
 export function clubCrestAssetPath(
   filename: string,
@@ -34,23 +35,25 @@ export function clubCrestAssetPath(
 }
 
 /**
- * V1 only contains locally authored artwork. Real-club rows remain auditable
- * references until a distribution licence is cleared; they intentionally have
- * no runtime asset path and therefore resolve to the existing short-mark UI.
+ * Runtime assets are locally authored artwork. Real-club identity references
+ * without original artwork intentionally retain a null asset path and resolve
+ * to the existing short-mark UI.
  */
 export const CLUB_CREST_MANIFEST: readonly Readonly<ClubCrestManifestRecord>[] =
   Object.freeze(([
     {
-      canonicalClubId: 'ita_inter', crestKey: 'inter', assetPath: null,
-      sourceUrl: 'https://www.inter.it/', sourceType: 'OFFICIAL_CLUB_REFERENCE',
-      rightsStatus: 'TRADEMARK_ASSET_PENDING_CLEARANCE',
-      attribution: 'Inter club identity reference; no crest file is embedded.', lastReviewedAt: REVIEWED_AT,
+      canonicalClubId: 'ita_inter', crestKey: 'inter-original',
+      assetPath: clubCrestAssetPath('ita-inter.svg'),
+      sourceUrl: 'https://www.inter.it/en/news/2021-03-27-history-inter-crest', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; official club history was used only to research the long-standing serpent identity.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
     },
     {
-      canonicalClubId: 'ita1_ac_milan', crestKey: 'ac-milan', assetPath: null,
-      sourceUrl: 'https://www.acmilan.com/', sourceType: 'OFFICIAL_CLUB_REFERENCE',
-      rightsStatus: 'TRADEMARK_ASSET_PENDING_CLEARANCE',
-      attribution: 'AC Milan club identity reference; no crest file is embedded.', lastReviewedAt: REVIEWED_AT,
+      canonicalClubId: 'ita1_ac_milan', crestKey: 'ac-milan-original',
+      assetPath: clubCrestAssetPath('ita-ac-milan.svg'),
+      sourceUrl: 'https://www.acmilan.com/en/history', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; official club history was used only to research the devil identity.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
     },
     {
       canonicalClubId: 'ita_juventus', crestKey: 'juventus', assetPath: null,
@@ -59,10 +62,46 @@ export const CLUB_CREST_MANIFEST: readonly Readonly<ClubCrestManifestRecord>[] =
       attribution: 'Juventus club identity reference; no crest file is embedded.', lastReviewedAt: REVIEWED_AT,
     },
     {
-      canonicalClubId: 'ita1_atalanta', crestKey: 'atalanta', assetPath: null,
-      sourceUrl: 'https://www.atalanta.it/', sourceType: 'OFFICIAL_CLUB_REFERENCE',
-      rightsStatus: 'TRADEMARK_ASSET_PENDING_CLEARANCE',
-      attribution: 'Atalanta club identity reference; no crest file is embedded.', lastReviewedAt: REVIEWED_AT,
+      canonicalClubId: 'ita1_atalanta', crestKey: 'atalanta-original',
+      assetPath: clubCrestAssetPath('ita-atalanta.svg'),
+      sourceUrl: 'https://en.atalanta.it/news/la-dea-al-centro-cambio-logo-22-05-2026', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; official club material was used only to research the goddess identity.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
+    },
+    {
+      canonicalClubId: 'ita1_lazio', crestKey: 'lazio-original',
+      assetPath: clubCrestAssetPath('ita-lazio.svg'),
+      sourceUrl: 'https://www.sslazio.it/en/club/storia-del-club/storia', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; official club history was used only to research the eagle identity.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
+    },
+    {
+      canonicalClubId: 'ita1_roma', crestKey: 'roma-original',
+      assetPath: clubCrestAssetPath('ita-roma.svg'),
+      sourceUrl: 'https://www.asroma.com/en/news/61619/on-this-day-the-lupetto-becomes-an-official-club-logo', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; official club history was used only to research the wolf identity.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
+    },
+    {
+      canonicalClubId: 'ita1_como', crestKey: 'como-original',
+      assetPath: clubCrestAssetPath('ita-como.svg'),
+      sourceUrl: 'https://www.comune.como.it/vivere-il-comune/luoghi/Piazza-Cavour/', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; municipal material was used only to research the lakefront setting.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
+    },
+    {
+      canonicalClubId: 'ita_bologna', crestKey: 'bologna-original',
+      assetPath: clubCrestAssetPath('ita-bologna.svg'),
+      sourceUrl: 'https://www.bolognawelcome.com/en/places/towers-historic-buildings/the-two-towers-garisenda-and-degli-asinelli-eng', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; municipal tourism material was used only to research the Two Towers.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
+    },
+    {
+      canonicalClubId: 'ita1_venezia', crestKey: 'venezia-original',
+      assetPath: clubCrestAssetPath('ita-venezia.svg'),
+      sourceUrl: 'https://www.comune.venezia.it/it/node/16768', sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
+      attribution: 'Original game artwork; municipal material was used only to research gondola culture.', lastReviewedAt: OVERSEAS_SAMPLE_REVIEWED_AT,
     },
     {
       canonicalClubId: 'eng_arsenal', crestKey: 'arsenal', assetPath: null,

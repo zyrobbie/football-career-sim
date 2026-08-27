@@ -33,27 +33,27 @@ describe('club crest V1 manifest', () => {
     )
   })
 
-  it('retains auditable real-club references while returning null without a cleared local asset', () => {
-    const canonical = getClubCrestManifestRecordByCompatibleId('ita_inter')
-    const workbook = getClubCrestManifestRecordByCompatibleId('ita1_inter')
+  it('retains auditable real-club references while returning null without original local artwork', () => {
+    const canonical = getClubCrestManifestRecordByCompatibleId('ita_juventus')
+    const workbook = getClubCrestManifestRecordByCompatibleId('ita1_juventus')
 
     expect(workbook).toBe(canonical)
     expect(canonical).toMatchObject({
-      canonicalClubId: 'ita_inter',
+      canonicalClubId: 'ita_juventus',
       assetPath: null,
       sourceType: 'OFFICIAL_CLUB_REFERENCE',
       rightsStatus: 'TRADEMARK_ASSET_PENDING_CLEARANCE',
     })
-    expect(getClubCrestByCompatibleId('ita_inter')).toBeNull()
+    expect(getClubCrestByCompatibleId('ita_juventus')).toBeNull()
     expect(getClubCrestByCompatibleId('eng_liverpool')).toBeNull()
     expect(getClubCrestByCompatibleId('missing-club')).toBeNull()
   })
 
-  it('has forty unique, canonical, audit-complete records and thirty-two usable Chinese local crests', () => {
-    expect(CLUB_CREST_MANIFEST).toHaveLength(40)
-    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.canonicalClubId)).size).toBe(40)
-    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.crestKey)).size).toBe(40)
-    expect(CLUB_CREST_MANIFEST.filter((crest) => crest.assetPath !== null)).toHaveLength(32)
+  it('has forty-five unique, canonical, audit-complete records and forty usable local crests', () => {
+    expect(CLUB_CREST_MANIFEST).toHaveLength(45)
+    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.canonicalClubId)).size).toBe(45)
+    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.crestKey)).size).toBe(45)
+    expect(CLUB_CREST_MANIFEST.filter((crest) => crest.assetPath !== null)).toHaveLength(40)
 
     for (const crest of CLUB_CREST_MANIFEST) {
       expect(getClubCrestManifestRecordByCompatibleId(crest.canonicalClubId)).toBe(crest)
@@ -66,6 +66,38 @@ describe('club crest V1 manifest', () => {
       } else {
         expect(crest.rightsStatus).toBe('TRADEMARK_ASSET_PENDING_CLEARANCE')
       }
+    }
+  })
+
+  it('resolves all eight approved Serie A samples by canonical and workbook-compatible IDs', () => {
+    const samples = [
+      ['ita_inter', 'ita1_inter', 'ita-inter.svg'],
+      ['ita1_ac_milan', 'ita1_ac_milan', 'ita-ac-milan.svg'],
+      ['ita1_atalanta', 'ita1_atalanta', 'ita-atalanta.svg'],
+      ['ita1_lazio', 'ita1_lazio', 'ita-lazio.svg'],
+      ['ita1_roma', 'ita1_roma', 'ita-roma.svg'],
+      ['ita1_como', 'ita1_como', 'ita-como.svg'],
+      ['ita_bologna', 'ita1_bologna', 'ita-bologna.svg'],
+      ['ita1_venezia', 'ita1_venezia', 'ita-venezia.svg'],
+    ] as const
+
+    for (const [canonicalId, workbookId, filename] of samples) {
+      const canonical = getClubCrestByCompatibleId(canonicalId)
+      expect(canonical).toMatchObject({
+        canonicalClubId: canonicalId,
+        assetPath: `/assets/clubs/crests/${filename}`,
+        sourceType: 'ORIGINAL_GAME_ARTWORK',
+        rightsStatus: 'ORIGINAL_GAME_ASSET',
+      })
+      expect(getClubCrestByCompatibleId(workbookId)).toBe(canonical)
+      const source = readFileSync(
+        resolve(process.cwd(), 'public/assets/clubs/crests', filename),
+        'utf8',
+      )
+      expect(source).toContain('viewBox="0 0 128 128"')
+      expect(source).not.toMatch(
+        /<(?:text|script|image)\b|font-family|(?:href|xlink:href)="(?:https?:|data:)/i,
+      )
     }
   })
 

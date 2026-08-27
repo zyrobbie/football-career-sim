@@ -6,14 +6,14 @@ import {
 } from '../ClubCrest'
 
 describe('club crest presentation fallback', () => {
-  it('keeps a mixed three-card invitation set renderable with local assets and short marks', () => {
+  it('keeps a mixed three-card invitation set renderable with approved assets and short marks', () => {
     const cards = [
       resolveClubCrestPresentation({ clubId: 'cn_shanghai_donggang', shortMark: '沪' }),
       resolveClubCrestPresentation({ clubId: 'ita_inter', shortMark: '国' }),
       resolveClubCrestPresentation({ clubId: 'eng_liverpool', shortMark: '利' }),
     ]
 
-    expect(cards.map((card) => card.assetPath !== null)).toEqual([true, false, false])
+    expect(cards.map((card) => card.assetPath !== null)).toEqual([true, true, false])
     expect(cards.map((card) => card.fallbackShortMark)).toEqual(['沪', '国', '利'])
   })
 
@@ -76,6 +76,11 @@ describe('club crest presentation fallback', () => {
         shortMark: '国',
         failedAssetPath: shanghai.assetPath,
       }),
-    ).toEqual({ assetPath: null, fallbackShortMark: '国' })
+    ).toEqual({
+      assetPath: expect.stringMatching(/assets\/clubs\/crests\/ita-inter\.svg$/),
+      fallbackShortMark: '国',
+    })
+    expect(resolveClubCrestPresentation({ clubId: 'ita_juventus', shortMark: '尤' }))
+      .toEqual({ assetPath: null, fallbackShortMark: '尤' })
   })
 })
