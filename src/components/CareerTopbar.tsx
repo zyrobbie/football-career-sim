@@ -32,7 +32,7 @@ export function CareerTopbar({
     <>
       <span className="topbar__time">
         <Icon name="calendar" />
-        <span className="topbar__label--full">{windowLabel}窗口</span>
+        <span className="topbar__label--full">{windowLabel}</span>
         <span className="topbar__label--compact">
           {windowLabel.replace('年', '').replace('季', '')}
         </span>
@@ -44,7 +44,7 @@ export function CareerTopbar({
       </span>
       <span className="topbar__context">
         <span className="topbar__label--full">
-          {clubName ? `当前俱乐部：${clubName}` : sectionLabel}
+          {clubName ? `效力：${clubName}` : sectionLabel}
         </span>
         <span className="topbar__label--compact">
           {currentClub ? clubDisplayNameForCompatibleId(currentClub.id, currentClub.name) : sectionLabel}

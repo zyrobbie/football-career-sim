@@ -24,12 +24,12 @@ const categoryIcons: Record<CareerEventCategory, IconName> = {
 }
 
 const interactionLabels = {
-  CHOICE: '直接选择',
-  DIALOGUE: '两步对话',
-  RISK: '可见概率',
-  ALLOCATION: '资源分配',
+  CHOICE: '直接决定',
+  DIALOGUE: '分两步决定',
+  RISK: '结果有风险',
+  ALLOCATION: '分配投入',
   RANKING: '优先级排序',
-  PERSON_TONE: '对象与语气',
+  PERSON_TONE: '选择对象与态度',
 } as const
 
 const deltaLabels: Record<string, string> = {
@@ -46,7 +46,7 @@ const deltaLabels: Record<string, string> = {
   fanRelation: '球迷关系',
   mediaRelation: '媒体关系',
   reputation: '知名度',
-  clubAttachment: '俱乐部认同',
+  clubAttachment: '俱乐部认可',
 }
 
 function deltaEntries(delta: PlayerEventDelta): Array<[string, number]> {
@@ -98,16 +98,16 @@ export function SpecialEventScreen() {
         {isResult && record ? (
           <div className="special-event__reveal" aria-live="polite">
             <span className="special-event__reveal-label">
-              {record.outcomeLabel ?? '选择已生效'}
+              {record.outcomeLabel ?? '决定已做出'}
             </span>
             <h2>{record.choiceTitle}</h2>
             <p>{record.outcomeSummary}</p>
-            <div className="special-event__deltas" aria-label="本次精确变化">
+            <div className="special-event__deltas" aria-label="这次选择带来的变化">
               {changes.length ? changes.map(([label, value]) => (
                 <span key={label} className={value > 0 ? 'is-positive' : 'is-negative'}>
                   {label} {value > 0 ? '+' : ''}{value}
                 </span>
-              )) : <span>本次没有即时数值变化</span>}
+              )) : <span>这次选择暂时没有带来即时数值变化</span>}
               {record.cashDeltaEuro !== 0 ? (
                 <span className={record.cashDeltaEuro > 0 ? 'is-positive' : 'is-negative'}>
                   现金 {record.cashDeltaEuro > 0 ? '+' : ''}€{record.cashDeltaEuro.toLocaleString()}
@@ -119,7 +119,7 @@ export function SpecialEventScreen() {
               type="button"
               onClick={continueAfterCareerEvent}
             >
-              进入本窗口结算 <Icon name="arrow" />
+              继续这半年 <Icon name="arrow" />
             </button>
           </div>
         ) : (
@@ -134,7 +134,7 @@ export function SpecialEventScreen() {
                 <div
                   className={`special-event__choices special-event__choices--setup special-event__choices--${interactionClass}`}
                   role="group"
-                  aria-label="特殊事件第一步选择"
+                  aria-label="生涯事件第一步选择"
                 >
                   {setup.options.map((option, index) => (
                     <button
@@ -145,7 +145,7 @@ export function SpecialEventScreen() {
                       <span>{index + 1}</span>
                       <strong>{option.title}</strong>
                       <small>{option.description}</small>
-                      <em>选择后再决定具体做法</em>
+                      <em>先选方向，下一步再决定具体做法</em>
                       <Icon name="arrow" />
                     </button>
                   ))}
@@ -177,7 +177,7 @@ export function SpecialEventScreen() {
                       <small>{choice.description}</small>
                       <em>{choice.effectPreview}</em>
                       {choice.outcomes?.length ? (
-                        <div className="special-event__odds" aria-label="可能结果">
+                        <div className="special-event__odds" aria-label="可能出现的结果">
                           {choice.outcomes.map((outcome) => (
                             <i key={outcome.id}>{outcome.weight}% {outcome.label}</i>
                           ))}

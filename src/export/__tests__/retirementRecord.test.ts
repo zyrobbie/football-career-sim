@@ -40,8 +40,8 @@ describe('retirement record export V1', () => {
   })
 
   it('filters unsafe player names from PNG filenames', () => {
-    expect(safeRetirementRecordFilename('林/致:远?*', 2048)).toBe('绿茵生涯-林致远-2048.png')
-    expect(safeRetirementRecordFilename('   ', 2048)).toBe('绿茵生涯-球员-2048.png')
+    expect(safeRetirementRecordFilename('林/致:远?*', 2048)).toBe('上场-林致远-2048.png')
+    expect(safeRetirementRecordFilename('   ', 2048)).toBe('上场-球员-2048.png')
   })
 
   it('uses a high-quality scale for ordinary careers without exceeding the pixel budget', () => {
@@ -193,11 +193,16 @@ describe('retirement record export V1', () => {
 
   it('returns share, cancellation, and fallback results without leaking share errors', async () => {
     const file = {} as File
+    let shareInput: ShareData | undefined
     const supportedNavigator = {
       canShare: () => true,
-      share: () => Promise.resolve(),
+      share: (input: ShareData) => {
+        shareInput = input
+        return Promise.resolve()
+      },
     }
     expect(await shareRetirementRecord(file, supportedNavigator)).toBe('SHARED')
+    expect(shareInput?.title).toBe('我的《上场》职业生涯')
     expect(await shareRetirementRecord(file, {
       canShare: () => true,
       share: () => Promise.reject(new DOMException('cancelled', 'AbortError')),
@@ -355,7 +360,7 @@ describe('retirement record export V1', () => {
 
 
   it('maps rendering failures to recoverable Chinese messages', () => {
-    expect(retirementExportErrorMessage(new Error('Canvas memory exhausted'))).toContain('无法安全生成')
+    expect(retirementExportErrorMessage(new Error('Canvas memory exhausted'))).toContain('当前设备无法生成')
     expect(retirementExportErrorMessage(new Error('other failure'))).toContain('生成失败')
   })
 

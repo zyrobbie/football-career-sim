@@ -35,7 +35,7 @@ export function buildPlayerViewModel(game: GameState): PlayerViewModel {
   return {
     age: playerAgeAtWindow(visibleCareerWindowIndex(game)),
     overall: Math.round(calculateOverall(player.attributes, player.primaryPosition)),
-    clubName: currentClub?.name ?? '暂未选择俱乐部',
+    clubName: currentClub?.name ?? '还没有加入俱乐部',
     clubShortMark: currentClub?.shortMark ?? '足',
     clubId: currentClub?.id ?? null,
     actualTeamLevel: game.teamLevel,
@@ -76,10 +76,10 @@ export function PlayerScreen({ game }: { game: GameState }) {
       <main className="player-screen">
         <header className="player-screen__title">
           <span>球员</span>
-          <small>只读生涯档案</small>
+          <small>生涯一览</small>
         </header>
 
-        <section className="player-screen__identity" aria-label="身份摘要">
+        <section className="player-screen__identity" aria-label="球员身份摘要">
           <div className="player-screen__overall"><span>OVR</span><strong>{view.overall}</strong></div>
           <div>
             <h1>{player.name}</h1>
@@ -88,7 +88,7 @@ export function PlayerScreen({ game }: { game: GameState }) {
               <ClubCrest clubId={view.clubId} shortMark={view.clubShortMark} className="club-crest--overview" />
               {view.clubName}
             </strong>
-            <small>{teamLevelLabel(view.actualTeamLevel)} · {view.actualRole ? roleLabel(view.actualRole) : '角色待确定'}</small>
+            <small>{teamLevelLabel(view.actualTeamLevel)} · {view.actualRole ? roleLabel(view.actualRole) : '角色还未确定'}</small>
           </div>
         </section>
 
@@ -99,33 +99,33 @@ export function PlayerScreen({ game }: { game: GameState }) {
           </dl>
         </section>
 
-        <section className="player-screen__section" aria-label="职业取向">
-          <header><h2>职业取向</h2></header>
+        <section className="player-screen__section" aria-label="职业偏好">
+          <header><h2>职业偏好</h2></header>
           <dl className="player-screen__preferences">
             <div><dt>职业追求</dt><dd>{player.priorities.map((priority, index) => <span key={priority}>{index + 1}. {PRIORITY_LABELS[priority]}</span>)}</dd></div>
             <div><dt>留洋倾向</dt><dd>{overseasIntentLabel(player.overseasIntent)}</dd></div>
-            <div><dt>偏好联赛</dt><dd>{player.preferredLeagues.length > 0 ? player.preferredLeagues.slice(0, 3).join(' · ') : '未设定偏好联赛'}</dd></div>
+            <div><dt>偏好联赛</dt><dd>{player.preferredLeagues.length > 0 ? player.preferredLeagues.slice(0, 3).join(' · ') : '还没有偏好联赛'}</dd></div>
           </dl>
         </section>
 
         {isContracted && view.contract ? (
-          <section className="player-screen__section" aria-label="合同状态">
+          <section className="player-screen__section" aria-label="当前合同状态">
             <header><h2>当前合同</h2></header>
             <dl className="player-screen__contract-grid">
               <div><dt>合同剩余</dt><dd>{remainingContractLabel(view.contract.remainingHalfYears)}</dd></div>
-              <div><dt>承诺球队层级</dt><dd>{teamLevelLabel(view.contract.promisedTeamLevel)}</dd></div>
+              <div><dt>承诺队伍</dt><dd>{teamLevelLabel(view.contract.promisedTeamLevel)}</dd></div>
               <div><dt>承诺角色</dt><dd>{view.contract.promisedRole ? roleLabel(view.contract.promisedRole) : '无'}</dd></div>
-              <div><dt>实际球队层级</dt><dd>{teamLevelLabel(view.actualContractTeamLevel)}</dd></div>
-              <div><dt>实际角色</dt><dd>{view.actualContractRole ? roleLabel(view.actualContractRole) : '待评估'}</dd></div>
+              <div><dt>当前队伍</dt><dd>{teamLevelLabel(view.actualContractTeamLevel)}</dd></div>
+              <div><dt>当前角色</dt><dd>{view.actualContractRole ? roleLabel(view.actualContractRole) : '待评估'}</dd></div>
             </dl>
           </section>
         ) : (
-          <section className="player-screen__section" aria-label="一线队通道">
-            <header><h2>一线队通道</h2><small>{firstTeamStatusLabel(pathway.status)}</small></header>
+          <section className="player-screen__section" aria-label="距离一线队">
+            <header><h2>距离一线队</h2><small>{firstTeamStatusLabel(pathway.status)}</small></header>
             <dl className="player-screen__pathway-grid">
-              <div><dt>一线队关注度</dt><dd>{Math.round(pathway.attention)}</dd></div>
-              <div><dt>培养准备</dt><dd>{Math.round(pathway.readiness)}</dd></div>
-              <div><dt>比赛证明</dt><dd>{Math.round(pathway.matchProof)}</dd></div>
+              <div><dt>一线队关注</dt><dd>{Math.round(pathway.attention)}</dd></div>
+              <div><dt>准备程度</dt><dd>{Math.round(pathway.readiness)}</dd></div>
+              <div><dt>比赛表现</dt><dd>{Math.round(pathway.matchProof)}</dd></div>
               <div><dt>教练推荐</dt><dd>{Math.round(pathway.coachBacking)}</dd></div>
             </dl>
           </section>
@@ -141,7 +141,7 @@ export function PlayerScreen({ game }: { game: GameState }) {
 
         <section className="player-screen__section player-screen__tags" aria-label="生涯标签">
           <header><h2>生涯标签</h2></header>
-          <p>生涯标签将在退役总结中生成。</p>
+          <p>你的生涯标签会在退役时揭晓。</p>
         </section>
       </main>
     </AppShell>

@@ -95,7 +95,7 @@ function buildLedgerRows(game: GameState): LedgerRow[] {
     const clubId = game.selectedClubId ?? ''
     const clubName = clubId
       ? clubNameFor(game, clubId)
-      : '等待选择俱乐部'
+      : '俱乐部待定'
     rows.push({
       key: `pending-${game.windowIndex}`,
       clubId,
@@ -133,7 +133,7 @@ export function CareerHub({
     ? `${currentClub.name}${
         game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'
       }`
-    : '等待选择第一家俱乐部'
+    : '尚未加入俱乐部'
   const totalStats = game.history.reduce(
     (totals, entry) => ({
       appearances: totals.appearances + entry.stats.appearances,
@@ -203,7 +203,7 @@ function PlayerOverview({
     : game.lastReport
 
   return (
-    <section className="career-overview" aria-label="球员总览">
+    <section className="career-overview" aria-label="球员生涯总览">
       <div className="career-overview__overall">
         <span>OVR</span>
         <strong>{overall}</strong>
@@ -242,8 +242,8 @@ function PlayerOverview({
         <div className="career-overview__totals">
           <p>
             {game.history.some((entry) => entry.teamLevel === 'FIRST_TEAM')
-              ? '生涯累计'
-              : '生涯累计（青年队）'}
+              ? '生涯数据'
+              : '青年队生涯数据'}
           </p>
           <dl>
             <OverviewNumber label="出场" value={totalStats.appearances} />
@@ -262,7 +262,7 @@ function PlayerOverview({
           ) : null}
         </div>
         <div className="career-overview__attributes">
-          <p>核心属性</p>
+          <p>球员能力</p>
           <dl>
             {attributeKeys.map((key) => {
               const delta = latest?.attributes[key].delta ?? 0
@@ -393,7 +393,7 @@ function FirstTeamPath({ game }: { game: GameState }) {
       (game.contract.brokenPromiseWindows === 0)
 
     return (
-      <section className="first-team-path" aria-label="职业合同状态">
+      <section className="first-team-path" aria-label="当前职业合同">
         <div className="first-team-path__summary">
           <span>合同剩余</span>
           <strong className="first-team-path__contract-term">
@@ -409,7 +409,7 @@ function FirstTeamPath({ game }: { game: GameState }) {
         </i>
         <dl>
           <div>
-            <dt>合同层级</dt>
+            <dt>承诺队伍</dt>
             <dd>
               {game.contract.promisedTeamLevel === 'FIRST_TEAM'
                 ? '一线队'
@@ -425,7 +425,7 @@ function FirstTeamPath({ game }: { game: GameState }) {
             </dd>
           </div>
           <div>
-            <dt>实际角色</dt>
+            <dt>当前角色</dt>
             <dd>
               {actualRole
                 ? roleLabel(actualRole).replace('球员', '')
@@ -525,12 +525,12 @@ function CareerLedger({
           >
             {isExpanded
               ? '▲ 收起完整履历'
-              : `▼ 查看全部${rows.length}个窗口`}
+              : `▼ 查看全部${rows.length}段履历`}
           </button>
         ) : null}
       </div>
       <p>
-        每个半年保留当时的俱乐部、地位、能力和青年队比赛数据。
+        每半年都会留下当时的俱乐部、角色、能力和比赛数据。
       </p>
     </section>
   )
@@ -548,11 +548,11 @@ function CareerLedgerTable({
       <table>
         <thead>
           <tr>
-            <th>窗口</th>
+            <th>阶段</th>
             <th>年龄</th>
             <th>俱乐部</th>
-            <th>队伍级别</th>
-            <th>地位</th>
+            <th>队伍</th>
+            <th>角色</th>
             <th>能力</th>
             <th>出场</th>
             <th>进球</th>

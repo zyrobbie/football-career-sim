@@ -55,7 +55,7 @@ export function HalfYearReportScreen() {
           <h1>{reportTitle}</h1>
           <span>
             {isCareerFinalWindow
-              ? `${report.fromLabel} · 职业生涯终章`
+              ? `${report.fromLabel} · 最后一个半年`
               : `${report.fromLabel} — ${report.toLabel}`}{' '}
             · {age}岁 ·{' '}
             {roleLabel(reportRole)}
@@ -70,11 +70,11 @@ export function HalfYearReportScreen() {
               <Stat label="助攻" value={stats.assists} />
               <Stat label="平均评分" value={stats.averageRating.toFixed(1)} />
             </dl>
-            <div className="attribute-table" role="table" aria-label="能力变化">
+            <div className="attribute-table" role="table" aria-label="这半年能力变化">
               <div role="row" className="attribute-table__head">
                 <span role="columnheader">能力</span>
-                <span role="columnheader">开始</span>
-                <span role="columnheader">当前</span>
+                <span role="columnheader">半年前</span>
+                <span role="columnheader">现在</span>
                 <span role="columnheader">变化</span>
               </div>
               {attributeKeys.map((key) => {
@@ -94,7 +94,7 @@ export function HalfYearReportScreen() {
               return change.delta > 0 && Math.round(change.before) === Math.round(change.after)
             }) ? (
               <p className="progress-note">
-                有些能力已经取得内部进展，距离下一整数等级更加接近。
+                部分能力已经在积累进步，只是还没有跨过下一个整数等级。
               </p>
             ) : null}
           </section>
@@ -111,7 +111,7 @@ export function HalfYearReportScreen() {
             ) : null}
             {report.specialEvent ? (
               <section className="special-event-result">
-                <h2>特殊事件</h2>
+              <h2>半年故事</h2>
                 <strong>{report.specialEvent.title}</strong>
                 <span>{report.specialEvent.choiceTitle}</span>
                 <p>{report.specialEvent.outcomeSummary}</p>
@@ -119,14 +119,14 @@ export function HalfYearReportScreen() {
             ) : null}
             {report.consequenceSummaries?.length ? (
               <section className="consequence-result">
-                <h2>长期后果</h2>
+                <h2>持续影响</h2>
                 {report.consequenceSummaries.map((summary) => (
                   <p key={summary}>{summary}</p>
                 ))}
               </section>
             ) : null}
             <section className="report-side__states">
-              <h2>状态与关系变化</h2>
+              <h2>状态与关系</h2>
               <ReportChange label="竞技状态" change={report.states.form} />
               <ReportChange label="身体状态" change={report.states.fitness} />
               <ReportChange label="心理状态" change={report.states.morale} />
@@ -135,28 +135,28 @@ export function HalfYearReportScreen() {
               <ReportChange label="球迷关系" change={report.relations.fans} />
             </section>
             <section className="report-side__finance">
-              <h2>财务状况</h2>
+              <h2>收入与现金</h2>
               <MoneyRow
                 label={report.incomeLabel ?? '青训津贴'}
                 value={report.stipendEuro}
                 positive
               />
-              <MoneyRow label="事件支出" value={report.expenseEuro} />
-              <MoneyRow label="当前现金" value={report.cashAfterEuro} />
+              <MoneyRow label="额外支出" value={report.expenseEuro} />
+              <MoneyRow label="可支配现金" value={report.cashAfterEuro} />
             </section>
             {report.contract ? (
               <ContractReport contract={report.contract} />
             ) : (
               <section className="first-team-report">
-                <h2>一线队通道</h2>
+                <h2>距离一线队</h2>
                 <ReportChange
-                  label="综合关注度"
+                  label="关注度"
                   change={report.firstTeam.attention}
                 />
                 <div className="first-team-report__metrics">
-                  <span>准备 {Math.round(report.firstTeam.readiness.after)}</span>
-                  <span>表现 {Math.round(report.firstTeam.matchProof.after)}</span>
-                  <span>推荐 {Math.round(report.firstTeam.coachBacking.after)}</span>
+                  <span>准备程度 {Math.round(report.firstTeam.readiness.after)}</span>
+                  <span>比赛表现 {Math.round(report.firstTeam.matchProof.after)}</span>
+                  <span>教练推荐 {Math.round(report.firstTeam.coachBacking.after)}</span>
                 </div>
                 <strong>
                   {firstTeamStatusLabel(report.firstTeam.statusAfter)}
@@ -167,7 +167,7 @@ export function HalfYearReportScreen() {
             {report.injury ? (
               <section className="injury-note">
                 <h2>身体情况</h2>
-                <p>本阶段经历了一次轻微伤病，缺阵约{report.injury.weeks}周。</p>
+                <p>这半年经历了一次轻微伤病，缺阵约{report.injury.weeks}周。</p>
               </section>
             ) : null}
           </aside>
@@ -176,12 +176,12 @@ export function HalfYearReportScreen() {
         <section className="report-footer">
           <div>
             <h2>
-              {isCareerFinalWindow ? '40岁赛季结束' : `${report.toLabel}前瞻`}
+              {isCareerFinalWindow ? '最后一个赛季结束了' : `接下来：${report.toLabel}`}
             </h2>
             <p className="event-summary">{report.eventSummary}</p>
             {isCareerFinalWindow ? (
               <ul>
-                <li>职业日历已到终点，完成报告后将进入强制退役流程。</li>
+                <li>最后一个赛季已经结束。看完这份回顾，你将正式走向退役。</li>
               </ul>
             ) : (
               <ul>
@@ -192,7 +192,7 @@ export function HalfYearReportScreen() {
             )}
             <p className="autosave-line">
               <Icon name="save" />
-              本阶段已自动保存
+              进度已保存
             </p>
           </div>
           <button
@@ -202,11 +202,11 @@ export function HalfYearReportScreen() {
           >
             {isProfessionalWindow
               ? isCareerFinalWindow
-                ? '完成最后一个职业半年'
-                : '完成本次职业半年'
+                ? '结束最后一个半年'
+                : '结束这半年'
               : isDemoComplete
-              ? '完成青训第二年'
-              : `进入${report.toLabel}窗口`}
+              ? '结束青训第二年'
+              : `进入${report.toLabel}`}
             <Icon name="arrow" />
           </button>
         </section>
@@ -236,7 +236,7 @@ function SeasonHonorsReport({
 }) {
   return (
     <section className="season-honors-report">
-      <h2>{season?.seasonLabel ?? '本期荣誉'}</h2>
+      <h2>{season?.seasonLabel ?? '这半年拿到的荣誉'}</h2>
       {season ? (
         <dl className="season-honors-report__results">
           <div>
@@ -257,7 +257,7 @@ function SeasonHonorsReport({
         {honors.length > 0 ? (
           honors.map((item) => <strong key={item.id}><HonorBadge honor={item} size={24} />{item.label}</strong>)
         ) : (
-          <span>本赛季没有新增荣誉</span>
+          <span>这赛季还没有新增荣誉</span>
         )}
       </div>
     </section>
@@ -293,7 +293,7 @@ function NationalTeamReport({
         </>
       ) : (
         <>
-          <strong>本期未获征召</strong>
+          <strong>这半年没有入选</strong>
           <p>{record.summary}</p>
         </>
       )}
@@ -303,14 +303,14 @@ function NationalTeamReport({
 
 function halfYearReportTitle(windowIndex: number): string {
   if (windowIndex === DEMO_WINDOW_COUNT) {
-    return '职业生涯首个半年报告'
+    return '职业生涯第一个半年'
   }
   return [
-    '首个半年报告',
-    '青训第一年总结',
-    '第二年上半程报告',
-    '一线队晋升评估',
-  ][windowIndex] ?? `第${windowIndex + 1}份半年报告`
+    '第一个半年回顾',
+    '青训第一年回顾',
+    '第二年上半程回顾',
+    '能进一线队了吗？',
+  ][windowIndex] ?? `第${windowIndex + 1}次半年回顾`
 }
 
 function ContractReport({
@@ -322,7 +322,7 @@ function ContractReport({
 }) {
   return (
     <section className="contract-window-report">
-      <h2>合同兑现</h2>
+      <h2>承诺兑现情况</h2>
       <dl>
         <div>
           <dt>合同承诺</dt>
@@ -333,11 +333,11 @@ function ContractReport({
             {' · '}
             {contract.promisedRole
               ? roleLabel(contract.promisedRole).replace('球员', '')
-              : '未承诺角色'}
+              : '没有角色承诺'}
           </dd>
         </div>
         <div>
-          <dt>实际安排</dt>
+          <dt>实际角色</dt>
           <dd>
             {contract.actualTeamLevel === 'FIRST_TEAM'
               ? '一线队'
@@ -356,7 +356,7 @@ function ContractReport({
           contract.promiseFulfilled ? 'is-positive' : 'is-negative'
         }
       >
-        {contract.promiseFulfilled ? '本窗口已兑现' : '本窗口未兑现'}
+        {contract.promiseFulfilled ? '已兑现' : '未兑现'}
       </strong>
     </section>
   )

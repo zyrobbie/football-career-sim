@@ -52,7 +52,7 @@ export function AppShell({
     >
       <aside className="sidebar">
         <Brand />
-        <nav aria-label="游戏导航" className="sidebar__nav">
+        <nav aria-label="主导航" className="sidebar__nav">
           {CAREER_NAV_ITEMS.map((item) => <NavigationButton key={item.key} item={item} />)}
         </nav>
         <div className="sidebar__pitch" aria-hidden="true">
@@ -60,14 +60,14 @@ export function AppShell({
         </div>
         <div className="sidebar__save">
           <span>进度已自动保存</span>
-          <small>本地生涯存档</small>
+          <small>本机存档</small>
         </div>
       </aside>
       <section className="app-surface">
         <header className="topbar">{topbar}</header>
         {children}
       </section>
-      <nav className="mobile-nav" aria-label="手机游戏导航">
+      <nav className="mobile-nav" aria-label="移动端主导航">
         {CAREER_NAV_ITEMS.map((item) => <NavigationButton key={item.key} item={item} mobile />)}
       </nav>
     </main>

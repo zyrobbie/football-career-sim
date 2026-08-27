@@ -14,29 +14,29 @@ const choices: Array<{
   {
     id: 'COACH',
     title: '主动与教练沟通',
-    description: '了解球队要求，明确第一个半年的发展目标。',
-    preview: '教练关系明显上升，队内关系小幅上升',
+    description: '弄清球队对你的期待，也让教练知道你想怎么成长。',
+    preview: '教练关系明显提升，队内关系小幅提升',
     icon: 'coach',
   },
   {
     id: 'TEAMMATES',
-    title: '积极认识新队友',
-    description: '把融入更衣室放在第一位。',
-    preview: '队内关系明显上升，心理状态小幅上升',
+    title: '主动融入更衣室',
+    description: '先认识队友，让自己尽快成为更衣室的一员。',
+    preview: '队内关系明显提升，心理状态小幅提升',
     icon: 'team',
   },
   {
     id: 'OPEN_DAY',
-    title: '参加俱乐部开放活动',
-    description: '在训练之外认识这里的球迷。',
-    preview: '球迷和媒体关系上升',
+    title: '去见见球迷',
+    description: '参加俱乐部活动，让球迷先认识你。',
+    preview: '球迷关系和媒体关系提升',
     icon: 'fans',
   },
   {
     id: 'EXTRA_TRAINING',
-    title: '留在训练场加练',
-    description: '用额外训练争取教练组注意。',
-    preview: '本窗口训练质量上升，身体状态小幅下降',
+    title: '留下来加练',
+    description: '用更多训练时间争取教练组的注意。',
+    preview: '这半年训练质量提升，身体状态小幅下降',
     icon: 'physical',
   },
 ]
@@ -52,19 +52,19 @@ export function ArrivalScreen() {
   if (!offer) return null
 
   return (
-    <CareerHub game={game} sectionLabel="首次入队事件">
+    <CareerHub game={game} sectionLabel="报到第一天">
       <div className="career-decision">
         <header className="career-panel-heading">
           <Icon name="team" />
-          <h1>第一天来到训练基地</h1>
+          <h1>第一天，怎么让大家记住你？</h1>
         </header>
         <p className="career-panel-lead">
-          你准备怎样开始这段职业生涯？这次选择会影响最初的关系与训练条件。
+          职业生涯从今天真正开始。你先做什么，会影响教练、队友和球迷对你的第一印象。
         </p>
         <div
           className="choice-list choice-list--career choice-list--arrival"
           role="radiogroup"
-          aria-label="入队选择"
+          aria-label="报到第一天的选择"
         >
           {choices.map((choice) => (
             <button
@@ -92,7 +92,7 @@ export function ArrivalScreen() {
           className="button button--primary career-decision__submit"
           onClick={() => chooseArrival(selected)}
         >
-          确认入队方式
+          就这么开始
           <Icon name="arrow" />
         </button>
       </div>

@@ -8,6 +8,17 @@ import {
 import { useGameStore } from '../store/gameStore'
 import { firstTeamStatusLabel } from '../ui/format'
 
+export const DEMO_DELETE_CAREER_CONFIRMATION = '确定删除当前生涯并返回首页吗？删除后无法恢复。'
+
+export function deleteDemoCareerIfConfirmed(
+  confirm: (message: string) => boolean,
+  deleteCareer: () => void,
+): boolean {
+  if (!confirm(DEMO_DELETE_CAREER_CONFIRMATION)) return false
+  deleteCareer()
+  return true
+}
+
 export function DemoCompleteScreen() {
   const game = useGameStore((state) => state.game)
   const reviewReport = useGameStore((state) => state.reviewReport)
@@ -43,10 +54,10 @@ export function DemoCompleteScreen() {
           <h1>
             {game.teamLevel === 'FIRST_TEAM'
               ? '你敲开了一线队的大门。'
-              : '四个半年已经写入你的生涯。'}
+              : '两年青训结束了。'}
           </h1>
           <p>
-            从首次入队到第二年晋升评估，成长、比赛、关系与一线队关注已经连续运行。下一阶段将从职业合同和正式一线队竞争开始。
+            两年青训到这里告一段落。你的训练、比赛和每一次选择，决定了俱乐部现在怎么看你。下一步，是第一份职业合同。
           </p>
           <p className="demo-complete__next">
             {nextWindow}窗口 · {playerAgeAtWindow(nextWindowIndex)}岁
@@ -75,7 +86,7 @@ export function DemoCompleteScreen() {
             </div>
             <div>
               <dt>存档状态</dt>
-              <dd>已保存到本地浏览器</dd>
+              <dd>已保存在此浏览器</dd>
             </div>
           </dl>
           <div className="demo-complete__actions">
@@ -92,15 +103,13 @@ export function DemoCompleteScreen() {
               className="button button--secondary"
               onClick={reviewReport}
             >
-              复查晋升评估
+              再看一次晋升评估
             </button>
             <button
               type="button"
               className="text-button text-button--danger demo-complete__delete"
               onClick={() => {
-                if (window.confirm('确定删除当前Demo生涯并返回首页吗？')) {
-                  deleteCareer()
-                }
+                deleteDemoCareerIfConfirmed(window.confirm, deleteCareer)
               }}
             >
               删除生涯

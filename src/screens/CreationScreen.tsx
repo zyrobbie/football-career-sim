@@ -43,7 +43,7 @@ function IdentityStep() {
   return (
     <SetupFrame
       step={1}
-      title="注册你的球员"
+      title="告诉我们你是谁？"
       description={`生涯从${game.startYear}年夏季开始，你将以13岁中国球员身份进入职业青训。`}
     >
       <form
@@ -64,12 +64,12 @@ function IdentityStep() {
             onChange={(event) => setName(event.target.value)}
             maxLength={12}
             autoComplete="off"
-            placeholder="输入2至12个字符"
+            placeholder="输入2—12个字符"
           />
         </label>
         <div className="identity-traits">
           <label className="field">
-            <span>偏好球衣号码</span>
+            <span>球衣号码</span>
             <input
               type="number"
               inputMode="numeric"
@@ -105,7 +105,7 @@ function IdentityStep() {
         </div>
         <div className="notice-line">
           <Icon name="info" />
-          <span>年龄固定为13岁，国籍固定为中国；号码和惯用脚会写入球员档案。</span>
+          <span>你将从13岁开始开启足球生涯，国籍为中国；号码和惯用脚会留在球员档案中。</span>
         </div>
         <div className="setup-actions setup-actions--end">
           <button type="submit" className="button button--primary">
@@ -141,8 +141,8 @@ function PositionStep() {
   return (
     <SetupFrame
       step={2}
-      title="选择你的场上位置"
-      description="位置决定四项能力的初始结构与综合能力权重。"
+      title="你踢什么位置？"
+      description="主位置会影响你的初始能力分配，以及综合能力的计算方式。"
     >
       <section className="position-builder">
         <h2 className="section-heading">主位置</h2>
@@ -197,7 +197,7 @@ function PositionStep() {
         </div>
         <div className="notice-line">
           <Icon name="info" />
-          <span>副位置熟练度92%，不占用生涯学习新位置的机会。</span>
+          <span>副位置初始熟练度为92%，不会占用生涯中学习新位置的机会。</span>
         </div>
         <div className="setup-actions">
           <button
@@ -244,8 +244,8 @@ function PrioritiesStep() {
   return (
     <SetupFrame
       step={3}
-      title="排列你的职业追求"
-      description="排名越靠前，球员在合同、转会和队内处境中越重视这一目标。"
+      title="你最看重什么？"
+      description="把四项追求按重要程度排好。以后面对合同、转会和队内竞争时，它会影响你的取舍。"
     >
       <section className="priority-editor">
         <ol>
@@ -325,8 +325,8 @@ function PreferencesStep() {
   return (
     <SetupFrame
       step={4}
-      title="确定你的留洋倾向"
-      description="这是长期偏好，不是必须执行的路线；合适的合同仍由你亲自决定。"
+      title="你想去海外踢球吗？"
+      description="这只是你的长期倾向，不会替你做决定。每一份合同，仍由你亲自选择。"
     >
       <section className="preference-editor">
         <fieldset>
@@ -358,7 +358,7 @@ function PreferencesStep() {
         </fieldset>
         {intent !== 'DOMESTIC' ? (
           <fieldset>
-            <legend>偏好联赛（最多三个）</legend>
+            <legend>最想去的联赛（最多3个）</legend>
             <div className="league-grid">
               {PREFERRED_LEAGUES.map((league) => {
                 const selectedIndex = leagues.indexOf(league)
@@ -406,35 +406,35 @@ function PreferencesStep() {
 }
 
 function positionDescription(position: Position): string {
-  if (position === 'ST') return '主要依靠进攻、身体与心理能力。'
+  if (position === 'ST') return '靠进攻终结比赛，也需要身体和心理支撑。'
   if (position === 'LW' || position === 'RW') {
-    return '需要进攻与身体能力制造边路威胁。'
+    return '用进攻和身体能力在边路制造威胁。'
   }
-  if (position === 'CAM') return '进攻与心理决定前场组织和创造力。'
+  if (position === 'CAM') return '负责前场组织与创造机会，进攻和心理尤其重要。'
   if (position === 'LM' || position === 'RM') {
-    return '兼顾进攻、防守与身体的中场边路角色。'
+    return '覆盖边路两端，需要兼顾进攻、防守和身体。'
   }
-  if (position === 'CM') return '进攻、防守和心理能力相对均衡。'
-  if (position === 'CDM') return '依靠防守与身体保护中场区域。'
+  if (position === 'CM') return '攻守都要参与，能力结构最讲究均衡。'
+  if (position === 'CDM') return '守住中场身后，防守和身体是立足之本。'
   if (position === 'LB' || position === 'RB') {
-    return '防守与身体是边后卫的主要基础。'
+    return '既要守住边路，也要有足够体能参与攻防。'
   }
-  return '防守、身体和心理决定中后卫的稳定性。'
+  return '站稳防线核心，防守、身体和心理缺一不可。'
 }
 
 function priorityDescription(priority: CareerPriority): string {
   return {
-    PLAYING_TIME: '更重视角色承诺与稳定出场。',
-    COMPETITIVE_LEVEL: '更愿意挑战更强联赛和俱乐部。',
-    SALARY: '更重视合同收入和谈判回报。',
-    STABILITY: '更偏好长约、熟悉环境和长期留队。',
+    PLAYING_TIME: '我想获得稳定的比赛机会和明确角色。',
+    COMPETITIVE_LEVEL: '我愿意去更高水平的联赛和俱乐部挑战自己。',
+    SALARY: '我更看重合同收入和谈判回报。',
+    STABILITY: '我更看重长约、熟悉的环境和长期留队。',
   }[priority]
 }
 
 function intentDescription(intent: OverseasIntent): string {
   return {
-    STRONG: '只要出现合理机会，就会优先考虑海外路线。',
-    CONDITIONAL: '联赛、出场和合同都合适时再作决定。',
-    DOMESTIC: '国内发展更符合预期，但不会永久关闭留洋。',
+    STRONG: '只要机会合适，我会优先考虑去海外发展。',
+    CONDITIONAL: '联赛、出场机会和合同都合适，我才会考虑出发。',
+    DOMESTIC: '我更习惯在国内发展，但真正合适的海外机会仍会考虑。',
   }[intent]
 }

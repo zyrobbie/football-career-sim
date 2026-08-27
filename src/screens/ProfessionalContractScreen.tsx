@@ -52,16 +52,16 @@ export function ProfessionalContractScreen() {
 
   if (game.phase === 'PRO_CONTRACT_COMPLETE' && game.contract) {
     return (
-      <CareerHub game={game} sectionLabel="职业合同已签署">
+      <CareerHub game={game} sectionLabel="职业合同已签">
         <section className="contract-complete">
           <div className="contract-complete__mark">
             <Icon name="check" />
           </div>
           <div>
             <p className="decision-kicker">首份职业合同</p>
-            <h1>签字完成，职业生涯正式开始。</h1>
+            <h1>签下名字，你正式成为职业球员。</h1>
             <p>
-              {clubName}已完成注册。合同与角色承诺会从下一窗口开始影响收入、出场和续约判断。
+              {clubName}已经为你完成注册。从下个半年开始，合同里的角色承诺会真正影响你的出场、收入和续约。
             </p>
             <ContractTerms
               offer={offer}
@@ -69,14 +69,14 @@ export function ProfessionalContractScreen() {
               compact
             />
             <p className="contract-complete__next">
-              下一阶段先完成首个职业半年；随后将进入正式转会窗口，评估留队或转会机会。
+              先踢完职业生涯的第一个半年。之后，转会市场会真正向你打开。
             </p>
             <button
               type="button"
               className="button button--primary"
               onClick={startProfessionalCareer}
             >
-              进入第一个职业半年
+              开始职业生涯
               <Icon name="arrow" />
             </button>
           </div>
@@ -93,12 +93,12 @@ export function ProfessionalContractScreen() {
         <header className="career-panel-heading">
           <Icon name="history" />
           <h1>你的首份职业合同</h1>
-          <span>仅可反报价一次</span>
+          <span>你只有一次反报价机会</span>
         </header>
         <p className="career-panel-lead">
           {offer.promisedTeamLevel === 'FIRST_TEAM'
-            ? '俱乐部确认你的晋升，并给出一线队角色承诺。'
-            : '你将以职业球员身份留在青年队，继续竞争一线队席位。'}
+            ? '俱乐部决定把你升入一线队，并在合同里承诺了你的角色。'
+            : '你已经成为职业球员，但会暂时留在青年队，继续争取一线队席位。'}
         </p>
 
         <ContractTerms offer={offer} clubName={clubName} />
@@ -122,7 +122,7 @@ export function ProfessionalContractScreen() {
         {!offer.counterUsed ? (
           <div
             className="contract-counter-grid"
-            aria-label="反报价方向"
+            aria-label="选择反报价方向"
           >
             {counterChoices.map((choice) => {
               const disabled =
@@ -136,7 +136,7 @@ export function ProfessionalContractScreen() {
                 >
                   <strong>{choice.title}</strong>
                   <small>
-                    {disabled ? '当前层级已是最高角色' : choice.effect}
+                    {disabled ? '已经是当前层级的最高角色' : choice.effect}
                   </small>
                 </button>
               )
@@ -150,11 +150,11 @@ export function ProfessionalContractScreen() {
             className="button button--primary"
             onClick={acceptProfessionalContract}
           >
-            {offer.counterUsed ? '接受最终报价并签约' : '接受原报价并签约'}
+            {offer.counterUsed ? '接受最终合同并签约' : '接受合同并签约'}
             <Icon name="arrow" />
           </button>
           <p>
-            税费、经纪人佣金、住房与日常生活支出将统一扣除；游戏现金只记录可支配部分。
+            工资会扣除税费、经纪人佣金和日常生活支出；页面显示的是你真正可以支配的现金。
           </p>
         </div>
       </section>

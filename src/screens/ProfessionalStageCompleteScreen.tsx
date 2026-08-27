@@ -12,6 +12,17 @@ import {
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, roleLabel } from '../ui/format'
 
+export const RETIRE_NATIONAL_TEAM_CONFIRMATION = '确定退出中国国家队吗？退出后无法撤回，但你的俱乐部生涯仍会继续。'
+
+export function retireFromNationalTeamIfConfirmed(
+  confirm: (message: string) => boolean,
+  retireFromNationalTeam: () => void,
+): boolean {
+  if (!confirm(RETIRE_NATIONAL_TEAM_CONFIRMATION)) return false
+  retireFromNationalTeam()
+  return true
+}
+
 export function professionalStageHeading(
   promiseFulfilled: boolean,
   isFirstProfessionalWindow: boolean,
@@ -80,14 +91,14 @@ export function ProfessionalStageCompleteScreen() {
     !retirementMandatory
 
   return (
-    <CareerHub game={game} sectionLabel="职业半年完成">
+    <CareerHub game={game} sectionLabel="半年结束">
       <section className="demo-complete demo-complete--hub">
         <span className="demo-complete__number">
           {String(game.history.length).padStart(2, '0')}
         </span>
         <div>
           <p className="decision-kicker">
-            {isFirstProfessionalWindow ? '职业生涯正式起步' : '职业窗口完成'}
+            {isFirstProfessionalWindow ? '职业生涯，正式开始' : '又一个半年过去了'}
           </p>
           <h1>
             {professionalStageHeading(
@@ -97,8 +108,8 @@ export function ProfessionalStageCompleteScreen() {
           </h1>
           <p>
             {actualTeamLevel === 'FIRST_TEAM'
-              ? '本窗口已经使用一线队训练质量、实际角色、正式比赛出场和工资可支配收入完成结算，后续转会与续约会沿用同一份职业状态。'
-              : '这一阶段已经按照职业合同结算青年队训练、比赛出场、工资可支配收入和角色承诺；你仍可继续竞争一线队席位。'}
+              ? '这半年，你已经按一线队的训练和比赛节奏生活。实际角色、正式比赛表现和收入，都会影响接下来的续约与转会。'
+              : '你已经签下职业合同，但这半年仍主要在青年队训练和比赛。你还有机会继续争取一线队席位。'}
           </p>
           <dl>
             <div>
@@ -139,13 +150,13 @@ export function ProfessionalStageCompleteScreen() {
           ) : null}
           <p className="demo-complete__next">
             {retirementMandatory
-              ? '最后一个赛季已经落幕。现在，去为这段漫长的球员生涯写下结尾。'
+              ? '最后一个赛季已经落幕。现在，为这段漫长的球员生涯写下结尾。'
               : !transferMarketOpen
-              ? '职业生涯已经进入最后一年。你将履行现有合同完成最后赛季，不再开启新的转会或续约谈判。'
+              ? '你已经进入职业生涯的最后一年。接下来只专心踢完最后一个赛季，不再开启新的续约或转会谈判。'
               : contractExpired
-              ? '合同已经到期。你必须先完成续约或接受新的自由身合同，才能进入下一职业半年。'
+              ? '合同已经到期。先决定续约，或者接受一份新的自由身合同，才能继续下一段生涯。'
               : canRequestTransfer
-                ? '球队已经连续两个窗口没有兑现角色承诺。你可以正式提出转会申请，或选择再留队半年等待改善。'
+                ? '球队已经连续两个半年没有兑现角色承诺。你可以正式申请转会，也可以再留下半年看看。'
                 : transferOpportunity.summary}
           </p>
           <div className="demo-complete__actions">
@@ -214,7 +225,7 @@ export function ProfessionalStageCompleteScreen() {
               className="retirement-option"
               onClick={requestRetirement}
             >
-              选择在本窗口后退役
+              踢完这半年后退役
             </button>
           ) : null}
           {canRetireFromNationalTeam ? (
@@ -222,13 +233,7 @@ export function ProfessionalStageCompleteScreen() {
               type="button"
               className="retirement-option retirement-option--national"
               onClick={() => {
-                if (
-                  window.confirm(
-                    '确认退出中国国家队吗？这项决定不能撤回，但俱乐部生涯仍会继续。',
-                  )
-                ) {
-                  retireFromNationalTeam()
-                }
+                retireFromNationalTeamIfConfirmed(window.confirm, retireFromNationalTeam)
               }}
             >
               退出中国国家队

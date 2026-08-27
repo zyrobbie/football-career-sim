@@ -70,7 +70,7 @@ describe('player view model', () => {
   it('does not need a contract or selected club to produce a safe read-only view', () => {
     const game = { ...createCareer('ACADEMY_OFFERS'), selectedClubId: null, contract: null }
     const view = buildPlayerViewModel(game)
-    expect(view.clubName).toBe('暂未选择俱乐部')
+    expect(view.clubName).toBe('还没有加入俱乐部')
     expect(view.contract).toBeNull()
     expect(view.actualRole).toBeNull()
   })

@@ -2821,6 +2821,7 @@ svg {
 }
 
 .choice-list--career > button {
+  min-width: 0;
   min-height: 62px;
   border: 0;
   border-bottom: 1px dotted var(--line);

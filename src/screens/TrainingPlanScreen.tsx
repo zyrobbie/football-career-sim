@@ -17,38 +17,38 @@ const plans: Array<{
 }> = [
   {
     id: 'attack',
-    title: '加强进攻',
-    description: '把固定训练份额集中到进攻能力。',
+    title: '重点练进攻',
+    description: '把更多训练时间放在进攻能力上。',
     icon: 'attack',
   },
   {
     id: 'defense',
-    title: '加强防守',
-    description: '提高防守训练比重，补强无球能力。',
+    title: '重点练防守',
+    description: '把更多训练时间放在防守和无球能力上。',
     icon: 'defense',
   },
   {
     id: 'physical',
-    title: '加强身体',
-    description: '提升身体素质，增强对抗与耐力。',
+    title: '重点练身体',
+    description: '提升身体素质，增强对抗和耐力。',
     icon: 'physical',
   },
   {
     id: 'mental',
-    title: '加强心理',
-    description: '训练判断、专注与比赛抗压能力。',
+    title: '重点练心理',
+    description: '提升判断、专注和比赛抗压能力。',
     icon: 'mental',
   },
   {
     id: 'BALANCED',
-    title: '平衡训练',
-    description: '按照位置权重分配全部训练份额。',
+    title: '均衡训练',
+    description: '按照你的位置特点均衡分配训练。',
     icon: 'career',
   },
   {
     id: 'ADAPTATION',
-    title: '适应青训节奏',
-    description: '优先稳定身体与心理，能力成长略慢。',
+    title: '先适应青训',
+    description: '优先稳住身体和心理状态，能力成长会稍慢一些。',
     icon: 'team',
   },
 ]
@@ -62,20 +62,20 @@ const approaches: Array<{
   {
     id: 'PUSH',
     title: '主动争取跟训',
-    description: '直接向教练表达进入一线队训练的意愿。',
-    effect: '教练推荐提升更快 · 身体负荷增加',
+    description: '直接告诉教练，你想进入一线队训练。',
+    effect: '更容易获得教练推荐 · 身体负荷增加',
   },
   {
     id: 'STEADY',
     title: '稳住成长节奏',
-    description: '继续按长期计划训练，不为了短期机会打乱节奏。',
-    effect: '竞技与身体状态更稳定',
+    description: '按长期计划继续训练，不为了眼前机会打乱节奏。',
+    effect: '竞技状态与身体状态更稳定',
   },
   {
     id: 'TEAM_FIRST',
-    title: '青年队成绩优先',
-    description: '承担更多比赛责任，用场上表现证明自己。',
-    effect: '比赛证明与队内关系更易提升',
+    title: '用比赛说话',
+    description: '在青年队承担更多责任，用表现争取一线队注意。',
+    effect: '比赛证明与队内关系更容易提升',
   },
 ]
 
@@ -83,19 +83,19 @@ const professionalApproaches: typeof approaches = [
   {
     id: 'PUSH',
     title: '主动争取出场',
-    description: '向教练明确表达比赛诉求，用更高训练投入争取机会。',
+    description: '明确告诉教练你想上场，并用更高训练投入争取机会。',
     effect: '教练关系提升 · 身体负荷增加',
   },
   {
     id: 'STEADY',
-    title: '稳定适应职业队',
-    description: '先适应训练、比赛准备与恢复节奏，再逐步扩大角色。',
-    effect: '竞技与身体状态更稳定',
+    title: '先站稳脚跟',
+    description: '先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。',
+    effect: '竞技状态与身体状态更稳定',
   },
   {
     id: 'TEAM_FIRST',
-    title: '接受球队安排',
-    description: '把团队需要放在个人出场诉求之前，耐心等待机会。',
+    title: '先服从球队安排',
+    description: '把球队需要放在个人出场之前，耐心等机会。',
     effect: '队内关系与心理状态提升',
   },
 ]
@@ -129,7 +129,7 @@ export function TrainingPlanScreen() {
   return (
     <CareerHub
       game={game}
-      sectionLabel="半年发展计划"
+      sectionLabel="半年计划"
     >
       <div className="career-decision">
         <header className="career-panel-heading">
@@ -140,24 +140,24 @@ export function TrainingPlanScreen() {
         </header>
         <p className="career-panel-lead">
             {needsRecovery
-              ? '俱乐部已为你的低状态安排恢复支持；你的训练选择仍会影响本阶段成长。'
+              ? '你的状态不在最佳，俱乐部已经安排恢复支持。怎么训练，仍会影响这半年的成长。'
               : isProfessional
-                ? '职业合同已经生效。训练方向、职业队策略和实际出场将共同决定合同承诺是否兑现。'
+                ? '合同已经生效。你怎么训练、怎么争取角色，以及真正获得多少出场，会决定俱乐部是否兑现承诺。'
                 : isSecondYear
-                ? '第二个青训赛季里，你的训练方向和职业策略会共同影响一线队评估。'
-                : '不同的发展方向会影响能力成长与事件概率，请谨慎选择。'}
+                ? '青训进入第二年。你的训练方向和职业策略，会直接影响俱乐部是否愿意把你推向一线队。'
+                : '未来半年没有标准答案。你选的方向，会改变成长节奏，也可能带来不同的故事。'}
         </p>
         {isSecondYear ? (
           <section className="path-choice">
             <header>
               <div>
-                <span>本窗口职业策略</span>
+                <span>这半年怎么踢</span>
                 <h2>
                   {isProfessional
                     ? game.windowIndex === 4
-                      ? '你准备怎样开始职业队生涯？'
-                      : '你准备怎样应对新的职业半年？'
-                    : '你准备如何面对一线队的关注？'}
+                      ? '职业队的第一步，你想怎么走？'
+                      : '这半年，你想把重心放在哪里？'
+                    : '一线队已经注意到你，你准备怎么争取？'}
                 </h2>
               </div>
               <strong>
@@ -198,7 +198,7 @@ export function TrainingPlanScreen() {
         <div
           className="choice-list choice-list--career choice-list--training-plan"
           role="radiogroup"
-          aria-label="半年发展计划"
+          aria-label="半年计划"
         >
           {plans.map((plan) => (
             <button
@@ -216,12 +216,12 @@ export function TrainingPlanScreen() {
               <span>
                 <strong>
                   {isProfessional && plan.id === 'ADAPTATION'
-                    ? '适应职业队节奏'
+                    ? '先适应职业队'
                     : plan.title}
                 </strong>
                 <small>
                   {isProfessional && plan.id === 'ADAPTATION'
-                    ? '优先稳定职业队训练与比赛节奏，能力成长略慢。'
+                    ? '优先适应职业队的训练和比赛强度，能力成长会稍慢一些。'
                     : plan.description}
                 </small>
               </span>
@@ -237,16 +237,16 @@ export function TrainingPlanScreen() {
           }
           disabled={isSimulating}
         >
-          {isSimulating ? '正在结算…' : '确认选择并模拟半年'}
+          {isSimulating ? '半年进行中…' : '开始这半年'}
           <Icon name="arrow" />
         </button>
         <p className="decision-footnote">
           <Icon name="info" />
-          {currentWindow}的选择完成后将进入{nextWindow}窗口
+          {currentWindow}结束后，将进入{nextWindow}
         </p>
         {game.lastReport ? (
-          <section className="previous-change" aria-label="上一窗口变化">
-            <h2>上一窗口变化</h2>
+          <section className="previous-change" aria-label="上半年回顾">
+            <h2>上半年回顾</h2>
             <div>
               {attributeKeysForPreview.map((key) => {
                 const delta = game.lastReport!.attributes[key].delta
@@ -272,15 +272,15 @@ export function TrainingPlanScreen() {
 
 function windowHeading(game: GameState): string {
   const windowIndex = game.windowIndex
-  if (windowIndex === 0) return '第一个半年，你准备怎样发展？'
-  if (windowIndex === 1) return '第一年下半程，你准备怎样发展？'
-  if (windowIndex === 2) return '青训第二年，你要怎样接近一线队？'
-  if (windowIndex === 3) return '晋升评估前，你要怎样完成最后冲刺？'
-  if (windowIndex === 4) return '职业生涯第一个半年，你准备怎样立足？'
+  if (windowIndex === 0) return '第一个半年，你想怎么起步？'
+  if (windowIndex === 1) return '第一年进入下半程，你想怎么走？'
+  if (windowIndex === 2) return '青训第二年，开始冲击一线队。'
+  if (windowIndex === 3) return '晋升评估前，最后冲一把。'
+  if (windowIndex === 4) return '职业生涯第一个半年，先站稳脚跟。'
   if (game.transferDecision?.kind === 'TRANSFER') {
-    return '新俱乐部的第一个半年，你准备怎样立足？'
+    return '新球队的第一个半年，先找到自己的位置。'
   }
-  return '新的职业半年，你准备怎样发展？'
+  return '接下来的半年，你想怎么踢？'
 }
 
 const attributeKeysForPreview = ['attack', 'physical'] as const

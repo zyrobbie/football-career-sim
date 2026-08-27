@@ -119,12 +119,12 @@ export function TransferWindowScreen() {
   if (game.phase === 'TRANSFER_ARRIVAL') {
     const dinnerCost = transferDinnerCost(game.cashEuro)
     return (
-      <CareerHub game={game} sectionLabel="新援融入">
+      <CareerHub game={game} sectionLabel="加盟报到">
         <section className="transfer-arrival">
           <header className="career-panel-heading">
             <Icon name="team" />
-            <h1>加盟后的第一步</h1>
-            <span>关系事件</span>
+            <h1>新球队，第一天。</h1>
+            <span>融入球队</span>
           </header>
           <p className="career-panel-lead">
             知名度已经影响初始融入。现在选择如何认识
@@ -147,7 +147,7 @@ export function TransferWindowScreen() {
             ))}
           </div>
           <p className="transfer-footnote">
-            聚餐费用直接从可支配现金扣除；其他日常开销已经包含在工资固定支出中。
+            全队聚餐会从可支配现金中扣款；其他日常开销已经计入固定生活支出。
           </p>
         </section>
       </CareerHub>
@@ -174,13 +174,13 @@ export function TransferWindowScreen() {
         selectedTransferChoiceId: game.selectedTransferChoiceId,
       })
     return (
-      <CareerHub game={game} sectionLabel="转会决定完成">
+      <CareerHub game={game} sectionLabel="去向已定">
         <section className="transfer-complete">
           <div className="transfer-complete__mark">
             <Icon name="check" />
           </div>
           <div>
-            <p className="decision-kicker">本次转会决定</p>
+            <p className="decision-kicker">转会窗口</p>
             <h1>
               {renewedCurrentClub
                 ? `原合同到期后，与${clubName(decision.toClubId)}签下新约。`
@@ -190,10 +190,10 @@ export function TransferWindowScreen() {
             </h1>
             <p>
               {renewedCurrentClub
-                ? '页面上方显示的是刚刚生效的新合同期限；球队层级和角色承诺已经写入存档，原有队内关系全部保留。'
+                ? '新合同已经生效，角色承诺也已经确定；你在队内建立的关系会继续保留。'
                 : decision.kind === 'STAY'
-                ? '原合同与既有关系全部保留，下一窗口继续为当前俱乐部效力。'
-                : '新合同、角色承诺与初始关系已经写入存档；转会费由俱乐部之间结算，不占用个人现金。'}
+                ? '原合同和已经建立的关系都会保留。下个半年，你继续为这家俱乐部效力。'
+                : '新合同和角色承诺已经生效；转会费由俱乐部之间结算，不会从你的现金中扣除。'}
             </p>
             <dl>
               <div>
@@ -232,14 +232,14 @@ export function TransferWindowScreen() {
               </div>
             </dl>
             <p className="transfer-complete__next">
-              下一步：进入{currentWindow}至{nextWindow}的职业半年，继续结算比赛、工资、合同和特殊事件。
+              接下来是{currentWindow}到{nextWindow}。比赛、工资、合同和新的故事都会继续。
             </p>
             <button
               type="button"
               className="button button--primary transfer-complete__continue"
               onClick={continueAfterTransfer}
             >
-              开始新的职业半年
+              开始下一个半年
               <Icon name="arrow" />
             </button>
           </div>
@@ -293,8 +293,8 @@ export function TransferWindowScreen() {
         </header>
         <p className="career-panel-lead">
           {contractExpired
-            ? '原合同已经结束。横条是原俱乐部续约，三张卡片是国内或海外俱乐部的自由身邀请。'
-            : '留队最稳定；三家俱乐部根据能力、表现、留洋倾向、联赛偏好与位置需求给出不同承诺。'}
+            ? '原合同已经结束。你可以接受老东家的续约，也可以以自由球员身份选择新的邀请。'
+            : '留下最熟悉，但不一定是最好。三家俱乐部会根据你的能力、表现和职业偏好给出不同角色。'}
         </p>
 
         {!contractExpired ? (
@@ -309,7 +309,7 @@ export function TransferWindowScreen() {
           >
             <span>
               <strong>留在 {currentClubName}</strong>
-              <small>保留合同、角色与全部既有关系</small>
+              <small>保留现有合同、角色和在队内建立的关系</small>
             </span>
             <em>
               {formatEuro(game.contract.annualSalaryEuro)} / 年
@@ -368,7 +368,7 @@ export function TransferWindowScreen() {
                 <small className="transfer-offer-grid__level">
                   {club
                     ? clubLevelLabel(club)
-                    : '俱乐部资料待确认'}
+                    : '俱乐部信息暂时无法读取'}
                 </small>
                 {club ? (
                   <small className="transfer-offer-grid__environment">
@@ -434,8 +434,8 @@ export function TransferWindowScreen() {
           </button>
           <p>
             {contractExpired
-              ? '每份合同仅可反报价一次；续约原报价不会因反报价失败而撤回。'
-              : '每份报价仅可反报价一次；失败时有30%概率被撤回。转会费不会进入个人现金。'}
+              ? '每份合同你只有一次反报价机会；即使续约反报价失败，原报价仍然有效。'
+              : '每份报价你只有一次反报价机会。谈崩时有30%概率让对方撤回报价；转会费归俱乐部，不会进入你的现金。'}
           </p>
         </div>
       </section>
@@ -452,7 +452,7 @@ function TransferOfferDetail({
 }) {
   const higherRoleAvailable = canRequestHigherTransferRole(offer)
   return (
-    <section className="transfer-offer-detail" aria-label="所选报价详情">
+    <section className="transfer-offer-detail" aria-label="当前选择的报价详情">
       <dl>
         <div>
           <dt>合同</dt>
@@ -502,7 +502,7 @@ function TransferOfferDetail({
                 disabled={disabled}
                 onClick={() => onCounter(choice.id)}
               >
-                {disabled ? '角色已封顶' : choice.title}
+                {disabled ? '已经是最高承诺角色' : choice.title}
               </button>
             )
           })}

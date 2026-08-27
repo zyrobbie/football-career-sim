@@ -19,19 +19,19 @@ export function RetirementRecordPreview({
   onClose: () => void
 }) {
   return (
-    <div className="retirement-export-preview" role="dialog" aria-modal="true" aria-label="生涯记录图片预览">
+    <div className="retirement-export-preview" role="dialog" aria-modal="true" aria-label="职业生涯长图预览">
       <div className="retirement-export-preview__panel">
         <header>
           <div>
-            <span>生涯记录已生成</span>
-            <strong>长按图片可保存到系统相册</strong>
+            <span>你的生涯长图做好了</span>
+            <strong>长按图片即可保存到相册</strong>
           </div>
-          <button type="button" onClick={onClose} aria-label="关闭图片预览">×</button>
+          <button type="button" onClick={onClose} aria-label="关闭生涯长图预览">×</button>
         </header>
         <div className="retirement-export-preview__image" data-export-file-size={fileSize}>
           <img
             src={previewUrl}
-            alt={`${playerName}的绿茵生涯记录`}
+            alt={`${playerName}的《上场》职业生涯记录`}
             draggable={false}
           />
         </div>
@@ -81,7 +81,7 @@ export function RetirementRecordExportActions({
   }
 
   return (
-    <section className="retirement-export-actions" aria-label="保存生涯记录">
+    <section className="retirement-export-actions" aria-label="保存职业生涯记录">
       <button
         type="button"
         className="button button--primary"
@@ -89,7 +89,7 @@ export function RetirementRecordExportActions({
         disabled={status === 'GENERATING'}
       >
         <Icon name="save" />
-        {status === 'GENERATING' ? '正在生成生涯记录…' : '保存我的生涯记录'}
+        {status === 'GENERATING' ? '正在生成生涯长图…' : '保存我的职业生涯'}
       </button>
       {status === 'ERROR' && message ? <p role="alert">{message}</p> : null}
 

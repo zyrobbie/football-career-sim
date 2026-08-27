@@ -100,7 +100,7 @@ function AppContent() {
       {error ? (
         <div className="error-toast" role="alert">
           <span>{error}</span>
-          <button type="button" onClick={clearError} aria-label="关闭错误提示">
+          <button type="button" onClick={clearError} aria-label="关闭提示">
             ×
           </button>
         </div>

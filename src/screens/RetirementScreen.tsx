@@ -26,24 +26,24 @@ export function retirementNarrative(input: {
   if (isFinal) {
     return {
       kicker: '终场之后',
-      heading: '这段绿茵岁月，已经写成了你的故事。',
+      heading: '从第一次上场，到最后一次离场。',
       summary:
-        '从青训营到最后一场比赛，每一次选择都已经留在履历里。球员生涯结束了，但属于你的足球故事不会消失。',
+        '从13岁的青训少年，到最后一场职业比赛，每一次选择都留在这里。球员生涯结束了，这段故事属于你。',
     }
   }
   if (isAgeLimit) {
     return {
-      kicker: '最后一场比赛已经结束',
+      kicker: '终场哨已经响了',
       heading: '是时候向球员生涯告别了。',
       summary:
-        '从13岁走进青训营，到今天完成最后一个赛季，你已经走完了职业球员的全部旅程。现在，为这段生涯写下结尾。',
+        '从13岁走进青训营，到踢完最后一个赛季，你已经走完一名职业球员的全部旅程。现在，看看这一生留下了什么。',
     }
   }
   return {
-    kicker: '把决定交给你',
+    kicker: '决定权在你手里',
     heading: `你准备在${age}岁挂靴吗？`,
     summary:
-      '如果确认，这个赛季将成为你的最后一季；如果心里还有未完成的目标，你也可以回到球场。',
+      '如果确认，这会成为你的最后一个赛季；如果还有放不下的目标，你也可以回去继续踢。',
   }
 }
 
@@ -79,7 +79,7 @@ function RetirementArchive() {
       <header className="retirement-archive__masthead">
         <Brand compact />
         <div>
-          <span>球员退役档案</span>
+          <span>球员生涯档案</span>
           <strong>{game.startYear}—{game.startYear + Math.floor(game.windowIndex / 2)}</strong>
         </div>
       </header>
@@ -87,7 +87,7 @@ function RetirementArchive() {
       <article className="retirement-archive__paper">
         <header className="retirement-archive__hero">
           <div className="retirement-archive__ovr" aria-label={`退役能力 ${summary.finalOverall}`}>
-            <small>RET. OVR</small>
+            <small>FINAL OVR</small>
             <strong>{summary.finalOverall}</strong>
           </div>
           <div className="retirement-archive__identity">
@@ -225,7 +225,7 @@ function RetirementArchive() {
               <div><dt>集体荣誉</dt><dd>{summary.evaluation.dimensions.collectiveHonors}/25</dd></div>
               <div><dt>个人荣誉</dt><dd>{summary.evaluation.dimensions.personalHonors}/15</dd></div>
             </dl>
-            <p>表现、国家队、平台、职业寿命与荣誉共同构成最终百分制评价。</p>
+            <p>俱乐部与国家队表现、巅峰高度、职业长度和荣誉，一起构成这段生涯的最终评分。</p>
           </section>
 
           <section className="retirement-archive__section retirement-honors">
@@ -280,14 +280,14 @@ function RetirementArchive() {
 
         <footer className="retirement-archive__footer">
           <Icon name="save" />
-          <span>退役档案已写入本地生涯存档</span>
+          <span>这份退役档案已保存在本地</span>
         </footer>
       </article>
       <footer className="retirement-export-qr" aria-hidden="true">
         <div className="retirement-export-qr__sheet" data-retirement-export-end>
           <img src={RETIREMENT_QR_ASSET_PATH} alt="" data-export-required="qr" />
           <div>
-            <strong>扫码开启你的球员生涯</strong>
+            <strong>扫码，开始你的球员生涯</strong>
             <small>{RETIREMENT_RECORD_URL.replace('https://', '')}</small>
           </div>
         </div>
@@ -344,14 +344,14 @@ export function RetirementScreen() {
           <p>{narrative.summary}</p>
           <div className="demo-complete__actions">
             <button type="button" className="button button--primary" onClick={confirmRetirement}>
-              确认退役
+              就此退役
               <Icon name="arrow" />
             </button>
             {isAgeLimit ? (
               <span className="retirement-panel__locked">最后一个赛季已经落幕</span>
             ) : (
               <button type="button" className="button button--secondary" onClick={cancelRetirement}>
-                返回继续生涯
+                我还想继续踢
               </button>
             )}
           </div>

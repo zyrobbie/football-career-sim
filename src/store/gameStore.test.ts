@@ -395,7 +395,7 @@ describe('academy two-year progression', () => {
     })
     store.confirmTransferChoice()
     expect(useGameStore.getState().game?.phase).toBe('TRANSFER_WINDOW')
-    expect(useGameStore.getState().error).toContain('原合同尚未到期')
+    expect(useGameStore.getState().error).toContain('原合同还没到期')
     store.clearError()
     useGameStore.setState({ game: normalTransferGame })
     game = normalTransferGame
@@ -472,7 +472,7 @@ describe('academy two-year progression', () => {
     })
     store.openTransferWindow(true)
     expect(useGameStore.getState().game?.phase).toBe('PRO_STAGE_COMPLETE')
-    expect(useGameStore.getState().error).toContain('连续两个窗口')
+    expect(useGameStore.getState().error).toContain('连续两个半年')
     store.clearError()
 
     useGameStore.setState({
@@ -523,7 +523,7 @@ describe('academy two-year progression', () => {
     expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
     store.cancelRetirement()
     expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
-    expect(useGameStore.getState().error).toContain('不能撤回')
+    expect(useGameStore.getState().error).toContain('无法撤回')
     store.clearError()
     store.confirmRetirement()
     expect(useGameStore.getState().game?.phase).toBe('CAREER_RETIRED')

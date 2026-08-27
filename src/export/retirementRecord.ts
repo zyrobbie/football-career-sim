@@ -42,7 +42,7 @@ export function safeRetirementRecordFilename(playerName: string, retirementYear:
     .replace(/\s+/g, ' ')
     .trim()
     .slice(0, 40) || '球员'
-  return `绿茵生涯-${safeName}-${retirementYear}.png`
+  return `上场-${safeName}-${retirementYear}.png`
 }
 
 export function canShareRetirementRecord(
@@ -63,12 +63,12 @@ export function chooseRetirementRecordDelivery(canShareFile: boolean): RecordDel
 
 export function retirementExportErrorMessage(error: unknown): string {
   if (error instanceof DOMException && error.name === 'SecurityError') {
-    return '浏览器阻止了图片生成，请关闭无痕限制后重试。'
+    return '浏览器阻止了图片生成。请退出无痕模式或关闭相关限制后重试。'
   }
   if (error instanceof Error && /canvas|memory|size/i.test(error.message)) {
-    return '这份生涯记录过长，当前设备无法安全生成单张图片。'
+    return '这段生涯太长，当前设备无法生成一张完整图片。'
   }
-  return '生涯记录生成失败，请稍后重试。'
+  return '生涯长图生成失败，请再试一次。'
 }
 
 export function isShareCancellation(error: unknown): boolean {
@@ -327,7 +327,7 @@ export async function shareRetirementRecord(
   try {
     await navigatorLike.share({
       files: [file],
-      title: '我的绿茵生涯',
+      title: '我的《上场》职业生涯',
       text: '这是我的球员生涯记录',
     })
     return 'SHARED'

@@ -254,7 +254,7 @@ export function resolveFirstContractCounter(input: {
       counterDirection: direction,
       negotiationSucceeded: false,
       negotiationMessage:
-        '俱乐部没有接受反报价，但青训培养协议保证原报价继续有效。',
+        '俱乐部没有接受你的条件，但原报价仍然有效。',
     }
   }
 
@@ -264,9 +264,9 @@ export function resolveFirstContractCounter(input: {
     counterDirection: direction,
     negotiationSucceeded: true,
     negotiationMessage: {
-      SALARY: '俱乐部接受了加薪要求，并送来修订后的合同。',
-      ROLE: '教练组同意提高角色承诺，竞争压力也会随之上升。',
-      RELEASE_CLAUSE: '俱乐部同意下调解约金，为未来转会保留空间。',
+      SALARY: '俱乐部接受了加薪要求，并送来了更新后的合同。',
+      ROLE: '教练组同意提高角色承诺，但你的竞争压力也会更大。',
+      RELEASE_CLAUSE: '俱乐部同意降低解约金，给未来转会留出了更多空间。',
     }[direction],
   }
 

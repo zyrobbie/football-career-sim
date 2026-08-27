@@ -4,7 +4,7 @@ import { CLUBS } from '../data/balance'
 import { DATA_VERSION, SAVE_VERSION, type GameState } from '../models/game'
 import { useGameStore } from '../store/gameStore'
 
-export const DELETE_CAREER_CONFIRMATION = '确定删除当前本地生涯吗？这个操作不能撤销。'
+export const DELETE_CAREER_CONFIRMATION = '确定删除当前生涯吗？删除后无法恢复。'
 
 export function buildSettingsView() {
   return {
@@ -32,11 +32,11 @@ export function SettingsScreen({ game }: { game: GameState }) {
   return (
     <AppShell topbar={<CareerTopbar game={game} sectionLabel="设置" />}>
       <main className="settings-screen">
-        <header className="settings-screen__title"><span>设置</span><small>本地生涯与玩法说明</small></header>
-        <section><h2>怎么玩</h2><ul><li>每半年选择训练方向。</li><li>特殊事件会影响状态、关系与职业故事。</li><li>合同和转会决定会影响平台、角色与成长空间。</li><li>比赛、能力成长、国家队与荣誉由系统结算。</li></ul></section>
-        <section><h2>存档</h2><p>当前生涯自动保存在此浏览器本地。只保留当前存档及内部恢复备份。</p><p>没有云同步、账号同步或多存档槽；清除浏览器数据可能导致存档丢失。</p></section>
+        <header className="settings-screen__title"><span>设置</span><small>玩法与本地存档</small></header>
+        <section><h2>怎么玩</h2><ul><li>每半年，你会选择一次训练方向和职业策略。</li><li>有些事件会改变状态和关系，也可能留下长期影响。</li><li>合同与转会，会改变你所在的平台、球队角色和成长空间。</li><li>比赛表现、能力成长、国家队经历和荣誉会由游戏根据你的选择模拟。</li></ul></section>
+        <section><h2>存档</h2><p>当前生涯会自动保存在这个浏览器中，并保留一份内部恢复备份。</p><p>目前没有云同步、账号同步或多存档。清除浏览器数据可能会让这段生涯永久丢失。</p></section>
         <section><h2>版本信息</h2><dl><div><dt>存档版本</dt><dd>{view.saveVersion}</dd></div><div><dt>数据版本</dt><dd>{view.dataVersion}</dd></div><div><dt>俱乐部数据库</dt><dd>{view.clubCount} 家</dd></div><div><dt>当前数据库范围</dt><dd>{view.leagueCount} 个联赛</dd></div></dl></section>
-        <section className="settings-screen__danger"><h2>危险操作</h2><p>删除后无法恢复当前本地生涯及内部恢复备份。</p><button type="button" onClick={() => deleteCareerIfConfirmed(window.confirm, deleteCareer)}>删除当前生涯</button></section>
+        <section className="settings-screen__danger"><h2>删除生涯</h2><p>删除后，当前生涯和内部恢复备份都无法找回。</p><button type="button" onClick={() => deleteCareerIfConfirmed(window.confirm, deleteCareer)}>删除生涯</button></section>
       </main>
     </AppShell>
   )

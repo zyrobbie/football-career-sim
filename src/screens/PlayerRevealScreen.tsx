@@ -20,8 +20,8 @@ export function PlayerRevealScreen() {
   return (
     <SetupFrame
       step={5}
-      title="你的球员档案"
-      description="当前能力已经生成，隐藏潜力将在退役时揭晓。返回修改偏好不会刷新这名球员。"
+      title="这就是你的起点"
+      description="你的初始能力和隐藏潜力已经确定。潜力会在退役时揭晓，返回修改偏好不会改变这名球员。"
     >
       <section className="reveal-layout">
         <div className="reveal-overall">
@@ -65,7 +65,7 @@ export function PlayerRevealScreen() {
               <dd>{player.secondaryPosition} · 92%</dd>
             </div>
             <div>
-              <dt>第一追求</dt>
+              <dt>最看重</dt>
               <dd>
                 {PRIORITY_LABELS[player.priorities[0] ?? 'PLAYING_TIME']}
               </dd>
@@ -79,7 +79,7 @@ export function PlayerRevealScreen() {
         <div className="notice-line reveal-note">
           <Icon name="info" />
           <span>
-            初始能力只决定起点。训练环境、出场、状态和关系将共同影响成长。
+            能力只是起点。训练、出场、状态和身边的人，会一起决定你能走多远。
           </span>
         </div>
         <div className="setup-actions">
@@ -88,14 +88,14 @@ export function PlayerRevealScreen() {
             className="button button--secondary"
             onClick={() => goToPhase('CREATE_PREFERENCES')}
           >
-            返回调整偏好
+            调整偏好
           </button>
           <button
             type="button"
             className="button button--primary"
             onClick={confirmPlayer}
           >
-            查看青训邀请
+            看看青训邀请
             <Icon name="arrow" />
           </button>
         </div>

@@ -31,16 +31,16 @@ export function clubLevelLabel(club: Club): string {
   const divisionLevel = getClubParametersByCompatibleId(club.id)?.divisionLevel
   if (club.country === '中国') {
     if (divisionLevel === 2) {
-      return club.tier <= 4 ? '中国次级联赛强队' : '中国次级联赛平台'
+      return club.tier <= 4 ? '中国第二级别联赛强队' : '中国第二级别联赛球队'
     }
     return club.profile === 'ELITE'
-      ? '中国顶级豪门'
-      : '中国顶级中游'
+      ? '中国顶级联赛豪门'
+      : '中国顶级联赛中游'
   }
 
   if (BIG_FIVE.has(club.country)) {
     if (divisionLevel === 2) {
-      return club.tier <= 4 ? '五大次级联赛强队' : '五大次级联赛普通球队'
+      return club.tier <= 4 ? '五大联赛国家第二级别强队' : '五大联赛国家第二级别球队'
     }
     if (club.tier === 1) return '世界级豪门'
     if (club.tier === 2) return '五大联赛强队'
@@ -49,9 +49,9 @@ export function clubLevelLabel(club: Club): string {
   }
 
   if (EUROPEAN_DEVELOPMENT_LEAGUES.has(club.country)) {
-    if (club.tier <= 2) return '欧洲次级豪门'
-    if (club.tier === 3) return '欧洲次级强队'
-    return '欧洲次级中游'
+    if (club.tier <= 2) return '欧洲发展联赛豪门'
+    if (club.tier === 3) return '欧洲发展联赛强队'
+    return '欧洲发展联赛中游'
   }
 
   if (club.country === '巴西' || club.country === '阿根廷') {
@@ -62,18 +62,18 @@ export function clubLevelLabel(club: Club): string {
 }
 
 export function trainingQualityLabel(club: Club): string {
-  if (club.facilityTier === 1) return '世界顶尖训练'
-  if (club.facilityTier === 2) return '国际一流训练'
-  if (club.facilityTier === 3) return '高水平训练'
+  if (club.facilityTier === 1) return '世界顶级训练条件'
+  if (club.facilityTier === 2) return '国际一流训练条件'
+  if (club.facilityTier === 3) return '高水平训练条件'
   if (club.facilityTier === 4) {
-    return club.country === '中国' ? '国内顶尖训练' : '优质训练'
+    return club.country === '中国' ? '国内顶尖训练条件' : '优质训练条件'
   }
-  if (club.facilityTier === 5) return '国内良好训练'
-  return '基础训练'
+  if (club.facilityTier === 5) return '国内良好训练条件'
+  return '基础训练条件'
 }
 
 export function academyQualityLabel(club: Club): string {
-  if (club.academyTier === 1) return '世界顶尖青训'
+  if (club.academyTier === 1) return '世界顶级青训'
   if (club.academyTier === 2) return '国际一流青训'
   if (club.academyTier === 3) return '高水平青训'
   if (club.academyTier === 4) {
@@ -139,9 +139,9 @@ export function nationalStageLabel(stage: NationalTeamStage): string {
 
 export function chanceLabel(chance: 'HARD' | 'NORMAL' | 'FAST'): string {
   return {
-    HARD: '较难',
-    NORMAL: '正常',
-    FAST: '较快',
+    HARD: '机会较少',
+    NORMAL: '机会适中',
+    FAST: '机会较多',
   }[chance]
 }
 
@@ -171,11 +171,11 @@ export function trainingFocusLabel(focus: TrainingFocus): string {
 export function firstTeamStatusLabel(status: FirstTeamStatus): string {
   return {
     DEVELOPING: '青年队培养',
-    WATCHLIST: '一线队观察名单',
+    WATCHLIST: '进入一线队视野',
     TRAINING_CANDIDATE: '跟训候选',
     FIRST_TEAM_TRAINING: '一线队跟训',
     PROMOTION_READY: '晋升讨论',
-    PROMOTED: '正式晋升一线队',
+    PROMOTED: '正式进入一线队',
   }[status]
 }
 

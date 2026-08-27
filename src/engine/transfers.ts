@@ -901,8 +901,8 @@ export function resolveTransferCounter(input: {
       counterDirection: direction,
       negotiationSucceeded: false,
       negotiationMessage: withdrawn
-        ? '俱乐部拒绝条件，并撤回了这份报价。'
-        : '俱乐部拒绝条件，但原报价仍然有效。',
+        ? '俱乐部拒绝了你的条件，并撤回这份报价。'
+        : '俱乐部拒绝了你的条件，但原报价仍然有效。',
       withdrawn,
     }
   }
@@ -913,9 +913,9 @@ export function resolveTransferCounter(input: {
     counterDirection: direction,
     negotiationSucceeded: true,
     negotiationMessage: {
-      SALARY: '俱乐部接受了加薪要求，并送来最终合同。',
+      SALARY: '俱乐部接受加薪要求，这就是最终合同。',
       ROLE: '教练组接受了更高的角色承诺。',
-      RELEASE_CLAUSE: '俱乐部同意下调解约金。',
+      RELEASE_CLAUSE: '俱乐部同意降低解约金。',
     }[direction],
   }
 

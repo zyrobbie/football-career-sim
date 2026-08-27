@@ -29,10 +29,10 @@ export function AcademyOffersScreen() {
       <section className="career-offers">
         <header className="career-panel-heading">
           <Icon name="career" />
-          <h1>选择你的第一家俱乐部</h1>
+          <h1>你的第一站，选哪一家？</h1>
         </header>
         <p className="career-panel-lead">
-          训练条件越好，竞争也越激烈。你的选择将决定第一个半年的成长环境。
+          更好的训练条件，往往也意味着更激烈的竞争。第一站会影响你的成长速度和机会。
         </p>
 
         <div className="offer-table" role="radiogroup" aria-label="青训邀请">
@@ -119,13 +119,13 @@ export function AcademyOffersScreen() {
               className="button button--secondary"
               onClick={() => goToPhase('CREATE_PREFERENCES')}
             >
-              返回调整职业偏好
+              调整职业偏好
             </button>
           </div>
         </section>
         <p className="career-offers__note">
           <Icon name="info" />
-          国内俱乐部名称为虚构内容
+          国内俱乐部均为虚构名称
         </p>
       </section>
     </CareerHub>

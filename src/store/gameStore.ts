@@ -204,7 +204,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         state.selectedClubId,
         state.youthRole ?? 'ROTATION',
       )
-    if (!offer) throw new Error('当前俱乐部资料缺失，无法完成半年结算。')
+    if (!offer) throw new Error('当前俱乐部信息不完整，这半年暂时无法模拟。')
     const consequences = consumeCareerConsequences(state)
     const simulationState: GameState = {
       ...state,
@@ -380,7 +380,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       try {
         commit(createInitialGame())
       } catch (error) {
-        set({ error: error instanceof Error ? error.message : '无法新建生涯。' })
+        set({ error: error instanceof Error ? error.message : '新生涯没有创建成功，请再试一次。' })
       }
     },
 
@@ -388,7 +388,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       try {
         const loaded = loadGame()
         if (!loaded) {
-          set({ hasSave: false, error: '没有找到可继续的生涯。' })
+          set({ hasSave: false, error: '没有找到可以继续的生涯。' })
           return
         }
         const pendingEvent = loaded.pendingCareerEvent
@@ -410,7 +410,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         set({ game: resumed, hasSave: true, error: null })
       } catch (error) {
         set({
-          error: error instanceof Error ? error.message : '存档读取失败。',
+          error: error instanceof Error ? error.message : '存档读取失败，请重试。',
         })
       }
     },
@@ -424,7 +424,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (!game) return
       if (name.trim().length < 2 || name.trim().length > 12) {
-        set({ error: '姓名需要输入2至12个字符。' })
+        set({ error: '姓名请填写2—12个字符。' })
         return
       }
       if (
@@ -432,7 +432,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         jerseyNumber < 1 ||
         jerseyNumber > 99
       ) {
-        set({ error: '偏好球衣号码需要是1至99之间的整数。' })
+        set({ error: '球衣号码请选择1—99之间的整数。' })
         return
       }
       commit({
@@ -451,7 +451,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (!game) return
       if (!SECONDARY_POSITIONS[primary].includes(secondary)) {
-        set({ error: '这个副位置与主位置不兼容。' })
+        set({ error: '这个副位置和你的主位置无法搭配，请换一个。' })
         return
       }
       commit({
@@ -469,7 +469,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (!game) return
       if (priorities.length !== 4 || new Set(priorities).size !== 4) {
-        set({ error: '请完整排列四项职业追求。' })
+        set({ error: '请把四项职业追求全部排好顺序。' })
         return
       }
       commit({
@@ -483,7 +483,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (!game) return
       if (preferredLeagues.length > 3) {
-        set({ error: '最多选择三个偏好联赛。' })
+        set({ error: '偏好联赛最多选择三个。' })
         return
       }
       const draft = {
@@ -518,7 +518,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         (candidate) => candidate.club.id === clubId,
       )
       if (!offer) {
-        set({ error: '这份青训邀请已经失效。' })
+        set({ error: '这份青训邀请已经失效，请重新选择。' })
         return
       }
       commit({
@@ -573,7 +573,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         commit(runReadySimulation(ready))
       } catch (error) {
         set({
-          error: error instanceof Error ? error.message : '半年结算失败。',
+          error: error instanceof Error ? error.message : '这半年没有成功模拟，请再试一次。',
         })
       }
     },
@@ -585,7 +585,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game.player ||
         game.phase !== 'SPECIAL_EVENT'
       ) {
-        set({ error: '当前没有等待处理的特殊事件。' })
+        set({ error: '现在没有需要你处理的生涯事件。' })
         return
       }
       try {
@@ -610,7 +610,7 @@ export const useGameStore = create<GameStore>((set, get) => {
             (candidate) => candidate.id === choiceId,
           )
           if (!setupOption) {
-            throw new Error('这个特殊事件的第一步选择不存在。')
+            throw new Error('找不到这条事件路线，请重新选择。')
           }
           commit({
             ...game,
@@ -628,7 +628,7 @@ export const useGameStore = create<GameStore>((set, get) => {
             (candidate) => candidate.id === game.pendingCareerEvent!.variantId,
           )
           if (!route?.choiceIds.includes(choiceId)) {
-            throw new Error('这个选项不属于当前特殊事件路线。')
+            throw new Error('这个选项不属于你刚才选择的路线，请重新选择。')
           }
         }
         if (
@@ -636,7 +636,7 @@ export const useGameStore = create<GameStore>((set, get) => {
             (candidate) => candidate.id === choiceId,
           )
         ) {
-          throw new Error('这个选项不符合球员当前的职业情境。')
+          throw new Error('以你现在的职业处境，还不能选择这个选项。')
         }
         const resolved = resolveCareerEventChoice({
           state: game,
@@ -670,7 +670,7 @@ export const useGameStore = create<GameStore>((set, get) => {
           error:
             error instanceof Error
               ? error.message
-              : '特殊事件结算失败。',
+              : '这次生涯事件没有成功结算，请再试一次。',
         })
       }
     },
@@ -678,7 +678,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     continueAfterCareerEvent: () => {
       const game = get().game
       if (!game || game.phase !== 'SPECIAL_EVENT_RESULT') {
-        set({ error: '当前没有等待确认的特殊事件结果。' })
+        set({ error: '现在没有等待确认的事件结果。' })
         return
       }
       const ready: GameState = {
@@ -737,14 +737,14 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game.selectedClubId ||
         !game.youthRole
       ) {
-        set({ error: '当前生涯还不具备签署首份职业合同的条件。' })
+        set({ error: '你现在还没有到签第一份职业合同的时候。' })
         return
       }
       const club = game.academyOffers.find(
         (candidate) => candidate.club.id === game.selectedClubId,
       )?.club
       if (!club) {
-        set({ error: '当前俱乐部资料缺失，无法生成合同。' })
+        set({ error: '当前俱乐部信息不完整，暂时无法生成合同。' })
         return
       }
       const professionalOffer =
@@ -810,7 +810,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game?.contract ||
         game.phase !== 'PRO_CONTRACT_COMPLETE'
       ) {
-        set({ error: '需要先完成首份职业合同签约。' })
+        set({ error: '先签下第一份职业合同，才能继续。' })
         return
       }
       commit({
@@ -830,11 +830,11 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game.selectedClubId ||
         game.phase !== 'PRO_STAGE_COMPLETE'
       ) {
-        set({ error: '当前生涯还不能进入转会窗口。' })
+        set({ error: '你现在还不能进入转会市场。' })
         return
       }
       if (!canAdvanceBeyondWindow(game.windowIndex)) {
-        set({ error: '40岁赛季已经结束，职业日历不能再进入新的转会窗口。' })
+        set({ error: '40岁赛季已经结束，接下来只能走向退役。' })
         return
       }
       if (!canOpenTransferMarketAfterWindow(game.windowIndex)) {
@@ -865,7 +865,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         forcedByPromiseBreach &&
         game.contract.brokenPromiseWindows >= 2
       if (forcedByPromiseBreach && !canRequestTransfer) {
-        set({ error: '只有连续两个窗口未兑现角色承诺时，才能主动提出转会申请。' })
+        set({ error: '球队连续两个半年没有兑现角色承诺后，你才能主动申请转会。' })
         return
       }
       if (
@@ -881,7 +881,7 @@ export const useGameStore = create<GameStore>((set, get) => {
           ? game.firstTeamRole
           : game.youthRole
       if (!currentRole) {
-        set({ error: '当前球队角色缺失，无法生成合同报价。' })
+        set({ error: '当前球队角色信息缺失，暂时无法生成合同报价。' })
         return
       }
       const windowIndex =
@@ -932,11 +932,11 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game.selectedClubId ||
         game.phase !== 'PRO_STAGE_COMPLETE'
       ) {
-        set({ error: '需要先完成本次职业半年。' })
+        set({ error: '先踢完这半年，才能继续。' })
         return
       }
       if (!canAdvanceBeyondWindow(game.windowIndex)) {
-        set({ error: '40岁赛季已经结束，必须先完成退役。' })
+        set({ error: '40岁赛季已经结束，请先完成退役。' })
         return
       }
       const opportunity = assessDomesticTransferOpportunity({
@@ -949,12 +949,12 @@ export const useGameStore = create<GameStore>((set, get) => {
       )
       if (game.contract.remainingHalfYears === 0) {
         set({
-          error: '合同已经到期，必须先完成续约或自由转会，不能无合同进入下一职业半年。',
+          error: '合同已经到期。请先续约或接受新的自由身合同，再开始下一个半年。',
         })
         return
       }
       if (transferMarketOpen && opportunity.available) {
-        set({ error: '本窗口已有正式转会机会，请先完成去留决定。' })
+        set({ error: '这半年已经有正式转会机会，请先决定去留。' })
         return
       }
       commit({
@@ -1001,7 +1001,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game.selectedTransferChoiceId ||
         game.selectedTransferChoiceId === 'STAY'
       ) {
-        set({ error: '请先选择一份可谈判的转会报价。' })
+        set({ error: '请先选择一份仍可谈判的转会报价。' })
         return
       }
       const selected = game.transferOffers.find(
@@ -1051,7 +1051,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game.selectedClubId ||
         !game.selectedTransferChoiceId
       ) {
-        set({ error: '请先确定本窗口的去向。' })
+        set({ error: '请先决定这次转会窗口的去向。' })
         return
       }
       const fromClubId = game.selectedClubId
@@ -1088,7 +1088,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         contract.promisedTeamLevel === 'FIRST_TEAM'
       if (offer.type === 'RENEWAL' && offer.clubId === fromClubId) {
         if (game.contract.remainingHalfYears > 0) {
-          set({ error: '原合同尚未到期，当前不能签署续约合同。' })
+          set({ error: '原合同还没到期，现在不能签续约合同。' })
           return
         }
         commit({
@@ -1116,7 +1116,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         (club) => club.id === offer.clubId,
       )
       if (!destinationClub) {
-        set({ error: '无法识别这家俱乐部，请重新选择报价。' })
+        set({ error: '无法识别这家俱乐部，请重新选择一份报价。' })
         return
       }
       const integration = integrationBaseForTransfer(
@@ -1155,7 +1155,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         game.phase !== 'TRANSFER_ARRIVAL' ||
         game.transferDecision?.kind !== 'TRANSFER'
       ) {
-        set({ error: '当前没有需要处理的转会融入事件。' })
+        set({ error: '现在没有需要处理的加盟融入事件。' })
         return
       }
       const result = applyTransferArrivalChoice({
@@ -1185,11 +1185,11 @@ export const useGameStore = create<GameStore>((set, get) => {
         !game.selectedClubId ||
         game.phase !== 'TRANSFER_STAGE_COMPLETE'
       ) {
-        set({ error: '需要先完成本次转会窗口。' })
+        set({ error: '请先完成这次转会决定。' })
         return
       }
       if (!canAdvanceBeyondWindow(game.windowIndex - 1)) {
-        set({ error: '40岁赛季已经结束，不能再进入新的职业半年。' })
+        set({ error: '40岁赛季已经结束，不能再开始下一个半年。' })
         return
       }
       commit({
@@ -1207,14 +1207,14 @@ export const useGameStore = create<GameStore>((set, get) => {
     requestRetirement: () => {
       const game = get().game
       if (!game?.player || game.phase !== 'PRO_STAGE_COMPLETE') {
-        set({ error: '只能在完成一个职业窗口后决定是否退役。' })
+        set({ error: '至少踢完一个职业半年后，才能决定是否退役。' })
         return
       }
       const availability = retirementAvailabilityAfterWindow(
         game.windowIndex,
       )
       if (availability === 'UNAVAILABLE') {
-        set({ error: '当前年龄和职业状态还不具备主动退役条件。' })
+        set({ error: '以你现在的年龄和职业状态，还不能主动退役。' })
         return
       }
       commit({
@@ -1232,7 +1232,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         game.phase !== 'RETIREMENT_DECISION' ||
         game.retirementReason !== 'VOLUNTARY'
       ) {
-        set({ error: '这次退役决定已经不能撤回。' })
+        set({ error: '退役已经确认，这个决定无法撤回。' })
         return
       }
       commit({
@@ -1249,7 +1249,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         game.phase !== 'RETIREMENT_DECISION' ||
         !game.retirementReason
       ) {
-        set({ error: '当前没有待确认的退役决定。' })
+        set({ error: '现在没有等待你确认的退役决定。' })
         return
       }
       commit({ ...game, phase: 'CAREER_RETIRED' })
@@ -1264,7 +1264,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         game.nationalTeam.retired ||
         game.nationalTeam.caps === 0
       ) {
-        set({ error: '当前还不能退出国家队。' })
+        set({ error: '你现在还不能退出国家队。' })
         return
       }
       commit({

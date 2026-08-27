@@ -26,7 +26,7 @@ describe('retirement player-facing copy', () => {
     })
 
     expect(copy.heading).toContain('35岁')
-    expect(copy.summary).toContain('回到球场')
+    expect(copy.summary).toContain('回去继续踢')
   })
 
   it('uses the runtime catalog short mark before falling back to the club name', () => {
