@@ -89,13 +89,15 @@ describe('honor aggregation and visual registry', () => {
     ]))
   })
 
-  it('keeps the league identity in aggregated golden-boot and team-of-season labels', () => {
+  it('keeps the league identity in all aggregated league personal-honor labels', () => {
     const grouped = aggregateCareerHonors([
       honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', competitionLabel: '意甲', seasonLabel: '2030赛季', windowIndex: 8 }),
       honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', competitionLabel: '意甲', seasonLabel: '2031赛季', windowIndex: 10 }),
       honor({ type: 'TEAM_OF_SEASON', scope: 'INDIVIDUAL', competitionLabel: '中甲', seasonLabel: '2032赛季', windowIndex: 12 }),
       honor({ type: 'GOLDEN_BOOT', scope: 'INDIVIDUAL', competitionLabel: '意甲', seasonLabel: '2033赛季', windowIndex: 14 }),
       honor({ type: 'GOLDEN_BOOT', scope: 'INDIVIDUAL', competitionLabel: '中甲', seasonLabel: '2034赛季', windowIndex: 16 }),
+      honor({ type: 'LEAGUE_PLAYER_OF_YEAR', scope: 'INDIVIDUAL', competitionLabel: '意甲', seasonLabel: '2035赛季', windowIndex: 18 }),
+      honor({ type: 'LEAGUE_PLAYER_OF_YEAR', scope: 'INDIVIDUAL', competitionLabel: '中超', seasonLabel: '2036赛季', windowIndex: 20 }),
     ])
 
     expect(grouped).toEqual(expect.arrayContaining([
@@ -103,6 +105,8 @@ describe('honor aggregation and visual registry', () => {
       expect.objectContaining({ type: 'TEAM_OF_SEASON', competitionLabel: '中甲', displayLabel: '中甲最佳阵容', count: 1 }),
       expect.objectContaining({ type: 'GOLDEN_BOOT', competitionLabel: '意甲', displayLabel: '意甲金靴', count: 1 }),
       expect.objectContaining({ type: 'GOLDEN_BOOT', competitionLabel: '中甲', displayLabel: '中甲金靴', count: 1 }),
+      expect.objectContaining({ type: 'LEAGUE_PLAYER_OF_YEAR', competitionLabel: '意甲', displayLabel: '意甲联赛最佳球员', count: 1 }),
+      expect.objectContaining({ type: 'LEAGUE_PLAYER_OF_YEAR', competitionLabel: '中超', displayLabel: '中超联赛最佳球员', count: 1 }),
     ]))
   })
 

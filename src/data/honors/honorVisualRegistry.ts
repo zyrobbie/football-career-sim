@@ -98,6 +98,7 @@ function contextualDisplayLabel(
   if (!competitionLabel) return visual.displayLabel
   if (honor.type === 'GOLDEN_BOOT') return `${competitionLabel}金靴`
   if (honor.type === 'TEAM_OF_SEASON') return `${competitionLabel}最佳阵容`
+  if (honor.type === 'LEAGUE_PLAYER_OF_YEAR') return `${competitionLabel}联赛最佳球员`
   return visual.displayLabel
 }
 

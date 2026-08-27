@@ -34,7 +34,10 @@ describe('honor badge presentation', () => {
   it('matches continental, national, and individual final-batch honors without cross-using assets', () => {
     expect(matchHonorVisual({ type: 'CONTINENTAL_TITLE', competitionLabel: '亚冠精英联赛', label: '亚冠精英联赛冠军' }).visual?.key).toBe('afc-champions-league-elite')
     expect(matchHonorVisual({ type: 'ASIAN_CUP', competitionLabel: '亚洲杯', label: '亚洲杯冠军' }).visual?.key).toBe('asian-cup')
-    expect(matchHonorVisual({ type: 'LEAGUE_PLAYER_OF_YEAR', competitionLabel: '意甲', label: '意甲最佳球员' }).visual?.key).toBe('league-player-of-year')
+    expect(matchHonorVisual({ type: 'LEAGUE_PLAYER_OF_YEAR', competitionLabel: '意甲', label: '意甲最佳球员' })).toMatchObject({
+      displayLabel: '意甲联赛最佳球员',
+      visual: expect.objectContaining({ key: 'league-player-of-year' }),
+    })
     expect(matchHonorVisual({ type: 'ASIAN_CUP', competitionLabel: '未知杯赛', label: '未知杯赛冠军' })).toMatchObject({ visual: null, fallbackMark: '亚' })
   })
 
