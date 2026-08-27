@@ -4,10 +4,10 @@
 > 初始设计原则见 [04-visual-direction.md](04-visual-direction.md)；已经完成的专项验收见 [14-honor-visual-system-v1-audit.md](14-honor-visual-system-v1-audit.md) 与 [15-china-club-crest-source-audit.md](15-china-club-crest-source-audit.md)。<br>
 > 后续每个视觉批次开始、返工、验收、提交或发布时，都必须同步更新本文。
 
-最后更新：2026-08-26<br>
-当前仓库基线：`706db4a`（已推送至 `origin/main`；功能补丁基线为 `23f29a6`）<br>
-当前进行阶段：**V4-B2 标准主题模板引擎与正式流程验收——READY_TO_COMMIT**<br>
-下一主阶段：**等待人工审核后决定提交；GitHub Pages 推送后补真实 iPhone Safari 与 Android Chrome 复核**
+最后更新：2026-08-27<br>
+当前仓库基线：`2a932f7`（已推送至 `origin/main`）<br>
+当前进行阶段：**V7-B1 8 枚意甲原创圆形队徽视觉样板——PRODUCT_APPROVED**<br>
+下一主阶段：**V7-C 按联赛继续概念研究与每批 14 枚绘制；运行时接入保留至 V7-D**
 
 ## 1. 这次视觉升级要解决什么
 
@@ -42,10 +42,10 @@
 | V1 | 42 项荣誉图标、聚合与联赛限定文案 | `SHIPPED` | `e52c38b`、`4cc2907`；42 SVG；[专项验收](14-honor-visual-system-v1-audit.md) | 仅做回归维护 |
 | V2 | 32 家中国虚构俱乐部原创队徽 | `SHIPPED` | 32 个本地 SVG、40 条清单记录；合法状态、正式 DOM、正式 PNG、完整命令与 Git 范围审计全部通过；`4b5acb5` 已推送；用户后续测试通过 | 仅做回归维护 |
 | V3 | 俱乐部主题 Token 与切换底座 | `SHIPPED` | 功能提交 `49a716e` 与视觉补丁 `23f29a6` 均已推送至 `origin/main`；用户已完成 GitHub Pages 测试 | 仅做回归维护 |
-| V4 | 14 套标准主题模板与 366 家静态归类 | `READY_TO_COMMIT` | V4-A2 静态归类、V4-B1 样板视觉审核与 V4-B2 正式流程／转会／固定退休边界均已通过 | 等待人工审核；推送后补真实手机复核 |
-| V5 | 海外模板归类扩展 | `MERGED_INTO_V4` | 海外 334 家已纳入 V4-A2 的 366 条静态归类；不新增 334 套色板 | 随 V4-B 统一接入与验收 |
+| V4 | 14 套标准主题模板与 366 家静态归类 | `SHIPPED` | `2a932f7`；V4-A2 静态归类、V4-B1 样板、V4-B2 正式流程／转会／固定退休边界通过；用户后续 GitHub Pages 测试通过 | 仅做反馈驱动的回归维护 |
+| V5 | 海外模板归类扩展 | `MERGED_INTO_V4` | 海外 334 家已随 V4 的 366 条静态映射统一接入、验收与推送 | 无独立后续阶段 |
 | V6 | 全局界面统一性与细节反馈 | `NOT_STARTED` | — | 在主题系统稳定后处理导航、身份带与动效 |
-| V7 | 海外原创队徽扩展 | `DEFERRED` | — | 不阻塞主题系统；另立长期资产项目 |
+| V7 | 海外 334 家原创队徽扩展 | `PRODUCT_APPROVED` | [可行性审计](18-overseas-club-crest-v1-feasibility-audit.md)、14 套队徽色板、[意甲 20 家概念清单](data/overseas-club-crest-concepts-v1.csv)与 8 枚视觉样板均获确认；尚未接入运行时 | V7-C 按联赛继续研究并每批绘制 14 枚 |
 | V8 | 视觉版本发布验收 | `NOT_STARTED` | — | 真实设备、完整生涯、转会切换、退役导出与线上回归 |
 
 ## 4. 已锁定的产品决定
@@ -223,7 +223,7 @@ V3.0.1 线上视觉补丁实际完成：
 
 ### V4：标准主题模板与 366 家静态归类
 
-状态：`READY_TO_COMMIT`（14 套模板样板、正式流程、转会切换与固定退休档案边界均已验收）
+状态：`SHIPPED`（提交 `2a932f7` 已推送；GitHub Pages 用户测试通过）
 
 本阶段不再制作 32 套独立色板，拆成四个可单独停止与审核的小批次：
 
@@ -242,13 +242,13 @@ V3.0.1 线上视觉补丁实际完成：
    - **V4-B1 已完成并获视觉确认**：生产运行时已使用 14 套共享只读 Token 与 366 条 canonical ID 显式映射；workbook 兼容 ID 先解析为 canonical ID；无俱乐部、未知 ID 与退休边界保持 `DEFAULT`。14 套隔离正式 `AppShell` 样板在 390×844、1280×720 无横向溢出、控制台无 error/warn。
    - **V4-B2 已完成**：14 套模板分别覆盖 `HALF_YEAR_PLAN`、`HALF_YEAR_REPORT`、`TRANSFER_WINDOW`、球员、履历与设置页，并在 390×844、1280×720 均无横向溢出；全部现有可导航职业 phase 已以 `BLUE_BLACK` 与 `BLACK_WHITE` 合法状态覆盖。八条异色正式转会链与国际米兰→亚特兰大同模板链均只出现源主题→目标主题，不经过 `DEFAULT`。退休决定仍跟随当前俱乐部，确认退休后移除 `.app-frame`，退役档案与正式 PNG 固定绿金；正式 PNG 为 2360×2486、5,866,960 像素、447,298 bytes，Sharp RGBA 与 jsQR 均通过。真实 iPhone Safari 与 Android Chrome 仍须在 GitHub Pages 推送后实机复核。
 3. **V4-C：中国 32 家显式归类**
-   - 依据已审核队徽配色把 32 家中国俱乐部分配到标准模板，不创建球队级 override；
-   - canonical ID 与 workbook ID 必须得到同一模板，32 家 production fallback 为 0；
-   - 同屏检查队徽衬底、长中文名、浅色／深色导航与移动底栏。
+   - **已完成**：依据已审核队徽配色把 32 家中国俱乐部分配到标准模板，没有球队级 override；
+   - canonical ID 与 workbook ID 得到同一模板，32 家 production fallback 为 0；
+   - 队徽衬底、长中文名、浅色／深色导航与移动底栏已纳入正式页面验收。
 4. **V4-D：中国转会链与回归**
-   - 连续切换不同模板家族的中国俱乐部，确认无旧主题残留或 DEFAULT 闪烁；
-   - 验证四项导航往返不改变 GameState；
-   - 退役档案与 PNG 继续保持固定绿金边界。
+   - **已完成**：异色与同模板正式转会链均无旧主题残留或 `DEFAULT` 闪烁；
+   - 四项导航往返不改变 GameState；
+   - 退役档案与 PNG 保持固定绿金边界。
 
 建议首版标准模板：
 
@@ -271,17 +271,12 @@ V3.0.1 线上视觉补丁实际完成：
 
 ### V5：海外 334 家模板归类
 
-状态：`NOT_STARTED`
+状态：`MERGED_INTO_V4`
 
-主题覆盖不依赖海外队徽完成，也不新增 334 套独立 CSS：
-
-1. 使用 V4 冻结的标准模板注册表；海外阶段原则上只新增 canonical ID → template key 的映射；
-2. 按联赛分批审核，每批展示俱乐部名称、所属模板与代表色，不重复设计 Token；
-3. 已审核批次不得出现默认 fallback；未审核批次在开发期间继续使用 DEFAULT，但正式覆盖完成前不能标记 V5 完成；
-4. 禁止球队级颜色 override。若多家俱乐部确实无法归入现有模板，应回到模板层新增一个通用家族并重新做完整 QA；
-5. 海外 334 家全部归类后，执行跨联赛连续转会链，覆盖深→浅、浅→深、双色→单色及相同模板间转会。
-
-完成门槛：366 家运行时俱乐部全部且唯一命中一个非 DEFAULT 模板；canonical ID 与 workbook ID 结果一致；无空值、无低对比文字、无旧主题泄漏。无俱乐部、未知外部数据与退休边界才允许使用 DEFAULT。
+- 海外 334 家已在 V4-A2 完成产品近似静态归类，并随 V4-B 统一接入生产映射；
+- 366 家运行时俱乐部全部且唯一命中一个非 `DEFAULT` 模板，canonical ID 与 workbook ID 结果一致；
+- 海外俱乐部不需要原创队徽，也没有新增 334 套独立 CSS 或球队级颜色 override；
+- 跨模板、同模板转会和旧主题泄漏检查已在 V4-B2 完成，因此不再保留独立 V5 开发阶段。
 
 ### V6：全局视觉统一与反馈
 
@@ -298,12 +293,19 @@ V3.0.1 线上视觉补丁实际完成：
 
 ### V7：海外原创队徽扩展
 
-状态：`DEFERRED`
+状态：`PRODUCT_APPROVED`（V7-A1 概念与 V7-B1 的 8 枚视觉样板均获用户确认；尚未接入运行时）
 
-- 334 家海外队徽工作量巨大，不再阻塞主题系统与整体视觉升级。
-- 不使用真实 Logo 文件，也不把搜索缩略图自动匹配为正确资产。
-- 若未来重启，应先按联赛建立配色与核心图腾表，再小批量绘制、用户审核和正式页面验收。
-- 不能用一套模板批量换字母或换颜色冒充 334 枚原创设计。
+- 用户已重启本阶段，并锁定简化方向：海外队徽统一圆形；颜色复用已上线的 14 套主题归类；圆内图腾优先采用俱乐部长期身份符号，其次采用城市建筑、地理或文化符号；
+- “吉祥物优先”在执行口径中统一为“俱乐部长期身份符号优先”，避免把历史昵称、神话符号或城市象征误报为正式吉祥物；
+- 当前技术链路可复用：`ClubCrest` 已有懒加载和失败回退，退休 PNG 已能栅格化队徽图片；334 枚新增资产不需要重写展示或导出系统；
+- 统一圆形只解决外框一致性，差异化必须由主图腾姿态、正负形、构图和克制的城市辅助线索承担；同为鹰／狼／狮子时禁止只换颜色；
+- 配色不再逐队取精确官方色值，但应先把 14 套 UI 主题冻结成 14 套 `crestPrimary / crestSecondary / crestNeutral / crestOutline` 队徽色板，不能机械把所有 UI Token 直接塞入 SVG；
+- 每家绘制前必须有 canonical ID、workbook ID、主题模板、来源类型、主图腾、辅助图腾、构图 key、来源链接、理由与审核状态；
+- 不使用真实 Logo 文件，不复制现实队徽的字标、成立年份、官方盾形、官方吉祥物角色造型或完整构图；
+- **V7-A1 已完成并获产品审核**：意甲 20 家概念清单以显式 canonical／workbook ID、主题模板、来源类型、图腾、构图 key 与链接记录；20 家唯一覆盖，`NEEDS_REVIEW` 为 0，尚未绘制海外 SVG。亚特兰大明确不用现行的五分头部线条，罗马明确不用母狼哺育双子，科莫改用市政府来源；固定的 8 枚样板为国际米兰、AC米兰、拉齐奥、罗马、亚特兰大、科莫、博洛尼亚、威尼斯；
+- **V7-B1 已完成并获用户确认**：8 枚意甲样板统一为透明安全区、异色外环、内部 field、高对比主图腾与可选小面积强调色；外环／field 低对比时仅使用细浅色 separator。最终 AC米兰采用正面双角獠牙魔鬼脸，罗马采用金色右向咆哮狼头，威尼斯采用横向贡多拉；仍未修改 `clubCrests.ts`、运行时 manifest、正式页面或导出链路；
+- 样板通过后，按联赛完成概念研究、每批 14 枚绘制并逐批审核；334 枚共 24 个视觉批次；
+- 完整设计、工程结构、验收门槛与停止条件见 [第 18 号审计](18-overseas-club-crest-v1-feasibility-audit.md)。
 
 ### V8：视觉版本发布验收
 
@@ -355,6 +357,12 @@ V3.0.1 线上视觉补丁实际完成：
 
 | 日期 | 阶段 | 变化 | 状态变化 | 证据 |
 | --- | --- | --- | --- | --- |
+| 2026-08-27 | V7-B1 最终视觉确认 | 用户否决 AC米兰与罗马的多轮低辨识构图后，最终锁定正面双角獠牙魔鬼脸与金色右向咆哮狼头；其余六枚保持不变。8 枚样板整体获确认，仍不接入运行时 | `WAITING_VISUAL_REVIEW → PRODUCT_APPROVED` | `public/assets/clubs/crests/ita-*.svg`、用户视觉确认 |
+| 2026-08-26 | V7-B1-R1 圆形队徽对比度与异色外环返修 | 为未来海外圆形队徽冻结“透明安全区→异色 ring→field→高对比 motif→小面积 accent”规则；8 枚意甲样板完成对比度与外环返修，罗马改为原创狼头、威尼斯改为横向贡多拉，未接入运行时 | `WAITING_VISUAL_REVIEW → WAITING_VISUAL_REVIEW` | [第18号审计](18-overseas-club-crest-v1-feasibility-audit.md)、概念 CSV、`/tmp/overseas-club-crests-v7-b1-round2-review.png` |
+| 2026-08-26 | V7-B1 意甲圆形队徽样板 | 新增 14 套固定队徽色板与 8 枚候选 SVG；确认同色模板下蛇／女神、鹰／湖山等图腾构图不同。未接入 runtime、页面或退役导出 | `PRODUCT_APPROVED → WAITING_VISUAL_REVIEW` | `docs/data/club-crest-palettes-v1.csv`、`public/assets/clubs/crests/ita-*.svg`、`/tmp/overseas-club-crests-v7-b1-review.png` |
+| 2026-08-26 | V7-A1 意甲概念清单 | 以当前运行时目录完成 20 家意甲唯一覆盖；产品审核后修订亚特兰大、罗马、科莫、那不勒斯的原创边界与来源表达，固定 8 枚样板。只新增审计 CSV，未绘制或接入海外 SVG | `IN_PROGRESS → PRODUCT_APPROVED` | `docs/data/overseas-club-crest-concepts-v1.csv`、[第18号审计](18-overseas-club-crest-v1-feasibility-audit.md)、数据生成检查 |
+| 2026-08-26 | V7-A 海外原创队徽可行性审计 | 用户重启海外 334 枚资产项目；锁定统一圆形、复用 14 套主题配色、俱乐部长期身份符号优先／城市文化补位的方向。确认展示与退休导出链路可复用，并建立先意甲概念清单、再 8 枚样板、后续每批 14 枚的执行门槛 | `DEFERRED → IN_PROGRESS` | `docs/18-overseas-club-crest-v1-feasibility-audit.md`；现有队徽清单、主题映射与导出链路只读审计 |
+| 2026-08-26 | V4 发布与用户线上验收 | 14 套标准模板与 366 家显式映射以 `2a932f7` 推送至 `origin/main`；用户随后在 GitHub Pages 实际测试并确认无问题 | `READY_TO_COMMIT → SHIPPED` | `2a932f7`；用户线上测试反馈 |
 | 2026-08-26 | V4-B2 正式流程、转会切换与退休边界 | 14 套模板完成正式职业页面、8 条异色与 1 条同模板转会链、导航不变性、固定退休档案及正式 PNG 验收；退休 PNG 2360×2486、5,866,960 像素、447,298 bytes，Sharp RGBA/jsQR 通过 | `WAITING_QA → READY_TO_COMMIT` | `/tmp/club-theme-presets-v4-b2-flow-review.png`、`/tmp/club-theme-presets-v4-b2-transfer-review.png`、`/tmp/club-theme-presets-v4-b2-retirement-review.png`、`/tmp/club-theme-presets-v4-b2-retirement-audit.png`；完整工程链 |
 | 2026-08-26 | V4-B1 标准主题模板与 14 套样板 | 将 366 条静态归类固化为 canonical ID → preset key 的运行时映射；14 套共享只读 Token 保留四个 V3 锚点不变，兼容 ID、对比度、静态分布与隔离正式 AppShell 样板通过 | `IN_PROGRESS → WAITING_VISUAL_REVIEW` | `/tmp/club-theme-presets-v4-b1-390.png`、`/tmp/club-theme-presets-v4-b1-1280.png`、主题定向测试与完整工程命令链 |
 | 2026-08-26 | V4-A2 海外近似归类 | 在不做运行时猜色、不主张官方色值的前提下，完成 366 条 canonical ID 静态映射；新增 `YELLOW_BLUE`、`RED_GOLD` 两套模板，总数 14。海外 334 家均为产品近似归类 | `IN_PROGRESS → COMPLETE` | `docs/17-club-theme-preset-audit.md`、366行CSV、数据生成检查 |
@@ -396,7 +404,8 @@ V3.0.1 线上视觉补丁实际完成：
 - QA-B2 完整命令与 Git 范围审计已通过，V2 当前为 `SHIPPED`；
 - V3-A、B1、B2 已完成；四套样板视觉未变，功能提交 `49a716e` 已推送至 `origin/main`，当前为 `SHIPPED`；
 - V3.0.1 已修复策略说明文字对比不足与移动端双荣誉卡挤压赛季表现，补丁 `23f29a6` 已推送至 `origin/main`，当前为 `SHIPPED`；
-- V4 产品方向已改为“14 套标准模板 + 366 家显式归类”，不再制作一队一套 Token；V4-B1 已获视觉确认，V4-B2 正式流程、转会切换与固定退休边界验收通过，当前为 `READY_TO_COMMIT`；
+- V4 产品方向已实现为“14 套标准模板 + 366 家显式归类”，不再制作一队一套 Token；提交 `2a932f7` 已推送至 `origin/main`，用户在 GitHub Pages 测试通过，当前为 `SHIPPED`；
 - V4-A2 已完成：32 家中国俱乐部保持既有归类，334 家海外俱乐部按产品近似口径逐条映射；弗鲁米嫩塞固定为 `CLARET_BLUE`、聚尔特瓦勒海姆固定为 `RED_WHITE`，`NEEDS_REVIEW` 已清零；
+- V7 已由用户重新启动；可行性审计完成，下一步只做意甲 20 家核心图腾与构图方向清单，不直接批量画 334 枚；
 - 唯一线上验收渠道为 `https://zyrobbie.github.io/football-career-sim/`；后续不再考虑或汇报 Netlify；
 - 既有 `outputs/019facd8-3fee-7b80-bfcd-2d1d35e522ba/` 为未跟踪审核输出，必须保留且不得进入提交；
