@@ -44,6 +44,7 @@ export function AppShell({
   children: ReactNode
 }) {
   const theme = useClubVisualTheme()
+  const brandTone = theme.key === 'BLACK_WHITE' ? 'standard' : 'reverse'
   return (
     <main
       className="app-frame"
@@ -51,7 +52,7 @@ export function AppShell({
       style={themeCssProperties(theme)}
     >
       <aside className="sidebar">
-        <Brand />
+        <Brand variant="full" tone={brandTone} collapseOnMobile />
         <nav aria-label="主导航" className="sidebar__nav">
           {CAREER_NAV_ITEMS.map((item) => <NavigationButton key={item.key} item={item} />)}
         </nav>
@@ -64,7 +65,12 @@ export function AppShell({
         </div>
       </aside>
       <section className="app-surface">
-        <header className="topbar">{topbar}</header>
+        <header className="topbar">
+          <div className="topbar__brand">
+            <Brand variant="full" tone={brandTone} collapseOnMobile />
+          </div>
+          {topbar}
+        </header>
         {children}
       </section>
       <nav className="mobile-nav" aria-label="移动端主导航">

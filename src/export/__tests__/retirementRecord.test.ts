@@ -259,7 +259,7 @@ describe('retirement record export V1', () => {
     await expect(waitForExportImage(qrImage as unknown as HTMLImageElement, 1)).rejects.toThrow('Required export image failed')
   })
 
-  it('rasterizes cloned crest, honor badge, and QR images at double internal resolution before export', () => {
+  it('rasterizes cloned crest, honor badge, brand logo, and QR images at double internal resolution before export', () => {
     const originalDocument = globalThis.document
     const crestCanvas = {
       width: 0,
@@ -282,7 +282,14 @@ describe('retirement record export V1', () => {
       style: { cssText: '', width: '', height: '' },
       getContext: () => ({ drawImage: (..._args: unknown[]) => undefined }),
     }
-    const canvases = [crestCanvas, honorCanvas, qrCanvas]
+    const brandCanvas = {
+      width: 0,
+      height: 0,
+      className: '',
+      style: { cssText: '', width: '', height: '' },
+      getContext: () => ({ drawImage: (..._args: unknown[]) => undefined }),
+    }
+    const canvases = [crestCanvas, honorCanvas, brandCanvas, qrCanvas]
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
       value: { createElement: () => canvases.shift() },
@@ -298,13 +305,15 @@ describe('retirement record export V1', () => {
     })
     const crest = image({ exportRasterize: 'club-crest' }, 37.5, 42.2)
     const honor = image({ exportRasterize: 'honor-badge' }, 24, 24)
+    const brand = image({ exportRasterize: 'brand-logo' }, 126, 46)
     const qr = image({ exportRequired: 'qr' }, 76, 76)
     const target = {
       querySelectorAll: (selector: string) => {
         expect(selector).toContain('data-export-rasterize="club-crest"')
         expect(selector).toContain('data-export-rasterize="honor-badge"')
+        expect(selector).toContain('data-export-rasterize="brand-logo"')
         expect(selector).toContain('data-export-required="qr"')
-        return [crest, honor, qr]
+        return [crest, honor, brand, qr]
       },
     }
 
@@ -317,14 +326,15 @@ describe('retirement record export V1', () => {
       })
     }
 
-    expect(replaced).toEqual([crestCanvas, honorCanvas, qrCanvas])
+    expect(replaced).toEqual([crestCanvas, honorCanvas, brandCanvas, qrCanvas])
     expect(crestCanvas).toMatchObject({ width: 76, height: 86, className: 'club-crest--retirement' })
     expect(crestCanvas.style).toMatchObject({ cssText: 'display:block', width: '38px', height: '43px' })
     expect(honorCanvas).toMatchObject({ width: 48, height: 48 })
+    expect(brandCanvas).toMatchObject({ width: 252, height: 92 })
     expect(qrCanvas).toMatchObject({ width: 152, height: 152 })
   })
 
-  it('falls back on crest rasterization failure but rejects a required QR rasterization failure', () => {
+  it('falls back on crest rasterization failure but rejects required brand and QR rasterization failures', () => {
     const originalDocument = globalThis.document
     Object.defineProperty(globalThis, 'document', {
       configurable: true,
@@ -339,9 +349,14 @@ describe('retirement record export V1', () => {
       dataset: { exportRequired: 'qr' }, className: '', style: { cssText: '' }, parentElement: { dataset: {}, textContent: '' },
       getBoundingClientRect: () => ({ width: 20, height: 20 }), replaceWith: () => undefined,
     }
+    const brand = {
+      dataset: { exportRasterize: 'brand-logo' }, className: '', style: { cssText: '' }, parentElement: { dataset: {}, textContent: '' },
+      getBoundingClientRect: () => ({ width: 20, height: 20 }), replaceWith: () => undefined,
+    }
     try {
       rasterizeExportImages({ querySelectorAll: () => [crest] } as unknown as HTMLElement)
       expect(crestParent.textContent).toBe('京')
+      expect(() => rasterizeExportImages({ querySelectorAll: () => [brand] } as unknown as HTMLElement)).toThrow('Unable to rasterize export image')
       expect(() => rasterizeExportImages({ querySelectorAll: () => [qr] } as unknown as HTMLElement)).toThrow('Unable to rasterize export image')
     } finally {
       Object.defineProperty(globalThis, 'document', {

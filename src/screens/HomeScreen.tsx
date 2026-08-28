@@ -41,7 +41,7 @@ export function HomeScreen() {
   return (
     <main className="home-screen">
       <section className="home-screen__content">
-        <Brand />
+        <Brand variant="full" tone="reverse" collapseOnMobile />
         <p className="home-screen__date">{new Date().getFullYear()}年夏季</p>
         <h1>从13岁开始，踢完这一生。</h1>
         <p className="home-screen__lead">

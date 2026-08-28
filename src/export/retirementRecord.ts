@@ -162,6 +162,7 @@ const EXPORT_IMAGE_RASTER_SCALE = 2
 
 function rasterizeExportImage(image: HTMLImageElement): void {
   const isRequired = image.dataset.exportRequired === 'qr'
+    || image.dataset.exportRasterize === 'brand-logo'
   try {
     const rect = image.getBoundingClientRect()
     const cssWidth = Math.max(1, Math.ceil(rect.width))
@@ -187,7 +188,7 @@ function rasterizeExportImage(image: HTMLImageElement): void {
 
 export function rasterizeExportImages(target: HTMLElement): void {
   for (const image of target.querySelectorAll<HTMLImageElement>(
-    'img[data-export-rasterize="club-crest"], img[data-export-rasterize="honor-badge"], img[data-export-required="qr"]',
+    'img[data-export-rasterize="club-crest"], img[data-export-rasterize="honor-badge"], img[data-export-rasterize="brand-logo"], img[data-export-required="qr"]',
   )) {
     rasterizeExportImage(image)
   }

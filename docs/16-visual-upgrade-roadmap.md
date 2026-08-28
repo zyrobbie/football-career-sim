@@ -1,11 +1,11 @@
-# 绿茵生涯：视觉升级实时路线图
+# 《上场》：视觉升级实时路线图
 
 > 本文是视觉升级工作的单一事实来源（Single Source of Truth）。<br>
 > 初始设计原则见 [04-visual-direction.md](04-visual-direction.md)；已经完成的专项验收见 [14-honor-visual-system-v1-audit.md](14-honor-visual-system-v1-audit.md) 与 [15-china-club-crest-source-audit.md](15-china-club-crest-source-audit.md)。<br>
 > 后续每个视觉批次开始、返工、验收、提交或发布时，都必须同步更新本文。
 
 最后更新：2026-08-28<br>
-当前仓库基线：`84fa158`（本地补丁基线）<br>
+当前仓库基线：`31d49d0`（正式品牌 Logo 接入基线）<br>
 当前视觉阶段：**V7-C 海外原创队徽扩展——DEFERRED**<br>
 当前插入项目：**核心固定 UI 文案已进入实施与验收，见 [19-interface-copy-review.md](19-interface-copy-review.md)；V7-C 海外队徽扩展继续暂停。**
 
@@ -47,6 +47,7 @@
 | V6 | 全局界面统一性与细节反馈 | `NOT_STARTED` | — | 在主题系统稳定后处理导航、身份带与动效 |
 | V7 | 海外 334 家原创队徽扩展 | `DEFERRED` | [可行性审计](18-overseas-club-crest-v1-feasibility-audit.md)、14 套队徽色板、[意甲 20 家概念清单](data/overseas-club-crest-concepts-v1.csv)与 8 枚视觉样板均获确认；8 枚样板已由 `5a761c2` 接入并推送 | 按用户决定暂停，待文案项目完成后再评估 V7-C |
 | COPY-A | 核心固定 UI 文案体系 | `READY_TO_COMMIT` | 490 个 ID 编辑表已合并产品修订稿；379 项修订、110 项保留、1 项新增，22 个正式 phase × 三种视口（66 样本）、5 个原生确认调用、正式退休 Blob/二维码及完整工程链均已完成；退休档案新增非破坏性返回首页与青训邀请卡移动排版回归通过 | 等待人工审核后提交；V7-C 继续暂停 |
+| BRAND-LOGO | 《上场》正式 Logo 资产与统一入口 | `READY_TO_COMMIT` | 5 份已定稿 SVG 原样纳入；首页、建档／职业框架与退役档案按 full／compact／reverse 层级接入；正式页面、退役 PNG 与用户视觉审核均通过 | 等待明确提交指令 |
 | V8 | 视觉版本发布验收 | `NOT_STARTED` | — | 真实设备、完整生涯、转会切换、退役导出与线上回归 |
 
 ## 4. 已锁定的产品决定
@@ -86,6 +87,21 @@
 - 唯一公开试玩与线上验收地址为 [GitHub Pages](https://zyrobbie.github.io/football-career-sim/)；
 - 后续发布报告只区分“已推送 GitHub”与“GitHub Pages 已完成线上／实机验证”；
 - 不再等待、检查、部署或汇报 Netlify，也不将 Netlify 状态作为任何阶段的完成条件。
+
+### 4.6 《上场》正式 Logo
+
+- 正式资产固定为 `public/assets/brand/` 下的 full、compact、reverse 与 mark 五份 SVG；不得在项目内重绘、改色或改写其 `viewBox`。
+- 首页、建档与职业流程使用 full Logo；在小于 768px 的视口通过 `<picture>` 切换 compact 资源，避免将英文副标强行压缩。
+- 深色承载面使用 reverse，浅色黑白主题流程使用 standard；退役档案仅以 compact reverse 作为小型署名。
+- 退役导出将 `brand-logo` 视为必需图像，必须等待加载并在导出克隆中栅格化；二维码、像素预算与底部 28 CSS px 几何边界保持不变。
+- `logo-mark.svg` 仅用作浏览器 favicon。当前没有官方反白 mark，不在二维码旁自行派生图形标。
+
+#### BRAND-LOGO 验收记录（2026-08-28）
+
+- 五份源 SVG 已按原文件纳入 `public/assets/brand/`；静态解析、色值与安全特征检查通过。
+- 正式页面在 320×568、390×844 与 1280×720 中验证：首页和建档在移动端选择 compact reverse；职业框架桌面侧栏选择 full reverse，≤520px 顶栏显示 compact，避免隐藏侧栏后失去品牌；退役档案使用 compact reverse 小型署名。
+- 正式 `RetirementRecordExportActions` 导出预览成功，`brand-logo` 与二维码一起进入必需等待及栅格化链路。最终审核 PNG 为 2360×2882、6,801,520 像素、507,809 bytes，Sharp RGBA 解码和 jsQR 网址校验均通过，页脚没有额外大块白边或深绿边。
+- `generate:clubs:check`、`verify:retirement-qr`、品牌和导出定向测试、全量测试、typecheck、build、npm audit 与 diff 检查均通过。产品已完成正式视觉审核，状态更新为 `READY_TO_COMMIT`；不自动提交。
 
 ### 4.5 标准主题模板，而非一队一色板
 

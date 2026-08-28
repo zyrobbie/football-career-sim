@@ -77,7 +77,7 @@ function RetirementArchive({ onReturnHome }: { onReturnHome: () => void }) {
     <main className="retirement-archive">
       <div className="retirement-export-sheet" ref={exportTargetRef} data-retirement-export-target>
       <header className="retirement-archive__masthead">
-        <Brand compact />
+        <Brand variant="compact" tone="reverse" exportRasterize />
         <div>
           <span>球员生涯档案</span>
           <strong>{game.startYear}—{game.startYear + Math.floor(game.windowIndex / 2)}</strong>

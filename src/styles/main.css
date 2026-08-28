@@ -83,8 +83,7 @@ p {
 }
 
 h1,
-h2,
-.brand__name {
+h2 {
   font-family: var(--heading);
 }
 
@@ -107,27 +106,28 @@ svg {
 }
 
 .brand {
-  color: #d1b36d;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  display: block;
+  width: 112px;
+  flex: none;
 }
 
-.brand__name {
-  font-size: clamp(30px, 2.35vw, 42px);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1;
+.brand__picture,
+.brand__image {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.brand__english {
-  font-family: Georgia, serif;
-  font-size: 10px;
-  letter-spacing: 0.36em;
+.brand--compact {
+  width: 126px;
 }
 
-.brand--compact .brand__name {
-  font-size: clamp(30px, 4vw, 40px);
+.brand--icon {
+  width: 42px;
+}
+
+.brand__a11y--mobile {
+  display: none;
 }
 
 .button {
@@ -262,6 +262,10 @@ svg {
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
+}
+
+.home-screen__content > .brand {
+  width: clamp(180px, 15vw, 220px);
 }
 
 .home-screen__date {
@@ -1214,7 +1218,8 @@ svg {
 }
 
 .sidebar > .brand {
-  padding: 34px 28px 26px;
+  width: 88px;
+  margin: 34px 28px 26px;
   border-bottom: 1px solid rgba(189, 157, 86, 0.25);
 }
 
@@ -1315,6 +1320,10 @@ svg {
   gap: 24px;
   font-family: var(--heading);
   font-size: 15px;
+}
+
+.topbar__brand {
+  display: none;
 }
 
 .topbar > span {
@@ -1613,7 +1622,8 @@ svg {
 }
 
 .offers-sidebar > .brand {
-  padding: 10px 20px 28px;
+  width: 112px;
+  margin: 10px 20px 28px;
   border-bottom: 1px solid rgba(189, 157, 86, 0.35);
 }
 
@@ -3307,11 +3317,8 @@ svg {
 
   .sidebar > .brand,
   .offers-sidebar > .brand {
-    padding: 22px 24px;
-  }
-
-  .sidebar .brand__english {
-    display: none;
+    width: 146px;
+    margin: 22px 24px;
   }
 
   .sidebar__nav,
@@ -4002,12 +4009,21 @@ svg {
     min-height: 42px;
     height: 42px;
     display: grid;
-    grid-template-columns: auto auto minmax(0, 1fr);
+    grid-template-columns: 74px auto auto minmax(0, 1fr);
     gap: 8px;
     padding: 0 10px;
     overflow: hidden;
     white-space: nowrap;
     font-size: 11px;
+  }
+
+  .topbar__brand {
+    display: block;
+    width: 70px;
+  }
+
+  .topbar__brand .brand {
+    width: 100%;
   }
 
   .topbar > span {
@@ -4668,9 +4684,8 @@ svg {
     padding: 9px 12px 10px;
   }
 
-  .setup-header .brand--compact .brand__name {
-    font-size: 19px;
-    letter-spacing: 0.05em;
+  .setup-header .brand {
+    width: 132px;
   }
 
   .setup-header__pitch {
@@ -7869,8 +7884,8 @@ svg {
     padding: 10px 14px;
   }
 
-  .retirement-archive__masthead .brand__name {
-    font-size: 22px;
+  .retirement-archive__masthead .brand {
+    width: 108px;
   }
 
   .retirement-archive__masthead > div:last-child {

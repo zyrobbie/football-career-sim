@@ -15,7 +15,7 @@ export function SetupFrame({
   return (
     <main className={`setup-shell setup-shell--step-${step}`}>
       <header className="setup-header">
-        <Brand compact />
+        <Brand variant="full" tone="reverse" collapseOnMobile />
         <div className="setup-header__pitch" aria-hidden="true" />
         <p>
           建档 <strong>{step}</strong> / 5
