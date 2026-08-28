@@ -33,7 +33,7 @@ export function CareerHistoryScreen({ game }: { game: GameState }) {
       <main className="history-screen">
         <header className="history-screen__title">
           <span>履历</span>
-          <small>你走过的每半年，都留在这里。</small>
+          <small>你踢过的每个完整赛季，都留在这里。</small>
         </header>
 
         <section className="history-screen__overview" aria-label="生涯概览">
@@ -47,22 +47,22 @@ export function CareerHistoryScreen({ game }: { game: GameState }) {
 
         <section className="history-screen__section" aria-label="生涯时间线">
           <header><Icon name="history" /><h2>生涯时间线</h2></header>
-          {view.windows.length === 0 ? (
-            <p className="history-screen__empty">完成第一个半年后，你的生涯时间线会从这里开始。</p>
+          {view.seasons.length === 0 ? (
+            <p className="history-screen__empty">完成一个完整赛季后，你的生涯时间线会从这里开始。</p>
           ) : (
             <>
               <div className="history-windows" role="table" aria-label="生涯时间线表格">
-                <div className="history-windows__head" role="row"><span>窗口</span><span>年龄</span><span>俱乐部</span><span>队伍</span><span>角色</span><span>OVR</span><span>出场</span><span>进球</span><span>助攻</span></div>
-                {view.windows.map((entry) => (
-                  <article className="history-windows__row" role="row" key={`${entry.clubId}-${entry.windowIndex}`}>
-                    <span>{entry.windowLabel}</span><span>{entry.age}岁</span><strong title={entry.clubName}>{entry.clubName}</strong><span>{teamLevelLabel(entry.teamLevel)}</span><span>{roleLabel(entry.role)}</span><strong>{entry.overall}</strong><span>{entry.appearances}</span><span>{entry.goals}</span><span>{entry.assists}</span>
+                <div className="history-windows__head" role="row"><span>赛季</span><span>年龄</span><span>俱乐部</span><span>赛季末队伍</span><span>赛季末角色</span><span>OVR</span><span>出场</span><span>进球</span><span>助攻</span></div>
+                {view.seasons.map((entry) => (
+                  <article className="history-windows__row" role="row" key={entry.endWindowIndex}>
+                    <span>{entry.seasonLabel}</span><span>{entry.age}岁</span><strong title={entry.clubName}>{entry.clubName}</strong><span>{teamLevelLabel(entry.teamLevel)}</span><span>{roleLabel(entry.role)}</span><strong>{entry.overall}</strong><span>{entry.appearances}</span><span>{entry.goals}</span><span>{entry.assists}</span>
                   </article>
                 ))}
               </div>
               <div className="history-windows__mobile" aria-label="生涯时间线移动端列表">
-                {view.windows.map((entry) => (
-                  <article key={`${entry.clubId}-${entry.windowIndex}`}>
-                    <div><span>{entry.windowLabel} · {entry.age}岁</span><strong title={entry.clubName}>{entry.clubName}</strong><span>{teamLevelLabel(entry.teamLevel)}</span></div>
+                {view.seasons.map((entry) => (
+                  <article key={entry.endWindowIndex}>
+                    <div><span>{entry.seasonLabel} · {entry.age}岁</span><strong title={entry.clubName}>{entry.clubName}</strong><span>{teamLevelLabel(entry.teamLevel)}</span></div>
                     <div><span>{roleLabel(entry.role)}</span><strong>OVR {entry.overall}</strong><span>{entry.appearances}场 · {entry.goals}球 · {entry.assists}助</span></div>
                   </article>
                 ))}

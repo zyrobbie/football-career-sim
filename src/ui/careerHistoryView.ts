@@ -1,15 +1,22 @@
 import { runtimeClubById } from '../data/clubs/runtimeClubCatalog'
 import { clubDisplayNameForCompatibleId } from '../data/clubs/clubChineseNames'
+import { resolveClubParametersId } from '../data/clubs/clubRepository'
 import { buildRetirementSummary } from '../engine/careerSummary'
-import { careerWindowLabel, playerAgeAtWindow } from '../engine/careerTime'
+import { playerAgeAtWindow } from '../engine/careerTime'
 import { calculateOverall } from '../engine/player'
-import type { CareerHonor, GameState, SquadRole, TeamLevel } from '../models/game'
+import type {
+  CareerHistoryEntry,
+  CareerHonor,
+  GameState,
+  SquadRole,
+  TeamLevel,
+} from '../models/game'
 
-export interface CareerHistoryWindowView {
-  windowIndex: number
-  windowLabel: string
+export interface CareerHistorySeasonView {
+  startWindowIndex: number
+  endWindowIndex: number
+  seasonLabel: string
   age: number
-  clubId: string
   clubName: string
   teamLevel: TeamLevel
   role: SquadRole
@@ -49,7 +56,7 @@ export interface CareerHistoryView {
     seniorAppearances: number
     nationalAppearances: number
   }
-  windows: CareerHistoryWindowView[]
+  seasons: CareerHistorySeasonView[]
   clubs: CareerHistoryClubView[]
   nationalTeam: {
     appearances: number
@@ -63,6 +70,60 @@ export interface CareerHistoryView {
     national: CareerHonor[]
     individual: CareerHonor[]
   }
+}
+
+function displayClubName(entry: CareerHistoryEntry): string {
+  return clubDisplayNameForCompatibleId(
+    entry.clubId,
+    runtimeClubById.get(entry.clubId)?.name ?? entry.clubName ?? '未知俱乐部',
+  )
+}
+
+function seasonLabel(startYear: number, startWindowIndex: number): string {
+  const seasonStartYear = startYear + startWindowIndex / 2
+  return `${seasonStartYear}-${String((seasonStartYear + 1) % 100).padStart(2, '0')}赛季`
+}
+
+export function buildCareerHistorySeasons(input: {
+  history: readonly CareerHistoryEntry[]
+  startYear: number
+  primaryPosition: NonNullable<GameState['player']>['primaryPosition']
+}): CareerHistorySeasonView[] {
+  const historyByWindowIndex = new Map<number, CareerHistoryEntry>()
+  for (const entry of input.history) {
+    if (!historyByWindowIndex.has(entry.windowIndex)) {
+      historyByWindowIndex.set(entry.windowIndex, entry)
+    }
+  }
+
+  return [...historyByWindowIndex.values()]
+    .filter((entry) => entry.windowIndex % 2 === 0)
+    .map((summerEntry) => {
+      const winterEntry = historyByWindowIndex.get(summerEntry.windowIndex + 1)
+      if (!winterEntry || winterEntry.windowIndex % 2 !== 1) return null
+
+      const summerClubName = displayClubName(summerEntry)
+      const winterClubName = displayClubName(winterEntry)
+      const summerCanonicalClubId = resolveClubParametersId(summerEntry.clubId) ?? summerEntry.clubId
+      const winterCanonicalClubId = resolveClubParametersId(winterEntry.clubId) ?? winterEntry.clubId
+      return {
+        startWindowIndex: summerEntry.windowIndex,
+        endWindowIndex: winterEntry.windowIndex,
+        seasonLabel: seasonLabel(input.startYear, summerEntry.windowIndex),
+        age: playerAgeAtWindow(summerEntry.windowIndex),
+        clubName: summerCanonicalClubId === winterCanonicalClubId
+          ? winterClubName
+          : `${summerClubName} → ${winterClubName}`,
+        teamLevel: winterEntry.teamLevel,
+        role: winterEntry.role,
+        overall: Math.round(calculateOverall(winterEntry.endingAttributes, input.primaryPosition)),
+        appearances: summerEntry.stats.appearances + winterEntry.stats.appearances,
+        goals: summerEntry.stats.goals + winterEntry.stats.goals,
+        assists: summerEntry.stats.assists + winterEntry.stats.assists,
+      } satisfies CareerHistorySeasonView
+    })
+    .filter((season): season is CareerHistorySeasonView => season !== null)
+    .sort((left, right) => right.endWindowIndex - left.endWindowIndex)
 }
 
 export function buildCareerHistoryView(game: GameState): CareerHistoryView {
@@ -85,24 +146,11 @@ export function buildCareerHistoryView(game: GameState): CareerHistoryView {
       seniorAppearances: summary.seniorTotals.appearances,
       nationalAppearances: summary.nationalTeam.appearances,
     },
-    windows: [...game.history]
-      .sort((left, right) => right.windowIndex - left.windowIndex)
-      .map((entry) => ({
-        windowIndex: entry.windowIndex,
-        windowLabel: careerWindowLabel(game.startYear, entry.windowIndex),
-        age: playerAgeAtWindow(entry.windowIndex),
-        clubId: entry.clubId,
-        clubName: clubDisplayNameForCompatibleId(
-          entry.clubId,
-          runtimeClubById.get(entry.clubId)?.name ?? entry.clubName ?? '未知俱乐部',
-        ),
-        teamLevel: entry.teamLevel,
-        role: entry.role,
-        overall: Math.round(calculateOverall(entry.endingAttributes, player.primaryPosition)),
-        appearances: entry.stats.appearances,
-        goals: entry.stats.goals,
-        assists: entry.stats.assists,
-      })),
+    seasons: buildCareerHistorySeasons({
+      history: game.history,
+      startYear: game.startYear,
+      primaryPosition: player.primaryPosition,
+    }),
     clubs: summary.clubs.map((club) => ({
       clubId: club.clubId,
       clubName: clubDisplayNameForCompatibleId(club.clubId, club.clubName),
