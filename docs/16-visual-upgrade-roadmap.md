@@ -4,8 +4,8 @@
 > 初始设计原则见 [04-visual-direction.md](04-visual-direction.md)；已经完成的专项验收见 [14-honor-visual-system-v1-audit.md](14-honor-visual-system-v1-audit.md) 与 [15-china-club-crest-source-audit.md](15-china-club-crest-source-audit.md)。<br>
 > 后续每个视觉批次开始、返工、验收、提交或发布时，都必须同步更新本文。
 
-最后更新：2026-08-27<br>
-当前仓库基线：`3ed71c1`（已推送至 `origin/main`）<br>
+最后更新：2026-08-28<br>
+当前仓库基线：`84fa158`（本地补丁基线）<br>
 当前视觉阶段：**V7-C 海外原创队徽扩展——DEFERRED**<br>
 当前插入项目：**核心固定 UI 文案已进入实施与验收，见 [19-interface-copy-review.md](19-interface-copy-review.md)；V7-C 海外队徽扩展继续暂停。**
 
@@ -46,7 +46,7 @@
 | V5 | 海外模板归类扩展 | `MERGED_INTO_V4` | 海外 334 家已随 V4 的 366 条静态映射统一接入、验收与推送 | 无独立后续阶段 |
 | V6 | 全局界面统一性与细节反馈 | `NOT_STARTED` | — | 在主题系统稳定后处理导航、身份带与动效 |
 | V7 | 海外 334 家原创队徽扩展 | `DEFERRED` | [可行性审计](18-overseas-club-crest-v1-feasibility-audit.md)、14 套队徽色板、[意甲 20 家概念清单](data/overseas-club-crest-concepts-v1.csv)与 8 枚视觉样板均获确认；8 枚样板已由 `5a761c2` 接入并推送 | 按用户决定暂停，待文案项目完成后再评估 V7-C |
-| COPY-A | 核心固定 UI 文案体系 | `READY_TO_COMMIT` | 489 个 ID 编辑表已合并产品修订稿；379 项修订、110 项保留，22 个正式 phase × 三种视口（66 样本）、5 个原生确认调用、正式退休 Blob/二维码及完整工程链均已完成 | 等待人工审核后提交；V7-C 继续暂停 |
+| COPY-A | 核心固定 UI 文案体系 | `READY_TO_COMMIT` | 490 个 ID 编辑表已合并产品修订稿；379 项修订、110 项保留、1 项新增，22 个正式 phase × 三种视口（66 样本）、5 个原生确认调用、正式退休 Blob/二维码及完整工程链均已完成；退休档案新增非破坏性返回首页与青训邀请卡移动排版回归通过 | 等待人工审核后提交；V7-C 继续暂停 |
 | V8 | 视觉版本发布验收 | `NOT_STARTED` | — | 真实设备、完整生涯、转会切换、退役导出与线上回归 |
 
 ## 4. 已锁定的产品决定
@@ -360,6 +360,7 @@ V3.0.1 线上视觉补丁实际完成：
 | 日期 | 阶段 | 变化 | 状态变化 | 证据 |
 | --- | --- | --- | --- | --- |
 | 2026-08-27 | V1 联赛最佳球员文案修复 | 将联赛最佳球员纳入既有赛事限定文案规则，履历与退役汇总显示“意甲联赛最佳球员”“中超联赛最佳球员”等，不再合并成无法区分赛事的通用文字 | `SHIPPED → READY_TO_COMMIT` | 荣誉匹配与聚合回归测试 |
+| 2026-08-28 | 退休档案返回首页与青训邀请卡移动补丁 | `CAREER_RETIRED` 新增只清除内存展示、保留退休存档的“回到初始界面”；首页可继续原退休档案。窄屏三张青训邀请卡改为字段名／值上下布局，长训练条件保持单行 | `READY_TO_COMMIT → READY_TO_COMMIT` | store、组件、CSS 回归；隔离正式页面 320×568、390×844、1280×720 验收 |
 | 2026-08-27 | V7-B3 样板运行时接入 | 将 8 枚已确认意甲样板接入正式队徽清单；canonical/workbook ID 一致，正式履历、退役页与保存预览在 390×844、1280×720 均为 asset 8、fallback 0、无溢出或控制台问题；完整工程链通过 | `PRODUCT_APPROVED → READY_TO_COMMIT` | 队徽清单与组件测试；隔离正式页面和 PNG 预览验收；48 文件／343 项全量测试 |
 | 2026-08-27 | V7-B1 最终视觉确认 | 用户否决 AC米兰与罗马的多轮低辨识构图后，最终锁定正面双角獠牙魔鬼脸与金色右向咆哮狼头；其余六枚保持不变。8 枚样板整体获确认，仍不接入运行时 | `WAITING_VISUAL_REVIEW → PRODUCT_APPROVED` | `public/assets/clubs/crests/ita-*.svg`、用户视觉确认 |
 | 2026-08-26 | V7-B1-R1 圆形队徽对比度与异色外环返修 | 为未来海外圆形队徽冻结“透明安全区→异色 ring→field→高对比 motif→小面积 accent”规则；8 枚意甲样板完成对比度与外环返修，罗马改为原创狼头、威尼斯改为横向贡多拉，未接入运行时 | `WAITING_VISUAL_REVIEW → WAITING_VISUAL_REVIEW` | [第18号审计](18-overseas-club-crest-v1-feasibility-audit.md)、概念 CSV、`/tmp/overseas-club-crests-v7-b1-round2-review.png` |

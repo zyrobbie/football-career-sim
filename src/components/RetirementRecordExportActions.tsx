@@ -43,9 +43,11 @@ export function RetirementRecordPreview({
 export function RetirementRecordExportActions({
   targetRef,
   playerName,
+  onReturnHome,
 }: {
   targetRef: RefObject<HTMLElement | null>
   playerName: string
+  onReturnHome: () => void
 }) {
   const [status, setStatus] = useState<ExportStatus>('IDLE')
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
@@ -82,15 +84,25 @@ export function RetirementRecordExportActions({
 
   return (
     <section className="retirement-export-actions" aria-label="保存职业生涯记录">
-      <button
-        type="button"
-        className="button button--primary"
-        onClick={() => void generateRecord()}
-        disabled={status === 'GENERATING'}
-      >
-        <Icon name="save" />
-        {status === 'GENERATING' ? '正在生成生涯长图…' : '保存我的职业生涯'}
-      </button>
+      <div className="retirement-export-actions__buttons">
+        <button
+          type="button"
+          className="button button--primary"
+          onClick={() => void generateRecord()}
+          disabled={status === 'GENERATING'}
+        >
+          <Icon name="save" />
+          {status === 'GENERATING' ? '正在生成生涯长图…' : '保存我的职业生涯'}
+        </button>
+        <button
+          type="button"
+          className="button button--secondary button--on-dark"
+          onClick={onReturnHome}
+          disabled={status === 'GENERATING'}
+        >
+          回到初始界面
+        </button>
+      </div>
       {status === 'ERROR' && message ? <p role="alert">{message}</p> : null}
 
       {previewUrl ? (

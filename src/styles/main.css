@@ -4376,7 +4376,7 @@ svg {
 
   .career-offers .offer-column {
     width: auto;
-    min-height: 132px;
+    min-height: 0;
     display: block;
     margin: 0;
     padding: 6px 5px;
@@ -4429,10 +4429,10 @@ svg {
 
   .career-offers .offer-column__value {
     min-height: 0;
-    display: flex;
-    justify-content: space-between;
-    gap: 3px;
-    padding: 2px 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1px;
+    padding: 3px 0;
     border: 0;
   }
 
@@ -4442,7 +4442,12 @@ svg {
   }
 
   .career-offers .offer-column__value strong {
-    font-size: 10px;
+    min-width: 0;
+    overflow: visible;
+    font-size: 9px;
+    line-height: 1.25;
+    text-overflow: clip;
+    white-space: nowrap;
   }
 
   .career-offers .offer-confirmation {
@@ -7495,8 +7500,42 @@ svg {
   background: var(--shell-deep);
 }
 
-.retirement-export-actions > .button {
-  min-width: min(360px, 100%);
+.retirement-export-actions__buttons {
+  width: min(560px, 100%);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.retirement-export-actions__buttons > .button {
+  min-width: 0;
+  min-height: 44px;
+  padding-inline: 12px;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .retirement-export-actions {
+    padding-inline: 12px;
+  }
+
+  .retirement-export-actions__buttons {
+    gap: 6px;
+  }
+
+  .retirement-export-actions__buttons > .button {
+    min-height: 42px;
+    padding-inline: 6px;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 0;
+  }
+
+  .retirement-export-actions__buttons > .button svg {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 .retirement-export-actions > p {

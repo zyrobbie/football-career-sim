@@ -54,7 +54,7 @@ export function retirementClubShortMarkFor(
   return runtimeClubById.get(clubId)?.shortMark ?? clubName.slice(0, 1)
 }
 
-function RetirementArchive() {
+function RetirementArchive({ onReturnHome }: { onReturnHome: () => void }) {
   const exportTargetRef = useRef<HTMLDivElement>(null)
   const game = useGameStore((state) => state.game)!
   const player = game.player!
@@ -297,6 +297,7 @@ function RetirementArchive() {
     <RetirementRecordExportActions
       targetRef={exportTargetRef}
       playerName={player.name}
+      onReturnHome={onReturnHome}
     />
     </>
   )
@@ -326,9 +327,12 @@ export function RetirementScreen() {
   const game = useGameStore((state) => state.game)
   const cancelRetirement = useGameStore((state) => state.cancelRetirement)
   const confirmRetirement = useGameStore((state) => state.confirmRetirement)
+  const returnToHome = useGameStore((state) => state.returnToHome)
 
   if (!game?.player || !game.retirementReason) return null
-  if (game.phase === 'CAREER_RETIRED') return <RetirementArchive />
+  if (game.phase === 'CAREER_RETIRED') {
+    return <RetirementArchive onReturnHome={returnToHome} />
+  }
 
   const age = playerAgeAtWindow(game.windowIndex)
   const isAgeLimit = game.retirementReason === 'AGE_LIMIT'

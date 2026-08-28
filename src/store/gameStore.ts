@@ -82,6 +82,7 @@ interface GameStore {
   startNewCareer: () => void
   continueCareer: () => void
   deleteCareer: () => void
+  returnToHome: () => void
   submitIdentity: (input: {
     name: string
     jerseyNumber: number
@@ -418,6 +419,11 @@ export const useGameStore = create<GameStore>((set, get) => {
     deleteCareer: () => {
       deleteSavedCareer()
       set({ game: null, hasSave: false, error: null })
+    },
+
+    returnToHome: () => {
+      if (get().game?.phase !== 'CAREER_RETIRED') return
+      set({ game: null, hasSave: true, error: null })
     },
 
     submitIdentity: ({ name, jerseyNumber, preferredFoot }) => {
