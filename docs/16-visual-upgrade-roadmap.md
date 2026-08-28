@@ -84,7 +84,7 @@
 ### 4.4 发布与线上验收渠道
 
 - 唯一代码远端为 GitHub 仓库 `zyrobbie/football-career-sim` 的 `origin/main`；
-- 唯一公开试玩与线上验收地址为 [GitHub Pages](https://zyrobbie.github.io/football-career-sim/)；
+- 唯一公开试玩与线上验收地址为 [footballcareer.zyrobbie.site](https://footballcareer.zyrobbie.site/)，由 GitHub Pages 托管；
 - 后续发布报告只区分“已推送 GitHub”与“GitHub Pages 已完成线上／实机验证”；
 - 不再等待、检查、部署或汇报 Netlify，也不将 Netlify 状态作为任何阶段的完成条件。
 
@@ -428,5 +428,5 @@ V3.0.1 线上视觉补丁实际完成：
 - V4 产品方向已实现为“14 套标准模板 + 366 家显式归类”，不再制作一队一套 Token；提交 `2a932f7` 已推送至 `origin/main`，用户在 GitHub Pages 测试通过，当前为 `SHIPPED`；
 - V4-A2 已完成：32 家中国俱乐部保持既有归类，334 家海外俱乐部按产品近似口径逐条映射；弗鲁米嫩塞固定为 `CLARET_BLUE`、聚尔特瓦勒海姆固定为 `RED_WHITE`，`NEEDS_REVIEW` 已清零；
 - V7 已由用户重新启动；可行性审计完成，下一步只做意甲 20 家核心图腾与构图方向清单，不直接批量画 334 枚；
-- 唯一线上验收渠道为 `https://zyrobbie.github.io/football-career-sim/`；后续不再考虑或汇报 Netlify；
+- 唯一线上验收渠道为 `https://footballcareer.zyrobbie.site/`（GitHub Pages）；后续不再考虑或汇报 Netlify；
 - 既有 `outputs/019facd8-3fee-7b80-bfcd-2d1d35e522ba/` 为未跟踪审核输出，必须保留且不得进入提交；

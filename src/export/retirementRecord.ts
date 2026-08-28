@@ -1,4 +1,4 @@
-export const RETIREMENT_RECORD_URL = 'https://zyrobbie.github.io/football-career-sim/'
+export const RETIREMENT_RECORD_URL = 'https://footballcareer.zyrobbie.site/'
 export const RETIREMENT_QR_ASSET_PATH = `${import.meta.env.BASE_URL}assets/retirement-career-qr.svg`
 export const RETIREMENT_EXPORT_WIDTH = 1180
 export const RETIREMENT_MAX_CANVAS_PIXELS = 12_000_000

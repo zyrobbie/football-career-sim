@@ -70,6 +70,8 @@ describe('official brand SVG assets', () => {
     expect(documentSource).toContain('<title>上场 · TAKE THE FIELD</title>')
     expect(documentSource).toContain('name="application-name" content="上场"')
     expect(documentSource).toContain('property="og:title" content="上场 · TAKE THE FIELD"')
+    expect(documentSource).toContain('property="og:url" content="https://footballcareer.zyrobbie.site/"')
+    expect(documentSource).toContain('rel="canonical" href="https://footballcareer.zyrobbie.site/"')
     expect(documentSource).toContain('href="/assets/brand/logo-mark.svg"')
   })
 })

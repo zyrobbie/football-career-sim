@@ -2,7 +2,7 @@
 
 一个以合同选择、职业生涯规划、技术特点和人际关系为核心的中国球员文字生涯模拟器。
 
-在线试玩：[https://zyrobbie.github.io/football-career-sim/](https://zyrobbie.github.io/football-career-sim/)
+在线试玩：[https://footballcareer.zyrobbie.site/](https://footballcareer.zyrobbie.site/)
 
 当前正式版本为 **V1.0.0**，已完成从建档到退役的可玩生涯闭环，覆盖：
 

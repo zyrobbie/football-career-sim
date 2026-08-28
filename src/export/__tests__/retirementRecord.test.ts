@@ -35,7 +35,7 @@ describe('retirement record export V1', () => {
   })
 
   it('keeps the QR target and local Pages-compatible asset path fixed', () => {
-    expect(RETIREMENT_RECORD_URL).toBe('https://zyrobbie.github.io/football-career-sim/')
+    expect(RETIREMENT_RECORD_URL).toBe('https://footballcareer.zyrobbie.site/')
     expect(RETIREMENT_QR_ASSET_PATH).toMatch(/assets\/retirement-career-qr\.svg$/)
   })
 
