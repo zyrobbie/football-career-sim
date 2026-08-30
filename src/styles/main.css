@@ -5141,7 +5141,8 @@ svg {
     min-width: 0;
     padding: 5px 6px;
     border-right: 1px solid var(--line);
-    font-size: 9px;
+    font-size: 12px;
+    line-height: 1.35;
   }
 
   .reveal-meta div:nth-child(even) {
@@ -5150,9 +5151,11 @@ svg {
 
   .reveal-meta dt,
   .reveal-meta dd {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    min-width: 0;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: normal;
   }
 
   .reveal-note,
@@ -5498,6 +5501,14 @@ svg {
 
   .demo-complete--hub .demo-complete__next {
     font-size: 12px;
+  }
+
+  /* Retirement is a reading-and-decision surface, not compact decoration. */
+  .retirement-panel.demo-complete--hub .decision-kicker,
+  .retirement-panel.demo-complete--hub > div > p:not(.decision-kicker),
+  .retirement-panel.demo-complete--hub .button {
+    font-size: 12px;
+    line-height: 1.35;
   }
 
   .demo-complete--hub .demo-complete__overseas-interest {
@@ -8218,6 +8229,484 @@ svg {
     margin-top: 10px;
     font-size: 8px;
   }
+
+  /* Retirement archive information must remain readable at its actual mobile size. */
+  .retirement-archive__masthead > div:last-child,
+  .retirement-archive__ovr small,
+  .retirement-archive__identity p,
+  .retirement-archive__ending small,
+  .retirement-archive__ending p,
+  .retirement-archive__snapshots span,
+  .retirement-archive__snapshots small,
+  .retirement-archive__section-title > span,
+  .retirement-national dt,
+  .retirement-clubs__service,
+  .retirement-clubs__club small,
+  .retirement-clubs__row > span:nth-child(3),
+  .retirement-clubs__row > strong:nth-child(n + 4),
+  .retirement-clubs__row > strong:nth-child(n + 4)::before,
+  .retirement-clubs__honor,
+  .retirement-evaluation__score small,
+  .retirement-evaluation dt,
+  .retirement-evaluation > p,
+  .retirement-honors__list span,
+  .retirement-honors__list p,
+  .retirement-tags__list span,
+  .retirement-archive__talent span,
+  .retirement-archive__talent p,
+  .retirement-archive__footer {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .retirement-national dd,
+  .retirement-clubs__club strong,
+  .retirement-evaluation dd {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .retirement-archive__masthead > div:last-child,
+  .retirement-archive__ovr small,
+  .retirement-archive__identity p,
+  .retirement-archive__ending small,
+  .retirement-archive__ending p,
+  .retirement-archive__snapshots span,
+  .retirement-archive__snapshots small,
+  .retirement-archive__section-title > span,
+  .retirement-clubs__club small,
+  .retirement-clubs__honor,
+  .retirement-evaluation__score small,
+  .retirement-evaluation > p,
+  .retirement-honors__list p,
+  .retirement-tags__list span,
+  .retirement-archive__talent p {
+    overflow-wrap: anywhere;
+  }
+
+  .retirement-archive__hero {
+    min-height: 132px;
+  }
+
+  .retirement-archive__ending {
+    gap: 9px;
+  }
+
+  .retirement-archive__snapshots > div,
+  .retirement-national dl div {
+    padding: 9px 8px;
+  }
+
+  .retirement-national dt,
+  .retirement-national dd {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .retirement-clubs__row {
+    min-height: 116px;
+    padding: 8px;
+    grid-template-columns: 70px minmax(0, 1fr) repeat(4, 34px);
+    gap: 4px;
+  }
+
+  .retirement-clubs__service {
+    font-size: 12px;
+  }
+
+  .retirement-clubs__club strong {
+    font-size: 13px;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .retirement-clubs__club,
+  .club-crest--retirement {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .retirement-clubs__row > strong:nth-child(4),
+  .retirement-clubs__row > strong:nth-child(5),
+  .retirement-clubs__row > strong:nth-child(6),
+  .retirement-clubs__row > strong:nth-child(7) {
+    padding-top: 16px;
+  }
+
+  .retirement-clubs__honor {
+    padding-top: 2px;
+  }
+
+  .retirement-evaluation dl div,
+  .retirement-honors__list > div {
+    min-height: 42px;
+    padding: 8px;
+  }
+
+  .retirement-honors__list > div {
+    grid-template-columns: 60px minmax(0, 1fr);
+  }
+
+  .retirement-honors__list p {
+    padding: 7px 8px;
+  }
+
+  .retirement-tags__list > div {
+    min-height: 62px;
+    padding: 9px;
+  }
+
+  .retirement-archive__talent {
+    padding: 10px;
+  }
+
+  .retirement-archive__talent > div {
+    min-height: 42px;
+  }
+}
+
+/* PC-QA-R4: the half-year report is a long reading surface, never a compressed dashboard. */
+@media (max-width: 720px) {
+  .career-report .stat-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px 0;
+    margin-bottom: 18px;
+  }
+
+  .career-report .stat-strip dt,
+  .career-report .stat-strip dd,
+  .career-report .attribute-table span,
+  .career-report .attribute-table strong,
+  .career-report .progress-note,
+  .career-report .report-side h2,
+  .career-report .report-footer h2,
+  .career-report .report-change > span,
+  .career-report .report-change strong,
+  .career-report .report-change i,
+  .career-report .report-change em,
+  .career-report .report-side__finance .report-change span,
+  .career-report .report-side__finance .report-change strong,
+  .career-report .contract-window-report dt,
+  .career-report .contract-window-report dd,
+  .career-report .contract-window-report > strong,
+  .career-report .first-team-report__metrics span,
+  .career-report .first-team-report > strong,
+  .career-report .first-team-report > p,
+  .career-report .injury-note p,
+  .career-report .national-team-report dt,
+  .career-report .national-team-report dd,
+  .career-report .national-team-report p,
+  .career-report .national-team-report__summary strong,
+  .career-report .national-team-report__summary span,
+  .career-report .season-honors-report__results dt,
+  .career-report .season-honors-report__results dd,
+  .career-report .season-honors-report__awards strong,
+  .career-report .season-honors-report__awards span,
+  .career-report .special-event-result strong,
+  .career-report .special-event-result span,
+  .career-report .special-event-result p,
+  .career-report .consequence-result p,
+  .career-report .report-footer .event-summary,
+  .career-report .report-footer li,
+  .career-report .autosave-line,
+  .career-report .report-footer .button {
+    min-width: 0;
+    overflow: visible;
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .career-report .stat-strip dd {
+    margin-top: 3px;
+    font-size: 24px;
+  }
+
+  .career-report .attribute-table > div {
+    min-height: 38px;
+    grid-template-columns: 1.2fr repeat(3, minmax(0, 0.9fr));
+  }
+
+  .career-report .attribute-table__head {
+    min-height: 32px !important;
+  }
+
+  .career-report .attribute-table span,
+  .career-report .attribute-table strong {
+    padding: 4px;
+  }
+
+  .career-report .progress-note {
+    margin-top: 10px;
+  }
+
+  .career-report .report-side {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .career-report .report-side section {
+    padding: 10px;
+  }
+
+  .career-report .report-side h2,
+  .career-report .report-footer h2 {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .career-report .report-side__states {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .career-report .report-change,
+  .career-report .report-side__states .report-change,
+  .career-report .report-side__finance .report-change,
+  .career-report .first-team-report > .report-change {
+    display: flex;
+    min-height: 0;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 0;
+    border-right: 0;
+    border-bottom: 1px dotted var(--line);
+  }
+
+  .career-report .report-change strong {
+    flex: 0 0 auto;
+  }
+
+  .career-report .report-side__finance,
+  .career-report .first-team-report,
+  .career-report .contract-window-report {
+    display: block;
+    grid-column: auto;
+  }
+
+  .career-report .contract-window-report h2,
+  .career-report .first-team-report h2 {
+    margin-bottom: 8px;
+  }
+
+  .career-report .contract-window-report dl {
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0;
+  }
+
+  .career-report .contract-window-report dl > div {
+    padding: 8px 0;
+    border-left: 0;
+    border-bottom: 1px dotted var(--line);
+  }
+
+  .career-report .contract-window-report dd {
+    margin-top: 3px;
+  }
+
+  .career-report .first-team-report__metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    margin: 10px 0;
+  }
+
+  .career-report .first-team-report__metrics span {
+    padding: 5px;
+    text-align: left;
+  }
+
+  .career-report .first-team-report > p {
+    margin-top: 10px;
+  }
+
+  .career-report .national-team-report__summary {
+    flex-wrap: wrap;
+  }
+
+  .career-report .national-team-report dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 0;
+  }
+
+  .career-report .season-honors-report__results {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .career-report .season-honors-report__results > div {
+    padding: 0 5px;
+  }
+
+  .career-report .season-honors-report__awards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .career-report .season-honors-report__awards > span,
+  .career-report .season-honors-report__awards > strong:only-child {
+    grid-column: 1 / -1;
+  }
+
+  .career-report .special-event-result,
+  .career-report .consequence-result {
+    padding: 10px;
+  }
+
+  .career-report .report-footer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    align-items: stretch;
+    margin-top: 16px;
+    padding-top: 14px;
+  }
+
+  .career-report .report-footer .event-summary {
+    display: block;
+    margin: 0;
+    -webkit-line-clamp: unset;
+  }
+
+  .career-report .report-footer ul {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .career-report .autosave-line {
+    margin-top: 10px;
+  }
+
+  .career-report .report-footer .button {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 12px;
+  }
+}
+
+/* PC-QA-R2: mobile reading information must grow naturally rather than clip. */
+@media (max-width: 720px) {
+  .preference-editor .select-row {
+    min-height: 0;
+  }
+
+  .preference-editor .select-row strong,
+  .preference-editor .select-row small {
+    min-width: 0;
+    overflow: visible;
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .preference-editor .select-row small {
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+
+  .career-ledger td:nth-child(3) {
+    height: auto;
+    min-height: 25px;
+    overflow: visible;
+    white-space: normal;
+  }
+
+  .career-ledger__club {
+    display: block;
+    max-width: none;
+    overflow: visible;
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .club-crest--ledger {
+    margin-right: 3px;
+    vertical-align: top;
+  }
+
+  .career-panel-lead {
+    display: block;
+    overflow: visible;
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    -webkit-line-clamp: unset;
+  }
+
+  .transfer-window .career-panel-lead,
+  .transfer-arrival .career-panel-lead,
+  .special-event .career-panel-lead {
+    font-size: 12px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  /* PC-QA-R3: keep the semantic nine-field career ledger readable on phones. */
+  .career-ledger__scroll {
+    overflow: visible;
+  }
+
+  .career-ledger table,
+  .career-ledger thead,
+  .career-ledger tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .career-ledger thead tr,
+  .career-ledger tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 0.7fr) minmax(0, 1.5fr);
+  }
+
+  .career-ledger th:nth-child(n),
+  .career-ledger td:nth-child(n) {
+    box-sizing: border-box;
+    width: auto;
+    height: auto;
+    min-height: 0;
+    min-width: 0;
+    padding: 5px 4px;
+    overflow: visible;
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: normal;
+  }
+
+  .career-ledger thead tr {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .career-ledger tbody tr {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .career-ledger tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  .career-ledger__details.is-open .career-ledger__scroll {
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 /* Read-only career history and local settings. */
@@ -8341,6 +8830,12 @@ svg {
 @media (max-width: 720px) {
   .history-screen,
   .settings-screen { padding: 12px 12px 24px; }
+  .player-screen__title > small,
+  .history-screen__title > small,
+  .settings-screen__title > small {
+    font-size: 12px;
+    line-height: 1.35;
+  }
   .history-screen__overview { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .history-screen__overview > div { padding: 9px; }
   .history-screen__overview strong { font-size: 21px; }
@@ -8454,4 +8949,82 @@ svg {
   .career-report .season-honors-report__awards > strong:only-child {
     grid-column: 1 / -1;
   }
+}
+
+/* PC-QA-R4 final cascade: report copy follows the reading rules after all legacy compact rules. */
+@media (max-width: 720px) {
+  .career-report h1 {
+    line-height: 1.35;
+  }
+
+  .career-report .stat-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 0; }
+  .career-report .report-side,
+  .career-report .season-honors-report,
+  .career-report .report-side__finance,
+  .career-report .first-team-report,
+  .career-report .contract-window-report { display: block; }
+  .career-report .stat-strip dt,
+  .career-report .stat-strip dd,
+  .career-report .attribute-table span,
+  .career-report .attribute-table strong,
+  .career-report .progress-note,
+  .career-report .report-side h2,
+  .career-report .report-footer h2,
+  .career-report .report-change > span,
+  .career-report .report-change strong,
+  .career-report .report-change i,
+  .career-report .report-change em,
+  .career-report .contract-window-report dt,
+  .career-report .contract-window-report dd,
+  .career-report .contract-window-report > strong,
+  .career-report .first-team-report__metrics span,
+  .career-report .first-team-report > strong,
+  .career-report .first-team-report > p,
+  .career-report .injury-note p,
+  .career-report .national-team-report dt,
+  .career-report .national-team-report dd,
+  .career-report .national-team-report p,
+  .career-report .national-team-report__summary strong,
+  .career-report .national-team-report__summary span,
+  .career-report .season-honors-report__results dt,
+  .career-report .season-honors-report__results dd,
+  .career-report .season-honors-report__awards strong,
+  .career-report .season-honors-report__awards span,
+  .career-report .special-event-result strong,
+  .career-report .special-event-result span,
+  .career-report .special-event-result p,
+  .career-report .consequence-result p,
+  .career-report .report-footer .event-summary,
+  .career-report .report-footer li,
+  .career-report .autosave-line,
+  .career-report .report-footer .button { min-width: 0; overflow: visible; font-size: 12px; line-height: 1.35; text-overflow: clip; white-space: normal; overflow-wrap: anywhere; }
+  .career-report .stat-strip dd { margin-top: 3px; font-size: 24px; }
+  .career-report .attribute-table > div { min-height: 38px; grid-template-columns: 1.2fr repeat(3, minmax(0, .9fr)); }
+  .career-report .attribute-table__head { min-height: 32px !important; }
+  .career-report .attribute-table span,
+  .career-report .attribute-table strong { padding: 4px; }
+  .career-report .report-side section { margin: 0 0 10px; padding: 10px; }
+  .career-report .report-side h2,
+  .career-report .report-footer h2 { margin-bottom: 8px; font-size: 16px; }
+  .career-report .report-side__states { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .career-report .report-change,
+  .career-report .report-side__states .report-change,
+  .career-report .report-side__finance .report-change,
+  .career-report .first-team-report > .report-change { display: flex; min-height: 0; align-items: baseline; justify-content: space-between; gap: 10px; padding: 8px 0; border-right: 0; border-bottom: 1px dotted var(--line); }
+  .career-report .report-side__finance .report-change span,
+  .career-report .report-side__finance .report-change strong { overflow: visible; text-overflow: clip; white-space: normal; }
+  .career-report .contract-window-report dl { grid-template-columns: minmax(0, 1fr); margin: 0; }
+  .career-report .contract-window-report dl > div { padding: 8px 0; border-left: 0; border-bottom: 1px dotted var(--line); }
+  .career-report .first-team-report__metrics { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 10px 0; }
+  .career-report .first-team-report__metrics span { padding: 5px; text-align: left; }
+  .career-report .national-team-report__summary { flex-wrap: wrap; }
+  .career-report .national-team-report dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 0; }
+  .career-report .season-honors-report__results { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin: 8px 0; }
+  .career-report .season-honors-report__awards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-top: 8px; }
+  .career-report .season-honors-report__awards > span,
+  .career-report .season-honors-report__awards > strong:only-child { grid-column: 1 / -1; }
+  .career-report .report-footer { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; margin-top: 16px; padding-top: 14px; }
+  .career-report .report-footer .event-summary { display: block; margin: 0; -webkit-line-clamp: unset; }
+  .career-report .report-footer ul { display: block; margin: 10px 0; }
+  .career-report .report-footer .button { width: 100%; min-height: 42px; padding: 0 12px; }
 }

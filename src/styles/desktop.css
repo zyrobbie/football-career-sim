@@ -1,0 +1,1931 @@
+/* PC-D1: shared desktop shell and CareerHub only. */
+@media (min-width: 821px) {
+  .app-frame {
+    width: min(1720px, 100%);
+    grid-template-columns: 186px minmax(0, 1fr);
+  }
+
+  .app-surface {
+    min-width: 0;
+  }
+
+  .sidebar > .brand {
+    width: 116px;
+    margin: 24px 20px 18px;
+  }
+
+  .sidebar__nav {
+    padding-top: 8px;
+  }
+
+  .sidebar__item {
+    min-height: 54px;
+    gap: 11px;
+    padding: 0 18px;
+    font-size: 16px;
+  }
+
+  .sidebar__item svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sidebar__pitch {
+    height: 110px;
+    margin: auto 14px 0;
+  }
+
+  .sidebar__pitch span {
+    width: 42px;
+    height: 42px;
+  }
+
+  .sidebar__save {
+    gap: 3px;
+    padding: 16px 18px 20px;
+    font-size: 13px;
+  }
+
+  .sidebar__save small {
+    font-size: 12px;
+  }
+
+  .topbar {
+    min-height: 52px;
+    padding: 0 24px;
+    gap: 16px;
+    font-size: 13px;
+  }
+
+  .topbar > span {
+    gap: 8px;
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .topbar > span + span {
+    padding-left: 16px;
+  }
+
+  .career-hub {
+    padding: 16px 24px 32px;
+  }
+
+  .career-overview {
+    min-height: 122px;
+    grid-template-columns:
+      92px minmax(220px, 1.05fr) 158px minmax(238px, 1fr)
+      minmax(242px, 1.04fr);
+  }
+
+  .career-overview__overall,
+  .career-overview__identity,
+  .career-overview__cash,
+  .career-overview__totals,
+  .career-overview__attributes {
+    padding: 12px 16px !important;
+  }
+
+  .career-overview__overall strong {
+    margin-top: 4px;
+    font-size: 54px;
+  }
+
+  .career-overview__identity h1 {
+    margin-bottom: 3px;
+    font-size: clamp(26px, 2.2vw, 32px);
+  }
+
+  .career-overview__identity p,
+  .career-overview__identity strong,
+  .career-overview__identity small,
+  .career-overview__cash span,
+  .career-overview__cash small,
+  .career-overview__totals > p,
+  .career-overview__attributes > p,
+  .career-overview__national,
+  .career-overview__totals dt,
+  .career-overview__attributes dt,
+  .career-overview__attributes small {
+    font-size: 12px;
+  }
+
+  .career-overview__identity strong {
+    margin-top: 8px;
+  }
+
+  .career-overview__identity small {
+    margin-top: 3px;
+  }
+
+  .career-overview__cash strong {
+    margin-top: 6px;
+    font-size: 28px;
+    white-space: nowrap;
+  }
+
+  .career-overview__cash small {
+    margin-top: 4px;
+  }
+
+  .career-overview__totals > p,
+  .career-overview__attributes > p {
+    margin-bottom: 8px;
+  }
+
+  .career-overview__totals dt {
+    margin-top: 2px;
+  }
+
+  .career-overview__totals dd {
+    font-size: 28px;
+  }
+
+  .career-overview__attributes dd {
+    margin: 3px 0 1px;
+    font-size: 24px;
+  }
+
+  .career-overview__national {
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .career-meters {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    margin-top: 10px;
+  }
+
+  .career-meter {
+    padding: 10px 12px;
+  }
+
+  .career-meter > span {
+    align-items: baseline;
+    gap: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    writing-mode: horizontal-tb;
+  }
+
+  .career-meter strong,
+  .career-meter em {
+    font-size: 12px;
+  }
+
+  .career-meter em {
+    margin-left: 0;
+  }
+
+  .career-meter > i {
+    height: 4px;
+    margin-top: 6px;
+  }
+
+  .first-team-path {
+    min-height: 60px;
+    grid-template-columns: 170px minmax(148px, 0.8fr) minmax(300px, 1.2fr);
+    gap: 14px;
+    margin-top: 10px;
+    padding: 10px 14px;
+  }
+
+  .first-team-path__summary span,
+  .first-team-path__summary em,
+  .first-team-path__summary small,
+  .first-team-path dt,
+  .first-team-path dl small {
+    font-size: 12px;
+  }
+
+  .first-team-path__summary strong {
+    font-size: 26px;
+  }
+
+  .first-team-path__bar {
+    height: 5px;
+  }
+
+  .first-team-path dl div {
+    min-width: 0;
+    padding: 0 12px;
+  }
+
+  .first-team-path dt,
+  .first-team-path dd,
+  .first-team-path dl small {
+    white-space: nowrap;
+    word-break: keep-all;
+    overflow-wrap: normal;
+    writing-mode: horizontal-tb;
+  }
+
+  .first-team-path dd {
+    font-size: 18px;
+  }
+
+  .career-workspace {
+    grid-template-columns: minmax(400px, 0.4fr) minmax(0, 0.6fr);
+    gap: 20px;
+    margin-top: 16px;
+  }
+
+  .career-ledger > header,
+  .career-panel-heading {
+    min-height: 40px;
+  }
+
+  .career-ledger > header svg,
+  .career-panel-heading > svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .career-ledger h2 {
+    font-size: 20px;
+  }
+
+  .career-ledger > header > span,
+  .career-ledger__toggle,
+  .career-ledger > p,
+  .career-panel-heading > span,
+  .career-panel-lead {
+    font-size: 12px;
+  }
+
+  .career-ledger__scroll {
+    margin-top: 8px;
+    overflow-x: visible;
+  }
+
+  .career-ledger th,
+  .career-ledger td {
+    min-width: 0;
+    height: 34px;
+    padding: 4px 3px;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .career-ledger th {
+    height: 30px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .career-ledger td {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .career-ledger th:nth-child(1) { width: 48px; }
+  .career-ledger th:nth-child(2) { width: 32px; }
+  .career-ledger th:nth-child(4) { width: 46px; }
+  .career-ledger th:nth-child(5) { width: 48px; }
+  .career-ledger th:nth-child(6) { width: 40px; }
+  .career-ledger th:nth-child(n + 7) { width: 32px; }
+
+  .career-ledger__club {
+    display: flex;
+    min-width: 0;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .career-active {
+    min-width: 0;
+    padding-left: 20px;
+  }
+
+  .career-panel-heading {
+    min-height: 42px;
+  }
+
+  .career-panel-heading h1 {
+    font-size: clamp(24px, 2vw, 30px);
+  }
+
+  .career-panel-lead {
+    margin-top: 10px;
+    line-height: 1.55;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1140px) {
+  .app-frame {
+    grid-template-columns: 170px minmax(0, 1fr);
+  }
+
+  .sidebar > .brand {
+    width: 106px;
+    margin-left: 16px;
+  }
+
+  .sidebar__item {
+    padding: 0 16px;
+    font-size: 15px;
+  }
+
+  .career-hub {
+    padding-inline: 18px;
+  }
+
+  .career-overview {
+    grid-template-columns: 82px minmax(190px, 1fr) 150px;
+  }
+
+  .career-overview__totals,
+  .career-overview__attributes {
+    grid-column: span 3;
+    border-top: 1px solid var(--line);
+  }
+
+  .career-overview__attributes {
+    border-left: 0 !important;
+  }
+
+  .career-workspace {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .career-active {
+    padding: 16px 0 0;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+}
+
+/* PC-D3: report, contract, transfer and completion pages only. */
+@media (min-width: 821px) {
+  .career-report {
+    padding: 0;
+  }
+
+  .career-report .report-grid {
+    grid-template-columns: minmax(0, 1.62fr) minmax(320px, 0.98fr);
+    margin-top: 12px;
+  }
+
+  .career-report .report-main {
+    padding: 18px 24px 22px 0;
+  }
+
+  .career-report .stat-strip {
+    margin-bottom: 18px;
+  }
+
+  .career-report .stat-strip dd {
+    margin-top: 5px;
+    font-size: clamp(28px, 2.4vw, 34px);
+  }
+
+  .career-report .attribute-table > div {
+    min-height: 38px;
+  }
+
+  .career-report .attribute-table__head {
+    min-height: 32px !important;
+  }
+
+  .career-report .attribute-table span,
+  .career-report .attribute-table strong {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .career-report .attribute-table strong {
+    font-size: 14px;
+  }
+
+  .career-report .report-side {
+    padding: 0 0 0 22px;
+  }
+
+  .career-report .report-side section {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+  }
+
+  .career-report .report-side h2,
+  .career-report .report-footer h2 {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  .career-report .report-change {
+    min-height: 32px;
+    gap: 12px;
+    font-size: 12px;
+  }
+
+  .career-report .report-change strong {
+    font-size: 14px;
+  }
+
+  .career-report .first-team-report__metrics span,
+  .career-report .first-team-report p,
+  .career-report .event-summary,
+  .career-report .autosave-line {
+    font-size: 12px;
+  }
+
+  .career-report .season-honors-report__results dt,
+  .career-report .season-honors-report__results dd {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .career-report .season-honors-report__results dt {
+    font-size: 12px;
+  }
+
+  .career-report .season-honors-report__results dd {
+    font-size: 14px;
+  }
+
+  .career-report .season-honors-report__awards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .career-report .season-honors-report__awards strong,
+  .career-report .season-honors-report__awards span {
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .career-report .season-honors-report__awards > span,
+  .career-report .season-honors-report__awards > strong:only-child {
+    grid-column: 1 / -1;
+  }
+
+  .career-report .report-footer {
+    min-height: 64px;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    gap: 28px;
+    margin: 0;
+    padding: 18px 0 0;
+  }
+
+  .career-report .report-footer ul {
+    margin: 8px 0;
+    line-height: 1.55;
+  }
+
+  .career-report .report-footer .button {
+    min-height: 52px;
+  }
+
+  /* PC-QA-R5: report information stays readable; long reports grow as a page. */
+  .career-report .stat-strip dt,
+  .career-report .attribute-table span,
+  .career-report .attribute-table strong,
+  .career-report .progress-note,
+  .career-report .report-side h2,
+  .career-report .report-footer h2,
+  .career-report .report-change > span,
+  .career-report .report-change strong,
+  .career-report .report-change i,
+  .career-report .report-change em,
+  .career-report .contract-window-report dt,
+  .career-report .contract-window-report dd,
+  .career-report .contract-window-report > strong,
+  .career-report .first-team-report__metrics span,
+  .career-report .first-team-report > strong,
+  .career-report .first-team-report > p,
+  .career-report .injury-note p,
+  .career-report .national-team-report dt,
+  .career-report .national-team-report dd,
+  .career-report .national-team-report p,
+  .career-report .national-team-report__summary strong,
+  .career-report .national-team-report__summary span,
+  .career-report .season-honors-report__results dt,
+  .career-report .season-honors-report__results dd,
+  .career-report .season-honors-report__awards strong,
+  .career-report .season-honors-report__awards span,
+  .career-report .special-event-result strong,
+  .career-report .special-event-result span,
+  .career-report .special-event-result p,
+  .career-report .consequence-result p,
+  .career-report .report-footer .event-summary,
+  .career-report .report-footer li,
+  .career-report .autosave-line,
+  .career-report .report-footer .button {
+    min-width: 0;
+    overflow: visible;
+    font-size: 12px;
+    line-height: 1.35;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .career-report .stat-strip dd {
+    line-height: 1.35;
+  }
+
+  .career-report .career-panel-heading h1,
+  .career-report .career-panel-heading > span {
+    line-height: 1.35;
+  }
+
+  .career-report .contract-window-report dd {
+    margin-top: 4px;
+  }
+
+  .career-report .special-event-result,
+  .career-report .consequence-result {
+    min-width: 0;
+  }
+
+  .contract-stage .career-panel-lead,
+  .transfer-window .career-panel-lead,
+  .transfer-arrival .career-panel-lead {
+    max-width: 78ch;
+  }
+
+  .contract-sheet {
+    margin-top: 12px;
+  }
+
+  .contract-sheet > header {
+    min-height: 42px;
+    padding: 8px 14px;
+  }
+
+  .contract-sheet dl div {
+    padding: 12px 10px;
+  }
+
+  .contract-sheet dt {
+    font-size: 12px;
+  }
+
+  .contract-sheet dd {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    font-size: 16px;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+  }
+
+  .contract-counter-grid {
+    margin-top: 10px;
+  }
+
+  .contract-counter-grid button {
+    min-height: 64px;
+    padding: 10px 14px;
+  }
+
+  .contract-counter-grid small,
+  .contract-actions p {
+    font-size: 12px;
+  }
+
+  .contract-actions {
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: 20px;
+  }
+
+  .contract-complete {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 18px;
+    padding-top: 0;
+  }
+
+  .contract-complete__mark {
+    width: 64px;
+    height: 64px;
+  }
+
+  .contract-complete h1,
+  .transfer-complete h1 {
+    font-size: clamp(26px, 2.2vw, 32px);
+  }
+
+  .transfer-stay {
+    min-height: 64px;
+    padding: 12px 14px;
+  }
+
+  .transfer-stay small,
+  .transfer-stay em,
+  .transfer-offer-grid dt,
+  .transfer-offer-grid dd,
+  .transfer-offer-grid > button > small,
+  .transfer-offer-grid > button > em,
+  .transfer-actions p,
+  .transfer-footnote {
+    font-size: 12px;
+  }
+
+  .transfer-offer-grid {
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .transfer-offer-grid > button {
+    min-height: 186px;
+    padding: 12px;
+  }
+
+  .transfer-offer-grid > button > strong {
+    font-size: 16px;
+  }
+
+  .transfer-offer-grid > button > small,
+  .transfer-offer-grid > button > em {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .transfer-offer-grid > button > .transfer-offer-grid__environment {
+    color: var(--gold-dark);
+  }
+
+  .transfer-offer-detail {
+    margin-top: 10px;
+  }
+
+  .transfer-offer-detail dt,
+  .transfer-offer-detail dd,
+  .transfer-counter-grid button {
+    font-size: 12px;
+  }
+
+  .transfer-offer-detail dd {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .transfer-actions {
+    grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+    gap: 18px;
+    margin-top: 12px;
+  }
+
+  .transfer-arrival__grid {
+    margin-top: 12px;
+  }
+
+  .transfer-arrival__grid button {
+    min-height: 82px;
+    padding: 12px 14px;
+  }
+
+  .transfer-arrival__grid small {
+    font-size: 12px;
+  }
+
+  .transfer-complete {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .transfer-complete__mark {
+    width: 64px;
+    height: 64px;
+  }
+
+  .transfer-complete dl {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .transfer-complete dl div {
+    display: block;
+    min-width: 0;
+    padding: 10px 12px;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .transfer-complete dl div:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+
+  .transfer-complete dl div:last-child {
+    border-right: 0;
+  }
+
+  .transfer-complete dt,
+  .transfer-complete dd {
+    font-size: 12px;
+    text-align: left;
+  }
+
+  .transfer-complete > div > p,
+  .transfer-complete__continue {
+    font-size: 12px;
+  }
+
+  .transfer-complete dd {
+    margin-top: 4px;
+    overflow-wrap: anywhere;
+  }
+
+  .demo-complete--hub {
+    min-height: 0;
+    grid-template-columns: 72px minmax(0, min(920px, 1fr));
+    gap: 18px;
+    padding: 6px 0 0;
+    align-content: start;
+  }
+
+  .demo-complete--hub .demo-complete__number {
+    font-size: clamp(48px, 5vw, 64px);
+  }
+
+  .demo-complete--hub h1 {
+    font-size: clamp(26px, 2.2vw, 32px);
+  }
+
+  .demo-complete--hub p {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .demo-complete--hub dl {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin: 18px 0;
+  }
+
+  .demo-complete--hub dl div {
+    display: block;
+    min-width: 0;
+    padding: 10px 12px;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .demo-complete--hub dl div:last-child {
+    border-right: 0;
+  }
+
+  .demo-complete--hub dt,
+  .demo-complete--hub dd {
+    font-size: 12px;
+    overflow-wrap: anywhere;
+  }
+
+  .demo-complete--hub dd {
+    margin-top: 4px;
+  }
+}
+
+@media (min-width: 821px) and (max-height: 800px) {
+  .career-report .report-main {
+    padding-top: 12px;
+    padding-bottom: 14px;
+  }
+
+  .career-report .report-side section {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  .career-report .report-footer {
+    padding-top: 14px;
+  }
+
+  .contract-counter-grid button,
+  .transfer-arrival__grid button {
+    min-height: 58px;
+  }
+
+  .contract-stage .career-panel-lead,
+  .transfer-window .career-panel-lead,
+  .transfer-arrival .career-panel-lead {
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .contract-sheet {
+    margin-top: 8px;
+  }
+
+  .contract-sheet > header {
+    min-height: 36px;
+    padding-block: 6px;
+  }
+
+  .contract-sheet dl div {
+    padding-block: 8px;
+  }
+
+  .contract-actions {
+    margin-top: 8px;
+  }
+
+  .contract-complete > div > p,
+  .transfer-complete > div > p {
+    line-height: 1.4;
+  }
+
+  .contract-complete {
+    gap: 14px;
+  }
+
+  .contract-complete .contract-sheet {
+    margin-top: 8px;
+  }
+
+  .contract-complete__next {
+    margin-top: 8px !important;
+  }
+
+  .contract-complete__next + .button {
+    margin-top: 8px;
+  }
+
+  .demo-complete--hub {
+    gap: 14px;
+    padding-top: 0;
+  }
+
+  .demo-complete--hub h1 {
+    margin: 4px 0;
+  }
+
+  .demo-complete--hub p {
+    margin-block: 6px;
+    line-height: 1.45;
+  }
+
+  .demo-complete--hub dl {
+    margin: 10px 0;
+  }
+
+  .demo-complete--hub dl div {
+    padding-block: 7px;
+  }
+
+  .demo-complete--hub .demo-complete__actions {
+    gap: 10px;
+  }
+}
+
+/* PC-D4: read-only player, history, settings and retirement browser pages only. */
+@media (min-width: 821px) {
+  .player-screen,
+  .history-screen,
+  .settings-screen {
+    max-width: 1440px;
+    padding: 18px 24px 32px;
+  }
+
+  .player-screen {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+    gap: 12px 16px;
+  }
+
+  .player-screen__title,
+  .player-screen__identity,
+  .player-screen__section:first-of-type {
+    grid-column: 1 / -1;
+  }
+
+  .player-screen__title {
+    margin-bottom: 0;
+  }
+
+  .player-screen__title > span {
+    font-size: clamp(28px, 2.2vw, 32px);
+  }
+
+  .player-screen__identity {
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 18px;
+    padding: 14px 18px;
+  }
+
+  .player-screen__overall {
+    min-height: 104px;
+  }
+
+  .player-screen__overall strong {
+    font-size: clamp(44px, 3.5vw, 52px);
+  }
+
+  .player-screen__identity h1 {
+    font-size: clamp(28px, 2.2vw, 32px);
+  }
+
+  .player-screen__section {
+    min-width: 0;
+    margin-top: 0;
+    padding: 14px 16px;
+  }
+
+  .player-screen__section h2 {
+    font-size: 18px;
+  }
+
+  .player-screen__attributes > div,
+  .player-screen__contract-grid > div,
+  .player-screen__pathway-grid > div {
+    min-width: 0;
+  }
+
+  .player-screen__attributes dd {
+    font-size: 28px;
+  }
+
+  .player-screen__preferences dd,
+  .player-screen__contract-grid dd,
+  .player-screen__pathway-grid dd,
+  .player-screen__tags p {
+    font-size: 12px;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .player-screen__meters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .player-screen__meter strong {
+    font-size: 14px;
+  }
+
+  .history-screen__title,
+  .settings-screen__title {
+    margin-bottom: 10px;
+  }
+
+  .history-screen__title > span,
+  .settings-screen__title > span {
+    font-size: clamp(28px, 2.2vw, 32px);
+  }
+
+  .player-screen__title > small,
+  .history-screen__title > small,
+  .settings-screen__title > small {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .history-screen__overview > div {
+    padding: 12px 14px;
+  }
+
+  .history-screen__overview strong {
+    font-size: 30px;
+  }
+
+  .history-screen__section,
+  .settings-screen > section {
+    margin-top: 10px;
+    padding: 14px 18px;
+  }
+
+  .history-windows__head,
+  .history-windows__row {
+    grid-template-columns: 1.05fr 56px minmax(190px, 1.7fr) 92px 108px 52px 52px 52px 52px;
+    gap: 10px;
+  }
+
+  .history-windows__head,
+  .history-windows__row,
+  .history-clubs__spells span,
+  .history-honors__group li small {
+    font-size: 12px;
+  }
+
+  .history-windows__row > strong:nth-child(3) {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .history-clubs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .history-clubs h3,
+  .history-clubs__honors,
+  .history-honors__group h3 {
+    font-size: 14px;
+  }
+
+  .history-screen__national dl,
+  .settings-screen dl {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .history-honors {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .settings-screen {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .settings-screen__title,
+  .settings-screen__danger {
+    grid-column: 1 / -1;
+  }
+
+  .settings-screen > section {
+    margin-top: 0;
+  }
+
+  .settings-screen p,
+  .settings-screen li,
+  .settings-screen dd {
+    font-size: 12px;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .settings-screen__danger {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: 20px;
+  }
+
+  .settings-screen__danger h2,
+  .settings-screen__danger p {
+    grid-column: 1;
+  }
+
+  .settings-screen__danger button {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    min-height: 40px;
+    white-space: nowrap;
+  }
+
+  .retirement-panel.demo-complete--hub {
+    min-height: 0;
+    padding-top: 4px;
+  }
+
+  .retirement-archive {
+    padding: 20px 24px 32px;
+  }
+
+  /* Archive labels are meaningful career information, including in the export clone. */
+  .retirement-archive__identity p,
+  .retirement-archive__ending small,
+  .retirement-archive__snapshots span,
+  .retirement-archive__snapshots small,
+  .retirement-archive__section-title > span,
+  .retirement-clubs__head,
+  .retirement-national dt,
+  .retirement-clubs__club small,
+  .retirement-clubs__honor,
+  .retirement-evaluation__score small,
+  .retirement-evaluation dt,
+  .retirement-evaluation > p,
+  .retirement-honors__list span,
+  .retirement-tags__list span,
+  .retirement-archive__talent span,
+  .retirement-archive__talent p,
+  .retirement-archive__footer {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .retirement-national dd,
+  .retirement-clubs__row,
+  .retirement-clubs__club strong,
+  .retirement-evaluation dd,
+  .retirement-honors__list p {
+    line-height: 1.35;
+  }
+
+  .retirement-clubs__head {
+    min-height: 40px;
+  }
+
+  .retirement-clubs__row {
+    min-height: 62px;
+  }
+
+  .retirement-clubs__club strong {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .club-crest--retirement {
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  .retirement-export-target.is-exporting .retirement-clubs__row {
+    min-height: 62px !important;
+  }
+
+  .retirement-export-actions {
+    max-width: 1180px;
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 821px) and (max-height: 800px) {
+  .player-screen,
+  .history-screen,
+  .settings-screen {
+    padding-top: 14px;
+    padding-bottom: 22px;
+  }
+
+  .player-screen__identity,
+  .player-screen__section,
+  .history-screen__section,
+  .settings-screen > section {
+    padding-block: 12px;
+  }
+
+  .retirement-panel.demo-complete--hub .demo-complete__actions {
+    margin-top: 14px;
+  }
+}
+
+@media (min-width: 821px) and (max-height: 800px) {
+  .sidebar__pitch {
+    height: 96px;
+  }
+
+  .sidebar__save {
+    padding-block: 12px 16px;
+  }
+
+  .career-hub {
+    padding-top: 12px;
+  }
+
+  .career-overview__overall,
+  .career-overview__identity,
+  .career-overview__cash,
+  .career-overview__totals,
+  .career-overview__attributes {
+    padding-block: 10px !important;
+  }
+}
+
+@media (min-width: 821px) and (max-height: 740px) {
+  .sidebar__pitch {
+    display: none;
+  }
+}
+
+/* PC-D2: home, setup and early-career decision pages only. */
+@media (min-width: 821px) {
+  .home-screen {
+    width: min(1600px, 100%);
+    grid-template-columns: minmax(0, 1.14fr) minmax(360px, 0.86fr);
+  }
+
+  .home-screen__content {
+    min-height: 0;
+    padding: clamp(32px, 4vw, 68px);
+  }
+
+  .home-screen__content > .brand {
+    width: clamp(170px, 14vw, 190px);
+  }
+
+  .home-screen__date {
+    margin: 34px 0 12px;
+    font-size: 13px;
+  }
+
+  .home-screen h1 {
+    max-width: 640px;
+    margin-bottom: 14px;
+    font-size: clamp(36px, 3.5vw, 44px);
+  }
+
+  .home-screen__lead {
+    max-width: 620px;
+    font-size: 15px;
+    line-height: 1.72;
+  }
+
+  .home-actions {
+    gap: 12px;
+    margin: 20px 0 32px;
+  }
+
+  .home-actions .button {
+    min-width: 170px;
+    min-height: 42px;
+  }
+
+  .home-principles {
+    max-width: 650px;
+    gap: 18px;
+    padding-top: 18px;
+  }
+
+  .home-principles dt {
+    font-size: 26px;
+  }
+
+  .home-principles dd {
+    font-size: 12px;
+  }
+
+  .home-screen__field {
+    padding: 40px;
+  }
+
+  .home-screen__field p {
+    max-width: 250px;
+    font-size: 18px;
+    line-height: 1.55;
+  }
+
+  .setup-header {
+    padding: 18px max(28px, calc((100vw - 1240px) / 2));
+  }
+
+  .setup-header__pitch {
+    top: -104px;
+    width: 320px;
+    height: 220px;
+  }
+
+  .setup-header > p {
+    margin: 14px 0 10px;
+    font-size: 14px;
+  }
+
+  .setup-header > p strong {
+    font-size: 18px;
+  }
+
+  .step-rail {
+    max-width: 650px;
+  }
+
+  .step-rail li span {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .setup-paper {
+    width: min(1180px, calc(100% - 56px));
+    padding: 30px 0 42px;
+  }
+
+  .setup-intro {
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+  }
+
+  .setup-intro h1 {
+    margin-bottom: 8px;
+    font-size: clamp(32px, 3vw, 40px);
+  }
+
+  .setup-intro p {
+    max-width: 780px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .setup-form--narrow {
+    max-width: 860px;
+  }
+
+  .field {
+    gap: 7px;
+  }
+
+  .field > span,
+  .field-group legend,
+  .preference-editor legend,
+  .foot-selector legend {
+    font-size: 14px;
+  }
+
+  .field input,
+  .field select,
+  .foot-option {
+    min-height: 44px;
+    font-size: 16px;
+  }
+
+  .identity-traits {
+    grid-template-columns: 210px minmax(330px, 1fr);
+    gap: 28px;
+    margin: 20px 0;
+  }
+
+  .foot-selector {
+    gap: 12px;
+  }
+
+  .setup-paper .notice-line,
+  .reveal-layout .notice-line,
+  .position-builder > .notice-line {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .setup-actions {
+    margin-top: 24px;
+    padding-top: 18px;
+  }
+
+  .setup-actions .button {
+    min-height: 42px;
+  }
+
+  .position-builder {
+    display: grid;
+    grid-template-columns: minmax(440px, 0.95fr) minmax(390px, 0.85fr);
+    gap: 16px 24px;
+    align-items: start;
+  }
+
+  .position-builder > .section-heading {
+    grid-column: 1;
+    margin: 0;
+    font-size: 21px;
+  }
+
+  .position-builder > .section-heading:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: end;
+    margin: 0;
+  }
+
+  .position-pitch {
+    grid-column: 1;
+    grid-row: 2 / span 4;
+    height: 300px;
+  }
+
+  .position-pitch::before {
+    width: 108px;
+    height: 108px;
+  }
+
+  .position-pitch__slot {
+    min-width: 60px;
+    min-height: 38px;
+    font-size: 14px;
+  }
+
+  .position-detail {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 0;
+    padding: 20px;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .position-detail__name {
+    min-height: 100px;
+  }
+
+  .position-detail__name span {
+    font-size: 18px;
+  }
+
+  .position-detail__name strong {
+    font-size: 30px;
+  }
+
+  .position-detail p {
+    margin: 0 0 14px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .weight-list div {
+    min-width: 0;
+    padding: 6px;
+  }
+
+  .weight-list dt,
+  .weight-list dd {
+    font-size: 12px;
+  }
+
+  .secondary-options {
+    grid-column: 2;
+    grid-row: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .secondary-options button {
+    min-height: 48px;
+    font-size: 17px;
+  }
+
+  .position-builder > .notice-line {
+    grid-column: 2;
+    grid-row: 4;
+    margin-top: 0;
+  }
+
+  .position-builder > .setup-actions {
+    grid-column: 2;
+    grid-row: 5;
+    margin-top: 0;
+  }
+
+  .priority-editor,
+  .preference-editor {
+    max-width: 1180px;
+  }
+
+  .priority-editor ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 20px;
+    border: 0;
+  }
+
+  .priority-editor li {
+    grid-template-columns: 48px minmax(0, 1fr) auto;
+    gap: 12px;
+    min-height: 94px;
+    padding: 14px;
+    border: 1px solid var(--line);
+  }
+
+  .priority-editor__rank {
+    font-size: 22px;
+  }
+
+  .priority-editor li strong {
+    margin-bottom: 4px;
+    font-size: 16px;
+  }
+
+  .priority-editor li small {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .priority-editor__controls button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .preference-editor {
+    display: grid;
+    grid-template-columns: minmax(340px, 0.78fr) minmax(440px, 1.22fr);
+    gap: 24px 32px;
+  }
+
+  .preference-editor fieldset {
+    margin: 0;
+  }
+
+  .preference-editor .setup-actions {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+
+  .select-row {
+    min-height: 64px;
+    padding: 12px 14px;
+  }
+
+  .select-row small,
+  .league-grid label,
+  .field-note {
+    font-size: 12px;
+  }
+
+  .league-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .league-grid label {
+    min-height: 46px;
+  }
+
+  .reveal-layout {
+    max-width: 1080px;
+    grid-template-columns: 190px minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .reveal-overall {
+    padding-right: 24px;
+  }
+
+  .reveal-overall > span,
+  .reveal-overall p,
+  .reveal-meta dt,
+  .reveal-meta dd {
+    font-size: 12px;
+  }
+
+  .reveal-overall > strong {
+    font-size: 72px;
+  }
+
+  .reveal-attributes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 22px;
+  }
+
+  .reveal-attributes div {
+    padding: 7px 0;
+  }
+
+  .reveal-attributes dd {
+    font-size: 18px;
+  }
+
+  .reveal-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 22px;
+  }
+
+  .reveal-meta div {
+    padding: 8px 0;
+  }
+
+  .career-offers .career-panel-heading {
+    min-height: 48px;
+  }
+
+  .career-offers .career-panel-heading h1 {
+    font-size: 30px;
+  }
+
+  .career-offers .career-panel-lead {
+    max-width: 820px;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .career-offers .offer-table {
+    grid-template-columns: 118px repeat(3, minmax(0, 1fr));
+    margin-top: 14px;
+  }
+
+  .career-offers .offer-table__labels,
+  .career-offers .offer-column {
+    grid-template-rows: 94px repeat(5, 40px);
+  }
+
+  .career-offers .offer-table__labels > * {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .career-offers .offer-column > header {
+    gap: 10px;
+    padding: 14px 12px 8px;
+  }
+
+  .career-offers .club-monogram {
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+  }
+
+  .career-offers .offer-column header strong {
+    margin-bottom: 2px;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .career-offers .offer-column header small,
+  .career-offers .offer-column__value strong {
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .career-offers .offer-column__value {
+    min-width: 0;
+    padding: 0 8px;
+  }
+
+  .career-offers .offer-column__value strong {
+    overflow-wrap: anywhere;
+  }
+
+  .career-offers .offer-confirmation {
+    grid-template-columns: 68px minmax(0, 1fr) 330px;
+    gap: 18px;
+    margin-top: 14px;
+    padding: 14px 18px;
+  }
+
+  .career-offers .offer-confirmation__number {
+    font-size: 56px;
+  }
+
+  .career-offers .offer-confirmation h2 {
+    margin-bottom: 4px;
+    font-size: 22px;
+  }
+
+  .career-offers .offer-confirmation p,
+  .career-offers__note {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .career-offers .offer-confirmation__actions {
+    gap: 8px;
+    padding-left: 18px;
+  }
+
+  .career-offers .offer-confirmation .button {
+    min-height: 38px;
+    font-size: 12px;
+  }
+
+  .career-decision .career-panel-lead {
+    max-width: 900px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .choice-list--arrival,
+  .choice-list--training-plan {
+    display: grid;
+    gap: 12px;
+    margin-top: 14px;
+    border: 0;
+  }
+
+  .choice-list--arrival {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .choice-list--training-plan {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .choice-list--arrival > button,
+  .choice-list--training-plan > button {
+    min-height: 74px;
+    align-content: start;
+    gap: 6px 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+  }
+
+  .choice-list--arrival > button {
+    min-height: 92px;
+  }
+
+  .choice-list--arrival small,
+  .choice-list--training-plan small,
+  .choice-list--arrival em,
+  .choice-list--training-plan em {
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .choice-list--arrival strong,
+  .choice-list--training-plan strong {
+    font-size: 14px;
+  }
+
+  .career-decision__submit {
+    width: min(100%, 460px);
+    min-height: 42px;
+    margin-top: 14px;
+  }
+
+  .career-decision .path-choice {
+    margin-top: 14px;
+    padding: 14px;
+  }
+
+  .career-decision .path-choice > header {
+    padding-bottom: 10px;
+  }
+
+  .career-decision .path-choice > header span,
+  .career-decision .path-choice button small,
+  .career-decision .path-choice button em {
+    font-size: 12px;
+  }
+
+  .career-decision .path-choice > div {
+    gap: 0;
+    margin-top: 10px;
+  }
+
+  .career-decision .path-choice button {
+    padding: 10px;
+  }
+
+  .career-decision .decision-footnote {
+    margin-top: 12px;
+    font-size: 12px;
+  }
+
+  .special-event .career-panel-lead {
+    max-width: 920px;
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .special-event__step {
+    min-height: 40px;
+    margin-top: 12px;
+    padding: 8px 12px;
+  }
+
+  .special-event__step span,
+  .special-event__step strong,
+  .special-event__note,
+  .special-event__reveal-label,
+  .special-event__reveal p,
+  .special-event__deltas span {
+    font-size: 12px;
+  }
+
+  .special-event__choices {
+    margin-top: 12px;
+  }
+
+  .special-event__choices button {
+    min-height: 128px;
+    padding: 14px;
+    grid-template-columns: 24px minmax(0, 1fr) 18px;
+    grid-template-rows: auto auto auto auto;
+    align-content: start;
+  }
+
+  .special-event__choices button > span {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .special-event__choices button > strong {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .special-event__choices button > svg {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  .special-event__choices button > small {
+    grid-column: 2 / -1;
+    grid-row: 2;
+    min-width: 0;
+  }
+
+  .special-event__choices button > em {
+    grid-column: 2 / -1;
+    grid-row: 3;
+    min-width: 0;
+  }
+
+  .special-event__choices button > .special-event__odds {
+    grid-column: 2 / -1;
+    grid-row: 4;
+    min-width: 0;
+  }
+
+  .special-event__choices strong {
+    font-size: 15px;
+  }
+
+  .special-event__choices small,
+  .special-event__choices em,
+  .special-event__odds i {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .special-event__reveal {
+    max-width: 920px;
+    margin-top: 12px;
+    padding: 16px;
+  }
+
+  .special-event__reveal h2 {
+    font-size: 22px;
+  }
+
+  .special-event__continue {
+    width: min(100%, 440px);
+    min-height: 42px;
+  }
+}
+
+@media (min-width: 821px) and (max-width: 1140px) {
+  .home-screen {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.62fr);
+  }
+
+  .home-screen__content {
+    padding: 32px;
+  }
+
+  .setup-paper {
+    width: min(1080px, calc(100% - 40px));
+  }
+
+  .position-builder {
+    grid-template-columns: minmax(380px, 1fr) minmax(320px, 0.82fr);
+  }
+
+  .position-pitch {
+    height: 300px;
+  }
+
+  .position-detail {
+    min-height: 300px;
+    grid-template-columns: 1fr;
+  }
+
+  .position-detail__name {
+    min-height: 78px;
+  }
+
+  .career-offers .offer-confirmation {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+
+  .career-offers .offer-confirmation__number {
+    display: none;
+  }
+
+  .preference-editor {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 821px) and (max-height: 800px) {
+  .home-screen__content {
+    padding-block: 24px;
+  }
+
+  .home-screen__date {
+    margin-top: 20px;
+  }
+
+  .home-actions {
+    margin-block: 16px 24px;
+  }
+
+  .setup-header {
+    padding-block: 14px;
+  }
+
+  .setup-paper {
+    padding-block: 22px 32px;
+  }
+
+  .setup-intro {
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+
+  .career-offers .offer-table__labels,
+  .career-offers .offer-column {
+    grid-template-rows: 84px repeat(5, 38px);
+  }
+}
