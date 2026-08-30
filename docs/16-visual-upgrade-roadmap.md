@@ -2,9 +2,9 @@
 
 > 本文是视觉升级工作的单一事实来源（Single Source of Truth）。<br>
 > 初始设计原则见 [04-visual-direction.md](04-visual-direction.md)；已经完成的专项验收见 [14-honor-visual-system-v1-audit.md](14-honor-visual-system-v1-audit.md) 与 [15-china-club-crest-source-audit.md](15-china-club-crest-source-audit.md)。<br>
-> 后续每个视觉批次开始、返工、验收、提交或发布时，都必须同步更新本文。PC 端专项优化的详细范围、批次和进度以 [20-pc-interface-optimization.md](20-pc-interface-optimization.md) 为准。
+> 后续每个视觉批次开始、返工、验收、提交或发布时，都必须同步更新本文。
 
-最后更新：2026-08-29<br>
+最后更新：2026-08-28<br>
 当前仓库基线：`31d49d0`（正式品牌 Logo 接入基线）<br>
 当前视觉阶段：**V7-C 海外原创队徽扩展——DEFERRED**<br>
 当前插入项目：**核心固定 UI 文案已进入实施与验收，见 [19-interface-copy-review.md](19-interface-copy-review.md)；V7-C 海外队徽扩展继续暂停。**
@@ -48,7 +48,6 @@
 | V7 | 海外 334 家原创队徽扩展 | `DEFERRED` | [可行性审计](18-overseas-club-crest-v1-feasibility-audit.md)、14 套队徽色板、[意甲 20 家概念清单](data/overseas-club-crest-concepts-v1.csv)与 8 枚视觉样板均获确认；8 枚样板已由 `5a761c2` 接入并推送 | 按用户决定暂停，待文案项目完成后再评估 V7-C |
 | COPY-A | 核心固定 UI 文案体系 | `READY_TO_COMMIT` | 490 个 ID 编辑表已合并产品修订稿；379 项修订、110 项保留、1 项新增，22 个正式 phase × 三种视口（66 样本）、5 个原生确认调用、正式退休 Blob/二维码及完整工程链均已完成；退休档案新增非破坏性返回首页与青训邀请卡移动排版回归通过 | 等待人工审核后提交；V7-C 继续暂停 |
 | BRAND-LOGO | 《上场》正式 Logo 资产与统一入口 | `READY_TO_COMMIT` | 5 份已定稿 SVG 原样纳入；首页、建档／职业框架与退役档案按 full／compact／reverse 层级接入；正式页面、退役 PNG 与用户视觉审核均通过 | 等待明确提交指令 |
-| PC-D | PC 端界面专项优化 | `READY_TO_COMMIT` | [专项说明与进度文档](20-pc-interface-optimization.md) 的 PC-D0 已完成：22 个正式 phase、球员／履历／设置与五种 PC 视口均完成隔离基线测量；无页面级横向溢出，21 个有限／固定基线为 `WASTED_OVERFLOW`，半年报告与退休档案为纯 `EXPECTED_LONG`，短履历与设置为 `FIT`（长履历在真实长生涯中转为 `EXPECTED_LONG`，不计入纯长内容）。PC-D4-R2 与 PC-QA-R5 已将审计到的移动／桌面有效信息统一修正至至少 12px，并重新完成正式退休 PNG、主题矩阵与工程验证 | `PC-D1 / READY_TO_COMMIT`；`PC-D2 / READY_TO_COMMIT`；`PC-D3 / READY_TO_COMMIT`；`PC-D4 / READY_TO_COMMIT`；`PC-QA / READY_TO_COMMIT`。等待明确提交指令 |
 | V8 | 视觉版本发布验收 | `NOT_STARTED` | — | 真实设备、完整生涯、转会切换、退役导出与线上回归 |
 
 ## 4. 已锁定的产品决定
@@ -376,21 +375,6 @@ V3.0.1 线上视觉补丁实际完成：
 
 | 日期 | 阶段 | 变化 | 状态变化 | 证据 |
 | --- | --- | --- | --- | --- |
-| 2026-08-30 | PC-QA-R5 桌面半年报告返修与终审 | 仅以 `.career-report` 桌面作用域修复事件、后果与合同兑现的 9–10px／ellipsis 信息问题；富内容报告 40 个组合×精确视口、基础 200 样本、14 套主题 42 个桌面样本、四套边界主题 12 个移动样本、长履历、32 家退休档案与正式 PNG 全部重新验证 | `WAITING_QA → READY_TO_COMMIT`；`PC-D: IN_PROGRESS → READY_TO_COMMIT` | 正式 PNG `/tmp/pc-qa-r5-retirement-audit.png` 为 `1640×7307`、11,983,480 像素、1,219,863 bytes、RGBA 47,933,920 bytes，jsQR 为 `https://footballcareer.zyrobbie.site/`；全量 57 文件／387 项、typecheck、build、audit 0 vulnerabilities。一次性夹具、bridge、服务与标签已清理 |
-| 2026-08-30 | PC-QA-R2 三类裁切返修与新阻塞 | 在移动端精确修复 CREATE_PREFERENCES 说明、CareerHub 当前俱乐部名和流程引导说明；保留 PlayerReveal R1。返修后 200 个基础样本无页面横向溢出、实际宽高裁切或 console 问题，14 套主题 42 个桌面样本与四套边界主题 12 个移动样本通过，并重新生成正式 32 家退休 PNG。随后全局信息审计发现 CareerHub 履历表 `th/td` 仍为 9px 且带 hidden／ellipsis／nowrap，属于范围外的有效表格信息问题 | `WAITING_QA → IN_PROGRESS → WAITING_QA` | `/tmp/pc-qa-r2-*.png`；PNG `1640×7307`、11,983,480 像素、1,219,863 bytes、RGBA 47,933,920 bytes、jsQR 为正式地址；全量 57 文件／384 项、typecheck、build、audit 通过。等待用户授权处理 CareerHub 表格信息 |
-| 2026-08-30 | PC-QA-R4 半年报告移动端返修与桌面范围外阻塞 | 在正式 `HalfYearReportScreen` 的移动端完整覆盖比赛、能力、状态关系、财务、合同、一线队、国家队、荣誉、事件、伤病和页脚；全部有效信息改为至少 12px／1.35，并移除移动报告的 hidden／ellipsis／nowrap／line-clamp。四个移动视口富内容报告均无横向或信息裁切。随后 1280×720 复核发现既有桌面事件为 9–10px，合同兑现 `dd` 仍为 hidden／ellipsis／nowrap | `WAITING_QA → IN_PROGRESS → WAITING_QA` | `/tmp/pc-qa-r4-report-320-{top,middle,bottom}.png`、`/tmp/pc-qa-r4-report-390-top.png`；桌面问题超出仅移动端授权，未继续 200 样本、主题、PNG 或完整工程链 |
-| 2026-08-30 | PC-QA-R3 最近履历重排与新阻塞 | 仅在移动 CSS 中将 CareerHub 原表格的同一行重排为 3×3，保留九字段、DOM／读屏顺序、当前高亮和展开行为；八个 CareerHub phase × 八个精确视口共 64 个样本通过，展开长履历仅自然增加整页高度。随后正式 HALF_YEAR_REPORT 扫描发现比赛统计、能力变化、状态／财务／一线队信息仍为 8–11px，财务字段还带 hidden／ellipsis／nowrap | `WAITING_QA → IN_PROGRESS → WAITING_QA` | `/tmp/pc-qa-r3-ledger-*.png`；定向样式 6 文件／30 项和 typecheck 通过。等待用户授权处理半年报告有效信息 |
-| 2026-08-30 | PC-QA-R1 定点修复与新阻塞 | 已修复 PLAYER_REVEAL 的移动偏好元数据 ellipsis；八视口定点通过。最终代码重新扫描 176 个正式样本发现 CREATE_PREFERENCES 说明固定高度裁切，以及多个职业 phase 的当前俱乐部摘要 ellipsis，均属有效信息 | `WAITING_QA → IN_PROGRESS → WAITING_QA` | Player Reveal 为 `12px / 16.2px`、无 ellipsis；全矩阵无页面级横向溢出、console `error=0 / warn=0`，但新裁切已记录于 [PC 专项说明](20-pc-interface-optimization.md)，等待新的最小范围授权 |
-| 2026-08-29 | PC-QA 初始矩阵阻塞 | 使用正式 App 与合法状态扫描 22 phase × 8 个精确视口；320×568 的 PLAYER_REVEAL 将“留洋倾向／条件合适时留洋”置于内部 ellipsis，属于有效信息裁切。未作生产返修，停止后续 QA | `NOT_STARTED → IN_PROGRESS → WAITING_QA` | `.reveal-meta dt/dd` 的 `29/36px`、`51.55/63px` 可复现宽度；`/tmp/pc-qa-blocker-player-reveal-320x568.png`；等待用户批准 PC-QA-R1 |
-| 2026-08-29 | PC-D4-R2 视觉审核通过 | 用户确认 R1 截图上下文纠正与 R2 有效信息字号返修通过；D4 仍未授权进入 PC-QA，D1–D4 阶段通过不等同于整个 PC 专项完成 | `WAITING_VISUAL_REVIEW → READY_TO_COMMIT` | Player／History／Settings 副标题为至少 12px；退休决定与退休档案有效信息至少 12px；正式 PNG、42 个桌面主题样本、12 个移动边界主题样本及工程链证据见 [PC 专项说明](20-pc-interface-optimization.md) |
-| 2026-08-29 | PC-D4-R2 有效信息最小字号返修 | 修复 Player／History／Settings 副标题、退休决定说明／按钮和退休档案真实信息低于 12px 的问题；仅使用精确 D4 选择器，长内容自然增高。重新走正式保存按钮→预览 Blob→原始字节 bridge→Sharp/jsQR 链路，并复核 14 套主题 42 个桌面与 4 套边界主题 12 个移动正式样本 | `WAITING_VISUAL_REVIEW → WAITING_VISUAL_REVIEW` | 有效信息最小字号均为 12px；390px 退休决定目标文字为 `12px / 16.2px`；PNG `1640×7307`、11,983,480 像素、1,219,863 bytes、RGBA 47,933,920 bytes、jsQR 为 `https://footballcareer.zyrobbie.site/`；工程链为 5 文件／40 项定向、57 文件／382 项全量、typecheck、build 与 audit 0 vulnerabilities；`/tmp/pc-d4-r2-*.png` 与 [PC 专项说明](20-pc-interface-optimization.md) |
-| 2026-08-29 | PC-D4-R1 审核证据纠正 | 旧 PC-D4 图使用失效捕获上下文：约 640 CSS px 页面被写入 1280 位图，长页面 full-page 捕获又产生重复／断片；干净隔离正式页面证明这是截图问题而非生产 CSS 半屏回归。未修改生产代码 | `WAITING_VISUAL_REVIEW → WAITING_VISUAL_REVIEW` | 1280×720：`innerWidth=clientWidth=scrollWidth=1280`、`visualViewport.scale=1`、`.app-frame=0–1280px`、`.app-surface=186–1280px`；退休 archive 为 0–1280px，export sheet 为 24–1256px。新 `/tmp/pc-d4-r1-*.png` 使用单帧固定视口，长履历与退休档案以 top／middle／bottom 三段保存 |
-| 2026-08-29 | PC-D4 正式页面、主题与退休边界验收 | PC-D4 完成球员、短／长履历、设置、退休决定和短／32 家退休档案的 8 个精确视口验收；14 套生产主题在 Player／History／Settings 完成 42 个桌面正式样本，BLACK_WHITE、BLUE_BLACK、GREEN_YELLOW、RED_GOLD 完成 12 个移动边界样本；固定绿金退休档案通过正式按钮→预览 Blob→Sharp/jsQR 验收 | `IN_PROGRESS → WAITING_VISUAL_REVIEW` | 42 个桌面与 12 个移动主题样本均无横向溢出、无 console error/warn、无 DEFAULT 且导航不改写状态；长履历为 16 个完整赛季／32 家俱乐部；队徽 asset=32、fallback=0；正式 PNG 2112×5676、11,987,712 像素、1,346,618 bytes、RGBA 47,950,848 bytes、jsQR 为 `https://footballcareer.zyrobbie.site/`；全量 57 文件／379 项测试、typecheck、build、audit 通过 |
-| 2026-08-29 | PC-D3 视觉审核通过 | 半年报告、职业合同、转会和阶段完成页获确认；长报告与多报价保留允许的整页纵向滚动；未新增 Tab、分页、抽屉、详情面板或局部滚动；未修改游戏流程、GameState、存档或手机主布局；未进入 D4 | `WAITING_VISUAL_REVIEW → READY_TO_COMMIT` | PC-D3 的 64 个正式样本与既有工程链通过；1280×720 为 6 个 `FIT`、2 个 `ACCEPTABLE_SCROLL`、0 个 `FAILED_WASTED_OVERFLOW` |
-| 2026-08-29 | PC-D3 桌面承载与隔离验收 | 仅在桌面层优化半年报告、职业合同、转会和阶段完成页；报告使用主次栏，荣誉两列自然换行，合同／转会解除有效文本 ellipsis，阶段完成压缩无功能间距；未进入 D4 | `IN_PROGRESS → WAITING_VISUAL_REVIEW` | 8 个 D3 phase × 8 个指定视口共 64 个正式样本；1280×720 为 6 个 `FIT`、2 个 `ACCEPTABLE_SCROLL`、0 个 `FAILED_WASTED_OVERFLOW`；`/tmp/pc-d3-*.png` |
-| 2026-08-29 | PC-D2 视觉审核通过 | 用户侧视觉审核通过；特殊事件与位置页返修获确认；未新增 Tab、分页、抽屉或局部滚动；没有进入 D3 | `WAITING_VISUAL_REVIEW → READY_TO_COMMIT` | PC-D2-R1 的 12 个 D2 phase × 8 个指定视口共 96 个正式页面样本；1280×720 为 6 个 `FIT`、6 个 `ACCEPTABLE_SCROLL`、0 个 `FAILED_WASTED_OVERFLOW` |
-| 2026-08-29 | PC-D2-R1 定点返修 | 修复特殊事件说明自动落入箭头窄列造成的一字一行；以不改变 DOM／Tab 顺序的 Grid 重排将建档副位置、说明和操作填入右栏。未进入 D3／D4 | `IN_PROGRESS → WAITING_VISUAL_REVIEW` | 隔离正式 App：12 个 D2 phase × 8 个指定视口共 96 个样本，均无页面级横向溢出、无控制台 error/warn；`/tmp/pc-d2-r1-*.png` |
-| 2026-08-28 | PC-D1 桌面底座与 CareerHub 共享框架 | 新增仅在 `min-width:821px` 生效的独立桌面样式层，收紧 AppShell／Sidebar／Topbar，并将 CareerHub 的总览、状态关系、一线队通道、最近履历与当前工作区改为可收缩的共享承载；未调整任何 phase 专属卡片或流程 | `IN_PROGRESS → READY_TO_COMMIT`（用户视觉审核通过） | 隔离正式 App：1024×768、1280×720、1366×768、1920×1080；14 套主题、五个关键职业 phase、四项导航与四种移动视口；`/tmp/pc-d1-*.png` 审核图 |
 | 2026-08-27 | V1 联赛最佳球员文案修复 | 将联赛最佳球员纳入既有赛事限定文案规则，履历与退役汇总显示“意甲联赛最佳球员”“中超联赛最佳球员”等，不再合并成无法区分赛事的通用文字 | `SHIPPED → READY_TO_COMMIT` | 荣誉匹配与聚合回归测试 |
 | 2026-08-28 | 退休档案返回首页与青训邀请卡移动补丁 | `CAREER_RETIRED` 新增只清除内存展示、保留退休存档的“回到初始界面”；首页可继续原退休档案。窄屏三张青训邀请卡改为字段名／值上下布局，长训练条件保持单行 | `READY_TO_COMMIT → READY_TO_COMMIT` | store、组件、CSS 回归；隔离正式页面 320×568、390×844、1280×720 验收 |
 | 2026-08-27 | V7-B3 样板运行时接入 | 将 8 枚已确认意甲样板接入正式队徽清单；canonical/workbook ID 一致，正式履历、退役页与保存预览在 390×844、1280×720 均为 asset 8、fallback 0、无溢出或控制台问题；完整工程链通过 | `PRODUCT_APPROVED → READY_TO_COMMIT` | 队徽清单与组件测试；隔离正式页面和 PNG 预览验收；48 文件／343 项全量测试 |
