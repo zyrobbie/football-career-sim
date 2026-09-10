@@ -1,0 +1,19 @@
+{
+  "url": "https://footballcareer.zyrobbie.site/",
+  "status": 200,
+  "assets": [
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/index-BD1ydlda.js",
+      "bytes": 859751,
+      "sha256": "290040356ae0cba395f4779b8933f0507a2a519b2ccaa8bf77be79cf2ab40db3",
+      "matchesCleanBuild": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/index-DSx3aor_.css",
+      "bytes": 129205,
+      "sha256": "323aaa3e20293d4ac550f6e3f1143756530df985b688f3ed269f6f7c735dd5be",
+      "matchesCleanBuild": true
+    }
+  ],
+  "passed": true
+}

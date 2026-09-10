@@ -1,0 +1,42 @@
+{
+  "version": "1.1.0",
+  "saveVersion": 12,
+  "dataVersion": 12,
+  "deployedCommit": "321f747c3a06e41ed4fc2868778e0aa3a3d9134a",
+  "branch": "main",
+  "workflow": "https://github.com/zyrobbie/football-career-sim/actions/runs/34456233963",
+  "conclusion": "success",
+  "site": "https://footballcareer.zyrobbie.site/",
+  "localTests": 722,
+  "cleanCandidateTests": 722,
+  "typecheck": "passed",
+  "build": "passed",
+  "onlineAssets": "online-assets.json: JS and CSS bytes match clean build",
+  "browserSmoke": {
+    "tool": "CUA in-app browser",
+    "viewport": "1280x720",
+    "initialState": "home with Start new career, no Continue button",
+    "flow": [
+      "home",
+      "start new career",
+      "identity form",
+      "enter anonymous test name",
+      "continue to position step 2/5"
+    ],
+    "consoleWarningsAndErrors": [],
+    "screenshot": "position step screenshot inspected in tool transcript; no separate file claimed",
+    "temporaryTab": "closed"
+  },
+  "limitations": [
+    "user device model unspecified",
+    "online smoke covers entry and draft progression, not a new full career",
+    "large chunk warning retained",
+    "Actions Node20 action-runtime deprecation annotation retained"
+  ],
+  "status": {
+    "R01": "complete",
+    "R02": "complete",
+    "R03": "complete"
+  },
+  "followupCommit": "documentation only; no production or workflow change"
+}
