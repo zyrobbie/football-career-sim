@@ -1,3 +1,7 @@
+import { allowsProfessionalAction, professionalNextAction, type ProfessionalAction, type CareerWindowContext, type VoluntaryRetirementConfirmation } from './professionalNextAction'
+import { restoreMarketContext } from './marketContext'
+import { canEditCareerPreferences, normalizeCareerPreferences } from './careerPreferences'
+import { normalizePendingTraining } from '../engine/trainingPlan'
 import { create } from 'zustand'
 import { CLUBS, SECONDARY_POSITIONS } from '../data/balance'
 import {
@@ -26,12 +30,9 @@ import {
   resetClubStory,
 } from '../engine/careerStory'
 import {
-  canOpenTransferMarketAfterWindow,
   canAdvanceBeyondWindow,
   DEMO_WINDOW_COUNT,
   playerAgeAtWindow,
-  retirementAvailabilityAfterWindow,
-  shouldRetireAtContractExpiry,
 } from '../engine/careerTime'
 import {
   attachNationalTeamToReport,
@@ -43,7 +44,6 @@ import { simulateProfessionalHalfYear } from '../engine/simulateProfessionalHalf
 import { settleHonorsForWindow } from '../engine/honors'
 import { enforceAgeBasedFirstTeam } from '../engine/eligibility'
 import {
-  assessDomesticTransferOpportunity,
   applyTransferArrivalChoice,
   contractFromTransferOffer,
   generateContractExpiryOffers,
@@ -100,11 +100,16 @@ interface GameStore {
   chooseTraining: (
     focus: TrainingFocus,
     approach?: DevelopmentApproach | null,
+    expected?: CareerWindowContext,
   ) => void
   chooseCareerEvent: (choice: CareerEventChoiceId) => void
   continueAfterCareerEvent: () => void
+  advanceProfessionalReport: (action: ProfessionalAction, expectedWindowIndex: number, expectedCareerSeed?: string) => void
   advanceAfterReport: () => void
   reviewReport: () => void
+  isReviewingReport: boolean
+  closeReportReview: () => void
+  updateCareerPreferences: (intent: unknown, leagues: unknown) => void
   openProfessionalContract: () => void
   counterProfessionalOffer: (direction: CounterOfferDirection) => void
   acceptProfessionalContract: () => void
@@ -116,9 +121,11 @@ interface GameStore {
   confirmTransferChoice: () => void
   chooseTransferArrival: (choice: TransferArrivalChoice) => void
   continueAfterTransfer: () => void
+  voluntaryRetirementConfirmation: VoluntaryRetirementConfirmation | null
+  confirmVoluntaryRetirement: (confirmation: VoluntaryRetirementConfirmation) => void
   requestRetirement: () => void
   cancelRetirement: () => void
-  confirmRetirement: () => void
+  confirmRetirement: (expected?: CareerWindowContext) => void
   retireFromNationalTeam: () => void
   goToPhase: (phase: GamePhase) => void
   clearError: () => void
@@ -185,10 +192,11 @@ export const useGameStore = create<GameStore>((set, get) => {
   const commit = (next: GameState) => {
     const normalized = enforceAgeBasedFirstTeam(next)
     saveGame(normalized)
-    set({ game: normalized, hasSave: true, error: null })
+    set({ game: normalized, hasSave: true, error: null, isReviewingReport: false, voluntaryRetirementConfirmation: null })
   }
 
-  const runReadySimulation = (state: GameState) => {
+  const runReadySimulation = (inputState: GameState) => {
+    const state = normalizePendingTraining(inputState)
     if (
       state.phase !== 'SIMULATION_READY' ||
       !state.player ||
@@ -374,6 +382,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
   return {
     game: null,
+    isReviewingReport: false, voluntaryRetirementConfirmation: null,
     hasSave: hasSavedCareer(),
     error: null,
 
@@ -386,8 +395,10 @@ export const useGameStore = create<GameStore>((set, get) => {
     },
 
     continueCareer: () => {
+      set({ voluntaryRetirementConfirmation: null, isReviewingReport: false })
       try {
-        const loaded = loadGame()
+        const saved = loadGame()
+        const loaded = saved ? normalizePendingTraining(restoreMarketContext(saved)) : null
         if (!loaded) {
           set({ hasSave: false, error: '没有找到可以继续的生涯。' })
           return
@@ -407,8 +418,8 @@ export const useGameStore = create<GameStore>((set, get) => {
               }
             : loaded
         const resumed = runReadySimulation(normalized)
-        if (resumed !== loaded) saveGame(resumed)
-        set({ game: resumed, hasSave: true, error: null })
+        if (resumed !== saved) saveGame(resumed)
+        set({ game: resumed, hasSave: true, error: null, isReviewingReport: false, voluntaryRetirementConfirmation: null })
       } catch (error) {
         set({
           error: error instanceof Error ? error.message : '存档读取失败，请重试。',
@@ -418,12 +429,13 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     deleteCareer: () => {
       deleteSavedCareer()
-      set({ game: null, hasSave: false, error: null })
+      set({ game: null, hasSave: false, error: null, isReviewingReport: false, voluntaryRetirementConfirmation: null })
     },
 
     returnToHome: () => {
+      set({ voluntaryRetirementConfirmation: null })
       if (get().game?.phase !== 'CAREER_RETIRED') return
-      set({ game: null, hasSave: true, error: null })
+      set({ game: null, hasSave: true, error: null, isReviewingReport: false, voluntaryRetirementConfirmation: null })
     },
 
     submitIdentity: ({ name, jerseyNumber, preferredFoot }) => {
@@ -548,17 +560,18 @@ export const useGameStore = create<GameStore>((set, get) => {
       })
     },
 
-    chooseTraining: (focus, approach = null) => {
+    chooseTraining: (focus, approach = null, expected) => {
       const game = get().game
-      if (!game) return
+      if (!game || game.phase !== 'HALF_YEAR_PLAN' || get().isReviewingReport ||
+        (expected && (expected.windowIndex !== game.windowIndex || expected.careerSeed !== game.careerSeed))) return
       try {
-        const ready: GameState = {
+        const ready = normalizePendingTraining({
           ...game,
           phase: 'SIMULATION_READY',
           trainingFocus: focus,
           developmentApproach:
             game.windowIndex >= 2 ? approach ?? 'STEADY' : null,
-        }
+        })
         const pendingCareerEventId = selectCareerEvent(ready)
         if (pendingCareerEventId) {
           const event = getCareerEvent(pendingCareerEventId)
@@ -696,26 +709,52 @@ export const useGameStore = create<GameStore>((set, get) => {
       commit(runReadySimulation(ready))
     },
 
-    advanceAfterReport: () => {
+    advanceProfessionalReport: (action, expectedWindowIndex, expectedCareerSeed) => {
       const game = get().game
-      if (!game) return
-      if (game.contract && game.windowIndex >= DEMO_WINDOW_COUNT) {
-        if (
-          game.contract.remainingHalfYears === 0 &&
-          shouldRetireAtContractExpiry(game.windowIndex)
-        ) {
-          commit({
-            ...game,
-            phase: 'RETIREMENT_DECISION',
-            retirementReason: 'AGE_LIMIT',
-            transferOffers: [],
-            selectedTransferChoiceId: null,
-          })
-          return
-        }
-        commit({ ...game, phase: 'PRO_STAGE_COMPLETE' })
+      if (!game || get().isReviewingReport || get().voluntaryRetirementConfirmation || game.windowIndex !== expectedWindowIndex ||
+        (expectedCareerSeed !== undefined && game.careerSeed !== expectedCareerSeed)) return
+      const model = professionalNextAction(game)
+      if (model.primary?.action === 'RESTORE') { commit(restoreMarketContext(game)); return }
+      if (!allowsProfessionalAction(game, action)) { set({ error: '当前进度不允许这项操作，请按当前报告继续。' }); return }
+      if (action === 'VOLUNTARY') { get().requestRetirement(); return }
+      if (action === 'NATIONAL') { get().retireFromNationalTeam(); return }
+      if (action === 'AGE_LIMIT') {
+        commit({ ...game, phase: 'RETIREMENT_DECISION', retirementReason: 'AGE_LIMIT', transferOffers: [], selectedTransferChoiceId: null })
         return
       }
+      if (action === 'PLAN' || (action === 'STAY' && !model.stayOpensMarket)) {
+        commit({ ...game, phase: 'HALF_YEAR_PLAN', windowIndex: game.windowIndex + 1,
+          transferOffers: [], selectedTransferChoiceId: null, transferDecision: null, transferArrivalChoice: null,
+          pendingCareerEvent: null, trainingFocus: null, developmentApproach: null, trainingQualityBonus: 0 })
+        return
+      }
+      const currentRole = game.teamLevel === 'FIRST_TEAM' ? game.firstTeamRole : game.youthRole
+      if (!currentRole || !game.player || !game.contract || !game.selectedClubId) return
+      const windowIndex = game.windowIndex + 1
+      const contractExpired = game.contract.remainingHalfYears === 0
+      const transferOffers = contractExpired
+        ? generateContractExpiryOffers({
+            player: game.player, currentClubId: game.selectedClubId, currentTeamLevel: game.teamLevel,
+            currentRole, currentContract: game.contract, latestReport: game.lastReport, careerSeed: game.careerSeed, windowIndex,
+          })
+        : generateTransferOffers({
+            player: game.player, currentClubId: game.selectedClubId, currentTeamLevel: game.teamLevel,
+            latestReport: game.lastReport, careerSeed: game.careerSeed, windowIndex,
+          })
+      commit({ ...game, phase: 'TRANSFER_WINDOW', windowIndex, transferOffers,
+        selectedTransferChoiceId: contractExpired ? transferOffers[0]?.id ?? null : 'STAY',
+        transferDecision: null, transferArrivalChoice: null })
+    },
+
+    advanceAfterReport: () => {
+      const game = get().game
+      if (!game || get().isReviewingReport || get().voluntaryRetirementConfirmation || game.phase !== 'HALF_YEAR_REPORT') return
+      if (game.contract) {
+        const primary = professionalNextAction(game).primary
+        if (primary) get().advanceProfessionalReport(primary.action, game.windowIndex, game.careerSeed)
+        return
+      }
+      if (game.pendingCareerEvent || game.history.at(-1)?.windowIndex !== game.windowIndex) return
       if (game.history.length >= DEMO_WINDOW_COUNT) {
         commit({ ...game, phase: 'CAREER_DASHBOARD' })
         return
@@ -733,7 +772,27 @@ export const useGameStore = create<GameStore>((set, get) => {
     reviewReport: () => {
       const game = get().game
       if (!game?.lastReport) return
-      commit({ ...game, phase: 'HALF_YEAR_REPORT' })
+      set({ isReviewingReport: true, voluntaryRetirementConfirmation: null, error: null })
+    },
+
+    closeReportReview: () => set({ isReviewingReport: false, voluntaryRetirementConfirmation: null }),
+
+    updateCareerPreferences: (intent, leagues) => {
+      const game = get().game
+      if (!game || !canEditCareerPreferences(game)) {
+        set({ error: '当前阶段不能修改求职方向。' })
+        return
+      }
+      try {
+        const next = normalizeCareerPreferences(intent, leagues)
+        const player = game.player!
+        if (player.overseasIntent === next.intent &&
+          player.preferredLeagues.length === next.leagues.length &&
+          player.preferredLeagues.every((league, index) => league === next.leagues[index])) return
+        commit({ ...game, player: { ...player, overseasIntent: next.intent, preferredLeagues: next.leagues } })
+      } catch (error) {
+        set({ error: error instanceof Error ? error.message : '求职方向未能保存。' })
+      }
     },
 
     openProfessionalContract: () => {
@@ -830,152 +889,17 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     openTransferWindow: (forcedByPromiseBreach = false) => {
       const game = get().game
-      if (
-        !game?.player ||
-        !game.contract ||
-        !game.selectedClubId ||
-        game.phase !== 'PRO_STAGE_COMPLETE'
-      ) {
-        set({ error: '你现在还不能进入转会市场。' })
-        return
-      }
-      if (!canAdvanceBeyondWindow(game.windowIndex)) {
-        set({ error: '40岁赛季已经结束，接下来只能走向退役。' })
-        return
-      }
-      if (!canOpenTransferMarketAfterWindow(game.windowIndex)) {
-        set({ error: '职业生涯最后一年不再开启新的合同或转会谈判。' })
-        return
-      }
-      const contractExpired = game.contract.remainingHalfYears === 0
-      if (
-        contractExpired &&
-        shouldRetireAtContractExpiry(game.windowIndex)
-      ) {
-        commit({
-          ...game,
-          phase: 'RETIREMENT_DECISION',
-          retirementReason: 'AGE_LIMIT',
-          transferOffers: [],
-          selectedTransferChoiceId: null,
-        })
-        return
-      }
-      const opportunity = assessDomesticTransferOpportunity({
-        player: game.player,
-        latestReport: game.lastReport,
-        windowIndex: game.windowIndex,
-      })
-      const canRequestTransfer =
-        !contractExpired &&
-        forcedByPromiseBreach &&
-        game.contract.brokenPromiseWindows >= 2
-      if (forcedByPromiseBreach && !canRequestTransfer) {
-        set({ error: '球队连续两个半年没有兑现角色承诺后，你才能主动申请转会。' })
-        return
-      }
-      if (
-        !contractExpired &&
-        !opportunity.available &&
-        !canRequestTransfer
-      ) {
-        set({ error: opportunity.summary })
-        return
-      }
-      const currentRole =
-        game.teamLevel === 'FIRST_TEAM'
-          ? game.firstTeamRole
-          : game.youthRole
-      if (!currentRole) {
-        set({ error: '当前球队角色信息缺失，暂时无法生成合同报价。' })
-        return
-      }
-      const windowIndex =
-        !contractExpired && game.transferOffers.length > 0
-          ? game.windowIndex
-          : game.windowIndex + 1
-      const transferOffers =
-        contractExpired
-          ? generateContractExpiryOffers({
-              player: game.player,
-              currentClubId: game.selectedClubId,
-              currentTeamLevel: game.teamLevel,
-              currentRole,
-              currentContract: game.contract,
-              latestReport: game.lastReport,
-              careerSeed: game.careerSeed,
-              windowIndex,
-            })
-          : game.transferOffers.length > 0
-          ? game.transferOffers
-          : generateTransferOffers({
-              player: game.player,
-              currentClubId: game.selectedClubId,
-              currentTeamLevel: game.teamLevel,
-              latestReport: game.lastReport,
-              careerSeed: game.careerSeed,
-              windowIndex,
-            })
-      commit({
-        ...game,
-        phase: 'TRANSFER_WINDOW',
-        windowIndex,
-        transferOffers,
-        selectedTransferChoiceId:
-          contractExpired
-            ? transferOffers[0]?.id ?? null
-            : game.selectedTransferChoiceId ?? 'STAY',
-        transferDecision: null,
-        transferArrivalChoice: null,
-      })
+      if (!game || get().isReviewingReport || get().voluntaryRetirementConfirmation) return
+      if (game.phase === 'TRANSFER_WINDOW') { set({ error: null }); return }
+      const model = professionalNextAction(game)
+      get().advanceProfessionalReport(forcedByPromiseBreach ? 'REQUEST_TRANSFER' : model.stayOpensMarket ? 'STAY' : 'MARKET', game.windowIndex, game.careerSeed)
     },
 
     continueProfessionalCareer: () => {
       const game = get().game
-      if (
-        !game?.player ||
-        !game.contract ||
-        !game.selectedClubId ||
-        game.phase !== 'PRO_STAGE_COMPLETE'
-      ) {
-        set({ error: '先踢完这半年，才能继续。' })
-        return
-      }
-      if (!canAdvanceBeyondWindow(game.windowIndex)) {
-        set({ error: '40岁赛季已经结束，请先完成退役。' })
-        return
-      }
-      const opportunity = assessDomesticTransferOpportunity({
-        player: game.player,
-        latestReport: game.lastReport,
-        windowIndex: game.windowIndex,
-      })
-      const transferMarketOpen = canOpenTransferMarketAfterWindow(
-        game.windowIndex,
-      )
-      if (game.contract.remainingHalfYears === 0) {
-        set({
-          error: '合同已经到期。请先续约或接受新的自由身合同，再开始下一个半年。',
-        })
-        return
-      }
-      if (transferMarketOpen && opportunity.available) {
-        set({ error: '这半年已经有正式转会机会，请先决定去留。' })
-        return
-      }
-      commit({
-        ...game,
-        phase: 'HALF_YEAR_PLAN',
-        windowIndex: game.windowIndex + 1,
-        transferOffers: [],
-        selectedTransferChoiceId: null,
-        transferDecision: null,
-        transferArrivalChoice: null,
-        pendingCareerEvent: null,
-        trainingFocus: null,
-        developmentApproach: null,
-        trainingQualityBonus: 0,
-      })
+      if (!game) return
+      const model = professionalNextAction(game)
+      get().advanceProfessionalReport(model.secondary.some(item => item.action === 'STAY') ? 'STAY' : 'PLAN', game.windowIndex, game.careerSeed)
     },
 
     selectTransferChoice: (choiceId) => {
@@ -1004,6 +928,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (
         !game?.player ||
+        game.phase !== 'TRANSFER_WINDOW' ||
         !game.selectedTransferChoiceId ||
         game.selectedTransferChoiceId === 'STAY'
       ) {
@@ -1053,6 +978,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       const game = get().game
       if (
         !game?.player ||
+        game.phase !== 'TRANSFER_WINDOW' ||
         !game.contract ||
         !game.selectedClubId ||
         !game.selectedTransferChoiceId
@@ -1212,26 +1138,29 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     requestRetirement: () => {
       const game = get().game
-      if (!game?.player || game.phase !== 'PRO_STAGE_COMPLETE') {
-        set({ error: '至少踢完一个职业半年后，才能决定是否退役。' })
+      if (!game || get().isReviewingReport || get().voluntaryRetirementConfirmation) return
+      if (allowsProfessionalAction(game, 'AGE_LIMIT')) {
+        get().advanceProfessionalReport('AGE_LIMIT', game.windowIndex, game.careerSeed)
         return
       }
-      const availability = retirementAvailabilityAfterWindow(
-        game.windowIndex,
-      )
-      if (availability === 'UNAVAILABLE') {
-        set({ error: '以你现在的年龄和职业状态，还不能主动退役。' })
+      if (!allowsProfessionalAction(game, 'VOLUNTARY')) { set({ error: '以你现在的年龄和职业状态，还不能主动退役。' }); return }
+      if (game.phase === 'HALF_YEAR_REPORT') {
+        set({ voluntaryRetirementConfirmation: { careerSeed: game.careerSeed, windowIndex: game.windowIndex, phase: 'HALF_YEAR_REPORT' }, error: null })
         return
       }
-      commit({
-        ...game,
-        phase: 'RETIREMENT_DECISION',
-        retirementReason:
-          availability === 'MANDATORY' ? 'AGE_LIMIT' : 'VOLUNTARY',
-      })
+      commit({ ...game, phase: 'RETIREMENT_DECISION', retirementReason: 'VOLUNTARY' })
+    },
+
+    confirmVoluntaryRetirement: (confirmation) => {
+      const game = get().game
+      if (!game || get().isReviewingReport || get().voluntaryRetirementConfirmation !== confirmation ||
+        game.phase !== confirmation.phase || game.careerSeed !== confirmation.careerSeed || game.windowIndex !== confirmation.windowIndex ||
+        !allowsProfessionalAction(game, 'VOLUNTARY')) return
+      commit({ ...game, phase: 'CAREER_RETIRED', retirementReason: 'VOLUNTARY' })
     },
 
     cancelRetirement: () => {
+      if (get().voluntaryRetirementConfirmation) { set({ voluntaryRetirementConfirmation: null }); return }
       const game = get().game
       if (
         !game ||
@@ -1248,8 +1177,9 @@ export const useGameStore = create<GameStore>((set, get) => {
       })
     },
 
-    confirmRetirement: () => {
+    confirmRetirement: (expected) => {
       const game = get().game
+      if (get().isReviewingReport || (expected && (game?.careerSeed !== expected.careerSeed || game?.windowIndex !== expected.windowIndex))) return
       if (
         !game?.player ||
         game.phase !== 'RETIREMENT_DECISION' ||
@@ -1263,13 +1193,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     retireFromNationalTeam: () => {
       const game = get().game
-      if (
-        !game?.player ||
-        game.phase !== 'PRO_STAGE_COMPLETE' ||
-        playerAgeAtWindow(game.windowIndex) < 30 ||
-        game.nationalTeam.retired ||
-        game.nationalTeam.caps === 0
-      ) {
+      if (!game || get().isReviewingReport || get().voluntaryRetirementConfirmation || !allowsProfessionalAction(game, 'NATIONAL')) {
         set({ error: '你现在还不能退出国家队。' })
         return
       }
@@ -1286,7 +1210,13 @@ export const useGameStore = create<GameStore>((set, get) => {
     goToPhase: (phase) => {
       const game = get().game
       if (!game) return
-      commit({ ...game, phase })
+      if (phase === 'HALF_YEAR_REPORT') { get().reviewReport(); return }
+      const back: Partial<Record<GamePhase, GamePhase>> = {
+        CREATE_POSITION: 'CREATE_IDENTITY', CREATE_PRIORITIES: 'CREATE_POSITION',
+        CREATE_PREFERENCES: 'CREATE_PRIORITIES', PLAYER_REVEAL: 'CREATE_PREFERENCES',
+        ACADEMY_OFFERS: 'CREATE_PREFERENCES',
+      }
+      if (back[game.phase] === phase) commit({ ...game, phase })
     },
 
     clearError: () => set({ error: null }),

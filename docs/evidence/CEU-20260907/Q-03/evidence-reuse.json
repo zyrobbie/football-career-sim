@@ -1,0 +1,7 @@
+{
+  "latestRepairArtifactsMatched": 103,
+  "unchangedSourcesExcludingCSS": 152,
+  "latestCSSDiffExact": true,
+  "full716": "Q-01 accepted before later CSS repair; not rerun here",
+  "latestRepairChecks": "35 tests/typecheck/build and six-view UI/export, cited not rerun"
+}

@@ -1,3 +1,4 @@
+import { trainingFocusMultiplier } from './trainingPlan'
 import {
   ACADEMY_SCORES,
   COACH_BASE_SCORES,
@@ -134,7 +135,7 @@ export function developmentMultiplierFromTraining(input: {
     (squadRelation - 50) * 0.0015 +
     (fitness - 60) * 0.0015 +
     (morale - 60) * 0.001
-  return clamp((environment + context) * (focus === 'ADAPTATION' ? 0.9 : 1), 0.65, 1.55)
+  return clamp((environment + context) * trainingFocusMultiplier(focus), 0.65, 1.55)
 }
 
 /** Adds real first-team match experience after the existing training/context multiplier. */

@@ -1,27 +1,15 @@
+import { ProfessionalReportActions } from '../components/ProfessionalReportActions'
 import { CareerHub } from '../components/CareerHub'
-import { Icon } from '../components/Icons'
 import {
   canOpenTransferMarketAfterWindow,
-  playerAgeAtWindow,
-  retirementAvailabilityAfterWindow,
 } from '../engine/careerTime'
 import {
-  assessDomesticTransferOpportunity,
   assessOverseasInterest,
 } from '../engine/transfers'
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, roleLabel } from '../ui/format'
 
-export const RETIRE_NATIONAL_TEAM_CONFIRMATION = '确定退出中国国家队吗？退出后无法撤回，但你的俱乐部生涯仍会继续。'
-
-export function retireFromNationalTeamIfConfirmed(
-  confirm: (message: string) => boolean,
-  retireFromNationalTeam: () => void,
-): boolean {
-  if (!confirm(RETIRE_NATIONAL_TEAM_CONFIRMATION)) return false
-  retireFromNationalTeam()
-  return true
-}
+export { RETIRE_NATIONAL_TEAM_CONFIRMATION, retireFromNationalTeamIfConfirmed } from '../components/ProfessionalReportActions'
 
 export function professionalStageHeading(
   promiseFulfilled: boolean,
@@ -35,17 +23,6 @@ export function professionalStageHeading(
 
 export function ProfessionalStageCompleteScreen() {
   const game = useGameStore((state) => state.game)
-  const reviewReport = useGameStore((state) => state.reviewReport)
-  const openTransferWindow = useGameStore(
-    (state) => state.openTransferWindow,
-  )
-  const continueProfessionalCareer = useGameStore(
-    (state) => state.continueProfessionalCareer,
-  )
-  const requestRetirement = useGameStore((state) => state.requestRetirement)
-  const retireFromNationalTeam = useGameStore(
-    (state) => state.retireFromNationalTeam,
-  )
   if (
     !game?.player ||
     !game.lastReport ||
@@ -60,35 +37,15 @@ export function ProfessionalStageCompleteScreen() {
   const actualTeamLevel =
     completedHistory?.teamLevel ?? contractReport.actualTeamLevel
   const actualRole = completedHistory?.role ?? contractReport.actualRole
-  const contractExpired = game.contract.remainingHalfYears === 0
   const isFirstProfessionalWindow = game.windowIndex === 4
   const transferMarketOpen = canOpenTransferMarketAfterWindow(
     game.windowIndex,
   )
-  const canRequestTransfer =
-    transferMarketOpen &&
-    !contractExpired &&
-    game.contract.brokenPromiseWindows >= 2
-  const transferOpportunity = assessDomesticTransferOpportunity({
-    player: game.player,
-    latestReport: report,
-    windowIndex: game.windowIndex,
-  })
   const overseasInterest = assessOverseasInterest({
     player: game.player,
     careerSeed: game.careerSeed,
     windowIndex: game.windowIndex + 1,
   })
-  const retirementAvailability = retirementAvailabilityAfterWindow(
-    game.windowIndex,
-  )
-  const retirementMandatory = retirementAvailability === 'MANDATORY'
-  const retirementOptional = retirementAvailability === 'OPTIONAL'
-  const canRetireFromNationalTeam =
-    playerAgeAtWindow(game.windowIndex) >= 30 &&
-    game.nationalTeam.caps > 0 &&
-    !game.nationalTeam.retired &&
-    !retirementMandatory
 
   return (
     <CareerHub game={game} sectionLabel="半年结束">
@@ -148,97 +105,7 @@ export function ProfessionalStageCompleteScreen() {
               <span>{overseasInterest.summary}</span>
             </p>
           ) : null}
-          <p className="demo-complete__next">
-            {retirementMandatory
-              ? '最后一个赛季已经落幕。现在，为这段漫长的球员生涯写下结尾。'
-              : !transferMarketOpen
-              ? '你已经进入职业生涯的最后一年。接下来只专心踢完最后一个赛季，不再开启新的续约或转会谈判。'
-              : contractExpired
-              ? '合同已经到期。先决定续约，或者接受一份新的自由身合同，才能继续下一段生涯。'
-              : canRequestTransfer
-                ? '球队已经连续两个半年没有兑现角色承诺。你可以正式申请转会，也可以再留下半年看看。'
-                : transferOpportunity.summary}
-          </p>
-          <div className="demo-complete__actions">
-            <button
-              type="button"
-              className="button button--primary"
-              onClick={() => {
-                if (retirementMandatory) {
-                  requestRetirement()
-                  return
-                }
-                if (canRequestTransfer) {
-                  openTransferWindow(true)
-                  return
-                }
-                if (
-                  transferMarketOpen &&
-                  (contractExpired || transferOpportunity.available)
-                ) {
-                  openTransferWindow()
-                  return
-                }
-                continueProfessionalCareer()
-              }}
-            >
-              {retirementMandatory
-                ? '走向退役时刻'
-                : canRequestTransfer
-                ? '提出转会申请'
-                : contractExpired
-                ? '处理合同到期'
-                : transferMarketOpen && transferOpportunity.available
-                ? '查看转会报价'
-                : '进入下一职业半年'}
-              <Icon name="arrow" />
-            </button>
-            {retirementMandatory ? (
-              <button
-                type="button"
-                className="button button--secondary"
-                onClick={reviewReport}
-              >
-                复查最后半年报告
-              </button>
-            ) : canRequestTransfer ? (
-              <button
-                type="button"
-                className="button button--secondary"
-                onClick={continueProfessionalCareer}
-              >
-                继续留队半年
-              </button>
-            ) : (
-              <button
-                type="button"
-                className="button button--secondary"
-                onClick={reviewReport}
-              >
-                复查职业半年报告
-              </button>
-            )}
-          </div>
-          {retirementOptional ? (
-            <button
-              type="button"
-              className="retirement-option"
-              onClick={requestRetirement}
-            >
-              踢完这半年后退役
-            </button>
-          ) : null}
-          {canRetireFromNationalTeam ? (
-            <button
-              type="button"
-              className="retirement-option retirement-option--national"
-              onClick={() => {
-                retireFromNationalTeamIfConfirmed(window.confirm, retireFromNationalTeam)
-              }}
-            >
-              退出中国国家队
-            </button>
-          ) : null}
+          <ProfessionalReportActions game={game} allowReview />
         </div>
       </section>
     </CareerHub>

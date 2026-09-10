@@ -1,0 +1,22 @@
+{
+  "artifacts": 16,
+  "existing": 2076,
+  "frozenUnchanged": 1764,
+  "references": 33,
+  "identities": 253,
+  "allSourceCovered": true,
+  "attributionRows": 1847,
+  "attributionCategories": {
+    "文档/验证/临时产物；非默认发布内容": 1792,
+    "升级实施后修改；相对HEAD可能混含实施前改动，不按整文件归新功能": 29,
+    "升级新增共享实现；T/M/F对应验收归档，发布纳入仍由统筹决定": 7,
+    "升级验证新增正式测试": 19
+  },
+  "linksResolved": true,
+  "changedExisting": [
+    "docs/20-career-experience-upgrade-plan.md",
+    "docs/21-career-experience-upgrade-qa.md"
+  ],
+  "HEAD": "3f290407a299790665b58c4bc7c2bf8455d24bbd",
+  "package": "1.0.0"
+}

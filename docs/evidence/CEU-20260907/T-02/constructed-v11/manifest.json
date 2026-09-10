@@ -1,0 +1,96 @@
+[
+  {
+    "file": "form-95.json",
+    "kind": "构造输入，非真实采集档",
+    "source": "docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/READY_attack.json",
+    "sourceSHA256": "9ddcfd07d3e24a0e8094b81b0f930df405b7cfe2ffea298a5860b60627e3979a",
+    "changes": [
+      {
+        "path": "data.player.form",
+        "before": 72.7,
+        "after": 95
+      }
+    ],
+    "checksumChange": {
+      "before": "a72fa00c",
+      "after": "579112cc"
+    },
+    "reason": "TR-01加载输入饱和边界；最终收益以事件/后果/策略后准备状态判断",
+    "sha256": "029cabfcc9978cf086addd1464c1e3824a5c9b9878dd303bbf1a78f382f1d7d1",
+    "bytes": 55591,
+    "v11RealLoadGame": "passed"
+  },
+  {
+    "file": "form-100.json",
+    "kind": "构造输入，非真实采集档",
+    "source": "docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/READY_attack.json",
+    "sourceSHA256": "9ddcfd07d3e24a0e8094b81b0f930df405b7cfe2ffea298a5860b60627e3979a",
+    "changes": [
+      {
+        "path": "data.player.form",
+        "before": 72.7,
+        "after": 100
+      }
+    ],
+    "checksumChange": {
+      "before": "a72fa00c",
+      "after": "35b208fb"
+    },
+    "reason": "TR-01加载输入饱和边界；最终收益以事件/后果/策略后准备状态判断",
+    "sha256": "1ca3cd8673b7cc057f486ee1c7e9e08a51740bb912650b3b24d031ba165343ce",
+    "bytes": 55592,
+    "v11RealLoadGame": "passed"
+  },
+  {
+    "file": "morale-95.json",
+    "kind": "构造输入，非真实采集档",
+    "source": "docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/READY_physical.json",
+    "sourceSHA256": "78305033a1689bad02dc725e475aa70ef444a8af1c6929ccbfbea0d8da5f7c39",
+    "changes": [
+      {
+        "path": "data.player.morale",
+        "before": 73.7,
+        "after": 95
+      },
+      {
+        "path": "data.trainingFocus",
+        "before": "physical",
+        "after": "mental"
+      }
+    ],
+    "checksumChange": {
+      "before": "805f4820",
+      "after": "173b3237"
+    },
+    "reason": "TR-01加载输入饱和边界；最终收益以事件/后果/策略后准备状态判断",
+    "sha256": "634e31467dfcd2fd8c5b983a439d2f375ac44a93093653034e4dbad0f1b7d99f",
+    "bytes": 56356,
+    "v11RealLoadGame": "passed"
+  },
+  {
+    "file": "morale-100.json",
+    "kind": "构造输入，非真实采集档",
+    "source": "docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/READY_physical.json",
+    "sourceSHA256": "78305033a1689bad02dc725e475aa70ef444a8af1c6929ccbfbea0d8da5f7c39",
+    "changes": [
+      {
+        "path": "data.player.morale",
+        "before": 73.7,
+        "after": 100
+      },
+      {
+        "path": "data.trainingFocus",
+        "before": "physical",
+        "after": "mental"
+      }
+    ],
+    "checksumChange": {
+      "before": "805f4820",
+      "after": "864a4492"
+    },
+    "reason": "TR-01加载输入饱和边界；最终收益以事件/后果/策略后准备状态判断",
+    "sha256": "c7538b451828ea50e9cb316d481e5bf53b7ddc9a66d08cdba0d8142aa789a308",
+    "bytes": 56357,
+    "v11RealLoadGame": "passed"
+  }
+]

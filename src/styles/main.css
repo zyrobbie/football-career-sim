@@ -6124,6 +6124,9 @@ svg {
 .transfer-offer-grid > button > .transfer-offer-grid__environment {
   margin-top: 0;
   color: var(--gold-dark);
+  white-space: normal;
+  overflow: visible;
+  text-overflow: clip;
 }
 
 .transfer-offer-grid dl {
@@ -7392,7 +7395,8 @@ svg {
   border-top: 0;
 }
 
-.retirement-honors__list span {
+.retirement-honors__list > div > span,
+.retirement-honors__list .retirement-honor-chip {
   padding: 0 9px;
   color: var(--muted);
   font-size: 9px;
@@ -7674,16 +7678,43 @@ svg {
   border-left: 1px solid var(--line) !important;
 }
 
-.retirement-export-target.is-exporting .retirement-clubs__head {
+.retirement-export-target.is-exporting .retirement-clubs__head,
+.retirement-export-target.is-exporting .retirement-clubs__row {
   display: grid !important;
+  grid-template-columns: 126px minmax(190px, 1fr) 120px repeat(4, 58px) minmax(126px, 0.6fr) !important;
+  grid-template-rows: none !important;
+  column-gap: 8px !important;
+}
+
+.retirement-export-target.is-exporting .retirement-clubs__head > *,
+.retirement-export-target.is-exporting .retirement-clubs__row > * {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  padding: 0 !important;
+}
+
+.retirement-export-target.is-exporting .retirement-clubs__row > *::before {
+  content: none !important;
+}
+
+.retirement-export-target.is-exporting .retirement-clubs__row > :not(.retirement-clubs__club):not(.retirement-clubs__honor) {
+  font-size: 12px !important;
+  text-align: center !important;
+}
+
+.retirement-export-target.is-exporting .retirement-clubs__club strong {
+  font-size: 13px !important;
+}
+
+.retirement-export-target.is-exporting .retirement-clubs__club small,
+.retirement-export-target.is-exporting .retirement-clubs__honor {
+  font-size: 9px !important;
 }
 
 .retirement-export-target.is-exporting .retirement-clubs__row {
   min-height: 54px !important;
   padding: 7px 12px !important;
-  grid-template-columns: 126px minmax(190px, 1fr) 120px repeat(4, 58px) minmax(126px, 0.6fr) !important;
-  grid-template-rows: none !important;
-  gap: 8px !important;
+  row-gap: 8px !important;
   font-size: 12px !important;
 }
 
@@ -8143,7 +8174,8 @@ svg {
     grid-template-columns: 42px minmax(0, 1fr);
   }
 
-  .retirement-honors__list span {
+  .retirement-honors__list > div > span,
+  .retirement-honors__list .retirement-honor-chip {
     padding: 0 5px;
     font-size: 7px;
   }
@@ -8453,5 +8485,82 @@ svg {
   .career-report .season-honors-report__awards > span,
   .career-report .season-honors-report__awards > strong:only-child {
     grid-column: 1 / -1;
+  }
+}
+
+/* T-03: training decisions and saved summaries must retain their explanations. */
+.training-plan--veteran .career-panel-lead,
+.training-plan__note,
+.training-plan__saved,
+.training-plan__recovery p {
+  display: block;
+  overflow: visible;
+  white-space: normal;
+  -webkit-line-clamp: unset;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.training-plan__note { margin: 12px 0; color: var(--muted); }
+.training-plan__saved,
+.training-plan__recovery { padding: 14px; border: 1px solid var(--line); background: var(--paper); margin: 14px 0; }
+.training-plan__recovery h2 { font-size: 18px; margin: 0 0 8px; }
+.training-plan__recovery p { margin: 6px 0; }
+.training-plan--veteran .choice-list--training-plan small,
+.training-plan--veteran .choice-list--training-plan em {
+  display: block; overflow: visible; -webkit-line-clamp: unset;
+  white-space: normal; font-size: 14px; line-height: 1.6; margin-top: 6px;
+}
+.training-plan--veteran .choice-list--training-plan strong { white-space: normal; font-size: 16px; }
+.training-plan--veteran .choice-list--training-plan > button { padding: 14px; min-height: 0; }
+.training-plan--veteran .choice-list--training-plan > button:disabled { opacity: 1; color: var(--muted); cursor: not-allowed; background: var(--paper); }
+.career-report .report-footer .training-event-summary {
+  display: block; overflow: visible; white-space: pre-wrap; overflow-wrap: anywhere;
+  -webkit-line-clamp: unset; max-height: none; font-size: 14px; line-height: 1.7;
+}
+@media (max-width: 600px) {
+  .training-plan--veteran .choice-list--training-plan { grid-template-columns: 1fr; }
+}
+.training-plan--veteran .path-choice > div { grid-template-columns: 1fr; }
+.training-plan--veteran .path-choice button { display: block; padding: 12px; border-left: 0; border-top: 1px solid var(--line); min-height: 0; }
+.training-plan--veteran .path-choice button .choice-list__radio { display: none; }
+.training-plan--veteran .path-choice button strong { font-size: 15px; white-space: normal; }
+.training-plan--veteran .path-choice button small,
+.training-plan--veteran .path-choice button em { display: block; font-size: 14px; line-height: 1.5; white-space: normal; overflow: visible; -webkit-line-clamp: unset; }
+
+/* Keep long training descriptions inside their local grid cell. */
+.training-plan .choice-list--training-plan > button > span { min-width: 0; }
+.training-plan .choice-list--training-plan small { white-space: normal; }
+
+/* M-03: local, optional career preferences; existing training cards stay intact. */
+.career-preferences { margin-block: 12px; padding: 12px; border: 1px solid var(--line, #deded6); border-radius: 10px; }
+.career-preferences__heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.career-preferences p { margin: 0; }
+.career-preferences__hint { margin-top: 8px !important; font-size: 13px; line-height: 1.6; }
+.career-preferences__form { display: grid; gap: 12px; margin-top: 12px; }
+.career-preferences__form select { display: block; width: 100%; min-height: 40px; margin-top: 6px; }
+.career-preferences fieldset { min-width: 0; margin: 0; padding: 8px; border: 1px solid var(--line, #deded6); }
+.career-preferences__leagues { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px; }
+.career-preferences__leagues label { display: flex; align-items: center; gap: 6px; min-height: 32px; }
+.career-preferences__leagues input { width: 16px; height: 16px; margin: 0; }
+.career-preferences__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.career-preferences__review { margin-top: 8px; padding: 6px 0; background: transparent; border: 0; text-decoration: underline; font: inherit; cursor: pointer; }
+
+/* F-02: shared report decisions, preserving the existing report grid. */
+.professional-report-actions { min-width: 0; }
+.professional-report-actions > p { margin: 0 0 14px; }
+.professional-report-actions .demo-complete__actions { flex-wrap: wrap; }
+.professional-report-actions .button { white-space: normal; }
+.professional-report-actions .retirement-option { margin-right: 16px; }
+
+@media (max-width: 760px) {
+  .career-report .report-footer--professional {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .career-report .report-footer--professional .button {
+    white-space: normal;
+  }
+  .career-report .report-footer--professional .professional-report-actions {
+    width: 100%;
   }
 }

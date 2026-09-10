@@ -1,7 +1,7 @@
+import { resolveTrainingPlan, applyTrainingMaintenance, trainingEventSummary, type TrainingExecution } from './trainingPlan'
 import {
   BASE_RATES,
   FIRST_TEAM_BENCHMARKS,
-  POSITION_WEIGHTS,
 } from '../data/balance'
 import {
   attributeKeys,
@@ -123,20 +123,6 @@ function performanceIndex(rating: number): number {
   if (rating <= 7.3) return 75
   if (rating <= 7.7) return 86
   return 95
-}
-
-function trainingShares(
-  position: Player['primaryPosition'],
-  focus: TrainingFocus,
-): Attributes {
-  const weights = POSITION_WEIGHTS[position]
-  if (focus === 'BALANCED' || focus === 'ADAPTATION') return { ...weights }
-  return Object.fromEntries(
-    attributeKeys.map((key) => [
-      key,
-      weights[key] * 0.75 + (key === focus ? 0.25 : 0),
-    ]),
-  ) as unknown as Attributes
 }
 
 function roleStepToward(
@@ -346,6 +332,7 @@ function growFirstTeamAttributes(input: {
   minutes: number
   seed: string
   windowIndex: number
+  trainingExecution: TrainingExecution | null
 }): Attributes {
   const { player, offer, role, focus, trainingBonus, minutes, seed, windowIndex } = input
   const trainingQuality = trainingQualityScore({
@@ -366,7 +353,7 @@ function growFirstTeamAttributes(input: {
     trainingMultiplier,
     firstTeamMatchExperienceBonusForRuntimeClub({ club: offer.club, minutes }),
   )
-  const shares = trainingShares(player.primaryPosition, focus)
+  const shares = resolveTrainingPlan(player.primaryPosition, focus).shares
   const random = createRandom(seed, 'professional-growth')
 
   return developAttributesByAge({
@@ -374,6 +361,7 @@ function growFirstTeamAttributes(input: {
     age: playerAgeAtWindow(windowIndex),
     developmentMultiplier: multiplier,
     trainingShares: shares,
+    trainingExecution: input.trainingExecution,
     random,
   })
 }
@@ -508,6 +496,7 @@ function simulateFirstTeamHalfYear(input: {
   const startPlayer = structuredClone(state.player!)
   const preparation = prepareProfessionalWindow(startPlayer, approach)
   const workingPlayer = preparation.player
+  const trainingExecution = applyTrainingMaintenance(startPlayer, workingPlayer, playerAgeAtWindow(state.windowIndex), focus)
   const seed = `${state.careerSeed}:window:${state.windowIndex}`
   const { stats, injury } = simulateFirstTeamStats({
     player: workingPlayer,
@@ -556,6 +545,7 @@ function simulateFirstTeamHalfYear(input: {
     minutes: stats.minutes,
     seed,
     windowIndex: state.windowIndex,
+    trainingExecution,
   })
   const playerAfter: Player = {
     ...workingPlayer,
@@ -571,7 +561,7 @@ function simulateFirstTeamHalfYear(input: {
     ),
     squadRelation: clamp(
       workingPlayer.squadRelation +
-        (stats.appearances >= 10 ? 2 : approach === 'TEAM_FIRST' ? 2 : 0),
+        (stats.appearances >= 10 ? 2 : !trainingExecution?.recovery && approach === 'TEAM_FIRST' ? 2 : 0),
       0,
       100,
     ),
@@ -655,7 +645,7 @@ function simulateFirstTeamHalfYear(input: {
     expenseEuro: 0,
     cashAfterEuro: settlement.cashAfterEuro,
     injury,
-    eventSummary: preparation.summary,
+    eventSummary: trainingEventSummary(preparation.summary, trainingExecution),
     hints: [
       roleAfter !== role
         ? '你的队内角色发生了一级变化，下一窗口出场比例也会随之调整。'

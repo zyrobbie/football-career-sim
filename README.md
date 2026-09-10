@@ -33,6 +33,7 @@ npm run build
 
 ## 文档
 
+- [生涯体验升级规划与执行台账](docs/20-career-experience-upgrade-plan.md)（老将训练、转会方向、半年流程；含任务状态与交接说明）
 - [产品与规则规格](docs/01-product-spec.md)
 - [数据字典](docs/02-data-dictionary.md)
 - [最小 Demo 与验收标准](docs/03-mvp-acceptance.md)

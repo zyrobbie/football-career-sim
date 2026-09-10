@@ -1,3 +1,4 @@
+import { useGameStore } from '../store/gameStore'
 import {
   createContext,
   useCallback,
@@ -19,6 +20,7 @@ const CareerNavigationContext = createContext<CareerNavigationValue | null>(null
 function CareerNavigationState({ children }: { children: ReactNode }) {
   const [activeNav, setActiveNav] = useState<CareerNavKey>('CAREER')
   const selectNav = useCallback((key: CareerNavKey) => {
+    useGameStore.getState().closeReportReview()
     setActiveNav((current) => nextCareerNav(current, key))
     window.scrollTo(0, 0)
   }, [])

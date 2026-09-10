@@ -1,3 +1,4 @@
+import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import { generateAcademyOffers } from '../../engine/offers'
 import { generatePlayer } from '../../engine/player'
@@ -67,8 +68,8 @@ function eventReadyState() {
 describe('save migration', () => {
   it('upgrades version 1 identity fields without invalidating the save', () => {
     const migrated = validateGameState(legacyIdentityState())
-    expect(migrated.saveVersion).toBe(11)
-    expect(migrated.dataVersion).toBe(11)
+    expect(migrated.saveVersion).toBe(SAVE_VERSION)
+    expect(migrated.dataVersion).toBe(DATA_VERSION)
     expect(migrated.draft.jerseyNumber).toBe(10)
     expect(migrated.draft.preferredFoot).toBe('RIGHT')
     expect(migrated.teamLevel).toBe('YOUTH')
@@ -201,7 +202,7 @@ describe('save migration', () => {
       academyOffers: [{ ...offer, club: legacyClub }],
     })
 
-    expect(migrated.saveVersion).toBe(11)
+    expect(migrated.saveVersion).toBe(SAVE_VERSION)
     expect(migrated.academyOffers[0]?.club.country).toBe('中国')
     expect(migrated.academyOffers[0]?.club.leagueKey).toBe('中国')
     expect('crestKey' in migrated.academyOffers[0]!.club).toBe(false)
@@ -456,7 +457,7 @@ describe('save migration', () => {
       dataVersion: 3,
     })
 
-    expect(migrated.saveVersion).toBe(11)
+    expect(migrated.saveVersion).toBe(SAVE_VERSION)
     expect(migrated.firstTeamRole).toBeNull()
     expect(migrated.contract).toBeNull()
     expect(migrated.professionalOffer).toBeNull()
@@ -549,7 +550,7 @@ describe('save migration', () => {
 
     const migrated = validateGameState(legacy)
 
-    expect(migrated.saveVersion).toBe(11)
+    expect(migrated.saveVersion).toBe(SAVE_VERSION)
     expect(migrated.lastReport?.contract?.actualRole).toBe('ROTATION')
     expect(migrated.lastReport?.contract?.actualTeamLevel).toBe('FIRST_TEAM')
     expect(migrated.lastReport?.contract?.promiseFulfilled).toBe(false)

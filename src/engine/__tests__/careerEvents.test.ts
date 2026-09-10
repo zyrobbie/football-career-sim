@@ -1,3 +1,4 @@
+import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import type { GameState } from '../../models/game'
 import {
@@ -26,8 +27,8 @@ function createState(windowIndex = 1): GameState {
   const academyOffers = generateAcademyOffers(player, careerSeed)
   const offer = academyOffers[0]!
   return {
-    saveVersion: 11,
-    dataVersion: 11,
+    saveVersion: SAVE_VERSION,
+    dataVersion: DATA_VERSION,
     phase: 'HALF_YEAR_PLAN',
     careerSeed,
     startYear: 2026,

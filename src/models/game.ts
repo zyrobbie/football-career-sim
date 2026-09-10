@@ -10,8 +10,8 @@ export type {
   CareerEventInteractionKind,
 } from '../data/careerEventIds'
 
-export const SAVE_VERSION = 11 as const
-export const DATA_VERSION = 11 as const
+export const SAVE_VERSION = 12 as const
+export const DATA_VERSION = 12 as const
 
 export const positions = [
   'ST',
@@ -153,6 +153,9 @@ export type TrainingFocus =
   | AttributeKey
   | 'BALANCED'
   | 'ADAPTATION'
+  | 'BODY_CARE'
+  | 'MATCH_SHARPNESS'
+  | 'MENTAL_RESET'
 
 export type ArrivalChoice =
   | 'COACH'

@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { SAVE_VERSION, DATA_VERSION } from '../models/game'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { generateAcademyOffers } from '../engine/offers'
 import { generatePlayer } from '../engine/player'
@@ -40,75 +42,13 @@ describe('academy two-year progression', () => {
   })
 
   it('retires directly when an expired contract would require a new age-40 deal', () => {
-    const careerSeed = 'expiry-before-age-limit'
-    const draft = createDraft('CM')
-    const player = generatePlayer(draft, careerSeed)
-    const academyOffers = generateAcademyOffers(player, careerSeed)
-    const selected = academyOffers[0]!
-    const base: GameState = {
-      saveVersion: 11,
-      dataVersion: 11,
-      phase: 'HALF_YEAR_REPORT',
-      careerSeed,
-      startYear: 2026,
-      windowIndex: 54,
-      draft,
-      player,
-      academyOffers,
-      selectedClubId: selected.club.id,
-      teamLevel: 'FIRST_TEAM',
-      youthRole: null,
-      firstTeamRole: 'ROTATION',
-      contract: {
-        type: 'RENEWAL',
-        clubId: selected.club.id,
-        remainingHalfYears: 0,
-        annualSalaryEuro: 200_000,
-        promisedTeamLevel: 'FIRST_TEAM',
-        promisedRole: 'ROTATION',
-        releaseClauseEuro: null,
-        clubOptionYears: 0,
-        parentClubId: null,
-        brokenPromiseWindows: 0,
-      },
-      professionalOffer: null,
-      transferOffers: [],
-      selectedTransferChoiceId: null,
-      transferDecision: null,
-      arrivalChoice: 'COACH',
-      transferArrivalChoice: null,
-      pendingCareerEvent: null,
-      careerEventHistory: [],
-      pendingConsequences: [],
-      careerStory: createCareerStoryState(selected.club.id),
-      trainingFocus: null,
-      developmentApproach: null,
-      trainingQualityBonus: 0,
-      firstTeamProgress: createFirstTeamProgress(selected.club.id),
-      cashEuro: 50_000,
-      nationalTeam: {
-        retired: false,
-        currentRole: null,
-        caps: 0,
-        goals: 0,
-        assists: 0,
-        debutWindowIndex: null,
-        history: [],
-      },
-      retirementReason: null,
-      lastReport: null,
-      history: [],
+    const inputs = JSON.parse(readFileSync('docs/evidence/CEU-20260907/F-01/results-final-r2.json', 'utf8')) as {name:string;input:GameState}[]
+    for (const name of ['late-expiry-53', 'late-expiry-54']) {
+      useGameStore.setState({ game: structuredClone(inputs.find(row => row.name === name)!.input), error: null })
+      useGameStore.getState().advanceAfterReport()
+      expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
+      expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
     }
-
-    useGameStore.setState({ game: base, error: null })
-    useGameStore.getState().advanceAfterReport()
-    expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
-    expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
-
-    useGameStore.setState({ game: { ...base, windowIndex: 53 }, error: null })
-    useGameStore.getState().advanceAfterReport()
-    expect(useGameStore.getState().game?.phase).toBe('RETIREMENT_DECISION')
-    expect(useGameStore.getState().game?.retirementReason).toBe('AGE_LIMIT')
   })
 
   it('persists the first route before resolving a multi-stage career event', () => {
@@ -289,14 +229,10 @@ describe('academy two-year progression', () => {
     })
 
     store.advanceAfterReport()
-    expect(useGameStore.getState().game?.phase).toBe(
-      'PRO_STAGE_COMPLETE',
-    )
-
+    expect(useGameStore.getState().game?.phase).toBe('TRANSFER_WINDOW')
+    const marketBeforeStaleContinue = useGameStore.getState().game
     store.continueProfessionalCareer()
-    game = useGameStore.getState().game
-    expect(game?.phase).toBe('PRO_STAGE_COMPLETE')
-    expect(useGameStore.getState().error).toContain('合同已经到期')
+    expect(useGameStore.getState().game).toBe(marketBeforeStaleContinue)
     store.clearError()
 
     store.openTransferWindow()
@@ -450,15 +386,16 @@ describe('academy two-year progression', () => {
       transferredContractHalfYears - 1,
     )
 
+    const settledReport = structuredClone(game!)
     store.advanceAfterReport()
-    expect(useGameStore.getState().game?.phase).toBe(
-      'PRO_STAGE_COMPLETE',
-    )
+    expect(useGameStore.getState().game?.phase).toBe('HALF_YEAR_PLAN')
+    // Independent legacy-stage compatibility branch from the same settled report.
+    useGameStore.setState({ game: { ...settledReport, phase: 'PRO_STAGE_COMPLETE' }, error: null })
     store.openTransferWindow()
     game = useGameStore.getState().game
     expect(game?.phase).toBe('PRO_STAGE_COMPLETE')
     expect(game?.transferOffers).toEqual([])
-    expect(useGameStore.getState().error).toContain('集中评估')
+    expect(useGameStore.getState().error).toContain('当前进度')
     store.clearError()
 
     useGameStore.setState({
@@ -472,7 +409,7 @@ describe('academy two-year progression', () => {
     })
     store.openTransferWindow(true)
     expect(useGameStore.getState().game?.phase).toBe('PRO_STAGE_COMPLETE')
-    expect(useGameStore.getState().error).toContain('连续两个半年')
+    expect(useGameStore.getState().error).toContain('当前进度')
     store.clearError()
 
     useGameStore.setState({
@@ -503,6 +440,7 @@ describe('academy two-year progression', () => {
         ...game!,
         phase: 'PRO_STAGE_COMPLETE',
         windowIndex: 34,
+        history: game!.history.map((h,i) => i === game!.history.length - 1 ? { ...h, windowIndex: 34 } : h),
         retirementReason: null,
       },
     })
@@ -516,6 +454,7 @@ describe('academy two-year progression', () => {
       game: {
         ...useGameStore.getState().game!,
         windowIndex: 55,
+        history: useGameStore.getState().game!.history.map((h,i,hs) => i === hs.length - 1 ? { ...h, windowIndex: 55 } : h),
         retirementReason: null,
       },
     })
@@ -544,8 +483,8 @@ describe('academy two-year progression', () => {
     const academyOffers = generateAcademyOffers(player, careerSeed)
     const selected = academyOffers[0]!
     const game: GameState = {
-      saveVersion: 11,
-      dataVersion: 11,
+      saveVersion: SAVE_VERSION,
+      dataVersion: DATA_VERSION,
       phase: 'HALF_YEAR_PLAN',
       careerSeed,
       startYear: 2026,
@@ -614,7 +553,7 @@ describe('academy two-year progression', () => {
     )
 
     useGameStore.setState({
-      game: { ...completed, phase: 'PRO_STAGE_COMPLETE', windowIndex: 34 },
+      game: { ...completed, phase: 'PRO_STAGE_COMPLETE', windowIndex: 34, history: completed.history.map((h,i) => i === completed.history.length - 1 ? { ...h, windowIndex: 34 } : h) },
     })
     useGameStore.getState().retireFromNationalTeam()
     expect(useGameStore.getState().game?.nationalTeam.retired).toBe(true)

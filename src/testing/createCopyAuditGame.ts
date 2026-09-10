@@ -150,10 +150,9 @@ function professionalStageGame(): GameState {
   professionalPlanGame()
   useGameStore.getState().chooseTraining('BALANCED', 'STEADY')
   resolveEventIfNeeded()
-  useGameStore.getState().advanceAfterReport()
-  if (state().phase !== 'PRO_STAGE_COMPLETE') {
-    throw new Error('Copy audit fixture did not reach professional stage complete.')
-  }
+  if (state().phase !== 'HALF_YEAR_REPORT') throw new Error('Copy audit fixture did not reach professional report.')
+  // Explicit legacy-page fixture: new reports no longer enter this phase.
+  useGameStore.setState({ game: { ...state(), phase: 'PRO_STAGE_COMPLETE' } })
   return state()
 }
 
@@ -300,7 +299,7 @@ export function createCopyAuditGame(phase: GamePhase): GameState | null {
 
   if (phase === 'RETIREMENT_DECISION') {
     const game = professionalStageGame()
-    useGameStore.setState({ game: { ...game, windowIndex: 34 }, error: null })
+    useGameStore.setState({ game: { ...game, windowIndex: 34, history: game.history.map((h, i) => i === game.history.length - 1 ? { ...h, windowIndex: 34 } : h) }, error: null })
     useGameStore.getState().requestRetirement()
     return validateFixture(state())
   }

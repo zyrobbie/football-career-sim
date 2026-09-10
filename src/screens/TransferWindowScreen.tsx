@@ -1,3 +1,4 @@
+import { CareerPreferencesEditor } from '../components/CareerPreferencesEditor'
 import { CareerHub } from '../components/CareerHub'
 import { ClubCrest } from '../components/ClubCrest'
 import { Icon } from '../components/Icons'
@@ -297,6 +298,7 @@ export function TransferWindowScreen() {
             : '留下最熟悉，但不一定是最好。三家俱乐部会根据你的能力、表现和职业偏好给出不同角色。'}
         </p>
 
+        <CareerPreferencesEditor key={game.careerSeed} game={game} />
         {!contractExpired ? (
           <button
             type="button"

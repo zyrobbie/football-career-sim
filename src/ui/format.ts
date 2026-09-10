@@ -165,6 +165,9 @@ export function trainingFocusLabel(focus: TrainingFocus): string {
     mental: '加强心理',
     BALANCED: '平衡训练',
     ADAPTATION: '适应青训节奏',
+    BODY_CARE: '身体维护',
+    MATCH_SHARPNESS: '比赛状态',
+    MENTAL_RESET: '心理调适',
   }[focus]
 }
 

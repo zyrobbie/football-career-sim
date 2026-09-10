@@ -1,0 +1,10 @@
+{
+  "oldCommit": "3f290407a299790665b58c4bc7c2bf8455d24bbd",
+  "isolatedOldClientTests": 2,
+  "passed": true,
+  "v12RejectedWithoutMutation": true,
+  "v11OriginalLoads": true,
+  "persistentBackupTests": 6,
+  "key": "career_save_v11_backup",
+  "semantics": "write once before migration/rotation; preserve bytes; fail before overwriting on storage failure; delete with explicit career deletion"
+}

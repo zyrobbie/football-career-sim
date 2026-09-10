@@ -1,0 +1,840 @@
+[
+  {
+    "name": "regular",
+    "file": "fixtures/regular.json",
+    "kind": "public continuation",
+    "source": "docs/evidence/CEU-20260907/S0/fixtures/TRANSFER_WINDOW.json",
+    "sourceSHA": "4398287cc2f6212df2abe2db6c9a6e8a507cb8eb384e9e7e45ddb2ec4cdf769c",
+    "construction": [],
+    "actions": [],
+    "seed": "ceu-s0-fixture-0",
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 6,
+    "cashEuro": 29500,
+    "history": 6,
+    "offers": [
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_shaanxi_qinling",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 74000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "SUBSTITUTE",
+        "releaseClauseEuro": 2180000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_shaanxi_qinling",
+        "transferFeeEuro": 910000,
+        "interestScore": 87,
+        "estimatedPotential": 84,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn1_zhejiang_qianchao",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 155000,
+        "promisedTeamLevel": "YOUTH",
+        "promisedRole": "CORE",
+        "releaseClauseEuro": 3410000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn1_zhejiang_qianchao",
+        "transferFeeEuro": 920000,
+        "interestScore": 92,
+        "estimatedPotential": 91,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_foshan_lingnan",
+        "remainingHalfYears": 6,
+        "annualSalaryEuro": 115000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "ROTATION",
+        "releaseClauseEuro": 2530000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_foshan_lingnan",
+        "transferFeeEuro": 900000,
+        "interestScore": 85,
+        "estimatedPotential": 95,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      }
+    ],
+    "selectedTransferChoiceId": "STAY",
+    "sha256": "0efa9b6453d254044e477a099b88eb8dd03041a1fe9b095bf16b86137c6e9c50",
+    "bytes": 12085
+  },
+  {
+    "name": "selected",
+    "file": "fixtures/selected.json",
+    "kind": "public continuation",
+    "source": "docs/evidence/CEU-20260907/S0/fixtures/TRANSFER_WINDOW.json",
+    "sourceSHA": "4398287cc2f6212df2abe2db6c9a6e8a507cb8eb384e9e7e45ddb2ec4cdf769c",
+    "construction": [],
+    "actions": [
+      {
+        "action": "selectTransferChoice",
+        "args": [
+          "transfer-6-chn2_shaanxi_qinling"
+        ],
+        "before": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "error": null
+      },
+      {
+        "action": "counterTransferOffer",
+        "args": [
+          "SALARY"
+        ],
+        "before": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "error": null
+      }
+    ],
+    "seed": "ceu-s0-fixture-0",
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 6,
+    "cashEuro": 29500,
+    "history": 6,
+    "offers": [
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_shaanxi_qinling",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 74000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "SUBSTITUTE",
+        "releaseClauseEuro": 2180000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_shaanxi_qinling",
+        "transferFeeEuro": 910000,
+        "interestScore": 87,
+        "estimatedPotential": 84,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn1_zhejiang_qianchao",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 155000,
+        "promisedTeamLevel": "YOUTH",
+        "promisedRole": "CORE",
+        "releaseClauseEuro": 3410000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn1_zhejiang_qianchao",
+        "transferFeeEuro": 920000,
+        "interestScore": 92,
+        "estimatedPotential": 91,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_foshan_lingnan",
+        "remainingHalfYears": 6,
+        "annualSalaryEuro": 115000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "ROTATION",
+        "releaseClauseEuro": 2530000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_foshan_lingnan",
+        "transferFeeEuro": 900000,
+        "interestScore": 85,
+        "estimatedPotential": 95,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      }
+    ],
+    "selectedTransferChoiceId": "transfer-6-chn2_shaanxi_qinling",
+    "sha256": "c5c9b0ebb452fbd2b32eb91ee5aa099c8c84605d09e80f1a5b7b34d0b4206695",
+    "bytes": 12112
+  },
+  {
+    "name": "negotiation-success",
+    "file": "fixtures/negotiation-success.json",
+    "kind": "public continuation",
+    "source": "docs/evidence/CEU-20260907/S0/fixtures/TRANSFER_WINDOW.json",
+    "sourceSHA": "4398287cc2f6212df2abe2db6c9a6e8a507cb8eb384e9e7e45ddb2ec4cdf769c",
+    "construction": [],
+    "actions": [
+      {
+        "action": "selectTransferChoice",
+        "args": [
+          "transfer-6-chn2_shaanxi_qinling"
+        ],
+        "before": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "error": null
+      },
+      {
+        "action": "counterTransferOffer",
+        "args": [
+          "SALARY"
+        ],
+        "before": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "error": null
+      }
+    ],
+    "seed": "ceu-s0-fixture-0",
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 6,
+    "cashEuro": 29500,
+    "history": 6,
+    "offers": [
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_shaanxi_qinling",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 86000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "SUBSTITUTE",
+        "releaseClauseEuro": 2180000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_shaanxi_qinling",
+        "transferFeeEuro": 910000,
+        "interestScore": 87,
+        "estimatedPotential": 84,
+        "counterUsed": true,
+        "counterDirection": "SALARY",
+        "negotiationSucceeded": true,
+        "negotiationMessage": "俱乐部接受加薪要求，这就是最终合同。",
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn1_zhejiang_qianchao",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 155000,
+        "promisedTeamLevel": "YOUTH",
+        "promisedRole": "CORE",
+        "releaseClauseEuro": 3410000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn1_zhejiang_qianchao",
+        "transferFeeEuro": 920000,
+        "interestScore": 92,
+        "estimatedPotential": 91,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_foshan_lingnan",
+        "remainingHalfYears": 6,
+        "annualSalaryEuro": 115000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "ROTATION",
+        "releaseClauseEuro": 2530000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_foshan_lingnan",
+        "transferFeeEuro": 900000,
+        "interestScore": 85,
+        "estimatedPotential": 95,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      }
+    ],
+    "selectedTransferChoiceId": "transfer-6-chn2_shaanxi_qinling",
+    "sha256": "6b260b83fe3ce3964398605fb2f4b2847ef64baa7ebd957ee0ee6489f97645c0",
+    "bytes": 12167
+  },
+  {
+    "name": "negotiation-failure",
+    "file": "fixtures/negotiation-failure.json",
+    "kind": "public continuation",
+    "source": "docs/evidence/CEU-20260907/S0/fixtures/TRANSFER_WINDOW.json",
+    "sourceSHA": "4398287cc2f6212df2abe2db6c9a6e8a507cb8eb384e9e7e45ddb2ec4cdf769c",
+    "construction": [],
+    "actions": [
+      {
+        "action": "selectTransferChoice",
+        "args": [
+          "transfer-6-chn2_shaanxi_qinling"
+        ],
+        "before": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "error": null
+      },
+      {
+        "action": "counterTransferOffer",
+        "args": [
+          "ROLE"
+        ],
+        "before": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 6,
+          "history": 6,
+          "cashEuro": 29500,
+          "events": 5
+        },
+        "error": null
+      }
+    ],
+    "seed": "ceu-s0-fixture-0",
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 6,
+    "cashEuro": 29500,
+    "history": 6,
+    "offers": [
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_shaanxi_qinling",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 74000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "SUBSTITUTE",
+        "releaseClauseEuro": 2180000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_shaanxi_qinling",
+        "transferFeeEuro": 910000,
+        "interestScore": 87,
+        "estimatedPotential": 84,
+        "counterUsed": true,
+        "counterDirection": "ROLE",
+        "negotiationSucceeded": false,
+        "negotiationMessage": "俱乐部拒绝了你的条件，但原报价仍然有效。",
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn1_zhejiang_qianchao",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 155000,
+        "promisedTeamLevel": "YOUTH",
+        "promisedRole": "CORE",
+        "releaseClauseEuro": 3410000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn1_zhejiang_qianchao",
+        "transferFeeEuro": 920000,
+        "interestScore": 92,
+        "estimatedPotential": 91,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "chn2_foshan_lingnan",
+        "remainingHalfYears": 6,
+        "annualSalaryEuro": 115000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "ROTATION",
+        "releaseClauseEuro": 2530000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "id": "transfer-6-chn2_foshan_lingnan",
+        "transferFeeEuro": 900000,
+        "interestScore": 85,
+        "estimatedPotential": 95,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      }
+    ],
+    "selectedTransferChoiceId": "transfer-6-chn2_shaanxi_qinling",
+    "sha256": "8db23dad526c74e367a5b80f52396578202920183786a69a5bede90119c07d8b",
+    "bytes": 12172
+  },
+  {
+    "name": "expiry",
+    "file": "fixtures/expiry.json",
+    "kind": "public continuation",
+    "source": "docs/evidence/CEU-20260907/S0/fixtures/CONTRACT_EXPIRED.json",
+    "sourceSHA": "0bc8f5b893847a48310dcad0ff8f5dd772678656180092c8011a50fc149fe460",
+    "construction": [],
+    "actions": [
+      {
+        "action": "openTransferWindow",
+        "args": [],
+        "before": {
+          "phase": "PRO_STAGE_COMPLETE",
+          "window": 11,
+          "history": 12,
+          "cashEuro": 30750,
+          "events": 10
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 12,
+          "history": 12,
+          "cashEuro": 30750,
+          "events": 10
+        },
+        "error": null
+      }
+    ],
+    "seed": "ceu-s0-fixture-0",
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 12,
+    "cashEuro": 30750,
+    "history": 12,
+    "offers": [
+      {
+        "id": "renewal-12-chn1_shenzhen_pengcheng",
+        "type": "RENEWAL",
+        "clubId": "chn1_shenzhen_pengcheng",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 515000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "STARTER",
+        "releaseClauseEuro": 12360000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "transferFeeEuro": 0,
+        "interestScore": 100,
+        "estimatedPotential": 91,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "id": "free-12-ita_inter",
+        "type": "FREE_TRANSFER",
+        "clubId": "ita_inter",
+        "remainingHalfYears": 6,
+        "annualSalaryEuro": 465000,
+        "promisedTeamLevel": "YOUTH",
+        "promisedRole": "CORE",
+        "releaseClauseEuro": 10230000,
+        "clubOptionYears": 1,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "transferFeeEuro": 0,
+        "interestScore": 100,
+        "estimatedPotential": 93,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "id": "free-12-esp1_getafe",
+        "type": "FREE_TRANSFER",
+        "clubId": "esp1_getafe",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 225000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "SUBSTITUTE",
+        "releaseClauseEuro": 4950000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "transferFeeEuro": 0,
+        "interestScore": 87,
+        "estimatedPotential": 91,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "id": "free-12-ita2_avellino",
+        "type": "FREE_TRANSFER",
+        "clubId": "ita2_avellino",
+        "remainingHalfYears": 10,
+        "annualSalaryEuro": 455000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "STARTER",
+        "releaseClauseEuro": 10010000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "transferFeeEuro": 0,
+        "interestScore": 100,
+        "estimatedPotential": 92,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      }
+    ],
+    "selectedTransferChoiceId": "renewal-12-chn1_shenzhen_pengcheng",
+    "sha256": "4d5c1f0404df18fd80bca7d37fbf161d2ed06f9cc2da72bf6e1191a1cb8107ec",
+    "bytes": 18855
+  },
+  {
+    "name": "rescue-constructed",
+    "file": "fixtures/rescue-constructed.json",
+    "kind": "constructed start + public continuation",
+    "source": "docs/evidence/CEU-20260907/S0/fixtures/CONTRACT_EXPIRED.json",
+    "sourceSHA": "0bc8f5b893847a48310dcad0ff8f5dd772678656180092c8011a50fc149fe460",
+    "construction": [
+      {
+        "path": "player.attributes.attack",
+        "before": 67.5,
+        "after": 79
+      },
+      {
+        "path": "player.attributes.defense",
+        "before": 63.7,
+        "after": 79
+      },
+      {
+        "path": "player.attributes.physical",
+        "before": 49.1,
+        "after": 79
+      },
+      {
+        "path": "player.attributes.mental",
+        "before": 61.4,
+        "after": 79
+      },
+      {
+        "path": "selectedClubId",
+        "before": "chn1_shenzhen_pengcheng",
+        "after": "eng_arsenal"
+      },
+      {
+        "path": "firstTeamRole",
+        "before": "STARTER",
+        "after": "FRINGE"
+      },
+      {
+        "path": "contract.clubId",
+        "before": "chn1_shenzhen_pengcheng",
+        "after": "eng_arsenal"
+      },
+      {
+        "path": "contract.remainingHalfYears",
+        "before": 0,
+        "after": 4
+      },
+      {
+        "path": "contract.brokenPromiseWindows",
+        "before": 0,
+        "after": 2
+      },
+      {
+        "path": "careerStory.club.clubId",
+        "before": "chn1_shenzhen_pengcheng",
+        "after": "eng_arsenal"
+      },
+      {
+        "path": "lastReport.roleAfter",
+        "before": "STARTER",
+        "after": "FRINGE"
+      },
+      {
+        "path": "lastReport.stats.appearances",
+        "before": 9,
+        "after": 3
+      },
+      {
+        "path": "lastReport.contract.actualRole",
+        "before": "ROTATION",
+        "after": "FRINGE"
+      }
+    ],
+    "actions": [
+      {
+        "action": "openTransferWindow",
+        "args": [
+          true
+        ],
+        "before": {
+          "phase": "PRO_STAGE_COMPLETE",
+          "window": 11,
+          "history": 12,
+          "cashEuro": 30750,
+          "events": 10
+        },
+        "after": {
+          "phase": "TRANSFER_WINDOW",
+          "window": 12,
+          "history": 12,
+          "cashEuro": 30750,
+          "events": 10
+        },
+        "error": null
+      }
+    ],
+    "seed": "ceu-s0-fixture-0",
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 12,
+    "cashEuro": 30750,
+    "history": 12,
+    "offers": [
+      {
+        "id": "transfer-12-eng2_millwall",
+        "type": "PERMANENT_TRANSFER",
+        "clubId": "eng2_millwall",
+        "remainingHalfYears": 6,
+        "annualSalaryEuro": 1920000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "CORE",
+        "releaseClauseEuro": 42240000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "transferFeeEuro": 2330000,
+        "interestScore": 86,
+        "estimatedPotential": 86,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "id": "transfer-12-bra1_sao_paulo",
+        "type": "PERMANENT_TRANSFER",
+        "clubId": "bra1_sao_paulo",
+        "remainingHalfYears": 8,
+        "annualSalaryEuro": 1095000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "STARTER",
+        "releaseClauseEuro": 24090000,
+        "clubOptionYears": 1,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "transferFeeEuro": 2570000,
+        "interestScore": 93,
+        "estimatedPotential": 95,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      },
+      {
+        "id": "transfer-12-cn_beijing_yuhua",
+        "type": "DOMESTIC_ACADEMY_TRANSFER",
+        "clubId": "cn_beijing_yuhua",
+        "remainingHalfYears": 10,
+        "annualSalaryEuro": 1845000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "CORE",
+        "releaseClauseEuro": 40590000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0,
+        "transferFeeEuro": 2380000,
+        "interestScore": 86,
+        "estimatedPotential": 90,
+        "counterUsed": false,
+        "counterDirection": null,
+        "negotiationSucceeded": null,
+        "negotiationMessage": null,
+        "withdrawn": false
+      }
+    ],
+    "selectedTransferChoiceId": "STAY",
+    "sha256": "4b82e3739968034e30d36daa013d0d7d5af52aeea887483e09b6cba462797fc8",
+    "bytes": 18373
+  },
+  {
+    "name": "empty-constructed",
+    "file": "fixtures/empty-constructed.json",
+    "kind": "constructed empty market",
+    "source": "docs/evidence/CEU-20260907/S0/fixtures/TRANSFER_WINDOW.json",
+    "sourceSHA": "4398287cc2f6212df2abe2db6c9a6e8a507cb8eb384e9e7e45ddb2ec4cdf769c",
+    "construction": [
+      {
+        "path": "transferOffers",
+        "before": [
+          {
+            "type": "DOMESTIC_ACADEMY_TRANSFER",
+            "clubId": "chn2_shaanxi_qinling",
+            "remainingHalfYears": 8,
+            "annualSalaryEuro": 74000,
+            "promisedTeamLevel": "FIRST_TEAM",
+            "promisedRole": "SUBSTITUTE",
+            "releaseClauseEuro": 2180000,
+            "clubOptionYears": 0,
+            "parentClubId": null,
+            "brokenPromiseWindows": 0,
+            "id": "transfer-6-chn2_shaanxi_qinling",
+            "transferFeeEuro": 910000,
+            "interestScore": 87,
+            "estimatedPotential": 84,
+            "counterUsed": false,
+            "counterDirection": null,
+            "negotiationSucceeded": null,
+            "negotiationMessage": null,
+            "withdrawn": false
+          },
+          {
+            "type": "DOMESTIC_ACADEMY_TRANSFER",
+            "clubId": "chn1_zhejiang_qianchao",
+            "remainingHalfYears": 8,
+            "annualSalaryEuro": 155000,
+            "promisedTeamLevel": "YOUTH",
+            "promisedRole": "CORE",
+            "releaseClauseEuro": 3410000,
+            "clubOptionYears": 0,
+            "parentClubId": null,
+            "brokenPromiseWindows": 0,
+            "id": "transfer-6-chn1_zhejiang_qianchao",
+            "transferFeeEuro": 920000,
+            "interestScore": 92,
+            "estimatedPotential": 91,
+            "counterUsed": false,
+            "counterDirection": null,
+            "negotiationSucceeded": null,
+            "negotiationMessage": null,
+            "withdrawn": false
+          },
+          {
+            "type": "DOMESTIC_ACADEMY_TRANSFER",
+            "clubId": "chn2_foshan_lingnan",
+            "remainingHalfYears": 6,
+            "annualSalaryEuro": 115000,
+            "promisedTeamLevel": "FIRST_TEAM",
+            "promisedRole": "ROTATION",
+            "releaseClauseEuro": 2530000,
+            "clubOptionYears": 0,
+            "parentClubId": null,
+            "brokenPromiseWindows": 0,
+            "id": "transfer-6-chn2_foshan_lingnan",
+            "transferFeeEuro": 900000,
+            "interestScore": 85,
+            "estimatedPotential": 95,
+            "counterUsed": false,
+            "counterDirection": null,
+            "negotiationSucceeded": null,
+            "negotiationMessage": null,
+            "withdrawn": false
+          }
+        ],
+        "after": []
+      }
+    ],
+    "actions": [],
+    "seed": "ceu-s0-fixture-0",
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 6,
+    "cashEuro": 29500,
+    "history": 6,
+    "offers": [],
+    "selectedTransferChoiceId": "STAY",
+    "sha256": "3836bc93965d1c07b7cff6ae281004adb9e1fa1965e202c2939870652457d36d",
+    "bytes": 10613
+  }
+]

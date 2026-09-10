@@ -1,0 +1,66 @@
+[
+  {
+    "file": "README.md",
+    "sha256": "b509221310dc6e2f81b74c937f10f113b4fcea9d8473776204c6ddde5bc399fd"
+  },
+  {
+    "file": "audit-command.txt",
+    "sha256": "77c880559307a6b6d1fdcef99b890fd8d3da331865c837f5b482c3e5fb009214"
+  },
+  {
+    "file": "audit.py",
+    "sha256": "8dca24add455c33505f218750c5aa187df768e5d925191d60563d9336c775182"
+  },
+  {
+    "file": "baseline.json",
+    "sha256": "dfc36451b39e54671283d750dfb80597658dd4c11c88d0c5ed415a61831b2dad"
+  },
+  {
+    "file": "before-hashes.json",
+    "sha256": "d0005cf7af7c31765e9c32e345325ccfd3557108e189fc01ee81e2f51c4c7105"
+  },
+  {
+    "file": "change-attribution-final.json",
+    "sha256": "7c8b231bd87a1c4b0b003171a222d718a2e55c3d0261e941411509d3f0e3684e"
+  },
+  {
+    "file": "change-attribution.json",
+    "sha256": "c3bb61450a5f0445bf1bf813acc940bb8ec73be16a0f5c79dc165859d26a48bd"
+  },
+  {
+    "file": "changed-files.json",
+    "sha256": "e107377ec3ab2045d7cf677532b190e6fc04369dbc960ce97db1173148154e18"
+  },
+  {
+    "file": "current-files-sha-final.json",
+    "sha256": "d600ee7a7b31014da6f84f573f01778bc1b697d9b2b42d64c6df6b80b75c70e7"
+  },
+  {
+    "file": "current-files-sha.json",
+    "sha256": "1d816414f65a9cc11abb29d8a43bb5236f73b9344d69da1f224d5854510e0538"
+  },
+  {
+    "file": "evidence-reuse.json",
+    "sha256": "6ea8272cc7cb18abc5aac91d4f11b9f4d6c351395f6026c9247f3f2cac19ae2f"
+  },
+  {
+    "file": "git-before.txt",
+    "sha256": "dba395fdc1212d97494abff7ba3cd073239d65e091f9b303913a67f393437e1c"
+  },
+  {
+    "file": "protection.json",
+    "sha256": "b90575f847bcd2caeb5a24560673443c691cbd86b24ed339b14eab0d24a86f64"
+  },
+  {
+    "file": "reference-manifest.json",
+    "sha256": "632fc124b0df6754e67b7ef4603ac4f753bffe704d5a85972b43320a929157e3"
+  },
+  {
+    "file": "verification-command.txt",
+    "sha256": "0edbc6333ebf2d4bc9a9b964c976adfd65f040ed0da1b3f81f4f53f719beb49a"
+  },
+  {
+    "file": "working-tree.diff",
+    "sha256": "7f229ca703fef7e3444744262f7639a852ff7a30e6f4e13d4a05d9f5d4f8aead"
+  }
+]

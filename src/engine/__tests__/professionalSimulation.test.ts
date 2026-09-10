@@ -1,3 +1,4 @@
+import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
 import type { Club, GameState } from '../../models/game'
@@ -42,8 +43,8 @@ function createFirstTeamState(
   })
   const contract = contractFromOffer(professionalOffer)
   const state: GameState = {
-    saveVersion: 11,
-    dataVersion: 11,
+    saveVersion: SAVE_VERSION,
+    dataVersion: DATA_VERSION,
     phase: 'SIMULATION_READY',
     careerSeed,
     startYear: 2026,

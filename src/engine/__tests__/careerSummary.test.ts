@@ -1,3 +1,4 @@
+import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import { generateAcademyOffers } from '../offers'
 import { generatePlayer } from '../player'
@@ -92,8 +93,8 @@ function retirementGame(): GameState {
   ]
 
   return {
-    saveVersion: 11,
-    dataVersion: 11,
+    saveVersion: SAVE_VERSION,
+    dataVersion: DATA_VERSION,
     phase: 'CAREER_RETIRED',
     careerSeed,
     startYear: 2026,

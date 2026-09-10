@@ -1,0 +1,30 @@
+{
+  "fixtures/CONTRACT_EXPIRED.json": {
+    "bytes": 16988,
+    "sha256": "0bc8f5b893847a48310dcad0ff8f5dd772678656180092c8011a50fc149fe460"
+  },
+  "fixtures/HALF_YEAR_PLAN.json": {
+    "bytes": 8525,
+    "sha256": "13011f2e33ee6e652d00ca72ec27aae478614d06d205ff6c0ba0fa39702bbe93"
+  },
+  "fixtures/HALF_YEAR_REPORT.json": {
+    "bytes": 9646,
+    "sha256": "7318c60272894f73405678bd0b7ef2c6cc91de255b8b2b8f9c65110b174d8fe7"
+  },
+  "fixtures/NEAR_RETIREMENT.json": {
+    "bytes": 70439,
+    "sha256": "81100f96b02803c01cf0115025ea48c2076c4a1e016f61104375df3fcc6a78d3"
+  },
+  "fixtures/PRO_STAGE_COMPLETE.json": {
+    "bytes": 9648,
+    "sha256": "399237d6dcc4002a13f663ba4b2e8f4ecd943f562a61bdaf4b7fab351f48840b"
+  },
+  "fixtures/SPECIAL_EVENT_RESULT.json": {
+    "bytes": 9044,
+    "sha256": "cf063b722eaf590dc93bfc3bda72ea2d9e687bf6962af1f780eb9e1a40d293bc"
+  },
+  "fixtures/TRANSFER_WINDOW.json": {
+    "bytes": 12085,
+    "sha256": "4398287cc2f6212df2abe2db6c9a6e8a507cb8eb384e9e7e45ddb2ec4cdf769c"
+  }
+}

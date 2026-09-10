@@ -28,12 +28,15 @@ function AppContent() {
   const game = useGameStore((state) => state.game)
   const error = useGameStore((state) => state.error)
   const clearError = useGameStore((state) => state.clearError)
+  const isReviewingReport = useGameStore((state) => state.isReviewingReport)
+  const closeReportReview = useGameStore((state) => state.closeReportReview)
+  const confirmation = useGameStore(state => state.voluntaryRetirementConfirmation)
   const phase = game?.phase
   const { activeNav } = useCareerNavigation()
 
   useEffect(() => {
     window.scrollTo(0, 0)
-  }, [phase])
+  }, [phase, confirmation])
 
   let screen = <HomeScreen />
 
@@ -44,6 +47,10 @@ function AppContent() {
       screen = <CareerHistoryScreen game={game} />
     } else if (canUseCareerNavigation(game.phase) && activeNav === 'SETTINGS') {
       screen = <SettingsScreen game={game} />
+    } else if (isReviewingReport && game.lastReport) {
+      screen = <HalfYearReportScreen readOnly onReturn={closeReportReview} />
+    } else if (confirmation && game.phase === confirmation.phase && game.careerSeed === confirmation.careerSeed && game.windowIndex === confirmation.windowIndex) {
+      screen = <RetirementScreen confirmation={confirmation} />
     } else if (
       [
         'CREATE_IDENTITY',

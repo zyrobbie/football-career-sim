@@ -51,6 +51,11 @@ function createTransferFixture() {
   return { careerSeed, player, currentClubId, offers }
 }
 
+function worldClassEligible(club: (typeof CLUBS)[number]): boolean {
+  const p = getClubParametersByCompatibleId(club.id)!
+  return p.divisionLevel === 1 && (p.platformTier <= 3 || club.country === '中国' && p.platformTier === 4)
+}
+
 describe('domestic transfer window', () => {
   it('uses career priorities when the agent filters sporting platforms and roles', () => {
     const { player } = createTransferFixture()
@@ -165,7 +170,7 @@ describe('domestic transfer window', () => {
       .filter((club) => club && isOverseasClub(club))
 
     expect(offers).toHaveLength(3)
-    expect(overseasClubs).toHaveLength(3)
+    expect(overseasClubs.length).toBeGreaterThanOrEqual(2)
     expect(overseasClubs.some((club) => club!.leagueKey === '英格兰')).toBe(true)
     expect(overseasClubs.some((club) => club!.leagueKey !== '英格兰')).toBe(true)
   })
@@ -186,7 +191,7 @@ describe('domestic transfer window', () => {
       expect(offers).toHaveLength(3)
       const clubs = offers.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!)
       expect(new Set(clubs.map((club) => club.id)).size).toBe(3)
-      expect(clubs.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3)).toBe(true)
+      expect(clubs.every((club) => worldClassEligible(club))).toBe(true)
       expect(clubs.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2)
       expect(clubs.some((club) => club.country === '意大利')).toBe(true)
       expect(clubs.some((club) => club.country !== '意大利')).toBe(true)
@@ -202,7 +207,7 @@ describe('domestic transfer window', () => {
     expect(italyCount).toBeLessThan(200)
     const expiry = generateContractExpiryOffers({ player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM', currentRole: 'CORE', currentContract: { type: 'FIRST_PRO', clubId: 'ita1_atalanta', remainingHalfYears: 0, annualSalaryEuro: 1_000_000, promisedTeamLevel: 'FIRST_TEAM', promisedRole: 'CORE', releaseClauseEuro: null, clubOptionYears: 0, parentClubId: null, brokenPromiseWindows: 0 }, latestReport: null, careerSeed: 'world-expiry', windowIndex: 12 })
     expect(expiry[0]?.type).toBe('RENEWAL')
-    expect(expiry.slice(1).every((offer) => { const club = CLUBS.find((candidate) => candidate.id === offer.clubId)!; return getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3 })).toBe(true)
+    expect(expiry.slice(1).every((offer) => { const club = CLUBS.find((candidate) => candidate.id === offer.clubId)!; return worldClassEligible(club) })).toBe(true)
   })
 
   it('rotates a single world-class career across ten deterministic market windows', () => {
@@ -214,18 +219,18 @@ describe('domestic transfer window', () => {
     const clubs = markets.flat().map((offer) => CLUBS.find((club) => club.id === offer.clubId)!)
     expect(new Set(clubs.map((club) => club.id)).size).toBeGreaterThanOrEqual(10)
     expect(['ita_inter', 'ita1_ac_milan', 'ita_juventus'].every((id) => clubs.some((club) => club.id === id))).toBe(true)
-    for (const market of markets) { const current = market.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); expect(new Set(current.map((club) => club.id)).size).toBe(3); expect(current.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3)).toBe(true); expect(current.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2); expect(current.some((club) => club.country === '意大利')).toBe(true); expect(current.some((club) => club.country !== '意大利')).toBe(true) }
+    for (const market of markets) { const current = market.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); expect(new Set(current.map((club) => club.id)).size).toBe(3); expect(current.every((club) => worldClassEligible(club))).toBe(true); expect(current.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2); expect(current.some((club) => club.country === '意大利')).toBe(true); expect(current.some((club) => club.country !== '意大利')).toBe(true) }
   })
 
   it('keeps 50 world-class expiry markets qualified and diverse', () => {
     const { player } = createTransferFixture(); player.attributes = { attack: 89, defense: 89, physical: 89, mental: 89 }; player.potentials = { ...player.attributes }; player.overseasIntent = 'STRONG'; player.preferredLeagues = ['意大利']
     const contract = { type: 'FIRST_PRO' as const, clubId: 'ita1_atalanta', remainingHalfYears: 0, annualSalaryEuro: 1_000_000, promisedTeamLevel: 'FIRST_TEAM' as const, promisedRole: 'CORE' as const, releaseClauseEuro: null, clubOptionYears: 0, parentClubId: null, brokenPromiseWindows: 0 }
     const seen = new Set<string>(); const counts = new Map<string, number>()
-    for (let index = 0; index < 50; index += 1) { const offers = generateContractExpiryOffers({ player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM', currentRole: 'CORE', currentContract: contract, latestReport: null, careerSeed: `expiry-audit-${index}`, windowIndex: 32 }); expect(offers).toHaveLength(4); expect(offers[0]?.type).toBe('RENEWAL'); const clubs = offers.slice(1).map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); expect(new Set(clubs.map((club) => club.id)).size).toBe(3); expect(clubs.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 3)).toBe(true); expect(clubs.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2); expect(clubs.some((club) => club.country === '意大利')).toBe(true); expect(clubs.some((club) => club.country !== '意大利')).toBe(true); clubs.forEach((club) => { seen.add(club.id); counts.set(club.id, (counts.get(club.id) ?? 0) + 1) }) }
+    for (let index = 0; index < 50; index += 1) { const offers = generateContractExpiryOffers({ player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM', currentRole: 'CORE', currentContract: contract, latestReport: null, careerSeed: `expiry-audit-${index}`, windowIndex: 32 }); expect(offers).toHaveLength(4); expect(offers[0]?.type).toBe('RENEWAL'); const clubs = offers.slice(1).map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); expect(new Set(clubs.map((club) => club.id)).size).toBe(3); expect(clubs.every((club) => worldClassEligible(club))).toBe(true); expect(clubs.filter((club) => club.tier <= 2).length).toBeGreaterThanOrEqual(2); expect(clubs.some((club) => club.country === '意大利')).toBe(true); expect(clubs.some((club) => club.country !== '意大利')).toBe(true); clubs.forEach((club) => { seen.add(club.id); counts.set(club.id, (counts.get(club.id) ?? 0) + 1) }) }
     expect(seen.size).toBeGreaterThanOrEqual(20); expect(counts.get('ita_inter') ?? 0).toBeGreaterThan(0); expect(counts.get('ita1_ac_milan') ?? 0).toBeGreaterThan(0); expect(counts.get('ita_juventus') ?? 0).toBeGreaterThan(0)
   })
 
-  it('gives world-class domestic-intent players two Chinese top-flight offers and one overseas option', () => {
+  it('gives world-class domestic-intent players at least two Chinese top-flight offers and an open third slot', () => {
     const { player } = createTransferFixture()
     player.attributes = { attack: 89, defense: 89, physical: 89, mental: 89 }
     player.potentials = { ...player.attributes }
@@ -235,18 +240,18 @@ describe('domestic transfer window', () => {
       const input = { player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM' as const, latestReport: null, careerSeed: `world-domestic-${index}`, windowIndex: 12 }
       const clubs = generateTransferOffers(input).map((offer) => CLUBS.find((club) => club.id === offer.clubId)!)
       expect(generateTransferOffers(input)).toEqual(generateTransferOffers(input))
-      expect(clubs.filter((club) => club.country === '中国')).toHaveLength(2)
-      expect(clubs.filter((club) => club.country !== '中国')).toHaveLength(1)
+      expect(clubs.filter((club) => club.country === '中国').length).toBeGreaterThanOrEqual(2)
+      expect(clubs.filter((club) => club.country !== '中国').length).toBeLessThanOrEqual(1)
       expect(clubs.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 4)).toBe(true)
       expect(new Set(clubs.map((club) => club.id)).size).toBe(3)
     }
   })
 
-  it('keeps OVR 82 domestic offers at two China T4 clubs and one overseas club', () => {
+  it('keeps OVR 82 domestic offers at least two China T4 clubs and an open third slot', () => {
     const { player } = createTransferFixture(); player.attributes = { attack: 82, defense: 82, physical: 82, mental: 82 }; player.potentials = { ...player.attributes }; player.overseasIntent = 'DOMESTIC'; player.preferredLeagues = []
     let domesticCount = 0; let overseasCount = 0
-    for (let index = 0; index < 100; index += 1) { const input = { player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM' as const, latestReport: null, careerSeed: `elite-domestic-${index}`, windowIndex: 32 }; const offers = generateTransferOffers(input); expect(offers).toEqual(generateTransferOffers(input)); const clubs = offers.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); const china = clubs.filter((club) => club.country === '中国'); const overseas = clubs.filter((club) => club.country !== '中国'); expect(china).toHaveLength(2); expect(overseas).toHaveLength(1); expect(china.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier === 4)).toBe(true); expect(overseas.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 4)).toBe(true); expect(new Set(clubs.map((club) => club.id)).size).toBe(3); domesticCount += china.length; overseasCount += overseas.length }
-    expect(domesticCount).toBe(200); expect(overseasCount).toBe(100)
+    for (let index = 0; index < 100; index += 1) { const input = { player, currentClubId: 'ita1_atalanta', currentTeamLevel: 'FIRST_TEAM' as const, latestReport: null, careerSeed: `elite-domestic-${index}`, windowIndex: 32 }; const offers = generateTransferOffers(input); expect(offers).toEqual(generateTransferOffers(input)); const clubs = offers.map((offer) => CLUBS.find((club) => club.id === offer.clubId)!); const china = clubs.filter((club) => club.country === '中国'); const overseas = clubs.filter((club) => club.country !== '中国'); expect(china.length).toBeGreaterThanOrEqual(2); expect(overseas.length).toBeLessThanOrEqual(1); expect(china.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier === 4)).toBe(true); expect(overseas.every((club) => getClubParametersByCompatibleId(club.id)?.divisionLevel === 1 && club.tier <= 4)).toBe(true); expect(new Set(clubs.map((club) => club.id)).size).toBe(3); domesticCount += china.length; overseasCount += overseas.length }
+    expect(domesticCount).toBeGreaterThanOrEqual(200); expect(domesticCount + overseasCount).toBe(300)
   })
 
   it('offers a descending platform ladder with better roles after a player stalls at an overseas giant', () => {

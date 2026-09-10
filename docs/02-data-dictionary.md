@@ -432,6 +432,9 @@ interface CurrentWindowState {
     | AttributeKey
     | 'BALANCED'
     | 'ADAPTATION'
+    | 'BODY_CARE'
+    | 'MATCH_SHARPNESS'
+    | 'MENTAL_RESET'
     | null
   developmentApproach:
     | 'PUSH'
@@ -589,3 +592,59 @@ career_save_backup
 - 迁移完成后重新执行完整校验；
 - 未知的更高版本存档必须拒绝读取，不能猜测降级；
 - 静态ID删除时必须提供ID映射或安全占位定义。
+
+
+### CEU-20260907：训练与 v12 持久化（T-02/T-03已验收）
+
+当前代码 SAVE_VERSION=12、DATA_VERSION=12。11→12只升级版本，保留原训练焦点、历史、报告、报价、draft与player偏好；原1→11链保留，原到期错误计划恢复兼容规则延续到12。目录数据未变，本次DATA_VERSION表示训练规则语义变化。
+
+`TrainingFocus`新增 BODY_CARE（身体维护）、MATCH_SHARPNESS（比赛状态）、MENTAL_RESET（心理调适）。`normalizePendingTraining(GameState)`为幂等纯函数，只处理 HALF_YEAR_PLAN / SPECIAL_EVENT / SPECIAL_EVENT_RESULT / SIMULATION_READY。null保持未选，≤30不变；31–33 physical→BODY_CARE、ADAPTATION→MENTAL_RESET；≥34额外把attack/defense/BALANCED→MATCH_SHARPNESS、mental→MENTAL_RESET。
+
+chooseTraining、continueCareer和runReadySimulation共用该函数，本期引擎、保存与新history均使用规范化焦点。旧history和已结算上下文不改写；事件路线和已应用即时结果保留。新history记录本期计划，即使恢复覆盖也不改成其他枚举，实际执行情况见报告。
+
+`HalfYearReport.eventSummary`仍是原有字符串：原摘要后追加换行和“本期训练：计划；实际准备收益/成本；实际身体衰退减缓或恢复覆盖/饱和原因。”实际执行记录仅在内存计算，不增加存档字段；精确能力减缓值保留于计算与验证证据；新报告文案必要时使用“约”并保留两位小数，不向玩家展示取整或下限实现细节。≤30摘要不变，旧报告不补算。hints仍最多三条，不承载维护说明。
+
+v11客户端不保证能读v12；本批未发布。未来发布前须保留v11备份，不能把代码回退称为存档降级。证据：[T-02](evidence/CEU-20260907/T-02/README.md)。
+
+T-04复用迁移回归并补验17份真实匿名旧档＋4份构造边界档的新页面/公开动作恢复；既有历史、事件前缀、报告与报价不追溯改写，待结算规范值与新增history一致。加载READY允许首次结算一次，其余已保存结果重复加载不结算。详见[训练验收总表](21-career-experience-upgrade-qa.md)，当前T-04已通过统筹验收；不表示旧客户端能读取v12。
+
+
+### CEU-20260907 M-02市场数据语义（2026-09-08，待验收）
+
+不增加持久字段，SAVE_VERSION/DATA_VERSION仍12/12；不改旧报价或已存谈判。新生成的外部TransferOffer最多3份，排除现队并按clubId去重；到期RENEWAL单独最多1份，FREE_TRANSFER最多3份且transferFeeEuro=0，总数≤4。薪资、角色承诺、潜力估计及谈判字段公式不变。
+
+资格使用兼容球队参数的divisionLevel/platformTier；85+高平台海外组合及救济触发仍用runtime club.tier，不能混用。新增TransferCandidate是生成器计算中的临时类型，不写入存档；selectTransferCandidates实际由生产生成器使用，测试可控制候选池，不提供生产刷新入口。
+
+**持久化契约（ASTRA-M02-R1补修待统筹验证）**：到期TRANSFER_WINDOW恰好1份当前selectedClubId续约，其余0–3份FREE_TRANSFER，不含现队；外部clubId和全部报价id唯一，总数≤4。selectedTransferChoiceId对应未撤回报价，不能为STAY。未选中的withdrawn报价及其完整谈判字段保留，不重生成或补满报价。基础schema、年龄退役及异常修复分支保持，未改格式、12/12版本或迁移。有效合同的空市场STAY继续合法。
+
+历史固定3外部校验造成的MR-05反例永久保留于[M-02阻塞](evidence/CEU-20260907/M-02/handoff-and-blocker.md)；当前保存/恢复及签约后继证据见[R1](evidence/CEU-20260907/M-02-R1/README.md)。MR-05未由执行者关闭，M-03未开始。
+
+
+### CEU-20260907 M-03：当前方向字段与视图状态（待验收）
+
+- `draft.overseasIntent/preferredLeagues`保留开局档案；`player.overseasIntent/preferredLeagues`为当前方向。新增`updateCareerPreferences(intent, leagues)`只更新后两项，其他player字段、职业优先级、seed、phase、窗口、cash、history、报告、事件、报价、选择与draft保持。
+- `normalizeCareerPreferences`先验证枚举与现有`PREFERRED_LEAGUES`，去重后最多3项，保留选择顺序；DOMESTIC规范为空。非法输入原子拒绝；重复规范化值不commit、不写存档、不调用随机或生成器。
+- `canEditCareerPreferences`共享允许表：有player/contract且无pending事件；HALF_YEAR_PLAN、HALF_YEAR_REPORT、CAREER_DASHBOARD、PRO_CONTRACT_OFFER、PRO_CONTRACT_COMPLETE、PRO_STAGE_COMPLETE、TRANSFER_WINDOW、TRANSFER_ARRIVAL、TRANSFER_STAGE_COMPLETE。其余phase禁止，页面入口也复用该判定。
+- `isReviewingReport`是Zustand非持久视图标志，不在GameState或envelope中；`reviewReport/closeReportReview`只切换视图。导航、成功加载/提交、删除或换生涯清除。无新增存档字段、marketId、枚举或迁移，12/12保持。
+- `restoreMarketContext`解释旧回看phase：仅合同存在，phase为报告/职业结束页，且W=最后history.windowIndex+1时，按选择与transferDecision恢复市场、到队、完成或下一计划。无history不推断。已生成空市场以phase和STAY表示，不用报价数组长度代替状态。
+- 真正未生成的结束窗口W=H才允许按原条件生成；无history的最小兼容状态要求结束phase、空报价、选择null、decisionnull，再走原门槛。新市场推进一次，已有市场先复用不受新开节奏拒绝；签约/到队状态不激活上一窗口报价。
+
+字段/动作表及完整构造来源见[M-03状态契约](evidence/CEU-20260907/M-03/state-contract.md)。MR-05已关闭且save.ts本批不改；MR-03修复待统筹验证。
+
+
+### CEU F-02：报告动作与临时确认（12/12不变，已验收）
+
+`professionalNextAction(game)`是页面/store共享纯判定。`advanceProfessionalReport(action, expectedWindowIndex, expectedCareerSeed?)`在提交前重新校验phase、W/H、player/合同/现队和待处理事件。W=H才是新的已结算推进；W=H+1的旧报告/结束上下文先由marketContext恢复，不生成、不加窗。真实页面传窗口和生涯seed；旧公开入口复用同一判定。
+
+`ProfessionalAction`仅是运行时动作，不写入存档：RESTORE、AGE_LIMIT、MARKET、REQUEST_TRANSFER、PLAN、STAY、VOLUNTARY、NATIONAL。普通计划及首次市场只提交一次完整next；不调用模拟引擎、不重结算history/cash/lastReport/事件/国家队事实。
+
+`voluntaryRetirementConfirmation`是Zustand临时视图，含careerSeed、windowIndex、phase=HALF_YEAR_REPORT；不属于GameState，不写入envelope。确认使用同一对象令牌并重核当前生涯/窗口/phase/资格。取消、重载、导航/回看、新生涯及成功commit清理令牌。新报告最终确认一次保存CAREER_RETIRED/VOLUNTARY；旧RETIREMENT_DECISION仍沿原协议确认/取消，不猜旧来源。
+
+`chooseTraining(focus, approach?, expected?: {careerSeed, windowIndex})`仅接受HALF_YEAR_PLAN。UI传预期上下文；两参数合法旧调用兼容。READY→模拟既有保存与恢复不变，不新增迁移/持久字段。
+
+2026-09-09核对：上述F-02数据契约已通过文档36验收，F-03连续结算已验收；F-04仅实页/文档补证待验收，没有增加字段或迁移。只读回看不持久化phase，刷新清除临时视图；临时自愿退役刷新回原报告。早期M-02-R1“待验证”为历史时点，MR-05现已关闭。当前专项结论与发布限制以[验收总表](21-career-experience-upgrade-qa.md)为准，12/12保持。
+
+
+## v1.1.0 发布备份补充
+
+新增localStorage键career_save_v11_backup：首次升级或覆盖合法v11当前档前保留原始字节，后续保存不轮换。备份写入失败时停止覆盖原档；明确删除生涯时同时删除。该键仅用于升级前恢复，不作为日常自动回退槽；旧客户端无法读取v12。

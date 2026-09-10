@@ -1,0 +1,11 @@
+{
+  "sourcePreT02DifferencesFromHEAD": [],
+  "conclusion": "tracked source matched HEAD at T02 start; current reviewed source changes belong to this upgrade",
+  "releaseAdditionalChanges": [
+    "src/persistence/save.ts",
+    "src/persistence/__tests__/v11Backup.test.ts",
+    "package.json",
+    "package-lock.json"
+  ],
+  "version": "1.1.0"
+}

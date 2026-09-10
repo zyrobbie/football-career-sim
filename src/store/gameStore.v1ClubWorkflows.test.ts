@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { SAVE_VERSION, DATA_VERSION } from '../models/game'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CLUBS } from '../data/balance'
 import { getClubParametersByCompatibleId } from '../data/clubs/clubRepository'
@@ -17,7 +19,7 @@ function academyGame(seed: string): GameState {
   const player = generatePlayer(draft, seed)
   const offers = generateAcademyOffers(player, seed)
   return {
-    saveVersion: 11, dataVersion: 11, phase: 'ACADEMY_OFFERS', careerSeed: seed, startYear: 2026, windowIndex: 0,
+    saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase: 'ACADEMY_OFFERS', careerSeed: seed, startYear: 2026, windowIndex: 0,
     draft, player, academyOffers: offers, selectedClubId: null, teamLevel: 'YOUTH', youthRole: null, firstTeamRole: null,
     contract: null, professionalOffer: null, transferOffers: [], selectedTransferChoiceId: null, transferDecision: null,
     arrivalChoice: null, transferArrivalChoice: null, pendingCareerEvent: null, careerEventHistory: [], pendingConsequences: [],
@@ -44,14 +46,15 @@ function professionalGame(seed: string, clubId: string, phase: GameState['phase'
   const progress = { ...createFirstTeamProgress(clubId), attention: 100, readiness: 100, matchProof: 100, coachBacking: 100, status: 'PROMOTED' as const }
   const professional = generateFirstProfessionalOffer({ player, club: academy.club, youthRole: 'STARTER', teamLevel: 'FIRST_TEAM', firstTeamProgress: progress, careerSeed: seed })
   return {
-    saveVersion: 11, dataVersion: 11, phase, careerSeed: seed, startYear: 2026, windowIndex: 9,
+    saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase, careerSeed: seed, startYear: 2026, windowIndex: 9,
     draft, player, academyOffers: [academy, ...generateAcademyOffers(player, `${seed}-offers`).slice(0, 2)], selectedClubId: clubId, teamLevel: 'FIRST_TEAM', youthRole: null, firstTeamRole: 'ROTATION',
     contract: { ...contractFromOffer(professional), remainingHalfYears: expired ? 0 : 6 }, professionalOffer: professional,
     transferOffers: [], selectedTransferChoiceId: null, transferDecision: null, arrivalChoice: 'COACH', transferArrivalChoice: null,
     pendingCareerEvent: null, careerEventHistory: [], pendingConsequences: [], careerStory: createCareerStoryState(clubId),
     trainingFocus: null, developmentApproach: null, trainingQualityBonus: 0, firstTeamProgress: progress, cashEuro: 7_000,
     nationalTeam: { retired: false, currentRole: null, caps: 0, goals: 0, assists: 0, debutWindowIndex: null, history: [] },
-    retirementReason: null, lastReport: null, history: [],
+    // Constructed settled-window marker from the frozen F-01 report; only stage fixtures need H=W.
+    retirementReason: null, lastReport: null, history: phase === 'PRO_STAGE_COMPLETE' ? [{ ...JSON.parse(readFileSync('docs/evidence/CEU-20260907/F-01/results-final-r2.json', 'utf8')).find((r: {name:string}) => r.name === 'ordinary').input.history.at(-1), windowIndex: 9, clubId }] : [],
   }
 }
 

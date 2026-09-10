@@ -56,6 +56,7 @@ describe('native confirmation flows', () => {
     const eligible = {
       ...game,
       windowIndex: 34,
+      history: game.history.map((h, i) => i === game.history.length - 1 ? { ...h, windowIndex: 34 } : h),
       teamLevel: 'FIRST_TEAM' as const,
       youthRole: null,
       firstTeamRole: 'FRINGE' as const,

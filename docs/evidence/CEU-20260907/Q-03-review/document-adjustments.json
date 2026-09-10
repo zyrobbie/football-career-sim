@@ -1,0 +1,11 @@
+{
+  "file": "docs/43-career-experience-acceptance-package.md",
+  "beforeSHA": "0ff1ac87f68a77ca53b667c233c3550e22540e36e64ab1404f82d1088b055f0b",
+  "afterSHA": "5ce82443e9a193cfa2be04fc85e617e4897821b30be64802dc346b970fd8b6c6",
+  "changes": [
+    "mark Q03 accepted; Q04 unexecuted",
+    "scope domestic quota to regular adult market with eligible candidates; retain recovery rules",
+    "clarify historical records unchanged"
+  ],
+  "productionChanged": false
+}

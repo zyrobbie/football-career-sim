@@ -1,0 +1,13 @@
+
+> football-career-sim@1.1.0 test:run
+> vitest run
+
+
+ RUN  v4.1.10 /private/var/folders/mt/x5819jds59n1qxjtm7v8vswc0000gn/T/ceu-release-clean-11gk8obl
+
+
+ Test Files  72 passed (72)
+      Tests  722 passed (722)
+   Start at  16:35:21
+   Duration  14.81s (transform 2.57s, setup 0ms, import 8.50s, tests 57.51s, environment 5ms)
+

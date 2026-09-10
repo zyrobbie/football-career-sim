@@ -1,0 +1,12 @@
+[
+  {
+    "file": "docs/20-career-experience-upgrade-plan.md",
+    "before": "a25ebb97c0ecd6b655525df72c9a218cd6c8c00c50585ad8382c74ed742f8a96",
+    "after": "2e294ac99aef33a3534ef8c01143b961ef0c0cd5042ffdf705355b207976876e"
+  },
+  {
+    "file": "docs/21-career-experience-upgrade-qa.md",
+    "before": "41919dc5710241b54a8d7903862dd0e1ca0ca9b585af720f03359192114ba7a6",
+    "after": "93e15d8448a437376ea7cc84d9a6edef14da1e3220beae5d6c79803cd38dc2d6"
+  }
+]

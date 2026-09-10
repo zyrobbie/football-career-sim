@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { CareerPreferencesEditor } from '../components/CareerPreferencesEditor'
+import { useRef, useState } from 'react'
 import { CareerHub } from '../components/CareerHub'
-import { Icon, type IconName } from '../components/Icons'
+import { Icon } from '../components/Icons'
 import { careerWindowLabel } from '../engine/careerTime'
 import type {
   DevelopmentApproach,
@@ -9,49 +10,10 @@ import type {
 } from '../models/game'
 import { useGameStore } from '../store/gameStore'
 
-const plans: Array<{
-  id: TrainingFocus
-  title: string
-  description: string
-  icon: IconName
-}> = [
-  {
-    id: 'attack',
-    title: '重点练进攻',
-    description: '把更多训练时间放在进攻能力上。',
-    icon: 'attack',
-  },
-  {
-    id: 'defense',
-    title: '重点练防守',
-    description: '把更多训练时间放在防守和无球能力上。',
-    icon: 'defense',
-  },
-  {
-    id: 'physical',
-    title: '重点练身体',
-    description: '提升身体素质，增强对抗和耐力。',
-    icon: 'physical',
-  },
-  {
-    id: 'mental',
-    title: '重点练心理',
-    description: '提升判断、专注和比赛抗压能力。',
-    icon: 'mental',
-  },
-  {
-    id: 'BALANCED',
-    title: '均衡训练',
-    description: '按照你的位置特点均衡分配训练。',
-    icon: 'career',
-  },
-  {
-    id: 'ADAPTATION',
-    title: '先适应青训',
-    description: '优先稳住身体和心理状态，能力成长会稍慢一些。',
-    icon: 'team',
-  },
-]
+import { trainingPlanView, trainingSubmission, type TrainingSelection } from '../ui/trainingPlanView'
+
+// View-only drafts survive navigation within this session; never written to a save.
+const drafts = new Map<string, TrainingSelection>()
 
 const approaches: Array<{
   id: DevelopmentApproach
@@ -102,11 +64,33 @@ const professionalApproaches: typeof approaches = [
 
 export function TrainingPlanScreen() {
   const game = useGameStore((state) => state.game)
-  const chooseTraining = useGameStore((state) => state.chooseTraining)
-  const [selected, setSelected] = useState<TrainingFocus>('physical')
-  const [approach, setApproach] =
-    useState<DevelopmentApproach>('STEADY')
   if (!game?.player || !game.selectedClubId) return null
+  const model = trainingPlanView(game)
+  return <TrainingPlanContent key={model.key} game={game} />
+}
+
+function TrainingPlanContent({ game }: { game: GameState }) {
+  const chooseTraining = useGameStore((state) => state.chooseTraining)
+  const model = trainingPlanView(game)
+  const [selection, setSelection] = useState<TrainingSelection>(() => drafts.get(model.key) ?? { focus: model.initialFocus, approach: game.developmentApproach ?? 'STEADY' })
+  const submitting = useRef(false)
+  const selected = selection.focus
+  const approach = selection.approach
+  const update = (next: TrainingSelection) => {
+    drafts.set(model.key, next)
+    if (drafts.size > 16) drafts.delete(drafts.keys().next().value!)
+    setSelection(next)
+  }
+  const submit = () => {
+    const current = useGameStore.getState().game
+    if (submitting.current || !current || current.phase !== 'HALF_YEAR_PLAN' || trainingPlanView(current).key !== model.key) return
+    const value = trainingSubmission(current, selection)
+    if (!value) return
+    submitting.current = true
+    chooseTraining(value.focus, value.approach, { careerSeed: game.careerSeed, windowIndex: game.windowIndex })
+    if (useGameStore.getState().error) submitting.current = false
+  }
+  if (!game.player) return null
   const currentRole =
     game.teamLevel === 'FIRST_TEAM'
       ? game.firstTeamRole
@@ -131,7 +115,7 @@ export function TrainingPlanScreen() {
       game={game}
       sectionLabel="半年计划"
     >
-      <div className="career-decision">
+      <div className={`career-decision training-plan${model.veteran ? " training-plan--veteran" : ""}`}>
         <header className="career-panel-heading">
           <Icon name="mental" />
           <h1>
@@ -139,7 +123,9 @@ export function TrainingPlanScreen() {
           </h1>
         </header>
         <p className="career-panel-lead">
-            {needsRecovery
+            {model.veteran
+              ? model.recovery ? "本期先恢复" : "选择本期训练重心，兼顾状态与身体负担。"
+              : needsRecovery
               ? '你的状态不在最佳，俱乐部已经安排恢复支持。怎么训练，仍会影响这半年的成长。'
               : isProfessional
                 ? '合同已经生效。你怎么训练、怎么争取角色，以及真正获得多少出场，会决定俱乐部是否兑现承诺。'
@@ -147,7 +133,17 @@ export function TrainingPlanScreen() {
                 ? '青训进入第二年。你的训练方向和职业策略，会直接影响俱乐部是否愿意把你推向一线队。'
                 : '未来半年没有标准答案。你选的方向，会改变成长节奏，也可能带来不同的故事。'}
         </p>
-        {isSecondYear ? (
+        <CareerPreferencesEditor key={game.careerSeed} game={game} />
+        {model.ageNote ? <p className="training-plan__note">{model.ageNote}</p> : null}
+        {model.recovery ? (
+          <section className="training-plan__recovery" aria-label="本期先恢复">
+            <h2>本期先恢复</h2>
+            <p>当前状态低于46，优先安排恢复，暂不选择训练和职业策略。</p>
+            <p>暂记身体维护计划，是否执行以事件和到期后果处理后的状态为准。</p>
+            {model.savedFocus ? <p>已保存的计划将由本次恢复安排接续，不会重新处理已完成的事件。</p> : null}
+          </section>
+        ) : null}
+        {isSecondYear && !model.recovery ? (
           <section className="path-choice">
             <header>
               <div>
@@ -179,7 +175,7 @@ export function TrainingPlanScreen() {
                   role="radio"
                   aria-checked={approach === item.id}
                   className={approach === item.id ? 'is-selected' : ''}
-                  onClick={() => setApproach(item.id)}
+                  onClick={() => update({ ...selection, approach: item.id })}
                   disabled={isSimulating}
                 >
                   <span className="choice-list__radio">
@@ -195,49 +191,42 @@ export function TrainingPlanScreen() {
             </div>
           </section>
         ) : null}
-        <div
+        {!model.recovery ? <div
           className="choice-list choice-list--career choice-list--training-plan"
           role="radiogroup"
           aria-label="半年计划"
         >
-          {plans.map((plan) => (
+          {model.options.map((plan) => (
             <button
               key={plan.id}
               type="button"
               role="radio"
               aria-checked={selected === plan.id}
               className={selected === plan.id ? 'is-selected' : ''}
-              onClick={() => setSelected(plan.id)}
-              disabled={isSimulating}
+              onClick={() => update({ ...selection, focus: plan.id })}
+              disabled={isSimulating || Boolean(plan.disabledReason)}
             >
               <span className="choice-list__radio">
                 {selected === plan.id ? <Icon name="check" /> : null}
               </span>
               <span>
-                <strong>
-                  {isProfessional && plan.id === 'ADAPTATION'
-                    ? '先适应职业队'
-                    : plan.title}
-                </strong>
-                <small>
-                  {isProfessional && plan.id === 'ADAPTATION'
-                    ? '优先适应职业队的训练和比赛强度，能力成长会稍慢一些。'
-                    : plan.description}
-                </small>
+                <strong>{plan.title}</strong>
+                <small>{plan.description}</small>
+                {plan.disabledReason ? <em>{plan.disabledReason}</em> : null}
               </span>
               <Icon name={plan.icon} />
             </button>
           ))}
-        </div>
+        </div> : null}
+        {model.veteran && !model.recovery ? <p className="training-plan__note">以上为训练准备的直接效果，不代表半年结束时的净变化。准备收益最多+4，目标上限95；事件、到期后果及职业策略可能改变实际效果，低状态恢复优先。</p> : null}
+        {!model.recovery && model.savedFocus === selected && model.options.find(option => option.id === selected)?.disabledReason ? <p className="training-plan__saved" role="status">已保留存档中的计划。你可以继续，实际准备收益可能为0，成本仍会执行；也可以改选其他计划。</p> : null}
         <button
           type="button"
           className="button button--primary career-decision__submit"
-          onClick={() =>
-            chooseTraining(selected, isSecondYear ? approach : null)
-          }
-          disabled={isSimulating}
+          onClick={submit}
+          disabled={isSimulating || !trainingSubmission(game, selection)}
         >
-          {isSimulating ? '半年进行中…' : '开始这半年'}
+          {isSimulating ? '半年进行中…' : model.recovery ? '按恢复安排开始这半年' : '开始这半年'}
           <Icon name="arrow" />
         </button>
         <p className="decision-footnote">

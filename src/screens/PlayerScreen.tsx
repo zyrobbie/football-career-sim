@@ -99,12 +99,13 @@ export function PlayerScreen({ game }: { game: GameState }) {
           </dl>
         </section>
 
-        <section className="player-screen__section" aria-label="职业偏好">
-          <header><h2>职业偏好</h2></header>
+        <section className="player-screen__section" aria-label="当前求职方向">
+          <header><h2>当前求职方向</h2></header>
           <dl className="player-screen__preferences">
             <div><dt>职业追求</dt><dd>{player.priorities.map((priority, index) => <span key={priority}>{index + 1}. {PRIORITY_LABELS[priority]}</span>)}</dd></div>
-            <div><dt>留洋倾向</dt><dd>{overseasIntentLabel(player.overseasIntent)}</dd></div>
-            <div><dt>偏好联赛</dt><dd>{player.preferredLeagues.length > 0 ? player.preferredLeagues.slice(0, 3).join(' · ') : '还没有偏好联赛'}</dd></div>
+            <div><dt>开局方向</dt><dd>{overseasIntentLabel(game.draft.overseasIntent)} · {game.draft.preferredLeagues.join(" · ") || "未指定联赛"}</dd></div>
+            <div><dt>当前方向</dt><dd>{overseasIntentLabel(player.overseasIntent)}</dd></div>
+            <div><dt>当前偏好联赛</dt><dd>{player.preferredLeagues.length > 0 ? player.preferredLeagues.slice(0, 3).join(' · ') : '还没有偏好联赛'}</dd></div>
           </dl>
         </section>
 

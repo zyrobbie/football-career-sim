@@ -22,6 +22,7 @@ import {
 
 const CURRENT_KEY = 'career_save_current'
 const BACKUP_KEY = 'career_save_backup'
+const V11_BACKUP_KEY = 'career_save_v11_backup'
 
 const attributesSchema = z.object({
   attack: z.number().finite(),
@@ -377,6 +378,9 @@ const stateSchema = z.object({
       'mental',
       'BALANCED',
       'ADAPTATION',
+      'BODY_CARE',
+      'MATCH_SHARPNESS',
+      'MENTAL_RESET',
     ])
     .nullable(),
   transferArrivalChoice: transferArrivalChoiceSchema.nullable(),
@@ -673,7 +677,7 @@ function migrateLegacyState(value: unknown): unknown {
   }
 
   if (
-    [7, 8, 9, 10, 11].includes(Number(migrated.saveVersion)) &&
+    [7, 8, 9, 10, 11, 12].includes(Number(migrated.saveVersion)) &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
     ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY'].includes(
@@ -767,8 +771,8 @@ function migrateLegacyState(value: unknown): unknown {
         : null
     migrated = {
       ...migrated,
-      saveVersion: SAVE_VERSION,
-      dataVersion: DATA_VERSION,
+      saveVersion: 11,
+      dataVersion: 11,
       pendingCareerEvent: pendingCareerEventId
         ? {
             eventId: pendingCareerEventId,
@@ -780,6 +784,12 @@ function migrateLegacyState(value: unknown): unknown {
         : null,
       careerStory: createCareerStoryState(selectedClubId),
     }
+  }
+
+  // v11 histories, reports and pending choices retain their original semantics.
+  // Only the runtime pending-window entry points canonicalize training.
+  if (migrated.saveVersion === 11 && migrated.dataVersion === 11) {
+    migrated = { ...migrated, saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION }
   }
 
   return migrated
@@ -1084,8 +1094,17 @@ export function validateGameState(value: unknown): GameState {
     )
     const validExpiryMarket =
       renewals.length === 1 &&
-      externalOffers.length === 3 &&
-      uniqueExternalClubs.size === 3
+      renewals[0]?.clubId === parsed.selectedClubId &&
+      externalOffers.length <= 3 &&
+      parsed.transferOffers.length === 1 + externalOffers.length &&
+      externalOffers.every((offer) => offer.clubId !== parsed.selectedClubId) &&
+      uniqueExternalClubs.size === externalOffers.length &&
+      new Set(parsed.transferOffers.map((offer) => offer.id)).size ===
+        parsed.transferOffers.length &&
+      parsed.selectedTransferChoiceId !== 'STAY' &&
+      parsed.transferOffers.some(
+        (offer) => offer.id === parsed.selectedTransferChoiceId && !offer.withdrawn,
+      )
 
     if (!validExpiryMarket) {
       const lastHistory = parsed.history[parsed.history.length - 1]
@@ -1129,16 +1148,33 @@ function storageAvailable(): boolean {
   return typeof window !== 'undefined' && Boolean(window.localStorage)
 }
 
+// Called only after decode succeeds. Keep the pre-upgrade bytes independent
+// of the rotating backup; a failed write must leave the old current untouched.
+function preserveV11Backup(raw: string): void {
+  if (JSON.parse(raw).data.saveVersion === 11 &&
+      window.localStorage.getItem(V11_BACKUP_KEY) === null) {
+    window.localStorage.setItem(V11_BACKUP_KEY, raw)
+    if (window.localStorage.getItem(V11_BACKUP_KEY) !== raw) {
+      throw new Error('Could not preserve the pre-upgrade save.')
+    }
+  }
+}
+
 export function saveGame(state: GameState): void {
   if (!storageAvailable()) return
   const encoded = encode(state)
   const current = window.localStorage.getItem(CURRENT_KEY)
   if (current) {
+    let valid = false
     try {
       decode(current)
-      window.localStorage.setItem(BACKUP_KEY, current)
+      valid = true
     } catch {
       // Keep the last known valid backup when the current value is corrupt.
+    }
+    if (valid) {
+      preserveV11Backup(current)
+      window.localStorage.setItem(BACKUP_KEY, current)
     }
   }
   window.localStorage.setItem(CURRENT_KEY, encoded)
@@ -1149,21 +1185,26 @@ export function loadGame(): GameState | null {
   if (!storageAvailable()) return null
   const current = window.localStorage.getItem(CURRENT_KEY)
   if (current) {
+    let decoded: GameState | null = null
     try {
-      const decoded = decode(current)
+      decoded = decode(current)
+    } catch {
+      // Fall through to the internal backup.
+    }
+    if (decoded) {
       const normalized = encode(decoded)
       if (normalized !== current) {
+        preserveV11Backup(current)
         window.localStorage.setItem(BACKUP_KEY, current)
         window.localStorage.setItem(CURRENT_KEY, normalized)
       }
       return decoded
-    } catch {
-      // Fall through to the internal backup.
     }
   }
   const backup = window.localStorage.getItem(BACKUP_KEY)
   if (!backup) return null
   const recovered = decode(backup)
+  preserveV11Backup(backup)
   window.localStorage.setItem(CURRENT_KEY, encode(recovered))
   return recovered
 }
@@ -1180,4 +1221,5 @@ export function deleteSavedCareer(): void {
   if (!storageAvailable()) return
   window.localStorage.removeItem(CURRENT_KEY)
   window.localStorage.removeItem(BACKUP_KEY)
+  window.localStorage.removeItem(V11_BACKUP_KEY)
 }

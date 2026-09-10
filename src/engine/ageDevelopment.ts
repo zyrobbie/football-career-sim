@@ -10,6 +10,7 @@ import {
   type Player,
 } from '../models/game'
 import type { RandomSource } from './random'
+import type { TrainingExecution } from './trainingPlan'
 
 function gapFactor(gap: number): number {
   if (gap >= 25) return 1.08
@@ -30,6 +31,7 @@ export function developAttributesByAge(input: {
   developmentMultiplier: number
   trainingShares: Record<AttributeKey, number>
   random: RandomSource
+  trainingExecution?: TrainingExecution | null
 }): Attributes {
   const {
     player,
@@ -40,7 +42,7 @@ export function developAttributesByAge(input: {
   } = input
   const growthPool = growthPoolAtAge(age)
   const decline = declineProfileAtAge(age)
-  const managementFactor = declineManagementFactor(player.fitness)
+  const managementFactor = declineManagementFactor(input.trainingExecution?.declineFitness ?? player.fitness)
 
   return Object.fromEntries(
     attributeKeys.map((key) => {
@@ -61,7 +63,12 @@ export function developAttributesByAge(input: {
         player.potentials[key],
         player.attributes[key] + normalGrowth + lateMentalGrowth,
       )
-      const afterDecline = improved - decline[key] * managementFactor
+      const originalDecline = decline[key] * managementFactor
+      const appliedDecline = originalDecline * (key === 'physical' ? input.trainingExecution?.physicalDeclineMultiplier ?? 1 : 1)
+      const afterDecline = improved - appliedDecline
+      if (key === 'physical' && input.trainingExecution) {
+        input.trainingExecution.physicalDeclineSaved = Math.max(20, afterDecline) - Math.max(20, improved - originalDecline)
+      }
 
       return [key, roundTenth(Math.max(20, afterDecline))]
     }),

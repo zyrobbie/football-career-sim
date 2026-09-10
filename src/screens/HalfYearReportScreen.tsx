@@ -1,3 +1,4 @@
+import { ProfessionalReportActions } from '../components/ProfessionalReportActions'
 import { CareerHub } from '../components/CareerHub'
 import { HonorBadge } from '../components/HonorBadge'
 import { Icon } from '../components/Icons'
@@ -23,7 +24,7 @@ import {
   roleLabel,
 } from '../ui/format'
 
-export function HalfYearReportScreen() {
+export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?: boolean; onReturn?: () => void } = {}) {
   const game = useGameStore((state) => state.game)
   const advanceAfterReport = useGameStore(
     (state) => state.advanceAfterReport,
@@ -31,16 +32,17 @@ export function HalfYearReportScreen() {
   if (!game?.player || !game.lastReport) return null
   const report = game.lastReport
   const stats = report.stats
+  const reportWindow = readOnly ? (game.history.at(-1)?.windowIndex ?? game.windowIndex) : game.windowIndex
   const isProfessionalWindow =
-    Boolean(game.contract) && game.windowIndex >= DEMO_WINDOW_COUNT
+    Boolean(game.contract) && reportWindow >= DEMO_WINDOW_COUNT
   const isDemoComplete =
     !isProfessionalWindow && game.history.length >= DEMO_WINDOW_COUNT
   const isCareerFinalWindow =
-    isProfessionalWindow && !canAdvanceBeyondWindow(game.windowIndex)
+    isProfessionalWindow && !canAdvanceBeyondWindow(reportWindow)
   const age = playerAgeAtWindow(
-    isCareerFinalWindow ? game.windowIndex : game.windowIndex + 1,
+    isCareerFinalWindow ? reportWindow : reportWindow + 1,
   )
-  const reportTitle = halfYearReportTitle(game.windowIndex)
+  const reportTitle = halfYearReportTitle(reportWindow)
   const reportRole = report.contract?.actualRole ?? report.roleAfter
 
   return (
@@ -173,12 +175,12 @@ export function HalfYearReportScreen() {
           </aside>
         </div>
 
-        <section className="report-footer">
+        <section className={`report-footer${!readOnly && isProfessionalWindow ? " report-footer--professional" : ""}`}>
           <div>
             <h2>
               {isCareerFinalWindow ? '最后一个赛季结束了' : `接下来：${report.toLabel}`}
             </h2>
-            <p className="event-summary">{report.eventSummary}</p>
+            <p className="event-summary training-event-summary">{report.eventSummary}</p>
             {isCareerFinalWindow ? (
               <ul>
                 <li>最后一个赛季已经结束。看完这份回顾，你将正式走向退役。</li>
@@ -195,12 +197,12 @@ export function HalfYearReportScreen() {
               进度已保存
             </p>
           </div>
-          <button
+          {!readOnly && isProfessionalWindow ? <ProfessionalReportActions game={game} /> : <button
             type="button"
             className="button button--primary"
-            onClick={advanceAfterReport}
+            onClick={readOnly ? onReturn : advanceAfterReport}
           >
-            {isProfessionalWindow
+            {readOnly ? '返回当前进度' : isProfessionalWindow
               ? isCareerFinalWindow
                 ? '结束最后一个半年'
                 : '结束这半年'
@@ -208,7 +210,7 @@ export function HalfYearReportScreen() {
               ? '结束青训第二年'
               : `进入${report.toLabel}`}
             <Icon name="arrow" />
-          </button>
+          </button>}
         </section>
       </article>
     </CareerHub>

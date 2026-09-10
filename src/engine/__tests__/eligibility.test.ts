@@ -1,3 +1,4 @@
+import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
 import type { GameState } from '../../models/game'
@@ -16,8 +17,8 @@ function createOverAgeYouthState(): GameState {
   const inter = CLUBS.find((club) => club.id === 'ita_inter')!
 
   return {
-    saveVersion: 11,
-    dataVersion: 11,
+    saveVersion: SAVE_VERSION,
+    dataVersion: DATA_VERSION,
     phase: 'HALF_YEAR_PLAN',
     careerSeed,
     startYear: 2026,

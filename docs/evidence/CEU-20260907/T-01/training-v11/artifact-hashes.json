@@ -1,0 +1,18 @@
+{
+  "boundary-full.json": {
+    "bytes": 1397903,
+    "sha256": "765b0d8853ef8667c55a7992ae182755c101d2c557a442296f9f4bdd791908a9"
+  },
+  "representative-full.json": {
+    "bytes": 6929915,
+    "sha256": "a086a228a132f5629cf4352d754f4a98078feff28d02eb4e4ca3e02e30f14315"
+  },
+  "summary.json": {
+    "bytes": 462,
+    "sha256": "919434b32ef1813703cc61c726b596a3963739b49c806884b3a561b092895c14"
+  },
+  "young-full.json": {
+    "bytes": 1203253,
+    "sha256": "242dd4da5bccfe14adca5a40a08dec2956f885fccedc222b1a25e0ca816aafe9"
+  }
+}

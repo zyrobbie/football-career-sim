@@ -1,0 +1,1520 @@
+[
+  {
+    "file": ".gitignore",
+    "category": "配置",
+    "sha256": "40ef145086bc5284ed875f948ee769238ce8831971d876ca9e8313b9e7a5eac0",
+    "bytes": 93
+  },
+  {
+    "file": "index.html",
+    "category": "配置",
+    "sha256": "f3a82e5f51de9720ba06bb23e3422f6fcfa9a97603aab2bce465d26e8bf9d261",
+    "bytes": 852
+  },
+  {
+    "file": "package-lock.json",
+    "category": "依赖",
+    "sha256": "df37f14dd87970557f81eeb19368c4192c9a8d63b54eb3feaf83bb8fe97c12e0",
+    "bytes": 99055
+  },
+  {
+    "file": "package.json",
+    "category": "依赖",
+    "sha256": "50ad3d3e90c90667e3cb07b31c2aa962fd625e56ab9cd411a3ff2331482d4e66",
+    "bytes": 1136
+  },
+  {
+    "file": "public/48dd44234a640c572076070f98e56483.txt",
+    "category": "资源",
+    "sha256": "681ba72c211b3efc40f2240b7ab8ea5293e530cd8ee13f049d02cfa3b42614c5",
+    "bytes": 41
+  },
+  {
+    "file": "public/545c6da190404b1d95143a795edd6c87.txt",
+    "category": "资源",
+    "sha256": "c00874e30503c251be0136be8395839a016681d68728617c4444803cfd33a586",
+    "bytes": 41
+  },
+  {
+    "file": "public/a02696e34ce6cbfbb6554d871bbbe191.txt",
+    "category": "资源",
+    "sha256": "c79642b7e8035ba6a8f8dd45db1c2ef48821501bbc715af90d44b9de2d112f42",
+    "bytes": 41
+  },
+  {
+    "file": "public/assets/brand/logo-compact-reverse.svg",
+    "category": "资源",
+    "sha256": "661745341787612679c7c7d170a5a3bd40cb2641634cbdd1e0f86d36c473774b",
+    "bytes": 5574
+  },
+  {
+    "file": "public/assets/brand/logo-compact.svg",
+    "category": "资源",
+    "sha256": "e2577de2ba6faa1d61a322ab45ca4b1cd12921e2f8a95a0052deedf6b213fa71",
+    "bytes": 5574
+  },
+  {
+    "file": "public/assets/brand/logo-full-reverse.svg",
+    "category": "资源",
+    "sha256": "20e973b6da5c4e74d39c900b1d151ce52a90be54044d00fd8e12bd1124530419",
+    "bytes": 14034
+  },
+  {
+    "file": "public/assets/brand/logo-full.svg",
+    "category": "资源",
+    "sha256": "4a7144c30c557bc1233f77d21416de5da4483c1ffb46a2a63f710ea8e30bf230",
+    "bytes": 14034
+  },
+  {
+    "file": "public/assets/brand/logo-mark.svg",
+    "category": "资源",
+    "sha256": "0177e11c4ed9a16883ec4f8d48a9b6444e85ffe6aa44538a245ac7ed3dacdcce",
+    "bytes": 2229
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-beijing-yuhua.svg",
+    "category": "资源",
+    "sha256": "4e19b8dec4902a2bdd5d50aa00df4fd7d33e4b4c2bce1d4de10d54b9509b1278",
+    "bytes": 688
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-changchun-beichen.svg",
+    "category": "资源",
+    "sha256": "b0c19b5573958e84b2590336947063ea46cba3d5e44b053a107576072ef2903d",
+    "bytes": 438
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-chengdu-jincheng.svg",
+    "category": "资源",
+    "sha256": "a790f40d688ba3437d2c9c22465c81002ec7ebb0edb2dbf52fc3890394717967",
+    "bytes": 721
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-chongqing-shancheng.svg",
+    "category": "资源",
+    "sha256": "88a4224c72ac4d5dc54ed53c2616f01b4763293d332762a403ce96352e0e814e",
+    "bytes": 530
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-dalian-bincheng.svg",
+    "category": "资源",
+    "sha256": "4ee563786f4175f09ce4f30e7c9bf34f573fb558803aad5d6b39a3abe90546d4",
+    "bytes": 540
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-foshan-lingnan.svg",
+    "category": "资源",
+    "sha256": "d89cf1be91589778beb4e5a936bc483e436ff49290d592f372a2222302c4ad2b",
+    "bytes": 352
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-guangxi-liancheng.svg",
+    "category": "资源",
+    "sha256": "14577af2af1643f7991269df3c9027a75161350d361549fe6f5fbb5ac5360e05",
+    "bytes": 505
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-guangzhou-nanyue.svg",
+    "category": "资源",
+    "sha256": "03b9daa0dd0dcccda610e73e07416f65f526945ec9a54217dda8445f055151d4",
+    "bytes": 448
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-guizhou-qianfeng.svg",
+    "category": "资源",
+    "sha256": "67f17640bb4fb2ffeabfae06989c30e3b1dbac89d33f06c03aafbd29c5db48c1",
+    "bytes": 387
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-hefei-luzhou.svg",
+    "category": "资源",
+    "sha256": "a32910571c48b5a070021d5de9dff2c9e5784349bdadf4d691198add5b6fe215",
+    "bytes": 373
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-henan-zhongyuan.svg",
+    "category": "资源",
+    "sha256": "d93dc47ef87e7fcd0039b455cddb53c6a0c5227fa409f21f4433383601efff82",
+    "bytes": 439
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-hohhot-qingcheng.svg",
+    "category": "资源",
+    "sha256": "95ea009addeff37610ac2cfff72473bd2a7db24af09d1a9db8c122c80f8f4be4",
+    "bytes": 396
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-liaoning-tiecheng.svg",
+    "category": "资源",
+    "sha256": "bb40133aa4ca98160ed6c98daca82a6ae1c3b74d65dd7aa3f242018d0411f720",
+    "bytes": 373
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-meizhou-jiaying.svg",
+    "category": "资源",
+    "sha256": "5c9858fe0881782d8c043054e43413075ca1d8d0feb03eb8ec88077a1695579b",
+    "bytes": 391
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-nanjing-jinling.svg",
+    "category": "资源",
+    "sha256": "213e715f8b4fb040520f68f06d95186411bba59bf98256743e91a3d05d084c00",
+    "bytes": 519
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-nantong-jianghai.svg",
+    "category": "资源",
+    "sha256": "fa8642bb1a23ed154867919b49277eadb0818d25b80cc93468991dfe88432578",
+    "bytes": 495
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-ningbo-yongjiang.svg",
+    "category": "资源",
+    "sha256": "0b3b87c92fc5779d155ca03131710ffb022524eec05963b11fabbbc26eed8ad5",
+    "bytes": 429
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-qingdao-haiwan.svg",
+    "category": "资源",
+    "sha256": "cc8a01c133bc0f102cde4c5fcca3f4c3a872f229c392d1e082d2f3fa58e8e87b",
+    "bytes": 514
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-shaanxi-qinling.svg",
+    "category": "资源",
+    "sha256": "ffa0144260ebc73164522c598fded1442a52f99ab616e7dbc3ec5ba207ac5336",
+    "bytes": 380
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-shandong-taiyue.svg",
+    "category": "资源",
+    "sha256": "730b9cc86b5d17b84f16036caf3541ae3d3673c29932575c3d89613b974361dd",
+    "bytes": 604
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-shanghai-donggang.svg",
+    "category": "资源",
+    "sha256": "f46a2a8f1a2142a2dcbcfbafbe686f6c7e0f63682ba1e39ba4709ceb3c243a64",
+    "bytes": 756
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-shenzhen-pengcheng.svg",
+    "category": "资源",
+    "sha256": "3be22466019fea123607168937a4bf84584a78374533d4d409974e6a5da11867",
+    "bytes": 383
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-shijiazhuang-yanzhao.svg",
+    "category": "资源",
+    "sha256": "1914348fadcb13585ab9ffb98e40740a037b8da9bb1e4eda5ba3b712df5c9d72",
+    "bytes": 379
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-suzhou-wumen.svg",
+    "category": "资源",
+    "sha256": "ba5f072100e08eb377f6acb93b2af4a81047e4d81fe12a280d90af930279fccf",
+    "bytes": 408
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-tianjin-jinmen.svg",
+    "category": "资源",
+    "sha256": "a2ef414a8b3289d0cf8dfaa9cd73705ffbef4ae131ede29a332a27179f8aeb78",
+    "bytes": 484
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-wuhan-jiangcheng.svg",
+    "category": "资源",
+    "sha256": "260e9758a8c82920702b7662c81c1b4d7b402db4728360a3f3ba2c2559182f73",
+    "bytes": 502
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-wuxi-taihu.svg",
+    "category": "资源",
+    "sha256": "ad6e88760b0d912ed690e3765db27ea29b3e39bd6a479ba81b344f33e61679fc",
+    "bytes": 425
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-xiamen-ludao.svg",
+    "category": "资源",
+    "sha256": "9e77171bc60ed7e8c28eb1aac66195b30cad7755e110ecf2df931e0541edb3ff",
+    "bytes": 395
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-xian-changan.svg",
+    "category": "资源",
+    "sha256": "07450e3d22d7411d818c4b052cde0e761ad9f1caf3586394123dc9d451381aa1",
+    "bytes": 456
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-xinjiang-kunlun.svg",
+    "category": "资源",
+    "sha256": "44ae3d2a4f10a0bbf455789c642e51b52a0b8c975eaa75178ba52628eb31e17e",
+    "bytes": 383
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-yunnan-shanhe.svg",
+    "category": "资源",
+    "sha256": "12dedc0f60ca5656a6be856007938f9cb3c3dfcdc046d5232be45a97d19364dd",
+    "bytes": 466
+  },
+  {
+    "file": "public/assets/clubs/crests/cn-zhejiang-qianchao.svg",
+    "category": "资源",
+    "sha256": "68b1f2a2ed52206a8be8c2f7639dd894b21dd3b991dcab998452b163c569f7ad",
+    "bytes": 602
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-ac-milan.svg",
+    "category": "资源",
+    "sha256": "5604e8f7424c0455d6994d776accb58d34e891c55ee75518229bc86787530737",
+    "bytes": 944
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-atalanta.svg",
+    "category": "资源",
+    "sha256": "acff17014068a1276785da05fe1e891b92779d24d44e848a67a74bce497bbbe6",
+    "bytes": 643
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-bologna.svg",
+    "category": "资源",
+    "sha256": "124133447a9cc14aeebc21fd7ff06120b2b4b387144efadd5eb75848c186279a",
+    "bytes": 495
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-como.svg",
+    "category": "资源",
+    "sha256": "693f120636b9e5128a4b85d22ebdc1fb67baa748e8abba2e99ee9349d67abcb7",
+    "bytes": 527
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-inter.svg",
+    "category": "资源",
+    "sha256": "ec5dd1845c55c5f774b03dce7c6e019c55aceb09a3337f86ca466b505a35efb8",
+    "bytes": 559
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-lazio.svg",
+    "category": "资源",
+    "sha256": "f22e99d40571d61477257f28d027efc8d4dfaf6f0c42fbbb2aacf0f713533bbf",
+    "bytes": 462
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-roma.svg",
+    "category": "资源",
+    "sha256": "a65dda7771f65f189ff236f1fbda2cb5238491c7d11f00359d799f0092d9c6ab",
+    "bytes": 829
+  },
+  {
+    "file": "public/assets/clubs/crests/ita-venezia.svg",
+    "category": "资源",
+    "sha256": "d21d59471ec7dffce1d17445c9d938a80c8e7480fdba692b7f34bb2fce9ed7c7",
+    "bytes": 577
+  },
+  {
+    "file": "public/assets/honors/2-bundesliga-title.svg",
+    "category": "资源",
+    "sha256": "5a45455a5826fe9eb24567b0fe5d4d8b99a7a244cde12e74e986961f5f9f1ef9",
+    "bytes": 1601
+  },
+  {
+    "file": "public/assets/honors/afc-champions-league-elite.svg",
+    "category": "资源",
+    "sha256": "b014c242d9f03116b9c95e6eb32cb3f246781c21aac8d80add4b3cdd09f73e69",
+    "bytes": 1696
+  },
+  {
+    "file": "public/assets/honors/argentina-primera-title.svg",
+    "category": "资源",
+    "sha256": "9edca716f95e9973f59190e318aa55a4f078667af091ba17f34ebade9cf0591a",
+    "bytes": 1707
+  },
+  {
+    "file": "public/assets/honors/asian-cup.svg",
+    "category": "资源",
+    "sha256": "2b78d744f2ca96970a95aef85d90f68c12d57c50746e377ed0567183a14409b5",
+    "bytes": 1877
+  },
+  {
+    "file": "public/assets/honors/ballon-dor.svg",
+    "category": "资源",
+    "sha256": "2a654f12a7d36a543c1ffe8da6a1839d1f80a00c29d244d3244924c8854a6933",
+    "bytes": 732
+  },
+  {
+    "file": "public/assets/honors/belgian-cup.svg",
+    "category": "资源",
+    "sha256": "601fea0e05cd7d6f873c0841820e2adcf5a6752bac65d0c8c635c08ddcb5bcd2",
+    "bytes": 883
+  },
+  {
+    "file": "public/assets/honors/belgian-pro-league-title.svg",
+    "category": "资源",
+    "sha256": "9b4359795215b895c9de58dd52d464e34816dd016b6fe3c8c3b83072d7eaf94f",
+    "bytes": 899
+  },
+  {
+    "file": "public/assets/honors/brasileirao-title.svg",
+    "category": "资源",
+    "sha256": "cb95c079d128449ae139b122e162546a4c2295e9577fe320fbdc39792c02a173",
+    "bytes": 1692
+  },
+  {
+    "file": "public/assets/honors/bundesliga-title.svg",
+    "category": "资源",
+    "sha256": "c0e07b7bdee8215565c72decb2bdaf07acc423c53aa30fe1a36ffad6814d6be3",
+    "bytes": 1535
+  },
+  {
+    "file": "public/assets/honors/cfa-cup.svg",
+    "category": "资源",
+    "sha256": "739a7a0637f6a87b5d36dade75828f1d81008d516ee31de1235662c0b534049a",
+    "bytes": 1694
+  },
+  {
+    "file": "public/assets/honors/champions-league.svg",
+    "category": "资源",
+    "sha256": "988ef37364c31d20ca50ed68ed46ecb08b764e1759997b0ffad304f55b75cc52",
+    "bytes": 1671
+  },
+  {
+    "file": "public/assets/honors/championship-title.svg",
+    "category": "资源",
+    "sha256": "1111a642e1b43f9aeaf6e04c6ecb5f3ccdd68ac25fa57d02ff76897a44d86bc4",
+    "bytes": 1438
+  },
+  {
+    "file": "public/assets/honors/china-league-one-title.svg",
+    "category": "资源",
+    "sha256": "d3150a8eb66d30b3f1786037b40f4ffd3121a6da4d8770403df4068ea1226a78",
+    "bytes": 1366
+  },
+  {
+    "file": "public/assets/honors/copa-argentina.svg",
+    "category": "资源",
+    "sha256": "9119555a9e6f800e1f69d8d875c5a5252186b34c0c1714d18e226ea4f0f90aa0",
+    "bytes": 1685
+  },
+  {
+    "file": "public/assets/honors/copa-del-rey.svg",
+    "category": "资源",
+    "sha256": "06bd87eb950a4c9605145a23608b75d11f0865eb9c4ea9982b71b3c32feadc27",
+    "bytes": 1358
+  },
+  {
+    "file": "public/assets/honors/copa-do-brasil.svg",
+    "category": "资源",
+    "sha256": "d8712443ca8b15523e794d505315ed601ccd447c0633a98881e5863cbcc3d984",
+    "bytes": 1763
+  },
+  {
+    "file": "public/assets/honors/copa-libertadores.svg",
+    "category": "资源",
+    "sha256": "961d0f2698b0c07a98b88d1432a1f9c5f34e6496fc3f90b3d12231f4d23ff417",
+    "bytes": 2006
+  },
+  {
+    "file": "public/assets/honors/coppa-italia.svg",
+    "category": "资源",
+    "sha256": "e62861e24d08a2d80d9b33573157f8638824f0f3fb140970c7cfba2ce8745868",
+    "bytes": 1376
+  },
+  {
+    "file": "public/assets/honors/coupe-de-france.svg",
+    "category": "资源",
+    "sha256": "15af3144b4f7b8b702a609612e19fc915332f445727a9bc626a7d3d6f687a225",
+    "bytes": 1307
+  },
+  {
+    "file": "public/assets/honors/csl-title.svg",
+    "category": "资源",
+    "sha256": "7b3443de0a4cc07bbf6097002cdb76632ffae860317906fc7c6c1373a8ebb85d",
+    "bytes": 2512
+  },
+  {
+    "file": "public/assets/honors/dfb-pokal.svg",
+    "category": "资源",
+    "sha256": "ed1e517a5ce5dc041285c96cc489c45c4a91e73e217131525b4ee4772848e257",
+    "bytes": 1525
+  },
+  {
+    "file": "public/assets/honors/emperors-cup.svg",
+    "category": "资源",
+    "sha256": "662baadfea91bd1b571ee179859cde160f50235e452234b2c70dc891f6b725b1",
+    "bytes": 1662
+  },
+  {
+    "file": "public/assets/honors/eredivisie-title.svg",
+    "category": "资源",
+    "sha256": "cb822b4e275b0e405bd9022eb0c6c2d7ddb05776b6403e4d277f3ef417ef6ebd",
+    "bytes": 1749
+  },
+  {
+    "file": "public/assets/honors/europa-league.svg",
+    "category": "资源",
+    "sha256": "77cf0d5cdeff6fbb23be9bcbc5697c7d247b3a959bdb4b470e80f9c402888607",
+    "bytes": 1244
+  },
+  {
+    "file": "public/assets/honors/fa-cup.svg",
+    "category": "资源",
+    "sha256": "d5b48b81e1a18f1b458781cd35eb9b6ec10c1276e1b66b7f0b833c4d34f4b8cc",
+    "bytes": 1331
+  },
+  {
+    "file": "public/assets/honors/golden-boot.svg",
+    "category": "资源",
+    "sha256": "06ae90d6d19f2f75f28e82158e0b22133112349fce369bf89b50587622c2a172",
+    "bytes": 840
+  },
+  {
+    "file": "public/assets/honors/j1-league-title.svg",
+    "category": "资源",
+    "sha256": "cb3d010a8443713d253c610408c529e68f23af3c275ffcef137426e13867818e",
+    "bytes": 1232
+  },
+  {
+    "file": "public/assets/honors/k1-league-title.svg",
+    "category": "资源",
+    "sha256": "cb9fd1999e32f5bd5942900a5d5818d04f5380e3b10ea8475828aec797a0698f",
+    "bytes": 981
+  },
+  {
+    "file": "public/assets/honors/knvb-cup.svg",
+    "category": "资源",
+    "sha256": "52ed362bb87ac75ebb152bf3413b264654e6771e9a05eb7984f22f5289a1da05",
+    "bytes": 1234
+  },
+  {
+    "file": "public/assets/honors/korean-fa-cup.svg",
+    "category": "资源",
+    "sha256": "fab28861ae94e377b1e5b36c2b1acc5f81264e66b527ded5bfbe75926e025108",
+    "bytes": 1193
+  },
+  {
+    "file": "public/assets/honors/la-liga-title.svg",
+    "category": "资源",
+    "sha256": "b624c9cff1aaadc29411f67df598c33d803625270a6b52953fbbeedb2416c9ec",
+    "bytes": 1094
+  },
+  {
+    "file": "public/assets/honors/league-player-of-year.svg",
+    "category": "资源",
+    "sha256": "0734b33353b39b97439244b21bfd768d13fb287e7d3e155218aa442217de90f7",
+    "bytes": 1635
+  },
+  {
+    "file": "public/assets/honors/ligue-1-title.svg",
+    "category": "资源",
+    "sha256": "b5e57dee0dc83d9ac44887f11636a1a5ed2ce4cfff7d7bda5198342f36c09e9c",
+    "bytes": 1397
+  },
+  {
+    "file": "public/assets/honors/ligue-2-title.svg",
+    "category": "资源",
+    "sha256": "fe5096b902ce50ef9a2dd2f1554bd3b3fc3d60f04e5882c7d62f4ed0015da81e",
+    "bytes": 1069
+  },
+  {
+    "file": "public/assets/honors/premier-league-title.svg",
+    "category": "资源",
+    "sha256": "eb3985afd7788c9c310bb684a7c042c51f8c0b30a7a18cfbf4dd3c0d3b2da849",
+    "bytes": 1425
+  },
+  {
+    "file": "public/assets/honors/primeira-liga-title.svg",
+    "category": "资源",
+    "sha256": "7b8cb0ba39ebc6c888d825b0e230fc80f9f692ee6c0b293dd0a47f5a420eccb4",
+    "bytes": 1256
+  },
+  {
+    "file": "public/assets/honors/segunda-division-title.svg",
+    "category": "资源",
+    "sha256": "16e78f4d6f3c25d751819e99a72094ab9abfa463a46c22d222e30bd0c0d88e32",
+    "bytes": 1471
+  },
+  {
+    "file": "public/assets/honors/serie-a-title.svg",
+    "category": "资源",
+    "sha256": "28fae41a7572c7a17c7d9e4425f010ed7d02cadb4c00d718c7cf8cbebf9da103",
+    "bytes": 857
+  },
+  {
+    "file": "public/assets/honors/serie-b-title.svg",
+    "category": "资源",
+    "sha256": "fd6ba2b2c75b0250b6575a85fb0dcfafa21236a9f851f58c0d4c2f4573f27517",
+    "bytes": 1608
+  },
+  {
+    "file": "public/assets/honors/taca-de-portugal.svg",
+    "category": "资源",
+    "sha256": "f49d6f5afd49e9da34d4c331dc964b302ed1496b39a8ee82bf85cc057b9e9bc9",
+    "bytes": 1788
+  },
+  {
+    "file": "public/assets/honors/team-of-season.svg",
+    "category": "资源",
+    "sha256": "05055bd62bcbbef03c9b7a4a0c70e391a9f82a0dc5ec02299157b8936a0e860f",
+    "bytes": 691
+  },
+  {
+    "file": "public/assets/honors/world-cup.svg",
+    "category": "资源",
+    "sha256": "a96447a293588f83a7ccaae23a7cc50d4fb99055577f62a34bd9090499992463",
+    "bytes": 2460
+  },
+  {
+    "file": "public/assets/retirement-career-qr.svg",
+    "category": "资源",
+    "sha256": "889beded3a2d9ec322e7bc13316d26ed9f916909f836c46d42ca867db785a03b",
+    "bytes": 1540
+  },
+  {
+    "file": "scripts/retirement-qr-config.mjs",
+    "category": "配置",
+    "sha256": "3a81cdbdb5b370959d382c1d411aa2e29f14b2f90a02d93cd1fb42d7a4887c07",
+    "bytes": 77
+  },
+  {
+    "file": "src/app/App.tsx",
+    "category": "生产",
+    "sha256": "d4cc665ee918edaafafb7ede6ee507a1aca243d979c174529bbeec91e0c0dcdd",
+    "bytes": 4929
+  },
+  {
+    "file": "src/app/ClubVisualThemeProvider.test.ts",
+    "category": "正式测试",
+    "sha256": "cb53b81d7d5fa69f71b8ed7e42a3b6bac1a8f281fca080b22bf0b13139adda96",
+    "bytes": 1560
+  },
+  {
+    "file": "src/app/ClubVisualThemeProvider.tsx",
+    "category": "生产",
+    "sha256": "dd90241694481b949ece3998039e835bbc4a81e6460200491fe9bfc1068a754d",
+    "bytes": 802
+  },
+  {
+    "file": "src/app/careerNavigation.test.ts",
+    "category": "正式测试",
+    "sha256": "8be50626b02d77dc4dd553cfa528813af4b7a8049e25a4e4c753dbbcc20195e8",
+    "bytes": 3049
+  },
+  {
+    "file": "src/app/careerNavigation.tsx",
+    "category": "生产",
+    "sha256": "3cfc18624893e726f9e8bba380a177f5c32ebc15ca0bd4a05b597fbaf6cebb43",
+    "bytes": 3063
+  },
+  {
+    "file": "src/components/AppShell.tsx",
+    "category": "生产",
+    "sha256": "09b39694f7352089a620af4faee2050fc9cb209638d61bb10431e31804006584",
+    "bytes": 2354
+  },
+  {
+    "file": "src/components/Brand.tsx",
+    "category": "生产",
+    "sha256": "41e5d258d5f85fcb9b46b91e0d31e76fb09ffebdafbef40e9224c894c3beea46",
+    "bytes": 2073
+  },
+  {
+    "file": "src/components/CareerHub.tsx",
+    "category": "生产",
+    "sha256": "102e81dca05bd812900c997bf03eb3261e9876dcd5d600dcfbc0bd11b3ea0cd5",
+    "bytes": 17825
+  },
+  {
+    "file": "src/components/CareerPreferencesEditor.tsx",
+    "category": "生产",
+    "sha256": "b3140f32ac77899423a5de389f736f9836b2fa9721dfebfbacc442adf76a4376",
+    "bytes": 3364
+  },
+  {
+    "file": "src/components/CareerTopbar.tsx",
+    "category": "生产",
+    "sha256": "ec83c02963fa46a1ae72c073b0cd6c9cf40e084740e656213abd1b37c3a1ce5c",
+    "bytes": 2083
+  },
+  {
+    "file": "src/components/ClubCrest.tsx",
+    "category": "生产",
+    "sha256": "a4844dfba565c3b06f9b20392581fc046d4b63e5ef46c57d246ee571a7a45664",
+    "bytes": 2032
+  },
+  {
+    "file": "src/components/HonorBadge.tsx",
+    "category": "生产",
+    "sha256": "ee38855b7272f21f966f409502ac4e7d7cdc10478061b26da5ba5908718fa182",
+    "bytes": 1472
+  },
+  {
+    "file": "src/components/Icons.tsx",
+    "category": "生产",
+    "sha256": "2c0dd96ab0576167135399cab5ae1ce40138412b6aff460a1f6ee1a229e17a93",
+    "bytes": 2698
+  },
+  {
+    "file": "src/components/PlayerDossier.tsx",
+    "category": "生产",
+    "sha256": "5942c6ab2e7e5c86ce8ada6a82c831c752f1ce37355eb57db308adb150acfa6d",
+    "bytes": 2918
+  },
+  {
+    "file": "src/components/ProfessionalReportActions.tsx",
+    "category": "生产",
+    "sha256": "029279ee2a8c99d3c4220208a8665ffae8345929d51f06fa9b3c32c9b27ca36c",
+    "bytes": 2001
+  },
+  {
+    "file": "src/components/RetirementRecordExportActions.tsx",
+    "category": "生产",
+    "sha256": "0110488d190fd38856f20e07b6da93bf8f2ff37d2af414d67413b5c0e999b6dc",
+    "bytes": 3455
+  },
+  {
+    "file": "src/components/SetupFrame.tsx",
+    "category": "生产",
+    "sha256": "e9473606b4fe07d6c812c90a58ee9d2289009a80609d4b24b4016b89318c14a0",
+    "bytes": 1260
+  },
+  {
+    "file": "src/components/__tests__/Brand.test.tsx",
+    "category": "正式测试",
+    "sha256": "2f111580d11f19c347cd8e2a285df4a0dc8c8fad8efb3f28ff0292771bc0ac4b",
+    "bytes": 2252
+  },
+  {
+    "file": "src/components/__tests__/ClubCrest.test.ts",
+    "category": "正式测试",
+    "sha256": "aa6129805af01efd749b1c8f3e39d53ac3c2c9473ce645d0a1962fce611a0dff",
+    "bytes": 3582
+  },
+  {
+    "file": "src/components/__tests__/HonorBadge.test.ts",
+    "category": "正式测试",
+    "sha256": "1dac4eeecea434baf95a4a4283ba15e52586db9b28d5fafba7c94b59569d034d",
+    "bytes": 3475
+  },
+  {
+    "file": "src/components/__tests__/RetirementRecordExportActions.test.tsx",
+    "category": "正式测试",
+    "sha256": "c6eba8fb00402f0732e3edb78c4f5c4a8624d795876bd8b9636ad6506b0e3d41",
+    "bytes": 1967
+  },
+  {
+    "file": "src/components/__tests__/brandAssets.test.ts",
+    "category": "正式测试",
+    "sha256": "537cc8480260ffb4aed5a280a66837bb665ad8d0482733ed2a370711bb780ced",
+    "bytes": 3307
+  },
+  {
+    "file": "src/data/ageCurve.ts",
+    "category": "生产",
+    "sha256": "a082569152cee1c9815e221b63e41a689ad6bd3d866ce01e8dac75217be1515f",
+    "bytes": 1456
+  },
+  {
+    "file": "src/data/balance.ts",
+    "category": "生产",
+    "sha256": "4d02ff784dfbd9c7e8c8bc4a447a366b83e9e6294c7780831d395840baf379b9",
+    "bytes": 20709
+  },
+  {
+    "file": "src/data/careerEventIds.ts",
+    "category": "生产",
+    "sha256": "e32cc9683473c700ac15f9b29e4665e5d7ef6be736ed75ac4db2f0b6bf2d3ab7",
+    "bytes": 3263
+  },
+  {
+    "file": "src/data/clubs/__tests__/clubChineseNames.test.ts",
+    "category": "正式测试",
+    "sha256": "e6ae0869fc596f1860a4d8f9ba8f51ebd54b62afeaada57a48d570e0dc4feed9",
+    "bytes": 3166
+  },
+  {
+    "file": "src/data/clubs/__tests__/clubCrests.test.ts",
+    "category": "正式测试",
+    "sha256": "869b35f7640335483dc19ac23aa25123d1d49965308b68dac604856399d07a28",
+    "bytes": 7959
+  },
+  {
+    "file": "src/data/clubs/__tests__/clubRepository.test.ts",
+    "category": "正式测试",
+    "sha256": "95e6dbdcaba944feadc9099af204dd0481d1cf034e524045152b4039e96a2e95",
+    "bytes": 7942
+  },
+  {
+    "file": "src/data/clubs/__tests__/clubThemeAssignments.test.ts",
+    "category": "正式测试",
+    "sha256": "b7e84f7eb9395aeeb3a91c953b28feb42cc6d503a22fa290399522cb2b8689ce",
+    "bytes": 2218
+  },
+  {
+    "file": "src/data/clubs/clubChineseNames.ts",
+    "category": "生产",
+    "sha256": "ac9fd4c2807003a3b8eb62fa47019b546157135827761db9cdde97944d1a365f",
+    "bytes": 12653
+  },
+  {
+    "file": "src/data/clubs/clubCrests.ts",
+    "category": "生产",
+    "sha256": "3a86bcaaf903bf9771175d8ac916b6a4ddaa630f73af5394589ffbf071d80624",
+    "bytes": 19844
+  },
+  {
+    "file": "src/data/clubs/clubParametersV1.ts",
+    "category": "生产",
+    "sha256": "7fa50679be976079ad87d6d6c4c6305eb4c51d202c152d0e95382c272b34a707",
+    "bytes": 113813
+  },
+  {
+    "file": "src/data/clubs/clubRepository.ts",
+    "category": "生产",
+    "sha256": "5c07a11fed0b525a4ec092b0232760d9b2f425723161d6f6739a96167d01435c",
+    "bytes": 5901
+  },
+  {
+    "file": "src/data/clubs/clubThemeAssignments.ts",
+    "category": "生产",
+    "sha256": "04a0beb419efb3aa271a333018ab460f5616edbddfa182feac72bd3813de4952",
+    "bytes": 13516
+  },
+  {
+    "file": "src/data/clubs/legacyClubIdMap.ts",
+    "category": "生产",
+    "sha256": "7b6fd9b8518d4a2c5760986adc82f38fbb2215d64e81895a476de860cfbf128a",
+    "bytes": 2073
+  },
+  {
+    "file": "src/data/clubs/runtimeClubCatalog.test.ts",
+    "category": "正式测试",
+    "sha256": "94926573467066eaa51f317078c57d154fdab4ebb9e19a5ad8fc9896783ae221",
+    "bytes": 1526
+  },
+  {
+    "file": "src/data/clubs/runtimeClubCatalog.ts",
+    "category": "生产",
+    "sha256": "9fd09d344787ef9b07436390230ecf8e87624e9bb7e494838b3ff668b96a4357",
+    "bytes": 2918
+  },
+  {
+    "file": "src/data/clubs/types.ts",
+    "category": "生产",
+    "sha256": "fe87e1ff6e4b4983dc46d122dc3f3e04766bfb85395668eb2fe722a418e6d2e5",
+    "bytes": 521
+  },
+  {
+    "file": "src/data/honors/__tests__/honorVisualAssets.test.ts",
+    "category": "正式测试",
+    "sha256": "2425c5bba1aced694315ee19345ce2f13f39b4e3253926fb9ba9a14a14fa7d21",
+    "bytes": 2847
+  },
+  {
+    "file": "src/data/honors/honorVisualRegistry.ts",
+    "category": "生产",
+    "sha256": "287988c8844a43d7590828611500e6f5a3ff7ff3b98ac929f4a939f1c9dd2d2a",
+    "bytes": 20245
+  },
+  {
+    "file": "src/engine/__tests__/ageDevelopment.test.ts",
+    "category": "正式测试",
+    "sha256": "b21ead6585f06eb22bf13f168abcecc63448bf6d400ddbc91e873cce31ec4f0f",
+    "bytes": 2244
+  },
+  {
+    "file": "src/engine/__tests__/careerEvents.test.ts",
+    "category": "正式测试",
+    "sha256": "ca3eb0e0f36218b3cfebe1dc12663094c33fbc872bc0f973cc0f6215f2cebbc3",
+    "bytes": 38021
+  },
+  {
+    "file": "src/engine/__tests__/careerGrowth.test.ts",
+    "category": "正式测试",
+    "sha256": "8f55c3b19000208721e7079c7e424bcc30a8a65f4e273d12fa1f9dd0b3941c35",
+    "bytes": 3599
+  },
+  {
+    "file": "src/engine/__tests__/careerStory.test.ts",
+    "category": "正式测试",
+    "sha256": "d1018618e5edf081ea12c3b706d9656bc5b4f97f52c47cafe4a7ff82a6b63cc0",
+    "bytes": 1609
+  },
+  {
+    "file": "src/engine/__tests__/careerSummary.test.ts",
+    "category": "正式测试",
+    "sha256": "7dc5cd99df10246d5b033b2a8d6fe649636ff405a0a0e491ffb0156126a4ef25",
+    "bytes": 8416
+  },
+  {
+    "file": "src/engine/__tests__/careerTime.test.ts",
+    "category": "正式测试",
+    "sha256": "c86cfd703e0e1830ea25e28d75162c7b14d2e216959aa5a3d430e2657d32ce45",
+    "bytes": 2169
+  },
+  {
+    "file": "src/engine/__tests__/ceuMarketPolicy.test.ts",
+    "category": "正式测试",
+    "sha256": "e0de5a9e5aaee190e77c8d6a6e515f2a85c5c102890f02253170c2412fa981f0",
+    "bytes": 13880
+  },
+  {
+    "file": "src/engine/__tests__/ceuMarketPoolConnection.test.ts",
+    "category": "正式测试",
+    "sha256": "8fff9873aa4d1c4c0b7db7ab9ff4c32ed5b4801ec7381aa32c0dd33d35e5b566",
+    "bytes": 6229
+  },
+  {
+    "file": "src/engine/__tests__/ceuTrainingBaseline.test.ts",
+    "category": "正式测试",
+    "sha256": "e45f9a4961b48837bf1451ecd6c2dd00bfb1e37ab04bfc89332112fdc2a2af9d",
+    "bytes": 2194
+  },
+  {
+    "file": "src/engine/__tests__/ceuTrainingBaselineFixture.ts",
+    "category": "正式测试",
+    "sha256": "6c0781a3aea63ceb1ac99cfeae0565a21dcaa2c8fadf2ff1900b04a0aa957a05",
+    "bytes": 2540
+  },
+  {
+    "file": "src/engine/__tests__/contracts.test.ts",
+    "category": "正式测试",
+    "sha256": "f62e891eb664ecc730c9642af4505506b78126e941891fe3dd6b9dba9d85eb20",
+    "bytes": 2869
+  },
+  {
+    "file": "src/engine/__tests__/eligibility.test.ts",
+    "category": "正式测试",
+    "sha256": "3dba484d8c04317d5446304539991981be5a170bb3e54b6eaf33ece4827dca2a",
+    "bytes": 3763
+  },
+  {
+    "file": "src/engine/__tests__/finance.test.ts",
+    "category": "正式测试",
+    "sha256": "c4b103fc05884ca9880e267df30895ddb9e8fd5f37479272ef69942bb791e2e7",
+    "bytes": 1120
+  },
+  {
+    "file": "src/engine/__tests__/firstTeamPath.test.ts",
+    "category": "正式测试",
+    "sha256": "a5f3fc3fc9b1c956c4194e1fa4998e6e38e1123922842b65c9bd2617e66b0587",
+    "bytes": 4250
+  },
+  {
+    "file": "src/engine/__tests__/honorAggregation.test.ts",
+    "category": "正式测试",
+    "sha256": "699c110cb5a9dbb058650973e84743fa393038c4b92aebe82d63b3b138b35370",
+    "bytes": 8873
+  },
+  {
+    "file": "src/engine/__tests__/honors.test.ts",
+    "category": "正式测试",
+    "sha256": "1cafcdcd7fd570460593df332bca0720568c9e71533c820e8d76592970a32b8c",
+    "bytes": 20331
+  },
+  {
+    "file": "src/engine/__tests__/nationalTeam.test.ts",
+    "category": "正式测试",
+    "sha256": "cc6d8ca99d9967f86cc923ea7553f8b49185bf290e7aa30224d66a296f84e55e",
+    "bytes": 3266
+  },
+  {
+    "file": "src/engine/__tests__/player.test.ts",
+    "category": "正式测试",
+    "sha256": "b57c35d330f5dfe444deb21e4c09dbdab1eb7bb3e49b3efb4b01f6f8b34a020f",
+    "bytes": 2853
+  },
+  {
+    "file": "src/engine/__tests__/professionalSimulation.test.ts",
+    "category": "正式测试",
+    "sha256": "899bfd5a120494b7c8388e39a4317073b4b9976982898c9d9672a15f1a6ce581",
+    "bytes": 10133
+  },
+  {
+    "file": "src/engine/__tests__/simulation.distribution.test.ts",
+    "category": "正式测试",
+    "sha256": "d222474bd534753bfdc655497fbfc2100e7b5f99858e4e298f464874f410b399",
+    "bytes": 4910
+  },
+  {
+    "file": "src/engine/__tests__/simulation.test.ts",
+    "category": "正式测试",
+    "sha256": "06c79d3c04a6a22bca04a01b21539200def3a6ff955b94ea11a5f7131cfbf287",
+    "bytes": 2932
+  },
+  {
+    "file": "src/engine/__tests__/testFixtures.ts",
+    "category": "正式测试",
+    "sha256": "d813a9ed03d694f1532ae17addcfafc5b464658dec3a1183ac5d8524857b29ff",
+    "bytes": 633
+  },
+  {
+    "file": "src/engine/__tests__/trainingPlan.test.ts",
+    "category": "正式测试",
+    "sha256": "f18e4477e2b87ff8a2e814b06bf456e88c38562b9865c253c41f76900f21c65d",
+    "bytes": 12024
+  },
+  {
+    "file": "src/engine/__tests__/trainingQuality.test.ts",
+    "category": "正式测试",
+    "sha256": "25245f79be55e22018e6b005cbefa33e8e063e0c99af50e35a98605160f1c201",
+    "bytes": 6541
+  },
+  {
+    "file": "src/engine/__tests__/transfers.test.ts",
+    "category": "正式测试",
+    "sha256": "02ec15014a76c222e42ba63742711ac4c61aa50ac1bcb0c0477f1c9b5ed63a91",
+    "bytes": 29414
+  },
+  {
+    "file": "src/engine/ageDevelopment.ts",
+    "category": "生产",
+    "sha256": "929aa4321ced9e635b8aaefc5ab3aefedbc341b9f7ad9ea7312bf5fba163773b",
+    "bytes": 2336
+  },
+  {
+    "file": "src/engine/careerEvents.ts",
+    "category": "生产",
+    "sha256": "366b9b6c4a53c9736dd0a710c2ece5fed7d4e5f1d6a58b05d26e59a31664a36a",
+    "bytes": 248579
+  },
+  {
+    "file": "src/engine/careerStory.ts",
+    "category": "生产",
+    "sha256": "a3b347a54e642ead86f0a0262dc8bd74bfdde7e56ec3a160a095617fce89cc08",
+    "bytes": 1581
+  },
+  {
+    "file": "src/engine/careerSummary.ts",
+    "category": "生产",
+    "sha256": "78345f9ef815e4801fbf77e34710868f43528956a02ef9b1064f3223b10da830",
+    "bytes": 21303
+  },
+  {
+    "file": "src/engine/careerTime.ts",
+    "category": "生产",
+    "sha256": "8df68f776ad01d5598232b641ce997f09feaa345154443dfff1f790176bcc890",
+    "bytes": 1829
+  },
+  {
+    "file": "src/engine/contracts.ts",
+    "category": "生产",
+    "sha256": "969355362cedf9d89796347c7ad3ef7a71d86c4dbfb9d981d39ae618296150e3",
+    "bytes": 7584
+  },
+  {
+    "file": "src/engine/eligibility.ts",
+    "category": "生产",
+    "sha256": "8f7719c875e29b8c5fb9cdbd9c7014c004a6c4537f19deb6f42b95c3081b6522",
+    "bytes": 2323
+  },
+  {
+    "file": "src/engine/finance.ts",
+    "category": "生产",
+    "sha256": "87abd76ae9c0ceb63704742e93dafb019a5d25a8a827d65ef6773c93de6a29b2",
+    "bytes": 1052
+  },
+  {
+    "file": "src/engine/firstTeamPath.ts",
+    "category": "生产",
+    "sha256": "006251dc8da6c3e13e3571067bc7f1ca535cbd7f551cda7585316b4bbc7592f2",
+    "bytes": 4416
+  },
+  {
+    "file": "src/engine/honorAggregation.ts",
+    "category": "生产",
+    "sha256": "4fdd6d4e053eb68d3ecc50f8ccd496a6185abb69814e54dc4d606eee24c131d1",
+    "bytes": 2380
+  },
+  {
+    "file": "src/engine/honors.ts",
+    "category": "生产",
+    "sha256": "5471892853a6cee73f8892e916043b1ff52a0b9cf99b69254a10190cbb842fa1",
+    "bytes": 14882
+  },
+  {
+    "file": "src/engine/nationalTeam.ts",
+    "category": "生产",
+    "sha256": "437f3d502a335817a4ece33476eea09533c67eae6f9874cacff8a60b5d892ca0",
+    "bytes": 11712
+  },
+  {
+    "file": "src/engine/offers.ts",
+    "category": "生产",
+    "sha256": "9c59025a1d5cb4b3acda49180b0c4337feda0284cc127a0510c4b4afd08cf722",
+    "bytes": 2118
+  },
+  {
+    "file": "src/engine/player.ts",
+    "category": "生产",
+    "sha256": "411492c71082b093c4ddc87f4b46ec01d354f5235e021097bd89f186f80abf70",
+    "bytes": 6176
+  },
+  {
+    "file": "src/engine/random.ts",
+    "category": "生产",
+    "sha256": "9e8dba4ab788c3732fd9ee3aaec1d5086cd44433755d2b9ad51e898e504e42fb",
+    "bytes": 2576
+  },
+  {
+    "file": "src/engine/simulateHalfYear.ts",
+    "category": "生产",
+    "sha256": "fa7fdc69c23c679c20ff0cdad2258ba737a5b887d2552639bf166bdb3770610c",
+    "bytes": 17336
+  },
+  {
+    "file": "src/engine/simulateProfessionalHalfYear.ts",
+    "category": "生产",
+    "sha256": "0244dd9b772097d3eeccc46232778150b04c9fcdbc0298b7e15adf799615065a",
+    "bytes": 22011
+  },
+  {
+    "file": "src/engine/trainingPlan.ts",
+    "category": "生产",
+    "sha256": "9b2b3dc9120dfe82778f5f10acc241bf5304f21fdde8f8a9c9a6a3912fc0a354",
+    "bytes": 5889
+  },
+  {
+    "file": "src/engine/trainingQuality.ts",
+    "category": "生产",
+    "sha256": "a27c1214c21a91edd510f87ad59587e4f5834e607689319fd8cbd5ce4ce81321",
+    "bytes": 4618
+  },
+  {
+    "file": "src/engine/transfers.ts",
+    "category": "生产",
+    "sha256": "f67a2eac6a19a9801036a5609d16966b78d72542154c2f3e18ea7c67aeff5fc0",
+    "bytes": 31347
+  },
+  {
+    "file": "src/export/__tests__/retirementRecord.test.ts",
+    "category": "正式测试",
+    "sha256": "5ee451c1004b5f19affac6cc58ede7e9d7a465d5515767dae4fd075ce63108ad",
+    "bytes": 16480
+  },
+  {
+    "file": "src/export/retirementRecord.ts",
+    "category": "生产",
+    "sha256": "1943ac6596e76bbb39d2d15b1e721ad902dddba2ef94c3c840c9d0b12f700cd8",
+    "bytes": 12791
+  },
+  {
+    "file": "src/main.tsx",
+    "category": "生产",
+    "sha256": "bb701f6f85fafe8cc5e86a0b65572fc07d1a67ce1fcff58b4719972fcfed62eb",
+    "bytes": 240
+  },
+  {
+    "file": "src/models/game.ts",
+    "category": "生产",
+    "sha256": "2fc46142537ccda31c18b3d8156aa767ad28c0392ff5139f43bb74018a3fc1db",
+    "bytes": 12083
+  },
+  {
+    "file": "src/persistence/__tests__/save.test.ts",
+    "category": "正式测试",
+    "sha256": "75c537de791dd9e771a5ff13fdeedec26db5aae0e64ce95dce5848353162f90a",
+    "bytes": 18166
+  },
+  {
+    "file": "src/persistence/save.ts",
+    "category": "生产",
+    "sha256": "467354363edcfca6663889ba9d8f8501160dd6dd81c0cee55b359ed7ce59dd2d",
+    "bytes": 35991
+  },
+  {
+    "file": "src/screens/AcademyOffersScreen.tsx",
+    "category": "生产",
+    "sha256": "e82967eff60056489016f3a5f8f8dc87f0bbf4269703c80e5688f8c046178a0e",
+    "bytes": 5150
+  },
+  {
+    "file": "src/screens/ArrivalScreen.tsx",
+    "category": "生产",
+    "sha256": "717b495e0f5f19c7da08c40396e53553d555fcca09c89acc09b2bb4873c9e88c",
+    "bytes": 3353
+  },
+  {
+    "file": "src/screens/CareerHistoryScreen.tsx",
+    "category": "生产",
+    "sha256": "6f5b21497d789b2e19001cdf7dd0dfb2d2f2575caa0f8dfc12656250571d3efa",
+    "bytes": 7148
+  },
+  {
+    "file": "src/screens/CreationScreen.tsx",
+    "category": "生产",
+    "sha256": "e7c2a07d0350e90c4139c3fa15e9591314275a3f48fc0efcc75a5f710b752970",
+    "bytes": 14788
+  },
+  {
+    "file": "src/screens/DemoCompleteScreen.tsx",
+    "category": "生产",
+    "sha256": "eea1e3fde2fc2cf5540fa6cb47207f60ac2995e2839f59dbefdf7c899f3bcf1a",
+    "bytes": 4132
+  },
+  {
+    "file": "src/screens/HalfYearReportScreen.tsx",
+    "category": "生产",
+    "sha256": "3fc639db73f5d5e8ee034d04f836722a52b320a30ad0ff0578e7f35f9be964fe",
+    "bytes": 14408
+  },
+  {
+    "file": "src/screens/HomeScreen.tsx",
+    "category": "生产",
+    "sha256": "5a6fdfa19f3d6fe401ddf597f62ccd70dab8fa07b42077620096f19a796cdfe8",
+    "bytes": 3545
+  },
+  {
+    "file": "src/screens/PlayerRevealScreen.tsx",
+    "category": "生产",
+    "sha256": "9418411fb8094674c5909407bf65d2501a2cdbec193ff434d0d6d24eb6caa038",
+    "bytes": 3423
+  },
+  {
+    "file": "src/screens/PlayerScreen.tsx",
+    "category": "生产",
+    "sha256": "d20153a71146055254c06de3adc27bf535081999b26ed912af708475a358bbe9",
+    "bytes": 7026
+  },
+  {
+    "file": "src/screens/ProfessionalContractScreen.tsx",
+    "category": "生产",
+    "sha256": "a20dc23a7866d8c650f345cdd097c645710eb1894331847435513d54dccb429f",
+    "bytes": 6890
+  },
+  {
+    "file": "src/screens/ProfessionalStageCompleteScreen.tsx",
+    "category": "生产",
+    "sha256": "48fc29f97fe4ba87390ae9086ab83dbc26ce276c1209e5c4f7422712c34c0694",
+    "bytes": 4136
+  },
+  {
+    "file": "src/screens/RetirementScreen.tsx",
+    "category": "生产",
+    "sha256": "9a270c29dac791bed6c4d4e0901f32049d31850af94c6e2f1d0f4a0094b48ed9",
+    "bytes": 15378
+  },
+  {
+    "file": "src/screens/SettingsScreen.tsx",
+    "category": "生产",
+    "sha256": "999b18d7b9513846b86470b38b588bced8877303b382636c512546dca77d9b08",
+    "bytes": 2538
+  },
+  {
+    "file": "src/screens/SpecialEventScreen.tsx",
+    "category": "生产",
+    "sha256": "affc063586edbddbf9e91920a430d3f68c5cfef5271081987de950c601e603b8",
+    "bytes": 7711
+  },
+  {
+    "file": "src/screens/TrainingPlanScreen.tsx",
+    "category": "生产",
+    "sha256": "a74438553ad96051cdb3b14931b879d3e1b6d7949e77b7cb719058ed26574c09",
+    "bytes": 11725
+  },
+  {
+    "file": "src/screens/TransferWindowScreen.tsx",
+    "category": "生产",
+    "sha256": "9144e1ee3cb9bd8d78f39d98c12bd4a2e8e4fe743023c77146e77b10ea08c3f2",
+    "bytes": 17141
+  },
+  {
+    "file": "src/screens/__tests__/PlayerScreen.test.ts",
+    "category": "正式测试",
+    "sha256": "09c9866557b97dac4042cc12c884283b74b517980c9e3e43e7367b9facc85226",
+    "bytes": 6695
+  },
+  {
+    "file": "src/screens/__tests__/ProfessionalStageCompleteScreen.test.ts",
+    "category": "正式测试",
+    "sha256": "5ad42a98617f10d0180722e0ea5eb82399bc526d527ccb804116ee93ba92f145",
+    "bytes": 797
+  },
+  {
+    "file": "src/screens/__tests__/RetirementScreen.test.ts",
+    "category": "正式测试",
+    "sha256": "1c51129b350f78dff0dcc65a879f241c4f8e4de3f7bb9fcc6221a89a7211f724",
+    "bytes": 1503
+  },
+  {
+    "file": "src/screens/__tests__/SettingsScreen.test.ts",
+    "category": "正式测试",
+    "sha256": "1eacfdc3e89444242de529a6b0ddf9aadd1805cc55c42281b61b7c0a9ad0c93e",
+    "bytes": 2020
+  },
+  {
+    "file": "src/screens/__tests__/TransferWindowScreen.test.ts",
+    "category": "正式测试",
+    "sha256": "52d7803f02c4dcf26e02a68e48ab490701c4fb3a34cc6d10d08c318021fe0a04",
+    "bytes": 923
+  },
+  {
+    "file": "src/screens/__tests__/confirmationFlows.test.ts",
+    "category": "正式测试",
+    "sha256": "398573acd34826deb061f2c66129cc366e25dca70307b20b73a139ea5f4a21e1",
+    "bytes": 4366
+  },
+  {
+    "file": "src/store/careerPreferences.ts",
+    "category": "生产",
+    "sha256": "a5b0d76dbcf6242ab53d008bd8a8874cbc5b6ade702932ee27ae9623cbd9b0ab",
+    "bytes": 1190
+  },
+  {
+    "file": "src/store/gameStore.ceuF01.test.ts",
+    "category": "正式测试",
+    "sha256": "df018bfe7e14ddda090dd5c5d0edf505f7755beecae7a4da7984354f9975e36e",
+    "bytes": 5285
+  },
+  {
+    "file": "src/store/gameStore.ceuF02.test.ts",
+    "category": "正式测试",
+    "sha256": "3b0a58297e1b5ce21e499e3d23b12659130a76be0270449d00b3b9cb95d5a255",
+    "bytes": 13335
+  },
+  {
+    "file": "src/store/gameStore.ceuF03.test.ts",
+    "category": "正式测试",
+    "sha256": "a055a0878d5048b92975751bd02888eb97e3ce3d9325aaf05569038cf4d89790",
+    "bytes": 7375
+  },
+  {
+    "file": "src/store/gameStore.ceuM01.test.ts",
+    "category": "正式测试",
+    "sha256": "388eb3ee0150b2f8255c28178af4fbd59e94e7791d76e7e74fdc00c5b345d63c",
+    "bytes": 5396
+  },
+  {
+    "file": "src/store/gameStore.ceuM02R1.test.ts",
+    "category": "正式测试",
+    "sha256": "69d09bfc71f282979a6f9f1d9eee347230de3b7cf7c42fe9245c3ae349c8c123",
+    "bytes": 10568
+  },
+  {
+    "file": "src/store/gameStore.ceuM03.test.ts",
+    "category": "正式测试",
+    "sha256": "762b4e19933a3b8c4cd270e86d6fe9347d44cbb77d1c2bc5e5266742fa82ed06",
+    "bytes": 15401
+  },
+  {
+    "file": "src/store/gameStore.ceuM04.test.ts",
+    "category": "正式测试",
+    "sha256": "28dc30286adc27cd6b83bd0decf340d0f81af4c1d1f68f0a9542f58049bccf7c",
+    "bytes": 7560
+  },
+  {
+    "file": "src/store/gameStore.ceuQ01Career.test.ts",
+    "category": "正式测试",
+    "sha256": "b107c4cad063b317712ed244f3e7df867ac6c201032247eec0db049e58655c26",
+    "bytes": 10234
+  },
+  {
+    "file": "src/store/gameStore.ceuQ01Matrix.test.ts",
+    "category": "正式测试",
+    "sha256": "7f0c50f7acbbbcfaabec0e8d64eb3e22d8a010e049287264ae4464254b402be9",
+    "bytes": 6806
+  },
+  {
+    "file": "src/store/gameStore.ceuS0Baseline.test.ts",
+    "category": "正式测试",
+    "sha256": "e7020edb073d368b34ad57b9ed3095da07b146433030887d38f8f290b00d8616",
+    "bytes": 3267
+  },
+  {
+    "file": "src/store/gameStore.ceuT01.test.ts",
+    "category": "正式测试",
+    "sha256": "c9f2f2546353dd5812c8baeb63a4d1beab9c3fff93af9373ff48e8d62de88dca",
+    "bytes": 9907
+  },
+  {
+    "file": "src/store/gameStore.fullCareerAudit.test.ts",
+    "category": "正式测试",
+    "sha256": "12a144d823897cf2bd3efa6bb4236f995c0c59646f21c7aea898c43a228895ee",
+    "bytes": 26550
+  },
+  {
+    "file": "src/store/gameStore.retirementArchive.test.ts",
+    "category": "正式测试",
+    "sha256": "337690fd86fde33f9ff123c3ad800e1ff1700b8409ae8f85d08a2ae048ae9b0d",
+    "bytes": 2080
+  },
+  {
+    "file": "src/store/gameStore.test.ts",
+    "category": "正式测试",
+    "sha256": "aaa63d300bd70d333309d6210e99cc92e0f3c9d4369322dd39be5a58ca2dba79",
+    "bytes": 19909
+  },
+  {
+    "file": "src/store/gameStore.trainingPlan.test.ts",
+    "category": "正式测试",
+    "sha256": "f3c04b34a58c334ad1a6b67d06897afc7630d7615a0448f14a1dc36d0cdee7f0",
+    "bytes": 8383
+  },
+  {
+    "file": "src/store/gameStore.ts",
+    "category": "生产",
+    "sha256": "84495136dc775501a3d3c4112f2f76ca1a980acee202b1b8593a3a45a67960a0",
+    "bytes": 41075
+  },
+  {
+    "file": "src/store/gameStore.v1ClubWorkflows.test.ts",
+    "category": "正式测试",
+    "sha256": "70c4a9d7c1a6d1b5f9b05ae5ff96609e060653b69611eccd4301906238d93bb8",
+    "bytes": 12330
+  },
+  {
+    "file": "src/store/marketContext.ts",
+    "category": "生产",
+    "sha256": "8345b2641b95c5721bc2a0c5bb89fc74ebdd66a0fffac9993e6352b99b72748b",
+    "bytes": 1414
+  },
+  {
+    "file": "src/store/professionalNextAction.ts",
+    "category": "生产",
+    "sha256": "4857a41011e06aaad12bd7f6ef309c3ccf745a91b6c93b68d610b9d5fe19192c",
+    "bytes": 4042
+  },
+  {
+    "file": "src/styles/__tests__/creationMobileLayout.test.ts",
+    "category": "正式测试",
+    "sha256": "074bbb83cf965808486eb3b53a28c2c34133a520c3a8926926879c1f5ed67456",
+    "bytes": 3196
+  },
+  {
+    "file": "src/styles/__tests__/specialEventLayout.test.ts",
+    "category": "正式测试",
+    "sha256": "bcf7e522c632bad294102b8ad4b62941fb88e7d718cc3d625116ebf55300705f",
+    "bytes": 1403
+  },
+  {
+    "file": "src/styles/__tests__/v3VisualFixes.test.ts",
+    "category": "正式测试",
+    "sha256": "0db90b9c719ea9b23756d262708719f2c2cb1697258f1decf90a1e05ffe9553d",
+    "bytes": 1808
+  },
+  {
+    "file": "src/styles/main.css",
+    "category": "生产",
+    "sha256": "a3573478e3269e9fc1113b0103c8222187f5ad70ad0cd8dca5381dd0263c112b",
+    "bytes": 164622
+  },
+  {
+    "file": "src/testing/createCopyAuditGame.test.ts",
+    "category": "正式测试",
+    "sha256": "04bedaa1da49e939d5ddc5352eb5f66c6e807abef5a8f0612f1dda96ec099dbb",
+    "bytes": 597
+  },
+  {
+    "file": "src/testing/createCopyAuditGame.ts",
+    "category": "生产",
+    "sha256": "38dc7fe275acc91055970ba47392cf9caf2eaafc9128ae0b41e646c59141c1f0",
+    "bytes": 10391
+  },
+  {
+    "file": "src/testing/createRetirementVisualAuditGame.test.ts",
+    "category": "正式测试",
+    "sha256": "2b1816c71634eb0a637c01a1d504aec0d12615ce52b9b6bbe8778438ed3ed9e3",
+    "bytes": 2772
+  },
+  {
+    "file": "src/testing/createRetirementVisualAuditGame.ts",
+    "category": "生产",
+    "sha256": "190ed00493341ed624e260803f5ffad4bddfe31430dea40541b01de47c709d33",
+    "bytes": 3436
+  },
+  {
+    "file": "src/ui/careerHistoryView.test.ts",
+    "category": "正式测试",
+    "sha256": "d0924ac2f03f1b5466da8e2ffc57afca8360ebd647c8bffde4d582d1450e674b",
+    "bytes": 11264
+  },
+  {
+    "file": "src/ui/careerHistoryView.ts",
+    "category": "生产",
+    "sha256": "b4e66137fd1cf380d912d892f9eedd8d18f03c36bff8838cdfece211d8f9e6ce",
+    "bytes": 6242
+  },
+  {
+    "file": "src/ui/careerView.test.ts",
+    "category": "正式测试",
+    "sha256": "6040a91301af1d21182354c55f10eae1aee2bc8670cd8d6067433fd47018e219",
+    "bytes": 1004
+  },
+  {
+    "file": "src/ui/careerView.ts",
+    "category": "生产",
+    "sha256": "442b2109a56692d55dbc8b72c1f9b342390df84af510a3af393c53918db6a1de",
+    "bytes": 666
+  },
+  {
+    "file": "src/ui/clubVisualTheme.test.ts",
+    "category": "正式测试",
+    "sha256": "af4bcf13510ef9fb75ea31a89737f37cf2e9910b2192f148c80425dd221f8c70",
+    "bytes": 8093
+  },
+  {
+    "file": "src/ui/clubVisualTheme.ts",
+    "category": "生产",
+    "sha256": "828bc358f6732145cb236a127c315cfc0c7fddd2487102779802dd4c865080ee",
+    "bytes": 13721
+  },
+  {
+    "file": "src/ui/format.test.ts",
+    "category": "正式测试",
+    "sha256": "3f0948def7659cc01d71f1dbf5b6064803090e4bb4af8be89a062b7295cd0e12",
+    "bytes": 1559
+  },
+  {
+    "file": "src/ui/format.ts",
+    "category": "生产",
+    "sha256": "b468c9148ad5dd7aa848f556d5cd9fc2ba90e3ad60933d5b209ad5cc222c2e3b",
+    "bytes": 5444
+  },
+  {
+    "file": "src/ui/trainingPlanView.test.ts",
+    "category": "正式测试",
+    "sha256": "e999c3875577603574dfa5ba26322d496bf02e2d2282a690f23d8aaf0c0d9830",
+    "bytes": 3027
+  },
+  {
+    "file": "src/ui/trainingPlanView.ts",
+    "category": "生产",
+    "sha256": "32672f7a33c6b624658a1a974bdff9007f72bf6d3e3f7adad30a094da4a39e6c",
+    "bytes": 4359
+  },
+  {
+    "file": "src/ui/trainingSummary.test.ts",
+    "category": "正式测试",
+    "sha256": "07b8d11e2eb3615d39558507254808a77dfaf20924b9cfc697a8bee4d9535541",
+    "bytes": 924
+  },
+  {
+    "file": "src/vite-env.d.ts",
+    "category": "生产",
+    "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+    "bytes": 38
+  },
+  {
+    "file": "tsconfig.app.json",
+    "category": "配置",
+    "sha256": "b890cebae6a09453b74da6d4fa2d34d5d03fc29da20a96b40f75ac2ec1eb8d6a",
+    "bytes": 585
+  },
+  {
+    "file": "tsconfig.json",
+    "category": "配置",
+    "sha256": "770b4140bbb581e2dfd9ea9946ffc9c75a1d86ba7d2db5f77c83e37cbdf9d808",
+    "bytes": 119
+  },
+  {
+    "file": "tsconfig.node.json",
+    "category": "配置",
+    "sha256": "4de39227e37a661a1639473f6ecff13131b6779d575e2f0634bbf085403799fa",
+    "bytes": 251
+  },
+  {
+    "file": "vite.config.ts",
+    "category": "配置",
+    "sha256": "73d2ed690bfa231d1df1dc55624592326bae1978d49d63117e50e4be9bfa1d07",
+    "bytes": 309
+  }
+]

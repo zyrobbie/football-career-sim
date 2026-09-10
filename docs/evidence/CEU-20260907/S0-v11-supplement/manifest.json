@@ -1,0 +1,237 @@
+[
+  {
+    "name": "PLAN_35",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "HALF_YEAR_PLAN",
+    "windowIndex": 44,
+    "seed": "ceu-v11-supplement-0",
+    "focus": null,
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 68,
+      "form": 72.7,
+      "morale": 70
+    },
+    "event": null,
+    "sha256": "e16f18d828fe276b2d4afbdf22b940c8ac50fefa2f0211bb685476c6e35b5357",
+    "bytes": 55583,
+    "actions": "actions/PLAN_35.json"
+  },
+  {
+    "name": "READY_attack",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SIMULATION_READY",
+    "windowIndex": 44,
+    "seed": "ceu-v11-supplement-0",
+    "focus": "attack",
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 68,
+      "form": 72.7,
+      "morale": 70
+    },
+    "event": null,
+    "sha256": "9ddcfd07d3e24a0e8094b81b0f930df405b7cfe2ffea298a5860b60627e3979a",
+    "bytes": 55593,
+    "actions": "actions/READY_attack.json"
+  },
+  {
+    "name": "EVENT_attack",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SPECIAL_EVENT",
+    "windowIndex": 45,
+    "seed": "ceu-v11-supplement-0",
+    "focus": "attack",
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 71,
+      "form": 74.9,
+      "morale": 70.5
+    },
+    "event": {
+      "eventId": "NATIONAL_CLUB_LOAD_CONFLICT",
+      "interactionKind": "ALLOCATION",
+      "stepIndex": 0,
+      "selections": [],
+      "variantId": null
+    },
+    "sha256": "720aa4290fcee32cf2322dccbe0921b81d4669421789e8ec9957f0d4d9e5dedc",
+    "bytes": 55708,
+    "actions": "actions/EVENT_attack.json"
+  },
+  {
+    "name": "RESULT_attack",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SPECIAL_EVENT_RESULT",
+    "windowIndex": 45,
+    "seed": "ceu-v11-supplement-0",
+    "focus": "attack",
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 75,
+      "form": 74.9,
+      "morale": 70.5
+    },
+    "event": {
+      "eventId": "NATIONAL_CLUB_LOAD_CONFLICT",
+      "interactionKind": "ALLOCATION",
+      "stepIndex": 0,
+      "selections": [
+        "A"
+      ],
+      "variantId": null
+    },
+    "sha256": "e338a3f4e7f5a9cd4cd0161e80ce9257146b203b6116ff11c1e6f25607c17e3c",
+    "bytes": 56048,
+    "actions": "actions/RESULT_attack.json"
+  },
+  {
+    "name": "EVENT_physical",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SPECIAL_EVENT",
+    "windowIndex": 44,
+    "seed": "ceu-v11-supplement-0",
+    "focus": "physical",
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 55,
+      "form": 72.3,
+      "morale": 71.7
+    },
+    "event": {
+      "eventId": "STARTING_ROLE_LOST",
+      "interactionKind": "DIALOGUE",
+      "stepIndex": 0,
+      "selections": [],
+      "variantId": null
+    },
+    "sha256": "9943e3baa22df8fb3e90be2ad3ad519ef66aa178c622729c01ba716d19e18143",
+    "bytes": 56115,
+    "actions": "actions/EVENT_physical.json"
+  },
+  {
+    "name": "ROUTE_physical",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SPECIAL_EVENT",
+    "windowIndex": 44,
+    "seed": "ceu-v11-supplement-0",
+    "focus": "physical",
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 55,
+      "form": 72.3,
+      "morale": 71.7
+    },
+    "event": {
+      "eventId": "STARTING_ROLE_LOST",
+      "interactionKind": "DIALOGUE",
+      "stepIndex": 1,
+      "selections": [
+        "COACH"
+      ],
+      "variantId": "COACH"
+    },
+    "sha256": "6d724d180d46ebbdb3c7d082de9b42809782279b280daee935d394abd3d6b4e0",
+    "bytes": 56125,
+    "actions": "actions/ROUTE_physical.json"
+  },
+  {
+    "name": "RESULT_physical",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SPECIAL_EVENT_RESULT",
+    "windowIndex": 44,
+    "seed": "ceu-v11-supplement-0",
+    "focus": "physical",
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 55,
+      "form": 72.3,
+      "morale": 73.7
+    },
+    "event": {
+      "eventId": "STARTING_ROLE_LOST",
+      "interactionKind": "DIALOGUE",
+      "stepIndex": 1,
+      "selections": [
+        "COACH",
+        "A"
+      ],
+      "variantId": "COACH"
+    },
+    "sha256": "96111c06524be279af333fa3ea162d9de472925b7944d6388ee876e156eed6d5",
+    "bytes": 56482,
+    "actions": "actions/RESULT_physical.json"
+  },
+  {
+    "name": "READY_physical",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SIMULATION_READY",
+    "windowIndex": 44,
+    "seed": "ceu-v11-supplement-0",
+    "focus": "physical",
+    "clubId": "chn1_guangzhou_nanyue",
+    "states": {
+      "fitness": 55,
+      "form": 72.3,
+      "morale": 73.7
+    },
+    "event": null,
+    "sha256": "78305033a1689bad02dc725e475aa70ef444a8af1c6929ccbfbea0d8da5f7c39",
+    "bytes": 56360,
+    "actions": "actions/READY_physical.json"
+  },
+  {
+    "name": "LOW_35",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "HALF_YEAR_PLAN",
+    "windowIndex": 45,
+    "seed": "ceu-v11-supplement-1",
+    "focus": null,
+    "clubId": "chn1_nanjing_jinling",
+    "states": {
+      "fitness": 43,
+      "form": 76.1,
+      "morale": 77.5
+    },
+    "event": null,
+    "sha256": "b52a37d76462db885ffacebbf7fe7ca999b34f6671b914d225845688d35b16f5",
+    "bytes": 53872,
+    "actions": "actions/LOW_35.json"
+  },
+  {
+    "name": "ROUTE_attack",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SPECIAL_EVENT",
+    "windowIndex": 45,
+    "seed": "ceu-v11-supplement-1",
+    "focus": "attack",
+    "clubId": "chn1_nanjing_jinling",
+    "states": {
+      "fitness": 43,
+      "form": 76.1,
+      "morale": 77.5
+    },
+    "event": {
+      "eventId": "TEAMMATE_CONTRACT_TENSION",
+      "interactionKind": "PERSON_TONE",
+      "stepIndex": 1,
+      "selections": [
+        "PLAYER"
+      ],
+      "variantId": "PLAYER"
+    },
+    "sha256": "4dec4d46750dc6ab906d29a4b83e387612ae9046e401fda109e61b7c3b8346de",
+    "bytes": 54005,
+    "actions": "actions/ROUTE_attack.json"
+  }
+]

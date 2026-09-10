@@ -1,3 +1,4 @@
+import type { VoluntaryRetirementConfirmation } from '../store/professionalNextAction'
 import { useRef } from 'react'
 import { Brand } from '../components/Brand'
 import { CareerHub } from '../components/CareerHub'
@@ -323,19 +324,19 @@ function HonorGroup({
   )
 }
 
-export function RetirementScreen() {
+export function RetirementScreen({ confirmation }: { confirmation?: VoluntaryRetirementConfirmation } = {}) {
   const game = useGameStore((state) => state.game)
   const cancelRetirement = useGameStore((state) => state.cancelRetirement)
   const confirmRetirement = useGameStore((state) => state.confirmRetirement)
   const returnToHome = useGameStore((state) => state.returnToHome)
 
-  if (!game?.player || !game.retirementReason) return null
+  if (!game?.player || (!confirmation && !game.retirementReason)) return null
   if (game.phase === 'CAREER_RETIRED') {
     return <RetirementArchive onReturnHome={returnToHome} />
   }
 
   const age = playerAgeAtWindow(game.windowIndex)
-  const isAgeLimit = game.retirementReason === 'AGE_LIMIT'
+  const isAgeLimit = !confirmation && game.retirementReason === 'AGE_LIMIT'
   const narrative = retirementNarrative({ age, isFinal: false, isAgeLimit })
 
   return (
@@ -347,7 +348,7 @@ export function RetirementScreen() {
           <h1>{narrative.heading}</h1>
           <p>{narrative.summary}</p>
           <div className="demo-complete__actions">
-            <button type="button" className="button button--primary" onClick={confirmRetirement}>
+            <button type="button" className="button button--primary" onClick={confirmation ? () => useGameStore.getState().confirmVoluntaryRetirement(confirmation) : () => confirmRetirement({ careerSeed: game.careerSeed, windowIndex: game.windowIndex })}>
               就此退役
               <Icon name="arrow" />
             </button>

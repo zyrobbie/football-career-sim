@@ -1,0 +1,30 @@
+{
+  "passed": true,
+  "HEAD": "3f290407a299790665b58c4bc7c2bf8455d24bbd",
+  "artifactsUnchanged": 16,
+  "identitiesUnchanged": 253,
+  "existingFiles": 2076,
+  "frozenEvidenceAndOutputsUnchanged": 1764,
+  "existingChanged": [
+    "docs/20-career-experience-upgrade-plan.md",
+    "docs/21-career-experience-upgrade-qa.md"
+  ],
+  "referencesChecked": 33,
+  "coordinatorDocumentAdjustments": {
+    "file": "docs/43-career-experience-acceptance-package.md",
+    "beforeSHA": "0ff1ac87f68a77ca53b667c233c3550e22540e36e64ab1404f82d1088b055f0b",
+    "afterSHA": "5ce82443e9a193cfa2be04fc85e617e4897821b30be64802dc346b970fd8b6c6",
+    "changes": [
+      "mark Q03 accepted; Q04 unexecuted",
+      "scope domestic quota to regular adult market with eligible candidates; retain recovery rules",
+      "clarify historical records unchanged"
+    ],
+    "productionChanged": false
+  },
+  "linksResolved": true,
+  "productionAndTestsChanged": false,
+  "testsBuildBrowserOrServerStarted": false,
+  "Q03": "accepted",
+  "Q04": "all unexecuted",
+  "R": "not started"
+}

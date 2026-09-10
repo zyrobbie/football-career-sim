@@ -1,0 +1,86 @@
+[
+  {
+    "name": "HALF_YEAR_PLAN",
+    "file": "fixtures/HALF_YEAR_PLAN.json",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "HALF_YEAR_PLAN",
+    "windowIndex": 4,
+    "seed": "ceu-s0-fixture-0",
+    "clubId": "chn1_shenzhen_pengcheng",
+    "contractRemaining": 8,
+    "bytes": 8525
+  },
+  {
+    "name": "SPECIAL_EVENT_RESULT",
+    "file": "fixtures/SPECIAL_EVENT_RESULT.json",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "SPECIAL_EVENT_RESULT",
+    "windowIndex": 4,
+    "seed": "ceu-s0-fixture-0",
+    "clubId": "chn1_shenzhen_pengcheng",
+    "contractRemaining": 8,
+    "bytes": 9044
+  },
+  {
+    "name": "HALF_YEAR_REPORT",
+    "file": "fixtures/HALF_YEAR_REPORT.json",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "HALF_YEAR_REPORT",
+    "windowIndex": 4,
+    "seed": "ceu-s0-fixture-0",
+    "clubId": "chn1_shenzhen_pengcheng",
+    "contractRemaining": 7,
+    "bytes": 9646
+  },
+  {
+    "name": "PRO_STAGE_COMPLETE",
+    "file": "fixtures/PRO_STAGE_COMPLETE.json",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "PRO_STAGE_COMPLETE",
+    "windowIndex": 4,
+    "seed": "ceu-s0-fixture-0",
+    "clubId": "chn1_shenzhen_pengcheng",
+    "contractRemaining": 7,
+    "bytes": 9648
+  },
+  {
+    "name": "TRANSFER_WINDOW",
+    "file": "fixtures/TRANSFER_WINDOW.json",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "TRANSFER_WINDOW",
+    "windowIndex": 6,
+    "seed": "ceu-s0-fixture-0",
+    "clubId": "chn1_shenzhen_pengcheng",
+    "contractRemaining": 6,
+    "bytes": 12085
+  },
+  {
+    "name": "CONTRACT_EXPIRED",
+    "file": "fixtures/CONTRACT_EXPIRED.json",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "PRO_STAGE_COMPLETE",
+    "windowIndex": 11,
+    "seed": "ceu-s0-fixture-0",
+    "clubId": "chn1_shenzhen_pengcheng",
+    "contractRemaining": 0,
+    "bytes": 16988
+  },
+  {
+    "name": "NEAR_RETIREMENT",
+    "file": "fixtures/NEAR_RETIREMENT.json",
+    "saveVersion": 11,
+    "dataVersion": 11,
+    "phase": "PRO_STAGE_COMPLETE",
+    "windowIndex": 52,
+    "seed": "ceu-s0-fixture-0",
+    "clubId": "chn1_shenzhen_pengcheng",
+    "contractRemaining": 1,
+    "bytes": 70439
+  }
+]

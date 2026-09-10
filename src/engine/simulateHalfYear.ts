@@ -1,6 +1,6 @@
+import { resolveTrainingPlan, applyTrainingMaintenance, trainingEventSummary, type TrainingExecution } from './trainingPlan'
 import {
   BASE_RATES,
-  POSITION_WEIGHTS,
   YOUTH_ATTACK_FACTORS,
   YOUTH_BENCHMARKS,
   youthCompetitionTierForClub,
@@ -302,20 +302,6 @@ function performanceIndex(rating: number): number {
   return 95
 }
 
-function trainingShares(
-  position: Player['primaryPosition'],
-  focus: TrainingFocus,
-): Attributes {
-  const weights = POSITION_WEIGHTS[position]
-  if (focus === 'BALANCED' || focus === 'ADAPTATION') return { ...weights }
-  return Object.fromEntries(
-    attributeKeys.map((key) => [
-      key,
-      weights[key] * 0.75 + (key === focus ? 0.25 : 0),
-    ]),
-  ) as unknown as Attributes
-}
-
 function growAttributes(
   player: Player,
   offer: AcademyOffer,
@@ -326,6 +312,7 @@ function growAttributes(
   averageMorale: number,
   seed: string,
   windowIndex: number,
+  trainingExecution: TrainingExecution | null,
 ): Attributes {
   const trainingQuality = trainingQualityScore({
     club: offer.club,
@@ -341,7 +328,7 @@ function growAttributes(
     morale: averageMorale,
     focus,
   })
-  const shares = trainingShares(player.primaryPosition, focus)
+  const shares = resolveTrainingPlan(player.primaryPosition, focus).shares
   const random = createRandom(seed, 'growth')
 
   return developAttributesByAge({
@@ -349,6 +336,7 @@ function growAttributes(
     age: playerAgeAtWindow(windowIndex),
     developmentMultiplier: multiplier,
     trainingShares: shares,
+    trainingExecution,
     random,
   })
 }
@@ -413,6 +401,7 @@ export function simulateHalfYear(input: {
     developmentApproach,
   )
   const workingPlayer = windowPreparation.player
+  const trainingExecution = applyTrainingMaintenance(startPlayer, workingPlayer, playerAgeAtWindow(windowIndex), trainingFocus)
   const simulationSeed = `${careerSeed}:window:${windowIndex}`
   const { stats, injury } = simulateStats(
     workingPlayer,
@@ -467,6 +456,7 @@ export function simulateHalfYear(input: {
     (workingPlayer.morale + moraleAfter) / 2,
     simulationSeed,
     windowIndex,
+    trainingExecution,
   )
 
   const playerAfter: Player = {
@@ -501,7 +491,7 @@ export function simulateHalfYear(input: {
     role: roleAfter,
     stats,
     windowIndex,
-    approach: developmentApproach,
+    approach: trainingExecution?.recovery ? null : developmentApproach,
   })
   const teamLevel =
     input.teamLevel === 'FIRST_TEAM'
@@ -583,7 +573,7 @@ export function simulateHalfYear(input: {
     expenseEuro: 0,
     cashAfterEuro: cashAfter,
     injury,
-    eventSummary: windowPreparation.summary,
+    eventSummary: trainingEventSummary(windowPreparation.summary, trainingExecution),
     hints: hints.slice(0, 3),
   }
 

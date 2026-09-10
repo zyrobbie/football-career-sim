@@ -1,0 +1,14 @@
+[
+  {
+    "name": "clean-test",
+    "exitCode": 0
+  },
+  {
+    "name": "clean-typecheck",
+    "exitCode": 0
+  },
+  {
+    "name": "clean-build",
+    "exitCode": 0
+  }
+]

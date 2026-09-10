@@ -1,0 +1,200 @@
+[
+  {
+    "path": "docs/20-career-experience-upgrade-plan.md",
+    "sha256": "2e294ac99aef33a3534ef8c01143b961ef0c0cd5042ffdf705355b207976876e",
+    "purpose": "主台账",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/21-career-experience-upgrade-qa.md",
+    "sha256": "93e15d8448a437376ea7cc84d9a6edef14da1e3220beae5d6c79803cd38dc2d6",
+    "purpose": "验收总表",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/23-career-experience-implementation-proposal.md",
+    "sha256": "255b73ea44dde67e3761edd4baf23e98206d07ea55cdd70fdf02daeb9f2d42f6",
+    "purpose": "文档23",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/25-s0-approval-and-training-handoff.md",
+    "sha256": "7dd6c8cb11af22c9422c9e637020907c14e843fa2a5626a7a78b9810b2d6234e",
+    "purpose": "文档25",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/29-t04-review-and-m01-instructions.md",
+    "sha256": "0ad3b304e658b8818640ce3d29858b1f75426cfc13c76f889e623fb7263b4a74",
+    "purpose": "文档29",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/T-04/README.md",
+    "sha256": "1f415e8d0be54df46232cad2fe361302686e5d02b45632f2c59569211443dba2",
+    "purpose": "T-04索引",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/34-m04-acceptance-and-f01-instructions.md",
+    "sha256": "ebfc6911785ae23063893793c30e1b3dc68086edec6c05cfc42bf7b1bc73882d",
+    "purpose": "文档34",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/M-04-review/README.md",
+    "sha256": "0b386dfc56c9d5ecdb064875e7f4346b9a18696cedbe8869588603f1d3a1f6f9",
+    "purpose": "M-04复核",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/39-f04-acceptance-and-q01-instructions.md",
+    "sha256": "0bd6e1610fd16f9922584e66908fb63de0847e41fc7e1a85bc46f673f1a23091",
+    "purpose": "文档39",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/F-04-R1-review/README.md",
+    "sha256": "ab339c507ea30fb1e2ffe6ee614400b2c4a1dce821fdff31bd514448819978a2",
+    "purpose": "F最终复核",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/40-q01-acceptance-and-q02-instructions.md",
+    "sha256": "c51adab906d2a9023695b2ac58c3f79cda960e1f7af46d29083fb400be9a2cdc",
+    "purpose": "文档40",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-01-review/README.md",
+    "sha256": "a4217c241ec88993df535b8ac707c544128874ba33435e45153bdd4ab7fbba71",
+    "purpose": "Q-01复核",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/42-q02-acceptance-and-q03-instructions.md",
+    "sha256": "c59c1560b27503fddc88cf935a0f3ce88c25389cf964417c2bebe9f33cacd475",
+    "purpose": "文档42",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-02-R1-review/README.md",
+    "sha256": "b9c4220b2e158249fd491a26aa7588b54d61fcb299f9da0512a8b09837c15d82",
+    "purpose": "Q最终复核",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-03/README.md",
+    "sha256": "b509221310dc6e2f81b74c937f10f113b4fcea9d8473776204c6ddde5bc399fd",
+    "purpose": "Q-03索引",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/33-m03-acceptance-and-m04-instructions.md",
+    "sha256": "1d2ed0984307b7c1c68061aa45a461f7cbda66ad7b0e3e0c26de7f4c12bce044",
+    "purpose": "文档33",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/32-m02-acceptance-and-m03-instructions.md",
+    "sha256": "846244a07ac3417c47a5557e36d44cb41dc840b63514787c2a7a98db7bfb9484",
+    "purpose": "文档32",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/36-f02-acceptance-and-f03-instructions.md",
+    "sha256": "90c4a675c9a2e966c223e3114c529f7a50f9205680a0c18c697c6c9932f0b946",
+    "purpose": "文档36",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/39-f04-acceptance-and-q01-instructions.md",
+    "sha256": "0bd6e1610fd16f9922584e66908fb63de0847e41fc7e1a85bc46f673f1a23091",
+    "purpose": "文档39",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/42-q02-acceptance-and-q03-instructions.md",
+    "sha256": "c59c1560b27503fddc88cf935a0f3ce88c25389cf964417c2bebe9f33cacd475",
+    "purpose": "文档42",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-01/q02-real-35-overseas-plan.json",
+    "sha256": "8f1a83af5a2923ef8b6219cf1d26669a5305a2fee338e63b3e4b69b974ea8ff4",
+    "purpose": "35岁海外匿名起点",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-02/mobile-training-action.png",
+    "sha256": "bc68bb599412fda89df884e9e276b4419ee8f2fb95d6c8b7e1b7c173a202ac11",
+    "purpose": "训练页图",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-02/desktop-market-edited.png",
+    "sha256": "175c472123e805aff057c077f30a860a109ee2a170d8c7c73a3641328dd23e8b",
+    "purpose": "已有市场编辑图",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/S0/fixtures/HALF_YEAR_REPORT.json",
+    "sha256": "7318c60272894f73405678bd0b7ef2c6cc91de255b8b2b8f9c65110b174d8fe7",
+    "purpose": "S0匿名报告",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/F-04/pages-r1/ordinary-mobile-action.png",
+    "sha256": "dc567bc3f8280eee315e58ddb73a633de437c426a546ccae4a7701c025b00988",
+    "purpose": "普通报告动作图",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/S0/fixtures/TRANSFER_WINDOW.json",
+    "sha256": "4398287cc2f6212df2abe2db6c9a6e8a507cb8eb384e9e7e45ddb2ec4cdf769c",
+    "purpose": "S0匿名市场",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/F-04/pages-r1/ordinary-mobile-readonly.png",
+    "sha256": "05b45b68463099fca1b0ecd761544ee5e6a76ecac76d39c8315bbda9404b0281",
+    "purpose": "只读返回图",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-02/desktop-final-raw.json",
+    "sha256": "338e6f5cb1e00e8e57f0a3ff811120b0d60c6d167059c4df6948d9a5332211e3",
+    "purpose": "Q-02实际退休raw",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-02-R1/after/390-export.png",
+    "sha256": "d6d40e7d03a732eb35665e8e6eb88d44aaca10dde1e2b326ab23ec76ceae03e9",
+    "purpose": "最终移动PNG",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-02-R1/after/375-action.png",
+    "sha256": "2bad31f8feb59fb02d3de050e574f96775d0b482d8051c57d9f124498fa21a27",
+    "purpose": "375动作图",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-02-R1/after/1280-export.png",
+    "sha256": "8e7444408a02c61e8ff82ee15f86dd9979a1ab2336349cbdc5267ee971ea18cb",
+    "purpose": "桌面PNG",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-03/current-files-sha-final.json",
+    "sha256": "d600ee7a7b31014da6f84f573f01778bc1b697d9b2b42d64c6df6b80b75c70e7",
+    "purpose": "文件SHA清单",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  },
+  {
+    "path": "docs/evidence/CEU-20260907/Q-03/change-attribution-final.json",
+    "sha256": "7c8b231bd87a1c4b0b003171a222d718a2e55c3d0261e941411509d3f0e3684e",
+    "purpose": "变更归属",
+    "source": "docs43 link; original frozen source path retained, no copies"
+  }
+]

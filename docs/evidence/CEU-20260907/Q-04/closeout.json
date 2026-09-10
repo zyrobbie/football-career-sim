@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-10",
+  "Q04": "已完成",
+  "R": "未开始",
+  "basis": [
+    "user-feedback-01.json",
+    "user-feedback-02.json",
+    "user-feedback-03.json"
+  ],
+  "fileIdentitiesVerifiedUnchanged": 253,
+  "HEAD": "3f290407a299790665b58c4bc7c2bf8455d24bbd",
+  "productionChanged": false,
+  "testsRerun": false,
+  "deviceModel": "未提供",
+  "otherBrowsersOnlineOldClientRollback": "未验证，发布前另行处理",
+  "localPreview": "保留供用户继续体验，未清除试玩存档"
+}

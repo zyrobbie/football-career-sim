@@ -389,14 +389,14 @@ function overseasInterestAdjustment(player: Player, club: Club): number {
   return preferenceBonus + intentBonus + eliteBarrier
 }
 
-function qualifiesForAdultMarket(player: Player, club: Club): boolean {
+export function qualifiesForAdultMarket(player: Player, club: Club): boolean {
   const parameters = getClubParametersByCompatibleId(club.id)
   const tier = parameters?.platformTier ?? club.tier
   const divisionLevel = parameters?.divisionLevel ?? 1
   const overall = calculateOverall(player.attributes, player.primaryPosition)
-  const domesticException = player.overseasIntent === 'DOMESTIC' && club.country === '中国' && divisionLevel === 1 && tier === 4
-  if (overall >= 85) return (divisionLevel === 1 && tier <= 3 && club.country !== '中国') || domesticException
-  if (overall >= 80) return divisionLevel === 1 && tier <= 4 && (club.country !== '中国' || player.overseasIntent === 'DOMESTIC')
+  const domesticException = club.country === '中国' && divisionLevel === 1 && tier === 4
+  if (overall >= 85) return (divisionLevel === 1 && tier <= 3) || domesticException
+  if (overall >= 80) return divisionLevel === 1 && tier <= 4
   if (overall >= 74) return (divisionLevel === 1 && tier <= 5) || (divisionLevel === 2 && tier === 4)
   if (overall >= 66) return tier >= 3 && tier <= 6
   return true
@@ -457,6 +457,181 @@ export function careerPreferenceFit(input: {
       0,
     ) / totalWeight,
   )
+}
+
+export interface TransferCandidate {
+  club: Club
+  estimatedPotential: number
+  interestScore: number
+  promise: ReturnType<typeof promisedTeamAndRole>
+  preferenceFit: number
+}
+
+/** Production selection layer, also usable with a finite candidate catalog.
+ * Input order is preserved; the first occurrence of each stable club ID wins.
+ */
+export function selectTransferCandidates(
+  input: GenerateTransferOffersInput,
+  candidatePool: readonly TransferCandidate[],
+  domesticOnly = false,
+): TransferCandidate[] {
+  const { player, currentClubId, currentTeamLevel, latestReport, careerSeed, windowIndex } = input
+  if (!canSignNewContractAtWindow(windowIndex)) return []
+  const playerAge = playerAgeAtWindow(windowIndex)
+  const seen = new Set<string>([currentClubId])
+  const candidates = candidatePool.filter(candidate => {
+    if (seen.has(candidate.club.id)) return false
+    seen.add(candidate.club.id)
+    return !(domesticOnly || playerAge < 18) || !isOverseasClub(candidate.club)
+  })
+
+  const selected: typeof candidates = []
+  const pickWeighted = (pool: typeof candidates, slot: string) => {
+    const available = pool.filter((candidate) => !selected.some((item) => item.club.id === candidate.club.id))
+    const weightFor = (candidate: (typeof candidates)[number]) => {
+      const preference = player.preferredLeagues[0] === candidate.club.leagueKey ? 1.28 : 1
+      const rotation = createRandom(careerSeed, 'transfer-market-rotation', windowIndex, candidate.club.id).float(0.65, 1.35)
+      return Math.max(1, (candidate.interestScore * 0.65 + candidate.preferenceFit * 0.35) * preference * rotation)
+    }
+    const total = available.reduce((sum, candidate) => sum + weightFor(candidate), 0)
+    if (total === 0) return undefined
+    let cursor = createRandom(careerSeed, 'transfer-market-slot', windowIndex, slot).float(0, total)
+    for (const candidate of available) {
+      cursor -= weightFor(candidate)
+      if (cursor <= 0) return candidate
+    }
+    return available[available.length - 1]
+  }
+  const addCandidate = (
+    candidate: (typeof candidates)[number] | undefined,
+  ) => {
+    if (
+      candidate &&
+      !selected.some((item) => item.club.id === candidate.club.id)
+    ) {
+      selected.push(candidate)
+    }
+  }
+
+  const currentClub = CLUBS.find(
+    (club) => club.id === currentClubId,
+  )
+  const actualTeamLevel =
+    latestReport?.contract?.actualTeamLevel ?? currentTeamLevel
+  const actualRole =
+    latestReport?.contract?.actualRole ?? latestReport?.roleAfter
+  const currentFirstTeamRole =
+    actualTeamLevel === 'FIRST_TEAM' &&
+    actualRole &&
+    FIRST_TEAM_ROLE_ORDER.includes(actualRole as FirstTeamRole)
+      ? (actualRole as FirstTeamRole)
+      : null
+  const currentRoleIndex = currentFirstTeamRole
+    ? FIRST_TEAM_ROLE_ORDER.indexOf(currentFirstTeamRole)
+    : -1
+  const improvesFirstTeamRole = (
+    candidate: (typeof candidates)[number],
+  ) =>
+    candidate.promise.teamLevel === 'FIRST_TEAM' &&
+    FIRST_TEAM_ROLE_ORDER.indexOf(
+      candidate.promise.role as FirstTeamRole,
+    ) > currentRoleIndex
+  const strugglingAtEliteOverseas = Boolean(
+    !domesticOnly &&
+      currentClub &&
+      isOverseasClub(currentClub) &&
+      currentClub.tier <= 2 &&
+      actualTeamLevel === 'FIRST_TEAM' &&
+      (currentFirstTeamRole === 'FRINGE' ||
+        (currentFirstTeamRole === 'SUBSTITUTE' &&
+          (latestReport?.stats.appearances ?? 0) <= 5)),
+  )
+
+  // Fill primary slots before fallbacks so a missing region cannot consume
+  // another region's sole candidate. The open slot is always filled LAST.
+  const fillSlots = (slots: { name: string; primary: typeof candidates; fallback: (typeof candidates)[] }[]) => {
+    const assignments = slots.map(slot => {
+      const candidate = pickWeighted(slot.primary, slot.name)
+      addCandidate(candidate)
+      return candidate
+    })
+    slots.forEach((slot, index) => {
+      if (assignments[index]) return
+      for (const [fallbackIndex, pool] of slot.fallback.entries()) {
+        const candidate = pickWeighted(pool, `${slot.name}-fallback-${fallbackIndex}`)
+        if (candidate) { addCandidate(candidate); assignments[index] = candidate; break }
+      }
+    })
+    return assignments.filter((candidate): candidate is TransferCandidate => candidate !== undefined)
+  }
+  if (strugglingAtEliteOverseas) {
+    const eligible = candidates.filter(improvesFirstTeamRole)
+    const slots = [
+      { name: 'recovery-big-five', primary: eligible.filter(c => BIG_FIVE_COUNTRIES.has(c.club.country) && c.club.tier >= 3), fallback: [eligible] },
+      { name: 'recovery-development', primary: eligible.filter(c => DEVELOPMENT_LEAGUE_COUNTRIES.has(c.club.country) && c.club.tier >= 3), fallback: [eligible] },
+      { name: 'recovery-domestic', primary: eligible.filter(c => c.club.country === '中国' && c.club.profile === 'ELITE'), fallback: [eligible] },
+    ]
+    return fillSlots(player.overseasIntent === 'DOMESTIC' ? [slots[2]!, slots[0]!, slots[1]!] : slots)
+  }
+
+  if (!domesticOnly && playerAge >= 18) {
+    const eligible = candidates.filter(c => qualifiesForAdultMarket(player, c.club))
+    const domestic = eligible.filter(c => !isOverseasClub(c.club))
+    const overseas = eligible.filter(c => isOverseasClub(c.club))
+    const firstPreference = player.preferredLeagues[0]
+    const preferred = overseas.filter(c => c.club.leagueKey === firstPreference)
+    const other = overseas.filter(c => c.club.leagueKey !== firstPreference)
+    const worldClass = calculateOverall(player.attributes, player.primaryPosition) >= 85
+    const high = overseas.filter(c => c.club.tier <= 2)
+    const highPreferred = high.filter(c => c.club.leagueKey === firstPreference)
+    const highOther = high.filter(c => c.club.leagueKey !== firstPreference)
+    const slots = player.overseasIntent === 'DOMESTIC' ? [
+      { name: 'adult-domestic-one', primary: domestic, fallback: [domestic, eligible] },
+      { name: 'adult-domestic-two', primary: domestic, fallback: [domestic, eligible] },
+    ] : player.overseasIntent === 'CONDITIONAL' ? [
+      { name: 'adult-conditional-domestic', primary: domestic, fallback: [domestic, eligible] },
+      { name: 'adult-conditional-overseas', primary: overseas, fallback: [overseas, eligible] },
+    ] : [
+      { name: 'adult-preferred', primary: worldClass ? highPreferred : preferred, fallback: worldClass ? [high, preferred, overseas, eligible] : [overseas, eligible] },
+      { name: 'adult-other-league', primary: worldClass ? highOther : other, fallback: worldClass ? [high, other, overseas, eligible] : [overseas, eligible] },
+    ]
+    const assigned = fillSlots(slots)
+    const open = pickWeighted(eligible, 'adult-open')
+    return open ? [...assigned, open] : assigned
+  }
+
+  addCandidate(pickWeighted(candidates.filter((candidate) => !isOverseasClub(candidate.club)), 'domestic'))
+  const marketMix = createRandom(
+    careerSeed,
+    'transfer-market-composition',
+    windowIndex,
+  ).float(0, 1)
+  const strongAcademyYouth = pickWeighted(candidates.filter(
+    (candidate) =>
+      !isOverseasClub(candidate.club) &&
+      candidate.club.academyTier <= 3 &&
+      candidate.promise.teamLevel === 'YOUTH',
+  ), 'academy')
+  const lowerLeagueFirstTeam = pickWeighted(candidates.filter(
+    (candidate) =>
+      !isOverseasClub(candidate.club) &&
+      candidate.club.tier >= 5 &&
+      candidate.promise.teamLevel === 'FIRST_TEAM',
+  ), 'first-team')
+
+  if (marketMix < 0.65 && strongAcademyYouth) {
+    addCandidate(strongAcademyYouth)
+  }
+  if (marketMix < 0.65 && lowerLeagueFirstTeam) {
+    addCandidate(lowerLeagueFirstTeam)
+  }
+
+  for (let slot = selected.length; slot < 3; slot += 1) {
+    if (selected.length >= 3) break
+    addCandidate(pickWeighted(candidates, `fill-${slot}`))
+  }
+
+  return selected.slice(0, 3)
 }
 
 function generateTransferOffersFromPool(
@@ -523,150 +698,7 @@ function generateTransferOffersFromPool(
       }
     })
 
-  const selectedCandidates = (() => {
-    const selected: typeof candidates = []
-    const pickWeighted = (pool: typeof candidates, slot: string) => {
-      const available = pool.filter((candidate) => !selected.some((item) => item.club.id === candidate.club.id))
-      const weightFor = (candidate: (typeof candidates)[number]) => {
-        const preference = player.preferredLeagues[0] === candidate.club.leagueKey ? 1.28 : 1
-        const rotation = createRandom(careerSeed, 'transfer-market-rotation', windowIndex, candidate.club.id).float(0.65, 1.35)
-        return Math.max(1, (candidate.interestScore * 0.65 + candidate.preferenceFit * 0.35) * preference * rotation)
-      }
-      const total = available.reduce((sum, candidate) => sum + weightFor(candidate), 0)
-      if (total === 0) return undefined
-      let cursor = createRandom(careerSeed, 'transfer-market-slot', windowIndex, slot).float(0, total)
-      for (const candidate of available) {
-        cursor -= weightFor(candidate)
-        if (cursor <= 0) return candidate
-      }
-      return available[available.length - 1]
-    }
-    const addCandidate = (
-      candidate: (typeof candidates)[number] | undefined,
-    ) => {
-      if (
-        candidate &&
-        !selected.some((item) => item.club.id === candidate.club.id)
-      ) {
-        selected.push(candidate)
-      }
-    }
-
-    const currentClub = CLUBS.find(
-      (club) => club.id === currentClubId,
-    )
-    const actualTeamLevel =
-      latestReport?.contract?.actualTeamLevel ?? currentTeamLevel
-    const actualRole =
-      latestReport?.contract?.actualRole ?? latestReport?.roleAfter
-    const currentFirstTeamRole =
-      actualTeamLevel === 'FIRST_TEAM' &&
-      actualRole &&
-      FIRST_TEAM_ROLE_ORDER.includes(actualRole as FirstTeamRole)
-        ? (actualRole as FirstTeamRole)
-        : null
-    const currentRoleIndex = currentFirstTeamRole
-      ? FIRST_TEAM_ROLE_ORDER.indexOf(currentFirstTeamRole)
-      : -1
-    const improvesFirstTeamRole = (
-      candidate: (typeof candidates)[number],
-    ) =>
-      candidate.promise.teamLevel === 'FIRST_TEAM' &&
-      FIRST_TEAM_ROLE_ORDER.indexOf(
-        candidate.promise.role as FirstTeamRole,
-      ) > currentRoleIndex
-    const strugglingAtEliteOverseas = Boolean(
-      !domesticOnly &&
-        currentClub &&
-        isOverseasClub(currentClub) &&
-        currentClub.tier <= 2 &&
-        actualTeamLevel === 'FIRST_TEAM' &&
-        (currentFirstTeamRole === 'FRINGE' ||
-          (currentFirstTeamRole === 'SUBSTITUTE' &&
-            (latestReport?.stats.appearances ?? 0) <= 5)),
-    )
-
-    if (strugglingAtEliteOverseas) {
-      const roleImprovingCandidates = candidates.filter(
-        improvesFirstTeamRole,
-      )
-      const firstTier = roleImprovingCandidates.filter(
-        (candidate) => BIG_FIVE_COUNTRIES.has(candidate.club.country) && candidate.club.tier >= 3,
-      )
-      const secondTier = roleImprovingCandidates.filter(
-        (candidate) => DEVELOPMENT_LEAGUE_COUNTRIES.has(candidate.club.country) && candidate.club.tier >= 3,
-      )
-      const thirdTier = roleImprovingCandidates.filter(
-        (candidate) => candidate.club.country === '中国' && candidate.club.profile === 'ELITE',
-      )
-      addCandidate(pickWeighted(firstTier, 'recovery-big-five') ?? pickWeighted(roleImprovingCandidates, 'recovery-big-five-fallback'))
-      addCandidate(pickWeighted(secondTier, 'recovery-development') ?? pickWeighted(roleImprovingCandidates, 'recovery-development-fallback'))
-      addCandidate(pickWeighted(thirdTier, 'recovery-domestic') ?? pickWeighted(roleImprovingCandidates, 'recovery-domestic-fallback'))
-      for (let slot = selected.length; slot < 3; slot += 1) {
-        addCandidate(pickWeighted(roleImprovingCandidates, `recovery-fill-${slot}`))
-      }
-      return selected.slice(0, 3)
-    }
-
-    if (!domesticOnly && playerAge >= 18) {
-      const eligible = candidates.filter((candidate) => qualifiesForAdultMarket(player, candidate.club))
-      if (player.overseasIntent === 'DOMESTIC') {
-        const domestic = eligible.filter((candidate) => candidate.club.country === '中国')
-        const overseas = eligible.filter((candidate) => candidate.club.country !== '中国')
-        addCandidate(pickWeighted(domestic, 'adult-domestic-one'))
-        addCandidate(pickWeighted(domestic, 'adult-domestic-two'))
-        addCandidate(pickWeighted(overseas, 'adult-domestic-overseas'))
-        for (let slot = selected.length; slot < 3; slot += 1) addCandidate(pickWeighted(domestic.length > 0 ? domestic : overseas, `adult-domestic-fill-${slot}`))
-        return selected.slice(0, 3)
-      }
-      const firstPreference = player.preferredLeagues[0]
-      const preferred = eligible.filter((candidate) => candidate.club.leagueKey === firstPreference)
-      const otherLeagues = eligible.filter((candidate) => candidate.club.leagueKey !== firstPreference)
-      const worldClass = calculateOverall(player.attributes, player.primaryPosition) >= 85
-      const highPlatform = eligible.filter((candidate) => candidate.club.tier <= 2)
-      const preferredHigh = preferred.filter((candidate) => candidate.club.tier <= 2)
-      const otherHigh = otherLeagues.filter((candidate) => candidate.club.tier <= 2)
-      addCandidate(pickWeighted(worldClass && preferredHigh.length > 0 ? preferredHigh : preferred.length > 0 ? preferred : eligible, 'adult-preferred'))
-      addCandidate(pickWeighted(worldClass && otherHigh.length > 0 ? otherHigh : otherLeagues.length > 0 ? otherLeagues : eligible, 'adult-other-league'))
-      if (worldClass && selected.filter((candidate) => candidate.club.tier <= 2).length < 2) addCandidate(pickWeighted(highPlatform, 'adult-world-second-high'))
-      addCandidate(pickWeighted(eligible, 'adult-open'))
-      for (let slot = selected.length; slot < 3; slot += 1) addCandidate(pickWeighted(eligible, `adult-fill-${slot}`))
-      return selected.slice(0, 3)
-    }
-
-    addCandidate(pickWeighted(candidates.filter((candidate) => !isOverseasClub(candidate.club)), 'domestic'))
-    const marketMix = createRandom(
-      careerSeed,
-      'transfer-market-composition',
-      windowIndex,
-    ).float(0, 1)
-    const strongAcademyYouth = pickWeighted(candidates.filter(
-      (candidate) =>
-        !isOverseasClub(candidate.club) &&
-        candidate.club.academyTier <= 3 &&
-        candidate.promise.teamLevel === 'YOUTH',
-    ), 'academy')
-    const lowerLeagueFirstTeam = pickWeighted(candidates.filter(
-      (candidate) =>
-        !isOverseasClub(candidate.club) &&
-        candidate.club.tier >= 5 &&
-        candidate.promise.teamLevel === 'FIRST_TEAM',
-    ), 'first-team')
-
-    if (marketMix < 0.65 && strongAcademyYouth) {
-      addCandidate(strongAcademyYouth)
-    }
-    if (marketMix < 0.65 && lowerLeagueFirstTeam) {
-      addCandidate(lowerLeagueFirstTeam)
-    }
-
-    for (let slot = selected.length; slot < 3; slot += 1) {
-      if (selected.length >= 3) break
-      addCandidate(pickWeighted(candidates, `fill-${slot}`))
-    }
-
-    return selected.slice(0, 3)
-  })()
+  const selectedCandidates = selectTransferCandidates(input, candidates, domesticOnly)
 
   return selectedCandidates.map(
     ({ club, estimatedPotential, interestScore, promise }) => {

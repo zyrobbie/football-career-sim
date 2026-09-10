@@ -1,0 +1,55 @@
+{
+  "fixedBeforeExecution": true,
+  "maxWindows": 54,
+  "training": "适龄默认/低状态BODY_CARE，STEADY",
+  "events": "目录首个合法路线、该路线首个合法选项",
+  "transfer": "市场按原节奏开启；第一份未撤回外部，否则续约，否则STAY；到队NONE；不谈判",
+  "construction": "真实匿名源经正式迁移；仅careerSeed替换，逐字段记录；不称自然生涯史",
+  "branches": [
+    {
+      "seed": "ceu-m04-continuous-0",
+      "source": "docs/evidence/CEU-20260907/S0/fixtures/HALF_YEAR_PLAN.json",
+      "policy": "conditional"
+    },
+    {
+      "seed": "ceu-m04-continuous-0",
+      "source": "docs/evidence/CEU-20260907/S0/fixtures/HALF_YEAR_PLAN.json",
+      "policy": "domestic"
+    },
+    {
+      "seed": "ceu-m04-continuous-0",
+      "source": "docs/evidence/CEU-20260907/S0/fixtures/HALF_YEAR_PLAN.json",
+      "policy": "switch"
+    },
+    {
+      "seed": "ceu-m04-continuous-1",
+      "source": "docs/evidence/CEU-20260907/S0/fixtures/HALF_YEAR_PLAN.json",
+      "policy": "conditional"
+    },
+    {
+      "seed": "ceu-m04-continuous-1",
+      "source": "docs/evidence/CEU-20260907/S0/fixtures/HALF_YEAR_PLAN.json",
+      "policy": "domestic"
+    },
+    {
+      "seed": "ceu-m04-continuous-1",
+      "source": "docs/evidence/CEU-20260907/S0/fixtures/HALF_YEAR_PLAN.json",
+      "policy": "switch"
+    },
+    {
+      "seed": "ceu-m04-continuous-2",
+      "source": "docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/PLAN_35.json",
+      "policy": "conditional"
+    },
+    {
+      "seed": "ceu-m04-continuous-2",
+      "source": "docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/PLAN_35.json",
+      "policy": "domestic"
+    },
+    {
+      "seed": "ceu-m04-continuous-2",
+      "source": "docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/PLAN_35.json",
+      "policy": "switch"
+    }
+  ]
+}
