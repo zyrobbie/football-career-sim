@@ -27,9 +27,9 @@ export function CareerPreferencesEditor({ game }: { game: GameState }) {
   }
   return <section className="career-preferences" aria-label="当前求职方向">
     <div className="career-preferences__bar">
-      <button type="button" className="career-preferences__toggle" aria-label={`修改求职方向，当前${overseasIntentLabel(game.player!.overseasIntent)}`} aria-expanded={editing} aria-controls={editing ? formId : undefined} onClick={editing ? () => { setEditing(false); setMessage('') } : open}>
-        <span className="career-preferences__summary"><span>求职方向</span><strong>{overseasIntentLabel(game.player!.overseasIntent)}</strong></span>
-        <span className="career-preferences__chevron" aria-hidden="true">{editing ? '⌃' : '⌄'}</span>
+      <div className="career-preferences__summary"><span>求职方向</span><strong>{overseasIntentLabel(game.player!.overseasIntent)}</strong></div>
+      <button type="button" className="career-preferences__toggle" aria-expanded={editing} aria-controls={editing ? formId : undefined} onClick={editing ? () => { setEditing(false); setMessage('') } : open}>
+        {editing ? '收起' : '调整'}
       </button>
       {game.lastReport && <button type="button" className="career-preferences__review" onClick={() => useGameStore.getState().reviewReport()}>回看上期报告</button>}
     </div>

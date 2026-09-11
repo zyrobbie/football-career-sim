@@ -8536,23 +8536,26 @@ svg {
 .career-preferences__bar { display: flex; align-items: stretch; min-width: 0; }
 .career-preferences__toggle,
 .career-preferences__review { min-height: 44px; padding: 8px 10px; border: 0; background: transparent; color: var(--ink); font: inherit; cursor: pointer; }
-.career-preferences__toggle { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: 1; min-width: 0; text-align: left; font-size: 14px; }
-.career-preferences__summary { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; line-height: 1.35; }
+.career-preferences__toggle { flex: none; min-width: 44px; padding-inline: 8px; font-size: 13px; text-decoration: underline; }
+.career-preferences__summary { display: flex; flex: 1; min-width: 0; flex-wrap: wrap; align-content: center; align-items: center; gap: 2px 8px; padding: 8px 10px; font-size: 13px; line-height: 1.35; }
 .career-preferences__summary > * { white-space: nowrap; }
-.career-preferences__chevron { flex: none; }
 .career-preferences__review { flex: none; border-left: 1px solid var(--line, #deded6); font-size: 13px; white-space: nowrap; text-decoration: underline; }
 .career-preferences__toggle:focus-visible,
 .career-preferences__review:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .career-preferences p { margin: 0; }
-.career-preferences__hint { font-size: 13px; line-height: 1.6; }
-.career-preferences__form { display: grid; gap: 12px; padding: 12px; border-top: 1px solid var(--line, #deded6); }
-.career-preferences__form select { display: block; width: 100%; min-height: 40px; margin-top: 6px; }
-.career-preferences fieldset { min-width: 0; margin: 0; padding: 8px; border: 1px solid var(--line, #deded6); }
-.career-preferences__leagues { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px; }
-.career-preferences__leagues label { display: flex; align-items: center; gap: 6px; min-height: 32px; }
+.career-preferences__hint { color: var(--muted); font-size: 12px; line-height: 1.5; }
+.career-preferences__form { display: grid; gap: 8px; padding: 10px; border-top: 1px solid var(--line, #deded6); color: var(--text); font-size: 13px; line-height: 1.5; }
+.career-preferences__form > label,
+.career-preferences legend { color: var(--ink); font-family: var(--heading); font-size: 13px; }
+.career-preferences__form select { display: block; width: 100%; min-height: 36px; margin-top: 4px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 0; background-color: var(--paper); color: var(--text); font-family: inherit; font-size: 13px; line-height: 1.5; }
+.career-preferences fieldset { min-width: 0; margin: 0; padding: 4px 8px 8px; border: 1px solid var(--line, #deded6); }
+.career-preferences legend { padding-inline: 4px; }
+.career-preferences__leagues { display: grid; grid-template-columns: repeat(auto-fit, minmax(76px, 1fr)); gap: 4px 8px; }
+.career-preferences__leagues label { display: flex; align-items: center; gap: 6px; min-height: 36px; font-size: 13px; cursor: pointer; }
 .career-preferences__leagues input { width: 16px; height: 16px; margin: 0; }
 .career-preferences__actions { display: flex; flex-wrap: wrap; gap: 8px; }
-.career-preferences__message { padding: 0 12px 12px; }
+.career-preferences__actions .button { min-height: 36px; padding: 6px 12px; border-radius: 0; font-size: 13px; line-height: 1.5; letter-spacing: 0; box-shadow: none; }
+.career-preferences__message { padding: 0 10px 10px; font-size: 13px; line-height: 1.5; }
 
 /* F-02: shared report decisions, preserving the existing report grid. */
 .professional-report-actions { min-width: 0; }
