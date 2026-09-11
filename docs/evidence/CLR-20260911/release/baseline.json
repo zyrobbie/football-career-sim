@@ -1,0 +1,25 @@
+{
+  "baseCommit": "16b8ddf2c14dbc36f7832a58d96ab18da1b53825",
+  "baseTree": "1aad2afc70540584b9ba2863b7378024dda26d4a",
+  "deployedCommit": "321f747c3a06e41ed4fc2868778e0aa3a3d9134a",
+  "deploymentRunId": 34456233963,
+  "deploymentURL": "https://github.com/zyrobbie/football-career-sim/actions/runs/34456233963",
+  "productionTreesEqual": true,
+  "rollbackTag": "rollback/clr-ita-20260911-before",
+  "oldSourceSHA": {
+    "public/assets/clubs/crests/ita-ac-milan.svg": "5604e8f7424c0455d6994d776accb58d34e891c55ee75518229bc86787530737",
+    "public/assets/clubs/crests/ita-atalanta.svg": "acff17014068a1276785da05fe1e891b92779d24d44e848a67a74bce497bbbe6",
+    "public/assets/clubs/crests/ita-bologna.svg": "124133447a9cc14aeebc21fd7ff06120b2b4b387144efadd5eb75848c186279a",
+    "public/assets/clubs/crests/ita-como.svg": "693f120636b9e5128a4b85d22ebdc1fb67baa748e8abba2e99ee9349d67abcb7",
+    "public/assets/clubs/crests/ita-inter.svg": "ec5dd1845c55c5f774b03dce7c6e019c55aceb09a3337f86ca466b505a35efb8",
+    "public/assets/clubs/crests/ita-lazio.svg": "f22e99d40571d61477257f28d027efc8d4dfaf6f0c42fbbb2aacf0f713533bbf",
+    "public/assets/clubs/crests/ita-roma.svg": "a65dda7771f65f189ff236f1fbda2cb5238491c7d11f00359d799f0092d9c6ab",
+    "public/assets/clubs/crests/ita-venezia.svg": "d21d59471ec7dffce1d17445c9d938a80c8e7480fdba692b7f34bb2fce9ed7c7",
+    "src/data/clubs/clubCrests.ts": "3a86bcaaf903bf9771175d8ac916b6a4ddaa630f73af5394589ffbf071d80624"
+  },
+  "package": "1.1.0",
+  "saveData": [
+    12,
+    12
+  ]
+}

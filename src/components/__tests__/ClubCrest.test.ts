@@ -80,7 +80,7 @@ describe('club crest presentation fallback', () => {
       assetPath: expect.stringMatching(/assets\/clubs\/crests\/ita-inter\.svg$/),
       fallbackShortMark: '国',
     })
-    expect(resolveClubCrestPresentation({ clubId: 'ita_juventus', shortMark: '尤' }))
-      .toEqual({ assetPath: null, fallbackShortMark: '尤' })
+    expect(resolveClubCrestPresentation({ clubId: 'eng_arsenal', shortMark: '阿' }))
+      .toEqual({ assetPath: null, fallbackShortMark: '阿' })
   })
 })
