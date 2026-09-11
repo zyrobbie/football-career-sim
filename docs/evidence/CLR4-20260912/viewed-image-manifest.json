@@ -1,0 +1,1154 @@
+[
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/eng-arsenal.svg.png",
+    "sha256": "06c67ebe6fd9e8a137ac59914e96edc078a8ae86d93a20ea75f897d6a1e93a6c",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/eng1-newcastle-united.svg.png",
+    "sha256": "74de45cade2335b80e77fbd0ed1a6d6a484efb6b305f7a2ad9c9265117007533",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/eng1-everton.svg.png",
+    "sha256": "0359d46bb56443ca459b7935978d25676d4d8fa88639ddba6b426fc83165bd1c",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/eng1-leeds-united.svg.png",
+    "sha256": "07b85649c8d7b36f0f3a494d5487aff5a210e8cc1e75d8bb36342e037b719489",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/1280-market-offers.png",
+    "sha256": "a6eef039068d36d5307a99dc7f489d7086126e0f4958ca4c9296dbd41a4a869d",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/1280-overview.png",
+    "sha256": "274d47eece2d13fe92dcd3b8a323a6483c45dd7dc1ab20b6d5163e987a4c0f3d",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/1280-ledger.png",
+    "sha256": "f4d5b94050a6f06dac6ad480e6fd655f5508b19470c431f53f307620f525012d",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/1280-export.png",
+    "sha256": "f164f65aa27fc2724cc302549ae3ad63208603c7b33615ad21830855c5bfce16",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/1280-export-crests.png",
+    "sha256": "03e61f6896598383fe368b35aee7cf918162e73992c433fe4389e56de67dd6f0",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/1280-retired-clubs.png",
+    "sha256": "51275995f9c12588ebc0a86d15eb3b9dd90a15d0e56c11513a0ba79a056b1173",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/390-market-offers.png",
+    "sha256": "876c6e75ad05582d37c484c752e109f8b19310bf1c71dd81b9f862b4eacb6541",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/390-overview.png",
+    "sha256": "f41b1ad8f5ad5c20e47552ddc7b222b1e1c7ab890866c42a50989bf030c4a67e",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/390-ledger.png",
+    "sha256": "131c532d9b0717dfdefe7019af140002bcf759c61e16cf29e2e57b7ab28a0901",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/390-export.png",
+    "sha256": "28baed714c6ae6121ce6382ee0b8e62b0e66f4dceede00331496b889717420da",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/390-export-crests.png",
+    "sha256": "c82f951ee53d19093055afe2826bc5688a6102c384df14e35d35200479638b4c",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-pilot/after/390-retired-clubs.png",
+    "sha256": "5d12e907246b0bac245cd376eb4a4fa193f01c607d9c31360e8764c52a2693fd",
+    "viewed": true,
+    "stage": "ENG-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng-brighton.svg.png",
+    "sha256": "ebe03556156df443d7a44cc1a50f0ff756920a5e147f904809791a99af0d5236",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng-fulham.svg.png",
+    "sha256": "fe7fe65a3d1cd7b04c3cb544d18cea7ca4494917795d5676a41bc32e246fa691",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng-liverpool.svg.png",
+    "sha256": "8fa45d3afff52f8141c99fbb84baea3161fcf9769688b0fb0e3db8cbb5acea17",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-afc-bournemouth.svg.png",
+    "sha256": "d083af746c098aed6cd18cc11ad0713060827b5e0e3130f41828095551b29e27",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-aston-villa.svg.png",
+    "sha256": "a592e57373c13af2e945f69fe51db1730b1976938c3740bef0d336d2c8d0ac70",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-brentford.svg.png",
+    "sha256": "bc44a9022e2fff8bd1b024d2cefc12eacffe9206a424cfce2baa3389c6aed6c0",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-chelsea.svg.png",
+    "sha256": "a83d60ddd72a52c868f1241fb547dfc9a3bb0af7fca6ed26b8d23bb2f8a833e6",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-coventry-city.svg.png",
+    "sha256": "82cb58b6260255fa600b72606a30c0ef0c276292f69207dab173c49c556e9510",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-crystal-palace.svg.png",
+    "sha256": "14cc572df0a7e4979b92a83f16cb101d84efd871060a566d03f2d0db38073cfe",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-hull-city.svg.png",
+    "sha256": "e820adb4a15f61967b8ed68b0ad0bd9629cfe15f75b5f46be8038250b52002a4",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-ipswich-town.svg.png",
+    "sha256": "edbaf832dc1b0573e23c635952c94b8ed2bcd5817888284d5b7b57e2dc8662a3",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-manchester-city.svg.png",
+    "sha256": "7abb93554c7dd982a35c02f65e45b0bd67f19183ccd15dfca6d971bc2fe437cd",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-manchester-united.svg.png",
+    "sha256": "2704b0f77170ac4be4c7493ffd6edb03f6ff1b25da87c0d413508f58c74b8d6c",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-nottingham-forest.svg.png",
+    "sha256": "6219843f9a45eb5f8073336e007d914613991283d2d5c92c432abc389cd9c1e1",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-sunderland.svg.png",
+    "sha256": "40a181cf236991287f195527cedf63a430a0470095cbda0b8cf974b1c93c6f01",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/eng1-tottenham-hotspur.svg.png",
+    "sha256": "a333e127942b71077639621d1a3474a1ad1b4a34843b51013d406c24a4e358d5",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/320-market-offers.png",
+    "sha256": "9a63b50e4210769ecaf9d1d593f0523f3b0ea6ee4957359513dc4b532a6a92bf",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/320-ledger.png",
+    "sha256": "9f3ef2bfa67b1454d36717a9b21813591cfcb2eac83110c2b3ff36443f901133",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/320-retired-clubs.png",
+    "sha256": "e9ce81113a2e85a861bdff6e64ae238e3c799db6db12d48ea578861a8504ebe9",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/1280-player.png",
+    "sha256": "66d79d107c22cd74d5901c1c140ebad475d29385804ae7200425f57c6a104f59",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/1280-history.png",
+    "sha256": "2f423adf50c028da24138741b6b5ad1e4be55da56f28f3ad7559ffd5b3fb231c",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/1280-export.png",
+    "sha256": "867326b5785f55ecfcdc8140d97e0df9be476399f02446c8e206bf3846ee1bb3",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/390-player.png",
+    "sha256": "c395fd54b02ac6d80aa32e340dc22b4ae7c93e94ba29ba7c42dbcccfbfeb3bf1",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/390-history.png",
+    "sha256": "06e57a990f4015836037f8dc32aa6c15d789810c0bb51f074fe50eb99916e762",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/390-export.png",
+    "sha256": "ec21132478c6e93eaff43cca2f0fc90131507628369357584fea84d340e8388f",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/1280-export-strip-0.png",
+    "sha256": "cd271618d105c81db5bef47f326d75d1dad5a79b0446a08dfd9ff3a265e1f0f2",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/1280-export-strip-1.png",
+    "sha256": "886cd3b83841edc4de41a8548d144d2183bdf647ff2b823eea86da37b54f895e",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/1280-export-strip-2.png",
+    "sha256": "bbd6b1ce3ca06b41864910084992941968c7bb56dca0378e7fb64daf9c23856d",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/1280-export-strip-3.png",
+    "sha256": "4cd8f443c9e9684619003a8d1f3c17b92813c09a09f2ca86ab59f990d9da0d55",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/390-export-strip-0.png",
+    "sha256": "e43338d17007c14fc1acab1794775b7653e10a608df64087164a642f3809d4d4",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/390-export-strip-1.png",
+    "sha256": "4e82c5f0e86d8746beaa306ce20e3e5c2981bb447518b17c896898a7fbaf58f0",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/390-export-strip-2.png",
+    "sha256": "36c94a009b96b9d045c7f7b121ee343b4fdf1f0bd43a8f7d10aed3ed015dd489",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ENG-full/after/390-export-strip-3.png",
+    "sha256": "f94a195e0dfb90bc545b9a0d1b0480c635dc1462fe39a08865f9d5ef600304eb",
+    "viewed": true,
+    "stage": "ENG-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/esp-real-madrid.svg.png",
+    "sha256": "1e8991bdfc961947cef687eff3eee1662709494c20740c468c9279c367291396",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/esp-real-sociedad.svg.png",
+    "sha256": "e80cb4ed357bdcfef37a86b16d5833b279591c4837132392f70f7e52608f5522",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/esp1-athletic-club.svg.png",
+    "sha256": "90f5d7974c352e711b1a497c8dd8640791cced39093a91ac8ab96e8ed5900d88",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/esp1-valencia.svg.png",
+    "sha256": "1845803b4d396056f3704653d6ee6230fb8dd92abc820e54ebf6b98165ba9218",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/390-market-offers.png",
+    "sha256": "281e9809a7cbacda1727a86ef8bac8a93285179572113ca59cf210a23f27443a",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/390-retired-clubs.png",
+    "sha256": "f8059bcb2f60d9b16456510fe8f43607a43be1620ad5e752cdd83041b880dea1",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/1280-market-offers.png",
+    "sha256": "2a5ede0c1242f0466d0a5590505978c523ae65391a4ca26dae93cc7b158c1ce9",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/1280-overview.png",
+    "sha256": "cc32dbb3628916ba01a3defedc6e2b9c52d7f50694122a14d2886920b08578ab",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/1280-export.png",
+    "sha256": "d46e5fce3b98ed73a0b664e1bb4e0e9c2604100a3c661f0379143b3fdc358015",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/390-overview.png",
+    "sha256": "5b0a7bab564ed9fb44609f5fa1cc74c76d7926270b75b543bd6d30daeb9d588e",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/390-export.png",
+    "sha256": "a7b0c781f9749f5dad07069d890ce8c315c7cb271a0e031b6eae4fb3af78dcbf",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/1280-export-strip-0.png",
+    "sha256": "8d2ca40a1c70eeaed9abfe7fd26d8377b2fc325f0cbe3bea9a592a8fdf80c941",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/1280-export-strip-1.png",
+    "sha256": "4dede2eeec7ac3ba672c7dee9d5be1329bb0c5e718b25e75c7f16404f91906fa",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/390-export-strip-0.png",
+    "sha256": "c6c5a4c87438b6c78f95a3db1e71583d60011766097e06dd65fafb049aeca786",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-pilot/after/390-export-strip-1.png",
+    "sha256": "d528b9ec054d6c97b40ce9c064a6457065ace4e23915889a2ab3849fbdee0f57",
+    "viewed": true,
+    "stage": "ESP-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp-barcelona.svg.png",
+    "sha256": "b9dc2d9c4376b39dbb83f3a25f619b773dbdb73932539888e08c9297b30619ab",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp-celta.svg.png",
+    "sha256": "ff74990bcf988edbb153d1fee7b320c97f7fa9ed43511e6cb789a257c124eecd",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-alaves.svg.png",
+    "sha256": "0aa339890308ead4bf1d54de8eec11f53c8231299f6489340a3a662a6046c353",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-atletico-de-madrid.svg.png",
+    "sha256": "26269db604f96c5a5b4f3f617cd6d55b7c8a78c91411d5ddf2e84896c79e2066",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-deportivo-la-coruna.svg.png",
+    "sha256": "d8ade90a1482bdfd18fef3411ed938d71623d214de9cbc9200562411ed1892d5",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-elche.svg.png",
+    "sha256": "9aa7557d6e82eb7378b91db4f06dd1b79f6f7a6fd3392f6530729f4c81cff00f",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-espanyol.svg.png",
+    "sha256": "da1220ec66f7025b826d357519a2010a8c4b29f2b0b0714914b42af642f146a2",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-getafe.svg.png",
+    "sha256": "c638a57df159a1afa185c8d0c453455326cd98a9339c178ab9e00aa425f958f5",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-levante.svg.png",
+    "sha256": "fbe209ea64cadb7cce6fd32039803aebdf697ba34b8ce081811c1558a8f1e5f2",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-malaga.svg.png",
+    "sha256": "915a1817451bc81474983dc5e221d6e46231a671b4d5c3f67ce534063e53d4d8",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-osasuna.svg.png",
+    "sha256": "4f22623b5d18a74e94c4592be47793ddb9705ca633a1a9bfa7a71ad4968347ca",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-racing-de-santander.svg.png",
+    "sha256": "92dcf0f1d3aef61ae5e4f9d031292c851a6f2b76205db90deef5897be193ca06",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-rayo-vallecano.svg.png",
+    "sha256": "146480dc1c584086d8ccdb99332255693b87ee1d2e361e650560c81c1ff843ac",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-real-betis.svg.png",
+    "sha256": "f19b38b47f99315bec79c33ba6a0f06f4fc5ec81e21e6784cb50de5fa4d61213",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-sevilla.svg.png",
+    "sha256": "c802b1f1de7005242777b07b9b1ccd16c263c9ee3849f55e837b0b7d1b8d9d19",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/esp1-villarreal.svg.png",
+    "sha256": "0aa2e4030103e7fa32631d7132e302cb07f8a203d3b5b0d35e7a381c7d4930f6",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-market-offers.png",
+    "sha256": "efe43734e572dc65af428e2938faf334e1bbe73809e504d77c8996c39645a34d",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-player.png",
+    "sha256": "d7a53e035cb44947d30ee002a1863b00072b10010a70fb891d22d52329471fcd",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-history.png",
+    "sha256": "b5f3d2988070e89c2ca298339378051dd9171b2a9706394cef1a6455115f5c80",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-export.png",
+    "sha256": "7bd8846dd0748d851a8cce23468673a03cc4b8e351acfa3f4ea52651d5ebc4bf",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-market-offers.png",
+    "sha256": "21110d25eead68950c16491f80d8ab7c3c9bb316fa94a730cf32c31f64eaf811",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-player.png",
+    "sha256": "5fb66fedcab7e87d4b93afcc2453c1ef199a916bcb951217d91c89acce87abed",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-history.png",
+    "sha256": "ddfe5bc8aa67861c1a17453c1be3d93ac500be9050b0545e9d8ecac7a60abd9e",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-export.png",
+    "sha256": "3d0fafbbe9486f6da1cd93dd897cb29d915feebacfff933de07352b89191c0ed",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/320-market-offers.png",
+    "sha256": "c26cea6b280e8a58486f3709ef40b99ed34a699376d406c9dc22bd482d432765",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/320-ledger.png",
+    "sha256": "0bc21c9078334f1f927760847a062a44bf98e08c83cb915eeb2c148eaa9c045a",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/320-retired-clubs.png",
+    "sha256": "4bae2ad2f56f679a042a636bebf1b66cbfecca188ad573eae896791089e0c194",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-export-strip-0.png",
+    "sha256": "14b6bfaf0133911ec7ed40847c57e1af2689c407f6ca20f5ba742fd7dc3ca931",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-export-strip-1.png",
+    "sha256": "fe27784efb6038a2bb885ab0304e4b0a26ff773d50defcc6307b740a4c6cf9c0",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-export-strip-2.png",
+    "sha256": "ae7abfb71a43eb41c211949d939d287f96169f17ebb6b994efc9fc59de78710d",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/1280-export-strip-3.png",
+    "sha256": "4cd8f443c9e9684619003a8d1f3c17b92813c09a09f2ca86ab59f990d9da0d55",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-export-strip-0.png",
+    "sha256": "55044ee063b467ae5f61af52cfa0120c48bc306dda6e26e2d4a1e72b3f5eec0a",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-export-strip-1.png",
+    "sha256": "552286c8850b0c3e1e0aa977e06d0d01a588a45483623633aacfb836cdfa20ec",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-export-strip-2.png",
+    "sha256": "cf245c2b41694dde4905dca2e8fcc259452226ef17fba26d5f232ec93816a3dd",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/ESP-full/after/390-export-strip-3.png",
+    "sha256": "f94a195e0dfb90bc545b9a0d1b0480c635dc1462fe39a08865f9d5ef600304eb",
+    "viewed": true,
+    "stage": "ESP-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/ger-bayern.svg.png",
+    "sha256": "4ff3c5aec5e86871b6a9dca021e36ee08e198ec1a468f67d6c58f3bc9618a8c4",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/ger1-hamburg.svg.png",
+    "sha256": "16096f8a93e37cf9bd132eb8d8fa6f35cc4e8ed08a05be812af70358f71bcb9a",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/ger1-hoffenheim.svg.png",
+    "sha256": "d4af94e7260e9dde94eb38b4d60647cb838d103a47516baddf25b6353918f1a3",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/ger1-werder-bremen.svg.png",
+    "sha256": "397049e017f56d96159f4eb5d820a54735e5f65568fe4f46f75ccd33c241187b",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/390-market-offers.png",
+    "sha256": "bc5dd436c3fc3c354180bc994a217a20e9d2696626e972500176392f988f5ed9",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/390-retired-clubs.png",
+    "sha256": "470a97ec3358a2dce4324919a9b5fac4d727f116c9c74f80591209f7db878b5a",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/1280-export.png",
+    "sha256": "abeaebd0f1d47109bfd875e9528ee49bc3da0211fb89f826289ce4dcda0bd7db",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/390-export.png",
+    "sha256": "08e72b1eb5acbac86c457dac970d495d536674f755a97bdc37553dfabf07f515",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/1280-export-strip-0.png",
+    "sha256": "aa2e65822820ac1fef3f4901cb985bc1acbb06a7b92fef082c0b6d90bdc30ab6",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/1280-export-strip-1.png",
+    "sha256": "e0a61a9b676bc3e4c70ce7e7a8c164afcdf7988025294460736eda049fe7f193",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/390-export-strip-0.png",
+    "sha256": "ebdf64c4ad9ccd90a6c54a6f0d1968177f2262643fc775261aa079b93199546c",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-pilot/after/390-export-strip-1.png",
+    "sha256": "d528b9ec054d6c97b40ce9c064a6457065ace4e23915889a2ab3849fbdee0f57",
+    "viewed": true,
+    "stage": "GER-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger-dortmund.svg.png",
+    "sha256": "346e316040878452f4e6a58fecc533a5706bc454e18a2b0ef19200bc3cdb766d",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger-frankfurt.svg.png",
+    "sha256": "d5876a7235b6e27271528a4bb61266c773b44269124ca4c5f068bdb474d93eae",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger-mainz.svg.png",
+    "sha256": "a0706f84cea3218e45864b7ec271812a073b245b3baa640f59a596e38b2b405d",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-augsburg.svg.png",
+    "sha256": "a77de77d92027d8bb7e1b0b3be7b18f9f5d2c0f4c40878dbec4517b6db373824",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-bayer-leverkusen.svg.png",
+    "sha256": "b6604ec22e0cfa03193c38a438d5294e60d92458305312ec9c7e3c65d57de842",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-borussia-monchengladbach.svg.png",
+    "sha256": "0545d2aa5f1f9c52178371243a0edd6c4e3b496a2ce1caedbfac5037f3526484",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-elversberg.svg.png",
+    "sha256": "5c412c335ebd6e25106642cab648d2337c67ebc98183b3201908559f3c41e71a",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-freiburg.svg.png",
+    "sha256": "f7e83c1b1f19d33a2438f1cf4e231852b6e751894e944697921b0ad828ca5b46",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-koln.svg.png",
+    "sha256": "796e3dafdcec2cb77270cffb28edbb12588e0a53cc91c7f54d2441331681b9b4",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-paderborn.svg.png",
+    "sha256": "e0caae5472ae357311a16241e153c0cc319b125a6a60a1215df80610f8101646",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-rb-leipzig.svg.png",
+    "sha256": "39bf910a09ec5b106adfb74a51c176e3c1b9a12707d2c7473f219d9c9f2aed3a",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-schalke-04.svg.png",
+    "sha256": "937b6b23dac8ae611c891c6676544f63a9010b50474ac57cada5ede145f4b22c",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-stuttgart.svg.png",
+    "sha256": "b2ca234b900ba6e24bbe9df547d41062c0e319fc62f00026a466834e573b9f77",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/ger1-union-berlin.svg.png",
+    "sha256": "9a438837c25781836c8ee9379c8cf7a7a7735291ac902600aa77397d29171011",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/1280-player.png",
+    "sha256": "d8d7a3cd042cd518388299d34515c6576bc6d31a4afae18f2f095b108d23f959",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/1280-history.png",
+    "sha256": "4d6f1eae2c8886622cbb13f3905aaf8f4640f4d91ba309ad14ba46a8878e2a84",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/1280-export.png",
+    "sha256": "af85cd595b193fcb77c651bbeaa7255342b1d3a7856dfe9b31e3105319b6cfa7",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/390-player.png",
+    "sha256": "4977a07583283488e61dc7bbcc673bde55d6c102ce94ec611d997fddc12520da",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/390-history.png",
+    "sha256": "0de1aae1e3bd42e30fe1bc9571dc6c4299fe4f59376451f85ba69a7108e4139b",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/390-export.png",
+    "sha256": "704584c70c72894ff878e551dbc42e5e6ff671fef734139e35ceb05d2c6ecf7e",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/320-market-offers.png",
+    "sha256": "01f11f99880569cf2eb373cf78bfbf3b3ba93b406e292d7d417f9bfafeb6cf9f",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/320-ledger.png",
+    "sha256": "93656c4f93280bb0387dcdd60bee8cf0805db0ef7ca3853821c87ac273db89dd",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/320-retired-clubs.png",
+    "sha256": "a77788700a6bd3af423fa097343968708ced22523eb55e547c2eeeb25d3c371c",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/1280-export-strip-0.png",
+    "sha256": "ec27ba8e565a9e7d07d2f40e73d934c4265375da8acbeca2014c2de3e3649641",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/1280-export-strip-1.png",
+    "sha256": "a78eb96a2794da470a4ecd47acc05054cdff68cf2b780dfab7763fd8fe07171d",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/1280-export-strip-2.png",
+    "sha256": "b71eb9e0880107b45aa6ae66e7bbda66dba63e7e3af4fa7dd47ac852a12e637e",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/1280-export-strip-3.png",
+    "sha256": "985d2f59c4b5f1972764d7e6c26a006c68a432646fe0c0c526432a1a3f9e8e53",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/390-export-strip-0.png",
+    "sha256": "bb543d4d9900e9f266587a7cceb1beabf84f5a59f41486ce44ee4f0cf933c93c",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/390-export-strip-1.png",
+    "sha256": "84b03c26c488e992ddc34c722bdfe69fe5e971b6a675f257d9fcb654727b4b30",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/390-export-strip-2.png",
+    "sha256": "da838f28f3a4246a53ac9f6609a39b25a3d973dc3b74f3e5da8a5781ce08c473",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/GER-full/after/390-export-strip-3.png",
+    "sha256": "4e57d6a0d18c9d0b9a0d0c0ca7efd6fd1bdaa39b2eadce1505a8947d08f77fce",
+    "viewed": true,
+    "stage": "GER-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/fra-psg.svg.png",
+    "sha256": "9f11ead165c543fb42ac9983edad11ed0e99bc375b1fe1b31614080a7924a300",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/fra1-angers.svg.png",
+    "sha256": "84ff199766b9ea561feb220e0d5b6ee3e9c4a3790aeaecd805c86f68e40caf70",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/fra1-marseille.svg.png",
+    "sha256": "b23064ac818c36d9e7851876117ba8e338b26660920ad38dbb9764354940f4d5",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/fra1-paris-fc.svg.png",
+    "sha256": "cf67a658b1b0509c939654ba15f651d967127c16c0f4e625bc016a41d8ed5d0f",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/390-market-offers.png",
+    "sha256": "3e6c6aa14aac049216e6a499beb9e442c0bd6506ac3f1fce33ebeb8622446ae9",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/390-retired-clubs.png",
+    "sha256": "10778df680c3b70800b8f9cd11517b79bf175b2b2adb85415a788c4b8d43949a",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/1280-export.png",
+    "sha256": "c2dccb635ec347bb719d02ed7aff37f214037a0c18fb938f798ed066e32f13a5",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/390-export.png",
+    "sha256": "7da5b259b555e59521d869f1a9ee4bd0f70f49d852aa7d5019b5289de0a2c542",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/1280-export-strip-0.png",
+    "sha256": "64e44d6fc0ee28264991cee2f64d130c9ac0451582f7a54ae301ffd9977275dc",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/1280-export-strip-1.png",
+    "sha256": "b00466d358e36a6ed5ebba43d6c8b7dedbc5de59bae871690e413751ee5472b5",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/390-export-strip-0.png",
+    "sha256": "4787777acd77d8fff982d3051db758675a59920fa0d9c8084592bb85cec15b25",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-pilot/after/390-export-strip-1.png",
+    "sha256": "d528b9ec054d6c97b40ce9c064a6457065ace4e23915889a2ab3849fbdee0f57",
+    "viewed": true,
+    "stage": "FRA-pilot"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra-lille.svg.png",
+    "sha256": "1f0a75fe0f585ba3ee23d5f58555301d898e72c168ad6ff7287b7c8786271251",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra-monaco.svg.png",
+    "sha256": "b500e8e93b1d05ae8df03945bb8b0045c80cbb989e1a8f52fee876546b64b35b",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra-strasbourg.svg.png",
+    "sha256": "0094d6cfe6bda76f432d0678e13de55a2600a1913704acd82eda07c563d72d1c",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-auxerre.svg.png",
+    "sha256": "403b8a5c53fdc0694245cd72be0d52cbfad176aea6dd29867a6e680f9d650a8c",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-brest.svg.png",
+    "sha256": "c9a02af0ccbcbba88db7e867413a7edb2dc92128b8edf5d35e0ebef035114f5b",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-le-havre.svg.png",
+    "sha256": "a17e2442348a2acf9984b497cf1c2f7e59ccd8b0fb5ac0c0b6fbba877f82e7f6",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-le-mans.svg.png",
+    "sha256": "a376769807cce5a5fd322148efd6465d86eb8eee6d7815fc2bbb3059cdd034a5",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-lens.svg.png",
+    "sha256": "f23907b42a80773c902fd73b09258ac04e24ddd94514f577c4c3cd6a32072ac2",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-lorient.svg.png",
+    "sha256": "200d1a61f4a6bc1e649f19f2fffcbb2a15062bbd52ff8a3035c48148a2217c1e",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-nice.svg.png",
+    "sha256": "38ed40cb566bf7202e8c73e471199d6f5287964ef61b7686fac122ca7dd6ff73",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-olympique-lyonnais.svg.png",
+    "sha256": "39d53c0392d5eab1c6f157135b4c4937e635e531ef4d5bcfd654c448636f4bf8",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-rennes.svg.png",
+    "sha256": "3e30853f3e84a0bebce9b93fe36705af150fe51e2f92ecdce39a536f872e5f1e",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-toulouse.svg.png",
+    "sha256": "b74f3b9da41c0af2dfa7c0735c46e87932cf16bd53006cb0c50bd5e43f4ef012",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/fra1-troyes.svg.png",
+    "sha256": "b6df933f2bb67350a00d1952f42e90d4510e8e8d33565ca09d3198951ad39ca6",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-market-offers.png",
+    "sha256": "3e91a88888b37600922cfcad6b99550a7caa08e202fd34f40f2f0029905f058b",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-player.png",
+    "sha256": "5a42ca9e15bc24901d2215beb67506e56241bc3f6d9a4c611f7ec25fd64f72d0",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-history.png",
+    "sha256": "24d728f022402fb0819c299a1c9512dce71c04f4060b775a176a7037f9415e26",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-export.png",
+    "sha256": "5b5a5ef901d849834ca0779d645406df443c32f98c9ff174142c6f39c4adeff8",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-market-offers.png",
+    "sha256": "c7e877c43b5322dce4b31c0d266bd670564c79e555e676de513a2bf655aa4938",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-player.png",
+    "sha256": "7a4bb80a6970ae0cc9d9d4c8ae58e497186ac1797a77e358110afb0f11a1a2c2",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-history.png",
+    "sha256": "5c0ef719c41c4c1c8642310404cea940d3bd4e0bca0dadc312aced7b5fc67ce5",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-export.png",
+    "sha256": "907c9e2c121767ca2e0d3e815d61d85839987b70095ef18ed51cb12dbdfb8928",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/320-market-offers.png",
+    "sha256": "f9035b40e9318bf88f2d4c4b33121c24c50966c19a24a003e321ceba1656a085",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/320-ledger.png",
+    "sha256": "e88d534a5ce98e21d291973b89fb405b20b38c296b7f2d20f8a3878f2dabb603",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/320-retired-clubs.png",
+    "sha256": "01909d154dda4882dd1f0202e93225428fe3dd3fb25c83a05a6c9adb59ec3021",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-export-strip-0.png",
+    "sha256": "58fca819cf354c0b326d15d2d75d2ffd2d7448c2fdb0d9b7ef88721d00101eff",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-export-strip-1.png",
+    "sha256": "4fbce7f2187fbdb63baa11b7d261b7b8ee6d1e57e91e7a96199d24c98ec02298",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-export-strip-2.png",
+    "sha256": "93e26cb03551be320d23389aa2d195873af4db952de06426da3eac5ed56edb5d",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/1280-export-strip-3.png",
+    "sha256": "985d2f59c4b5f1972764d7e6c26a006c68a432646fe0c0c526432a1a3f9e8e53",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-export-strip-0.png",
+    "sha256": "7d82d0ca0807c3cb44ddaae1254b16b8a4f29925493cc3680814c23fb5ab8a9c",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-export-strip-1.png",
+    "sha256": "1de6b10c850eaeb388799f96280026e21632d6d7ccdafe30f2356b72d44be138",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-export-strip-2.png",
+    "sha256": "eba72660e2c76702cd66fab352e433c35d0d367f79a1682358f2163e2d21e735",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/FRA-full/after/390-export-strip-3.png",
+    "sha256": "4e57d6a0d18c9d0b9a0d0c0ca7efd6fd1bdaa39b2eadce1505a8947d08f77fce",
+    "viewed": true,
+    "stage": "FRA-full"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/Q/supplement/ENG-negotiation.png",
+    "sha256": "1649c4607a105e8d338911a1a1c3f9475aff8670b65f644c10f63029b8368a7b",
+    "viewed": true,
+    "stage": "Q"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/Q/supplement/ESP-negotiation.png",
+    "sha256": "048e4fcff8d844e4de2d0a9971d836f9b290a8787126a8119be5c07a09a8a5d5",
+    "viewed": true,
+    "stage": "Q"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/Q/supplement/GER-negotiation.png",
+    "sha256": "bed313b7996f29b5598683adcafb084c66b18f3732dc45ccb2cf0c16f186ee58",
+    "viewed": true,
+    "stage": "Q"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/Q/supplement/FRA-negotiation.png",
+    "sha256": "d3f06341de7de264a9a7482231dd74f8f81fc568b53a8194fa5ce59920972ed5",
+    "viewed": true,
+    "stage": "Q"
+  },
+  {
+    "path": "/tmp/CLR4-20260912/Q/fallback-r2/fallback.png",
+    "sha256": "c8fe79895e0d3aae0fefc124837f4d82edb62d6411d848f4ed5d39bcde7c3b7c",
+    "viewed": true,
+    "stage": "Q"
+  }
+]

@@ -1,0 +1,603 @@
+{
+  "head": "6ca977ee452c9572db60ac0d229638071de1c705",
+  "packageVersion": "1.1.0",
+  "saveDataVersion": [
+    12,
+    12
+  ],
+  "protectedBeforeFileCount": 2414,
+  "candidateFileCount": 339,
+  "candidateStillIdentical": true,
+  "sourceTargetDistMatches": 76,
+  "changedOrAddedProductTestsDocs": [
+    {
+      "path": "public/assets/clubs/crests/eng-arsenal.svg",
+      "beforeSHA": null,
+      "afterSHA": "c927591eb73f697f9339338c89f02caf5e5b33fb2d1fc3baae1f57376aa9d7e2",
+      "bytes": 27769,
+      "distSHA": "c927591eb73f697f9339338c89f02caf5e5b33fb2d1fc3baae1f57376aa9d7e2"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng-brighton.svg",
+      "beforeSHA": null,
+      "afterSHA": "66b77b51d333123fba616561cd09e3023b8aaf61f1ca67d2d71c705f82208bf1",
+      "bytes": 30558,
+      "distSHA": "66b77b51d333123fba616561cd09e3023b8aaf61f1ca67d2d71c705f82208bf1"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng-fulham.svg",
+      "beforeSHA": null,
+      "afterSHA": "ef5b4981a76812a9450237e7771e42cfa2d3dd379aa434d6bdb74ea358690b0d",
+      "bytes": 22124,
+      "distSHA": "ef5b4981a76812a9450237e7771e42cfa2d3dd379aa434d6bdb74ea358690b0d"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng-liverpool.svg",
+      "beforeSHA": null,
+      "afterSHA": "3d965984cc0c3e608f4aae8462f27ecf9f1efba9bf75b75117c9f8b8d91b40cd",
+      "bytes": 27744,
+      "distSHA": "3d965984cc0c3e608f4aae8462f27ecf9f1efba9bf75b75117c9f8b8d91b40cd"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-afc-bournemouth.svg",
+      "beforeSHA": null,
+      "afterSHA": "98cf0f9a2fb1f2b419fc7af4937677c183358001eb1df337f0a702e282e54a2c",
+      "bytes": 50360,
+      "distSHA": "98cf0f9a2fb1f2b419fc7af4937677c183358001eb1df337f0a702e282e54a2c"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-aston-villa.svg",
+      "beforeSHA": null,
+      "afterSHA": "b739ddb5c5cec03f80b22d02661980cea092b592e1c6348734eace3263e209f6",
+      "bytes": 17357,
+      "distSHA": "b739ddb5c5cec03f80b22d02661980cea092b592e1c6348734eace3263e209f6"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-brentford.svg",
+      "beforeSHA": null,
+      "afterSHA": "87fd875575a0e2ffce9d1011b0692b06e91b13e35daff772ac8224b688ac3ffc",
+      "bytes": 66166,
+      "distSHA": "87fd875575a0e2ffce9d1011b0692b06e91b13e35daff772ac8224b688ac3ffc"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-chelsea.svg",
+      "beforeSHA": null,
+      "afterSHA": "db6f0c61e3656360087f7b139292ed1dd2bf7c7be640405b17596cb8c7060488",
+      "bytes": 26271,
+      "distSHA": "db6f0c61e3656360087f7b139292ed1dd2bf7c7be640405b17596cb8c7060488"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-coventry-city.svg",
+      "beforeSHA": null,
+      "afterSHA": "1e185810689969ba1eee02309f4ae331691a3ec88b22592cd13d45a4480d9635",
+      "bytes": 13779,
+      "distSHA": "1e185810689969ba1eee02309f4ae331691a3ec88b22592cd13d45a4480d9635"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-crystal-palace.svg",
+      "beforeSHA": null,
+      "afterSHA": "61a4f5a9ddbd77e4823fd76478089f5afde3847e6247727876a1bfc0b701f2b9",
+      "bytes": 22627,
+      "distSHA": "61a4f5a9ddbd77e4823fd76478089f5afde3847e6247727876a1bfc0b701f2b9"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-everton.svg",
+      "beforeSHA": null,
+      "afterSHA": "b6551994d4ed66a14534d62232571b60c1a701de22baeae457d98cd3954aeaef",
+      "bytes": 80245,
+      "distSHA": "b6551994d4ed66a14534d62232571b60c1a701de22baeae457d98cd3954aeaef"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-hull-city.svg",
+      "beforeSHA": null,
+      "afterSHA": "ef648066348dfbe9442f0730011536bee080de3345157dbaa36ae3afcb05a8bf",
+      "bytes": 14459,
+      "distSHA": "ef648066348dfbe9442f0730011536bee080de3345157dbaa36ae3afcb05a8bf"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-ipswich-town.svg",
+      "beforeSHA": null,
+      "afterSHA": "39dc28743b00ea7d3208541e21b499f97e1f67b2c5b21f48f10c6f3b7a826823",
+      "bytes": 7422,
+      "distSHA": "39dc28743b00ea7d3208541e21b499f97e1f67b2c5b21f48f10c6f3b7a826823"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-leeds-united.svg",
+      "beforeSHA": null,
+      "afterSHA": "c1e0679279cb9fae3752d41402e39ee4fba2f85ee9890acc0a62430a3cd44b7a",
+      "bytes": 8627,
+      "distSHA": "c1e0679279cb9fae3752d41402e39ee4fba2f85ee9890acc0a62430a3cd44b7a"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-manchester-city.svg",
+      "beforeSHA": null,
+      "afterSHA": "7dbb16351f3c7fd4ab1b7ececc3b99a015ceda4b9f2eb5901c7e0f175573e7df",
+      "bytes": 38899,
+      "distSHA": "7dbb16351f3c7fd4ab1b7ececc3b99a015ceda4b9f2eb5901c7e0f175573e7df"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-manchester-united.svg",
+      "beforeSHA": null,
+      "afterSHA": "3e7b38774417ead8b71e83f9af6f6f382bc93efca080cf22a208eae2f8322d71",
+      "bytes": 23178,
+      "distSHA": "3e7b38774417ead8b71e83f9af6f6f382bc93efca080cf22a208eae2f8322d71"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-newcastle-united.svg",
+      "beforeSHA": null,
+      "afterSHA": "c8b0aa170e87b2116f0b05a62719c8ab15c44c6a4584b45177dd1ea70b64639a",
+      "bytes": 134423,
+      "distSHA": "c8b0aa170e87b2116f0b05a62719c8ab15c44c6a4584b45177dd1ea70b64639a"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-nottingham-forest.svg",
+      "beforeSHA": null,
+      "afterSHA": "f23f8573c05e9b734ea8c2129a9826b3ee2d73b70709179ed11e4d8f280b7137",
+      "bytes": 9617,
+      "distSHA": "f23f8573c05e9b734ea8c2129a9826b3ee2d73b70709179ed11e4d8f280b7137"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-sunderland.svg",
+      "beforeSHA": null,
+      "afterSHA": "c9c6c31da460417c0f7e7c1f92cc47556f4a444f7dc9fd04a8fdbdeb98f7cb42",
+      "bytes": 9984,
+      "distSHA": "c9c6c31da460417c0f7e7c1f92cc47556f4a444f7dc9fd04a8fdbdeb98f7cb42"
+    },
+    {
+      "path": "public/assets/clubs/crests/eng1-tottenham-hotspur.svg",
+      "beforeSHA": null,
+      "afterSHA": "8608b09e0a6f43bb906baecd928ae211489d3d0c130fdbd6c5b77b97eb500901",
+      "bytes": 14553,
+      "distSHA": "8608b09e0a6f43bb906baecd928ae211489d3d0c130fdbd6c5b77b97eb500901"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp-barcelona.svg",
+      "beforeSHA": null,
+      "afterSHA": "65b3c2ae21896bef87e8e4340b0156f9fa5d7a46a1cb4e86485ddf702041e5da",
+      "bytes": 31689,
+      "distSHA": "65b3c2ae21896bef87e8e4340b0156f9fa5d7a46a1cb4e86485ddf702041e5da"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp-celta.svg",
+      "beforeSHA": null,
+      "afterSHA": "22e7d6826e82b2af988b4aeebec4e499232b40a0b8877c4b3446e1ef87dd05e2",
+      "bytes": 18194,
+      "distSHA": "22e7d6826e82b2af988b4aeebec4e499232b40a0b8877c4b3446e1ef87dd05e2"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp-real-madrid.svg",
+      "beforeSHA": null,
+      "afterSHA": "1dea490ac5b5ad34a46df68a45699291334d1b2f01be2689d58c68390f78a2ab",
+      "bytes": 11936,
+      "distSHA": "1dea490ac5b5ad34a46df68a45699291334d1b2f01be2689d58c68390f78a2ab"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp-real-sociedad.svg",
+      "beforeSHA": null,
+      "afterSHA": "fac804d8276ccb979400e46f38cdd113c1d1ad8ab1a0d9a4f805dff46d3c1198",
+      "bytes": 65086,
+      "distSHA": "fac804d8276ccb979400e46f38cdd113c1d1ad8ab1a0d9a4f805dff46d3c1198"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-alaves.svg",
+      "beforeSHA": null,
+      "afterSHA": "c905791e4dd4500f376c5bad42644d290fed0975be90c1aceaa1e8ae6efe3ea8",
+      "bytes": 36790,
+      "distSHA": "c905791e4dd4500f376c5bad42644d290fed0975be90c1aceaa1e8ae6efe3ea8"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-athletic-club.svg",
+      "beforeSHA": null,
+      "afterSHA": "568f3f2b89599b5a8d45ed816fd8b89d076a13859450a6a98d0df1b1545ca648",
+      "bytes": 15230,
+      "distSHA": "568f3f2b89599b5a8d45ed816fd8b89d076a13859450a6a98d0df1b1545ca648"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-atletico-de-madrid.svg",
+      "beforeSHA": null,
+      "afterSHA": "d302c60a4a74711c0131b30794364c13a0f6ab7f9dbedbfbedb909bb8711e41a",
+      "bytes": 10901,
+      "distSHA": "d302c60a4a74711c0131b30794364c13a0f6ab7f9dbedbfbedb909bb8711e41a"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-deportivo-la-coruna.svg",
+      "beforeSHA": null,
+      "afterSHA": "0c1c219e35ce1a36496a160e0bbfe205a3a1af1b9f2eec7dcfc773523ece80bb",
+      "bytes": 21073,
+      "distSHA": "0c1c219e35ce1a36496a160e0bbfe205a3a1af1b9f2eec7dcfc773523ece80bb"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-elche.svg",
+      "beforeSHA": null,
+      "afterSHA": "fa7a9e49df8c637cf2a38d4bb20a9161c2048874d4a1710488024e170faa9842",
+      "bytes": 7432,
+      "distSHA": "fa7a9e49df8c637cf2a38d4bb20a9161c2048874d4a1710488024e170faa9842"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-espanyol.svg",
+      "beforeSHA": null,
+      "afterSHA": "4ec5234a29bc1d915653eda53ce8e418c30bce8f1d189ac3e2771b673e3e02c6",
+      "bytes": 17406,
+      "distSHA": "4ec5234a29bc1d915653eda53ce8e418c30bce8f1d189ac3e2771b673e3e02c6"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-getafe.svg",
+      "beforeSHA": null,
+      "afterSHA": "b513bdfff443f6083c65f848f3aaddee39fac4044daeb2abc5ee65dd5f889ac0",
+      "bytes": 22339,
+      "distSHA": "b513bdfff443f6083c65f848f3aaddee39fac4044daeb2abc5ee65dd5f889ac0"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-levante.svg",
+      "beforeSHA": null,
+      "afterSHA": "2166779e48ecf50850507e2b20b6393450fa15b881d829d96ae0ba848a63b05c",
+      "bytes": 10186,
+      "distSHA": "2166779e48ecf50850507e2b20b6393450fa15b881d829d96ae0ba848a63b05c"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-malaga.svg",
+      "beforeSHA": null,
+      "afterSHA": "555d57e968a74a51707ad258f6ba57027a44ae693ed2346301886d628b55fdaf",
+      "bytes": 8168,
+      "distSHA": "555d57e968a74a51707ad258f6ba57027a44ae693ed2346301886d628b55fdaf"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-osasuna.svg",
+      "beforeSHA": null,
+      "afterSHA": "c1d43dff395a3e137edad1bac2b5f59d2a46670b61f0f069efbfc4ecd6d41783",
+      "bytes": 8753,
+      "distSHA": "c1d43dff395a3e137edad1bac2b5f59d2a46670b61f0f069efbfc4ecd6d41783"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-racing-de-santander.svg",
+      "beforeSHA": null,
+      "afterSHA": "3c231934f6e5702429701ded73c8ad7ff1588227b769d956c07e0a4c89e84eb9",
+      "bytes": 7668,
+      "distSHA": "3c231934f6e5702429701ded73c8ad7ff1588227b769d956c07e0a4c89e84eb9"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-rayo-vallecano.svg",
+      "beforeSHA": null,
+      "afterSHA": "a05414f4655de54475f92299fff49efbcc8b302ab73bda28c4e3ffdfcaf68d00",
+      "bytes": 27008,
+      "distSHA": "a05414f4655de54475f92299fff49efbcc8b302ab73bda28c4e3ffdfcaf68d00"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-real-betis.svg",
+      "beforeSHA": null,
+      "afterSHA": "507f632b88db3af9bb14a6b31eec5c2594538bee88372019de5d0c5d7201030d",
+      "bytes": 9759,
+      "distSHA": "507f632b88db3af9bb14a6b31eec5c2594538bee88372019de5d0c5d7201030d"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-sevilla.svg",
+      "beforeSHA": null,
+      "afterSHA": "6c31e8f49fd4c9fd8f69dfda1f7d608b0fe9f86d523e6c67c8af8741b5304035",
+      "bytes": 38395,
+      "distSHA": "6c31e8f49fd4c9fd8f69dfda1f7d608b0fe9f86d523e6c67c8af8741b5304035"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-valencia.svg",
+      "beforeSHA": null,
+      "afterSHA": "e314f842f6b869d109723644af87149cc951a0afc1dd736ab9f04d313612762a",
+      "bytes": 5532,
+      "distSHA": "e314f842f6b869d109723644af87149cc951a0afc1dd736ab9f04d313612762a"
+    },
+    {
+      "path": "public/assets/clubs/crests/esp1-villarreal.svg",
+      "beforeSHA": null,
+      "afterSHA": "e4e3d0e595a4d49ad4aa0ee7d6af0fa66b214c9f08218af4b08c2fc7ae007483",
+      "bytes": 10988,
+      "distSHA": "e4e3d0e595a4d49ad4aa0ee7d6af0fa66b214c9f08218af4b08c2fc7ae007483"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger-bayern.svg",
+      "beforeSHA": null,
+      "afterSHA": "d11c4ed08185e23dd65395ce9fe0ea1445d19fdf742f69e8613831594e6ddf38",
+      "bytes": 11187,
+      "distSHA": "d11c4ed08185e23dd65395ce9fe0ea1445d19fdf742f69e8613831594e6ddf38"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger-dortmund.svg",
+      "beforeSHA": null,
+      "afterSHA": "2d1df22ef44afe1fd5233f341cc1d077094093c17f805b0b40ae06dfd138f80d",
+      "bytes": 10111,
+      "distSHA": "2d1df22ef44afe1fd5233f341cc1d077094093c17f805b0b40ae06dfd138f80d"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger-frankfurt.svg",
+      "beforeSHA": null,
+      "afterSHA": "bfcb5f3e73e06142bc25e66ea9a79ce9502c5a76ffca01ae804d6c72d47fd534",
+      "bytes": 11833,
+      "distSHA": "bfcb5f3e73e06142bc25e66ea9a79ce9502c5a76ffca01ae804d6c72d47fd534"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger-mainz.svg",
+      "beforeSHA": null,
+      "afterSHA": "90ccb4636f91d824d090cad81d1d1948816a2b6f236eb54a74caf29bff0242a7",
+      "bytes": 80577,
+      "distSHA": "90ccb4636f91d824d090cad81d1d1948816a2b6f236eb54a74caf29bff0242a7"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-augsburg.svg",
+      "beforeSHA": null,
+      "afterSHA": "4b76a58ea022172db141e409af588097aa24c07806a2b0e821d1decc064eeada",
+      "bytes": 143827,
+      "distSHA": "4b76a58ea022172db141e409af588097aa24c07806a2b0e821d1decc064eeada"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-bayer-leverkusen.svg",
+      "beforeSHA": null,
+      "afterSHA": "2bfc99548ee3d70266c9b056d4e350013b751ec6704596db220f1d648f7c433b",
+      "bytes": 11190,
+      "distSHA": "2bfc99548ee3d70266c9b056d4e350013b751ec6704596db220f1d648f7c433b"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-borussia-monchengladbach.svg",
+      "beforeSHA": null,
+      "afterSHA": "8ac049ff480f3a8db64ed6ffc1bd9268c3c86968d4095aaa8300a6d13d8e229b",
+      "bytes": 14965,
+      "distSHA": "8ac049ff480f3a8db64ed6ffc1bd9268c3c86968d4095aaa8300a6d13d8e229b"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-elversberg.svg",
+      "beforeSHA": null,
+      "afterSHA": "a2b513e258e7f30415351a1d9d42f80fdf0479351eb31e81e933b4b8ba1d12d1",
+      "bytes": 182933,
+      "distSHA": "a2b513e258e7f30415351a1d9d42f80fdf0479351eb31e81e933b4b8ba1d12d1"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-freiburg.svg",
+      "beforeSHA": null,
+      "afterSHA": "e3407284c5d2dfe622918bc1fb465cabf1079e73b80828e9bb3b5fa087640820",
+      "bytes": 7513,
+      "distSHA": "e3407284c5d2dfe622918bc1fb465cabf1079e73b80828e9bb3b5fa087640820"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-hamburg.svg",
+      "beforeSHA": null,
+      "afterSHA": "2734afc8657aa6b6f1e20d473a0b6cf4d75a2162762fc3625005c43fbba1a1e6",
+      "bytes": 197991,
+      "distSHA": "2734afc8657aa6b6f1e20d473a0b6cf4d75a2162762fc3625005c43fbba1a1e6"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-hoffenheim.svg",
+      "beforeSHA": null,
+      "afterSHA": "89c8a1642aab4125a3271eb947fb0fdc9902143f322041a1b304601d26bc272a",
+      "bytes": 4429,
+      "distSHA": "89c8a1642aab4125a3271eb947fb0fdc9902143f322041a1b304601d26bc272a"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-koln.svg",
+      "beforeSHA": null,
+      "afterSHA": "def4abf8cd69103f4f2b2cb6056c40fa5fa42b5016c6c25df6a98824fc99f911",
+      "bytes": 85864,
+      "distSHA": "def4abf8cd69103f4f2b2cb6056c40fa5fa42b5016c6c25df6a98824fc99f911"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-paderborn.svg",
+      "beforeSHA": null,
+      "afterSHA": "75c33dd78a260cfe96fe1e4debe41a196764b82ca9d09e2179a12beff82cb570",
+      "bytes": 202149,
+      "distSHA": "75c33dd78a260cfe96fe1e4debe41a196764b82ca9d09e2179a12beff82cb570"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-rb-leipzig.svg",
+      "beforeSHA": null,
+      "afterSHA": "ab4ed512cb3fddb30c8323e7e870975d76b5fc6bdeb287229ed03d80665d892b",
+      "bytes": 9173,
+      "distSHA": "ab4ed512cb3fddb30c8323e7e870975d76b5fc6bdeb287229ed03d80665d892b"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-schalke-04.svg",
+      "beforeSHA": null,
+      "afterSHA": "add631693108ef3da319c13c861dbc31752468c0bfd8691372e75f86ac135698",
+      "bytes": 181745,
+      "distSHA": "add631693108ef3da319c13c861dbc31752468c0bfd8691372e75f86ac135698"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-stuttgart.svg",
+      "beforeSHA": null,
+      "afterSHA": "59b41af573ac25e012e5c7040ce1e5cf891a629aaea9c536af8f51c431017d7a",
+      "bytes": 19265,
+      "distSHA": "59b41af573ac25e012e5c7040ce1e5cf891a629aaea9c536af8f51c431017d7a"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-union-berlin.svg",
+      "beforeSHA": null,
+      "afterSHA": "a9a381b26bb21e8864e1f2bc7a15072c974514e0de459f00e68c761a6a2e544f",
+      "bytes": 113150,
+      "distSHA": "a9a381b26bb21e8864e1f2bc7a15072c974514e0de459f00e68c761a6a2e544f"
+    },
+    {
+      "path": "public/assets/clubs/crests/ger1-werder-bremen.svg",
+      "beforeSHA": null,
+      "afterSHA": "50f2fe9de9c9212d6303eb4e16b9b65d6a093f83c80a07c3f6d3a76c4184e708",
+      "bytes": 246337,
+      "distSHA": "50f2fe9de9c9212d6303eb4e16b9b65d6a093f83c80a07c3f6d3a76c4184e708"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra-lille.svg",
+      "beforeSHA": null,
+      "afterSHA": "b1e880e9408148fafb2ac8dcd0de1f31ffb792bcc2ff91b37e652a5939b8b9b1",
+      "bytes": 12047,
+      "distSHA": "b1e880e9408148fafb2ac8dcd0de1f31ffb792bcc2ff91b37e652a5939b8b9b1"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra-monaco.svg",
+      "beforeSHA": null,
+      "afterSHA": "30939e7db2947b9411edd28d4cf2b297a6a16790e2aa61803291d3eeca5d4fb0",
+      "bytes": 6874,
+      "distSHA": "30939e7db2947b9411edd28d4cf2b297a6a16790e2aa61803291d3eeca5d4fb0"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra-psg.svg",
+      "beforeSHA": null,
+      "afterSHA": "2234fe98ead6274d278004323235beda2d75397f647db40b671a408dc34cfbd4",
+      "bytes": 3345,
+      "distSHA": "2234fe98ead6274d278004323235beda2d75397f647db40b671a408dc34cfbd4"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra-strasbourg.svg",
+      "beforeSHA": null,
+      "afterSHA": "28c61a2f80a4a3e709b5f55d5d61794e76f8ae8d7b82cab7b3b98ec60c20736b",
+      "bytes": 9116,
+      "distSHA": "28c61a2f80a4a3e709b5f55d5d61794e76f8ae8d7b82cab7b3b98ec60c20736b"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-angers.svg",
+      "beforeSHA": null,
+      "afterSHA": "7b1aba9874f9b7967a1fc3f16337a2de10a5114fe5255ecf5591da36cef85c9b",
+      "bytes": 22227,
+      "distSHA": "7b1aba9874f9b7967a1fc3f16337a2de10a5114fe5255ecf5591da36cef85c9b"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-auxerre.svg",
+      "beforeSHA": null,
+      "afterSHA": "a60dbb169108dbfeb5df94c0419094c673c53676f479f9ec770ff82ab2f43001",
+      "bytes": 13654,
+      "distSHA": "a60dbb169108dbfeb5df94c0419094c673c53676f479f9ec770ff82ab2f43001"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-brest.svg",
+      "beforeSHA": null,
+      "afterSHA": "2d512cb4cea72da7fce3cacc95a1038fde84a023793f9277bbdb4e8e72a17475",
+      "bytes": 7076,
+      "distSHA": "2d512cb4cea72da7fce3cacc95a1038fde84a023793f9277bbdb4e8e72a17475"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-le-havre.svg",
+      "beforeSHA": null,
+      "afterSHA": "9afb4c62bf322c2278cee5dac74198bd719c66687216334f04913c9fc7f9c38a",
+      "bytes": 6558,
+      "distSHA": "9afb4c62bf322c2278cee5dac74198bd719c66687216334f04913c9fc7f9c38a"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-le-mans.svg",
+      "beforeSHA": null,
+      "afterSHA": "91b19458d398368ea95caedbca2c9c5fb80388da3aedfc1a0ae5ce44dd900b6f",
+      "bytes": 6828,
+      "distSHA": "91b19458d398368ea95caedbca2c9c5fb80388da3aedfc1a0ae5ce44dd900b6f"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-lens.svg",
+      "beforeSHA": null,
+      "afterSHA": "0cfd52b8df86b414c429d8c0ff1d2701ff229acc1105844da9954df2aa9fffbe",
+      "bytes": 4856,
+      "distSHA": "0cfd52b8df86b414c429d8c0ff1d2701ff229acc1105844da9954df2aa9fffbe"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-lorient.svg",
+      "beforeSHA": null,
+      "afterSHA": "88f80874812dc57eb608ec27a5d208c723ba826a39859a9cde88ce9eb2b1c170",
+      "bytes": 11045,
+      "distSHA": "88f80874812dc57eb608ec27a5d208c723ba826a39859a9cde88ce9eb2b1c170"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-marseille.svg",
+      "beforeSHA": null,
+      "afterSHA": "160ee733674cea1c6c8b192b216b41fa482dd6b50cd76d61dd7cad7ea6364132",
+      "bytes": 7541,
+      "distSHA": "160ee733674cea1c6c8b192b216b41fa482dd6b50cd76d61dd7cad7ea6364132"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-nice.svg",
+      "beforeSHA": null,
+      "afterSHA": "afd303c6756e9b1d225ce44507ab2e17fbe3c18507d5fcb8a9c02be03fe48eaa",
+      "bytes": 9861,
+      "distSHA": "afd303c6756e9b1d225ce44507ab2e17fbe3c18507d5fcb8a9c02be03fe48eaa"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-olympique-lyonnais.svg",
+      "beforeSHA": null,
+      "afterSHA": "ca2a6f5db376fccfdc08906401e72baf3603b368b3d7353eb9a2786fd08ace82",
+      "bytes": 17194,
+      "distSHA": "ca2a6f5db376fccfdc08906401e72baf3603b368b3d7353eb9a2786fd08ace82"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-paris-fc.svg",
+      "beforeSHA": null,
+      "afterSHA": "b5f0c81acd54dfff799e4bd7a2e6f533e11f4a123bf7dab60639cde89597bfe2",
+      "bytes": 37295,
+      "distSHA": "b5f0c81acd54dfff799e4bd7a2e6f533e11f4a123bf7dab60639cde89597bfe2"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-rennes.svg",
+      "beforeSHA": null,
+      "afterSHA": "4956b22a5644a978640781d42a181dd574b97ce154ac973a15728b98d4d7b78b",
+      "bytes": 13484,
+      "distSHA": "4956b22a5644a978640781d42a181dd574b97ce154ac973a15728b98d4d7b78b"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-toulouse.svg",
+      "beforeSHA": null,
+      "afterSHA": "ab4c206c2c8e890386e544f120606b73fbe37f0fba95566750e99f4b010af04e",
+      "bytes": 8450,
+      "distSHA": "ab4c206c2c8e890386e544f120606b73fbe37f0fba95566750e99f4b010af04e"
+    },
+    {
+      "path": "public/assets/clubs/crests/fra1-troyes.svg",
+      "beforeSHA": null,
+      "afterSHA": "510a0b820be5b4e265af12654752c409e112fbce4559c96fd18f1661c11dfe45",
+      "bytes": 7619,
+      "distSHA": "510a0b820be5b4e265af12654752c409e112fbce4559c96fd18f1661c11dfe45"
+    },
+    {
+      "path": "src/data/clubs/clubCrests.ts",
+      "beforeSHA": "5bcb49778ce1c801e694560ddd77346cf9e29daa141c46473d3ef959fe030e51",
+      "afterSHA": "897da2093f79add2a81fb5eb7d093842d782786bcbad5057a88c3ff2d3540b30"
+    },
+    {
+      "path": "src/data/clubs/__tests__/clubCrests.test.ts",
+      "beforeSHA": "ca7c5a2f23a12c4d8ee4e293b53cb2190c1462ec47fbb36309c6d87de9389f69",
+      "afterSHA": "4271f6191c6a0199bde01ea356bb754d327fdba7f82679aab2325a53fdd71d71"
+    },
+    {
+      "path": "src/components/__tests__/ClubCrest.test.ts",
+      "beforeSHA": "eb85e756ea8582ed24056bc800741f14d2f1101cceffe1eb5c3eea9cdd01c29b",
+      "afterSHA": "3e8b02c212b82e9dd0cecea1009859010b787f2f877e10272d83a726daed519a"
+    },
+    {
+      "path": "docs/46-club-logo-replacement-plan.md",
+      "beforeSHA": "4428baa2cea701e2f66ba38ed717be5f113438d441ebed2b62bb6f73927f2072",
+      "afterSHA": "2ac66043ca20154d243bd7cb052e6ef8a67bc7af84d3f84c4f0e43917d0273e7"
+    },
+    {
+      "path": "docs/49-astra-four-league-crests-instructions.md",
+      "beforeSHA": "eb57e14430fcdab000f213fca43d640da47eca7838d0276161e9abdd7b09ab25",
+      "afterSHA": "d5f39a60ea473e5e0db34fce96d973e9364a7dd2b0d54a998eee8c90abf59690"
+    }
+  ],
+  "newEvidenceFiles": [
+    "docs/evidence/CLR4-20260912/ENG-full-ESP-pilot-protection.json",
+    "docs/evidence/CLR4-20260912/ENG-full-ESP-pilot-r2-protection.json",
+    "docs/evidence/CLR4-20260912/ESP-full-GER-pilot-protection.json",
+    "docs/evidence/CLR4-20260912/GER-full-FRA-pilot-protection.json",
+    "docs/evidence/CLR4-20260912/README.md",
+    "docs/evidence/CLR4-20260912/final-manifest.json",
+    "docs/evidence/CLR4-20260912/final-protection.json",
+    "docs/evidence/CLR4-20260912/source-map.json",
+    "docs/evidence/CLR4-20260912/viewed-image-manifest.json",
+    "docs/evidence/CLR4-20260912/visual-review.json"
+  ],
+  "unexpectedNewFiles": [],
+  "diffCheck": {
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "service4271Closed": true,
+  "browserClosed": "page scripts finally await browser.close",
+  "notCommittedPushedDeployed": true,
+  "evidenceHashesExcludingSelf": {
+    "docs/evidence/CLR4-20260912/viewed-image-manifest.json": "637897b78823573d36a51b7cbc866810bf673ab8ffd44225a8fec9276b2ca730",
+    "docs/evidence/CLR4-20260912/visual-review.json": "6e0e3df30f81632d685be5d02b401a01993b15e768ae64f7545be0a40d6df28e",
+    "docs/evidence/CLR4-20260912/README.md": "9ac356aab51f9f1486c67437a99eaff46bfc57b224d5ef38ff83acdf0b7042a4",
+    "docs/evidence/CLR4-20260912/ESP-full-GER-pilot-protection.json": "94885d96cc93cd8a099583526c04b54b290f16d0d50476e23eda0f6802eb99e2",
+    "docs/evidence/CLR4-20260912/final-protection.json": "e3bbf1cf6772e9299a69a7d063080731020650f91ca79ff66454e0d79129149e",
+    "docs/evidence/CLR4-20260912/ENG-full-ESP-pilot-protection.json": "b02bc090d22bf3f8de9f37c3c1114ed9e5b1ed4469fdbdf4683d11b8d126ad4c",
+    "docs/evidence/CLR4-20260912/ENG-full-ESP-pilot-r2-protection.json": "e6f7a89e0b719aefe70cccd2b898d12e34bd3ba8a0f1e6c15eb5322f3d20a82f",
+    "docs/evidence/CLR4-20260912/source-map.json": "59f79b649a5da6c495b056f0662e6420c0e02b83c8adb70cb2f8a8b59c8d4050",
+    "docs/evidence/CLR4-20260912/GER-full-FRA-pilot-protection.json": "cba233899d369f68e0f81d461766f70241bec2a19e6b009fa6753ed7c5c857a7"
+  }
+}

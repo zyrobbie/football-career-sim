@@ -1,0 +1,22 @@
+{
+  "head": "6ca977ee452c9572db60ac0d229638071de1c705",
+  "changedProtectedFiles": [
+    "docs/46-club-logo-replacement-plan.md",
+    "docs/49-astra-four-league-crests-instructions.md",
+    "src/components/__tests__/ClubCrest.test.ts",
+    "src/data/clubs/__tests__/clubCrests.test.ts",
+    "src/data/clubs/clubCrests.ts"
+  ],
+  "unauthorizedChanges": [],
+  "nonTargetManifestRecordsUnchanged": 55,
+  "sourceFilesUnchanged": 76,
+  "targetsByteIdentical": 76,
+  "allAdditionalProtectedFiles": 7,
+  "currentHashes": {
+    "docs/46-club-logo-replacement-plan.md": "2ac66043ca20154d243bd7cb052e6ef8a67bc7af84d3f84c4f0e43917d0273e7",
+    "docs/49-astra-four-league-crests-instructions.md": "d5f39a60ea473e5e0db34fce96d973e9364a7dd2b0d54a998eee8c90abf59690",
+    "src/components/__tests__/ClubCrest.test.ts": "3e8b02c212b82e9dd0cecea1009859010b787f2f877e10272d83a726daed519a",
+    "src/data/clubs/__tests__/clubCrests.test.ts": "4271f6191c6a0199bde01ea356bb754d327fdba7f82679aab2325a53fdd71d71",
+    "src/data/clubs/clubCrests.ts": "897da2093f79add2a81fb5eb7d093842d782786bcbad5057a88c3ff2d3540b30"
+  }
+}
