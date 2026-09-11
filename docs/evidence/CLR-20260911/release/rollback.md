@@ -1,20 +1,33 @@
-# CLR 意甲资产回退
+# 意甲队徽发布回退
 
-基线：`16b8ddf2c14dbc36f7832a58d96ab18da1b53825`，生产与此前成功部署321f747一致。带说明tag `rollback/clr-ita-20260911-before` 已由统筹推送并核验远端peeled提交为上述基线。tag对象 `0f956ce24ec0347e5de025fa1f7f604bcd74c161`。
+可用远端回退标签：`rollback/clr-ita-20260911-before`。标签对象 `0f956ce24ec0347e5de025fa1f7f604bcd74c161`，对应基线提交 `16b8ddf2c14dbc36f7832a58d96ab18da1b53825`；生产代码与此前成功部署 `321f747c3a06e41ed4fc2868778e0aa3a3d9134a` 相同。
 
-当前发布提交尚未创建，不能执行下列回退。发布后将占位符替换为**本批真实产品发布SHA**，不把纯文档skip提交当成产品提交：
+本次已上线产品提交：`d0e5565482d671224a11ea62f8f1509c07d27e57`。回退只恢复[23条生产/测试路径](rollback-files.txt)，保留发布文档、其他功能和用户存档。纯文档收尾后直接revert产品提交可能发生文档修改/删除冲突，所以采用明确白名单恢复、普通提交和推送；不reset、不force push。
+
+以下命令是未来需要回退时使用，**本轮没有执行线上回退**。在新的终端、独立干净副本运行，任何错误立即停止。先验证远端标签仍指向上述完整基线SHA。
 
 ```sh
-git fetch origin main refs/tags/rollback/clr-ita-20260911-before:refs/tags/rollback/clr-ita-20260911-before
-git switch main
-git merge --ff-only origin/main
-git revert --no-edit <CLR_ITA_RELEASE_COMMIT>
+set -e
+clr_rollback_dir=$(mktemp -d /tmp/clr-ita-rollback.XXXXXX)
+git clone https://github.com/zyrobbie/football-career-sim.git "$clr_rollback_dir"
+cd "$clr_rollback_dir"
+git fetch origin tag rollback/clr-ita-20260911-before
+test "$(git rev-parse rollback/clr-ita-20260911-before^{commit})" = 16b8ddf2c14dbc36f7832a58d96ab18da1b53825
+git switch -c codex/rollback-clr-ita-20260911 origin/main
+
+# 若这些路径已有后续修改（例如英超接入），立即停止并交统筹审查。
+git diff --exit-code d0e5565482d671224a11ea62f8f1509c07d27e57 HEAD -- public/assets/clubs/crests src/data/clubs/clubCrests.ts src/data/clubs/__tests__/clubCrests.test.ts src/components/__tests__/ClubCrest.test.ts
+
+git restore --source=refs/tags/rollback/clr-ita-20260911-before --staged --worktree --pathspec-from-file=docs/evidence/CLR-20260911/release/rollback-files.txt
+git diff --cached --name-status
+npm ci
 npm run test:run
 npm run typecheck
 npm run build
-git push origin main
+git commit -m "revert: restore pre-CLR Italian club crests"
+git push origin HEAD:main
 ```
 
-必须在独立、干净的发布副本操作，避免触碰用户正在开发的工作树。提交后等待新SHA对应Pages workflow成功，再核对普通线上URL。20资产变化整体反向应用：8旧图/旧清单恢复，12新图移除，相关测试恢复；组件、CSS、业务、SAVE/DATA及用户存档无需修改。
+推送后必须等待新提交对应Pages部署成功，再逐一核对8份旧意甲图/旧清单、12份新图的移除及正常页面。若远端期间前进，普通push应拒绝；不得force，重新审查变更。
 
-本批将先在临时副本进行 `git revert --no-commit` 演练，逐文件核对生产树与tag基线一致。演练不推送、不实际回退线上，不reset主工作树、不force push。遇到后续重叠提交冲突，停止并由统筹审定最小冲突解决范围，不能覆盖后续功能。
+临时演练包括：执行者从产品提交直接revert后完整树等于基线；统筹在保留最终文档状态的临时副本运行上述白名单restore，验证23条路径与基线一致、12新增图移除、文档保持。详细演练日志仅本地保留，精简结果见[README](README.md)。无需改写玩家存档，SAVE/DATA仍为12/12。

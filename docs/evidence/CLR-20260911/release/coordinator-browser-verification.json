@@ -1,0 +1,17 @@
+{
+  "scope": "Coordinator read-only existing online entry and direct Inter SVG page, ordinary refresh after deployment",
+  "site": "https://footballcareer.zyrobbie.site/",
+  "deployedCommit": "d0e5565482d671224a11ea62f8f1509c07d27e57",
+  "workflow": {"id": 34580160876, "conclusion": "success"},
+  "scriptBefore": "./assets/index-BD1ydlda.js",
+  "scriptAfter": "./assets/index-CqnJNu5T.js",
+  "normalReloadUpdatedScript": true,
+  "InterSVGNormalReloadShowsNewOriginalArtwork": true,
+  "entryTitle": "上场 · TAKE THE FIELD",
+  "bodyNonEmpty": true,
+  "consoleWarningsOrErrors": [],
+  "existingOnlineSaveReadOrChanged": false,
+  "careerFlowExecuted": false,
+  "forcedRefreshOrCacheBustQueryUsed": false,
+  "limitations": "Single in-app browser refresh scope; no claim about all user caches, full online careers or real-phone album saving."
+}

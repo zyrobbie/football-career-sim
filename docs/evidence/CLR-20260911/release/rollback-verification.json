@@ -1,0 +1,15 @@
+{
+  "productCommit": "d0e5565482d671224a11ea62f8f1509c07d27e57",
+  "remoteRollbackTag": "rollback/clr-ita-20260911-before",
+  "baseCommit": "16b8ddf2c14dbc36f7832a58d96ab18da1b53825",
+  "initialFullRevertTreeEqualsBaseline": true,
+  "finalDocsPreservingRestore": {
+    "targetPathsExactlyMatchBaseline": 23,
+    "restoredExistingFiles": 11,
+    "removedNewSVGs": 12,
+    "unrelatedChanges": 0,
+    "publishedDocsPreserved": true
+  },
+  "onlineRollbackExecuted": false,
+  "note": "Detailed local-only logs: rollback-drill.json and coordinator-final-rollback-drill.json. Restore path list is published in rollback-files.txt."
+}

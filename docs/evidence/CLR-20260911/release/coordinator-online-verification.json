@@ -1,0 +1,300 @@
+{
+  "time": "2026-09-11T08:41:16.918967+00:00",
+  "ordinaryURLs": true,
+  "cacheBustQueryUsed": false,
+  "assets": [
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-ac-milan.svg",
+      "status": 200,
+      "bytes": 17161,
+      "SHA": "92a4f7aef70ba5d3cdab75de60dcc782d4527ba6020b5a05d44ae5c31e549412",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-ac-milan.svg",
+      "expected": "92a4f7aef70ba5d3cdab75de60dcc782d4527ba6020b5a05d44ae5c31e549412",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-atalanta.svg",
+      "status": 200,
+      "bytes": 7686,
+      "SHA": "2b14eceefff00cd2b979cfff2c1fc17c9a33cbd8b755d754c29759d9ea5b0623",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-atalanta.svg",
+      "expected": "2b14eceefff00cd2b979cfff2c1fc17c9a33cbd8b755d754c29759d9ea5b0623",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-bologna.svg",
+      "status": 200,
+      "bytes": 4036,
+      "SHA": "fadd5db28fdb7926fcf326ecb957550447527bc54a416cb84ba2882f1506fbd7",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-bologna.svg",
+      "expected": "fadd5db28fdb7926fcf326ecb957550447527bc54a416cb84ba2882f1506fbd7",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-como.svg",
+      "status": 200,
+      "bytes": 11123,
+      "SHA": "3055a86e993ecf9d0f1eb1b44f145e09a29c07c5b376d6369711c96276ae0e17",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-como.svg",
+      "expected": "3055a86e993ecf9d0f1eb1b44f145e09a29c07c5b376d6369711c96276ae0e17",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-inter.svg",
+      "status": 200,
+      "bytes": 17579,
+      "SHA": "3299127a5d95d4a1bd7fab8686471c24efca0d6c539b7634d7ca62068ff0b357",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-inter.svg",
+      "expected": "3299127a5d95d4a1bd7fab8686471c24efca0d6c539b7634d7ca62068ff0b357",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-juventus.svg",
+      "status": 200,
+      "bytes": 5684,
+      "SHA": "ace0584ec3748a8f8fe5857633cb76528a2a7b8b4fa450ffc39b4e43231ae3f6",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-juventus.svg",
+      "expected": "ace0584ec3748a8f8fe5857633cb76528a2a7b8b4fa450ffc39b4e43231ae3f6",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-lazio.svg",
+      "status": 200,
+      "bytes": 19424,
+      "SHA": "c097ac5c7ec9846dbe9ced9014b71b470e97a0374b7b50631999ea167892b1f6",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-lazio.svg",
+      "expected": "c097ac5c7ec9846dbe9ced9014b71b470e97a0374b7b50631999ea167892b1f6",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-roma.svg",
+      "status": 200,
+      "bytes": 10216,
+      "SHA": "afe2ffcb715e0559d74eba1d9b2334f4308b93393f62fb02ae87e17b16554801",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-roma.svg",
+      "expected": "afe2ffcb715e0559d74eba1d9b2334f4308b93393f62fb02ae87e17b16554801",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-torino.svg",
+      "status": 200,
+      "bytes": 16376,
+      "SHA": "46eb6bbe1be5d8e67cca747f27c9694444881d4477e060ba5273e17c9a0efaaa",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-torino.svg",
+      "expected": "46eb6bbe1be5d8e67cca747f27c9694444881d4477e060ba5273e17c9a0efaaa",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita-venezia.svg",
+      "status": 200,
+      "bytes": 11408,
+      "SHA": "3f778124fcd1ad796c5488fab2f67800f4cd4b9b5292ffdd52e11e06de81c94b",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita-venezia.svg",
+      "expected": "3f778124fcd1ad796c5488fab2f67800f4cd4b9b5292ffdd52e11e06de81c94b",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-cagliari.svg",
+      "status": 200,
+      "bytes": 10750,
+      "SHA": "a63024f137426fbedc0d1599c1c053bee9ff47c3f55ffa5da6e841b38736357c",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-cagliari.svg",
+      "expected": "a63024f137426fbedc0d1599c1c053bee9ff47c3f55ffa5da6e841b38736357c",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-fiorentina.svg",
+      "status": 200,
+      "bytes": 27751,
+      "SHA": "10d7963253b2537cf3338d952c517a6437d9fe670ab1aaad910a073a30ec5e85",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-fiorentina.svg",
+      "expected": "10d7963253b2537cf3338d952c517a6437d9fe670ab1aaad910a073a30ec5e85",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-frosinone.svg",
+      "status": 200,
+      "bytes": 13696,
+      "SHA": "c3ae695459f21f3cfa0388cc86805a6835c504ddb3a53459c30b8522b75d38e2",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-frosinone.svg",
+      "expected": "c3ae695459f21f3cfa0388cc86805a6835c504ddb3a53459c30b8522b75d38e2",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-genoa.svg",
+      "status": 200,
+      "bytes": 13407,
+      "SHA": "a5e5aaff4ed77fd043f8346aa41c815cc9f5d9a4f8f9aa81e74a20e41baf91ab",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-genoa.svg",
+      "expected": "a5e5aaff4ed77fd043f8346aa41c815cc9f5d9a4f8f9aa81e74a20e41baf91ab",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-lecce.svg",
+      "status": 200,
+      "bytes": 90495,
+      "SHA": "70473eae93d993c829f0efbb5e2a172256cc69de6347501735a03bb3a8ef0d22",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-lecce.svg",
+      "expected": "70473eae93d993c829f0efbb5e2a172256cc69de6347501735a03bb3a8ef0d22",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-monza.svg",
+      "status": 200,
+      "bytes": 39388,
+      "SHA": "41275e39c36012c7c9b745c4d42bf9069d95e764c66341fadfc09c12ea45da7f",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-monza.svg",
+      "expected": "41275e39c36012c7c9b745c4d42bf9069d95e764c66341fadfc09c12ea45da7f",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-napoli.svg",
+      "status": 200,
+      "bytes": 6562,
+      "SHA": "c3bfa82bd13119894714ab041c150b58263fa383b32d4793a0321662259f1382",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-napoli.svg",
+      "expected": "c3bfa82bd13119894714ab041c150b58263fa383b32d4793a0321662259f1382",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-parma.svg",
+      "status": 200,
+      "bytes": 20408,
+      "SHA": "b0a51e62674cf8447bbf66eb8172e3c1780e8d022b4ef66c644d9af55b0c2f0f",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-parma.svg",
+      "expected": "b0a51e62674cf8447bbf66eb8172e3c1780e8d022b4ef66c644d9af55b0c2f0f",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-sassuolo.svg",
+      "status": 200,
+      "bytes": 5727,
+      "SHA": "7e15635977e8feede6e3a66e53a8da51aac3ff2f669cea06109bf77b2a5f9644",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-sassuolo.svg",
+      "expected": "7e15635977e8feede6e3a66e53a8da51aac3ff2f669cea06109bf77b2a5f9644",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/ita1-udinese.svg",
+      "status": 200,
+      "bytes": 9733,
+      "SHA": "46537c215381feb435a891042628bd60af6e13e55d36826d0c42dc1030159722",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "file": "ita1-udinese.svg",
+      "expected": "46537c215381feb435a891042628bd60af6e13e55d36826d0c42dc1030159722",
+      "matches": true
+    }
+  ],
+  "home": {
+    "url": "https://footballcareer.zyrobbie.site/",
+    "status": 200,
+    "bytes": 953,
+    "SHA": "f7119c48c162d7a6c0c273eea58edec13d6df043e8744207222924a2efaa4085",
+    "contentType": "text/html; charset=utf-8",
+    "cacheControl": "max-age=600",
+    "age": "0"
+  },
+  "bundles": [
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/index-CqnJNu5T.js",
+      "status": 200,
+      "bytes": 863616,
+      "SHA": "cf9136ccddd5cebe42a87d4ed072303085d017ef50ac26817ef9f6a1f3185ceb",
+      "contentType": "application/javascript; charset=utf-8",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "localBuildMatch": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/index-DSx3aor_.css",
+      "status": 200,
+      "bytes": 129205,
+      "SHA": "323aaa3e20293d4ac550f6e3f1143756530df985b688f3ed269f6f7c735dd5be",
+      "contentType": "text/css; charset=utf-8",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "localBuildMatch": true
+    }
+  ],
+  "nonTargets": [
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/cn-shanghai-donggang.svg",
+      "status": 200,
+      "bytes": 756,
+      "SHA": "f46a2a8f1a2142a2dcbcfbafbe686f6c7e0f63682ba1e39ba4709ceb3c243a64",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "matches": true
+    },
+    {
+      "url": "https://footballcareer.zyrobbie.site/assets/clubs/crests/cn-beijing-yuhua.svg",
+      "status": 200,
+      "bytes": 688,
+      "SHA": "4e19b8dec4902a2bdd5d50aa00df4fd7d33e4b4c2bce1d4de10d54b9509b1278",
+      "contentType": "image/svg+xml",
+      "cacheControl": "max-age=600",
+      "age": "0",
+      "matches": true
+    }
+  ]
+}
