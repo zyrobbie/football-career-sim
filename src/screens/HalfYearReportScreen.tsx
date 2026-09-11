@@ -1,3 +1,4 @@
+import { uniqueClubChampionships } from '../engine/honors'
 import { ProfessionalReportActions } from '../components/ProfessionalReportActions'
 import { CareerHub } from '../components/CareerHub'
 import { HonorBadge } from '../components/HonorBadge'
@@ -105,7 +106,7 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
             {report.clubSeason || report.honors?.length ? (
               <SeasonHonorsReport
                 season={report.clubSeason ?? null}
-                honors={report.honors ?? []}
+                honors={uniqueClubChampionships(report.honors ?? [])}
               />
             ) : null}
             {report.nationalTeam ? (

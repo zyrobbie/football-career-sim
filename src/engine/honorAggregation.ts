@@ -1,3 +1,4 @@
+import { uniqueClubChampionships } from './honors'
 import { matchHonorVisual } from '../data/honors/honorVisualRegistry'
 import type { CareerHonor } from '../models/game'
 
@@ -29,7 +30,7 @@ function orderedHonors(honors: readonly CareerHonor[]): CareerHonor[] {
 /** Groups only display data; it never mutates persisted honors or their seasons. */
 export function aggregateCareerHonors(honors: readonly CareerHonor[]): readonly AggregatedCareerHonor[] {
   const groups = new Map<string, CareerHonor[]>()
-  for (const honor of orderedHonors(honors)) {
+  for (const honor of orderedHonors(uniqueClubChampionships(honors))) {
     const key = aggregationKey(honor)
     const group = groups.get(key)
     if (group) group.push(honor)
@@ -63,5 +64,5 @@ export function aggregateClubCareerHonors(
   honors: readonly CareerHonor[],
   clubId: string,
 ): readonly AggregatedCareerHonor[] {
-  return aggregateCareerHonors(honors.filter((honor) => honor.scope === 'CLUB' && honor.clubId === clubId))
+  return aggregateCareerHonors(uniqueClubChampionships(honors).filter((honor) => honor.scope === 'CLUB' && honor.clubId === clubId))
 }
