@@ -436,13 +436,33 @@ export function settleHonorsForWindow(input: {
     }
   }
 
+  const uniqueHonors = uniqueClubChampionships(honors)
   return {
     clubSeason: season,
-    honors,
-    reputationDelta: honors.reduce((sum, item) => sum + reputationForHonor(item.type), 0),
+    honors: uniqueHonors,
+    reputationDelta: uniqueHonors.reduce((sum, item) => sum + reputationForHonor(item.type), 0),
   }
 }
 
+/**
+ * A championship belongs to one competition season, even after a transfer.
+ * Keep source order (current club before former club); never mutate old records.
+ * Missing identity and non-club awards are deliberately left untouched.
+ */
+export function uniqueClubChampionships(honors: readonly CareerHonor[]): CareerHonor[] {
+  const seen = new Set<string>()
+  return honors.filter((item) => {
+    if (item.scope !== 'CLUB' || !['LEAGUE_TITLE', 'DOMESTIC_CUP', 'CONTINENTAL_TITLE'].includes(item.type)) return true
+    const competition = item.competitionLabel.normalize('NFKC').trim()
+    const season = item.seasonLabel.normalize('NFKC').trim()
+    if (!competition || !season) return true
+    const key = JSON.stringify([item.scope, item.type, competition, season])
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
 export function careerHonors(history: CareerHistoryEntry[]): CareerHonor[] {
-  return history.flatMap((entry) => entry.honors ?? [])
+  return uniqueClubChampionships(history.flatMap((entry) => entry.honors ?? []))
 }

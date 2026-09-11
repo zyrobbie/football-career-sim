@@ -163,8 +163,7 @@ export function buildCareerHistoryView(game: GameState): CareerHistoryView {
       goals: club.goals,
       assists: club.assists,
       peakOverall: club.peakOverall,
-      honors: game.history
-        .flatMap((entry) => entry.honors ?? [])
+      honors: summary.honors
         .filter((honor) => honor.scope === 'CLUB' && honor.clubId === club.clubId),
     })),
     nationalTeam: {

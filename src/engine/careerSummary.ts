@@ -268,6 +268,7 @@ function serviceSpellsForEntries(
 
 function aggregateClubs(game: GameState): ClubCareerSummary[] {
   const player = game.player!
+  const honors = careerHonors(game.history)
   const grouped = new Map<
     string,
     {
@@ -321,8 +322,7 @@ function aggregateClubs(game: GameState): ClubCareerSummary[] {
         ...levels,
         ...group.totals,
         peakOverall: group.peakOverall,
-        honors: group.entries
-          .flatMap((entry) => entry.honors ?? [])
+        honors: honors
           .filter(
             (item) => item.scope === 'CLUB' && item.clubId === clubId,
           )

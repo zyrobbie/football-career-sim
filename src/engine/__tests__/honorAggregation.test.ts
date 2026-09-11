@@ -121,8 +121,8 @@ describe('honor aggregation and visual registry', () => {
 
   it('filters a returning player club spell before aggregation and does not mutate input', () => {
     const honors = [
-      honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', competitionLabel: '意甲', clubId: 'ita_inter', windowIndex: 8 }),
-      honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', competitionLabel: '意甲', clubId: 'ita_inter', windowIndex: 16 }),
+      honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', competitionLabel: '意甲', clubId: 'ita_inter', windowIndex: 8, seasonLabel: '2030赛季' }),
+      honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', competitionLabel: '意甲', clubId: 'ita_inter', windowIndex: 16, seasonLabel: '2034赛季' }),
       honor({ type: 'LEAGUE_TITLE', scope: 'CLUB', competitionLabel: '英超', clubId: 'eng_arsenal', windowIndex: 12 }),
     ]
     const before = [...honors]
