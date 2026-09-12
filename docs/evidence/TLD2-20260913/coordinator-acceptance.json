@@ -1,6 +1,6 @@
 {
   "task": "TLD2-20260913",
-  "decision": "Independent local acceptance passed; await executor final candidate then release",
+  "decision": "Accepted and deployed; online verification passed",
   "scope": {
     "base": "034324dd4fdbc0437cc9b7132b8846988eb4854d",
     "changedTracked": [
@@ -1194,8 +1194,140 @@
     }
   ],
   "limits": [
-    "No real device, WeChat, Safari or photo-library test",
-    "Original bundle warning retained",
-    "Full validation and executor final file SHA still to confirm before release"
-  ]
+    "No actual device, WeChat, Safari or photo-library test",
+    "Bundle 911.56kB warning retained"
+  ],
+  "release": {
+    "status": "V2.0 deployed and coordinator verified",
+    "productCommit": "21d98144b0479a1198be644e86fa048f134b88b9",
+    "site": "https://footballcareer.zyrobbie.site/",
+    "publicRepository": "https://github.com/zyrobbie/football-career-sim",
+    "userSpecificPublicDestinationConfirmation": "确认，推送吧",
+    "previousApprovalBlockResolved": true,
+    "pagesRun": "https://github.com/zyrobbie/football-career-sim/actions/runs/34705833319",
+    "pagesConclusion": "success",
+    "version": "2.0.0",
+    "saveData": "12/12",
+    "onlineAssets": {
+      "checkedAt": "2026-09-12T16:40:15.964316+00:00",
+      "resources": [
+        {
+          "path": "index.html",
+          "status": 200,
+          "expectedSHA": "2f5c9c1d3d5ada55edfcb8c4cf6ac76a59e6f8710d6df5b32eacdaffc3a242f3",
+          "onlineSHA": "2f5c9c1d3d5ada55edfcb8c4cf6ac76a59e6f8710d6df5b32eacdaffc3a242f3",
+          "match": true
+        },
+        {
+          "path": "assets/index-BBM1FfY9.css",
+          "status": 200,
+          "expectedSHA": "0736afc1eab8c74e71f5631dd60cba66417b9e6bfca0b50a3c2788d64e336f58",
+          "onlineSHA": "0736afc1eab8c74e71f5631dd60cba66417b9e6bfca0b50a3c2788d64e336f58",
+          "match": true
+        },
+        {
+          "path": "assets/html2canvas-COtBxje2.js",
+          "status": 200,
+          "expectedSHA": "280f6f8544bf76b6db34ef59cb4ed349ff5598fed98cc9c551d158de6e496698",
+          "onlineSHA": "280f6f8544bf76b6db34ef59cb4ed349ff5598fed98cc9c551d158de6e496698",
+          "match": true
+        },
+        {
+          "path": "assets/index-HwOsjSIh.js",
+          "status": 200,
+          "expectedSHA": "adadc64fc33e23167c3327bfacbe82152af11799b519247ce5557aef84d19fc7",
+          "onlineSHA": "adadc64fc33e23167c3327bfacbe82152af11799b519247ce5557aef84d19fc7",
+          "match": true
+        }
+      ]
+    },
+    "onlineFlows": [
+      {
+        "id": "402-31-70-new",
+        "realClicks": 17,
+        "completedReport": {
+          "phase": "HALF_YEAR_REPORT",
+          "history": 13,
+          "cashEuro": 72750,
+          "focus": "BODY_CARE"
+        },
+        "nextPhase": "HALF_YEAR_PLAN",
+        "errors": [],
+        "heights": {
+          ".training-plan": 639.78125,
+          ".path-choice": 119,
+          ".choice-list--training-plan": 141,
+          ".training-plan__recovery": null
+        }
+      },
+      {
+        "id": "402-34-70-new",
+        "realClicks": 13,
+        "completedReport": {
+          "phase": "HALF_YEAR_REPORT",
+          "history": 13,
+          "cashEuro": 72750,
+          "focus": "BODY_CARE"
+        },
+        "nextPhase": "HALF_YEAR_PLAN",
+        "errors": [],
+        "heights": {
+          ".training-plan": 566.78125,
+          ".path-choice": 119,
+          ".choice-list--training-plan": 68,
+          ".training-plan__recovery": null
+        }
+      },
+      {
+        "id": "402-32-45-new",
+        "realClicks": 4,
+        "completedReport": {
+          "phase": "HALF_YEAR_REPORT",
+          "history": 13,
+          "cashEuro": 72750,
+          "focus": "BODY_CARE"
+        },
+        "nextPhase": "HALF_YEAR_PLAN",
+        "errors": [],
+        "heights": {
+          ".training-plan": 298.78125,
+          ".path-choice": null,
+          ".choice-list--training-plan": null,
+          ".training-plan__recovery": 81.78125
+        }
+      }
+    ],
+    "onlineSource": "Constructed anonymous saves in fresh isolated Chromium, 402x874; no real user profile",
+    "rollbackTag": "rollback/tld2-v2-20260913-before",
+    "rollbackBase": "034324dd4fdbc0437cc9b7132b8846988eb4854d",
+    "rollbackTagPushed": true,
+    "evidence": [
+      {
+        "path": "/tmp/TLD2-20260913-coordinator/online/results.json",
+        "sha256": "ffe5ea8f41ce8283b923501293386dbbd727a27c19d417721e235b4ecda253a3"
+      },
+      {
+        "path": "/tmp/TLD2-20260913-coordinator/online/402-31-70-new-plan.png",
+        "sha256": "f5e89641bbb26571b3df0fd01cfb9a3c86b2d4a83dc10c40e5c5b6c31a7e23ac"
+      },
+      {
+        "path": "/tmp/TLD2-20260913-coordinator/online/402-32-45-new-plan.png",
+        "sha256": "564b959f4602e016f312925d35dfc5f5bd6a27103b0236c462690447c9b66c59"
+      },
+      {
+        "path": "/tmp/TLD2-20260913-coordinator/online/402-31-70-new-settings.png",
+        "sha256": "1571fbba41b54988eb2922b48246b7cf8508487c4de88453f30ee5ec659cbdb2"
+      },
+      {
+        "path": "/tmp/TLD2-20260913-coordinator/pages-ci.json",
+        "sha256": "2447c455781a7102ef67c57da066f0e13557b3b4ea313adfd1b5c8a7084b0ace"
+      }
+    ],
+    "limitations": [
+      "No actual device, WeChat or Safari test",
+      "Bundle 911.56kB warning retained",
+      "Successful CI notes legacy Node20 action targets run on Node24"
+    ],
+    "finalDocs": "Documentation-only closeout; product tree must remain identical; no runtime redeployment necessary"
+  }
 }
