@@ -43,3 +43,11 @@ export function trainingSubmission(game: GameState, selection: TrainingSelection
   if ((!option || option.disabledReason) && selection.focus !== model.savedFocus) return null
   return { focus: selection.focus, approach: game.windowIndex >= 2 ? selection.approach : null }
 }
+
+
+/** Display copy only: submission and normalization remain above unchanged. */
+export const TRAINING_SHORT_EFFECTS: Record<TrainingFocus, string> = {
+  attack: '侧重进攻能力', defense: '侧重防守与无球', physical: '对抗与耐力',
+  mental: '判断与专注能力', BALANCED: '按位置均衡分配', ADAPTATION: '稳住状态 · 成长稍慢',
+  BODY_CARE: '身体最多+4 · 竞技−2', MATCH_SHARPNESS: '竞技最多+4 · 身体−3', MENTAL_RESET: '心理最多+4 · 竞技−2',
+}

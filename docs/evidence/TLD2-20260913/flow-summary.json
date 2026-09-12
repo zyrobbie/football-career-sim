@@ -1,0 +1,88 @@
+[
+  {
+    "id": "cross30",
+    "inputWindow": 35,
+    "finalWindow": 36,
+    "realButtonActions": 17,
+    "historyBefore": 0,
+    "historyAfter": 1,
+    "cashBefore": 7000,
+    "cashAfter": 7000,
+    "nextOptions": [
+      "重点练进攻",
+      "重点练防守",
+      "重点练心理",
+      "均衡训练",
+      "身体维护",
+      "心理调适"
+    ],
+    "nextSelected": "身体维护\n身体最多+4 · 竞技−2",
+    "reportSummary": "本期策略：主动争取出场。争取更多出场与首发，承担更高伤病风险。\n准备实际变化：教练关系+3、身体状态-4。",
+    "console": [],
+    "source": "/tmp/TLD2-20260913/flows/results.json",
+    "sourceSHA": "0ca3daebac5e20fbb6f26432a03c27e1ccec29e30bd25c76a20ba061f0b17d5d"
+  },
+  {
+    "id": "cross33",
+    "inputWindow": 41,
+    "finalWindow": 42,
+    "realButtonActions": 14,
+    "historyBefore": 0,
+    "historyAfter": 1,
+    "cashBefore": 7000,
+    "cashAfter": 7000,
+    "nextOptions": [
+      "身体维护",
+      "比赛状态",
+      "心理调适"
+    ],
+    "nextSelected": "身体维护\n身体最多+4 · 竞技−2",
+    "reportSummary": "本期策略：先服从球队安排。增加替补机会，减少首发诉求。\n准备实际变化：队内关系+5、心理状态+3。\n赛后队内关系另+2。\n本期训练：均衡训练；按原规则分配成长，身体不再正常成长。",
+    "console": [],
+    "source": "/tmp/TLD2-20260913/flows/results.json",
+    "sourceSHA": "0ca3daebac5e20fbb6f26432a03c27e1ccec29e30bd25c76a20ba061f0b17d5d"
+  },
+  {
+    "id": "recovery31",
+    "inputWindow": 36,
+    "finalWindow": 37,
+    "realButtonActions": 9,
+    "historyBefore": 0,
+    "historyAfter": 1,
+    "cashBefore": 7000,
+    "cashAfter": 7000,
+    "nextOptions": [
+      "重点练进攻",
+      "重点练防守",
+      "重点练心理",
+      "均衡训练",
+      "身体维护",
+      "心理调适"
+    ],
+    "nextSelected": "身体维护\n身体最多+4 · 竞技−2",
+    "reportSummary": "本期先恢复，策略未执行。恢复准备：身体状态+10。\n本期训练：身体维护；结算准备时身体40低于46，自动恢复优先（仅低项：竞技+0、身体+10、心理状态+0）；本期由恢复安排接替职业策略和维护计划，未执行维护收益、成本及衰退减缓。",
+    "console": [],
+    "source": "/tmp/TLD2-20260913/flows/results.json",
+    "sourceSHA": "0ca3daebac5e20fbb6f26432a03c27e1ccec29e30bd25c76a20ba061f0b17d5d"
+  },
+  {
+    "id": "saved37",
+    "inputWindow": 48,
+    "finalWindow": 49,
+    "realButtonActions": 13,
+    "historyBefore": 0,
+    "historyAfter": 1,
+    "cashBefore": 7000,
+    "cashAfter": 7000,
+    "nextOptions": [
+      "身体维护",
+      "比赛状态",
+      "心理调适"
+    ],
+    "nextSelected": "身体维护\n身体最多+4 · 竞技−2",
+    "reportSummary": "本期策略：先站稳脚跟。保持原角色机会范围，伤病风险已到下限。\n准备实际变化：竞技状态+3、身体状态+2。\n本期训练：比赛状态；训练准备竞技+0、身体−3；能力仍随年龄变化；准备时目标状态已达95，准备收益为0，成本照常执行。",
+    "console": [],
+    "source": "/tmp/TLD2-20260913/flows/results.json",
+    "sourceSHA": "0ca3daebac5e20fbb6f26432a03c27e1ccec29e30bd25c76a20ba061f0b17d5d"
+  }
+]

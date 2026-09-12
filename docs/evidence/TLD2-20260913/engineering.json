@@ -1,0 +1,53 @@
+{
+  "targeted": {
+    "command": [
+      "npm",
+      "run",
+      "test:run",
+      "--",
+      "src/ui/trainingPlanView.test.ts",
+      "src/store/gameStore.trainingPlan.test.ts",
+      "src/engine/__tests__/trainingPlan.test.ts",
+      "src/engine/__tests__/ceuTrainingBaseline.test.ts",
+      "src/engine/__tests__/professionalApproach.test.ts",
+      "src/screens/__tests__/SettingsScreen.test.ts"
+    ],
+    "exitCode": 0,
+    "seconds": 0.8356280326843262,
+    "log": "/tmp/TLD2-20260913/targeted.txt",
+    "logSHA": "94be3f5718602df7deb7fcc4581fd51f85b0e99e92ce4301f3d27a47d25e6371"
+  },
+  "full": {
+    "command": [
+      "npm",
+      "run",
+      "test:run"
+    ],
+    "exitCode": 0,
+    "seconds": 15.37678599357605,
+    "log": "/tmp/TLD2-20260913/full.txt",
+    "logSHA": "75762354f69d6f6c85eb15a9922fda3ac93d08701742ca125e21a820cc5895f6"
+  },
+  "typecheck": {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "seconds": 0.34957003593444824,
+    "log": "/tmp/TLD2-20260913/typecheck.txt",
+    "logSHA": "e30b4522e5d643007088d28082b2494ddcb3dbc44ea82b2dbee2dcc38c359f19"
+  },
+  "build": {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 0.5834450721740723,
+    "log": "/tmp/TLD2-20260913/build.txt",
+    "logSHA": "c0920ae747ebacb7214919579985fbca8a261b8cbb0d113662fa55f3d0af06da"
+  }
+}

@@ -8488,48 +8488,48 @@ svg {
   }
 }
 
-/* T-03: training decisions and saved summaries must retain their explanations. */
-.training-plan--veteran .career-panel-lead,
+/* TLD2: the same compact controls at every age; complete selected details below. */
+.training-plan .career-panel-lead { display: block; white-space: normal; overflow: visible; -webkit-line-clamp: unset; font-size: 12px; line-height: 1.4; margin: 8px 0; }
+.training-plan .path-choice { margin: 8px 0; padding: 8px; }
+.training-plan .path-choice > header { gap: 8px; padding-bottom: 6px; align-items: center; }
+.training-plan .path-choice > header span { display: none; }
+.training-plan .path-choice > header h2 { font-size: 13px; line-height: 1.35; margin: 0; }
+.training-plan .path-choice > header > strong { font-size: 13px; }
+.training-plan .path-choice > div { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 6px; }
+.training-plan .path-choice button { display: block; min-height: 70px; padding: 6px; border-top: 0; border-left: 1px solid var(--line); }
+.training-plan .path-choice button:first-child { border-left: 0; }
+.training-plan .path-choice .choice-list__radio { display: none; }
+.training-plan .path-choice button strong,
+.training-plan .choice-list--training-plan strong { display: block; font-size: 12px; line-height: 1.35; white-space: normal; overflow: visible; text-overflow: clip; }
+.training-plan .path-choice button em,
+.training-plan .choice-list--training-plan small,
+.training-plan .choice-list--training-plan em { display: block; font-size: 11px; line-height: 1.35; margin-top: 4px; white-space: normal; overflow: visible; -webkit-line-clamp: unset; font-style: normal; }
+.training-plan .choice-list--training-plan { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin: 8px 0; border: 0; }
+.training-plan .choice-list--training-plan > button { display: block; min-width: 0; min-height: 68px; padding: 7px; border: 1px solid var(--line); }
+.training-plan .choice-list--training-plan > button > span { min-width: 0; }
+.training-plan .choice-list--training-plan .choice-list__radio,
+.training-plan .choice-list--training-plan > button > svg { display: none; }
+.training-plan .choice-list--training-plan > button:disabled { opacity: 1; color: var(--muted); cursor: not-allowed; background: var(--paper); }
+.training-plan__selection,
+.training-plan__recovery,
+.training-plan__saved { padding: 8px; border: 1px solid var(--line); background: var(--paper); margin: 8px 0; }
+.training-plan__selection p,
+.training-plan__recovery p,
+.training-plan__rules p { margin: 4px 0; }
+.training-plan__selection,
 .training-plan__note,
 .training-plan__saved,
-.training-plan__recovery p {
-  display: block;
-  overflow: visible;
-  white-space: normal;
-  -webkit-line-clamp: unset;
-  font-size: 14px;
-  line-height: 1.65;
-}
-.training-plan__note { margin: 12px 0; color: var(--muted); }
-.training-plan__saved,
-.training-plan__recovery { padding: 14px; border: 1px solid var(--line); background: var(--paper); margin: 14px 0; }
-.training-plan__recovery h2 { font-size: 18px; margin: 0 0 8px; }
-.training-plan__recovery p { margin: 6px 0; }
-.training-plan--veteran .choice-list--training-plan small,
-.training-plan--veteran .choice-list--training-plan em {
-  display: block; overflow: visible; -webkit-line-clamp: unset;
-  white-space: normal; font-size: 14px; line-height: 1.6; margin-top: 6px;
-}
-.training-plan--veteran .choice-list--training-plan strong { white-space: normal; font-size: 16px; }
-.training-plan--veteran .choice-list--training-plan > button { padding: 14px; min-height: 0; }
-.training-plan--veteran .choice-list--training-plan > button:disabled { opacity: 1; color: var(--muted); cursor: not-allowed; background: var(--paper); }
+.training-plan__recovery,
+.training-plan__rules { font-size: 12px; line-height: 1.4; white-space: normal; overflow: visible; }
+.training-plan__note { margin: 8px 0; color: var(--muted); }
+.training-plan__recovery h2 { font-size: 13px; margin: 0 0 4px; }
+.training-plan__rules { margin: 8px 0; color: var(--muted); }
+.training-plan__rules summary { min-height: 32px; display: list-item; cursor: pointer; padding: 6px 0; color: var(--ink); }
+.training-plan .career-decision__submit { margin-top: 8px; min-height: 40px; }
 .career-report .report-footer .training-event-summary {
   display: block; overflow: visible; white-space: pre-wrap; overflow-wrap: anywhere;
   -webkit-line-clamp: unset; max-height: none; font-size: 14px; line-height: 1.7;
 }
-@media (max-width: 600px) {
-  .training-plan--veteran .choice-list--training-plan { grid-template-columns: 1fr; }
-}
-.training-plan--veteran .path-choice > div { grid-template-columns: 1fr; }
-.training-plan--veteran .path-choice button { display: block; padding: 12px; border-left: 0; border-top: 1px solid var(--line); min-height: 0; }
-.training-plan--veteran .path-choice button .choice-list__radio { display: none; }
-.training-plan--veteran .path-choice button strong { font-size: 15px; white-space: normal; }
-.training-plan--veteran .path-choice button small,
-.training-plan--veteran .path-choice button em { display: block; font-size: 14px; line-height: 1.5; white-space: normal; overflow: visible; -webkit-line-clamp: unset; }
-
-/* Keep long training descriptions inside their local grid cell. */
-.training-plan .choice-list--training-plan > button > span { min-width: 0; }
-.training-plan .choice-list--training-plan small { white-space: normal; }
 
 /* M-03: local, optional career preferences; existing training cards stay intact. */
 .career-preferences { margin-block: 8px; border: 1px solid var(--line, #deded6); }

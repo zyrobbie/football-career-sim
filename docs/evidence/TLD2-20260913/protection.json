@@ -1,0 +1,22 @@
+{
+  "HEAD": "034324dd4fdbc0437cc9b7132b8846988eb4854d",
+  "package": "2.0.0",
+  "SAVE_DATA": "12/12",
+  "beforePath": "/tmp/TLD2-20260913/before.json",
+  "beforeSHA": "58b4eeada0515a26e36901d4250e2fada8aeeb62b7775e6a845d4276b1ba6066",
+  "protectedFiles": 2749,
+  "changedExisting": [
+    "docs/51-v2-training-layout-upgrade.md",
+    "package-lock.json",
+    "package.json",
+    "src/screens/TrainingPlanScreen.tsx",
+    "src/styles/main.css",
+    "src/ui/trainingPlanView.test.ts",
+    "src/ui/trainingPlanView.ts"
+  ],
+  "trainingPlanViewAndSubmissionOriginalPrefixExact": true,
+  "submitHandlerExact": true,
+  "reportStyleExact": true,
+  "onlyPackageVersionFieldsChanged": true,
+  "indexEmpty": true
+}

@@ -1,0 +1,2966 @@
+[
+  {
+    "w": 390,
+    "h": 844,
+    "age": 30,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 441.6875,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 115,
+        "width": 374,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 66,
+        "width": 358,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "119.328px 119.328px 119.344px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 66,
+        "width": 119.328125,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 14,
+        "width": 107.328125,
+        "font": "10px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 20,
+        "width": 107.328125,
+        "font": "8px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "flow-root"
+      },
+      ".choice-list--training-plan": {
+        "height": 121,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "121.328px 121.328px 121.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 17,
+        "width": 105.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 0,
+        "width": 0,
+        "font": "13.3333px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "none"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 614.984375,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 374,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "118.656px 118.672px 118.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 118.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 106.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 106.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "121.328px 121.328px 121.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 105.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 105.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 390,
+    "h": 844,
+    "age": 31,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1279.8125,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 442,
+        "width": 374,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 393,
+        "width": 358,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "358px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 138,
+        "width": 358,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 334,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 334,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 506.34375,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "374px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 344,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 344,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 639.78125,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 374,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "118.656px 118.672px 118.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 118.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 106.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 106.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "121.328px 121.328px 121.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 105.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 105.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 390,
+    "h": 844,
+    "age": 34,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1023.640625,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 442,
+        "width": 374,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 393,
+        "width": 358,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "358px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 138,
+        "width": 358,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 334,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 334,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 250.171875,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "374px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 344,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 344,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 566.78125,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 374,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "118.656px 118.672px 118.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 118.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 106.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 106.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 68,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "121.328px 121.328px 121.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 105.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 105.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 390,
+    "h": 844,
+    "age": 33,
+    "value": 45,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 414.5625,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": null,
+      ".path-choice > div": null,
+      ".path-choice button": null,
+      ".path-choice button strong": null,
+      ".path-choice button em": null,
+      ".choice-list--training-plan": null,
+      ".choice-list--training-plan strong": null,
+      ".choice-list--training-plan small": null,
+      ".training-plan__recovery": {
+        "height": 167.375,
+        "width": 374,
+        "font": "16px",
+        "padding": "14px",
+        "columns": "none",
+        "display": "block"
+      }
+    },
+    "after": {
+      ".training-plan": {
+        "height": 315.578125,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": null,
+      ".path-choice > div": null,
+      ".path-choice button": null,
+      ".path-choice button strong": null,
+      ".path-choice button em": null,
+      ".choice-list--training-plan": null,
+      ".choice-list--training-plan strong": null,
+      ".choice-list--training-plan small": null,
+      ".training-plan__recovery": {
+        "height": 98.578125,
+        "width": 374,
+        "font": "12px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      }
+    },
+    "errors": []
+  },
+  {
+    "w": 390,
+    "h": 844,
+    "age": 37,
+    "value": 95,
+    "focus": "attack",
+    "before": {
+      ".training-plan": {
+        "height": 1240.484375,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 442,
+        "width": 374,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 393,
+        "width": 358,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "358px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 138,
+        "width": 358,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 334,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 334,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 351.734375,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "374px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 344,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 67.171875,
+        "width": 344,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 657.9375,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 374,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "118.656px 118.672px 118.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 118.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 106.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 106.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 99.5625,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "121.328px 121.328px 121.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 105.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 105.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 390,
+    "h": 844,
+    "age": 34,
+    "value": 100,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1125.203125,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 442,
+        "width": 374,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 393,
+        "width": 358,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "358px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 138,
+        "width": 358,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 334,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 334,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 351.734375,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "374px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 344,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 67.171875,
+        "width": 344,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 615.140625,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 374,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "118.656px 118.672px 118.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 118.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 106.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 106.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 99.5625,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "121.328px 121.328px 121.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 105.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 105.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 390,
+    "h": 844,
+    "age": 31,
+    "value": 46,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1279.8125,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 442,
+        "width": 374,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 393,
+        "width": 358,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "358px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 138,
+        "width": 358,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 334,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 334,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 506.34375,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "374px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 344,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 344,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 639.78125,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 374,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "118.656px 118.672px 118.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 118.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 106.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 106.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 374,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "121.328px 121.328px 121.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 105.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 105.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 402,
+    "h": 874,
+    "age": 30,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 441.6875,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 115,
+        "width": 386,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 66,
+        "width": 370,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "123.328px 123.328px 123.344px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 66,
+        "width": 123.328125,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 14,
+        "width": 111.328125,
+        "font": "10px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 20,
+        "width": 111.328125,
+        "font": "8px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "flow-root"
+      },
+      ".choice-list--training-plan": {
+        "height": 121,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "125.328px 125.328px 125.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 17,
+        "width": 109.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 0,
+        "width": 0,
+        "font": "13.3333px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "none"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 614.984375,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 386,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 368,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "122.656px 122.672px 122.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 122.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 110.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 110.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "125.328px 125.328px 125.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 109.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 109.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 402,
+    "h": 874,
+    "age": 31,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1258.8125,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 421,
+        "width": 386,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 372,
+        "width": 370,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "370px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 117,
+        "width": 370,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 346,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 346,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 506.34375,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "386px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 356,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 639.78125,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 386,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 368,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "122.656px 122.672px 122.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 122.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 110.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 110.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "125.328px 125.328px 125.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 109.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 109.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 402,
+    "h": 874,
+    "age": 34,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1002.640625,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 421,
+        "width": 386,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 372,
+        "width": 370,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "370px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 117,
+        "width": 370,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 346,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 346,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 250.171875,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "386px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 356,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 566.78125,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 386,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 368,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "122.656px 122.672px 122.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 122.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 110.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 110.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 68,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "125.328px 125.328px 125.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 109.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 109.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 402,
+    "h": 874,
+    "age": 33,
+    "value": 45,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 414.5625,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": null,
+      ".path-choice > div": null,
+      ".path-choice button": null,
+      ".path-choice button strong": null,
+      ".path-choice button em": null,
+      ".choice-list--training-plan": null,
+      ".choice-list--training-plan strong": null,
+      ".choice-list--training-plan small": null,
+      ".training-plan__recovery": {
+        "height": 167.375,
+        "width": 386,
+        "font": "16px",
+        "padding": "14px",
+        "columns": "none",
+        "display": "block"
+      }
+    },
+    "after": {
+      ".training-plan": {
+        "height": 298.78125,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": null,
+      ".path-choice > div": null,
+      ".path-choice button": null,
+      ".path-choice button strong": null,
+      ".path-choice button em": null,
+      ".choice-list--training-plan": null,
+      ".choice-list--training-plan strong": null,
+      ".choice-list--training-plan small": null,
+      ".training-plan__recovery": {
+        "height": 81.78125,
+        "width": 386,
+        "font": "12px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      }
+    },
+    "errors": []
+  },
+  {
+    "w": 402,
+    "h": 874,
+    "age": 37,
+    "value": 95,
+    "focus": "attack",
+    "before": {
+      ".training-plan": {
+        "height": 1219.484375,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 421,
+        "width": 386,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 372,
+        "width": 370,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "370px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 117,
+        "width": 370,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 346,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 346,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 351.734375,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "386px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 67.171875,
+        "width": 356,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 657.9375,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 386,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 368,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "122.656px 122.672px 122.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 122.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 110.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 110.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 99.5625,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "125.328px 125.328px 125.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 109.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 109.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 402,
+    "h": 874,
+    "age": 34,
+    "value": 100,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1104.203125,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 421,
+        "width": 386,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 372,
+        "width": 370,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "370px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 117,
+        "width": 370,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 346,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 346,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 351.734375,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "386px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 67.171875,
+        "width": 356,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 615.140625,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 386,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 368,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "122.656px 122.672px 122.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 122.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 110.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 110.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 99.5625,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "125.328px 125.328px 125.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 109.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 109.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 402,
+    "h": 874,
+    "age": 31,
+    "value": 46,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1258.8125,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 421,
+        "width": 386,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 372,
+        "width": 370,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "370px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 117,
+        "width": 370,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 346,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 346,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 506.34375,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "386px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 356,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 356,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 639.78125,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 386,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 368,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "122.656px 122.672px 122.656px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 122.65625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 110.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 110.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 386,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "125.328px 125.328px 125.344px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 109.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 109.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 320,
+    "h": 568,
+    "age": 31,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1405.265625,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 463,
+        "width": 304,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 414,
+        "width": 288,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "288px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 138,
+        "width": 288,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 264,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 264,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 573.515625,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "304px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 274,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 274,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 672.53125,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 127.0625,
+        "width": 304,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 78.0625,
+        "width": 286,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "95.3281px 95.3281px 95.3438px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 78.0625,
+        "width": 95.328125,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 83.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 44.53125,
+        "width": 83.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "98px 98px 98px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 82,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 82,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 320,
+    "h": 568,
+    "age": 34,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1126,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 463,
+        "width": 304,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 414,
+        "width": 288,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "288px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 138,
+        "width": 288,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 264,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 264,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 317.34375,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "304px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 274,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 44.78125,
+        "width": 274,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 599.53125,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 127.0625,
+        "width": 304,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 78.0625,
+        "width": 286,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "95.3281px 95.3281px 95.3438px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 78.0625,
+        "width": 95.328125,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 83.328125,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 44.53125,
+        "width": 83.328125,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 68,
+        "width": 304,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "98px 98px 98px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 82,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 29.6875,
+        "width": 82,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 430,
+    "h": 932,
+    "age": 31,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1237.8125,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 400,
+        "width": 414,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 351,
+        "width": 398,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "398px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 117,
+        "width": 398,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 374,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 374,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 506.34375,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "414px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 384,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 384,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 622.984375,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 414,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 396,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "132px 132px 132px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 132,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 120,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 120,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "134.656px 134.672px 134.672px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 118.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 118.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 430,
+    "h": 932,
+    "age": 34,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 981.640625,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 400,
+        "width": 414,
+        "font": "16px",
+        "padding": "7px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 351,
+        "width": 398,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "398px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 117,
+        "width": 398,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 374,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 374,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 250.171875,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "414px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 384,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 384,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 549.984375,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 414,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 396,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "132px 132px 132px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 132,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 120,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 120,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 68,
+        "width": 414,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "134.656px 134.672px 134.672px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 118.65625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 118.65625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 1280,
+    "h": 720,
+    "age": 31,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1618.984375,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 529,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "18px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 384,
+        "width": 368.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "368.203px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 121,
+        "width": 368.203125,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 344.203125,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 344.203125,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 545.515625,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "406.203px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 286.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 22.390625,
+        "width": 286.203125,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 778.984375,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 388.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "129.391px 129.406px 129.406px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 129.390625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 117.390625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 117.390625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 141,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "132.062px 132.062px 132.062px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 116.0625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 116.0625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  },
+  {
+    "w": 1280,
+    "h": 720,
+    "age": 34,
+    "value": 70,
+    "focus": null,
+    "before": {
+      ".training-plan": {
+        "height": 1380.8125,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 529,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "18px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 384,
+        "width": 368.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "368.203px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 121,
+        "width": 368.203125,
+        "font": "16px",
+        "padding": "12px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 21,
+        "width": 344.203125,
+        "font": "15px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 42,
+        "width": 344.203125,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 307.34375,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "406.203px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 22,
+        "width": 284.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 44.78125,
+        "width": 284.203125,
+        "font": "14px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "after": {
+      ".training-plan": {
+        "height": 705.984375,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice": {
+        "height": 119,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "8px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice > div": {
+        "height": 70,
+        "width": 388.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "129.391px 129.406px 129.406px",
+        "display": "grid"
+      },
+      ".path-choice button": {
+        "height": 70,
+        "width": 129.390625,
+        "font": "16px",
+        "padding": "6px",
+        "columns": "22px 1fr",
+        "display": "block"
+      },
+      ".path-choice button strong": {
+        "height": 16.1875,
+        "width": 117.390625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".path-choice button em": {
+        "height": 29.6875,
+        "width": 117.390625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan": {
+        "height": 68,
+        "width": 406.203125,
+        "font": "16px",
+        "padding": "0px",
+        "columns": "132.062px 132.062px 132.062px",
+        "display": "grid"
+      },
+      ".choice-list--training-plan strong": {
+        "height": 16.1875,
+        "width": 116.0625,
+        "font": "12px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".choice-list--training-plan small": {
+        "height": 14.84375,
+        "width": 116.0625,
+        "font": "11px",
+        "padding": "0px",
+        "columns": "none",
+        "display": "block"
+      },
+      ".training-plan__recovery": null
+    },
+    "errors": []
+  }
+]

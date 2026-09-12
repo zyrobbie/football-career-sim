@@ -6,11 +6,10 @@ import { careerWindowLabel, playerAgeAtWindow } from '../engine/careerTime'
 import type {
   DevelopmentApproach,
   GameState,
-  TrainingFocus,
 } from '../models/game'
 import { useGameStore } from '../store/gameStore'
 
-import { trainingPlanView, trainingSubmission, type TrainingSelection } from '../ui/trainingPlanView'
+import { trainingPlanView, trainingSubmission, type TrainingSelection, TRAINING_SHORT_EFFECTS } from '../ui/trainingPlanView'
 
 // View-only drafts survive navigation within this session; never written to a save.
 const drafts = new Map<string, TrainingSelection>()
@@ -116,14 +115,14 @@ function TrainingPlanContent({ game }: { game: GameState }) {
       game={game}
       sectionLabel="半年计划"
     >
-      <div className={`career-decision training-plan${model.veteran ? " training-plan--veteran" : ""}`}>
+      <div className="career-decision training-plan">
         <header className="career-panel-heading">
           <Icon name="mental" />
           <h1>
             {windowHeading(game)}
           </h1>
         </header>
-        <p className="career-panel-lead">
+        {!model.recovery ? <p className="career-panel-lead">
             {model.veteran
               ? model.recovery ? "本期先恢复" : "选择本期训练重心，兼顾状态与身体负担。"
               : needsRecovery
@@ -133,13 +132,12 @@ function TrainingPlanContent({ game }: { game: GameState }) {
                 : isSecondYear
                 ? '青训进入第二年。你的训练方向和职业策略，会直接影响俱乐部是否愿意把你推向一线队。'
                 : '未来半年没有标准答案。你选的方向，会改变成长节奏，也可能带来不同的故事。'}
-        </p>
+        </p> : null}
         <CareerPreferencesEditor key={game.careerSeed} game={game} />
-        {model.ageNote ? <p className="training-plan__note">{model.ageNote}</p> : null}
         {model.recovery ? (
           <section className="training-plan__recovery" aria-label="本期先恢复">
             <h2>本期先恢复</h2>
-            <p>当前状态低于46，优先安排恢复，暂不选择训练和职业策略。</p>
+            <p>当前状态低于46，优先恢复，暂不选择训练和职业策略。</p>
             <p>暂记身体维护计划，是否执行以事件和到期后果处理后的状态为准。</p>
             {model.savedFocus ? <p>已保存的计划将由本次恢复安排接续，不会重新处理已完成的事件。</p> : null}
           </section>
@@ -184,7 +182,6 @@ function TrainingPlanContent({ game }: { game: GameState }) {
                   </span>
                   <span>
                     <strong>{item.title}</strong>
-                    <small>{item.description}</small>
                     <em>{isProfessionalFirstTeam
                       ? (needsRecovery ? '结算仍低迷 · 策略不执行' : item.effect).split(' · ').map((line, index) => <Fragment key={line}>{index > 0 ? <br /> : null}{line}</Fragment>)
                       : item.effect}</em>
@@ -214,14 +211,24 @@ function TrainingPlanContent({ game }: { game: GameState }) {
               </span>
               <span>
                 <strong>{plan.title}</strong>
-                <small>{plan.description}</small>
+                <small>{TRAINING_SHORT_EFFECTS[plan.id]}</small>
                 {plan.disabledReason ? <em>{plan.disabledReason}</em> : null}
+                {plan.id === 'BODY_CARE' && game.player!.fitness >= 95 ? <em>身体已达95：收益可能为0，竞技仍−2；仍减缓衰退。</em> : null}
               </span>
               <Icon name={plan.icon} />
             </button>
           ))}
         </div> : null}
-        {model.veteran && !model.recovery ? <p className="training-plan__note">以上为训练准备的直接效果，不代表半年结束时的净变化。准备收益最多+4，目标上限95；事件、到期后果及职业策略可能改变实际效果，低状态恢复优先。</p> : null}
+        {!model.recovery ? <section className="training-plan__selection" aria-label="当前选择说明">
+          {isSecondYear ? <p><strong>{activeApproaches.find(item => item.id === approach)?.title}：</strong>{activeApproaches.find(item => item.id === approach)?.description}</p> : null}
+          <p><strong>{model.options.find(item => item.id === selected)?.title}：</strong>{model.options.find(item => item.id === selected)?.description}</p>
+        </section> : null}
+        {model.veteran && !model.recovery ? <p className="training-plan__note">状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。</p> : null}
+        <details className="training-plan__rules">
+          <summary>训练与成长说明</summary>
+          {model.ageNote ? <p>{model.ageNote}</p> : <p>训练按位置、年龄和当前能力处理成长，选择侧重不保证固定涨幅。</p>}
+          {model.veteran ? <p>维护直接准备收益最多+4。身体维护减缓身体衰退20%；心理调适改变心理状态，不提升心理能力。是否执行维护，以事件和到期后果处理后的状态为准。</p> : null}
+        </details>
         {!model.recovery && model.savedFocus === selected && model.options.find(option => option.id === selected)?.disabledReason ? <p className="training-plan__saved" role="status">已保留存档中的计划。你可以继续，实际准备收益可能为0，成本仍会执行；也可以改选其他计划。</p> : null}
         <button
           type="button"

@@ -1,0 +1,77 @@
+{
+  "base": "034324dd4fdbc0437cc9b7132b8846988eb4854d",
+  "status": "待统筹审核，未stage/commit/push/deploy",
+  "note": "Coordinator acceptance may be appended separately; candidate manifest itself is audit metadata, not self-hashed.",
+  "files": [
+    {
+      "path": "package.json",
+      "sha256": "5c2c1fb05470268241809cc9e6949d60ae189f7384fa3f5f856a79db43393713",
+      "bytes": 1136
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "96caf268927576efb6bdffe489c7c9fa67eff76aed9e5f3d3a5e9d625e1b761a",
+      "bytes": 99055
+    },
+    {
+      "path": "src/screens/TrainingPlanScreen.tsx",
+      "sha256": "ccd1488a55ac259f735dc164b53ba60f98ed24a6dd2d29c81aac8b5e614ad1d3",
+      "bytes": 13267
+    },
+    {
+      "path": "src/styles/main.css",
+      "sha256": "89bdafd954352f75e4b8cbae9d566ba914f9c15a9a193de79718926105cf8089",
+      "bytes": 166814
+    },
+    {
+      "path": "src/ui/trainingPlanView.ts",
+      "sha256": "46d35353969745f36564f668095a2ef3fc5883826d2e6958b02b69c526769b1d",
+      "bytes": 4862
+    },
+    {
+      "path": "src/ui/trainingPlanView.test.ts",
+      "sha256": "99eabcdfd22516fd75a5cee0a53cf8ac850539af4ee0056782746531a2240865",
+      "bytes": 4495
+    },
+    {
+      "path": "docs/51-v2-training-layout-upgrade.md",
+      "sha256": "c7f391ae60c58941ca16b7b9d8fe885bcb051358e6e763691db23dd1679bd785",
+      "bytes": 6388
+    },
+    {
+      "path": "docs/evidence/TLD2-20260913/README.md",
+      "sha256": "5f755b8ddd8bee12ab7d2051bd12fe9ed9fdd53711c6553f041e787acefc9ffb",
+      "bytes": 6123
+    },
+    {
+      "path": "docs/evidence/TLD2-20260913/engineering.json",
+      "sha256": "1091edff98c57a0936f935a805ba5b96586e5e49e2fdeadf4c405da3dd3e274b",
+      "bytes": 1389
+    },
+    {
+      "path": "docs/evidence/TLD2-20260913/evidence-index.json",
+      "sha256": "8590f0171eaa6bd072ffedbcf9707c8b8980285e860303f3aebb1d00f5a0131c",
+      "bytes": 31749
+    },
+    {
+      "path": "docs/evidence/TLD2-20260913/flow-summary.json",
+      "sha256": "9696b8a4ee12f3c8f36f8ac2cd4b2db5850e26fca2d981420fa38ef9e93725d5",
+      "bytes": 3350
+    },
+    {
+      "path": "docs/evidence/TLD2-20260913/layout-comparison.json",
+      "sha256": "6f09f702bec8801671d535567e4add4c377566d677dc8d4285b3d751d26b0391",
+      "bytes": 72221
+    },
+    {
+      "path": "docs/evidence/TLD2-20260913/protection.json",
+      "sha256": "fe621ebec03a4414f32b7ff4397e20301839bc4fdf13615b009ea453eb3bd280",
+      "bytes": 703
+    },
+    {
+      "path": "docs/evidence/TLD2-20260913/viewed-images.json",
+      "sha256": "4959d77b92f1e2458f84fe7e5107946d977fc7e9124dfd1f9f877819e5642a25",
+      "bytes": 3700
+    }
+  ]
+}

@@ -1,0 +1,1201 @@
+{
+  "task": "TLD2-20260913",
+  "decision": "Independent local acceptance passed; await executor final candidate then release",
+  "scope": {
+    "base": "034324dd4fdbc0437cc9b7132b8846988eb4854d",
+    "changedTracked": [
+      "package-lock.json",
+      "package.json",
+      "src/screens/TrainingPlanScreen.tsx",
+      "src/styles/main.css",
+      "src/ui/trainingPlanView.test.ts",
+      "src/ui/trainingPlanView.ts"
+    ],
+    "originalViewFunctionsUnchanged": true,
+    "reportSummaryCSSUnchanged": true,
+    "remainingTrackedUnchanged": 794
+  },
+  "version": "2.0.0 / SAVE12 / DATA12",
+  "browser": "isolated Chromium; Browser plugin not available",
+  "renderInputs": "Constructed from previous anonymous legal plan; actual checksum load and continue; not natural careers",
+  "layoutCases": [
+    {
+      "id": "402-30-70-new",
+      "width": 402,
+      "age": 30,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 614.984375,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n合同已经生效。你怎么训练、怎么争取角色，以及真正获得多少出场，会决定俱乐部是否兑现承诺。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练身体\n对抗与耐力\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n先适应职业队\n稳住状态 · 成长稍慢\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n重点练身体：提升身体素质，增强对抗和耐力。\n\n训练与成长说明\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 386,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 368,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "122.656px 122.672px 122.656px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 122.65625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 110.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 110.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 141,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "125.328px 125.328px 125.344px",
+          "text": "重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练身体\n对抗与耐力\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n先适应职业队\n稳住状态 · 成长稍慢",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 125.328125,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "重点练进攻\n侧重进攻能力",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 109.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "重点练进攻",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 109.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "侧重进攻能力",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "402-31-70-new",
+      "width": 402,
+      "age": 31,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 639.78125,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 386,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 368,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "122.656px 122.672px 122.656px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 122.65625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 110.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 110.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 141,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "125.328px 125.328px 125.344px",
+          "text": "重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 125.328125,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "重点练进攻\n侧重进攻能力",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 109.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "重点练进攻",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 109.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "侧重进攻能力",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "402-33-70-new",
+      "width": 402,
+      "age": 33,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 639.78125,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 386,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 368,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "122.656px 122.672px 122.656px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 122.65625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 110.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 110.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 141,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "125.328px 125.328px 125.344px",
+          "text": "重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 125.328125,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "重点练进攻\n侧重进攻能力",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 109.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "重点练进攻",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 109.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "侧重进攻能力",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "402-34-70-new",
+      "width": 402,
+      "age": 34,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 566.78125,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n身体维护\n身体最多+4 · 竞技−2\n比赛状态\n竞技最多+4 · 身体−3\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 386,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 368,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "122.656px 122.672px 122.656px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 122.65625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 110.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 110.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 68,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "125.328px 125.328px 125.344px",
+          "text": "身体维护\n身体最多+4 · 竞技−2\n比赛状态\n竞技最多+4 · 身体−3\n心理调适\n心理最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 125.328125,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "身体维护\n身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 109.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体维护",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 109.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "402-37-70-new",
+      "width": 402,
+      "age": 37,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 566.78125,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n身体维护\n身体最多+4 · 竞技−2\n比赛状态\n竞技最多+4 · 身体−3\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 386,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 368,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "122.656px 122.672px 122.656px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 122.65625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 110.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 110.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 68,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "125.328px 125.328px 125.344px",
+          "text": "身体维护\n身体最多+4 · 竞技−2\n比赛状态\n竞技最多+4 · 身体−3\n心理调适\n心理最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 125.328125,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "身体维护\n身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 109.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体维护",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 109.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "402-32-45-new",
+      "width": 402,
+      "age": 32,
+      "value": 45,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 298.78125,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n本期先恢复\n\n当前状态低于46，优先恢复，暂不选择训练和职业策略。\n\n暂记身体维护计划，是否执行以事件和到期后果处理后的状态为准。\n\n训练与成长说明\n按恢复安排开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": null,
+        ".path-choice > div": null,
+        ".path-choice button": null,
+        ".path-choice button strong": null,
+        ".path-choice button em": null,
+        ".choice-list--training-plan": null,
+        ".choice-list--training-plan button": null,
+        ".choice-list--training-plan strong": null,
+        ".choice-list--training-plan small": null,
+        ".training-plan__recovery": {
+          "height": 81.78125,
+          "width": 386,
+          "font": "12px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "本期先恢复\n\n当前状态低于46，优先恢复，暂不选择训练和职业策略。\n\n暂记身体维护计划，是否执行以事件和到期后果处理后的状态为准。",
+          "overflow": false
+        }
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "402-34-100-new",
+      "width": 402,
+      "age": 34,
+      "value": 100,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 615.140625,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n身体维护\n身体最多+4 · 竞技−2\n身体已达95：收益可能为0，竞技仍−2；仍减缓衰退。\n比赛状态\n竞技最多+4 · 身体−3\n当前竞技状态已达95，不能新选此计划。\n心理调适\n心理最多+4 · 竞技−2\n当前心理状态已达95，不能新选此计划。\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。 当前身体状态已接近上限，准备收益可能为0，仍可减缓身体衰退。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 386,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 368,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "122.656px 122.672px 122.656px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 122.65625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 110.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 110.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 99.5625,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "125.328px 125.328px 125.344px",
+          "text": "身体维护\n身体最多+4 · 竞技−2\n身体已达95：收益可能为0，竞技仍−2；仍减缓衰退。\n比赛状态\n竞技最多+4 · 身体−3\n当前竞技状态已达95，不能新选此计划。\n心理调适\n心理最多+4 · 竞技−2\n当前心理状态已达95，不能新选此计划。",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 99.5625,
+          "width": 125.328125,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "身体维护\n身体最多+4 · 竞技−2\n身体已达95：收益可能为0，竞技仍−2；仍减缓衰退。",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 109.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体维护",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 109.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "402-34-95-MATCH_SHARPNESS",
+      "width": 402,
+      "age": 34,
+      "value": 95,
+      "focus": "MATCH_SHARPNESS",
+      "measure": {
+        ".training-plan": {
+          "height": 657.9375,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n身体维护\n身体最多+4 · 竞技−2\n身体已达95：收益可能为0，竞技仍−2；仍减缓衰退。\n比赛状态\n竞技最多+4 · 身体−3\n当前竞技状态已达95，不能新选此计划。\n心理调适\n心理最多+4 · 竞技−2\n当前心理状态已达95，不能新选此计划。\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n比赛状态：竞技状态最多+4、身体状态−3；能力仍随年龄变化。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n\n已保留存档中的计划。你可以继续，实际准备收益可能为0，成本仍会执行；也可以改选其他计划。\n\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 386,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 368,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "122.656px 122.672px 122.656px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 122.65625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 110.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 110.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 99.5625,
+          "width": 386,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "125.328px 125.328px 125.344px",
+          "text": "身体维护\n身体最多+4 · 竞技−2\n身体已达95：收益可能为0，竞技仍−2；仍减缓衰退。\n比赛状态\n竞技最多+4 · 身体−3\n当前竞技状态已达95，不能新选此计划。\n心理调适\n心理最多+4 · 竞技−2\n当前心理状态已达95，不能新选此计划。",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 99.5625,
+          "width": 125.328125,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "身体维护\n身体最多+4 · 竞技−2\n身体已达95：收益可能为0，竞技仍−2；仍减缓衰退。",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 109.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体维护",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 109.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "320-31-70-new",
+      "width": 320,
+      "age": 31,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 672.53125,
+          "width": 304,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 127.0625,
+          "width": 304,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 78.0625,
+          "width": 286,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "95.3281px 95.3281px 95.3438px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 78.0625,
+          "width": 95.328125,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 83.328125,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 44.53125,
+          "width": 83.328125,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 141,
+          "width": 304,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "98px 98px 98px",
+          "text": "重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 98,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "重点练进攻\n侧重进攻能力",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 82,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "重点练进攻",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 82,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "侧重进攻能力",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "430-34-70-new",
+      "width": 430,
+      "age": 34,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 549.984375,
+          "width": 414,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n身体维护\n身体最多+4 · 竞技−2\n比赛状态\n竞技最多+4 · 身体−3\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 414,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 396,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "132px 132px 132px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 132,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 120,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 120,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 68,
+          "width": 414,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "134.656px 134.672px 134.672px",
+          "text": "身体维护\n身体最多+4 · 竞技−2\n比赛状态\n竞技最多+4 · 身体−3\n心理调适\n心理最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 134.65625,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "1fr",
+          "text": "身体维护\n身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 118.65625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体维护",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 118.65625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "身体最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    },
+    {
+      "id": "1280-31-70-new",
+      "width": 1280,
+      "age": 31,
+      "value": 70,
+      "focus": null,
+      "measure": {
+        ".training-plan": {
+          "height": 778.984375,
+          "width": 406.203125,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "新球队的第一个半年，先找到自己的位置。\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n回看上期报告\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年\n\n2044年夏季结束后，将进入2044年冬季\n\n上半年回顾\n+2 进攻\n+1 身体\n教练关系0",
+          "overflow": false
+        },
+        ".path-choice": {
+          "height": 119,
+          "width": 406.203125,
+          "font": "16px",
+          "padding": "8px",
+          "columns": "none",
+          "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice > div": {
+          "height": 70,
+          "width": 388.203125,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "129.391px 129.406px 129.406px",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "overflow": false
+        },
+        ".path-choice button": {
+          "height": 70,
+          "width": 129.390625,
+          "font": "16px",
+          "padding": "6px",
+          "columns": "22px 1fr",
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".path-choice button strong": {
+          "height": 16.1875,
+          "width": 117.390625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "主动争取出场",
+          "overflow": false
+        },
+        ".path-choice button em": {
+          "height": 29.6875,
+          "width": 117.390625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "出场首发更多\n负荷、伤病风险增",
+          "overflow": false
+        },
+        ".choice-list--training-plan": {
+          "height": 141,
+          "width": 406.203125,
+          "font": "16px",
+          "padding": "0px",
+          "columns": "132.062px 132.062px 132.062px",
+          "text": "重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2",
+          "overflow": false
+        },
+        ".choice-list--training-plan button": {
+          "height": 68,
+          "width": 132.0625,
+          "font": "16px",
+          "padding": "7px",
+          "columns": "28px 1fr 32px",
+          "text": "重点练进攻\n侧重进攻能力",
+          "overflow": false
+        },
+        ".choice-list--training-plan strong": {
+          "height": 16.1875,
+          "width": 116.0625,
+          "font": "12px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "重点练进攻",
+          "overflow": false
+        },
+        ".choice-list--training-plan small": {
+          "height": 14.84375,
+          "width": 116.0625,
+          "font": "11px",
+          "padding": "0px",
+          "columns": "none",
+          "text": "侧重进攻能力",
+          "overflow": false
+        },
+        ".training-plan__recovery": null
+      },
+      "saveReloadUnchanged": true,
+      "errors": []
+    }
+  ],
+  "realFlowCases": [
+    {
+      "id": "402-31-70-new",
+      "actions": [
+        "职业队策略:主动争取出场",
+        "职业队策略:先站稳脚跟",
+        "职业队策略:先服从球队安排",
+        "半年计划:重点练进攻",
+        "半年计划:重点练防守",
+        "半年计划:重点练心理",
+        "半年计划:均衡训练",
+        "半年计划:身体维护",
+        "半年计划:心理调适",
+        "details open",
+        "details close",
+        "settings",
+        "return career",
+        "submit half year",
+        "event choice",
+        "continue event",
+        "report next plan"
+      ],
+      "completedReport": {
+        "phase": "HALF_YEAR_REPORT",
+        "history": 13,
+        "cashEuro": 72750,
+        "focus": "BODY_CARE"
+      },
+      "nextPhase": "HALF_YEAR_PLAN",
+      "errors": []
+    },
+    {
+      "id": "402-34-70-new",
+      "actions": [
+        "职业队策略:主动争取出场",
+        "职业队策略:先站稳脚跟",
+        "职业队策略:先服从球队安排",
+        "半年计划:身体维护",
+        "半年计划:比赛状态",
+        "半年计划:心理调适",
+        "details open",
+        "details close",
+        "submit half year",
+        "event choice",
+        "event choice",
+        "continue event",
+        "report next plan"
+      ],
+      "completedReport": {
+        "phase": "HALF_YEAR_REPORT",
+        "history": 13,
+        "cashEuro": 72750,
+        "focus": "BODY_CARE"
+      },
+      "nextPhase": "HALF_YEAR_PLAN",
+      "errors": []
+    },
+    {
+      "id": "402-32-45-new",
+      "actions": [
+        "submit half year",
+        "event choice",
+        "continue event",
+        "report next plan"
+      ],
+      "completedReport": {
+        "phase": "HALF_YEAR_REPORT",
+        "history": 13,
+        "cashEuro": 72750,
+        "focus": "BODY_CARE"
+      },
+      "nextPhase": "HALF_YEAR_PLAN",
+      "errors": []
+    }
+  ],
+  "viewedImages": [
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-r1/402-31-70-new-plan.png",
+      "sha256": "f5e89641bbb26571b3df0fd01cfb9a3c86b2d4a83dc10c40e5c5b6c31a7e23ac"
+    },
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-r1/402-32-45-new-plan.png",
+      "sha256": "564b959f4602e016f312925d35dfc5f5bd6a27103b0236c462690447c9b66c59"
+    },
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-r1/402-34-95-MATCH_SHARPNESS-plan.png",
+      "sha256": "580b8af46e59f0f5ac5286a4fcaf9740d2e238499c0bee17949ecf749689e07f"
+    },
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-r1/320-31-70-new-cta.png",
+      "sha256": "146ecb67b69c497b3073a431ea3e8ecb9f0d9001e1391d5d75c7a18be1c0ca2c"
+    },
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-r1/1280-31-70-new-top.png",
+      "sha256": "05e5107421877bdc0fd4f798d206849b323eb39a673054c7ecef2d6f97d225db"
+    },
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-r1/1280-31-70-new-plan.png",
+      "sha256": "b7b3c3e673244e1148c635e77a0d5fa0186d861958c19c0d53fbb52400fbd836"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-r1/results.json",
+      "sha256": "20274dd16f2d1fe262d5ebafdb53dab9ca60a22217ec4304699ea9bf98e2890f"
+    },
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/local-flows/results.json",
+      "sha256": "58c893b5982be4f784c08eadd2a4a74deb05dc05bb56f60417c96b29fd0eff18"
+    },
+    {
+      "path": "/tmp/TLD2-20260913-coordinator/scope-audit.json",
+      "sha256": "e8e1579a58b627fc294b858fdc97b389d18d362328aae2afa44af3b6517065ea"
+    }
+  ],
+  "limits": [
+    "No real device, WeChat, Safari or photo-library test",
+    "Original bundle warning retained",
+    "Full validation and executor final file SHA still to confirm before release"
+  ]
+}

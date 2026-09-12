@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import type { GameState } from '../models/game'
-import { trainingPlanView, trainingSubmission } from './trainingPlanView'
+import { trainingPlanView, trainingSubmission, TRAINING_SHORT_EFFECTS } from './trainingPlanView'
 const base = JSON.parse(readFileSync('docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/PLAN_35.json', 'utf8')).data as GameState
 function game(age: number) { const state = structuredClone(base); state.windowIndex = (age - 13) * 2; state.player!.form = state.player!.fitness = state.player!.morale = 80; return state }
 describe('training presentation contract', () => {
@@ -35,5 +35,26 @@ describe('training presentation contract', () => {
     state.windowIndex++;expect(trainingPlanView(state).key).not.toBe(key)
     expect(trainingPlanView(state).initialFocus).toBe('BODY_CARE')
     state.trainingFocus='mental';expect(trainingPlanView(state).initialFocus).toBe('MENTAL_RESET')
+  })
+})
+
+
+describe('compact training information', () => {
+  it('shows every maintenance benefit and cost before selection and preserves full explanations', () => {
+    const state=game(34); const model=trainingPlanView(state)
+    expect(TRAINING_SHORT_EFFECTS.BODY_CARE).toBe('身体最多+4 · 竞技−2')
+    expect(TRAINING_SHORT_EFFECTS.MATCH_SHARPNESS).toBe('竞技最多+4 · 身体−3')
+    expect(TRAINING_SHORT_EFFECTS.MENTAL_RESET).toBe('心理最多+4 · 竞技−2')
+    expect(model.options.find(x=>x.id==='BODY_CARE')?.description).toContain('身体衰退减缓20%')
+    expect(model.options.find(x=>x.id==='MENTAL_RESET')?.description).toContain('不提升心理能力')
+    for (const age of [30,31,33,34,37]) for(const option of trainingPlanView(game(age)).options) expect(TRAINING_SHORT_EFFECTS[option.id].length).toBeGreaterThan(0)
+  })
+  it('keeps saturation reasons and saved-choice continuation separate from short copy', () => {
+    const state=game(37);state.player!.form=100;state.trainingFocus='attack'
+    const model=trainingPlanView(state)
+    expect(model.options.find(x=>x.id==='MATCH_SHARPNESS')?.disabledReason).toContain('不能新选')
+    expect(trainingSubmission(state,{focus:model.initialFocus,approach:'TEAM_FIRST'})).toEqual({focus:'MATCH_SHARPNESS',approach:'TEAM_FIRST'})
+    state.trainingFocus=null
+    expect(trainingSubmission(state,{focus:'MATCH_SHARPNESS',approach:'TEAM_FIRST'})).toBeNull()
   })
 })
