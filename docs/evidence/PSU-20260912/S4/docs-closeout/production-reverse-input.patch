@@ -1,0 +1,636 @@
+diff --git a/package-lock.json b/package-lock.json
+index 256e767..d2b9369 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,12 +1,12 @@
+ {
+   "name": "football-career-sim",
+-  "version": "1.1.0",
++  "version": "1.9.0",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "football-career-sim",
+-      "version": "1.1.0",
++      "version": "1.9.0",
+       "dependencies": {
+         "html2canvas": "^1.4.1",
+         "react": "19.2.8",
+diff --git a/package.json b/package.json
+index 1e9a9d2..0c6a072 100644
+--- a/package.json
++++ b/package.json
+@@ -1,7 +1,7 @@
+ {
+   "name": "football-career-sim",
+   "private": true,
+-  "version": "1.1.0",
++  "version": "1.9.0",
+   "type": "module",
+   "scripts": {
+     "dev": "vite",
+diff --git a/src/engine/__tests__/ceuTrainingBaseline.test.ts b/src/engine/__tests__/ceuTrainingBaseline.test.ts
+index 27424cc..76f9580 100644
+--- a/src/engine/__tests__/ceuTrainingBaseline.test.ts
++++ b/src/engine/__tests__/ceuTrainingBaseline.test.ts
+@@ -1,11 +1,11 @@
+ import { expect, it } from 'vitest'
+-import { readFileSync, writeFileSync } from 'node:fs'
++import { readFileSync } from 'node:fs'
+ import { createHash } from 'node:crypto'
+ import { simulateProfessionalHalfYear } from '../simulateProfessionalHalfYear'
+ import { simulateHalfYear } from '../simulateHalfYear'
+ import type { TrainingFocus } from '../../models/game'
+ const dir = 'docs/evidence/CEU-20260907/T-01/training-v11'
+-it('compares all 324 young outputs against the frozen 54 inputs, without regenerating inputs', () => {
++it('protects frozen youth outputs and limits authorized professional changes across all324 old outputs', () => {
+   if (process.env.CEU_T01_TRAINING) throw new Error('Historical generation disabled; see T-02/historical-v11')
+   const hashes = JSON.parse(readFileSync(`${dir}/artifact-hashes.json`, 'utf8'))
+   const raw = readFileSync(`${dir}/young-full.json`)
+@@ -20,10 +20,39 @@ it('compares all 324 young outputs against the frozen 54 inputs, without regener
+   for (const row of rows) for (const result of row.results) {
+     const input = structuredClone(row.input)
+     const actual = row.kind === 'youth' ? simulateHalfYear({ ...input, trainingFocus: result.focus }) : simulateProfessionalHalfYear({ state: { ...input.state, trainingFocus: result.focus }, offer: input.academy })
+-    // Stronger than required: whole output, including Player/stats/summary, must match.
+-    expect(actual).toEqual(result.output)
++    if (row.kind === 'youth') {
++      expect(actual).toEqual(result.output)
++    } else {
++      // PSU intentionally changes all48 normal STEADY professional inputs. Keep
++      // old bytes and compare every field outside the explicitly causal outputs.
++      // S3 separately proves all1562 S2 numeric outputs; new eventSummary is authorized.
++      const old = result.output as typeof actual
++      const oldProjection = structuredClone(old), newProjection = structuredClone(actual)
++      for (const projection of [oldProjection, newProjection]) {
++        for (const key of ['attributes', 'form', 'fitness', 'morale', 'coachRelation', 'squadRelation', 'fanRelation', 'reputation'] as const) delete (projection.player as Partial<typeof projection.player>)[key]
++        for (const key of ['stats', 'attributes', 'states', 'relations', 'injury', 'roleAfter', 'firstTeam', 'hints', 'eventSummary'] as const) delete (projection.report as Partial<typeof projection.report>)[key]
++        delete (projection as { firstTeamRole?: unknown }).firstTeamRole
++      }
++      expect(newProjection).toEqual(oldProjection)
++      const stats = actual.report.stats
++      expect(stats.starts).toBeGreaterThanOrEqual(0)
++      expect(stats.starts).toBeLessThanOrEqual(stats.appearances)
++      expect(stats.appearances).toBeLessThanOrEqual(18)
++      // STEADY reduces risk and leaves ranges untouched; a healthy old result
++      // cannot acquire an injury at the same injury draw, and retains both counts.
++      if (!old.report.injury) {
++        expect(actual.report.injury).toBeNull()
++        expect(stats.appearances).toBe(old.report.stats.appearances)
++        expect(stats.starts).toBe(old.report.stats.starts)
++      }
++      const fitness = Math.min(100, input.state.player!.fitness + 2)
++      expect(stats.minutes).toBe(Math.round(stats.starts * (65 + fitness * .25) + (stats.appearances - stats.starts) * (10 + fitness * .25)))
++      const workload = stats.appearances >= 15 ? -5 : stats.appearances >= 11 ? -2 : 2
++      expect(actual.player.fitness).toBe(actual.report.injury ? Math.min(70, fitness + workload) : Math.min(100, Math.max(0, fitness + workload)))
++      expect(actual).toEqual(simulateProfessionalHalfYear({ state: { ...structuredClone(input.state), trainingFocus: result.focus }, offer: input.academy }))
++    }
+     count++
+   }
+   expect(count).toBe(324)
+-  if (process.env.CEU_T02_EVIDENCE === '1') writeFileSync('docs/evidence/CEU-20260907/T-02/young-comparison.json', JSON.stringify({ inputs: rows.length, outputs: count, player: 'exact', stats: 'exact', otherFields: 'all exact; no differences', source: `${dir}/young-full.json` }, null, 2) + '\n', { flag: 'wx' })
++  if (process.env.CEU_T02_EVIDENCE) throw new Error('Frozen T-02 evidence cannot be regenerated after PSU.')
+ })
+diff --git a/src/engine/__tests__/professionalApproach.test.ts b/src/engine/__tests__/professionalApproach.test.ts
+new file mode 100644
+index 0000000..44cdb3c
+--- /dev/null
++++ b/src/engine/__tests__/professionalApproach.test.ts
+@@ -0,0 +1,56 @@
++import { afterEach, expect, it, vi } from 'vitest'
++import { createTrainingBaselineState } from './ceuTrainingBaselineFixture'
++import { adjustedProfessionalRange, prepareProfessionalWindow, professionalInjuryRisk } from '../professionalApproach'
++import { simulateProfessionalHalfYear } from '../simulateProfessionalHalfYear'
++import * as rng from '../random'
++const fixture = () => {
++  const { state, academy } = createTrainingBaselineState('psu-unit')
++  state.windowIndex = 22; state.firstTeamRole = 'FRINGE'
++  Object.assign(state.player!, { form: 70, fitness: 70, morale: 70, squadRelation: 60, coachRelation: 60 })
++  return { state, academy }
++}
++afterEach(() => vi.restoreAllMocks())
++it('applies each approved preparation and resolves null as STEADY without mutating player', () => {
++  const p=fixture().state.player!, original=structuredClone(p)
++  const push=prepareProfessionalWindow(p,'PUSH'),steady=prepareProfessionalWindow(p,'STEADY'),team=prepareProfessionalWindow(p,'TEAM_FIRST')
++  expect(push.preparationChanges).toEqual({coachRelation:3,squadRelation:0,form:0,fitness:-4,morale:0})
++  expect(steady.preparationChanges).toEqual({coachRelation:0,squadRelation:0,form:3,fitness:2,morale:0})
++  expect(team.preparationChanges).toEqual({coachRelation:0,squadRelation:5,form:0,fitness:0,morale:3})
++  expect(prepareProfessionalWindow(p,null)).toEqual(steady);expect(p).toEqual(original)
++})
++it('checks support once at45, not46/47 or after PUSH cost; disables every strategy modifier',()=>{
++  for(const key of ['form','fitness','morale'] as const) for(const n of [45,46,47]) {
++    const p=fixture().state.player!;p[key]=n
++    for(const a of ['PUSH','STEADY','TEAM_FIRST',null] as const){const r=prepareProfessionalWindow(p,a);expect(r.recovery).toBe(n===45);if(n===45){expect(r.effectiveApproach).toBeNull();expect(r.trainingBonus).toBe(0);expect(r.matchModifiers).toEqual({appearanceRateBonus:0,startRateBonus:0,injuryRiskDelta:0});expect(r.player[key]).toBe(n+({form:7,fitness:10,morale:8}[key]));expect(r.player.squadRelation).toBe(60)}}
++  }
++  const p=fixture().state.player!;p.fitness=46;const r=prepareProfessionalWindow(p,'PUSH');expect(r.player.fitness).toBe(42);expect(r.recovery).toBe(false)
++})
++it('uses actual capped preparation changes and keeps recovery injury range distinct',()=>{
++  const p=fixture().state.player!;Object.assign(p,{form:100,fitness:100,morale:100,squadRelation:100,coachRelation:100});p.attributes.physical=100
++  expect(prepareProfessionalWindow(p,'TEAM_FIRST').preparationChanges.squadRelation).toBe(0)
++  const r=prepareProfessionalWindow(p,'STEADY');expect(r.preparationChanges.form).toBe(0);expect(professionalInjuryRisk(r.player,r.matchModifiers,false)).toBe(.015)
++  expect(professionalInjuryRisk(r.player,r.matchModifiers,true)).toBe(.03)
++  // Arithmetic clamp boundary only, not a legal saved player or observed probability.
++  expect(professionalInjuryRisk({...p,fitness:-100},r.matchModifiers,true)).toBe(.12)
++  expect(professionalInjuryRisk(p,{appearanceRateBonus:0,startRateBonus:0,injuryRiskDelta:1},false)).toBe(.16)
++})
++it('matches published normal probability example and ignores modifiers during recovery',()=>{
++  const p=fixture().state.player!;p.fitness=50;p.attributes.physical=45
++  const a=prepareProfessionalWindow(p,'PUSH'),b=prepareProfessionalWindow(p,'STEADY')
++  expect(professionalInjuryRisk(a.player,a.matchModifiers,false)).toBeCloseTo(.069,12)
++  expect(professionalInjuryRisk(b.player,b.matchModifiers,false)).toBeCloseTo(.023,12)
++  expect(professionalInjuryRisk(a.player,a.matchModifiers,true)).toBeCloseTo(.044,12)
++})
++it('clamps both range ends, allows rounded18, and retains starts <= appearances',()=>{
++  expect(adjustedProfessionalRange([.8,.95],.1,.98)).toEqual([.9,.98])
++  const lowerStart=adjustedProfessionalRange([0,.1],-.06,1);expect(lowerStart[0]).toBe(0);expect(lowerStart[1]).toBeCloseTo(.04,12)
++  const {state,academy}=fixture();state.firstTeamRole='CORE';state.developmentApproach='PUSH'
++  const original=rng.createRandom;vi.spyOn(rng,'createRandom').mockImplementation((...parts)=>{const r=original(...parts);return parts.includes('professional-appearances')?{...r,float:(_min,max)=>max}:parts.includes('professional-injury')?{...r,next:()=>1}:r})
++  const r=simulateProfessionalHalfYear({state,offer:academy});expect(r.report.stats.appearances).toBe(18);expect(r.report.stats.starts).toBe(18)
++})
++it('removes young recovery TEAM_FIRST residue but retains normal high-appearance reward',()=>{
++  const {state,academy}=fixture();state.player!.form=45
++  const results=['STEADY','PUSH','TEAM_FIRST'].map(developmentApproach=>simulateProfessionalHalfYear({state:{...state,developmentApproach:developmentApproach as 'STEADY'},offer:academy}))
++  expect(results[1]).toEqual(results[0]);expect(results[2]).toEqual(results[0]);expect(results[0]!.player.squadRelation).toBe(60)
++  state.firstTeamRole='CORE';const r=simulateProfessionalHalfYear({state:{...state,developmentApproach:'TEAM_FIRST'},offer:academy});expect(r.report.stats.appearances).toBeGreaterThanOrEqual(10);expect(r.player.squadRelation).toBe(62)
++})
+diff --git a/src/engine/__tests__/professionalSimulation.test.ts b/src/engine/__tests__/professionalSimulation.test.ts
+index fbd1bd8..82e5ca4 100644
+--- a/src/engine/__tests__/professionalSimulation.test.ts
++++ b/src/engine/__tests__/professionalSimulation.test.ts
+@@ -283,11 +283,12 @@ describe('professional half-year simulation', () => {
+     expect(state.academyOffers.map((offer) => offer.club.id)).toEqual(['ned_ajax'])
+ 
+     const result = simulateProfessionalHalfYear({ state, offer: academy })
+-    // This locks the complete path: simulated stats.minutes (497) is consumed
++    // This locks the complete path: simulated stats.minutes (499: STEADY fitness72 instead of71) is consumed
+     // by firstTeamMatchExperienceBonusForRuntimeClub before age growth.
++    // Fitness context +.0015 crosses the attack rounding boundary; see PSU S2 Ajax derivation.
+     expect({ minutes: result.report.stats.minutes, attributes: result.player.attributes }).toEqual({
+-      minutes: 497,
+-      attributes: { attack: 45.9, defense: 42.9, physical: 44.1, mental: 44.9 },
++      minutes: 499,
++      attributes: { attack: 46, defense: 42.9, physical: 44.1, mental: 44.9 },
+     })
+   })
+ })
+diff --git a/src/engine/__tests__/professionalSummary.test.ts b/src/engine/__tests__/professionalSummary.test.ts
+new file mode 100644
+index 0000000..05e7dd9
+--- /dev/null
++++ b/src/engine/__tests__/professionalSummary.test.ts
+@@ -0,0 +1,36 @@
++import { expect, it } from 'vitest'
++import { createTrainingBaselineState } from './ceuTrainingBaselineFixture'
++import { simulateProfessionalHalfYear } from '../simulateProfessionalHalfYear'
++const source = () => {
++ const f = createTrainingBaselineState('psu-summary')
++ Object.assign(f.state, { windowIndex: 22, firstTeamRole: 'CORE', teamLevel: 'FIRST_TEAM', trainingFocus: 'BALANCED' })
++ Object.assign(f.state.player!, { form: 100, fitness: 100, morale: 100, coachRelation: 100, squadRelation: 100 })
++ f.state.player!.attributes.physical = 65
++ return f
++}
++it('reports executed capped preparation, opportunity bounds and risk floor without promising appearances', () => {
++ const f = source(); f.state.developmentApproach = 'PUSH'
++ const r = simulateProfessionalHalfYear({state:f.state,offer:f.academy}).report
++ expect(r.eventSummary).toContain('身体状态-4')
++ expect(r.eventSummary).not.toContain('教练关系+3')
++ expect(r.eventSummary).toContain('受状态或关系边界限制')
++ expect(r.eventSummary).not.toMatch(/\d+%/)
++ expect(r.eventSummary).toContain('已触及边界')
++ expect(r.eventSummary).toContain('风险仍处于下限')
++ expect(r.eventSummary).not.toContain('承担更高伤病风险')
++ expect(r.eventSummary).not.toContain('抽取')
++})
++it('reports recovery strategy suppression at all ages and retains veteran maintenance explanation', () => {
++ for (const w of [22,44]) {
++ const f = source(); f.state.windowIndex=w; f.state.player!.fitness=41;f.state.developmentApproach='TEAM_FIRST';f.state.trainingFocus=w===44?'BODY_CARE':'BALANCED'
++ const summary=simulateProfessionalHalfYear({state:f.state,offer:f.academy}).report.eventSummary
++ expect(summary).toContain('策略未执行');expect(summary).toContain('身体状态+10');expect(summary).not.toContain('本期策略：');expect(summary).not.toContain('队内关系实际增加')
++ if(w===44)expect(summary).toContain('恢复')
++ }
++})
++it('reports actual team relationship gain without stacking the ordinary reward and does not leak hidden ability', () => {
++ const f = source();f.state.developmentApproach='TEAM_FIRST'
++ const summary=simulateProfessionalHalfYear({state:f.state,offer:f.academy}).report.eventSummary
++ expect(summary).toContain('减少首发诉求');expect(summary).not.toContain('队内关系+');expect(summary).not.toContain('赛后队内关系另')
++ expect(summary).not.toMatch(/potential|潜力|TEAM_FIRST|PUSH|STEADY/)
++})
+diff --git a/src/engine/__tests__/trainingPlan.test.ts b/src/engine/__tests__/trainingPlan.test.ts
+index bd196d3..7872d8c 100644
+--- a/src/engine/__tests__/trainingPlan.test.ts
++++ b/src/engine/__tests__/trainingPlan.test.ts
+@@ -65,9 +65,9 @@ it('executes age/state/potential boundaries with exact recovery, costs and decli
+         expect(execution!.physicalDeclineMultiplier).toBe(1)
+         expect(result.report.eventSummary).toContain('自动恢复优先')
+       } else {
+-        if (approach === 'PUSH') expected.fitness -= 3
+-        if (approach === 'STEADY') { expected.fitness = bounded(expected.fitness + 1); expected.form = bounded(expected.form + 2) }
+-        if (approach === 'TEAM_FIRST') expected.morale = bounded(expected.morale + 2)
++        if (approach === 'PUSH') expected.fitness -= 4
++        if (approach === 'STEADY') { expected.fitness = bounded(expected.fitness + 2); expected.form = bounded(expected.form + 3) }
++        if (approach === 'TEAM_FIRST') expected.morale = bounded(expected.morale + 3)
+         expect(execution!.declineFitness).toBe(expected.fitness)
+         const gain = Math.min(4, Math.max(0, 95 - expected[target]))
+         const cost = Math.min(expected[costKey], costKey === 'fitness' ? 3 : 2)
+@@ -89,8 +89,14 @@ it('executes age/state/potential boundaries with exact recovery, costs and decli
+       // Direct youth entry still shares maintenance interpretation (even though age eligibility normally promotes).
+       const youth = simulateHalfYear({ player: before, offer: row.input.academy, role: 'STARTER', arrivalChoice: null, careerSeed: state.careerSeed, startYear: state.startYear, windowIndex: state.windowIndex, cashBeforeEuro: 0, developmentApproach: approach, trainingFocus: focus })
+       const youthExecution = spy.mock.results.at(-1)!.value as plans.TrainingExecution
+-      expect(youthExecution).toEqual(execution)
+-      expect(youth.player.attributes.physical).toBe(result.player.attributes.physical)
++      // PSU changes professional preparation only. Youth retains its old +1/-3 fitness.
++      const youthFitness = recovery ? (before.fitness < 46 ? before.fitness + 10 : before.fitness) : approach === 'STEADY' ? bounded(before.fitness + 1) : approach === 'PUSH' ? before.fitness - 3 : before.fitness
++      expect(youthExecution.recovery).toBe(recovery)
++      expect(youthExecution.declineFitness).toBe(youthFitness)
++      expect(youthExecution.physicalDeclineMultiplier).toBe(factor)
++      expect(youthExecution.costs).toEqual(execution!.costs)
++      const youthManagement = Math.max(0.8, Math.min(1.5, 1.5 - youthFitness * 0.007))
++      expect(youth.player.attributes.physical).toBe(round(Math.max(20, before.attributes.physical - decline * youthManagement * factor)))
+       expect(youth.report.eventSummary).toContain(`本期训练：${plans.MAINTENANCE_LABELS[focus]}`)
+     }
+   }
+@@ -121,11 +127,11 @@ it('pairs three maintenance plans with all 300 frozen representative inputs and
+     const execution = spy.mock.results.at(-1)!.value as plans.TrainingExecution
+     const baseline = row.results.find(result => result.focus === 'BALANCED')!.output
+     expect(execution.recovery).toBe(false)
+-    expect(execution.declineFitness).toBe(81)
++    expect(execution.declineFitness).toBe(82)
+     expect(execution.gains).toEqual({ form: focus === 'MATCH_SHARPNESS' ? 4 : 0, fitness: focus === 'BODY_CARE' ? 4 : 0, morale: focus === 'MENTAL_RESET' ? 4 : 0 })
+     expect(execution.costs).toEqual({ form: focus === 'MATCH_SHARPNESS' ? 0 : 2, fitness: focus === 'MATCH_SHARPNESS' ? 3 : 0, morale: 0 })
+-    expect(execution.physicalDeclineSaved).toBeCloseTo(focus === 'BODY_CARE' ? 0.7 * (1.5 - 81 * 0.007) * 0.2 : 0, 12)
+-    expect(actual.player.attributes.physical).toBe(focus === 'BODY_CARE' ? 69.5 : 69.3)
++    expect(execution.physicalDeclineSaved).toBeCloseTo(focus === 'BODY_CARE' ? 0.7 * (1.5 - 82 * 0.007) * 0.2 : 0, 12)
++    expect(actual.player.attributes.physical).toBe(focus === 'BODY_CARE' ? 69.5 : 69.4)
+     samples.push({ position: row.position, seed: row.seed, focus, execution, delta: { rating: actual.report.stats.averageRating - baseline.report.stats.averageRating, goals: actual.report.stats.goals - baseline.report.stats.goals, assists: actual.report.stats.assists - baseline.report.stats.assists, minutes: actual.report.stats.minutes - baseline.report.stats.minutes, physical: actual.player.attributes.physical - baseline.player.attributes.physical, form: actual.player.form - baseline.player.form, fitness: actual.player.fitness - baseline.player.fitness, morale: actual.player.morale - baseline.player.morale } })
+   }
+   expect(samples).toHaveLength(900)
+diff --git a/src/engine/professionalApproach.ts b/src/engine/professionalApproach.ts
+new file mode 100644
+index 0000000..9db9f32
+--- /dev/null
++++ b/src/engine/professionalApproach.ts
+@@ -0,0 +1,103 @@
++import type { DevelopmentApproach, Player } from '../models/game'
++
++export interface ProfessionalMatchModifiers {
++  appearanceRateBonus: number
++  startRateBonus: number
++  injuryRiskDelta: number
++}
++interface ApproachConfiguration extends ProfessionalMatchModifiers {
++  coachRelation: number
++  squadRelation: number
++  form: number
++  fitness: number
++  morale: number
++  trainingBonus: number
++  summary: string
++}
++
++export const PROFESSIONAL_APPROACHES: Readonly<Record<DevelopmentApproach, Readonly<ApproachConfiguration>>> = {
++  PUSH: {
++    coachRelation: 3, squadRelation: 0, form: 0, fitness: -4, morale: 0,
++    trainingBonus: 1, appearanceRateBonus: 0.10, startRateBonus: 0.08, injuryRiskDelta: 0.025,
++    summary: '你主动向教练争取更多正式比赛机会，训练投入得到认可，但身体负荷也随之增加。',
++  },
++  STEADY: {
++    coachRelation: 0, squadRelation: 0, form: 3, fitness: 2, morale: 0,
++    trainingBonus: 0, appearanceRateBonus: 0, startRateBonus: 0, injuryRiskDelta: -0.015,
++    summary: '你选择先适应职业队节奏，在训练强度、比赛准备和身体恢复之间保持平衡。',
++  },
++  TEAM_FIRST: {
++    coachRelation: 0, squadRelation: 5, form: 0, fitness: 0, morale: 3,
++    trainingBonus: 0, appearanceRateBonus: 0.04, startRateBonus: -0.06, injuryRiskDelta: 0,
++    summary: '你接受球队的阶段性安排，把团队需要放在个人出场诉求之前，更衣室更愿意接纳你。',
++  },
++}
++export const PROFESSIONAL_INJURY_LIMITS = { normal: [0.015, 0.16], recovery: [0.03, 0.12] } as const
++export const PROFESSIONAL_APPEARANCE_LIMIT = 0.98
++const stateKeys = ['coachRelation', 'squadRelation', 'form', 'fitness', 'morale'] as const
++const clamp = (n: number, min: number, max: number) => Math.max(min, Math.min(max, n))
++
++export function prepareProfessionalWindow(player: Player, approach: DevelopmentApproach | null) {
++  const next = structuredClone(player)
++  const recovery = player.form < 46 || player.fitness < 46 || player.morale < 46
++  const effectiveApproach = recovery ? null : approach ?? 'STEADY'
++  const config = effectiveApproach ? PROFESSIONAL_APPROACHES[effectiveApproach] : null
++  if (recovery) {
++    if (next.form < 46) next.form = clamp(next.form + 7, 0, 100)
++    if (next.fitness < 46) next.fitness = clamp(next.fitness + 10, 0, 100)
++    if (next.morale < 46) next.morale = clamp(next.morale + 8, 0, 100)
++  } else if (config) {
++    for (const key of stateKeys) next[key] = clamp(next[key] + config[key], 0, 100)
++  }
++  return {
++    player: next,
++    trainingBonus: config?.trainingBonus ?? 0,
++    recovery,
++    effectiveApproach,
++    preparationChanges: Object.fromEntries(stateKeys.map(key => [key, next[key] - player[key]])) as Record<typeof stateKeys[number], number>,
++    summary: config?.summary ?? '职业队为你安排了恢复训练、体能监测和心理沟通，避免低迷状态持续恶化。',
++    matchModifiers: {
++      appearanceRateBonus: config?.appearanceRateBonus ?? 0,
++      startRateBonus: config?.startRateBonus ?? 0,
++      injuryRiskDelta: config?.injuryRiskDelta ?? 0,
++    } satisfies ProfessionalMatchModifiers,
++  }
++}
++
++export function adjustedProfessionalRange(range: readonly [number, number], bonus: number, max: number): readonly [number, number] {
++  const lower = clamp(range[0] + bonus, 0, max)
++  return [lower, clamp(range[1] + bonus, lower, max)]
++}
++
++export function professionalInjuryRisk(player: Player, modifiers: ProfessionalMatchModifiers, recovery: boolean): number {
++  const [min, max] = recovery ? PROFESSIONAL_INJURY_LIMITS.recovery : PROFESSIONAL_INJURY_LIMITS.normal
++  return clamp(0.04 + (50 - player.fitness) * 0.001 + (45 - player.attributes.physical) * 0.0005 + (recovery ? 0 : modifiers.injuryRiskDelta), min, max)
++}
++
++
++/** Describes actual execution; probability and draw metadata stay out of player copy. */
++export function professionalApproachSummary(
++  preparation: ReturnType<typeof prepareProfessionalWindow>,
++  match: { appearanceRange: readonly [number, number]; startRange: readonly [number, number]; injuryRisk: number; opportunityCapped: boolean },
++  squadAfter: number,
++): string {
++  const names = { PUSH: '主动争取出场', STEADY: '先站稳脚跟', TEAM_FIRST: '先服从球队安排' }
++  const labels = { coachRelation: '教练关系', squadRelation: '队内关系', form: '竞技状态', fitness: '身体状态', morale: '心理状态' }
++  const signed = (n: number) => `${n > 0 ? '+' : ''}${Math.round(n * 10) / 10}`
++  const changes = stateKeys.filter(k => preparation.preparationChanges[k] !== 0).map(k => `${labels[k]}${signed(preparation.preparationChanges[k])}`).join('、') || '状态与关系没有额外变化'
++  if (preparation.recovery) return `本期先恢复，策略未执行。恢复准备：${changes}。`
++  const approach = preparation.effectiveApproach!
++  const riskAtFloor = match.injuryRisk === PROFESSIONAL_INJURY_LIMITS.normal[0]
++  const direction = approach === 'PUSH'
++    ? `争取更多出场与首发，${riskAtFloor ? '伤病风险仍处于下限' : '承担更高伤病风险'}`
++    : approach === 'TEAM_FIRST' ? '增加替补机会，减少首发诉求'
++    : `保持原角色机会范围，${riskAtFloor ? '伤病风险已到下限' : '降低伤病风险'}`
++  const lines = [`本期策略：${names[approach]}。${direction}。`, `准备实际变化：${changes}。`]
++  const config = PROFESSIONAL_APPROACHES[approach]
++  const limits = []
++  if (stateKeys.some(k => preparation.preparationChanges[k] !== config[k])) limits.push('部分准备效果已受状态或关系边界限制')
++  if (match.opportunityCapped) limits.push('部分机会调整已触及边界')
++  if (limits.length) lines.push(`${limits.join('；')}。`)
++  if (approach === 'TEAM_FIRST' && squadAfter > preparation.player.squadRelation) lines.push(`赛后队内关系另${signed(squadAfter - preparation.player.squadRelation)}。`)
++  return lines.join('\n')
++}
+diff --git a/src/engine/simulateProfessionalHalfYear.ts b/src/engine/simulateProfessionalHalfYear.ts
+index 6d98e7b..992f762 100644
+--- a/src/engine/simulateProfessionalHalfYear.ts
++++ b/src/engine/simulateProfessionalHalfYear.ts
+@@ -1,3 +1,4 @@
++import { professionalApproachSummary, prepareProfessionalWindow, adjustedProfessionalRange, professionalInjuryRisk, PROFESSIONAL_APPEARANCE_LIMIT, type ProfessionalMatchModifiers } from './professionalApproach'
+ import { resolveTrainingPlan, applyTrainingMaintenance, trainingEventSummary, type TrainingExecution } from './trainingPlan'
+ import {
+   BASE_RATES,
+@@ -137,80 +138,25 @@ function roleStepToward(
+   ] as FirstTeamRole
+ }
+ 
+-function prepareProfessionalWindow(
+-  player: Player,
+-  approach: DevelopmentApproach | null,
+-): { player: Player; trainingBonus: number; summary: string } {
+-  const next = structuredClone(player)
+-  const needsSupport =
+-    next.form < 46 || next.fitness < 46 || next.morale < 46
+-
+-  if (needsSupport) {
+-    if (next.form < 46) next.form = clamp(next.form + 7, 0, 100)
+-    if (next.fitness < 46) next.fitness = clamp(next.fitness + 10, 0, 100)
+-    if (next.morale < 46) next.morale = clamp(next.morale + 8, 0, 100)
+-    return {
+-      player: next,
+-      trainingBonus: 0,
+-      summary:
+-        '职业队为你安排了恢复训练、体能监测和心理沟通，避免低迷状态持续恶化。',
+-    }
+-  }
+-
+-  if (approach === 'PUSH') {
+-    next.coachRelation = clamp(next.coachRelation + 3, 0, 100)
+-    next.fitness = clamp(next.fitness - 3, 0, 100)
+-    return {
+-      player: next,
+-      trainingBonus: 1,
+-      summary:
+-        '你主动向教练争取更多正式比赛机会，训练投入得到认可，但身体负荷也随之增加。',
+-    }
+-  }
+-
+-  if (approach === 'TEAM_FIRST') {
+-    next.squadRelation = clamp(next.squadRelation + 4, 0, 100)
+-    next.morale = clamp(next.morale + 2, 0, 100)
+-    return {
+-      player: next,
+-      trainingBonus: 0,
+-      summary:
+-        '你接受球队的阶段性安排，把团队需要放在个人出场诉求之前，更衣室更愿意接纳你。',
+-    }
+-  }
+-
+-  next.form = clamp(next.form + 2, 0, 100)
+-  next.fitness = clamp(next.fitness + 1, 0, 100)
+-  return {
+-    player: next,
+-    trainingBonus: 0,
+-    summary:
+-      '你选择先适应职业队节奏，在训练强度、比赛准备和身体恢复之间保持平衡。',
+-  }
+-}
+-
+ function simulateFirstTeamStats(input: {
+   player: Player
+   offer: AcademyOffer
+   role: FirstTeamRole
+   seed: string
++  matchModifiers: ProfessionalMatchModifiers
++  recovery: boolean
+ }): {
+   stats: HalfYearStats
+   injury: HalfYearReport['injury']
++  execution: { appearanceRange: readonly [number, number]; startRange: readonly [number, number]; injuryRisk: number; opportunityCapped: boolean }
+ } {
+   const { player, offer, role, seed } = input
+   const random = createRandom(seed, 'professional-appearances')
+   const injuryRandom = createRandom(seed, 'professional-injury')
+   const totalMatches = 18
+-  const [appearanceMin, appearanceMax] = APPEARANCE_RANGES[role]
+-  const [startMin, startMax] = START_RANGES[role]
+-  const injuryRisk = clamp(
+-    0.04 +
+-      (50 - player.fitness) * 0.001 +
+-      (45 - player.attributes.physical) * 0.0005,
+-    0.03,
+-    0.12,
+-  )
++  const [appearanceMin, appearanceMax] = adjustedProfessionalRange(APPEARANCE_RANGES[role], input.matchModifiers.appearanceRateBonus, PROFESSIONAL_APPEARANCE_LIMIT)
++  const [startMin, startMax] = adjustedProfessionalRange(START_RANGES[role], input.matchModifiers.startRateBonus, 1)
++  const injuryRisk = professionalInjuryRisk(player, input.matchModifiers, input.recovery)
+   const hasInjury = injuryRandom.next() < injuryRisk
+   const injuryWeeks = hasInjury ? injuryRandom.int(2, 7) : 0
+   const availability = hasInjury
+@@ -299,6 +245,7 @@ function simulateFirstTeamStats(input: {
+   )
+ 
+   return {
++    execution: { appearanceRange: [appearanceMin, appearanceMax] as const, startRange: [startMin, startMax] as const, injuryRisk, opportunityCapped: APPEARANCE_RANGES[role].some(v => v + input.matchModifiers.appearanceRateBonus > PROFESSIONAL_APPEARANCE_LIMIT || v + input.matchModifiers.appearanceRateBonus < 0) || START_RANGES[role].some(v => v + input.matchModifiers.startRateBonus > 1 || v + input.matchModifiers.startRateBonus < 0) },
+     stats: {
+       appearances,
+       starts,
+@@ -498,11 +445,13 @@ function simulateFirstTeamHalfYear(input: {
+   const workingPlayer = preparation.player
+   const trainingExecution = applyTrainingMaintenance(startPlayer, workingPlayer, playerAgeAtWindow(state.windowIndex), focus)
+   const seed = `${state.careerSeed}:window:${state.windowIndex}`
+-  const { stats, injury } = simulateFirstTeamStats({
++  const { stats, injury, execution } = simulateFirstTeamStats({
+     player: workingPlayer,
+     offer,
+     role,
+     seed,
++    matchModifiers: preparation.matchModifiers,
++    recovery: preparation.recovery,
+   })
+   const formAfter = clamp(
+     stats.appearances >= 8
+@@ -561,7 +510,7 @@ function simulateFirstTeamHalfYear(input: {
+     ),
+     squadRelation: clamp(
+       workingPlayer.squadRelation +
+-        (stats.appearances >= 10 ? 2 : !trainingExecution?.recovery && approach === 'TEAM_FIRST' ? 2 : 0),
++        (stats.appearances >= 10 ? 2 : !preparation.recovery && preparation.effectiveApproach === 'TEAM_FIRST' ? 2 : 0),
+       0,
+       100,
+     ),
+@@ -645,7 +594,7 @@ function simulateFirstTeamHalfYear(input: {
+     expenseEuro: 0,
+     cashAfterEuro: settlement.cashAfterEuro,
+     injury,
+-    eventSummary: trainingEventSummary(preparation.summary, trainingExecution),
++    eventSummary: trainingEventSummary(professionalApproachSummary(preparation, execution, playerAfter.squadRelation), trainingExecution),
+     hints: [
+       roleAfter !== role
+         ? '你的队内角色发生了一级变化，下一窗口出场比例也会随之调整。'
+diff --git a/src/screens/SettingsScreen.tsx b/src/screens/SettingsScreen.tsx
+index 2bfe45e..7094562 100644
+--- a/src/screens/SettingsScreen.tsx
++++ b/src/screens/SettingsScreen.tsx
+@@ -1,3 +1,4 @@
++import { version as gameVersion } from '../../package.json'
+ import { AppShell } from '../components/AppShell'
+ import { CareerTopbar } from '../components/CareerTopbar'
+ import { CLUBS } from '../data/balance'
+@@ -8,6 +9,7 @@ export const DELETE_CAREER_CONFIRMATION = '确定删除当前生涯吗？删除
+ 
+ export function buildSettingsView() {
+   return {
++    gameVersion,
+     saveVersion: SAVE_VERSION,
+     dataVersion: DATA_VERSION,
+     clubCount: CLUBS.length,
+@@ -35,7 +37,7 @@ export function SettingsScreen({ game }: { game: GameState }) {
+         <header className="settings-screen__title"><span>设置</span><small>玩法与本地存档</small></header>
+         <section><h2>怎么玩</h2><ul><li>每半年，你会选择一次训练方向和职业策略。</li><li>有些事件会改变状态和关系，也可能留下长期影响。</li><li>合同与转会，会改变你所在的平台、球队角色和成长空间。</li><li>比赛表现、能力成长、国家队经历和荣誉会由游戏根据你的选择模拟。</li></ul></section>
+         <section><h2>存档</h2><p>当前生涯会自动保存在这个浏览器中，并保留一份内部恢复备份。</p><p>目前没有云同步、账号同步或多存档。清除浏览器数据可能会让这段生涯永久丢失。</p></section>
+-        <section><h2>版本信息</h2><dl><div><dt>存档版本</dt><dd>{view.saveVersion}</dd></div><div><dt>数据版本</dt><dd>{view.dataVersion}</dd></div><div><dt>俱乐部数据库</dt><dd>{view.clubCount} 家</dd></div><div><dt>当前数据库范围</dt><dd>{view.leagueCount} 个联赛</dd></div></dl></section>
++        <section><h2>版本信息</h2><dl><div><dt>游戏版本</dt><dd>{view.gameVersion}</dd></div><div><dt>存档版本</dt><dd>{view.saveVersion}</dd></div><div><dt>数据版本</dt><dd>{view.dataVersion}</dd></div><div><dt>俱乐部数据库</dt><dd>{view.clubCount} 家</dd></div><div><dt>当前数据库范围</dt><dd>{view.leagueCount} 个联赛</dd></div></dl></section>
+         <section className="settings-screen__danger"><h2>删除生涯</h2><p>删除后，当前生涯和内部恢复备份都无法找回。</p><button type="button" onClick={() => deleteCareerIfConfirmed(window.confirm, deleteCareer)}>删除生涯</button></section>
+       </main>
+     </AppShell>
+diff --git a/src/screens/TrainingPlanScreen.tsx b/src/screens/TrainingPlanScreen.tsx
+index b35f751..8ae1a4a 100644
+--- a/src/screens/TrainingPlanScreen.tsx
++++ b/src/screens/TrainingPlanScreen.tsx
+@@ -1,8 +1,8 @@
+ import { CareerPreferencesEditor } from '../components/CareerPreferencesEditor'
+-import { useRef, useState } from 'react'
++import { Fragment, useRef, useState } from 'react'
+ import { CareerHub } from '../components/CareerHub'
+ import { Icon } from '../components/Icons'
+-import { careerWindowLabel } from '../engine/careerTime'
++import { careerWindowLabel, playerAgeAtWindow } from '../engine/careerTime'
+ import type {
+   DevelopmentApproach,
+   GameState,
+@@ -46,19 +46,19 @@ const professionalApproaches: typeof approaches = [
+     id: 'PUSH',
+     title: '主动争取出场',
+     description: '明确告诉教练你想上场，并用更高训练投入争取机会。',
+-    effect: '教练关系提升 · 身体负荷增加',
++    effect: '出场首发更多 · 负荷、伤病风险增',
+   },
+   {
+     id: 'STEADY',
+     title: '先站稳脚跟',
+     description: '先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。',
+-    effect: '竞技状态与身体状态更稳定',
++    effect: '稳住竞技和身体 · 伤病风险降低',
+   },
+   {
+     id: 'TEAM_FIRST',
+     title: '先服从球队安排',
+     description: '把球队需要放在个人出场之前，耐心等机会。',
+-    effect: '队内关系与心理状态提升',
++    effect: '替补/队内关系增 · 首发占比降低',
+   },
+ ]
+ 
+@@ -102,7 +102,8 @@ function TrainingPlanContent({ game }: { game: GameState }) {
+   const isSecondYear = game.windowIndex >= 2
+   const isProfessional =
+     Boolean(game.contract) && game.windowIndex >= 4
+-  const activeApproaches = isProfessional
++  const isProfessionalFirstTeam = isProfessional && (game.teamLevel === 'FIRST_TEAM' || playerAgeAtWindow(game.windowIndex) >= 22)
++  const activeApproaches = isProfessionalFirstTeam
+     ? professionalApproaches
+     : approaches
+   const needsRecovery =
+@@ -126,7 +127,7 @@ function TrainingPlanContent({ game }: { game: GameState }) {
+             {model.veteran
+               ? model.recovery ? "本期先恢复" : "选择本期训练重心，兼顾状态与身体负担。"
+               : needsRecovery
+-              ? '你的状态不在最佳，俱乐部已经安排恢复支持。怎么训练，仍会影响这半年的成长。'
++              ? isProfessionalFirstTeam ? '当前状态需要恢复。若结算准备时仍低于46，本期职业策略不执行；训练成长仍按原规则处理。' : '你的状态不在最佳，俱乐部已经安排恢复支持。怎么训练，仍会影响这半年的成长。'
+               : isProfessional
+                 ? '合同已经生效。你怎么训练、怎么争取角色，以及真正获得多少出场，会决定俱乐部是否兑现承诺。'
+                 : isSecondYear
+@@ -184,7 +185,9 @@ function TrainingPlanContent({ game }: { game: GameState }) {
+                   <span>
+                     <strong>{item.title}</strong>
+                     <small>{item.description}</small>
+-                    <em>{item.effect}</em>
++                    <em>{isProfessionalFirstTeam
++                      ? (needsRecovery ? '结算仍低迷 · 策略不执行' : item.effect).split(' · ').map((line, index) => <Fragment key={line}>{index > 0 ? <br /> : null}{line}</Fragment>)
++                      : item.effect}</em>
+                   </span>
+                 </button>
+               ))}
+diff --git a/src/screens/__tests__/SettingsScreen.test.ts b/src/screens/__tests__/SettingsScreen.test.ts
+index 4a6e800..d7d027b 100644
+--- a/src/screens/__tests__/SettingsScreen.test.ts
++++ b/src/screens/__tests__/SettingsScreen.test.ts
+@@ -1,3 +1,4 @@
++import { version } from '../../../package.json'
+ import { beforeEach, describe, expect, it } from 'vitest'
+ import { CLUBS } from '../../data/balance'
+ import { DATA_VERSION, SAVE_VERSION } from '../../models/game'
+@@ -20,6 +21,7 @@ describe('settings screen helpers', () => {
+   it('reads version and directory information from runtime constants', () => {
+     const view = buildSettingsView()
+     expect(view).toEqual({
++      gameVersion: version,
+       saveVersion: SAVE_VERSION,
+       dataVersion: DATA_VERSION,
+       clubCount: CLUBS.length,
+diff --git a/src/store/gameStore.trainingPlan.test.ts b/src/store/gameStore.trainingPlan.test.ts
+index 22e18df..17de0eb 100644
+--- a/src/store/gameStore.trainingPlan.test.ts
++++ b/src/store/gameStore.trainingPlan.test.ts
+@@ -40,7 +40,7 @@ it.each([{ before: 46, delta: -1, recovery: true }, { before: 45, delta: 1, reco
+   expect(engineInput.player!.fitness).toBe(before + delta)
+   const execution = executionSpy.mock.results[0]!.value as plans.TrainingExecution
+   expect(execution.recovery).toBe(recovery)
+-  expect(execution.declineFitness).toBe(recovery ? 55 : 43)
++  expect(execution.declineFitness).toBe(recovery ? 55 : 42)
+   expect(execution.gains.fitness).toBe(recovery ? 0 : 4)
+   const final = structuredClone(store().game!)
+   expect(final.pendingConsequences).toEqual([future])

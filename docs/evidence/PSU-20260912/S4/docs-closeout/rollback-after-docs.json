@@ -1,0 +1,33 @@
+{
+  "base": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "productCommit": "690de955bc69f295bce8f39cb359f0dbf2fd64ac",
+  "simulatedDocsCommit": "4571f29d9a032bb53a7c7bdc3734b6ed1debb783",
+  "simulatedRevertCommit": "fa5261f14391e3fa501c740a9af1d3abd3353202",
+  "codePaths": [
+    "package-lock.json",
+    "package.json",
+    "src/engine/__tests__/ceuTrainingBaseline.test.ts",
+    "src/engine/__tests__/professionalApproach.test.ts",
+    "src/engine/__tests__/professionalSimulation.test.ts",
+    "src/engine/__tests__/professionalSummary.test.ts",
+    "src/engine/__tests__/trainingPlan.test.ts",
+    "src/engine/professionalApproach.ts",
+    "src/engine/simulateProfessionalHalfYear.ts",
+    "src/screens/SettingsScreen.tsx",
+    "src/screens/TrainingPlanScreen.tsx",
+    "src/screens/__tests__/SettingsScreen.test.ts",
+    "src/store/gameStore.trainingPlan.test.ts"
+  ],
+  "productionMatchesBase": true,
+  "only13CodePathsChanged": true,
+  "docsPreserved": {
+    "docs/football-career-professional-strategy-upgrade-v1.1.md": "46b98db0070ca55f5a529485f0336a6c3550a3089633950f2aebb24dbd5bc006",
+    "docs/professional-strategy-v1.9-execution.md": "3696960cb5c21b9bcd36edc505c2a8d1f85cd58b3d4fe4f0bcd0b75f0c620235",
+    "docs/evidence/PSU-20260912/S4/README.md": "a84c85aeec6a371e86c8e6abf2e8aa18e69da1cc9d748ba3df8093e4a7d9d209",
+    "docs/evidence/PSU-20260912/S4/rollback-plan.md": "b00ba5ca1310fd0a78bc1a08cbe40214bf96f6c6920615afd46b5433e5dda8f8",
+    "docs/evidence/PSU-20260912/S4/release-result.md": "68faf4f8c1a26495decfe333de265aa36c98b24bfd02a2d94921f1abf81f9c06"
+  },
+  "isolation": "/tmp/PSU-20260912-after-docs",
+  "userRepositoryUnchanged": true,
+  "note": "Synthetic doc commit in independent clone; not actual final documentation commit. Later final doc wording does not alter the13-path reverse patch."
+}

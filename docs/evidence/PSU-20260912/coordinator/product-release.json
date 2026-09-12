@@ -1,0 +1,11 @@
+{
+  "productCommit": "690de955bc69f295bce8f39cb359f0dbf2fd64ac",
+  "tree": "ba7858ef5fa23b14518316a5e7e68c8918437aeb",
+  "candidateFiles": 141,
+  "remote": "https://github.com/zyrobbie/football-career-sim.git",
+  "rollbackTag": "rollback/psu-v1.9-before",
+  "rollbackTarget": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "push": "main and rollback tag succeeded",
+  "authorization": "User directly confirmed push in coordinator task, answering exact141files/destination/rollback/main deployment question. Executor relay denied; coordinator normal approval accepted direct user authorization.",
+  "stagingNote": "Only candidate s4-continuous.log needed explicit force-add due generic log ignore; final tree and141paths matched."
+}

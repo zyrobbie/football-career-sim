@@ -1,0 +1,26 @@
+[
+  {
+    "url": "https://footballcareer.zyrobbie.site/index.html",
+    "status": 200,
+    "sha256": "82dddf1d971efae4dba69f902334b1edf5395168949a5b36cfab78a3e25502c7",
+    "matchesCandidate": true
+  },
+  {
+    "url": "https://footballcareer.zyrobbie.site/assets/index-BbBsTsZs.js",
+    "status": 200,
+    "sha256": "068453f4f87c964ddb45e25956a9c354004836471168371629fa746814531fba",
+    "matchesCandidate": true
+  },
+  {
+    "url": "https://footballcareer.zyrobbie.site/assets/index-BXyw3Raw.css",
+    "status": 200,
+    "sha256": "163aac24fbde1b940e63a09c6f950d97f2a972bef8c1c69df7b3d4fd3f20c41f",
+    "matchesCandidate": true
+  },
+  {
+    "url": "https://footballcareer.zyrobbie.site/assets/html2canvas-DKuiHynV.js",
+    "status": 200,
+    "sha256": "7b12c2874c18824c88a0b0a3f69d64b37c47b16148da9e1ffc0c63ee05acd218",
+    "matchesCandidate": true
+  }
+]

@@ -1,0 +1,29 @@
+{
+  "beforeFiles": 2641,
+  "changed": [
+    {
+      "path": "docs/football-career-professional-strategy-upgrade-v1.1.md",
+      "before": "30100db0d876191c84027922f043d91689368ea93304e59dc99501f27ca2dc65",
+      "after": "3782f3ce4f3e450577cf7dcae3b83093387b77affbd5782485c6c456335085cf"
+    },
+    {
+      "path": "docs/professional-strategy-v1.9-execution.md",
+      "before": "d0ec7b30a8534f3e2d1a0916e57ea63c6427c7a204486f02104f7a4c3aa497e2",
+      "after": "c943868bab3a14651fec95414dc3bb068334b843f749393ac1a889a799972650"
+    }
+  ],
+  "unauthorizedChanged": [],
+  "productionAndFormalTestsEqualS3": true,
+  "candidateFilesMatchManifest": 141,
+  "priorEvidenceOutputsAndRawUnchanged": true,
+  "v10": {
+    "path": "/Users/zhihu/Desktop/football-career-professional-strategy-upgrade-v1.0.md",
+    "sha256": "2ecc43e0013bdddb37b35954d85c257360bf257ced5e696076902fb673a2049a",
+    "unchanged": true
+  },
+  "userRepoHead": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "stagedEmpty": true,
+  "rollbackTagNotCreated": true,
+  "temporaryCandidateOnly": "883a46c6f965b4e9a970ebfd50d0eb97ff3b4f11",
+  "noMainCommitPushDeploy": true
+}

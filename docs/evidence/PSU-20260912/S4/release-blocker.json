@@ -1,0 +1,14 @@
+{
+  "action": "git push origin refs/tags/rollback/psu-v1.9-before",
+  "result": "automatic approval rejected before process execution",
+  "reason": "将回退标签及其可达提交推送到未由可信证据确认的远端，可能向外部目的地暴露私有代码；泛化的推送吧未明确授权该具体payload与destination。",
+  "destination": "https://github.com/zyrobbie/football-career-sim.git",
+  "localTagTarget": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "mainHead": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "stagedDiff": "",
+  "candidateManifestSHA": "cbd2c8ee4252c566e8bb6a836d7d49cb3ff5b1d4452fd3775bf042b66df12506",
+  "approvedTree": "ba7858ef5fa23b14518316a5e7e68c8918437aeb",
+  "productCommitCreated": false,
+  "productPushOrDeployExecuted": false,
+  "next": "explicit user authorization for this destination, rollback tag and approved141-file V1.9 candidate; do not bypass rejection"
+}

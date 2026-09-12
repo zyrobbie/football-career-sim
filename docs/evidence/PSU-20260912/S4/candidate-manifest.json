@@ -1,0 +1,865 @@
+{
+  "base": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "branch": "main",
+  "codeFiles": 13,
+  "fileCount": 141,
+  "bytes": 7900630,
+  "files": [
+    {
+      "path": "docs/evidence/PSU-20260912/S1/README.md",
+      "sha256": "8f264d68d1e5df026fcec8fda6c9bf40a6d8dd418f5be84a0b7dc9f6a252760d",
+      "bytes": 4140,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/aggregate.json",
+      "sha256": "2a222bf69c20062ff6890244289c26587046268d2c928c335ed22a735b63a7e3",
+      "bytes": 67854,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/artifact-hashes.json",
+      "sha256": "da0a816432e639c1479f7d0c2482390442a4f98bfa7264e40be1282e04e785e1",
+      "bytes": 3734,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/baseline-commands.json",
+      "sha256": "33ef98c6fa8db014d88d0e0d77aaf0182b28178ef2c2b140921b49576e1f53c4",
+      "bytes": 1027,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/baseline.config.ts",
+      "sha256": "ed0eb3a00c0eaa2da677862937e68fe4af8687088b9c018cdaa623861413d8d4",
+      "bytes": 192,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/baseline.runner.ts",
+      "sha256": "18e12eb06d1dcd7852e8ebcfc77a0ff6dfc39e71ae674aed434fa41adffc1f22",
+      "bytes": 8383,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/before.json",
+      "sha256": "e9c0832b7b2ead1f4ccade63a4b55240a87a8058702d37200abc847620a973dc",
+      "bytes": 398786,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/build-command.json",
+      "sha256": "56805bbe81e62d93f81846224c8db4023e92e053497bc3c029ae71fb05a01fc0",
+      "bytes": 82,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/build.txt",
+      "sha256": "111af6466ec45b90bbfaec9805201236f6e6922b5884055c2fcc519474f4dcfd",
+      "bytes": 857,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/case-plan.md",
+      "sha256": "945e6d773aa7a805c8d71c96ada542e33e2f6ce227f701f0824945fe5d8ed221",
+      "bytes": 2529,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/collection-initial.txt",
+      "sha256": "83afe035cd18f96798b2dea77197f4e04328ea80d931f35d401c870c263261cf",
+      "bytes": 1227,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/collection-r2.txt",
+      "sha256": "698829dfed0e4d91901d9045a877651176dc51c8bd1d2f42251d7df7bf71502e",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/final-protection.json",
+      "sha256": "3a37c9aefc619a06c3757f5fde68eca7a6891fa55ef0525656bd931881a68f22",
+      "bytes": 788,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/full-command.json",
+      "sha256": "9e4f30246ec73afbe64c67817fad1c31f6a00f1bde783457837271ad2039c654",
+      "bytes": 85,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/full.txt",
+      "sha256": "bc71075623a03a597868ffccc1a29cbfee99ce6f5612977f705ba340f6752bd8",
+      "bytes": 286,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+      "sha256": "3087266ebd7eab29a1dccac05a4f506e8c6b6e107d85b9ec0b30fee96ba5ae57",
+      "bytes": 40770,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/inputs.json",
+      "sha256": "f4d2fca4f0755a97fdf909f2deb29c9f258d6c3904e4e751a656b9d64bafc1e2",
+      "bytes": 40857,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/inventory.py",
+      "sha256": "ec2515230f589ff5ca06cee0478b9114e281be1409a810da0fdd7421c5d3e9b7",
+      "bytes": 2789,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/old-save-inventory.json",
+      "sha256": "852dd30fbb626f3f87282a9d8f96cda09d192ba987d86a862702faba8083f7b7",
+      "bytes": 24078,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/outputs.json.gz",
+      "sha256": "026ef2da8ad6bd52fe34afbc0ddfc56f1910a7fdcbe86a2f3506cb4f0f18ab18",
+      "bytes": 232468,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/recovery-counterexample.json",
+      "sha256": "7995b913f343c70ec67b64a494ed66e4d355fdbc959458f2817ba35125d33b59",
+      "bytes": 15504,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/remote-check.json",
+      "sha256": "ac10ca64ae8357803786a00b33ad65aa43ad7ff749bec3947462f6dd49d7853e",
+      "bytes": 155,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/replay-final.txt",
+      "sha256": "2f2910da1e10c9a5bc1622332d2b279977c7c86aa530edd1fe60e1c2fbc22e48",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/replay.txt",
+      "sha256": "588c5ea3c502b1e548acf3a47a42e293aeebf7725e6d7eb078c427b2d310973c",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/run-summary.json",
+      "sha256": "8c3e12daf29717c342b2264884869b44ea69356ce69d83a70542b448c73f07a8",
+      "bytes": 286,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/s2-handoff.md",
+      "sha256": "7b40f706ea86ebd3cc7075b0bb1776e124f9d763e054693c736df742d3629c03",
+      "bytes": 8054,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/store-successors.json",
+      "sha256": "8c018a71e0f3bc3a7123c176654b995a0c32803076ad95f6862adae6e3eea724",
+      "bytes": 76748,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/summarize.py",
+      "sha256": "1e5e5c09f14d630b1219430bf702363eb392132588f5bd52aac5a569a2e1cb46",
+      "bytes": 2275,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/typecheck-command.json",
+      "sha256": "398a610de51c2899f7cfcfe7cfcfb293affc13405ab7e5f007586ef22891817b",
+      "bytes": 86,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S1/typecheck.txt",
+      "sha256": "34ac25485ae5e01622161070d4a3ab62af8bbb9538ff313214de8b6f9a0695d1",
+      "bytes": 64,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/README.md",
+      "sha256": "1598ac3ab89dffe47cf02b749de217aca0c6103b4eeca05cf5a6ffda9ff12e3e",
+      "bytes": 2619,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/aggregate.json",
+      "sha256": "976609095171b2a4830eaaa78e957f8fdc4898b3c8fb6b00000ae886b59144bd",
+      "bytes": 67742,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/ajax-derivation.json",
+      "sha256": "980cc67890061b0c385a175d79f9386edcf198e519deb08d91a546a70304eb68",
+      "bytes": 487,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/ajax-derivation.txt",
+      "sha256": "4223fb8563cc51af8b31087bff2989f4466be5682cfa166abcd76086bc6c1f79",
+      "bytes": 222,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/balance-default.txt",
+      "sha256": "954e124e49decc508422c98d6d711e738cefb6d0d6f0bcc040e72ccb67fe271f",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/balance.config.ts",
+      "sha256": "44e6f16477975c621abebceeb50a2a65d7d4ee57bf516392434b54d0b48d146f",
+      "bytes": 175,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/before.json",
+      "sha256": "682a1056070ea76eeceedbc10f97c9d54be0e40a68e1cc7f97e05215b3a6e6b0",
+      "bytes": 332115,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/case-plan.md",
+      "sha256": "e0e4b7e4b4dabe256a40e176b280723daef926f47b0f0be65d9d7cd81ae13da7",
+      "bytes": 1574,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/compare.py",
+      "sha256": "35598872d0d92cca47baebb9ed035973f1930a7174f2a2dc264963d5afd1e317",
+      "bytes": 5024,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/comparison.json",
+      "sha256": "dd15fbea4b66dead3919d02b6a38ac7c1d306017729a03ab4f502594fe8728c2",
+      "bytes": 32782,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/continuous.json.gz",
+      "sha256": "7435278edcd6b45eab37e4172b106635ec9a93e187e217d6201453fb7b41181a",
+      "bytes": 320136,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/continuous.runner.ts",
+      "sha256": "e424cbde24446a50e09f0e30c36f732018b3b481b8e1951faa131f6e844d5e07",
+      "bytes": 5679,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/derivation.runner.ts",
+      "sha256": "3fb5c914d1efad8c951b6b58747d671ebd629ef3ace8ada9215e3ed2a6705e79",
+      "bytes": 1688,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/engine-candidate.json",
+      "sha256": "fec50c76354c6fd8431f49aaf51d06067eea73d2bc99b26d30ecba3878d3fd0e",
+      "bytes": 17629,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/final-protection.json",
+      "sha256": "cf003b01c2e3e8e531a8c60865171c684600547ef8e4d4ec7867c828cb9092d6",
+      "bytes": 1258,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/first-divergence.json",
+      "sha256": "4d28a803c6420505499373ef41ca20cfcb353be5b59fb74e646186b742b98e0a",
+      "bytes": 5247,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/full-final-command.json",
+      "sha256": "9b580586cfabcf10c91e9d91e7112f2a17ce5cee68ac2dfeb4757ae00e07a8ec",
+      "bytes": 85,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/full-final.txt",
+      "sha256": "4233278d03d7df8b2a952cfc061b9eff39e4b981e704e4a8ef9e64e773ff7ab2",
+      "bytes": 286,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/full-initial-command.json",
+      "sha256": "6406fb6ca2567aab3de98bb41d2adbee034402b29aae09226f5120088ec52cae",
+      "bytes": 85,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/full-initial.txt",
+      "sha256": "f3cc64c71e3daf88607ba315e3559fb201af5805b8605a19ddd04caf5f1182e2",
+      "bytes": 1253,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/injury-extended.txt",
+      "sha256": "27ec4765b1bb543b4bfe55f2783b59b959e1b3459db8a2f919d5324cc1102850",
+      "bytes": 225,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/injury-maintenance-10000-outputs.json.gz",
+      "sha256": "ca674756e152775caf01984383837b2bb6bef71f00845aab8719611b9cfeef21",
+      "bytes": 1549099,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/injury-maintenance-10000-summary.json",
+      "sha256": "a1126c0d16f6ff0d7df3128bb1b479a6d7da8fca14fea06cca945fb649ac4fcf",
+      "bytes": 496,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/injury-outputs.json.gz",
+      "sha256": "352b9ea79be85047e5363b3e28d077aa7d5ccd7be298f8ec3a93fa923b58d3af",
+      "bytes": 851843,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/injury-summary.json",
+      "sha256": "d43bcb564df0ac41d647c3992a279901e28d07e2ff5c5e433f6a906103f554a5",
+      "bytes": 2405,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/injury.runner.ts",
+      "sha256": "60d255ee80bcca0c6ce4719d884ee03e7d99cb01d3edf9f57223184e95f30998",
+      "bytes": 2947,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/matrix-initial.txt",
+      "sha256": "393775219f158b3a572604ec376120c85aeabd714d48329f051a77fa60e41c89",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/matrix.runner.ts",
+      "sha256": "6c625ce64d6c05dce63c14e8719032209b67b40dc85819ca09cdec8552b98393",
+      "bytes": 8551,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/outputs.json.gz",
+      "sha256": "fbe97a3cfef97d4e447d3794672d45b1ac44abfe7bd4dd7b009e5176191f0e6d",
+      "bytes": 233078,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/recovery-fixed.json",
+      "sha256": "450b6e29f3e9553e2745f08fcfe2889caeb95d23f32dc53237be54f0fa1a5e96",
+      "bytes": 15214,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/replay-final.txt",
+      "sha256": "ba224fb92dd1237af5bc115e1fdddeaa50a1bbd5e923bc92d5a4c487cef3b3ec",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/run-summary.json",
+      "sha256": "00e09366154da92307441c263f10c070ca432c64aabf6e8850627666c3cf0344",
+      "bytes": 286,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/source-snapshot/README.md",
+      "sha256": "97f398b084f7b9b630538dc1a7ff3a5326b6bad7175d24971c4f65d9523ce406",
+      "bytes": 445,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/source-snapshot/src/engine/__tests__/professionalApproach.test.ts.txt",
+      "sha256": "f0ff0431530872857809b58d5ef9d8869a3cb1a8adb5b9070f2e85665f08bad9",
+      "bytes": 5075,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/source-snapshot/src/engine/professionalApproach.ts.txt",
+      "sha256": "23f4e6c384684942c13c2f94866a51d01b7c2412ed7793736fc40e72944e945c",
+      "bytes": 3741,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/source-snapshot/tracked.patch",
+      "sha256": "22a3c25416b0fbbc0b4e6d0d690ceb857e2d99b6b01366695efaa41930b8e703",
+      "bytes": 15386,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/store-successors.json",
+      "sha256": "e68d2dc7863bd95626d084579b382aaadb6771175782fad2ea74df45347bea73",
+      "bytes": 76758,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/summarize.py",
+      "sha256": "dce6d198e5f850d8805a1be8216934db204508bb549ef0ca1082589dba6e578a",
+      "bytes": 2298,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/targeted-final-command.json",
+      "sha256": "bb6e43508a3f05400cf26cec32c75f04501968cb58406609c3379bcae96ad642",
+      "bytes": 332,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/targeted-final.txt",
+      "sha256": "e2b14bb24d0db97eef678ce22f9220e3d343383526bbfc6c15a818839e0b0768",
+      "bytes": 228,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/targeted-initial.txt",
+      "sha256": "1d78ac4aa86728fe5c8b36ca9ec3c1f61bb01fc1ca85191a710a712c1f43ac5f",
+      "bytes": 5243,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/targeted-r2.txt",
+      "sha256": "6a87a080a105905e88e1b5a76cb5ef44ec74138d67dda03e2f76e3e3c5f9be57",
+      "bytes": 1562,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/typecheck-final-command.json",
+      "sha256": "dab48ec9d75da3e54c9b0b767126d34947ee123417291895b9ada2cddc61f554",
+      "bytes": 86,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/typecheck-final-r2-command.json",
+      "sha256": "0da6c697b878f77c1b6db91c9661fa7b9bb8cad5989fd22f74e07b84e615149b",
+      "bytes": 87,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/typecheck-final-r2.txt",
+      "sha256": "34ac25485ae5e01622161070d4a3ab62af8bbb9538ff313214de8b6f9a0695d1",
+      "bytes": 64,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/typecheck-final.txt",
+      "sha256": "34ac25485ae5e01622161070d4a3ab62af8bbb9538ff313214de8b6f9a0695d1",
+      "bytes": 64,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S2/typecheck-initial.txt",
+      "sha256": "34ac25485ae5e01622161070d4a3ab62af8bbb9538ff313214de8b6f9a0695d1",
+      "bytes": 64,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/README.md",
+      "sha256": "bd07fbbcd890c509e7b3e5c50c72d3aef40b81156b55f391520dd83c73a8ed1c",
+      "bytes": 4402,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/additional-command-records.json",
+      "sha256": "537f87d937f4180d02a4635c218b926a9756fb54ba4f63e8ae582b503f41dc95",
+      "bytes": 875,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/artifact-hashes.json",
+      "sha256": "0dabc2dc5f428df35e408e028ff6b810b7d143d65f4a02a462eb3e828c8df9da",
+      "bytes": 4004,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/before.json",
+      "sha256": "220fc92f376dda8dc6fa63bc0b5f1b4e1ea8030030df43f17011941f2048c0b8",
+      "bytes": 338745,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/build-final-command.json",
+      "sha256": "3301e4024b7ec2a2137d80eb4c0bc39f2807f5030dd867f9285dbcdde70f67ab",
+      "bytes": 219,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/build-final.txt",
+      "sha256": "c5d98b89306ad641763365d6c4340107e42c92d94b6b976e496c71a6b1584a99",
+      "bytes": 857,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/candidate-files.json",
+      "sha256": "4a91164027290d4397f907499d48fa9b68945839d3ef66d659384e59f7798c8b",
+      "bytes": 39544,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/case-plan.md",
+      "sha256": "5578ed4f44a49bc6f1490dc1a4ebfd3afd8f651141eab42327d022fcc14e7f18",
+      "bytes": 1535,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/changed-files.json",
+      "sha256": "1a163959d238d72aebe37d96b0eca551466a99002c3c67eeee4deed0c9fa3f61",
+      "bytes": 3865,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/checks.config.ts",
+      "sha256": "c87df6c8b9191dc091c85f31851c7afa1759234cbdd098d9b99ce04e24ef7ad6",
+      "bytes": 175,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/compatibility-final-command.json",
+      "sha256": "c59abf7db47e6d83b8bbe0a6b45fe4da1c99b429c84f0a6984708e570d1b0773",
+      "bytes": 324,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/compatibility-final.txt",
+      "sha256": "a43ed0c5950e8e872fbf2e7c5a37dffb4f2cd80c63b475d3457409f39459074b",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/compatibility-initial.txt",
+      "sha256": "86ac82eb6344032b28d81a5108cc1e7f56f87731f4530a46a8a7f7894b76695c",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/compatibility.runner.ts",
+      "sha256": "c6fdd51467ba658178ce19fdb398e09c4f1c6676c44b59f0fddcf8d5e7eae884",
+      "bytes": 7587,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/compression.json",
+      "sha256": "eddbb73516f192fa9fa5ef6abd3d5fe51fe6b66f5964c627265642b4acbea321",
+      "bytes": 494,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/final-protection.json",
+      "sha256": "599a350b670d31b73bcf4cded10b8c2ba9bf412c1036cb789a295344686a3834",
+      "bytes": 386,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/full-final-command.json",
+      "sha256": "b5e0d8f00dfb4e479e7af0b81f7a6b322fd08ddb2ceb2af3b6d3f8ccae4ff0b8",
+      "bytes": 222,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/full-final.txt",
+      "sha256": "25c16e05e6d24f805489b135a6a07df9f44133a02753f49d27bf566be06a1791",
+      "bytes": 286,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/numeric-equivalence.json",
+      "sha256": "225b97f8933b23fb0b56fbeb7082410f3fe97591e9828c5ed4d6176fde09f413",
+      "bytes": 28848,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/old-raw-results-r2.json.gz",
+      "sha256": "db87e2a94fd585e2eb9870f53ac28f3c08bfefeac2b884fc809519375f68c0de",
+      "bytes": 2552500,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/old-record-prefix-final-command.json",
+      "sha256": "a25b012a21a1798eacb86a4dfd4d5a7d40d899fee969925bf3d1257acea2b369",
+      "bytes": 349,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/old-record-prefix-final.txt",
+      "sha256": "81737195507315e5e95dcdbacdc08a7a04092b260097009461c11b1bcabaebf1",
+      "bytes": 238,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/page-artifacts.json",
+      "sha256": "32bb5ebc2701ce4d8b8b52d4aa599eb260227796dbb16e248ff9632c930b5eee",
+      "bytes": 24998,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/page-review.md",
+      "sha256": "d5e8ac53edff27766dc8a53a7a4b2ffe8d65b7c76c3a63ac9ce29ec65dcd5050",
+      "bytes": 2904,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/targeted-final-command.json",
+      "sha256": "ef5f100a38f95bee61fe043630a194311f064c77a0ad1fa50b81e9a9f817574e",
+      "bytes": 596,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/targeted-final.txt",
+      "sha256": "247a402620bdbc437d1e1ea67125c283521391619bd8e97f02fd34c9b77faa53",
+      "bytes": 228,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/targeted-r1-command.json",
+      "sha256": "e58da70bd2380959370d85cea860bb40a982427410f0829eac60ed9db8ec3e01",
+      "bytes": 596,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/targeted-r1.txt",
+      "sha256": "1f37e11ed3c091db1a1ad6df0a3c3b21b26f7c32374a64ee59895db098b54a44",
+      "bytes": 2696,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/typecheck-final-command.json",
+      "sha256": "43073eb0b5bd19d1de30f7cd85ac2ea503779b8a70dace34509cdaea070151ce",
+      "bytes": 222,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/typecheck-final.txt",
+      "sha256": "aa4be02388eb4dc02f07cc494dfcd1925e67620c5247e8f967b7d954f36bba07",
+      "bytes": 64,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S3/typecheck-initial.txt",
+      "sha256": "aa4be02388eb4dc02f07cc494dfcd1925e67620c5247e8f967b7d954f36bba07",
+      "bytes": 64,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S4/README.md",
+      "sha256": "7ee283b4a36dfce9444e334e3b06b38772dde0ed20c22abdbf2216ee6b1c5410",
+      "bytes": 2429,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S4/release-notes.md",
+      "sha256": "cea6a38cce9133fb1d28216e93ce49d1f6edb8e1a65ca0fe6e74c091766e7682",
+      "bytes": 888,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/S4/rollback-plan.md",
+      "sha256": "494aea3c94e0482289cca3626c02560dafbd5ebbfbca6ae148ec2310d8d70fbf",
+      "bytes": 1616,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/README.md",
+      "sha256": "f6b22772c4dadbe90cbd2cbc04e124dec654bfb7eae3deb65c30257d520d00fa",
+      "bytes": 2985,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s1-replay.txt",
+      "sha256": "92fcc0c2f44fceff978b8655cab1c961986fdd37a144df293d3ebcc9baea15ee",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s2-injury-extended-replay.txt",
+      "sha256": "0ac3fcb749a2ad9e16b300d52ed532d7356c55ef2b3baf164b2bde05f104cd8a",
+      "bytes": 225,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s2-replay.txt",
+      "sha256": "5ec9b925d53aa78edf02342d0b311cc011af08f11b88500116444c5bd5af17dd",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s3-compatibility-replay.txt",
+      "sha256": "ddcc05bdfb71774fa50057bbb8587b260d2d042fdfb7d69670037d9ae6c0f880",
+      "bytes": 226,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s4-continuous-results.json.gz",
+      "sha256": "7601565882ddaad5da03205438eb00b4dee01edfcb0612e8881686f4edcd9866",
+      "bytes": 41408,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s4-continuous.cjs",
+      "sha256": "dd15f50c9e4240793674e5ece6a66362ecde345c12649c5eb7eb9c88fe2b9df4",
+      "bytes": 6094,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s4-continuous.log",
+      "sha256": "cbc9848772b663014e2699914c11636e8bff4cac397e8ce6e26795fbc27be770",
+      "bytes": 33,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/s4-screenshots.json",
+      "sha256": "7feb8864f892419c67384cdbf07f40577177eedab43d05acbfa3f3b16c9f1ff7",
+      "bytes": 2442,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/screenshots.json",
+      "sha256": "cbca2d877678ead3575b6168ebf9d4dcc35d753023afa7c6d49a003628d8328b",
+      "bytes": 4497,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/ui-baseline.json",
+      "sha256": "babb616537b8b305ebc7a63b4ef5666015b786d303d3db69e3518136f4675630",
+      "bytes": 2899,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/ui-final.cjs",
+      "sha256": "8f33f9bcd7ad7ec2fc76069f5cabdba23d1d09d805375b8b4adfefaeab64db03",
+      "bytes": 5110,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/evidence/PSU-20260912/coordinator/ui-results.json.gz",
+      "sha256": "e7516d576d89a496848a734376d77b576028800d2f19bf8a4616e6bf390cd3d1",
+      "bytes": 62762,
+      "purpose": "frozen inputs, replay, compact evidence or acceptance/rollback documentation"
+    },
+    {
+      "path": "docs/football-career-professional-strategy-upgrade-v1.1.md",
+      "sha256": "3782f3ce4f3e450577cf7dcae3b83093387b77affbd5782485c6c456335085cf",
+      "bytes": 38843,
+      "purpose": "PSU specification/instructions"
+    },
+    {
+      "path": "docs/professional-strategy-v1.9-execution.md",
+      "sha256": "c943868bab3a14651fec95414dc3bb068334b843f749393ac1a889a799972650",
+      "bytes": 8184,
+      "purpose": "PSU specification/instructions"
+    },
+    {
+      "path": "docs/professional-strategy-v1.9-s3-instructions.md",
+      "sha256": "162e593dfb9945e8475166dc397413d5f78a67b7c036b0fa642b409d6a45929d",
+      "bytes": 4113,
+      "purpose": "PSU specification/instructions"
+    },
+    {
+      "path": "docs/professional-strategy-v1.9-s4-instructions.md",
+      "sha256": "c197b277912044c4c15ec0dff85381cf4393d8da52dd207bc7dae47675e0e087",
+      "bytes": 2445,
+      "purpose": "PSU specification/instructions"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "cb8abdd270aa2a80f13ec68f7ecc70c090309f3900642ddf17fd81c919d5e616",
+      "bytes": 99055,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "package.json",
+      "sha256": "a14075d2a0ba6637a26b0ac5bd3fdb4bcdbab717ebf781082e35e2aba37933c9",
+      "bytes": 1136,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/engine/__tests__/ceuTrainingBaseline.test.ts",
+      "sha256": "4ce08c70e1259497658bc2110bdd2888fc8a539d1e22ba2cc4deed00cb4835c5",
+      "bytes": 4160,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/engine/__tests__/professionalApproach.test.ts",
+      "sha256": "f0ff0431530872857809b58d5ef9d8869a3cb1a8adb5b9070f2e85665f08bad9",
+      "bytes": 5075,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/engine/__tests__/professionalSimulation.test.ts",
+      "sha256": "0acc0191e885764e54b6b69f733c2ca68394e560b2409779f98a35fa8fa04e7b",
+      "bytes": 10258,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/engine/__tests__/professionalSummary.test.ts",
+      "sha256": "eb9e1eb6a60816e4353a83fd3458b068641b08d4fdeaa5728aa8f5bd9ac50399",
+      "bytes": 2411,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/engine/__tests__/trainingPlan.test.ts",
+      "sha256": "1ac46f227e4e08130af200a174056f24de4c966960a2e50068e307216211def6",
+      "bytes": 12661,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/engine/professionalApproach.ts",
+      "sha256": "386cb390d46c07880491f16f279d04843dac3bf9bb9c30194256c9515939685d",
+      "bytes": 5898,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/engine/simulateProfessionalHalfYear.ts",
+      "sha256": "b7cf2fe6e8455474beec80749701fa5a02161c2fb9fc8e3a3e728516f61874cc",
+      "bytes": 21457,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/screens/SettingsScreen.tsx",
+      "sha256": "1db1564e966317042accaa90c00814dc1c0c23165e8b2c7d7c2a16ab3294a297",
+      "bytes": 2674,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/screens/TrainingPlanScreen.tsx",
+      "sha256": "c29310f555c27e2d38d754daad511f7f5aa6d60299b777a5aa4c76165a64855d",
+      "bytes": 12317,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/screens/__tests__/SettingsScreen.test.ts",
+      "sha256": "fd922aa513ead43507e61e43a81a6f97baf30cdb75c1f7cb1ece1f54a94cba25",
+      "bytes": 2096,
+      "purpose": "production/test/package"
+    },
+    {
+      "path": "src/store/gameStore.trainingPlan.test.ts",
+      "sha256": "a581af8ccbd892f548534d1655967577beb3c53f8f514dbfd2a61190b82f0435",
+      "bytes": 8383,
+      "purpose": "production/test/package"
+    }
+  ],
+  "exclusions": [
+    "pre-existing untracked CEU/CLR/CP evidence",
+    "outputs/",
+    "dist/",
+    "node_modules/",
+    "S3/old-raw-results.json",
+    "S3/old-raw-results-r2.json",
+    "S4 mutable audit manifests/logs"
+  ],
+  "sourceEqualsS3Final": true
+}

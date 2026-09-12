@@ -1,0 +1,9 @@
+{
+  "action": "git push origin refs/tags/rollback/psu-v1.9-before",
+  "result": "automatic approval rejected before execution",
+  "reason": "具体目的地授权仅由不可信的代理转述，不能覆盖敏感代码外传规则。",
+  "candidateHashesVerified": 141,
+  "mainAndLocalTag": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "stagedEmpty": true,
+  "next": "Await direct user authorization in this task for repository, approved candidate and rollback tag."
+}
