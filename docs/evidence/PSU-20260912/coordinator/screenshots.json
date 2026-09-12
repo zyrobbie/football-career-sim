@@ -1,0 +1,112 @@
+[
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-PUSH-plan.png",
+    "sha256": "094bfdc62807d2b22e83a7e7bd1d02407c4d003175c0f0126decbac765148d16",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-PUSH-report.png",
+    "sha256": "8cf4be94afa724b35ded3031934a968901b0826375ad8afff05b97cd43477779",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-STEADY-plan.png",
+    "sha256": "094bfdc62807d2b22e83a7e7bd1d02407c4d003175c0f0126decbac765148d16",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-STEADY-report.png",
+    "sha256": "1ae90ca1cd7bd1bbe37f0acd4179751a65f69d652ae9dde75b4d96b1c4a915bc",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-STEADY-settings.png",
+    "sha256": "c841e01b6636a1fb9b8561a685aa482be6f44df36cf56f29a1f7a3644d69ad98",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-TEAM_FIRST-plan.png",
+    "sha256": "094bfdc62807d2b22e83a7e7bd1d02407c4d003175c0f0126decbac765148d16",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-TEAM_FIRST-report.png",
+    "sha256": "be5bdb8e019f810f0acc589e93778f6cb1ab3d80af73b3a2b3ceaaa5b1e8e743",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-mature-recovery-plan.png",
+    "sha256": "f9bf5249fee926975b9bc67a823baec15a7e81ad9ae877f9972e33011ea5b1d4",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-mature-recovery-report.png",
+    "sha256": "1d9a5cde7dd190f0b5afe90f96ee69174141301621733bf5925a4fcac7501320",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-veteran-sharp-recovery-plan.png",
+    "sha256": "235efeabbc359ddaa7f3d338ab243815aa1bcf19a0d0f5bd93af9a24b0054ab4",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/1280-veteran-sharp-recovery-report.png",
+    "sha256": "989e9f0cefbe52b3691167b57dcac5175604fa1acef4fab36d27133ef57051bf",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-PUSH-plan.png",
+    "sha256": "5ee8f55bfa96fcc510564b10c90749a3f27c89c48a202e13b86c047251c59358",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-PUSH-report.png",
+    "sha256": "cba2ed23c937d512f3cae9add8982bdc10337c0b77a49f8e553ce5cbe2ff5b16",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-STEADY-plan.png",
+    "sha256": "5ee8f55bfa96fcc510564b10c90749a3f27c89c48a202e13b86c047251c59358",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-STEADY-report.png",
+    "sha256": "b0c164e6e0855a0f8d717f17df497c526de4fea22e3a85dd1c7e9efb8ef2201d",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-STEADY-settings.png",
+    "sha256": "83e17109830b19e596c569fe1973dba74dfc7dbb80fa6a3360f31624f2bdf06b",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-TEAM_FIRST-plan.png",
+    "sha256": "5ee8f55bfa96fcc510564b10c90749a3f27c89c48a202e13b86c047251c59358",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-TEAM_FIRST-report.png",
+    "sha256": "47453d99a9d53092c48fb4b41832b45d821b8916de66c827147b78a24a3ab16d",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-mature-recovery-plan.png",
+    "sha256": "9668987efa45d1024df95fad3b2aa47cdecf9d3fd4ce74f1159e5632e85750cc",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-mature-recovery-report.png",
+    "sha256": "4e62b63e6eeded8f2b0c976d2d06efb7329a6754f2ecc8fa4eaf93542d6c1842",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-veteran-sharp-recovery-plan.png",
+    "sha256": "9a7949f47b3c02dbe590fbe9f815545b7a1e03cb49bb90a0e1606085cfd83100",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/ui-final-r3/390-veteran-sharp-recovery-report.png",
+    "sha256": "529997704e5cec26fea499b7c68d3284c2a9d5afe9931d365ad22dbfcb5fcc01",
+    "visuallyReviewed": true
+  }
+]

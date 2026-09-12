@@ -1,0 +1,18 @@
+{
+  "command": [
+    "npx",
+    "vitest",
+    "run",
+    "src/engine/__tests__/professionalApproach.test.ts",
+    "src/engine/__tests__/professionalSummary.test.ts",
+    "src/engine/__tests__/professionalSimulation.test.ts",
+    "src/engine/__tests__/trainingPlan.test.ts",
+    "src/engine/__tests__/ceuTrainingBaseline.test.ts",
+    "src/store/gameStore.trainingPlan.test.ts",
+    "src/screens/__tests__/SettingsScreen.test.ts"
+  ],
+  "cwd": "/Users/zhihu/Documents/\u8db3\u7403\u751f\u6daf\u6e38\u620f",
+  "started": 1789223660.450046,
+  "durationSeconds": 0.8781709671020508,
+  "exitCode": 0
+}

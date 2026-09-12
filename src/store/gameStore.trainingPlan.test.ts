@@ -40,7 +40,7 @@ it.each([{ before: 46, delta: -1, recovery: true }, { before: 45, delta: 1, reco
   expect(engineInput.player!.fitness).toBe(before + delta)
   const execution = executionSpy.mock.results[0]!.value as plans.TrainingExecution
   expect(execution.recovery).toBe(recovery)
-  expect(execution.declineFitness).toBe(recovery ? 55 : 43)
+  expect(execution.declineFitness).toBe(recovery ? 55 : 42)
   expect(execution.gains.fitness).toBe(recovery ? 0 : 4)
   const final = structuredClone(store().game!)
   expect(final.pendingConsequences).toEqual([future])

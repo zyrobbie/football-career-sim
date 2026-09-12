@@ -1,0 +1,6 @@
+{
+  "command": "git ls-remote origin refs/heads/main",
+  "exitCode": 0,
+  "remoteMain": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "matchesHEAD": true
+}

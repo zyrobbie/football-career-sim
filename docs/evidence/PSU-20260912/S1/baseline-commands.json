@@ -1,0 +1,26 @@
+[
+  {
+    "command": "PSU_S1_COLLECT=1 npx vitest run --config docs/evidence/PSU-20260912/S1/baseline.config.ts",
+    "log": "collection-initial.txt",
+    "exitCode": 1,
+    "classification": "fixture invalid arrivalChoice null; zero matrix simulations; original input retained"
+  },
+  {
+    "command": "PSU_S1_COLLECT=1 npx vitest run --config docs/evidence/PSU-20260912/S1/baseline.config.ts",
+    "log": "collection-r2.txt",
+    "exitCode": 0,
+    "classification": "legal COACH fixture; 1562 unique+1562 deterministic repeats,3 store successors"
+  },
+  {
+    "command": "npx vitest run --config docs/evidence/PSU-20260912/S1/baseline.config.ts",
+    "log": "replay.txt",
+    "exitCode": 0,
+    "classification": "read-only complete output replay, no new unique cases"
+  },
+  {
+    "command": "npx vitest run --config docs/evidence/PSU-20260912/S1/baseline.config.ts",
+    "log": "replay-final.txt",
+    "exitCode": 0,
+    "classification": "read-only complete output replay plus two explicit null=STEADY cross-checks"
+  }
+]

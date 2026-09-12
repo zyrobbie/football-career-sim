@@ -1,0 +1,576 @@
+{
+  "knownDefect": false,
+  "note": "S1 defect fixed with explicit recovery; old input preserved; all three recovery outputs agree",
+  "teamFirst": {
+    "id": "form-45/TEAM_FIRST",
+    "group": "boundary",
+    "seed": "psu-boundary-000",
+    "inputChanges": [
+      {
+        "path": "/careerSeed",
+        "before": "psu-s1-source",
+        "after": "psu-boundary-000"
+      },
+      {
+        "path": "/player/form",
+        "before": 70,
+        "after": 45
+      },
+      {
+        "path": "/firstTeamRole",
+        "before": "ROTATION",
+        "after": "FRINGE"
+      },
+      {
+        "path": "/contract/promisedRole",
+        "before": "ROTATION",
+        "after": "FRINGE"
+      },
+      {
+        "path": "/developmentApproach",
+        "before": "STEADY",
+        "after": "TEAM_FIRST"
+      }
+    ],
+    "loadedChanges": [],
+    "inputSHA": "727d4339755f7564df6f03637c15975ff812fe0cdbde1861dd2c7af6f5112612",
+    "rawSHA": "98025c758a080f4dd523e55cb611958203a8811ddfca219097bf3374393052b9",
+    "actualTeam": "FIRST_TEAM",
+    "probe": {
+      "prepared": {
+        "id": "player-psu-s1-sourc",
+        "name": "PSU匿名基线",
+        "nationality": "CHN",
+        "jerseyNumber": 10,
+        "preferredFoot": "RIGHT",
+        "primaryPosition": "CAM",
+        "secondaryPosition": "CM",
+        "positionFamiliarity": {
+          "CAM": 100,
+          "CM": 92
+        },
+        "attributes": {
+          "attack": 65,
+          "defense": 65,
+          "physical": 65,
+          "mental": 65
+        },
+        "potentials": {
+          "attack": 90,
+          "defense": 90,
+          "physical": 90,
+          "mental": 90
+        },
+        "form": 52,
+        "fitness": 70,
+        "morale": 70,
+        "coachRelation": 60,
+        "squadRelation": 60,
+        "agentRelation": 60,
+        "fanRelation": 60,
+        "mediaRelation": 60,
+        "reputation": 8,
+        "clubAttachment": 60,
+        "priorities": [
+          "PLAYING_TIME",
+          "COMPETITIVE_LEVEL",
+          "SALARY",
+          "STABILITY"
+        ],
+        "priorityValues": {
+          "PLAYING_TIME": 85,
+          "COMPETITIVE_LEVEL": 70,
+          "SALARY": 55,
+          "STABILITY": 40
+        },
+        "overseasIntent": "CONDITIONAL",
+        "preferredLeagues": [
+          "英格兰"
+        ]
+      },
+      "execution": null
+    },
+    "oldRiskFormulaForComparison": 0.03,
+    "output": {
+      "player": {
+        "id": "player-psu-s1-sourc",
+        "name": "PSU匿名基线",
+        "nationality": "CHN",
+        "jerseyNumber": 10,
+        "preferredFoot": "RIGHT",
+        "primaryPosition": "CAM",
+        "secondaryPosition": "CM",
+        "positionFamiliarity": {
+          "CAM": 100,
+          "CM": 92
+        },
+        "attributes": {
+          "attack": 66.4,
+          "defense": 65.4,
+          "physical": 65.7,
+          "mental": 66.2
+        },
+        "potentials": {
+          "attack": 90,
+          "defense": 90,
+          "physical": 90,
+          "mental": 90
+        },
+        "form": 54.8,
+        "fitness": 72,
+        "morale": 61.5,
+        "coachRelation": 62,
+        "squadRelation": 60,
+        "agentRelation": 60,
+        "fanRelation": 60,
+        "mediaRelation": 60,
+        "reputation": 8,
+        "clubAttachment": 62,
+        "priorities": [
+          "PLAYING_TIME",
+          "COMPETITIVE_LEVEL",
+          "SALARY",
+          "STABILITY"
+        ],
+        "priorityValues": {
+          "PLAYING_TIME": 85,
+          "COMPETITIVE_LEVEL": 70,
+          "SALARY": 55,
+          "STABILITY": 40
+        },
+        "overseasIntent": "CONDITIONAL",
+        "preferredLeagues": [
+          "英格兰"
+        ]
+      },
+      "report": {
+        "fromLabel": "2037年夏季",
+        "toLabel": "2037年冬季",
+        "clubId": "chn1_xian_changan",
+        "clubName": "西安长安",
+        "roleBefore": "FRINGE",
+        "roleAfter": "SUBSTITUTE",
+        "stats": {
+          "appearances": 2,
+          "starts": 0,
+          "minutes": 55,
+          "goals": 0,
+          "assists": 0,
+          "yellowCards": 0,
+          "redCards": 0,
+          "averageRating": 6.8
+        },
+        "attributes": {
+          "attack": {
+            "before": 65,
+            "after": 66.4,
+            "delta": 1.4
+          },
+          "defense": {
+            "before": 65,
+            "after": 65.4,
+            "delta": 0.4
+          },
+          "physical": {
+            "before": 65,
+            "after": 65.7,
+            "delta": 0.7
+          },
+          "mental": {
+            "before": 65,
+            "after": 66.2,
+            "delta": 1.2
+          }
+        },
+        "states": {
+          "form": {
+            "before": 45,
+            "after": 54.8,
+            "delta": 9.8
+          },
+          "fitness": {
+            "before": 70,
+            "after": 72,
+            "delta": 2
+          },
+          "morale": {
+            "before": 70,
+            "after": 61.5,
+            "delta": -8.5
+          }
+        },
+        "relations": {
+          "coach": {
+            "before": 60,
+            "after": 62,
+            "delta": 2
+          },
+          "squad": {
+            "before": 60,
+            "after": 60,
+            "delta": 0
+          },
+          "fans": {
+            "before": 60,
+            "after": 60,
+            "delta": 0
+          }
+        },
+        "firstTeam": {
+          "attention": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "readiness": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "matchProof": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "coachBacking": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "statusBefore": "PROMOTED",
+          "statusAfter": "PROMOTED",
+          "outcomeSummary": "教练组根据训练和比赛表现调整了你的一线队角色。"
+        },
+        "stipendEuro": 0,
+        "incomeLabel": "工资可支配收入",
+        "expenseEuro": 0,
+        "cashAfterEuro": 7000,
+        "injury": null,
+        "eventSummary": "职业队为你安排了恢复训练、体能监测和心理沟通，避免低迷状态持续恶化。",
+        "hints": [
+          "俱乐部本窗口兑现了合同中的球队层级与角色承诺。",
+          "现金储备已经达到当前工资对应的上限，本窗口可支配收入已转入不单独模拟的长期资产。",
+          "你的队内角色发生了一级变化，下一窗口出场比例也会随之调整。"
+        ],
+        "contract": {
+          "annualSalaryEuro": 10000,
+          "remainingHalfYears": 7,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "actualTeamLevel": "FIRST_TEAM",
+          "actualRole": "FRINGE",
+          "promiseFulfilled": true,
+          "brokenPromiseWindows": 0
+        }
+      },
+      "firstTeamRole": "SUBSTITUTE",
+      "contract": {
+        "type": "FIRST_PRO",
+        "clubId": "chn1_xian_changan",
+        "remainingHalfYears": 7,
+        "annualSalaryEuro": 10000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "FRINGE",
+        "releaseClauseEuro": 250000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0
+      },
+      "cashEuro": 7000,
+      "teamLevel": "FIRST_TEAM",
+      "youthRole": null,
+      "firstTeamProgress": {
+        "clubId": "chn1_xian_changan",
+        "attention": 100,
+        "readiness": 100,
+        "matchProof": 100,
+        "coachBacking": 100,
+        "status": "PROMOTED"
+      }
+    }
+  },
+  "steady": {
+    "id": "form-45/STEADY",
+    "group": "boundary",
+    "seed": "psu-boundary-000",
+    "inputChanges": [
+      {
+        "path": "/careerSeed",
+        "before": "psu-s1-source",
+        "after": "psu-boundary-000"
+      },
+      {
+        "path": "/player/form",
+        "before": 70,
+        "after": 45
+      },
+      {
+        "path": "/firstTeamRole",
+        "before": "ROTATION",
+        "after": "FRINGE"
+      },
+      {
+        "path": "/contract/promisedRole",
+        "before": "ROTATION",
+        "after": "FRINGE"
+      }
+    ],
+    "loadedChanges": [],
+    "inputSHA": "ff9a57d4713d5bbb586f52773cb8a7a5f241b66f67cac081c68aa49185e0cc3a",
+    "rawSHA": "f43069ac131a96035cbb20772d8d0d509c7c24887acaf23dff93e6c5669db3d6",
+    "actualTeam": "FIRST_TEAM",
+    "probe": {
+      "prepared": {
+        "id": "player-psu-s1-sourc",
+        "name": "PSU匿名基线",
+        "nationality": "CHN",
+        "jerseyNumber": 10,
+        "preferredFoot": "RIGHT",
+        "primaryPosition": "CAM",
+        "secondaryPosition": "CM",
+        "positionFamiliarity": {
+          "CAM": 100,
+          "CM": 92
+        },
+        "attributes": {
+          "attack": 65,
+          "defense": 65,
+          "physical": 65,
+          "mental": 65
+        },
+        "potentials": {
+          "attack": 90,
+          "defense": 90,
+          "physical": 90,
+          "mental": 90
+        },
+        "form": 52,
+        "fitness": 70,
+        "morale": 70,
+        "coachRelation": 60,
+        "squadRelation": 60,
+        "agentRelation": 60,
+        "fanRelation": 60,
+        "mediaRelation": 60,
+        "reputation": 8,
+        "clubAttachment": 60,
+        "priorities": [
+          "PLAYING_TIME",
+          "COMPETITIVE_LEVEL",
+          "SALARY",
+          "STABILITY"
+        ],
+        "priorityValues": {
+          "PLAYING_TIME": 85,
+          "COMPETITIVE_LEVEL": 70,
+          "SALARY": 55,
+          "STABILITY": 40
+        },
+        "overseasIntent": "CONDITIONAL",
+        "preferredLeagues": [
+          "英格兰"
+        ]
+      },
+      "execution": null
+    },
+    "oldRiskFormulaForComparison": 0.03,
+    "output": {
+      "player": {
+        "id": "player-psu-s1-sourc",
+        "name": "PSU匿名基线",
+        "nationality": "CHN",
+        "jerseyNumber": 10,
+        "preferredFoot": "RIGHT",
+        "primaryPosition": "CAM",
+        "secondaryPosition": "CM",
+        "positionFamiliarity": {
+          "CAM": 100,
+          "CM": 92
+        },
+        "attributes": {
+          "attack": 66.4,
+          "defense": 65.4,
+          "physical": 65.7,
+          "mental": 66.2
+        },
+        "potentials": {
+          "attack": 90,
+          "defense": 90,
+          "physical": 90,
+          "mental": 90
+        },
+        "form": 54.8,
+        "fitness": 72,
+        "morale": 61.5,
+        "coachRelation": 62,
+        "squadRelation": 60,
+        "agentRelation": 60,
+        "fanRelation": 60,
+        "mediaRelation": 60,
+        "reputation": 8,
+        "clubAttachment": 62,
+        "priorities": [
+          "PLAYING_TIME",
+          "COMPETITIVE_LEVEL",
+          "SALARY",
+          "STABILITY"
+        ],
+        "priorityValues": {
+          "PLAYING_TIME": 85,
+          "COMPETITIVE_LEVEL": 70,
+          "SALARY": 55,
+          "STABILITY": 40
+        },
+        "overseasIntent": "CONDITIONAL",
+        "preferredLeagues": [
+          "英格兰"
+        ]
+      },
+      "report": {
+        "fromLabel": "2037年夏季",
+        "toLabel": "2037年冬季",
+        "clubId": "chn1_xian_changan",
+        "clubName": "西安长安",
+        "roleBefore": "FRINGE",
+        "roleAfter": "SUBSTITUTE",
+        "stats": {
+          "appearances": 2,
+          "starts": 0,
+          "minutes": 55,
+          "goals": 0,
+          "assists": 0,
+          "yellowCards": 0,
+          "redCards": 0,
+          "averageRating": 6.8
+        },
+        "attributes": {
+          "attack": {
+            "before": 65,
+            "after": 66.4,
+            "delta": 1.4
+          },
+          "defense": {
+            "before": 65,
+            "after": 65.4,
+            "delta": 0.4
+          },
+          "physical": {
+            "before": 65,
+            "after": 65.7,
+            "delta": 0.7
+          },
+          "mental": {
+            "before": 65,
+            "after": 66.2,
+            "delta": 1.2
+          }
+        },
+        "states": {
+          "form": {
+            "before": 45,
+            "after": 54.8,
+            "delta": 9.8
+          },
+          "fitness": {
+            "before": 70,
+            "after": 72,
+            "delta": 2
+          },
+          "morale": {
+            "before": 70,
+            "after": 61.5,
+            "delta": -8.5
+          }
+        },
+        "relations": {
+          "coach": {
+            "before": 60,
+            "after": 62,
+            "delta": 2
+          },
+          "squad": {
+            "before": 60,
+            "after": 60,
+            "delta": 0
+          },
+          "fans": {
+            "before": 60,
+            "after": 60,
+            "delta": 0
+          }
+        },
+        "firstTeam": {
+          "attention": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "readiness": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "matchProof": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "coachBacking": {
+            "before": 100,
+            "after": 100,
+            "delta": 0
+          },
+          "statusBefore": "PROMOTED",
+          "statusAfter": "PROMOTED",
+          "outcomeSummary": "教练组根据训练和比赛表现调整了你的一线队角色。"
+        },
+        "stipendEuro": 0,
+        "incomeLabel": "工资可支配收入",
+        "expenseEuro": 0,
+        "cashAfterEuro": 7000,
+        "injury": null,
+        "eventSummary": "职业队为你安排了恢复训练、体能监测和心理沟通，避免低迷状态持续恶化。",
+        "hints": [
+          "俱乐部本窗口兑现了合同中的球队层级与角色承诺。",
+          "现金储备已经达到当前工资对应的上限，本窗口可支配收入已转入不单独模拟的长期资产。",
+          "你的队内角色发生了一级变化，下一窗口出场比例也会随之调整。"
+        ],
+        "contract": {
+          "annualSalaryEuro": 10000,
+          "remainingHalfYears": 7,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "actualTeamLevel": "FIRST_TEAM",
+          "actualRole": "FRINGE",
+          "promiseFulfilled": true,
+          "brokenPromiseWindows": 0
+        }
+      },
+      "firstTeamRole": "SUBSTITUTE",
+      "contract": {
+        "type": "FIRST_PRO",
+        "clubId": "chn1_xian_changan",
+        "remainingHalfYears": 7,
+        "annualSalaryEuro": 10000,
+        "promisedTeamLevel": "FIRST_TEAM",
+        "promisedRole": "FRINGE",
+        "releaseClauseEuro": 250000,
+        "clubOptionYears": 0,
+        "parentClubId": null,
+        "brokenPromiseWindows": 0
+      },
+      "cashEuro": 7000,
+      "teamLevel": "FIRST_TEAM",
+      "youthRole": null,
+      "firstTeamProgress": {
+        "clubId": "chn1_xian_changan",
+        "attention": 100,
+        "readiness": 100,
+        "matchProof": 100,
+        "coachBacking": 100,
+        "status": "PROMOTED"
+      }
+    }
+  },
+  "differences": []
+}

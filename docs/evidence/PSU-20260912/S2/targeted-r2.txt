@@ -1,0 +1,41 @@
+
+ RUN  v4.1.10 /Users/zhihu/Documents/足球生涯游戏
+
+ ❯ src/engine/__tests__/professionalSimulation.test.ts (8 tests | 1 failed) 116ms
+     × 职业半年结算会将实际比赛分钟计入能力成长 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/engine/__tests__/professionalSimulation.test.ts > professional half-year simulation > 职业半年结算会将实际比赛分钟计入能力成长
+AssertionError: expected { minutes: 499, attributes: { …(4) } } to deeply equal { minutes: 499, attributes: { …(4) } }
+
+- Expected
++ Received
+
+@@ -1,8 +1,8 @@
+  {
+    "attributes": {
+-     "attack": 45.9,
++     "attack": 46,
+      "defense": 42.9,
+      "mental": 44.9,
+      "physical": 44.1,
+    },
+    "minutes": 499,
+
+ ❯ src/engine/__tests__/professionalSimulation.test.ts:288:92
+    286|     // This locks the complete path: simulated stats.minutes (499: STE…
+    287|     // by firstTeamMatchExperienceBonusForRuntimeClub before age growt…
+    288|     expect({ minutes: result.report.stats.minutes, attributes: result.…
+       |                                                                                            ^
+    289|       minutes: 499,
+    290|       attributes: { attack: 45.9, defense: 42.9, physical: 44.1, menta…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 19 passed (20)
+   Start at  22:16:45
+   Duration  514ms (transform 394ms, setup 0ms, import 514ms, tests 509ms, environment 0ms)
+

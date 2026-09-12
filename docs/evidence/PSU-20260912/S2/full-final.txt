@@ -1,0 +1,13 @@
+
+> football-career-sim@1.1.0 test:run
+> vitest run
+
+
+ RUN  v4.1.10 /Users/zhihu/Documents/足球生涯游戏
+
+
+ Test Files  74 passed (74)
+      Tests  741 passed (741)
+   Start at  22:21:00
+   Duration  14.86s (transform 2.26s, setup 0ms, import 8.05s, tests 52.42s, environment 4ms)
+

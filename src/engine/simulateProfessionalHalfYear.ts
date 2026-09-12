@@ -1,3 +1,4 @@
+import { professionalApproachSummary, prepareProfessionalWindow, adjustedProfessionalRange, professionalInjuryRisk, PROFESSIONAL_APPEARANCE_LIMIT, type ProfessionalMatchModifiers } from './professionalApproach'
 import { resolveTrainingPlan, applyTrainingMaintenance, trainingEventSummary, type TrainingExecution } from './trainingPlan'
 import {
   BASE_RATES,
@@ -137,80 +138,25 @@ function roleStepToward(
   ] as FirstTeamRole
 }
 
-function prepareProfessionalWindow(
-  player: Player,
-  approach: DevelopmentApproach | null,
-): { player: Player; trainingBonus: number; summary: string } {
-  const next = structuredClone(player)
-  const needsSupport =
-    next.form < 46 || next.fitness < 46 || next.morale < 46
-
-  if (needsSupport) {
-    if (next.form < 46) next.form = clamp(next.form + 7, 0, 100)
-    if (next.fitness < 46) next.fitness = clamp(next.fitness + 10, 0, 100)
-    if (next.morale < 46) next.morale = clamp(next.morale + 8, 0, 100)
-    return {
-      player: next,
-      trainingBonus: 0,
-      summary:
-        '职业队为你安排了恢复训练、体能监测和心理沟通，避免低迷状态持续恶化。',
-    }
-  }
-
-  if (approach === 'PUSH') {
-    next.coachRelation = clamp(next.coachRelation + 3, 0, 100)
-    next.fitness = clamp(next.fitness - 3, 0, 100)
-    return {
-      player: next,
-      trainingBonus: 1,
-      summary:
-        '你主动向教练争取更多正式比赛机会，训练投入得到认可，但身体负荷也随之增加。',
-    }
-  }
-
-  if (approach === 'TEAM_FIRST') {
-    next.squadRelation = clamp(next.squadRelation + 4, 0, 100)
-    next.morale = clamp(next.morale + 2, 0, 100)
-    return {
-      player: next,
-      trainingBonus: 0,
-      summary:
-        '你接受球队的阶段性安排，把团队需要放在个人出场诉求之前，更衣室更愿意接纳你。',
-    }
-  }
-
-  next.form = clamp(next.form + 2, 0, 100)
-  next.fitness = clamp(next.fitness + 1, 0, 100)
-  return {
-    player: next,
-    trainingBonus: 0,
-    summary:
-      '你选择先适应职业队节奏，在训练强度、比赛准备和身体恢复之间保持平衡。',
-  }
-}
-
 function simulateFirstTeamStats(input: {
   player: Player
   offer: AcademyOffer
   role: FirstTeamRole
   seed: string
+  matchModifiers: ProfessionalMatchModifiers
+  recovery: boolean
 }): {
   stats: HalfYearStats
   injury: HalfYearReport['injury']
+  execution: { appearanceRange: readonly [number, number]; startRange: readonly [number, number]; injuryRisk: number; opportunityCapped: boolean }
 } {
   const { player, offer, role, seed } = input
   const random = createRandom(seed, 'professional-appearances')
   const injuryRandom = createRandom(seed, 'professional-injury')
   const totalMatches = 18
-  const [appearanceMin, appearanceMax] = APPEARANCE_RANGES[role]
-  const [startMin, startMax] = START_RANGES[role]
-  const injuryRisk = clamp(
-    0.04 +
-      (50 - player.fitness) * 0.001 +
-      (45 - player.attributes.physical) * 0.0005,
-    0.03,
-    0.12,
-  )
+  const [appearanceMin, appearanceMax] = adjustedProfessionalRange(APPEARANCE_RANGES[role], input.matchModifiers.appearanceRateBonus, PROFESSIONAL_APPEARANCE_LIMIT)
+  const [startMin, startMax] = adjustedProfessionalRange(START_RANGES[role], input.matchModifiers.startRateBonus, 1)
+  const injuryRisk = professionalInjuryRisk(player, input.matchModifiers, input.recovery)
   const hasInjury = injuryRandom.next() < injuryRisk
   const injuryWeeks = hasInjury ? injuryRandom.int(2, 7) : 0
   const availability = hasInjury
@@ -299,6 +245,7 @@ function simulateFirstTeamStats(input: {
   )
 
   return {
+    execution: { appearanceRange: [appearanceMin, appearanceMax] as const, startRange: [startMin, startMax] as const, injuryRisk, opportunityCapped: APPEARANCE_RANGES[role].some(v => v + input.matchModifiers.appearanceRateBonus > PROFESSIONAL_APPEARANCE_LIMIT || v + input.matchModifiers.appearanceRateBonus < 0) || START_RANGES[role].some(v => v + input.matchModifiers.startRateBonus > 1 || v + input.matchModifiers.startRateBonus < 0) },
     stats: {
       appearances,
       starts,
@@ -498,11 +445,13 @@ function simulateFirstTeamHalfYear(input: {
   const workingPlayer = preparation.player
   const trainingExecution = applyTrainingMaintenance(startPlayer, workingPlayer, playerAgeAtWindow(state.windowIndex), focus)
   const seed = `${state.careerSeed}:window:${state.windowIndex}`
-  const { stats, injury } = simulateFirstTeamStats({
+  const { stats, injury, execution } = simulateFirstTeamStats({
     player: workingPlayer,
     offer,
     role,
     seed,
+    matchModifiers: preparation.matchModifiers,
+    recovery: preparation.recovery,
   })
   const formAfter = clamp(
     stats.appearances >= 8
@@ -561,7 +510,7 @@ function simulateFirstTeamHalfYear(input: {
     ),
     squadRelation: clamp(
       workingPlayer.squadRelation +
-        (stats.appearances >= 10 ? 2 : !trainingExecution?.recovery && approach === 'TEAM_FIRST' ? 2 : 0),
+        (stats.appearances >= 10 ? 2 : !preparation.recovery && preparation.effectiveApproach === 'TEAM_FIRST' ? 2 : 0),
       0,
       100,
     ),
@@ -645,7 +594,7 @@ function simulateFirstTeamHalfYear(input: {
     expenseEuro: 0,
     cashAfterEuro: settlement.cashAfterEuro,
     injury,
-    eventSummary: trainingEventSummary(preparation.summary, trainingExecution),
+    eventSummary: trainingEventSummary(professionalApproachSummary(preparation, execution, playerAfter.squadRelation), trainingExecution),
     hints: [
       roleAfter !== role
         ? '你的队内角色发生了一级变化，下一窗口出场比例也会随之调整。'

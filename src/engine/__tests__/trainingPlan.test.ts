@@ -65,9 +65,9 @@ it('executes age/state/potential boundaries with exact recovery, costs and decli
         expect(execution!.physicalDeclineMultiplier).toBe(1)
         expect(result.report.eventSummary).toContain('自动恢复优先')
       } else {
-        if (approach === 'PUSH') expected.fitness -= 3
-        if (approach === 'STEADY') { expected.fitness = bounded(expected.fitness + 1); expected.form = bounded(expected.form + 2) }
-        if (approach === 'TEAM_FIRST') expected.morale = bounded(expected.morale + 2)
+        if (approach === 'PUSH') expected.fitness -= 4
+        if (approach === 'STEADY') { expected.fitness = bounded(expected.fitness + 2); expected.form = bounded(expected.form + 3) }
+        if (approach === 'TEAM_FIRST') expected.morale = bounded(expected.morale + 3)
         expect(execution!.declineFitness).toBe(expected.fitness)
         const gain = Math.min(4, Math.max(0, 95 - expected[target]))
         const cost = Math.min(expected[costKey], costKey === 'fitness' ? 3 : 2)
@@ -89,8 +89,14 @@ it('executes age/state/potential boundaries with exact recovery, costs and decli
       // Direct youth entry still shares maintenance interpretation (even though age eligibility normally promotes).
       const youth = simulateHalfYear({ player: before, offer: row.input.academy, role: 'STARTER', arrivalChoice: null, careerSeed: state.careerSeed, startYear: state.startYear, windowIndex: state.windowIndex, cashBeforeEuro: 0, developmentApproach: approach, trainingFocus: focus })
       const youthExecution = spy.mock.results.at(-1)!.value as plans.TrainingExecution
-      expect(youthExecution).toEqual(execution)
-      expect(youth.player.attributes.physical).toBe(result.player.attributes.physical)
+      // PSU changes professional preparation only. Youth retains its old +1/-3 fitness.
+      const youthFitness = recovery ? (before.fitness < 46 ? before.fitness + 10 : before.fitness) : approach === 'STEADY' ? bounded(before.fitness + 1) : approach === 'PUSH' ? before.fitness - 3 : before.fitness
+      expect(youthExecution.recovery).toBe(recovery)
+      expect(youthExecution.declineFitness).toBe(youthFitness)
+      expect(youthExecution.physicalDeclineMultiplier).toBe(factor)
+      expect(youthExecution.costs).toEqual(execution!.costs)
+      const youthManagement = Math.max(0.8, Math.min(1.5, 1.5 - youthFitness * 0.007))
+      expect(youth.player.attributes.physical).toBe(round(Math.max(20, before.attributes.physical - decline * youthManagement * factor)))
       expect(youth.report.eventSummary).toContain(`本期训练：${plans.MAINTENANCE_LABELS[focus]}`)
     }
   }
@@ -121,11 +127,11 @@ it('pairs three maintenance plans with all 300 frozen representative inputs and 
     const execution = spy.mock.results.at(-1)!.value as plans.TrainingExecution
     const baseline = row.results.find(result => result.focus === 'BALANCED')!.output
     expect(execution.recovery).toBe(false)
-    expect(execution.declineFitness).toBe(81)
+    expect(execution.declineFitness).toBe(82)
     expect(execution.gains).toEqual({ form: focus === 'MATCH_SHARPNESS' ? 4 : 0, fitness: focus === 'BODY_CARE' ? 4 : 0, morale: focus === 'MENTAL_RESET' ? 4 : 0 })
     expect(execution.costs).toEqual({ form: focus === 'MATCH_SHARPNESS' ? 0 : 2, fitness: focus === 'MATCH_SHARPNESS' ? 3 : 0, morale: 0 })
-    expect(execution.physicalDeclineSaved).toBeCloseTo(focus === 'BODY_CARE' ? 0.7 * (1.5 - 81 * 0.007) * 0.2 : 0, 12)
-    expect(actual.player.attributes.physical).toBe(focus === 'BODY_CARE' ? 69.5 : 69.3)
+    expect(execution.physicalDeclineSaved).toBeCloseTo(focus === 'BODY_CARE' ? 0.7 * (1.5 - 82 * 0.007) * 0.2 : 0, 12)
+    expect(actual.player.attributes.physical).toBe(focus === 'BODY_CARE' ? 69.5 : 69.4)
     samples.push({ position: row.position, seed: row.seed, focus, execution, delta: { rating: actual.report.stats.averageRating - baseline.report.stats.averageRating, goals: actual.report.stats.goals - baseline.report.stats.goals, assists: actual.report.stats.assists - baseline.report.stats.assists, minutes: actual.report.stats.minutes - baseline.report.stats.minutes, physical: actual.player.attributes.physical - baseline.player.attributes.physical, form: actual.player.form - baseline.player.form, fitness: actual.player.fitness - baseline.player.fitness, morale: actual.player.morale - baseline.player.morale } })
   }
   expect(samples).toHaveLength(900)

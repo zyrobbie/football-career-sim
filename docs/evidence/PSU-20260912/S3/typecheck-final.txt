@@ -1,0 +1,4 @@
+
+> football-career-sim@1.9.0 typecheck
+> tsc -b --pretty false
+

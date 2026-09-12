@@ -1,0 +1,15 @@
+{
+  "command": [
+    "env",
+    "PSU_S3_COLLECT=1",
+    "npx",
+    "vitest",
+    "run",
+    "--config",
+    "docs/evidence/PSU-20260912/S3/checks.config.ts"
+  ],
+  "cwd": "/Users/zhihu/Documents/\u8db3\u7403\u751f\u6daf\u6e38\u620f",
+  "started": 1789223629.423527,
+  "durationSeconds": 1.3410248756408691,
+  "exitCode": 0
+}

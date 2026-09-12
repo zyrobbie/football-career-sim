@@ -1,0 +1,34 @@
+{
+  "compatibility-initial": {
+    "command": "npx vitest run --config docs/evidence/PSU-20260912/S3/checks.config.ts",
+    "exitCode": 0
+  },
+  "typecheck-initial": {
+    "command": "npm run typecheck",
+    "exitCode": 0
+  },
+  "pages": [
+    {
+      "command": "node /tmp/PSU-20260912-S3/pages.cjs pages-r1",
+      "exitCode": 0
+    },
+    {
+      "command": "node /tmp/PSU-20260912-S3/copy-check.cjs (copy-final)",
+      "exitCode": 0
+    },
+    {
+      "command": "node /tmp/PSU-20260912-S3/copy-check.cjs (copy-final-r2)",
+      "exitCode": 0
+    },
+    {
+      "command": "node /tmp/PSU-20260912-S3/final-details.cjs",
+      "exitCode": 0
+    }
+  ],
+  "firstServer": {
+    "command": "npm run dev -- --host 127.0.0.1 --port 4291 --strictPort",
+    "exitCode": 1,
+    "log": "/tmp/psu-s3-server.txt",
+    "reason": "sandbox listen EPERM; escalated retry succeeded"
+  }
+}

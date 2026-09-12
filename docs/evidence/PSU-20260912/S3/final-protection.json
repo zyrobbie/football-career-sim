@@ -1,0 +1,16 @@
+{
+  "beforeCount": 2593,
+  "changedCount": 15,
+  "unauthorizedChanged": [],
+  "frozenS1S2Outputs": "unchanged",
+  "priorCEUEvidenceAndOutputs": "unchanged",
+  "snapshotContents": "identical, extensions changed to avoid test discovery",
+  "versions": [
+    12,
+    12
+  ],
+  "package": "1.9.0",
+  "head": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "stagedDiff": "",
+  "diffCheck": 0
+}

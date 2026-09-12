@@ -1,0 +1,1 @@
+{"command": ["npx", "vitest", "run", "src/engine/__tests__/professionalApproach.test.ts", "src/engine/__tests__/professionalSimulation.test.ts", "src/engine/__tests__/trainingPlan.test.ts", "src/engine/__tests__/ceuTrainingBaseline.test.ts", "src/store/gameStore.trainingPlan.test.ts"], "exitCode": 0, "seconds": 0.9221570491790771}

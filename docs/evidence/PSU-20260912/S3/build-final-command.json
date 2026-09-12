@@ -1,0 +1,11 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "build"
+  ],
+  "cwd": "/Users/zhihu/Documents/\u8db3\u7403\u751f\u6daf\u6e38\u620f",
+  "started": 1789223975.7267148,
+  "durationSeconds": 0.5407562255859375,
+  "exitCode": 0
+}

@@ -1,0 +1,30 @@
+
+ RUN  v4.1.10 /Users/zhihu/Documents/足球生涯游戏
+
+ ❯ docs/evidence/PSU-20260912/S1/baseline.runner.ts (1 test | 1 failed) 38ms
+   × freezes paired current-engine matrix and finite boundary evidence; normal rerun read-only 38ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  docs/evidence/PSU-20260912/S1/baseline.runner.ts > freezes paired current-engine matrix and finite boundary evidence; normal rerun read-only
+Error: Simulation-ready state is missing player choices.
+ ❯ validateGameState src/persistence/save.ts:963:11
+    961|     (!parsed.arrivalChoice || !parsed.trainingFocus)
+    962|   ) {
+    963|     throw new Error('Simulation-ready state is missing player choices.…
+       |           ^
+    964|   }
+    965|
+ ❯ encode src/persistence/save.ts:1126:21
+ ❯ saveGame src/persistence/save.ts:1165:19
+ ❯ run docs/evidence/PSU-20260912/S1/baseline.runner.ts:24:123
+ ❯ docs/evidence/PSU-20260912/S1/baseline.runner.ts:25:226
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  22:02:09
+   Duration  377ms (transform 203ms, setup 0ms, import 276ms, tests 38ms, environment 0ms)
+

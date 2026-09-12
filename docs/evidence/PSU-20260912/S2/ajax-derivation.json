@@ -1,0 +1,24 @@
+[
+  {
+    "fitness": 71,
+    "minutes": 497,
+    "quality": 89.3,
+    "multiplier": 1.4022280548500001,
+    "growthPool": 6.5,
+    "share": 0.4,
+    "randomFactor": 1.0030669036321342,
+    "unrounded": 45.94953217728592,
+    "attack": 45.9
+  },
+  {
+    "fitness": 72,
+    "minutes": 499,
+    "quality": 89.3,
+    "multiplier": 1.4037280548500002,
+    "growthPool": 6.5,
+    "share": 0.4,
+    "randomFactor": 1.0030669036321342,
+    "unrounded": 45.953757095084015,
+    "attack": 46
+  }
+]

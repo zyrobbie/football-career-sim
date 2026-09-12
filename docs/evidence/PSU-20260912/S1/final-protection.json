@@ -1,0 +1,21 @@
+{
+  "head": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "beforeProtectedFiles": 2511,
+  "changedExisting": [
+    "docs/football-career-professional-strategy-upgrade-v1.1.md",
+    "docs/professional-strategy-v1.9-execution.md"
+  ],
+  "unauthorizedChanges": [],
+  "productionAndFormalTestsUnchanged": true,
+  "existingEvidenceOutputsAndV10Unchanged": true,
+  "newFilesScope": "docs/evidence/PSU-20260912/S1 only",
+  "diffCheck": {
+    "exitCode": 0,
+    "stdout": ""
+  },
+  "currentChangedHashes": {
+    "docs/football-career-professional-strategy-upgrade-v1.1.md": "7e40722b355a530388a21287ef8c48615347e0e67e226f3ab44c75d7e47d0184",
+    "docs/professional-strategy-v1.9-execution.md": "8be5f82a441aac3b93fac32893e65bdff2afef0a35c5841a49f26983a9dc0d6e"
+  },
+  "noCommitPushDeploy": true
+}

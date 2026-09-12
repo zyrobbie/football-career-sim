@@ -1,0 +1,21 @@
+{
+  "beforeFiles": 2540,
+  "changed": [
+    "docs/football-career-professional-strategy-upgrade-v1.1.md",
+    "src/engine/__tests__/ceuTrainingBaseline.test.ts",
+    "src/engine/__tests__/professionalSimulation.test.ts",
+    "src/engine/__tests__/trainingPlan.test.ts",
+    "src/engine/simulateProfessionalHalfYear.ts",
+    "src/store/gameStore.trainingPlan.test.ts"
+  ],
+  "unauthorizedChanged": [],
+  "snapshot": {
+    "docs/evidence/PSU-20260912/S2/source-snapshot/tracked.patch": "22a3c25416b0fbbc0b4e6d0d690ceb857e2d99b6b01366695efaa41930b8e703",
+    "docs/evidence/PSU-20260912/S2/source-snapshot/README.md": "97f398b084f7b9b630538dc1a7ff3a5326b6bad7175d24971c4f65d9523ce406",
+    "docs/evidence/PSU-20260912/S2/source-snapshot/src/engine/professionalApproach.ts.txt": "23f4e6c384684942c13c2f94866a51d01b7c2412ed7793736fc40e72944e945c",
+    "docs/evidence/PSU-20260912/S2/source-snapshot/src/engine/__tests__/professionalApproach.test.ts.txt": "f0ff0431530872857809b58d5ef9d8869a3cb1a8adb5b9070f2e85665f08bad9"
+  },
+  "frozenEvidenceAndOutputs": "unchanged",
+  "head": "2570017bd4da05aa2c1db11b9ca4e70c98d40427",
+  "snapshotPackagingCorrection": "S3初次定向自动发现快照test.ts，改为.ts.txt，内容不变；未改任何S2原始结果。"
+}

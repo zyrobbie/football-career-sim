@@ -1,0 +1,137 @@
+[
+  {
+    "group": "normal",
+    "approach": "PUSH",
+    "n": 1000,
+    "preparedFitness": 66,
+    "risk": 0.039,
+    "injuries": 35,
+    "rate": 0.035
+  },
+  {
+    "group": "normal",
+    "approach": "STEADY",
+    "n": 1000,
+    "preparedFitness": 72,
+    "risk": 0.015,
+    "injuries": 11,
+    "rate": 0.011
+  },
+  {
+    "group": "normal",
+    "approach": "TEAM_FIRST",
+    "n": 1000,
+    "preparedFitness": 70,
+    "risk": 0.015,
+    "injuries": 11,
+    "rate": 0.011
+  },
+  {
+    "group": "threshold",
+    "approach": "PUSH",
+    "n": 1000,
+    "preparedFitness": 42,
+    "risk": 0.063,
+    "injuries": 62,
+    "rate": 0.062
+  },
+  {
+    "group": "threshold",
+    "approach": "STEADY",
+    "n": 1000,
+    "preparedFitness": 48,
+    "risk": 0.017,
+    "injuries": 16,
+    "rate": 0.016
+  },
+  {
+    "group": "threshold",
+    "approach": "TEAM_FIRST",
+    "n": 1000,
+    "preparedFitness": 46,
+    "risk": 0.033999999999999996,
+    "injuries": 34,
+    "rate": 0.034
+  },
+  {
+    "group": "high",
+    "approach": "PUSH",
+    "n": 1000,
+    "preparedFitness": 96,
+    "risk": 0.015,
+    "injuries": 11,
+    "rate": 0.011
+  },
+  {
+    "group": "high",
+    "approach": "STEADY",
+    "n": 1000,
+    "preparedFitness": 100,
+    "risk": 0.015,
+    "injuries": 11,
+    "rate": 0.011
+  },
+  {
+    "group": "high",
+    "approach": "TEAM_FIRST",
+    "n": 1000,
+    "preparedFitness": 100,
+    "risk": 0.015,
+    "injuries": 11,
+    "rate": 0.011
+  },
+  {
+    "group": "recovery",
+    "approach": "PUSH",
+    "n": 1000,
+    "preparedFitness": 70,
+    "risk": 0.03,
+    "injuries": 32,
+    "rate": 0.032
+  },
+  {
+    "group": "recovery",
+    "approach": "STEADY",
+    "n": 1000,
+    "preparedFitness": 70,
+    "risk": 0.03,
+    "injuries": 32,
+    "rate": 0.032
+  },
+  {
+    "group": "recovery",
+    "approach": "TEAM_FIRST",
+    "n": 1000,
+    "preparedFitness": 70,
+    "risk": 0.03,
+    "injuries": 32,
+    "rate": 0.032
+  },
+  {
+    "group": "maintenance",
+    "approach": "PUSH",
+    "n": 1000,
+    "preparedFitness": 70,
+    "risk": 0.035,
+    "injuries": 52,
+    "rate": 0.052
+  },
+  {
+    "group": "maintenance",
+    "approach": "STEADY",
+    "n": 1000,
+    "preparedFitness": 76,
+    "risk": 0.015,
+    "injuries": 27,
+    "rate": 0.027
+  },
+  {
+    "group": "maintenance",
+    "approach": "TEAM_FIRST",
+    "n": 1000,
+    "preparedFitness": 74,
+    "risk": 0.015,
+    "injuries": 27,
+    "rate": 0.027
+  }
+]

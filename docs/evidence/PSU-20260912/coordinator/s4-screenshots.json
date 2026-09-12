@@ -1,0 +1,62 @@
+[
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/1280-young-0-plan.png",
+    "sha256": "094bfdc62807d2b22e83a7e7bd1d02407c4d003175c0f0126decbac765148d16",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/1280-young-0-report.png",
+    "sha256": "8cf4be94afa724b35ded3031934a968901b0826375ad8afff05b97cd43477779",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/1280-young-1-plan.png",
+    "sha256": "bed912a622b11fe2a5cec7e38b40d1422f2dcc90867e5f01589a0d4641445cd8",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/1280-young-1-report.png",
+    "sha256": "420788262c4d66786fd73a9f839464e28abbe57ff013683cd8d3c85ef0478ef5",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/1280-young-2-plan.png",
+    "sha256": "bed912a622b11fe2a5cec7e38b40d1422f2dcc90867e5f01589a0d4641445cd8",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/1280-young-2-report.png",
+    "sha256": "da94898e23c030339d48e23cb3363c1edad1ad7c353e4b0ac5d61ed78a45fa29",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/390-veteran-0-plan.png",
+    "sha256": "9a7949f47b3c02dbe590fbe9f815545b7a1e03cb49bb90a0e1606085cfd83100",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/390-veteran-0-report.png",
+    "sha256": "c3420173f88556408c2bf9d2541ae15b8e4c93d71772bcac7e045d7421ef2475",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/390-veteran-1-plan.png",
+    "sha256": "f6ea648af6ddadd0faa1c277e294517d4db1a59b1c896625086f237fde6e8b5a",
+    "visuallyReviewed": true
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/390-veteran-1-report.png",
+    "sha256": "c93dbe2f3a96c8a7a14b1b72f53a2ad3f49ff09d1c0c5485a9f0a4314b63774c",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/390-veteran-2-plan.png",
+    "sha256": "f6ea648af6ddadd0faa1c277e294517d4db1a59b1c896625086f237fde6e8b5a",
+    "visuallyReviewed": false
+  },
+  {
+    "path": "/tmp/PSU-20260912-coordinator/s4-continuous/390-veteran-2-report.png",
+    "sha256": "da3a25efc0fec90f5eb625c02ddc154da1edbf403bbfad174942bc840a9ed38f",
+    "visuallyReviewed": true
+  }
+]

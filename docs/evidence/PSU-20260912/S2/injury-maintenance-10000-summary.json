@@ -1,0 +1,29 @@
+[
+  {
+    "group": "maintenance",
+    "approach": "PUSH",
+    "n": 10000,
+    "preparedFitness": 70,
+    "risk": 0.035,
+    "injuries": 370,
+    "rate": 0.037
+  },
+  {
+    "group": "maintenance",
+    "approach": "STEADY",
+    "n": 10000,
+    "preparedFitness": 76,
+    "risk": 0.015,
+    "injuries": 150,
+    "rate": 0.015
+  },
+  {
+    "group": "maintenance",
+    "approach": "TEAM_FIRST",
+    "n": 10000,
+    "preparedFitness": 74,
+    "risk": 0.015,
+    "injuries": 150,
+    "rate": 0.015
+  }
+]

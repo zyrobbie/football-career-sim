@@ -1,0 +1,75 @@
+{
+  "browser": "Browser plugin not available; bundled Playwright isolated Chromium",
+  "source": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+  "kind": "Constructed plan from S1 base, phase/focus/approach changed only for UI baseline",
+  "results": [
+    {
+      "width": 1280,
+      "height": 720,
+      "url": "http://127.0.0.1:4289/",
+      "title": "上场 · TAKE THE FIELD",
+      "errors": [],
+      "text": "这半年怎么踢\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n明确告诉教练你想上场，并用更高训练投入争取机会。\n教练关系提升 · 身体负荷增加\n先站稳脚跟\n先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n竞技状态与身体状态更稳定\n先服从球队安排\n把球队需要放在个人出场之前，耐心等机会。\n队内关系与心理状态提升",
+      "rect": {
+        "x": 845.796875,
+        "y": 165.375,
+        "width": 406.203125,
+        "height": 390.1875
+      },
+      "buttons": [
+        {
+          "text": "主动争取出场\n明确告诉教练你想上场，并用更高训练投入争取机会。\n教练关系提升 · 身体负荷增加",
+          "width": 122.734375,
+          "height": 245.1875,
+          "font": "16px"
+        },
+        {
+          "text": "先站稳脚跟\n先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n竞技状态与身体状态更稳定",
+          "width": 122.734375,
+          "height": 245.1875,
+          "font": "16px"
+        },
+        {
+          "text": "先服从球队安排\n把球队需要放在个人出场之前，耐心等机会。\n队内关系与心理状态提升",
+          "width": 122.734375,
+          "height": 245.1875,
+          "font": "16px"
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "url": "http://127.0.0.1:4289/",
+      "title": "上场 · TAKE THE FIELD",
+      "errors": [],
+      "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n教练关系提升 · 身体负荷增加\n先站稳脚跟\n竞技状态与身体状态更稳定\n先服从球队安排\n队内关系与心理状态提升",
+      "rect": {
+        "x": 8,
+        "y": 623.6875,
+        "width": 374,
+        "height": 115
+      },
+      "buttons": [
+        {
+          "text": "主动争取出场\n教练关系提升 · 身体负荷增加",
+          "width": 119.328125,
+          "height": 66,
+          "font": "16px"
+        },
+        {
+          "text": "先站稳脚跟\n竞技状态与身体状态更稳定",
+          "width": 119.328125,
+          "height": 66,
+          "font": "16px"
+        },
+        {
+          "text": "先服从球队安排\n队内关系与心理状态提升",
+          "width": 119.34375,
+          "height": 66,
+          "font": "16px"
+        }
+      ]
+    }
+  ]
+}

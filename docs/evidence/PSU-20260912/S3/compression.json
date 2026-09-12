@@ -1,0 +1,11 @@
+{
+  "original": "docs/evidence/PSU-20260912/S3/old-raw-results-r2.json",
+  "originalBytes": 25384212,
+  "originalSHA": "10c1800c076cafccaed92cfffed4d5bb29ec2668b89e8cd738f2312aff497707",
+  "gzip": "docs/evidence/PSU-20260912/S3/old-raw-results-r2.json.gz",
+  "gzipBytes": 2552500,
+  "gzipSHA": "db87e2a94fd585e2eb9870f53ac28f3c08bfefeac2b884fc809519375f68c0de",
+  "verifiedDecompressedIdentical": true,
+  "originalRetainedLocal": true,
+  "releaseScope": "not selected; S4 coordinator decides"
+}

@@ -1,0 +1,148 @@
+
+ RUN  v4.1.10 /Users/zhihu/Documents/足球生涯游戏
+
+ ❯ src/engine/__tests__/ceuTrainingBaseline.test.ts (1 test | 1 failed) 18ms
+   × compares all 324 young outputs against the frozen 54 inputs, without regenerating inputs 18ms
+ ❯ src/engine/__tests__/professionalSimulation.test.ts (8 tests | 1 failed) 99ms
+     × 职业半年结算会将实际比赛分钟计入能力成长 5ms
+ ❯ src/engine/__tests__/trainingPlan.test.ts (5 tests | 2 failed) 133ms
+   × executes age/state/potential boundaries with exact recovery, costs and decline in both engines 12ms
+   × pairs three maintenance plans with all 300 frozen representative inputs and publishes descriptive statistics 33ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/engine/__tests__/ceuTrainingBaseline.test.ts > compares all 324 young outputs against the frozen 54 inputs, without regenerating inputs
+AssertionError: expected { player: { …(24) }, …(7) } to deeply equal { player: { …(24) }, …(7) }
+
+- Expected
++ Received
+
+@@ -30,12 +30,12 @@
+        "physical": 71.2,
+      },
+      "clubAttachment": 47,
+      "coachRelation": 52,
+      "fanRelation": 53,
+-     "fitness": 83,
+-     "form": 83.1,
++     "fitness": 84,
++     "form": 83.8,
+      "id": "player-ceu-young-ST",
+      "jerseyNumber": 10,
+      "mediaRelation": 50,
+      "morale": 71,
+      "name": "匿名训练对照",
+@@ -161,18 +161,18 @@
+      },
+      "roleAfter": "SUBSTITUTE",
+      "roleBefore": "FRINGE",
+      "states": {
+        "fitness": {
+-         "after": 83,
++         "after": 84,
+          "before": 80,
+-         "delta": 3,
++         "delta": 4,
+        },
+        "form": {
+-         "after": 83.1,
++         "after": 83.8,
+          "before": 80,
+-         "delta": 3.1,
++         "delta": 3.8,
+        },
+        "morale": {
+          "after": 71,
+          "before": 80,
+          "delta": -9,
+@@ -181,11 +181,11 @@
+      "stats": {
+        "appearances": 3,
+        "assists": 0,
+        "averageRating": 7.4,
+        "goals": 1,
+-       "minutes": 91,
++       "minutes": 92,
+        "redCards": 0,
+        "starts": 0,
+        "yellowCards": 0,
+      },
+      "stipendEuro": 3750,
+
+ ❯ src/engine/__tests__/ceuTrainingBaseline.test.ts:24:20
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  src/engine/__tests__/professionalSimulation.test.ts > professional half-year simulation > 职业半年结算会将实际比赛分钟计入能力成长
+AssertionError: expected { minutes: 499, attributes: { …(4) } } to deeply equal { minutes: 497, attributes: { …(4) } }
+
+- Expected
++ Received
+
+  {
+    "attributes": {
+-     "attack": 45.9,
++     "attack": 46,
+      "defense": 42.9,
+      "mental": 44.9,
+      "physical": 44.1,
+    },
+-   "minutes": 497,
++   "minutes": 499,
+  }
+
+ ❯ src/engine/__tests__/professionalSimulation.test.ts:288:92
+    286|     // This locks the complete path: simulated stats.minutes (497) is …
+    287|     // by firstTeamMatchExperienceBonusForRuntimeClub before age growt…
+    288|     expect({ minutes: result.report.stats.minutes, attributes: result.…
+       |                                                                                            ^
+    289|       minutes: 497,
+    290|       attributes: { attack: 45.9, defense: 42.9, physical: 44.1, menta…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  src/engine/__tests__/trainingPlan.test.ts > executes age/state/potential boundaries with exact recovery, costs and decline in both engines
+AssertionError: expected 82 to be 81 // Object.is equality
+
+- Expected
++ Received
+
+- 81
++ 82
+
+ ❯ src/engine/__tests__/trainingPlan.test.ts:71:43
+     69|         if (approach === 'STEADY') { expected.fitness = bounded(expect…
+     70|         if (approach === 'TEAM_FIRST') expected.morale = bounded(expec…
+     71|         expect(execution!.declineFitness).toBe(expected.fitness)
+       |                                           ^
+     72|         const gain = Math.min(4, Math.max(0, 95 - expected[target]))
+     73|         const cost = Math.min(expected[costKey], costKey === 'fitness'…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  src/engine/__tests__/trainingPlan.test.ts > pairs three maintenance plans with all 300 frozen representative inputs and publishes descriptive statistics
+AssertionError: expected 82 to be 81 // Object.is equality
+
+- Expected
++ Received
+
+- 81
++ 82
+
+ ❯ src/engine/__tests__/trainingPlan.test.ts:124:38
+    122|     const baseline = row.results.find(result => result.focus === 'BALA…
+    123|     expect(execution.recovery).toBe(false)
+    124|     expect(execution.declineFitness).toBe(81)
+       |                                      ^
+    125|     expect(execution.gains).toEqual({ form: focus === 'MATCH_SHARPNESS…
+    126|     expect(execution.costs).toEqual({ form: focus === 'MATCH_SHARPNESS…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  3 failed | 1 passed (4)
+      Tests  4 failed | 16 passed (20)
+   Start at  22:12:38
+   Duration  303ms (transform 317ms, setup 0ms, import 425ms, tests 283ms, environment 0ms)
+

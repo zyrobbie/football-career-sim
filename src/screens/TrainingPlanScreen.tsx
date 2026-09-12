@@ -1,8 +1,8 @@
 import { CareerPreferencesEditor } from '../components/CareerPreferencesEditor'
-import { useRef, useState } from 'react'
+import { Fragment, useRef, useState } from 'react'
 import { CareerHub } from '../components/CareerHub'
 import { Icon } from '../components/Icons'
-import { careerWindowLabel } from '../engine/careerTime'
+import { careerWindowLabel, playerAgeAtWindow } from '../engine/careerTime'
 import type {
   DevelopmentApproach,
   GameState,
@@ -46,19 +46,19 @@ const professionalApproaches: typeof approaches = [
     id: 'PUSH',
     title: '主动争取出场',
     description: '明确告诉教练你想上场，并用更高训练投入争取机会。',
-    effect: '教练关系提升 · 身体负荷增加',
+    effect: '出场首发更多 · 负荷、伤病风险增',
   },
   {
     id: 'STEADY',
     title: '先站稳脚跟',
     description: '先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。',
-    effect: '竞技状态与身体状态更稳定',
+    effect: '稳住竞技和身体 · 伤病风险降低',
   },
   {
     id: 'TEAM_FIRST',
     title: '先服从球队安排',
     description: '把球队需要放在个人出场之前，耐心等机会。',
-    effect: '队内关系与心理状态提升',
+    effect: '替补/队内关系增 · 首发占比降低',
   },
 ]
 
@@ -102,7 +102,8 @@ function TrainingPlanContent({ game }: { game: GameState }) {
   const isSecondYear = game.windowIndex >= 2
   const isProfessional =
     Boolean(game.contract) && game.windowIndex >= 4
-  const activeApproaches = isProfessional
+  const isProfessionalFirstTeam = isProfessional && (game.teamLevel === 'FIRST_TEAM' || playerAgeAtWindow(game.windowIndex) >= 22)
+  const activeApproaches = isProfessionalFirstTeam
     ? professionalApproaches
     : approaches
   const needsRecovery =
@@ -126,7 +127,7 @@ function TrainingPlanContent({ game }: { game: GameState }) {
             {model.veteran
               ? model.recovery ? "本期先恢复" : "选择本期训练重心，兼顾状态与身体负担。"
               : needsRecovery
-              ? '你的状态不在最佳，俱乐部已经安排恢复支持。怎么训练，仍会影响这半年的成长。'
+              ? isProfessionalFirstTeam ? '当前状态需要恢复。若结算准备时仍低于46，本期职业策略不执行；训练成长仍按原规则处理。' : '你的状态不在最佳，俱乐部已经安排恢复支持。怎么训练，仍会影响这半年的成长。'
               : isProfessional
                 ? '合同已经生效。你怎么训练、怎么争取角色，以及真正获得多少出场，会决定俱乐部是否兑现承诺。'
                 : isSecondYear
@@ -184,7 +185,9 @@ function TrainingPlanContent({ game }: { game: GameState }) {
                   <span>
                     <strong>{item.title}</strong>
                     <small>{item.description}</small>
-                    <em>{item.effect}</em>
+                    <em>{isProfessionalFirstTeam
+                      ? (needsRecovery ? '结算仍低迷 · 策略不执行' : item.effect).split(' · ').map((line, index) => <Fragment key={line}>{index > 0 ? <br /> : null}{line}</Fragment>)
+                      : item.effect}</em>
                   </span>
                 </button>
               ))}

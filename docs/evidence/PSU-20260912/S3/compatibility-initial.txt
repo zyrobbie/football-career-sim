@@ -1,0 +1,9 @@
+
+ RUN  v4.1.10 /Users/zhihu/Documents/足球生涯游戏
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  22:32:22
+   Duration  967ms (transform 165ms, setup 0ms, import 226ms, tests 686ms, environment 0ms)
+

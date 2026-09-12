@@ -1,3 +1,4 @@
+import { version } from '../../../package.json'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
 import { DATA_VERSION, SAVE_VERSION } from '../../models/game'
@@ -20,6 +21,7 @@ describe('settings screen helpers', () => {
   it('reads version and directory information from runtime constants', () => {
     const view = buildSettingsView()
     expect(view).toEqual({
+      gameVersion: version,
       saveVersion: SAVE_VERSION,
       dataVersion: DATA_VERSION,
       clubCount: CLUBS.length,

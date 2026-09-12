@@ -1,0 +1,767 @@
+{
+  "browser": "Browser plugin not available; isolated bundled Chromium",
+  "newScreenshots": 51,
+  "newViewed": 21,
+  "reusedViewed": 2,
+  "files": [
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-check.cjs",
+      "sha256": "78389ac5867cb11b5252033abf1269c2f66cdde27974c93c71de4d4188a76cbc",
+      "bytes": 1528,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final/1280.png",
+      "sha256": "282d0ecb644d0bdb0c54c9b43aea749ff05e690fa2d5908ad4b5120f57c0fc3a",
+      "bytes": 125655,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final/320.png",
+      "sha256": "149aee150fd6b59b6755821c171439b5bd59bdf5aab4e23dd62c71124a43da51",
+      "bytes": 62783,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final/390.png",
+      "sha256": "c680233e16848e0213ea0f71609e3135be1d5f114769c639eab2d10e69744d40",
+      "bytes": 96397,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final/430.png",
+      "sha256": "6dd9d199a4a5ef9406f81df5cf5bbf1dd15c0a19a2e907e166c1ab1cb515000c",
+      "bytes": 103929,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final/result.json",
+      "sha256": "c0b201c1ad77e7e595fabc9f293e3174ca9cbd087e9110e00029118899447ff1",
+      "bytes": 6439,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final-r2/1280.png",
+      "sha256": "a7cf52ea269ce877f50b7be3aea4981858d6ceee3ebed37b6aad9c0233f50215",
+      "bytes": 124270,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final-r2/320.png",
+      "sha256": "8d2a340bfa4fd5bf20a7b3f203f186e3e5a28a56cf1e25aa7b9de9bfd28de709",
+      "bytes": 63775,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final-r2/390.png",
+      "sha256": "44bf165ceeb174d0a0fbae55137afe9c44e362d538ff24c05426c91db94b59ce",
+      "bytes": 97192,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final-r2/430.png",
+      "sha256": "72fca515d63956cdbad97eeb2d9aef4cd43a00e34dec357ecbd725fc4f1708bf",
+      "bytes": 104813,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final-r2/result.json",
+      "sha256": "059a5319b181ba0f778adfb3e6fbf87bcf46b57417ec0756f18b8d8f4e2511f3",
+      "bytes": 6567,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final-r2.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/copy-final.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/details-final/result.json",
+      "sha256": "063a634b6881338cce86661bd3ba97c157d36f4ee4df0dc0abe17490bc931a26",
+      "bytes": 501,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/details-final/settings.png",
+      "sha256": "dd53dba337c01334db0fcc0f81e18b5eb33a626f4e9edb756b759a302e0b5ac0",
+      "bytes": 51460,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/details-final/young-low.png",
+      "sha256": "fd76fff9181ae4091266e9430938f9f10e852856fb048b6dee8190b8559ca16e",
+      "bytes": 96281,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/details-final.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/final-details.cjs",
+      "sha256": "8a58df58c8509f35fa9134d002f83a163cdd2ae64a1e2f67e83c27134901ff01",
+      "bytes": 1740,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/mature-1280-event-result.png",
+      "sha256": "f126351ab29fabc1d6ffc688fa6518074a3db80eae577189a1f6db7bf9d72896",
+      "bytes": 152840,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/mature-1280-first.png",
+      "sha256": "e15281f66866ff65601c2dfbcade67cf8f962a598639ecd3090be77183bd55ca",
+      "bytes": 160538,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/mature-1280-readonly.png",
+      "sha256": "7b4584d27310b55b6147a9766c32d0542771dc1454ea2dc4398db79653bb07f3",
+      "bytes": 93798,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/mature-1280-report.png",
+      "sha256": "1d9a5cde7dd190f0b5afe90f96ee69174141301621733bf5925a4fcac7501320",
+      "bytes": 111634,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/mature-1280-strategy.png",
+      "sha256": "289f9d4b9bcbba045626a8370cdc2745b7d492cc68bd19a1e27f4efd2f9aca14",
+      "bytes": 129556,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/mature-1280-submit.png",
+      "sha256": "59f0a6b99a303a255db5a0a9586dd349390cbfdcba1176c081897e1fab6cf2e3",
+      "bytes": 93828,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/narrow-320-event-result.png",
+      "sha256": "e077e1245948648a0f9142c23b1254c8118a6f5cf558d24eb0b079cbd8f6e32d",
+      "bytes": 56985,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/narrow-320-first.png",
+      "sha256": "211b29284099ea64d2d576f1fea4a2e51d82a3e1955d0eacb9d6b7fdb12b4703",
+      "bytes": 63180,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/narrow-320-readonly.png",
+      "sha256": "04f487104b2e0ca5b5b85218f45fb72d2dff767d368ff89a83693f9e5bd65590",
+      "bytes": 64011,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/narrow-320-report.png",
+      "sha256": "ff764b5b0984ea4584de83d6ae228ba73f50069e892023c4f7fc6aad1439bb52",
+      "bytes": 64809,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/narrow-320-settings.png",
+      "sha256": "46c22e0394f11b94021201c7fcd4d9522cb1eabe33dae247c03d1567a864075e",
+      "bytes": 63510,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/narrow-320-strategy.png",
+      "sha256": "f173dfbe138db3cd70cd401e4ec7da08afce14b7707354fc87438ad73378125b",
+      "bytes": 63009,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/narrow-320-submit.png",
+      "sha256": "25b62d7ca629ce32c381a83aeea95b12f0ba2d6e4d74af24c7dd2bed00732215",
+      "bytes": 62483,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-push-1280-event-result.png",
+      "sha256": "dced51d58d603e9c8536cbcf336d96cab8d3be691fcbfff3e569f4213b3c8849",
+      "bytes": 149664,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-push-1280-first.png",
+      "sha256": "72bdc59f11a014a33c99dfdc921730023aa8f7a13eca6cc2d66b4a2758495f96",
+      "bytes": 153054,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-push-1280-readonly.png",
+      "sha256": "cb10cd50396c625181195850cb247a657ae3f1bff22855fe37ce4a4a260a2fc1",
+      "bytes": 98756,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-push-1280-report.png",
+      "sha256": "8cf4be94afa724b35ded3031934a968901b0826375ad8afff05b97cd43477779",
+      "bytes": 111285,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-push-1280-strategy.png",
+      "sha256": "58194dea7740d55be3e7c566bbe4b86784f6f6489349ec4202276d0860559d3f",
+      "bytes": 123572,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-push-1280-submit.png",
+      "sha256": "fea3966d1b7f32001ca8654e2d416161d3d0ddba1579400ac30f5f1d6f18821b",
+      "bytes": 90222,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-steady-390-event-result.png",
+      "sha256": "9fdaa97b00fed87fd3d600f3258622ce28259b0d293c3ee17dd052e638d2edef",
+      "bytes": 80534,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-steady-390-first.png",
+      "sha256": "dd0c2a3bdfc0ff647c46f3e82db47928a31365d090e3b76f407bc2b8aaebc6ae",
+      "bytes": 96700,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-steady-390-readonly.png",
+      "sha256": "0c274fd89d7fd4338f251fd8437a8d26439e13a9c82599f1b253733b860c6911",
+      "bytes": 92223,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-steady-390-report.png",
+      "sha256": "b0c164e6e0855a0f8d717f17df497c526de4fea22e3a85dd1c7e9efb8ef2201d",
+      "bytes": 93911,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-steady-390-strategy.png",
+      "sha256": "dd0c2a3bdfc0ff647c46f3e82db47928a31365d090e3b76f407bc2b8aaebc6ae",
+      "bytes": 96700,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-steady-390-submit.png",
+      "sha256": "35cdd1af140eac858967768c30f2d6a733796ba46606fb2253ffbdf8c3afd4f9",
+      "bytes": 87145,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-team-430-event-result.png",
+      "sha256": "08be3a867c6c34eadd1a12b1fc26149767e10156a78f9ada2931be0399ecfb9b",
+      "bytes": 83473,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-team-430-first.png",
+      "sha256": "34ad9adc4f25f42590a2d544845c9ecd94b24f42aa6f032244c3584db57161fb",
+      "bytes": 104037,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-team-430-readonly.png",
+      "sha256": "07fede2b8d958be3aac321330e5f42e9e9d06c0093d54b9af2f0c016dfe10c4e",
+      "bytes": 105055,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-team-430-report.png",
+      "sha256": "94e8b63e2ce65ad9144d39b6ec410d330e1c81ba5f271272b60d5e1d6c0e541d",
+      "bytes": 104093,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-team-430-settings.png",
+      "sha256": "84587272dbdee4b2bc99dc0313908f88226325f7e934ff583f312574f4977011",
+      "bytes": 83479,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-team-430-strategy.png",
+      "sha256": "34ad9adc4f25f42590a2d544845c9ecd94b24f42aa6f032244c3584db57161fb",
+      "bytes": 104037,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/normal-team-430-submit.png",
+      "sha256": "d5f58bdb8f212733e0a336f808e61714d604088d7bd008a580fbd194eb31a280",
+      "bytes": 100428,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/results.json",
+      "sha256": "7dbed0d4c2822dbac7a45019b3afda2b550b750443e4f563e018376ebe3278dc",
+      "bytes": 3633004,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/veteran-sharp-390-first.png",
+      "sha256": "5abef4bcc756a990a0d0013850ea1f9cd8562cff798e94161e6f5d0a06ed7e0c",
+      "bytes": 93779,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/veteran-sharp-390-readonly.png",
+      "sha256": "88a53611f3778a296e8881b6373719d678bf7f9b409429b29092af9d86be3c40",
+      "bytes": 87237,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/veteran-sharp-390-report.png",
+      "sha256": "529997704e5cec26fea499b7c68d3284c2a9d5afe9931d365ad22dbfcb5fcc01",
+      "bytes": 99163,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/veteran-sharp-390-submit.png",
+      "sha256": "9a7949f47b3c02dbe590fbe9f815545b7a1e03cb49bb90a0e1606085cfd83100",
+      "bytes": 90263,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/young-low-390-first.png",
+      "sha256": "d2caf13cca89362f2811a86d1b35b7b911c14e5f410c93867a1bcd176642f1a9",
+      "bytes": 98014,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/young-low-390-low-note.png",
+      "sha256": "d2caf13cca89362f2811a86d1b35b7b911c14e5f410c93867a1bcd176642f1a9",
+      "bytes": 98014,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/young-low-390-strategy.png",
+      "sha256": "d2caf13cca89362f2811a86d1b35b7b911c14e5f410c93867a1bcd176642f1a9",
+      "bytes": 98014,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/youth-320-first.png",
+      "sha256": "c9c5c26b307bdd55b0ad5f1fb9ef7fcc71a817af13d8be8b645f6169b87db272",
+      "bytes": 63490,
+      "viewed": false
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1/youth-320-strategy.png",
+      "sha256": "cbb13d722c5dec1f7d99c0aa4795945608fac14e850d642ccaa4fda0849f806f",
+      "bytes": 64642,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages-r1.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-S3/pages.cjs",
+      "sha256": "4dfced30fe9a4c8dfd8b6c8fb95725e98e16e6c4ad90b161a20910525c4ba46e",
+      "bytes": 9869,
+      "viewed": null
+    },
+    {
+      "path": "/tmp/PSU-20260912-coordinator/before-390.png",
+      "sha256": "1d387d1b27efc0b00ae2c2249d9b1960158e14c8423162058fa6b9c2705b5484",
+      "reused": true,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-coordinator/before-1280.png",
+      "sha256": "23e9d21850965d2bbec69601a7d776a5be9d3e85e5e33dd099963d2d2e8c4251",
+      "reused": true,
+      "viewed": true
+    },
+    {
+      "path": "/tmp/PSU-20260912-coordinator/ui-baseline.json",
+      "sha256": "babb616537b8b305ebc7a63b4ef5666015b786d303d3db69e3518136f4675630",
+      "reused": true,
+      "viewed": false
+    }
+  ],
+  "finalStrategyLayout": [
+    {
+      "w": 1280,
+      "h": 720,
+      "box": {
+        "x": 845.796875,
+        "y": 158.375,
+        "width": 406.203125,
+        "height": 404.1875
+      },
+      "text": "这半年怎么踢\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n明确告诉教练你想上场，并用更高训练投入争取机会。\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n把球队需要放在个人出场之前，耐心等机会。\n替补/队内关系增\n首发占比降低",
+      "buttons": [
+        {
+          "box": {
+            "x": 864.796875,
+            "y": 284.375,
+            "width": 122.734375,
+            "height": 259.1875,
+            "top": 284.375,
+            "right": 987.53125,
+            "bottom": 543.5625,
+            "left": 864.796875
+          },
+          "text": "主动争取出场\n明确告诉教练你想上场，并用更高训练投入争取机会。\n出场首发更多\n负荷、伤病风险增",
+          "font": "10px"
+        },
+        {
+          "box": {
+            "x": 987.53125,
+            "y": 284.375,
+            "width": 122.734375,
+            "height": 259.1875,
+            "top": 284.375,
+            "right": 1110.265625,
+            "bottom": 543.5625,
+            "left": 987.53125
+          },
+          "text": "先站稳脚跟\n先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n稳住竞技和身体\n伤病风险降低",
+          "font": "10px"
+        },
+        {
+          "box": {
+            "x": 1110.265625,
+            "y": 284.375,
+            "width": 122.734375,
+            "height": 259.1875,
+            "top": 284.375,
+            "right": 1233,
+            "bottom": 543.5625,
+            "left": 1110.265625
+          },
+          "text": "先服从球队安排\n把球队需要放在个人出场之前，耐心等机会。\n替补/队内关系增\n首发占比降低",
+          "font": "10px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "w": 390,
+      "h": 844,
+      "box": {
+        "x": 8,
+        "y": 623.6875,
+        "width": 374,
+        "height": 115
+      },
+      "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+      "buttons": [
+        {
+          "box": {
+            "x": 16,
+            "y": 664.6875,
+            "width": 119.328125,
+            "height": 66,
+            "top": 664.6875,
+            "right": 135.328125,
+            "bottom": 730.6875,
+            "left": 16
+          },
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "font": "8px"
+        },
+        {
+          "box": {
+            "x": 135.328125,
+            "y": 664.6875,
+            "width": 119.328125,
+            "height": 66,
+            "top": 664.6875,
+            "right": 254.65625,
+            "bottom": 730.6875,
+            "left": 135.328125
+          },
+          "text": "先站稳脚跟\n稳住竞技和身体\n伤病风险降低",
+          "font": "8px"
+        },
+        {
+          "box": {
+            "x": 254.65625,
+            "y": 664.6875,
+            "width": 119.34375,
+            "height": 66,
+            "top": 664.6875,
+            "right": 374,
+            "bottom": 730.6875,
+            "left": 254.65625
+          },
+          "text": "先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "font": "8px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "w": 320,
+      "h": 568,
+      "box": {
+        "x": 8,
+        "y": 247.84375,
+        "width": 304,
+        "height": 103
+      },
+      "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+      "buttons": [
+        {
+          "box": {
+            "x": 16,
+            "y": 288.84375,
+            "width": 96,
+            "height": 54,
+            "top": 288.84375,
+            "right": 112,
+            "bottom": 342.84375,
+            "left": 16
+          },
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "font": "8px"
+        },
+        {
+          "box": {
+            "x": 112,
+            "y": 288.84375,
+            "width": 96,
+            "height": 54,
+            "top": 288.84375,
+            "right": 208,
+            "bottom": 342.84375,
+            "left": 112
+          },
+          "text": "先站稳脚跟\n稳住竞技和身体\n伤病风险降低",
+          "font": "8px"
+        },
+        {
+          "box": {
+            "x": 208,
+            "y": 288.84375,
+            "width": 96,
+            "height": 54,
+            "top": 288.84375,
+            "right": 304,
+            "bottom": 342.84375,
+            "left": 208
+          },
+          "text": "先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "font": "8px"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "w": 430,
+      "h": 932,
+      "box": {
+        "x": 8,
+        "y": 623.6875,
+        "width": 414,
+        "height": 115
+      },
+      "text": "这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低",
+      "buttons": [
+        {
+          "box": {
+            "x": 16,
+            "y": 664.6875,
+            "width": 132.65625,
+            "height": 66,
+            "top": 664.6875,
+            "right": 148.65625,
+            "bottom": 730.6875,
+            "left": 16
+          },
+          "text": "主动争取出场\n出场首发更多\n负荷、伤病风险增",
+          "font": "8px"
+        },
+        {
+          "box": {
+            "x": 148.65625,
+            "y": 664.6875,
+            "width": 132.671875,
+            "height": 66,
+            "top": 664.6875,
+            "right": 281.328125,
+            "bottom": 730.6875,
+            "left": 148.65625
+          },
+          "text": "先站稳脚跟\n稳住竞技和身体\n伤病风险降低",
+          "font": "8px"
+        },
+        {
+          "box": {
+            "x": 281.328125,
+            "y": 664.6875,
+            "width": 132.671875,
+            "height": 66,
+            "top": 664.6875,
+            "right": 414,
+            "bottom": 730.6875,
+            "left": 281.328125
+          },
+          "text": "先服从球队安排\n替补/队内关系增\n首发占比降低",
+          "font": "8px"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "flows": [
+    {
+      "id": "normal-push",
+      "w": 1280,
+      "h": 720,
+      "mode": "normal",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+        "sha": "3087266ebd7eab29a1dccac05a4f506e8c6b6e107d85b9ec0b30fee96ba5ae57",
+        "kind": "constructed S1 page baseline",
+        "changes": {
+          "phase": "HALF_YEAR_PLAN",
+          "trainingFocus": null,
+          "developmentApproach": null
+        }
+      },
+      "noHorizontalOverflow": true
+    },
+    {
+      "id": "normal-steady",
+      "w": 390,
+      "h": 844,
+      "mode": "normal",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+        "sha": "3087266ebd7eab29a1dccac05a4f506e8c6b6e107d85b9ec0b30fee96ba5ae57",
+        "kind": "constructed S1 page baseline",
+        "changes": {
+          "phase": "HALF_YEAR_PLAN",
+          "trainingFocus": null,
+          "developmentApproach": null
+        }
+      },
+      "noHorizontalOverflow": true
+    },
+    {
+      "id": "normal-team",
+      "w": 430,
+      "h": 932,
+      "mode": "normal",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+        "sha": "3087266ebd7eab29a1dccac05a4f506e8c6b6e107d85b9ec0b30fee96ba5ae57",
+        "kind": "constructed S1 page baseline",
+        "changes": {
+          "phase": "HALF_YEAR_PLAN",
+          "trainingFocus": null,
+          "developmentApproach": null
+        }
+      },
+      "noHorizontalOverflow": true
+    },
+    {
+      "id": "narrow",
+      "w": 320,
+      "h": 568,
+      "mode": "normal",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+        "sha": "3087266ebd7eab29a1dccac05a4f506e8c6b6e107d85b9ec0b30fee96ba5ae57",
+        "kind": "constructed S1 page baseline",
+        "changes": {
+          "phase": "HALF_YEAR_PLAN",
+          "trainingFocus": null,
+          "developmentApproach": null
+        }
+      },
+      "noHorizontalOverflow": true
+    },
+    {
+      "id": "mature",
+      "w": 1280,
+      "h": 720,
+      "mode": "recovery",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S2/continuous.json.gz",
+        "sha": "7435278edcd6b45eab37e4172b106635ec9a93e187e217d6201453fb7b41181a",
+        "selector": "mature/PUSH/finalRaw",
+        "kind": "S2 constructed start, public four-window final raw; no fields changed"
+      },
+      "noHorizontalOverflow": true
+    },
+    {
+      "id": "veteran-sharp",
+      "w": 390,
+      "h": 844,
+      "mode": "recovery",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S2/continuous.json.gz",
+        "sha": "7435278edcd6b45eab37e4172b106635ec9a93e187e217d6201453fb7b41181a",
+        "selector": "veteran-sharp/PUSH/finalRaw",
+        "kind": "S2 constructed start, public four-window final raw; no fields changed"
+      },
+      "noHorizontalOverflow": true
+    },
+    {
+      "id": "youth",
+      "w": 320,
+      "h": 568,
+      "mode": "youth",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+        "sha": "3087266ebd7eab29a1dccac05a4f506e8c6b6e107d85b9ec0b30fee96ba5ae57",
+        "kind": "constructed S1 page baseline",
+        "changes": {
+          "phase": "HALF_YEAR_PLAN",
+          "trainingFocus": null,
+          "developmentApproach": null,
+          "windowIndex": 16,
+          "teamLevel": "YOUTH",
+          "firstTeamRole": null,
+          "youthRole": "ROTATION",
+          "contract.promisedTeamLevel": "YOUTH",
+          "contract.promisedRole": "ROTATION"
+        }
+      }
+    },
+    {
+      "id": "young-low",
+      "w": 390,
+      "h": 844,
+      "mode": "young-low",
+      "console": [],
+      "source": {
+        "path": "docs/evidence/PSU-20260912/S1/inputs-valid.json",
+        "sha": "3087266ebd7eab29a1dccac05a4f506e8c6b6e107d85b9ec0b30fee96ba5ae57",
+        "kind": "constructed S1 page baseline",
+        "changes": {
+          "phase": "HALF_YEAR_PLAN",
+          "trainingFocus": null,
+          "developmentApproach": null,
+          "player.fitness": 41
+        }
+      }
+    }
+  ]
+}

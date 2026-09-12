@@ -283,11 +283,12 @@ describe('professional half-year simulation', () => {
     expect(state.academyOffers.map((offer) => offer.club.id)).toEqual(['ned_ajax'])
 
     const result = simulateProfessionalHalfYear({ state, offer: academy })
-    // This locks the complete path: simulated stats.minutes (497) is consumed
+    // This locks the complete path: simulated stats.minutes (499: STEADY fitness72 instead of71) is consumed
     // by firstTeamMatchExperienceBonusForRuntimeClub before age growth.
+    // Fitness context +.0015 crosses the attack rounding boundary; see PSU S2 Ajax derivation.
     expect({ minutes: result.report.stats.minutes, attributes: result.player.attributes }).toEqual({
-      minutes: 497,
-      attributes: { attack: 45.9, defense: 42.9, physical: 44.1, mental: 44.9 },
+      minutes: 499,
+      attributes: { attack: 46, defense: 42.9, physical: 44.1, mental: 44.9 },
     })
   })
 })

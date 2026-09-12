@@ -1,0 +1,212 @@
+[
+  {
+    "group": "young",
+    "approach": "PUSH",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": 3,
+    "steady": {
+      "label": "event FIRST_TEAM_DEBUT_REFLECTION/A",
+      "W": 23,
+      "phase": "SPECIAL_EVENT",
+      "event": {
+        "eventId": "FIRST_TEAM_DEBUT_REFLECTION",
+        "interactionKind": "CHOICE",
+        "stepIndex": 0,
+        "selections": [],
+        "variantId": null
+      },
+      "offerIds": []
+    },
+    "branch": {
+      "label": "event FIRST_SENIOR_GOAL_REACTION/A",
+      "W": 23,
+      "phase": "SPECIAL_EVENT",
+      "event": {
+        "eventId": "FIRST_SENIOR_GOAL_REACTION",
+        "interactionKind": "CHOICE",
+        "stepIndex": 0,
+        "selections": [],
+        "variantId": null
+      },
+      "offerIds": []
+    }
+  },
+  {
+    "group": "young",
+    "approach": "STEADY",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": null,
+    "steady": null,
+    "branch": null
+  },
+  {
+    "group": "young",
+    "approach": "TEAM_FIRST",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": null,
+    "steady": null,
+    "branch": null
+  },
+  {
+    "group": "mature",
+    "approach": "PUSH",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": 9,
+    "steady": {
+      "label": "event FIRST_NATIONAL_GOAL_REACTION/A",
+      "W": 33,
+      "phase": "SPECIAL_EVENT",
+      "event": {
+        "eventId": "FIRST_NATIONAL_GOAL_REACTION",
+        "interactionKind": "CHOICE",
+        "stepIndex": 0,
+        "selections": [],
+        "variantId": null
+      },
+      "offerIds": []
+    },
+    "branch": {
+      "label": "report MARKET",
+      "W": 33,
+      "phase": "HALF_YEAR_REPORT",
+      "event": null,
+      "offerIds": []
+    }
+  },
+  {
+    "group": "mature",
+    "approach": "STEADY",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": null,
+    "steady": null,
+    "branch": null
+  },
+  {
+    "group": "mature",
+    "approach": "TEAM_FIRST",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": null,
+    "steady": null,
+    "branch": null
+  },
+  {
+    "group": "veteran-body",
+    "approach": "PUSH",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": 3,
+    "steady": {
+      "label": "report MARKET",
+      "W": 45,
+      "phase": "HALF_YEAR_REPORT",
+      "event": null,
+      "offerIds": []
+    },
+    "branch": {
+      "label": "report PLAN",
+      "W": 45,
+      "phase": "HALF_YEAR_REPORT",
+      "event": null,
+      "offerIds": []
+    }
+  },
+  {
+    "group": "veteran-body",
+    "approach": "STEADY",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": null,
+    "steady": null,
+    "branch": null
+  },
+  {
+    "group": "veteran-body",
+    "approach": "TEAM_FIRST",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": 6,
+    "steady": {
+      "label": "event THREE_YEAR_CAREER_DIRECTION/A",
+      "W": 47,
+      "phase": "SPECIAL_EVENT",
+      "event": {
+        "eventId": "THREE_YEAR_CAREER_DIRECTION",
+        "interactionKind": "RANKING",
+        "stepIndex": 0,
+        "selections": [],
+        "variantId": null
+      },
+      "offerIds": []
+    },
+    "branch": {
+      "label": "event NATIONAL_ROLE_MISMATCH/A",
+      "W": 47,
+      "phase": "SPECIAL_EVENT",
+      "event": {
+        "eventId": "NATIONAL_ROLE_MISMATCH",
+        "interactionKind": "ALLOCATION",
+        "stepIndex": 0,
+        "selections": [],
+        "variantId": null
+      },
+      "offerIds": []
+    }
+  },
+  {
+    "group": "veteran-sharp",
+    "approach": "PUSH",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": 3,
+    "steady": {
+      "label": "report MARKET",
+      "W": 45,
+      "phase": "HALF_YEAR_REPORT",
+      "event": null,
+      "offerIds": []
+    },
+    "branch": {
+      "label": "report PLAN",
+      "W": 45,
+      "phase": "HALF_YEAR_REPORT",
+      "event": null,
+      "offerIds": []
+    }
+  },
+  {
+    "group": "veteran-sharp",
+    "approach": "STEADY",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": null,
+    "steady": null,
+    "branch": null
+  },
+  {
+    "group": "veteran-sharp",
+    "approach": "TEAM_FIRST",
+    "comparison": "vs STEADY; external decision/offer context only",
+    "firstDifferenceIndex": 6,
+    "steady": {
+      "label": "event THREE_YEAR_CAREER_DIRECTION/A",
+      "W": 47,
+      "phase": "SPECIAL_EVENT",
+      "event": {
+        "eventId": "THREE_YEAR_CAREER_DIRECTION",
+        "interactionKind": "RANKING",
+        "stepIndex": 0,
+        "selections": [],
+        "variantId": null
+      },
+      "offerIds": []
+    },
+    "branch": {
+      "label": "event NATIONAL_ROLE_MISMATCH/A",
+      "W": 47,
+      "phase": "SPECIAL_EVENT",
+      "event": {
+        "eventId": "NATIONAL_ROLE_MISMATCH",
+        "interactionKind": "ALLOCATION",
+        "stepIndex": 0,
+        "selections": [],
+        "variantId": null
+      },
+      "offerIds": []
+    }
+  }
+]
