@@ -1,0 +1,1052 @@
+{
+  "crests": [
+    {
+      "canonicalId": "ned_ajax",
+      "sourceSHA": "5919545bfbd848375f89cb0b38db62bdce88fa93fb75936d71197a15ea0846d4",
+      "sourceContact": "/tmp/CLR7-20260912/NED-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/NED/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "ned1_feyenoord",
+      "sourceSHA": "2fc8441047bd8b71440e073bc38ee9f7e17d2595f7e5e7c187926380af95b8fc",
+      "sourceContact": "/tmp/CLR7-20260912/NED-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/NED/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "ned1_az",
+      "sourceSHA": "5a7c3735b10de1b413a7780838e9e2339769265a84435f356990ac5011cf2f02",
+      "sourceContact": "/tmp/CLR7-20260912/NED-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/NED/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "ned1_twente",
+      "sourceSHA": "0d8cc681dae6f3a019a2e94dbed6e2682124d614e01c6d1f4470244c6733d3cd",
+      "sourceContact": "/tmp/CLR7-20260912/NED-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/NED/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "ned_psv",
+      "sourceSHA": "920951819ced1856a9d288959d89b947a0ff5bf3d58bb410810d13e8211f6b3c",
+      "sourceContact": "/tmp/CLR7-20260912/NED-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/NED/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "por_benfica",
+      "sourceSHA": "465dfe710e0dff8ea2769ace804320c0a9d5ad3582247e519b9884bf19ab4b2f",
+      "sourceContact": "/tmp/CLR7-20260912/POR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/POR/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "por_porto",
+      "sourceSHA": "c7379069792debcdde9a1e0dd508edc99dfa6aa692997f5495dc701a30dbdf4f",
+      "sourceContact": "/tmp/CLR7-20260912/POR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/POR/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "por1_braga",
+      "sourceSHA": "4976a0edd972ea2912a4025e839bab1bfcc10f7014a2a0923fc3e4ee6256ffa1",
+      "sourceContact": "/tmp/CLR7-20260912/POR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/POR/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "por1_sporting_cp",
+      "sourceSHA": "f968055350eb10d4ebfe6537422f43fabe9c0a5fd7b325e06371c3b7626b5cab",
+      "sourceContact": "/tmp/CLR7-20260912/POR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/POR/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "por1_vitoria_sc",
+      "sourceSHA": "c466ef4e692dfb9e69e7233097b603ebe05f730eaaac2bc132497f77b226445d",
+      "sourceContact": "/tmp/CLR7-20260912/POR-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/POR/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bel_anderlecht",
+      "sourceSHA": "589ddae1591b5cde7fa23eb101be887fa9e63e3f74f9f02f27013f2c7d2aedc9",
+      "sourceContact": "/tmp/CLR7-20260912/BEL-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bel_brugge",
+      "sourceSHA": "e28f05c80223a1846ff84328cffa9041fc0469f024c1d573e83cbbb800b57dae",
+      "sourceContact": "/tmp/CLR7-20260912/BEL-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bel1_antwerp",
+      "sourceSHA": "c73cd86a09a1b9d5928b2e17b283b33581dbc762257230cf1945137c822e2d4c",
+      "sourceContact": "/tmp/CLR7-20260912/BEL-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bel1_genk",
+      "sourceSHA": "d7035f29ed757e9228f978dde8dee29595522506bb453dce1395b4c2736bfada",
+      "sourceContact": "/tmp/CLR7-20260912/BEL-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bel1_gent",
+      "sourceSHA": "d9af521b80cb35ea88f30a127e9dfdfc4047aff915cc287603a004c2d9a61650",
+      "sourceContact": "/tmp/CLR7-20260912/BEL-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bel1_standard_liege",
+      "sourceSHA": "7315a1f64a1790ca84a9df03f86d8c1dd741dc274e52643355fbb1a5ffe84659",
+      "sourceContact": "/tmp/CLR7-20260912/BEL-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bel1_union_saint_gilloise",
+      "sourceSHA": "6d544901c1e6255101d413e0c575db6d307bdcbcad086b5176d5cd267ca53379",
+      "sourceContact": "/tmp/CLR7-20260912/BEL-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg_boca",
+      "sourceSHA": "3be8377ad1412ae5496e527f84695dfbe3d9ca404bdc45839c1a2114e50214e4",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg_river",
+      "sourceSHA": "fbb0c9ce08beeefe78c654cebdb9f26879f3e95bed04c13309eef25c5bc75a51",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_argentinos_juniors",
+      "sourceSHA": "dd2b348f6e2ad7b2c00e72194e249091d4da3709b800d734dcd3d52ebd38bbfe",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_estudiantes_de_la_plata",
+      "sourceSHA": "f42b348f662fc695b84c265b5770fc0fa25e79afb083b055e8acef593c249010",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_independiente",
+      "sourceSHA": "1ff98459f20e378994dcb0040ddfd8fb7ad81ae6b62cf086c6b57e7df5f2e1ab",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_newell_s_old_boys",
+      "sourceSHA": "62c83793277566655875dd0c84b35f4d54df1fdac6c663b8f49eafbea74cfffe",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_racing_club",
+      "sourceSHA": "f562afda12ce8ee63dbbb46a64eae3bba712747280a7bca7952521727110b62a",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_rosario_central",
+      "sourceSHA": "1709e9bcc39f9ed4ac147fcad7b135523b22779bf9fdf6b27e04719126e66c3d",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_san_lorenzo",
+      "sourceSHA": "b12382a7a03d967e74edcb3728e79c2057497ddcbc8c5fd507ac7dc9243b5502",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-8.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "arg1_velez_sarsfield",
+      "sourceSHA": "705b34f2ec615b81063a3255c035944f9fa782c02e90f45d861ee78e5b142585",
+      "sourceContact": "/tmp/CLR7-20260912/ARG-sources-8.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "kor_jeonbuk",
+      "sourceSHA": "b3e95901db7fd8616ce3ff7796faa5af87b55bf985e5bd9190721b568e7189ad",
+      "sourceContact": "/tmp/CLR7-20260912/KOR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/KOR/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "kor1_fc_seoul",
+      "sourceSHA": "486150cdc191ce75bc14798b64e7097fec86fee3eeede78314a9aad84d971feb",
+      "sourceContact": "/tmp/CLR7-20260912/KOR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/KOR/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "kor1_pohang_steelers",
+      "sourceSHA": "7d7d1e5b14b43126490beb90d7c976edfee3d9d2ba3828450a2f5202dc8653eb",
+      "sourceContact": "/tmp/CLR7-20260912/KOR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/KOR/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "kor_ulsan",
+      "sourceSHA": "0f5bd6b24b002b7d9434ad4902d9f3a5803803465349bdd17835e5fd0091afe0",
+      "sourceContact": "/tmp/CLR7-20260912/KOR-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/KOR/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "jpn_urawa",
+      "sourceSHA": "b55cbb3015552b6ac6cdfd7fe547afc80248f079493cee00b75fcc8448b1457e",
+      "sourceContact": "/tmp/CLR7-20260912/JPN-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "jpn_vissel",
+      "sourceSHA": "9e5235ab334bc7d277279fb08d990b5a0fd84ffdefd6e063916b3a287dd21054",
+      "sourceContact": "/tmp/CLR7-20260912/JPN-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "jpn1_gamba_osaka",
+      "sourceSHA": "27834bf7805845844b58b038d42fe6b07da40b6f810e33b05754e4efc03f513d",
+      "sourceContact": "/tmp/CLR7-20260912/JPN-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "jpn1_kashima_antlers",
+      "sourceSHA": "11f85b01dc43229f6658647ce89356da726e455258a0a13a2a352030d5d4aab8",
+      "sourceContact": "/tmp/CLR7-20260912/JPN-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "jpn1_kawasaki_frontale",
+      "sourceSHA": "e58d007bc39fa91846bef7763a8ea02ab8a6a800607885e79450c0b7e6060517",
+      "sourceContact": "/tmp/CLR7-20260912/JPN-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "jpn1_sanfrecce_hiroshima",
+      "sourceSHA": "11483ead1f2e6b2cc7689269c1376d30ab99d14215b56dc233c1b7d6d917dc41",
+      "sourceContact": "/tmp/CLR7-20260912/JPN-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "jpn1_yokohama_f_marinos",
+      "sourceSHA": "811c3a554bcce98346e525c494e0bc58ea9b624364d10a95833dadb96dcdfef1",
+      "sourceContact": "/tmp/CLR7-20260912/JPN-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra_flamengo",
+      "sourceSHA": "1e577d33bcc7009b2cd442fb884cc2f59ecd2616ffe8d03de133f9f23a05ea5a",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra_palmeiras",
+      "sourceSHA": "4b9bb41896a7f6ea5b3cf73791d91e14a796564982dfee7482728298bcbe9ff8",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_atletico_mineiro",
+      "sourceSHA": "d531c8905f84126672b1e461dc6666e1b1f600170cdb3821487cae9fcbacf84b",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_botafogo",
+      "sourceSHA": "6ae3747cf827e5611b6c8322afe838d76c95cbb38d1ec65eb33bd99979ae5be8",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-0.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_corinthians",
+      "sourceSHA": "728c6d6ace7f06f74854b6cdf53ebc94ce9990e0787bef088dba82e77f2d2850",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_cruzeiro",
+      "sourceSHA": "fd495f67aa1873d700ac21bc5d637d8b68cffd4754163f4a2c27ef89e8579fc5",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_fluminense",
+      "sourceSHA": "3338316dcff4693d09b52251177ab845b3d8c3970e2c498da7e4a6dd92d065e0",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_gremio",
+      "sourceSHA": "dbbc9fcd5dcf32b49e21082d9f4f1abc8e6da11478b9354b0fa75ce5f9ff7771",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-4.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_internacional",
+      "sourceSHA": "c3f8462823ba448dbfe1835d7e1aa7494bd543931ae559b996359705ae1828bb",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-8.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_santos",
+      "sourceSHA": "08f8bfeef5d8ca7a95b8ccf84de7e46a384db87dd4793c4ea2e6f81fc76a2dd4",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-8.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_sao_paulo",
+      "sourceSHA": "23f1774acd28552476066e04e9ea704328e54cbc25cb7651772dd0b976069786",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-8.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    },
+    {
+      "canonicalId": "bra1_vasco_da_gama",
+      "sourceSHA": "1622c60814cf9f186b291b971f4f90e16e14db48c8bf22e5c1c0145e22b8a595",
+      "sourceContact": "/tmp/CLR7-20260912/BRA-sources-8.png",
+      "sizes": [
+        18,
+        24,
+        32,
+        48,
+        96,
+        128
+      ],
+      "sourceResult": "主体与圆边完整，24/32保持形状；微小装饰不保证可辨",
+      "actualPNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "actualPNGResult": "逐枚原像素裁片目视，图形正确，无空白/短标回退/主体裁切",
+      "pageResult": "七联赛代表页面与两个主尺寸已验证；不是50队逐队签约"
+    }
+  ],
+  "pages": [
+    {
+      "league": "NED",
+      "source": "/tmp/CLR7-20260912/NED/after/input-provenance.json",
+      "sourceSHA": "0ff8955402bce0a81e2fd0f148efed92d5e15c80881b074f302bcc68d811cdfb",
+      "result": "/tmp/CLR7-20260912/NED/after/result.json",
+      "resultSHA": "bfb97cd0cd18b2be073c49ca63c6053c7598c290c94734b634ab124e1a10f192",
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "realClicks": 28,
+      "errors": [],
+      "PNG": "/tmp/CLR7-20260912/NED/after/1280-export.png",
+      "PNGsha": "a07247153ef1fd86adbcac749cdb29119382c6e07305d7296a932369ac1da24f",
+      "PNGsize": [
+        2360,
+        4424
+      ],
+      "savedPlanChecks": "HALF_YEAR_PLAN; history length/cashEuro unchanged; exact game after reload; export close unchanged"
+    },
+    {
+      "league": "POR",
+      "source": "/tmp/CLR7-20260912/POR/after/input-provenance.json",
+      "sourceSHA": "1ef03de77a525a0cbf35c2a4470f8b8f8fa7d3dfb21d31a8ee0c3b7b8f9f4752",
+      "result": "/tmp/CLR7-20260912/POR/after/result.json",
+      "resultSHA": "697a223baf56f2444fc2d89c897796a5b1ad0ff7587c553bd82ac2a4eb0a689c",
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "realClicks": 28,
+      "errors": [],
+      "PNG": "/tmp/CLR7-20260912/POR/after/390-export.png",
+      "PNGsha": "caf6c5a618ab4ed7fd995477233a799be458baccd8376126d1c6e8a554c52358",
+      "PNGsize": [
+        2360,
+        3922
+      ],
+      "savedPlanChecks": "HALF_YEAR_PLAN; history length/cashEuro unchanged; exact game after reload; export close unchanged"
+    },
+    {
+      "league": "BEL",
+      "source": "/tmp/CLR7-20260912/BEL/after/input-provenance.json",
+      "sourceSHA": "7c8819b9aa794f72058190aa2c16f07f45624db187cf3c3bc903c7d47b57f20b",
+      "result": "/tmp/CLR7-20260912/BEL/after/result.json",
+      "resultSHA": "4a6d11ff10186637a21acfff4e8018cd56288318bf1033bf7b979a947eca1b42",
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "realClicks": 28,
+      "errors": [],
+      "PNG": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+      "PNGsha": "bd98fa7541db6f1018e0b1744bd84eef1ec462ed72a9b89a7906a2a45eef80f7",
+      "PNGsize": [
+        2360,
+        4482
+      ],
+      "savedPlanChecks": "HALF_YEAR_PLAN; history length/cashEuro unchanged; exact game after reload; export close unchanged"
+    },
+    {
+      "league": "ARG",
+      "source": "/tmp/CLR7-20260912/ARG/after/input-provenance.json",
+      "sourceSHA": "133af0ec50f43a887206dc6226d3044debbb2d0324d1efe444cac3ae8196bd24",
+      "result": "/tmp/CLR7-20260912/ARG/after/result.json",
+      "resultSHA": "0568ac317ee43aa5b8c871a7638adc3c00606f7b20441bc5f845b9c242cb143d",
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          320,
+          568
+        ]
+      ],
+      "realClicks": 41,
+      "errors": [],
+      "PNG": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+      "PNGsha": "3ea42351838cbb5d0738983b6832bf271114f3f42a1d25d0e0c64bed315ddbd4",
+      "PNGsize": [
+        2360,
+        4112
+      ],
+      "savedPlanChecks": "HALF_YEAR_PLAN; history length/cashEuro unchanged; exact game after reload; export close unchanged"
+    },
+    {
+      "league": "KOR",
+      "source": "/tmp/CLR7-20260912/KOR/after/input-provenance.json",
+      "sourceSHA": "54736808868c67c4018b59846a572f8ebea675e3a9d44d2f40ad49d2ab39ea67",
+      "result": "/tmp/CLR7-20260912/KOR/after/result.json",
+      "resultSHA": "4beebfd8a40dd44f6740115cd83ceacb46857757b38f83036f39abaac5256021",
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "realClicks": 28,
+      "errors": [],
+      "PNG": "/tmp/CLR7-20260912/KOR/after/1280-export.png",
+      "PNGsha": "365d3f1e4ab4cbb9a9e486ed353bdb1485a4859c912ad5be9526da30ca82ec53",
+      "PNGsize": [
+        2360,
+        4398
+      ],
+      "savedPlanChecks": "HALF_YEAR_PLAN; history length/cashEuro unchanged; exact game after reload; export close unchanged"
+    },
+    {
+      "league": "JPN",
+      "source": "/tmp/CLR7-20260912/JPN/after/input-provenance.json",
+      "sourceSHA": "7f34825b52fc55d9a83097cc995adbeac08545a3939b788b60acb374139409c5",
+      "result": "/tmp/CLR7-20260912/JPN/after/result.json",
+      "resultSHA": "a2ea6cefd642f84379554442f0fdfcfe2b5f18fd0459e366a46f0aba59ed74c8",
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "realClicks": 28,
+      "errors": [],
+      "PNG": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+      "PNGsha": "71ab32c14f77c34c4b6d3b5e235de9a4c1b3518822c35b6bbe8bf489d824a867",
+      "PNGsize": [
+        2360,
+        3980
+      ],
+      "savedPlanChecks": "HALF_YEAR_PLAN; history length/cashEuro unchanged; exact game after reload; export close unchanged"
+    },
+    {
+      "league": "BRA",
+      "source": "/tmp/CLR7-20260912/BRA/after/input-provenance.json",
+      "sourceSHA": "cbea7c10da6640826f797f50edc79e45755723268bee14dde3d3a9483d4afcf8",
+      "result": "/tmp/CLR7-20260912/BRA/after/result.json",
+      "resultSHA": "6cdf0f076b64f4f9f8a56122008c028711fdcd815e2b0654b4bc6d645b16f132",
+      "viewports": [
+        [
+          1280,
+          720
+        ],
+        [
+          390,
+          844
+        ],
+        [
+          320,
+          568
+        ]
+      ],
+      "realClicks": 41,
+      "errors": [],
+      "PNG": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+      "PNGsha": "49b7e6b61626d81346b2245104ff358111d145ef4f389fff3bd82c5aa0c04ad3",
+      "PNGsize": [
+        2360,
+        4830
+      ],
+      "savedPlanChecks": "HALF_YEAR_PLAN; history length/cashEuro unchanged; exact game after reload; export close unchanged"
+    }
+  ],
+  "viewedImageCount": 72,
+  "limits": [
+    "真实手机、微信、Safari、相册和线上未执行",
+    "既有小字及正常滚动限制保留；不保证任意滚动位置无遮挡",
+    "构造履历/报价用于显示覆盖，不证明自然市场生成"
+  ]
+}

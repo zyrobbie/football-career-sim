@@ -1,0 +1,47 @@
+{
+  "task": "CLR7-20260912",
+  "decision": "Q accepted; release authorized by user",
+  "base": "e6202a8b5a53a9c60625db81674748e766d3aff6",
+  "candidateFileCount": 61,
+  "checks": {
+    "candidateHashes": 61,
+    "sourceFrozenTargetMatching": 50,
+    "nonTargetManifestUnchanged": 128,
+    "fullTests": 745,
+    "typecheck": "pass",
+    "build": "pass",
+    "executorPageFlows": 16,
+    "executorRealClicks": 222,
+    "executorActualPNG": 7,
+    "executorPNGCreastsInspected": 50,
+    "coordinatorMixedLeagues": 7,
+    "coordinatorViewport": "430x932",
+    "coordinatorActualClicks": 15,
+    "coordinatorSaveReload": "pass",
+    "coordinatorActualPNG": "2360x3980; native pixel inspection pass"
+  },
+  "coordinatorEvidence": [
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/integration-audit.json",
+      "sha256": "e3e44385a8c28812eee8e964b86c262bc0dac79a2bfae887b4902f40adce6e9b"
+    },
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/visual-review.json",
+      "sha256": "e210a91a669750c1c845dca425d7ef9802f5c6747d74e5a4e5de89dbcec2b873"
+    },
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/local/result.json",
+      "sha256": "e473a94888956f47e00dace69679eab5009af8861c42a371627cca6f8ffbdcc3"
+    },
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/local/430-export.png",
+      "sha256": "aa9226c2f43d4ec20acda1706b5b66ea93e01098cccc12f75592ce2c0b71dc7e"
+    }
+  ],
+  "limitations": [
+    "Large bundle warning 910.36 kB",
+    "No actual phone, WeChat, Safari or photo-library test",
+    "Page fixtures constructed; not natural careers",
+    "Online checks pending deployment"
+  ]
+}

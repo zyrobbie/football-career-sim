@@ -1,0 +1,45 @@
+{
+  "targeted": {
+    "command": "npm run test:run -- src/data/clubs/__tests__/clubCrests.test.ts src/components/__tests__/ClubCrest.test.ts src/data/clubs/__tests__/clubRepository.test.ts",
+    "exitCode": 0,
+    "tests": 24,
+    "log": "/tmp/CLR7-20260912/targeted.txt",
+    "logSHA": "68087e6e834e329356d025a944f331fdf76f1427732354d038b816e708f5e423"
+  },
+  "full": {
+    "command": [
+      "npm",
+      "run",
+      "test:run"
+    ],
+    "exitCode": 0,
+    "seconds": 15.586132049560547,
+    "log": "/tmp/CLR7-20260912/full.txt",
+    "logSHA": "22ec5a1e4e18067023a2f43b0a1914bb965ef6dfb198ca31a2740686dc53f38c"
+  },
+  "typecheck": {
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "seconds": 0.3258240222930908,
+    "log": "/tmp/CLR7-20260912/typecheck.txt",
+    "logSHA": "aa4be02388eb4dc02f07cc494dfcd1925e67620c5247e8f967b7d954f36bba07"
+  },
+  "build": {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 0.5747411251068115,
+    "log": "/tmp/CLR7-20260912/build.txt",
+    "logSHA": "02ad2ea2ea535128372fcbeef6e72debbc34fd5f073d4b688df8c77729ba55bc"
+  },
+  "fullTests": 745,
+  "buildWarningKB": 910.36,
+  "hostFailure": "server.txt: listen EPERM; normal escalation server-r2 success. Not product failure."
+}

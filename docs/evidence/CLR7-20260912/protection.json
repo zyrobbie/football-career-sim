@@ -1,0 +1,18 @@
+{
+  "head": "e6202a8b5a53a9c60625db81674748e766d3aff6",
+  "package": "1.9.0",
+  "SAVE_DATA": "12/12",
+  "beforePath": "/tmp/CLR7-20260912/before.json",
+  "beforeSHA": "653e04591d62e928f6e2ac5e17dd1d50a3a31753050d05d2247c6d0c640df57e",
+  "protectedCount": 2679,
+  "changedExisting": [
+    "docs/50-strong-club-crests-replacement.md",
+    "src/components/__tests__/ClubCrest.test.ts",
+    "src/data/clubs/__tests__/clubCrests.test.ts",
+    "src/data/clubs/clubCrests.ts"
+  ],
+  "nonTargetManifestUnchanged": 128,
+  "sourceFrozenTargetDistEqual": 50,
+  "indexEmpty": true,
+  "productionScope": "50 SVG + manifest; 2 formal tests. No CSS/components/engine/store/data/migration/package edits."
+}

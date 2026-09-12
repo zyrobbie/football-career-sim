@@ -1,0 +1,1807 @@
+[
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-history.png",
+    "sha256": "403825011203a21c8dc8613afef2695d943a4cb191e5e23ab525c8ffa50ffa30",
+    "bytes": 109759
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-ledger.png",
+    "sha256": "0d39c340e7ba6db5254dfff48601a16e7f088a81d164409879c1c4ac9e04a8da",
+    "bytes": 190941
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-market-first.png",
+    "sha256": "df1ac4e724e00c4d5e94ea5532c65e68df4f2b57a391d34413988d47b3afe016",
+    "bytes": 145475
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-market-offers.png",
+    "sha256": "e21e0204355c8de48cebaa1b1c0e999fef5aa97a47d9d00abb73c17b63ff77f0",
+    "bytes": 146357
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-overview.png",
+    "sha256": "89f2aafc404c6b5f878f2c0cae6c95a393733da12f1e8926a2680ecf7e9ab77b",
+    "bytes": 155408
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-player.png",
+    "sha256": "df1f1d0da3752359c34e9ce4986ed0f98de95ee697afa16e3b37629d090711b3",
+    "bytes": 83659
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-retired-clubs-4.png",
+    "sha256": "2852d61a49f544bc64e730d6fdc5acaf11ded697168f48be3641fca5b918b601",
+    "bytes": 167447
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-retired-clubs-8.png",
+    "sha256": "f9b35cfe7bd5e5a3de47d07469bf8b1842104a857fa63521c0e628d4b15768b9",
+    "bytes": 155678
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-retired-clubs.png",
+    "sha256": "f7e1dbb98d046af56bb0ee980c7fed6fc309402e8dc07a0fc669643e7473f8c2",
+    "bytes": 157473
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/1280-retired-first.png",
+    "sha256": "390a53136b68c3d0f28e9645daa17a09600258717a73abe30bf139ceb70a11e2",
+    "bytes": 140396
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-history.png",
+    "sha256": "bedafbb236b10dd7f8ab5473dfb6eb4970ae1e35c1ec8bb5db58bd90dd3a85ea",
+    "bytes": 48680
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-ledger.png",
+    "sha256": "270c8b3c43471d566a248be24cc63377eb5762a8faf26815c293f72e164b28bb",
+    "bytes": 61783
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-market-first.png",
+    "sha256": "8cbf0b38f8d2b5488bef537d21f0b522183ae75701c9eeaf4629332b3d1ee351",
+    "bytes": 58952
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-market-offers.png",
+    "sha256": "440f5bd9ef8848ca3e5d87c18b299cb4147888ab57eb178d8ccb0ef6084e1b76",
+    "bytes": 68724
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-overview.png",
+    "sha256": "c2414c5d31e489adba50af5e48ba1746fdfea19ab60bc73daf5819c6ebd2d6d0",
+    "bytes": 62424
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-player.png",
+    "sha256": "9bb92f77e24d56fcf6dc2fd6dd6a147857c88066e97f3f89a5af773410357f34",
+    "bytes": 51428
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-retired-clubs-4.png",
+    "sha256": "6711f3f4b36eb40bfa6a17f12a921d7091aa3588013069cb76e2bc539b585aa6",
+    "bytes": 53112
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-retired-clubs-8.png",
+    "sha256": "00b4dc62974f3cd6e699d1579773f654a9837407b9f5b6e3b1a90385fd73acf2",
+    "bytes": 48853
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-retired-clubs.png",
+    "sha256": "219d89951ef5752978baf1823347ea291509908b8ccfb5004e520ee21f575abe",
+    "bytes": 54288
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/320-retired-first.png",
+    "sha256": "67397050d28758443e539903a0efc4eaf68608af2f4e8607ba817b3e86431aa4",
+    "bytes": 54833
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-export.png",
+    "sha256": "3ea42351838cbb5d0738983b6832bf271114f3f42a1d25d0e0c64bed315ddbd4",
+    "bytes": 1070444
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-history.png",
+    "sha256": "b834494273f73eba1b8cc8501cd292c5f659a1a97b8dc0d1890a6ceedfab1b33",
+    "bytes": 72673
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-ledger.png",
+    "sha256": "6608235a2445b4ac2f482ed4261293d38dc9adfeb7b3707c6ff6a28de32004d3",
+    "bytes": 95590
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-market-first.png",
+    "sha256": "2ec72597bc7e7dde0c9590fd3d37301dad4c9ddab555b922d81c284a1d470b7a",
+    "bytes": 98641
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-market-offers.png",
+    "sha256": "d4d504b586317df42d8c88a6e41d79da2538577d86e2b6616d4b1a68795f380f",
+    "bytes": 96580
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-overview.png",
+    "sha256": "a6c84051194bef2e243551a28e656da65dc34495a2c2c47fe65bb095cabfb835",
+    "bytes": 103410
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-player.png",
+    "sha256": "1c564488cd4486f74da70a11e024c8931d66eff31b4c8e1db1a3e598f35e00dc",
+    "bytes": 67234
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-preview.png",
+    "sha256": "eccd2d8341eede8d43d3fe4fa1ce33f6300cec75542d4c3196b694a5abecd079",
+    "bytes": 74282
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-retired-clubs-4.png",
+    "sha256": "caa0da81f9c95fef3c866ea0f20ab68f1ea7e3189a1286ae22305bb52aa62d0e",
+    "bytes": 77353
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-retired-clubs-8.png",
+    "sha256": "362e0227265665f7fc20400a3dc4ac59a0a062b011635efff245454a1fe77c5b",
+    "bytes": 74384
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-retired-clubs.png",
+    "sha256": "59dbd96ab68da924f592309c86d5a945a8776a44152a5e8b525f2989d89ec0b2",
+    "bytes": 85347
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/390-retired-first.png",
+    "sha256": "d421737b310a0117c763a7bf5c2ea925d415ee93e59738e77701cb332a6c0073",
+    "bytes": 83795
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg-boca.svg.png",
+    "sha256": "758327a3b962b3f4e16931bfcdf3b27224ddc932adea44285ff905e170d162b7",
+    "bytes": 40540
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg-river.svg.png",
+    "sha256": "ec48893a1d757c9ec86b400752a9f7c9bb9f148589838eda34c74def7f2fd357",
+    "bytes": 35499
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-argentinos-juniors.svg.png",
+    "sha256": "36acac0478b0a44387134b622a3595c7c2ec52496144eea102471d5656aaf261",
+    "bytes": 37127
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-estudiantes-de-la-plata.svg.png",
+    "sha256": "8e6df90c863c6044ba371adec2e676091cac33fb124d9afa3e33343cd60a3334",
+    "bytes": 43200
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-independiente.svg.png",
+    "sha256": "bcc5bfff20b0a23d1dc3ee255b76d0e7df382f4b3cf37633dd8c09e07fb3e93d",
+    "bytes": 40618
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-newell-s-old-boys.svg.png",
+    "sha256": "94a24662231d7545571c986d54001dd9ed9e5e12dd6454b54c1c8dc28dddb0b0",
+    "bytes": 39868
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-racing-club.svg.png",
+    "sha256": "a83b56afcc4eb5a09f6fbb4e54da98d07a84d0f08cc38e8fccd340a1fd042d46",
+    "bytes": 37169
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-rosario-central.svg.png",
+    "sha256": "6b9da74e8a5a0ec0392116496621594c3740260379252d6c6d16d93695bebaef",
+    "bytes": 40275
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-san-lorenzo.svg.png",
+    "sha256": "516cf93ccf58368123c36d2976103d99e14fc74af14f17b3a5e6f5fef5ae633f",
+    "bytes": 39558
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/arg1-velez-sarsfield.svg.png",
+    "sha256": "c072eb45b77f4b1735e865727a13264e0a4cfd13445c8df13e65a78da12186d0",
+    "bytes": 40235
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/input-provenance.json",
+    "sha256": "133af0ec50f43a887206dc6226d3044debbb2d0324d1efe444cac3ae8196bd24",
+    "bytes": 161754
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG/after/result.json",
+    "sha256": "0568ac317ee43aa5b8c871a7638adc3c00606f7b20441bc5f845b9c242cb143d",
+    "bytes": 3575864
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-command.json",
+    "sha256": "89d156b76ac18ed591fe693d5e48e934c817fdbe2f42e0bd4cbcffffa8d55bc0",
+    "bytes": 114
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-export-crop-0.png",
+    "sha256": "6b50406daa13ea4be05e48e052d46e2f3af46bb937ed2ff15ab475887678c971",
+    "bytes": 89663
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-export-crop-1.png",
+    "sha256": "a8153194e4ac6d0c0238ebf7cd64b10b7660a8496073a55312809ff63fe641b1",
+    "bytes": 76903
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-export-crop-2.png",
+    "sha256": "e76d4d4605f788a338f7b98992f75a31a5b2e896d465c443ce6d4974ca88cb7e",
+    "bytes": 55369
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-export-overlap.png",
+    "sha256": "a95dff588e3ae9e289d53ad2cc05180842f63231e04fa0b48aac4734b3e86045",
+    "bytes": 122152
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-mobile-review.png",
+    "sha256": "c39ff22666277835063a24b0115af0316f56600fb6f42156a195135d12bd4e3d",
+    "bytes": 322474
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-pages.txt",
+    "sha256": "177c295ea53c40e51a36f766ccfb072c22a732d08a3e2e71166aaa8e4799f718",
+    "bytes": 52
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-sources-0.png",
+    "sha256": "14799bef46c9f398ede6208cd9e10fe82a7b32d9c0e98e2c16cbd795299e3488",
+    "bytes": 107992
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-sources-4.png",
+    "sha256": "abe463176c26ae38cbbc90b699fb167618b9d57e3d6701032cb269b4a888ac8a",
+    "bytes": 114035
+  },
+  {
+    "path": "/tmp/CLR7-20260912/ARG-sources-8.png",
+    "sha256": "053b627f358a5b862a42834666471a2c2a872aa65cd3b183f7f9481155112af1",
+    "bytes": 61304
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-export.png",
+    "sha256": "bd98fa7541db6f1018e0b1744bd84eef1ec462ed72a9b89a7906a2a45eef80f7",
+    "bytes": 1160826
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-history.png",
+    "sha256": "23630e0c6535afe8b6a3ccee91d5c19401e0e6fa7518b2bb1cc3c7d2c1989254",
+    "bytes": 112112
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-ledger.png",
+    "sha256": "c2ed72704fd6b6e604476ad9014f9d75d0ba1ca6aad63117c2e8f91412a18604",
+    "bytes": 189318
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-market-first.png",
+    "sha256": "df1ac4e724e00c4d5e94ea5532c65e68df4f2b57a391d34413988d47b3afe016",
+    "bytes": 145475
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-market-offers.png",
+    "sha256": "d8e11febf5ba0a386ea5ec42fc698005fc1108588a34c1eee5f999ca84ef0697",
+    "bytes": 149317
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-overview.png",
+    "sha256": "5f4ac2314e8c3d9c852332512cd3ab9073797d0da6838f95806cca3e3c4d87ca",
+    "bytes": 158611
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-player.png",
+    "sha256": "a09be3e8141c90b459b6945a564e3a153e273b2553fa29b2359d9c828f08b20a",
+    "bytes": 86154
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-preview.png",
+    "sha256": "b5b6c0d6e0e219b4b0e20693f26546f2cb57a74a55fc57ce6e1c41ed6be26baa",
+    "bytes": 151324
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-retired-clubs-4.png",
+    "sha256": "1391f3d6a563bcc387ec01a65cdce5880d8c088979c339edbb86d01ed9fd24fa",
+    "bytes": 158019
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-retired-clubs.png",
+    "sha256": "0d8f1489ae62be674f3ecc38b19aa30af12b08c9b853c0c777eb9e7ae73fa8b0",
+    "bytes": 154253
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/1280-retired-first.png",
+    "sha256": "97101ee4f5df85454ee097dded816507742c03361e0028c32d65a54af9c4b588",
+    "bytes": 140320
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-history.png",
+    "sha256": "a904b18ea9342812c3160428412fded8027e249ce7880b01579b7196f5c80cab",
+    "bytes": 71442
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-ledger.png",
+    "sha256": "ec2b248b004c71fce7c48c3c7c183ae5e8360b9a910fdf9c22d58178f0a72d7c",
+    "bytes": 95836
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-market-first.png",
+    "sha256": "4637cbbccfe1caccb50dda3c7de069cfc897eebf107744eed879258ba787131f",
+    "bytes": 99517
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-market-offers.png",
+    "sha256": "aba103d42f7c3247271ae378bdacb93a88c7ea1ef16449f6b12981ff9cd6a305",
+    "bytes": 97719
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-overview.png",
+    "sha256": "8def0c939203af37c96ad90929769cbe8bc7560fb133fbb9c755ab87bb748f1f",
+    "bytes": 104752
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-player.png",
+    "sha256": "2456612ba5dad3a7667bd624c85fccc02fe68417b7b96474410d7d5a756ca5c8",
+    "bytes": 68942
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-retired-clubs-4.png",
+    "sha256": "19e3f900bb3513372e8a32f1eb68c2727562a381580b9291b4b5481fc8dc8d00",
+    "bytes": 77100
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-retired-clubs.png",
+    "sha256": "bd4150a0478123c6cc4d1060aa8603a796225ebcd286130a10f04d52f3e62015",
+    "bytes": 87497
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/390-retired-first.png",
+    "sha256": "7bf7becdf58df9c188189c8283f5d4829deb3a7f1ac1636006d7308776496a71",
+    "bytes": 83711
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/bel-anderlecht.svg.png",
+    "sha256": "0f4f005c28436020a6b9853a95760967f65473b1598d67ac9cbbe9c6452ff0ef",
+    "bytes": 40169
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/bel-club-brugge.svg.png",
+    "sha256": "7a6c32281987b598965194c5ffaa6c3cb3f7f8426d9e8f570295952207f108fb",
+    "bytes": 43183
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/bel1-antwerp.svg.png",
+    "sha256": "96e75c3763a8b6fdbed3d1dcb45396685533717e21728e7e0ac806ba14918f65",
+    "bytes": 38031
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/bel1-genk.svg.png",
+    "sha256": "e4b4f2cbdaa50a9812c56cb083bed185acd99ab476881ff06afb21eaae262901",
+    "bytes": 38195
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/bel1-gent.svg.png",
+    "sha256": "8f1c2f7bfb51aee744ed29cca8a3b99dd09d8489428586aca08bcf63eb6838d9",
+    "bytes": 41220
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/bel1-standard-liege.svg.png",
+    "sha256": "5e106e110e03c97ec32785e970b37fb10b82767f3cf1dcb25f7885f4a93866ed",
+    "bytes": 39058
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/bel1-union-saint-gilloise.svg.png",
+    "sha256": "f3c3bd31e66d401ff81dd249a064400c7100464d97d5349c2e5ecc8454cee5c6",
+    "bytes": 43501
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/input-provenance.json",
+    "sha256": "7c8819b9aa794f72058190aa2c16f07f45624db187cf3c3bc903c7d47b57f20b",
+    "bytes": 160802
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL/after/result.json",
+    "sha256": "4a6d11ff10186637a21acfff4e8018cd56288318bf1033bf7b979a947eca1b42",
+    "bytes": 2524284
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-command.json",
+    "sha256": "d3d3ff98e62046704cfb597d8958fc891a3ec95ccedc81eba870b886ed6eaf0a",
+    "bytes": 114
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-export-crop-0.png",
+    "sha256": "629df37d78f917097e35a6ab92427c56f93b58918b6daeadba184dbad6a0ebd7",
+    "bytes": 72410
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-export-crop-1.png",
+    "sha256": "a71c800538d8fff37cef267748df881098dad66f4b0253ca3c71b0ff6de8c48b",
+    "bytes": 87365
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-export-crop-2.png",
+    "sha256": "cc8199f84813bf08632e2dfb9624292e0581c7fbf5e4be1d78eb2263c7f34906",
+    "bytes": 52858
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-mobile-review.png",
+    "sha256": "9538c1e10519101d3f7d6fa3ea7c46b0cbcab4bd1d9f2bdfef149830f02f3636",
+    "bytes": 326500
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-pages.txt",
+    "sha256": "e74e067363e8cc7038061f635e9eb566adcbc8ec3000e8ad8acd2df4ab396f02",
+    "bytes": 35
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-sources-0.png",
+    "sha256": "7f277ed9db42e4439ad0dc77766527601170e3e555f37597f0e72348109c0219",
+    "bytes": 116681
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BEL-sources-4.png",
+    "sha256": "377b5e40767c13490e2ee7bb0f84c79b44be592f052ab28b38dd68bf1511e26d",
+    "bytes": 98578
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-export.png",
+    "sha256": "49b7e6b61626d81346b2245104ff358111d145ef4f389fff3bd82c5aa0c04ad3",
+    "bytes": 1280436
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-history.png",
+    "sha256": "48da82aceacc540dd6d5f5bd6b13ce1f4db069a73f9de7a078d593f055274526",
+    "bytes": 110931
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-ledger.png",
+    "sha256": "f9e0dc1536af74947319364abbeaca685577f7fb59443f8a70c44bc3927736cf",
+    "bytes": 191553
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-market-first.png",
+    "sha256": "df1ac4e724e00c4d5e94ea5532c65e68df4f2b57a391d34413988d47b3afe016",
+    "bytes": 145475
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-market-offers.png",
+    "sha256": "d7ce7cad33922f566ae38a0738a3000fda151e63b54e4aa64ca4a6242db9d855",
+    "bytes": 146456
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-overview.png",
+    "sha256": "4765261792b37d71d513e17fc5c1e3d70c3fa5ca7999a66f85ea896a27cf490e",
+    "bytes": 155829
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-player.png",
+    "sha256": "0438529a6c7b320a143a62fce1cbe03b44b34dd24267964f76f6a9fbfc30fb64",
+    "bytes": 84035
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-preview.png",
+    "sha256": "756de5f4acf5aceb9cbef3d175200ea591116656522b2bf220d276c27cc0dc04",
+    "bytes": 156668
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-retired-clubs-4.png",
+    "sha256": "97d98f9e4a62ef982870b89ce7cb58f12393617e36f78407c861631539ccd233",
+    "bytes": 161189
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-retired-clubs-8.png",
+    "sha256": "40f4b98272c0a655a933fd1dbb71419ebc3de88a4691089b217e5d2a4c746817",
+    "bytes": 145536
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-retired-clubs.png",
+    "sha256": "e360c62ee4a645afcf0782fd21d2d7ae4b722ff39351d1f51c0eaf6863f89d1d",
+    "bytes": 152859
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/1280-retired-first.png",
+    "sha256": "b517d936232e521ae1199839d7fc597566e819c8fd54a99bf9a1414a78f94cc9",
+    "bytes": 142477
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-history.png",
+    "sha256": "a87cc9300c73d3f70fe26bbd9494eb939ec350b2c3118aa6204b922e681133fa",
+    "bytes": 48834
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-ledger.png",
+    "sha256": "8df4cef1b482e36eebee440ad65fd6e35d8d72615c46320eb0dc95e3fdf42f02",
+    "bytes": 62038
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-market-first.png",
+    "sha256": "8cbf0b38f8d2b5488bef537d21f0b522183ae75701c9eeaf4629332b3d1ee351",
+    "bytes": 58952
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-market-offers.png",
+    "sha256": "e75775b5c7b0e15aa17fcd5e2ccfdeaae5e7d6c0ec77f5c8ee6e91e5771eaf5a",
+    "bytes": 68508
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-overview.png",
+    "sha256": "a682bd842d64644ed364a0c2e871e67aadf958f85100e7e93baeeaa42b8c8dab",
+    "bytes": 62238
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-player.png",
+    "sha256": "7ffba6c168961b3e52489146c3a41fac3d733ba7d3af7b85abbc4ef96834c2a7",
+    "bytes": 51634
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-retired-clubs-4.png",
+    "sha256": "b3c2cf43277c0df97c2646e4abdf08ed2ac8c0d46ac6598eaa1158808184e92d",
+    "bytes": 50744
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-retired-clubs-8.png",
+    "sha256": "2d34776f5e00e58a1c0b530ffdbd0cb7c30a2a1f931e835ec466f0cd133459a8",
+    "bytes": 46532
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-retired-clubs.png",
+    "sha256": "1f72c28b143a26d9b9c6bd1d1cd07903b3581efd4cc98d4bceb9904fd1a326e3",
+    "bytes": 53402
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/320-retired-first.png",
+    "sha256": "7cce2ab8f956f19301e74da3f1cc4104f23728af4ad1e2f8047ace7dfaa4b2be",
+    "bytes": 55832
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-history.png",
+    "sha256": "68137078ea550cf47bc6dca5e33bae52b8fd6a8e386eb1ae33b0b290340a5198",
+    "bytes": 73094
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-ledger.png",
+    "sha256": "1e15835d2a69bdeb0e2916e0bb4d7e0eb7fc8a49c9381d09d99e33d6f4e1ff59",
+    "bytes": 96053
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-market-first.png",
+    "sha256": "4d51f93cece2e0eea748f9e73d462b9e4186f9ac3a95a06ff2ba186626c234dd",
+    "bytes": 98441
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-market-offers.png",
+    "sha256": "64114e7c325294a66cb3f44672282505e603fae5203d5b06ae164899b350bd12",
+    "bytes": 96361
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-overview.png",
+    "sha256": "9fccc5276feb70d9657109e564db9402e0a81c94982a463a523874b6e3eb1843",
+    "bytes": 103422
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-player.png",
+    "sha256": "171b4372ac8cd1df5478f3bd2c0302fdb2660876a639beb7d7df0fe1d18885a3",
+    "bytes": 67471
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-retired-clubs-4.png",
+    "sha256": "2fc54acdc834aaebfdfb4ba998b433fec3b1f23eb570deb98fcd5c4a63fd7044",
+    "bytes": 74485
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-retired-clubs-8.png",
+    "sha256": "c793a348f05c1a5c732a67642ad9e05022e176f9d07bd4cebcd21b3d9ef0b6e4",
+    "bytes": 70842
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-retired-clubs.png",
+    "sha256": "15bd2c5183c5c4dc6afbe6ca713c804be614585967b77d6cac1b57feedbbf58c",
+    "bytes": 84754
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/390-retired-first.png",
+    "sha256": "b3f3bddcdb25b10e54576672c41ad1e3a437ab51d397100d63f47e1cfe7f8256",
+    "bytes": 82869
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra-flamengo.svg.png",
+    "sha256": "0aebb4425963fe3a0511ad5d36ff844e525d94c1286dad177fa609a849d3ce38",
+    "bytes": 43458
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra-palmeiras.svg.png",
+    "sha256": "5eba621b08a91e41181491eeb504c9d62155051051cd507a5ee127bf35ae15c9",
+    "bytes": 47758
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-atletico-mineiro.svg.png",
+    "sha256": "25404daa1a90f9f8333b9165574556f2dc63428d380f0de3dded3df21676fa02",
+    "bytes": 38448
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-botafogo.svg.png",
+    "sha256": "c09c935c7946d3f8649dd6d8c7987775b71bc50401442ee50b16d50d698424cc",
+    "bytes": 31896
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-corinthians.svg.png",
+    "sha256": "5beb5be74b49cca55b8f30db727cebfb1505fd203d26967f2dae62137a4475d0",
+    "bytes": 32691
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-cruzeiro.svg.png",
+    "sha256": "b8ffae1fbff521634b04a158dbc7a26751412323dda8218b958fdfc4341b6ae1",
+    "bytes": 34264
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-fluminense.svg.png",
+    "sha256": "6e1dd4ea05d0819ca56d1d12f16c192dc3eecc42d22ec525f695a6fb854c878b",
+    "bytes": 43003
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-gremio.svg.png",
+    "sha256": "06b50e6793042832b164769891ea29a65aefeb706b8ae161623d82447b334e01",
+    "bytes": 41210
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-internacional.svg.png",
+    "sha256": "ef5229bb64b6853ca0c405b0fca22bd05e862c3e03cb8b18c1bb130883ac4d44",
+    "bytes": 39381
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-santos.svg.png",
+    "sha256": "08859e58b704b666da8607f59fd1b5e36556c9f4472ecf7ca3e7a5a8c02f6ff2",
+    "bytes": 32918
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-sao-paulo.svg.png",
+    "sha256": "0799e242704bc42c2740ce8faa473a98bbd1011a74954b3bbf67c5efb7f3eda2",
+    "bytes": 37697
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/bra1-vasco-da-gama.svg.png",
+    "sha256": "396f16c90eb0225eb854caa62e14c0bed0cea3793c6e30e9623a466b5e2017ee",
+    "bytes": 39727
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/input-provenance.json",
+    "sha256": "cbea7c10da6640826f797f50edc79e45755723268bee14dde3d3a9483d4afcf8",
+    "bytes": 160986
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA/after/result.json",
+    "sha256": "6cdf0f076b64f4f9f8a56122008c028711fdcd815e2b0654b4bc6d645b16f132",
+    "bytes": 3578080
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-command.json",
+    "sha256": "fa1dc63ada99ece6bffdeaf4eb392b03e90ce7bc35acc1ca0d96e413b90a8fc2",
+    "bytes": 114
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-export-crop-0.png",
+    "sha256": "ac06cb80724b93f0a32d721d3b0e0073d8830e5ec140bb6c8acc3063a264b9bd",
+    "bytes": 80397
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-export-crop-1.png",
+    "sha256": "8529c7d2b48db39ac73e49023ed18138421c55c73e07b76d555f1337ce558bbb",
+    "bytes": 87751
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-export-crop-2.png",
+    "sha256": "aa61f7e06f3e002e03a83a324416b9e047ddaffc05d6c5b27fba5a24c5e04859",
+    "bytes": 63018
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-mobile-review.png",
+    "sha256": "b34adbc0fd8df6602a1d62f32c887418693913bd5742cd1830e90453210e035c",
+    "bytes": 322547
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-pages.txt",
+    "sha256": "177c295ea53c40e51a36f766ccfb072c22a732d08a3e2e71166aaa8e4799f718",
+    "bytes": 52
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-sources-0.png",
+    "sha256": "1e19363c2f14d2019cc98f1bb07a1f55aa15e308f5ff726828fb07b8214371a7",
+    "bytes": 114951
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-sources-4.png",
+    "sha256": "9cbf3f9636e877414d07e6fba3713232f3756409cd3fd95f6463be7c9a0adc01",
+    "bytes": 108752
+  },
+  {
+    "path": "/tmp/CLR7-20260912/BRA-sources-8.png",
+    "sha256": "917c91ed93ef26b894bac2a78d429e6a9f0f38d89191777cb6c52c34f1b952b0",
+    "bytes": 108715
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-history.png",
+    "sha256": "dd00fe3bd4043fc40e019ca94a54a9e6f9d56c07bf5547c7e2fd5da4194cae80",
+    "bytes": 110630
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-ledger.png",
+    "sha256": "4592ac3e927e947fa4c773559cd9088e23a0acc7d3d650374f79508f1a7a8009",
+    "bytes": 189789
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-market-first.png",
+    "sha256": "df1ac4e724e00c4d5e94ea5532c65e68df4f2b57a391d34413988d47b3afe016",
+    "bytes": 145475
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-market-offers.png",
+    "sha256": "573430639b48c6d11b84215f69c539d41e7585966ae36bdd609bb176997a5839",
+    "bytes": 147182
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-overview.png",
+    "sha256": "b335839464490735243aa1202630f2edcb87aaabe41c31488a7e469a4cd582d0",
+    "bytes": 155482
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-player.png",
+    "sha256": "e93490e546b7d242402adedcd277284acdbcb7e7929f73a0fbdbf936501cc415",
+    "bytes": 84166
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-retired-clubs-4.png",
+    "sha256": "447eb8dbaee6f9df3119fd57c777928c52018fe2ea04179ccb10920bf4b1ddb7",
+    "bytes": 154436
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-retired-clubs.png",
+    "sha256": "7c7410c8a341ec9d19b283e6311d3d42876067c8f397ff7e877fcbfcba635603",
+    "bytes": 150601
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/1280-retired-first.png",
+    "sha256": "7a057644dc801e71cd239e7dd0831248821e472424ede0b568da9903dfcb3271",
+    "bytes": 139647
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-export.png",
+    "sha256": "71ab32c14f77c34c4b6d3b5e235de9a4c1b3518822c35b6bbe8bf489d824a867",
+    "bytes": 988859
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-history.png",
+    "sha256": "b82740d8ab12edf58ab46be14dcd0b7984c17e4186d3fd457f93234696ae302f",
+    "bytes": 72387
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-ledger.png",
+    "sha256": "dafb6c2aba8bc198b3cb6c916f0e28b723d6f5d6245afc97974b1896743fb100",
+    "bytes": 93780
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-market-first.png",
+    "sha256": "a91d3a4f63bb1fd5730c378f78af18875654c8e45db394512d6b63c7ad377919",
+    "bytes": 98893
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-market-offers.png",
+    "sha256": "65a7cb1508f6c653838f659f4c52582f1c7b583249bf2f8c3e7586fbf98761a2",
+    "bytes": 96854
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-overview.png",
+    "sha256": "8248de5f715c9d3e8af9648bfb698751e1b49623c08f3b5a8c024bd10b803c60",
+    "bytes": 103439
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-player.png",
+    "sha256": "f8329e13f12d82c35500eb826dc4fee01ffa44343cc3406c176b5ae1c23c0e65",
+    "bytes": 67489
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-preview.png",
+    "sha256": "48611956ab16b30f095ea9c0f5291ad1542cd1b197c7126dfa051775ea356817",
+    "bytes": 71523
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-retired-clubs-4.png",
+    "sha256": "9de61841da32e06edda64281eef74025418b5396ca44adab8e6d323bf1113366",
+    "bytes": 75701
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-retired-clubs.png",
+    "sha256": "6450764eccb4c5493e10bfda3e9bf3c833e9ee3fdeb7110062578f75b241b73d",
+    "bytes": 85383
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/390-retired-first.png",
+    "sha256": "a65c4169335f2acb29d6d6aa1e8190f46105d9e13a9ae97aefd64a661638a53f",
+    "bytes": 82815
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/input-provenance.json",
+    "sha256": "7f34825b52fc55d9a83097cc995adbeac08545a3939b788b60acb374139409c5",
+    "bytes": 161696
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/jpn-urawa.svg.png",
+    "sha256": "96d5080f239eedef76da8277dd9972c832601a13b727d95f04c0d432836b475c",
+    "bytes": 37365
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/jpn-vissel.svg.png",
+    "sha256": "92a1ef6f522fbfdec7429fc89de23b097668315d5d940c6f49a0f19fb5420e00",
+    "bytes": 35844
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/jpn1-gamba-osaka.svg.png",
+    "sha256": "8ff680a0cb3794e9aab81e9c9fc1d95bdca97f304d1ad531d54d7e6ca96565a3",
+    "bytes": 41937
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/jpn1-kashima-antlers.svg.png",
+    "sha256": "44fc8ddb6de3f3624978a88af4cd0a75142a1da065f077bb1774bdbef57e8ed6",
+    "bytes": 41038
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/jpn1-kawasaki-frontale.svg.png",
+    "sha256": "664787a5b3a9a63d2bb5eceb6e07c66af5265a6150793402ecf3576f9ed27cff",
+    "bytes": 38351
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/jpn1-sanfrecce-hiroshima.svg.png",
+    "sha256": "7a8e30fc0b3456d1eebbe237f01529a0601a11e681f45aad61a1d30d7d62ffd9",
+    "bytes": 40534
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/jpn1-yokohama-f-marinos.svg.png",
+    "sha256": "6529b1e65d075abae379d4845f0c0b26f019fa9fa5778b5aee824ff4ecb0bab2",
+    "bytes": 40660
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN/after/result.json",
+    "sha256": "a2ea6cefd642f84379554442f0fdfcfe2b5f18fd0459e366a46f0aba59ed74c8",
+    "bytes": 2529187
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-command.json",
+    "sha256": "aee8a2e6e225a1022763eb85a1444a4d5ae447752e65a63e71f66a920d7dfec9",
+    "bytes": 114
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-export-crop-0.png",
+    "sha256": "4ac43fa5f0b47e65011877c02e50618566c6a423ee48fe1de4647df8410eba80",
+    "bytes": 73514
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-export-crop-1.png",
+    "sha256": "122626996dbb5c989e8dd957cec51423bcd6ea86e6e8c334dca55286684b1612",
+    "bytes": 71299
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-export-crop-2.png",
+    "sha256": "9706bfbe8e98085f3859a4b36b63697b6381af18778b3c250582ea7db97c2523",
+    "bytes": 51761
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-mobile-review.png",
+    "sha256": "a4525dbfff5e87f07758e65f42c12d8df89eab1b63e4c841ec1723ef3ef57953",
+    "bytes": 323248
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-pages.txt",
+    "sha256": "e74e067363e8cc7038061f635e9eb566adcbc8ec3000e8ad8acd2df4ab396f02",
+    "bytes": 35
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-sources-0.png",
+    "sha256": "f3891bb8716b9fd250c5a2eaf193f3ec72ba6475fd298bc29797d94883eb3a26",
+    "bytes": 105832
+  },
+  {
+    "path": "/tmp/CLR7-20260912/JPN-sources-4.png",
+    "sha256": "f199d251e59580474530407dfa036f8f8cb83fb51820789f5645fc52b75e6f79",
+    "bytes": 92917
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-export.png",
+    "sha256": "365d3f1e4ab4cbb9a9e486ed353bdb1485a4859c912ad5be9526da30ca82ec53",
+    "bytes": 1070506
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-history.png",
+    "sha256": "6d19fd9f105da3f7e43296ade967f9994c2a1e11e9377d06fdd6607f03ae8aea",
+    "bytes": 110094
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-ledger.png",
+    "sha256": "8fe80e57627877b1bf62ac2e78c3be543bfeb2f8ad055930080dc5e2f0185afb",
+    "bytes": 189390
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-market-first.png",
+    "sha256": "df1ac4e724e00c4d5e94ea5532c65e68df4f2b57a391d34413988d47b3afe016",
+    "bytes": 145475
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-market-offers.png",
+    "sha256": "5ecd1d6049287d8737a602bcca2faf1ded9271f03b69272cefb7b5aed1be4226",
+    "bytes": 146922
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-overview.png",
+    "sha256": "754a2650a176733999f40f0865f3548198bec77dd6a964420919d34422e6ca09",
+    "bytes": 155968
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-player.png",
+    "sha256": "5741370b077f7ad0b27920a81c299305d533635425f168dad002949b4b8e665b",
+    "bytes": 84234
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-preview.png",
+    "sha256": "e1e8eb5a773a369beeff3411e1d9c30fe71d84a7bf7645cc5aac65c7cf340a18",
+    "bytes": 139240
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-retired-clubs.png",
+    "sha256": "f465060cb11845052133797356f7c70d25e0872e1a5ee9bf3e2f325549568c84",
+    "bytes": 138941
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/1280-retired-first.png",
+    "sha256": "6004024f4a6c145b839b961c42c555827e91617cd713f454e99781c49116c6e1",
+    "bytes": 134953
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-history.png",
+    "sha256": "d070c79cb77d4bf0e4c0a4049405d5a066c44d9919bb0399a43910505f16bc2b",
+    "bytes": 71741
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-ledger.png",
+    "sha256": "5da637371e73898a69e3ed6920b20a7e26caec2192793d5ed74f541cf317237a",
+    "bytes": 95239
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-market-first.png",
+    "sha256": "2e44240b4307b672a23e63d0c6d25d6b02d05b8aca6b05314f4cd8af0821a54c",
+    "bytes": 98948
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-market-offers.png",
+    "sha256": "6234d3706403f8290a1d5526fbf4ed4aa051c49428689c1acc0534a695c9719a",
+    "bytes": 96895
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-overview.png",
+    "sha256": "5ecdc59a0d84015144a8ac23eb008d7a9f118d602062ef28d778555d0e9b1356",
+    "bytes": 103384
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-player.png",
+    "sha256": "258ccf635c6d2dc64dff6a9ca2471bc4c5b6ee7527c5c2021ed2685559d776fb",
+    "bytes": 67728
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-retired-clubs.png",
+    "sha256": "25e5e64f60e12f8d05dbc6c1c7d02937b260e18ab13c083214520e1c2129590b",
+    "bytes": 70390
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/390-retired-first.png",
+    "sha256": "d99a036faa17b46ac5431e29f6607f7af10b86e8fdf4ec602b20cc3625385447",
+    "bytes": 76295
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/input-provenance.json",
+    "sha256": "54736808868c67c4018b59846a572f8ebea675e3a9d44d2f40ad49d2ab39ea67",
+    "bytes": 161172
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/kor-jeonbuk-hyundai-motors.svg.png",
+    "sha256": "4e71573b6c792a6ab1a46b9c26835b0072b752b686242069bf2e29c04ded536b",
+    "bytes": 46803
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/kor1-fc-seoul.svg.png",
+    "sha256": "883cd244cf32f00a4562a6fa4abb96cd8bd8520a65c3f8c230cfc68e43ca1eb8",
+    "bytes": 44101
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/kor1-pohang-steelers.svg.png",
+    "sha256": "511df3fd6e15fb1303f71f6c65c4ebc212fa3d3fb46dc57049529f3f3f21528b",
+    "bytes": 36869
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/kor1-ulsan-hd.svg.png",
+    "sha256": "f8dbe8c76d1aa60e6110e440b4bb9a4b294009afe7a414dbb251adc86bed208d",
+    "bytes": 42273
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR/after/result.json",
+    "sha256": "4beebfd8a40dd44f6740115cd83ceacb46857757b38f83036f39abaac5256021",
+    "bytes": 2510793
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-command.json",
+    "sha256": "370c021fc6b4f1dff672b2a95b74c0d3dacee581f67186fb13bb7709ef05e4b7",
+    "bytes": 114
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-export-crop-0.png",
+    "sha256": "7b30949430e5a1a6ff2c516df7a4a9875721e4801702d0fb2c4a5a0b0eec5069",
+    "bytes": 51019
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-export-crop-1.png",
+    "sha256": "4e28d11d0191828aade9b35ee60277d2ddfdf20bf98543d92328d676ccf248a2",
+    "bytes": 74816
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-export-crop-2.png",
+    "sha256": "023c3b1b8c5875cb1c8b6f3db39ccfac295f3c04d74b55ea2c351b8e5284b81f",
+    "bytes": 53001
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-export-overlap.png",
+    "sha256": "c5ed40108caf033d5958bd945f94be6d208a04fc322df811d6cbbe02a92ee30b",
+    "bytes": 82176
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-mobile-review.png",
+    "sha256": "ba155f45e42c702a573f4352ce97548b961557ab71cb0983440721b845976fff",
+    "bytes": 313898
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-pages.txt",
+    "sha256": "e74e067363e8cc7038061f635e9eb566adcbc8ec3000e8ad8acd2df4ab396f02",
+    "bytes": 35
+  },
+  {
+    "path": "/tmp/CLR7-20260912/KOR-sources-0.png",
+    "sha256": "0e5ba75404c28e0b966dfb4beee1f7060aa205d7c1eb3a84e542de21a08d75cc",
+    "bytes": 125420
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-export.png",
+    "sha256": "a07247153ef1fd86adbcac749cdb29119382c6e07305d7296a932369ac1da24f",
+    "bytes": 1102944
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-history.png",
+    "sha256": "1d34fb920719cf58449b0bab28c47fdf5c2a13919e9c29c7097275685f4db5b7",
+    "bytes": 111356
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-ledger.png",
+    "sha256": "c57ee8639d9dec6fbe9f799f00ec9ebb18924647913a240134d44a5928e3fa45",
+    "bytes": 189363
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-market-first.png",
+    "sha256": "df1ac4e724e00c4d5e94ea5532c65e68df4f2b57a391d34413988d47b3afe016",
+    "bytes": 145475
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-market-offers.png",
+    "sha256": "94770512de510251138b7fb360c31b03d72e0f51787e2b17a938d9eb161197f1",
+    "bytes": 147439
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-overview.png",
+    "sha256": "782819a4f0fb1e0015f1cc6d85e4874438c3402169f9fb1145300d2800b2af45",
+    "bytes": 155588
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-player.png",
+    "sha256": "1536e8d110a431f78718df8e0e7b16605649c3f26b0d8cc3762fce3e074ba3ea",
+    "bytes": 84148
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-preview.png",
+    "sha256": "667107fecc74b06c901d1b29aa75bafd14b14ae572e68e370153d8ecf8fe3042",
+    "bytes": 145358
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-retired-clubs-4.png",
+    "sha256": "cd1d0553dbd3e55e96d629b9bd2e4abf84f079e17d59786bb887cf4f1c8a9dfb",
+    "bytes": 145874
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-retired-clubs.png",
+    "sha256": "2f51cc96e3b33721d07485f5a585dcdf3f1d8b1446a8a0c1aaaa9137754d3e10",
+    "bytes": 144965
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/1280-retired-first.png",
+    "sha256": "5caabece3b073bce39aadb29219dd3cbeb5c2e9592664aa294e5c9bd75faea99",
+    "bytes": 134979
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-history.png",
+    "sha256": "b17c4f594e4f418630e0d08b759af5ed45a1ffbda261ecf75884cde22baac7ee",
+    "bytes": 72056
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-ledger.png",
+    "sha256": "4e0720ab67d65d411066e38cb4db24e6f91dfb1c047514d32426c9c44937e040",
+    "bytes": 94528
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-market-first.png",
+    "sha256": "68c22abce503478e1fb57a1e32adc6e6cad5f44c629d20497f0b04328a1795cd",
+    "bytes": 99070
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-market-offers.png",
+    "sha256": "e5dbbb1ba2affac9cf762cf734eb29fa55e17948e67cfe4736a6a12566d0f530",
+    "bytes": 96955
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-overview.png",
+    "sha256": "c8ae734ad5e8dad31e45c5953c4cdfdb7e052799b18aca516dfc9c5a0671ee85",
+    "bytes": 103763
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-player.png",
+    "sha256": "1e85d0dc69877b468673c342c4e7fc9f96bbae9c0a043266abce9747127ee8fc",
+    "bytes": 67531
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-retired-clubs-4.png",
+    "sha256": "e3e90b733becb5c3c3e93557f788b0cafbb14e957fddeee676914baaefe0a4a6",
+    "bytes": 73273
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-retired-clubs.png",
+    "sha256": "72827844a5e7d0f8dee0663437ce93903417f0c4bc6a780518b8f3d14362f864",
+    "bytes": 78834
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/390-retired-first.png",
+    "sha256": "e050ee964dc0e03b88018e5cc47cc92dc8cc4f8b7d922e5318812f190e97bf03",
+    "bytes": 80853
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/input-provenance.json",
+    "sha256": "0ff8955402bce0a81e2fd0f148efed92d5e15c80881b074f302bcc68d811cdfb",
+    "bytes": 159990
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/ned-ajax.svg.png",
+    "sha256": "0823beb9edd6c41b94970f86aa35f2cf7be30a910d6337331e4c41e2c7afadb3",
+    "bytes": 39768
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/ned-feyenoord.svg.png",
+    "sha256": "ae56d4ffbf02b2866433a21b41a4fdb5b4dc0d9f1b05241541975683d1566ea6",
+    "bytes": 38512
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/ned1-az-alkmaar.svg.png",
+    "sha256": "a03b2832c6f85b8f237b17437080f8a8ec4ba125ad7acf9a9286969ef6ae19ec",
+    "bytes": 37339
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/ned1-fc-twente.svg.png",
+    "sha256": "3441c0ee92d889a45acf18bd8f51dfba703ff33dc4fd4d5f833d1ba00c7a1571",
+    "bytes": 39785
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/ned1-psv-eindhoven.svg.png",
+    "sha256": "c791d43feeeafcac206797f87e56033ea7f03ab6dd004d33b90e9c2783db2fac",
+    "bytes": 37383
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED/after/result.json",
+    "sha256": "bfb97cd0cd18b2be073c49ca63c6053c7598c290c94734b634ab124e1a10f192",
+    "bytes": 2504704
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED-export-crop-0.png",
+    "sha256": "467e4750c714ed363c9ca82d6894c6bd24f7b446327d8099ceb00290a9c78ae4",
+    "bytes": 61902
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED-export-crop-1.png",
+    "sha256": "5af0c201e58adb7808e15717a1eff140030ba63c89d3cecd775d6a9622da4b7f",
+    "bytes": 75898
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED-export-crop-2.png",
+    "sha256": "e004e522eebfc0fc02cf80faaba17aa8927b78d9ae2914ad9cc4b2dd46c029e2",
+    "bytes": 52975
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED-mobile-review.png",
+    "sha256": "7d857bcf429fd4d4d8af90e07e7a45226094aec78d8454ea464ee7ac3387463a",
+    "bytes": 319969
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED-pages.txt",
+    "sha256": "e74e067363e8cc7038061f635e9eb566adcbc8ec3000e8ad8acd2df4ab396f02",
+    "bytes": 35
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED-sources-0.png",
+    "sha256": "e2246a72949efaf9ad1c3d07e9e7f6841070c4e1b6a9b5e1d70faf9b63aac90e",
+    "bytes": 106451
+  },
+  {
+    "path": "/tmp/CLR7-20260912/NED-sources-4.png",
+    "sha256": "85f8d396880a71ac6b401ed67090c49cef39938d96b849d9760a98e3aa9cd70a",
+    "bytes": 36423
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-history.png",
+    "sha256": "a4e65c3acac48642806cca96d0a713136923acd87f6b409acf5f4bcc7bce8153",
+    "bytes": 110177
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-ledger.png",
+    "sha256": "5e15ecc87c86a9327983ba0096e46d5cdcb9054e92659b38cab85e2c93ec6332",
+    "bytes": 188573
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-market-first.png",
+    "sha256": "df1ac4e724e00c4d5e94ea5532c65e68df4f2b57a391d34413988d47b3afe016",
+    "bytes": 145475
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-market-offers.png",
+    "sha256": "f4fb7f39dcb7220e806e999ecbaf4b90777c11eb49caca0865803d0c066c4e7a",
+    "bytes": 146282
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-overview.png",
+    "sha256": "e2283af620529beefac2233c28e11e22b4415fbffe2ff548393da827dc465eaf",
+    "bytes": 153998
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-player.png",
+    "sha256": "498caf45eba125021ca23a4941efd2f9b437d7b3b983b4bac5450a7284784ac9",
+    "bytes": 83007
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-retired-clubs-4.png",
+    "sha256": "4a04a2a6076155a1464e5f7342e65914ef977239dbb5440c68ec005b3ec8a99d",
+    "bytes": 146992
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-retired-clubs.png",
+    "sha256": "0058466b7720aa7796e17d8fd264d1106d6d6fcb93aa7800a1809bcb0774cb50",
+    "bytes": 145878
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/1280-retired-first.png",
+    "sha256": "8dd062e1b750f8ec2ea0d6318d0050db3d673d563d8c1945105c707d30394cd0",
+    "bytes": 134987
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-export.png",
+    "sha256": "caf6c5a618ab4ed7fd995477233a799be458baccd8376126d1c6e8a554c52358",
+    "bytes": 953516
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-history.png",
+    "sha256": "e3ef64769a274e9d7f0ec2f795138e41d805a292d0e2df4703e8a8066eb29ec5",
+    "bytes": 71917
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-ledger.png",
+    "sha256": "acdffae4968f37a3af4e70c9b3dba18a660fc3f43e81c6947ad312de1d39ca78",
+    "bytes": 93817
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-market-first.png",
+    "sha256": "c3cefb6a48457e2c3c7c8bc70054464793b33593f7407b683b72c8f994859b83",
+    "bytes": 98957
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-market-offers.png",
+    "sha256": "6a63804f5ba55e1bc4019f1fe79c098fbd1c7159d360069ff00cf9514218c9fc",
+    "bytes": 96724
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-overview.png",
+    "sha256": "03ec8c1ea151a720a14693bfe9f9bf30cc74340fb987bda99b27bdda596a1b7f",
+    "bytes": 102790
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-player.png",
+    "sha256": "9c2bc62acd5dea014bbd0e2a1c587aaf355ca530d52ccd49c309a0158aa6810b",
+    "bytes": 66716
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-preview.png",
+    "sha256": "fa77d6e1145ba6a23506dd20c3919ece9b75641d83108384e24dddf11f2f2a89",
+    "bytes": 69725
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-retired-clubs-4.png",
+    "sha256": "e2abe7315f6100b0e7da1217d81d4cb6aaab1e43166130c19daa9b140cc8f1de",
+    "bytes": 73925
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-retired-clubs.png",
+    "sha256": "72b270c0dffd029dff37ad079ab8f477e9943ae6fa7c5be83e58053a64b0ba95",
+    "bytes": 79367
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/390-retired-first.png",
+    "sha256": "28a4225d178d9ec0f41a52c9e3570946cd2da7139febee06dc19b46d96c7b3d4",
+    "bytes": 81305
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/input-provenance.json",
+    "sha256": "1ef03de77a525a0cbf35c2a4470f8b8f8fa7d3dfb21d31a8ee0c3b7b8f9f4752",
+    "bytes": 160584
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/por-benfica.svg.png",
+    "sha256": "c4aa4ee310eb5317a66404e28cc76954c8032d129413b1711c11cad6a5c382d7",
+    "bytes": 41432
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/por-porto.svg.png",
+    "sha256": "5c29150b231ec6a7d7a2b3d3c6111e0d513e6acc185425875525f79a16f97ce8",
+    "bytes": 41250
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/por1-braga.svg.png",
+    "sha256": "67f32d5c5a5174ac5e90fb1b3524146675c2e3b2995f3c7da3012e70473cdb42",
+    "bytes": 34288
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/por1-sporting-cp.svg.png",
+    "sha256": "7d9b66fc902ded61718c6b7847eb3178e2393ce032b4c641bb2db0a86476a101",
+    "bytes": 43508
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/por1-vitoria-guimaraes.svg.png",
+    "sha256": "6e60764d16afcb4866382a4d6a09782f871ea980610eeab679009c7641a07703",
+    "bytes": 36783
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR/after/result.json",
+    "sha256": "697a223baf56f2444fc2d89c897796a5b1ad0ff7587c553bd82ac2a4eb0a689c",
+    "bytes": 2510219
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-command.json",
+    "sha256": "2dda9b9c94ca05962aba8eac523cb8d88d0a0b7d846c7c08d4a4171630402c04",
+    "bytes": 113
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-export-crop-0.png",
+    "sha256": "3f8b511ce5c7614e7b177ed29fcfde727f50f7eb6f4db11f16fdb1a1e76e4ad0",
+    "bytes": 65893
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-export-crop-1.png",
+    "sha256": "a443e3e524471c71243aa41327e25569d565d434e0cd16b33435dd1ff04a672d",
+    "bytes": 70102
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-export-crop-2.png",
+    "sha256": "5342ad4289e2be55507e14e50a40cd1220c6f693aa2c7d6df8ef37faef1461bf",
+    "bytes": 51498
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-mobile-review.png",
+    "sha256": "99bb4da30ad243a9da7fbc6d8ba3d236fa0ae1624a53f5aed9d888a291b75463",
+    "bytes": 319167
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-pages.txt",
+    "sha256": "e74e067363e8cc7038061f635e9eb566adcbc8ec3000e8ad8acd2df4ab396f02",
+    "bytes": 35
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-sources-0.png",
+    "sha256": "767d54271871d9f0d2a613ed8f9b697ab78a89eb95c92ea546a4d824d6239cb8",
+    "bytes": 115504
+  },
+  {
+    "path": "/tmp/CLR7-20260912/POR-sources-4.png",
+    "sha256": "0f9b9baa0e48f88e1f5abbca301bc051858fa41ba0cc0ae4b5b2c4beeaf860a7",
+    "bytes": 35611
+  },
+  {
+    "path": "/tmp/CLR7-20260912/before.json",
+    "sha256": "653e04591d62e928f6e2ac5e17dd1d50a3a31753050d05d2247c6d0c640df57e",
+    "bytes": 350233
+  },
+  {
+    "path": "/tmp/CLR7-20260912/build-command.json",
+    "sha256": "fd832523b6059780743364dbafa5247adbcbee743acf90544aa140232dd1b38b",
+    "bytes": 106
+  },
+  {
+    "path": "/tmp/CLR7-20260912/build.txt",
+    "sha256": "02ad2ea2ea535128372fcbeef6e72debbc34fd5f073d4b688df8c77729ba55bc",
+    "bytes": 857
+  },
+  {
+    "path": "/tmp/CLR7-20260912/case-plan.json",
+    "sha256": "e1c5191cc0d4d5c7b698257489ea754e2ad133ab5ebf1fbef0abe89bb99483a7",
+    "bytes": 742
+  },
+  {
+    "path": "/tmp/CLR7-20260912/clubCrests.before.ts.txt",
+    "sha256": "897da2093f79add2a81fb5eb7d093842d782786bcbad5057a88c3ff2d3540b30",
+    "bytes": 56837
+  },
+  {
+    "path": "/tmp/CLR7-20260912/commands.py",
+    "sha256": "4929696b028f3a796691ce5c68cf157c9e751ccd9caf36af3400c0acd88ad369",
+    "bytes": 511
+  },
+  {
+    "path": "/tmp/CLR7-20260912/fallback/fallback.json",
+    "sha256": "1332db9535f0dbf19a62736d210240cf2fa0fb0060fb468d497278028d832425",
+    "bytes": 487
+  },
+  {
+    "path": "/tmp/CLR7-20260912/fallback/fallback.png",
+    "sha256": "401ce077b0d83a933ccdf37758e5467ed3fbfdd9ac7978d174b6f50f8a0e55dc",
+    "bytes": 13818
+  },
+  {
+    "path": "/tmp/CLR7-20260912/fallback/observed-react-module-urls.json",
+    "sha256": "7592ddc37aab95c6fd25ecd9f44077e51318ebc74482ea10fc864c3f005e2b7e",
+    "bytes": 155
+  },
+  {
+    "path": "/tmp/CLR7-20260912/fallback/results.json",
+    "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "bytes": 2
+  },
+  {
+    "path": "/tmp/CLR7-20260912/fallback.cjs",
+    "sha256": "f4df77f1526c6fa89e9d385e950e9643b0b5c2019296a17435e90937e95ba819",
+    "bytes": 4782
+  },
+  {
+    "path": "/tmp/CLR7-20260912/fallback.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  {
+    "path": "/tmp/CLR7-20260912/finish.py",
+    "sha256": "6496dac1128637730cd317528896b4e8c3a1de62061c031117b3e160319f2d2c",
+    "bytes": 5987
+  },
+  {
+    "path": "/tmp/CLR7-20260912/freeze.py",
+    "sha256": "6809cb37c9715de66b38b220eb0b071b74e9d79cf07b957d6624e3c8fa916d18",
+    "bytes": 3609
+  },
+  {
+    "path": "/tmp/CLR7-20260912/full-command.json",
+    "sha256": "115848992673891f69d742dd9259ba9fa696778b271c560aea1cc4b7d49feaa1",
+    "bytes": 109
+  },
+  {
+    "path": "/tmp/CLR7-20260912/full.txt",
+    "sha256": "22ec5a1e4e18067023a2f43b0a1914bb965ef6dfb198ca31a2740686dc53f38c",
+    "bytes": 286
+  },
+  {
+    "path": "/tmp/CLR7-20260912/integrate.py",
+    "sha256": "7bd38349d6dfdcec7c6985c7f2aa5d07df5e084b62b43b42f95735fac0cf834d",
+    "bytes": 3793
+  },
+  {
+    "path": "/tmp/CLR7-20260912/make-pages.py",
+    "sha256": "08f0589eae6be593fce592f1793c3d0d254c882bd5de2becc53de84a62d3f47a",
+    "bytes": 2770
+  },
+  {
+    "path": "/tmp/CLR7-20260912/page-sheets.cjs",
+    "sha256": "532c4395441b6ca313bc184f397e84d147006a047a624cb9b3e59da78f5aadb2",
+    "bytes": 650
+  },
+  {
+    "path": "/tmp/CLR7-20260912/pages.cjs",
+    "sha256": "54f6f72f69b37b580e7c3490bfbd63bf1b16ae65f3742dcefecd93da21eaf18d",
+    "bytes": 10093
+  },
+  {
+    "path": "/tmp/CLR7-20260912/review-image-index.json",
+    "sha256": "fc59aa9454329322544f08fa121e1341ed1153150823e3c7a15cb2c930d8be53",
+    "bytes": 8218
+  },
+  {
+    "path": "/tmp/CLR7-20260912/review-images.cjs",
+    "sha256": "43a07aa7b1408ebfe8be6383351a188ab9e261612b91295b607db22613b9cc44",
+    "bytes": 1481
+  },
+  {
+    "path": "/tmp/CLR7-20260912/run-pages.py",
+    "sha256": "1ea7570f6df0248fa33cb36b9fa7f8a84ce9327d9eaa21e500c32b7d5cd4188d",
+    "bytes": 489
+  },
+  {
+    "path": "/tmp/CLR7-20260912/server.txt",
+    "sha256": "ebff002b568b2274c3703152e2b4ea4f2d5802b163c5e4bb6d94d4c960c0e256",
+    "bytes": 480
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg-boca.svg",
+    "sha256": "3be8377ad1412ae5496e527f84695dfbe3d9ca404bdc45839c1a2114e50214e4",
+    "bytes": 7643
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg-river.svg",
+    "sha256": "fbb0c9ce08beeefe78c654cebdb9f26879f3e95bed04c13309eef25c5bc75a51",
+    "bytes": 4549
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-argentinos-juniors.svg",
+    "sha256": "dd2b348f6e2ad7b2c00e72194e249091d4da3709b800d734dcd3d52ebd38bbfe",
+    "bytes": 5294
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-estudiantes-de-la-plata.svg",
+    "sha256": "f42b348f662fc695b84c265b5770fc0fa25e79afb083b055e8acef593c249010",
+    "bytes": 10060
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-independiente.svg",
+    "sha256": "1ff98459f20e378994dcb0040ddfd8fb7ad81ae6b62cf086c6b57e7df5f2e1ab",
+    "bytes": 8171
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-newell-s-old-boys.svg",
+    "sha256": "62c83793277566655875dd0c84b35f4d54df1fdac6c663b8f49eafbea74cfffe",
+    "bytes": 4466
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-racing-club.svg",
+    "sha256": "f562afda12ce8ee63dbbb46a64eae3bba712747280a7bca7952521727110b62a",
+    "bytes": 5463
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-rosario-central.svg",
+    "sha256": "1709e9bcc39f9ed4ac147fcad7b135523b22779bf9fdf6b27e04719126e66c3d",
+    "bytes": 7698
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-san-lorenzo.svg",
+    "sha256": "b12382a7a03d967e74edcb3728e79c2057497ddcbc8c5fd507ac7dc9243b5502",
+    "bytes": 7062
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/ARG/arg1-velez-sarsfield.svg",
+    "sha256": "705b34f2ec615b81063a3255c035944f9fa782c02e90f45d861ee78e5b142585",
+    "bytes": 4079
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BEL/bel-anderlecht.svg",
+    "sha256": "589ddae1591b5cde7fa23eb101be887fa9e63e3f74f9f02f27013f2c7d2aedc9",
+    "bytes": 8072
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BEL/bel-club-brugge.svg",
+    "sha256": "e28f05c80223a1846ff84328cffa9041fc0469f024c1d573e83cbbb800b57dae",
+    "bytes": 11766
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BEL/bel1-antwerp.svg",
+    "sha256": "c73cd86a09a1b9d5928b2e17b283b33581dbc762257230cf1945137c822e2d4c",
+    "bytes": 7159
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BEL/bel1-genk.svg",
+    "sha256": "d7035f29ed757e9228f978dde8dee29595522506bb453dce1395b4c2736bfada",
+    "bytes": 2955
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BEL/bel1-gent.svg",
+    "sha256": "d9af521b80cb35ea88f30a127e9dfdfc4047aff915cc287603a004c2d9a61650",
+    "bytes": 13196
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BEL/bel1-standard-liege.svg",
+    "sha256": "7315a1f64a1790ca84a9df03f86d8c1dd741dc274e52643355fbb1a5ffe84659",
+    "bytes": 8958
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BEL/bel1-union-saint-gilloise.svg",
+    "sha256": "6d544901c1e6255101d413e0c575db6d307bdcbcad086b5176d5cd267ca53379",
+    "bytes": 12753
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra-flamengo.svg",
+    "sha256": "1e577d33bcc7009b2cd442fb884cc2f59ecd2616ffe8d03de133f9f23a05ea5a",
+    "bytes": 10428
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra-palmeiras.svg",
+    "sha256": "4b9bb41896a7f6ea5b3cf73791d91e14a796564982dfee7482728298bcbe9ff8",
+    "bytes": 12815
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-atletico-mineiro.svg",
+    "sha256": "d531c8905f84126672b1e461dc6666e1b1f600170cdb3821487cae9fcbacf84b",
+    "bytes": 18935
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-botafogo.svg",
+    "sha256": "6ae3747cf827e5611b6c8322afe838d76c95cbb38d1ec65eb33bd99979ae5be8",
+    "bytes": 14511
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-corinthians.svg",
+    "sha256": "728c6d6ace7f06f74854b6cdf53ebc94ce9990e0787bef088dba82e77f2d2850",
+    "bytes": 11563
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-cruzeiro.svg",
+    "sha256": "fd495f67aa1873d700ac21bc5d637d8b68cffd4754163f4a2c27ef89e8579fc5",
+    "bytes": 2792
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-fluminense.svg",
+    "sha256": "3338316dcff4693d09b52251177ab845b3d8c3970e2c498da7e4a6dd92d065e0",
+    "bytes": 8640
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-gremio.svg",
+    "sha256": "dbbc9fcd5dcf32b49e21082d9f4f1abc8e6da11478b9354b0fa75ce5f9ff7771",
+    "bytes": 8613
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-internacional.svg",
+    "sha256": "c3f8462823ba448dbfe1835d7e1aa7494bd543931ae559b996359705ae1828bb",
+    "bytes": 7310
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-santos.svg",
+    "sha256": "08f8bfeef5d8ca7a95b8ccf84de7e46a384db87dd4793c4ea2e6f81fc76a2dd4",
+    "bytes": 12682
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-sao-paulo.svg",
+    "sha256": "23f1774acd28552476066e04e9ea704328e54cbc25cb7651772dd0b976069786",
+    "bytes": 2787
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/BRA/bra1-vasco-da-gama.svg",
+    "sha256": "1622c60814cf9f186b291b971f4f90e16e14db48c8bf22e5c1c0145e22b8a595",
+    "bytes": 31135
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/JPN/jpn-urawa.svg",
+    "sha256": "b55cbb3015552b6ac6cdfd7fe547afc80248f079493cee00b75fcc8448b1457e",
+    "bytes": 3810
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/JPN/jpn-vissel.svg",
+    "sha256": "9e5235ab334bc7d277279fb08d990b5a0fd84ffdefd6e063916b3a287dd21054",
+    "bytes": 5295
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/JPN/jpn1-gamba-osaka.svg",
+    "sha256": "27834bf7805845844b58b038d42fe6b07da40b6f810e33b05754e4efc03f513d",
+    "bytes": 3788
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/JPN/jpn1-kashima-antlers.svg",
+    "sha256": "11f85b01dc43229f6658647ce89356da726e455258a0a13a2a352030d5d4aab8",
+    "bytes": 4994
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/JPN/jpn1-kawasaki-frontale.svg",
+    "sha256": "e58d007bc39fa91846bef7763a8ea02ab8a6a800607885e79450c0b7e6060517",
+    "bytes": 4352
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/JPN/jpn1-sanfrecce-hiroshima.svg",
+    "sha256": "11483ead1f2e6b2cc7689269c1376d30ab99d14215b56dc233c1b7d6d917dc41",
+    "bytes": 2623
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/JPN/jpn1-yokohama-f-marinos.svg",
+    "sha256": "811c3a554bcce98346e525c494e0bc58ea9b624364d10a95833dadb96dcdfef1",
+    "bytes": 5430
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/KOR/kor-jeonbuk-hyundai-motors.svg",
+    "sha256": "b3e95901db7fd8616ce3ff7796faa5af87b55bf985e5bd9190721b568e7189ad",
+    "bytes": 16002
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/KOR/kor1-fc-seoul.svg",
+    "sha256": "486150cdc191ce75bc14798b64e7097fec86fee3eeede78314a9aad84d971feb",
+    "bytes": 10566
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/KOR/kor1-pohang-steelers.svg",
+    "sha256": "7d7d1e5b14b43126490beb90d7c976edfee3d9d2ba3828450a2f5202dc8653eb",
+    "bytes": 6008
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/KOR/kor1-ulsan-hd.svg",
+    "sha256": "0f5bd6b24b002b7d9434ad4902d9f3a5803803465349bdd17835e5fd0091afe0",
+    "bytes": 8906
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/NED/ned-ajax.svg",
+    "sha256": "5919545bfbd848375f89cb0b38db62bdce88fa93fb75936d71197a15ea0846d4",
+    "bytes": 8365
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/NED/ned-feyenoord.svg",
+    "sha256": "2fc8441047bd8b71440e073bc38ee9f7e17d2595f7e5e7c187926380af95b8fc",
+    "bytes": 4897
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/NED/ned1-az-alkmaar.svg",
+    "sha256": "5a7c3735b10de1b413a7780838e9e2339769265a84435f356990ac5011cf2f02",
+    "bytes": 5298
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/NED/ned1-fc-twente.svg",
+    "sha256": "0d8cc681dae6f3a019a2e94dbed6e2682124d614e01c6d1f4470244c6733d3cd",
+    "bytes": 10566
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/NED/ned1-psv-eindhoven.svg",
+    "sha256": "920951819ced1856a9d288959d89b947a0ff5bf3d58bb410810d13e8211f6b3c",
+    "bytes": 5728
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/POR/por-benfica.svg",
+    "sha256": "465dfe710e0dff8ea2769ace804320c0a9d5ad3582247e519b9884bf19ab4b2f",
+    "bytes": 8257
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/POR/por-porto.svg",
+    "sha256": "c7379069792debcdde9a1e0dd508edc99dfa6aa692997f5495dc701a30dbdf4f",
+    "bytes": 7878
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/POR/por1-braga.svg",
+    "sha256": "4976a0edd972ea2912a4025e839bab1bfcc10f7014a2a0923fc3e4ee6256ffa1",
+    "bytes": 7372
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/POR/por1-sporting-cp.svg",
+    "sha256": "f968055350eb10d4ebfe6537422f43fabe9c0a5fd7b325e06371c3b7626b5cab",
+    "bytes": 12224
+  },
+  {
+    "path": "/tmp/CLR7-20260912/sources/POR/por1-vitoria-guimaraes.svg",
+    "sha256": "c466ef4e692dfb9e69e7233097b603ebe05f730eaaac2bc132497f77b226445d",
+    "bytes": 4540
+  },
+  {
+    "path": "/tmp/CLR7-20260912/targeted.txt",
+    "sha256": "68087e6e834e329356d025a944f331fdf76f1427732354d038b816e708f5e423",
+    "bytes": 415
+  },
+  {
+    "path": "/tmp/CLR7-20260912/typecheck-command.json",
+    "sha256": "236fbbb28f71a4563b29449912d9a2c7df8477c43789f2a56427d0c660391dce",
+    "bytes": 110
+  },
+  {
+    "path": "/tmp/CLR7-20260912/typecheck.txt",
+    "sha256": "aa4be02388eb4dc02f07cc494dfcd1925e67620c5247e8f967b7d954f36bba07",
+    "bytes": 64
+  }
+]

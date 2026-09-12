@@ -10,11 +10,11 @@ describe('club crest presentation fallback', () => {
     const cards = [
       resolveClubCrestPresentation({ clubId: 'cn_shanghai_donggang', shortMark: '沪' }),
       resolveClubCrestPresentation({ clubId: 'ita_inter', shortMark: '国' }),
-      resolveClubCrestPresentation({ clubId: 'ned_ajax', shortMark: '阿' }),
+      resolveClubCrestPresentation({ clubId: 'ned1_utrecht', shortMark: '乌' }),
     ]
 
     expect(cards.map((card) => card.assetPath !== null)).toEqual([true, true, false])
-    expect(cards.map((card) => card.fallbackShortMark)).toEqual(['沪', '国', '阿'])
+    expect(cards.map((card) => card.fallbackShortMark)).toEqual(['沪', '国', '乌'])
   })
 
   it('uses the same resolved resource for repeated career spells', () => {
@@ -80,7 +80,7 @@ describe('club crest presentation fallback', () => {
       assetPath: expect.stringMatching(/assets\/clubs\/crests\/ita-inter\.svg$/),
       fallbackShortMark: '国',
     })
-    expect(resolveClubCrestPresentation({ clubId: 'ned_ajax', shortMark: '阿' }))
-      .toEqual({ assetPath: null, fallbackShortMark: '阿' })
+    expect(resolveClubCrestPresentation({ clubId: 'ned1_utrecht', shortMark: '乌' }))
+      .toEqual({ assetPath: null, fallbackShortMark: '乌' })
   })
 })

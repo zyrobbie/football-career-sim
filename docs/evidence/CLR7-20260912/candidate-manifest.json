@@ -1,0 +1,311 @@
+{
+  "base": "e6202a8b5a53a9c60625db81674748e766d3aff6",
+  "status": "待统筹审核；未stage/commit/push/deploy",
+  "files": [
+    {
+      "path": "public/assets/clubs/crests/ned-ajax.svg",
+      "bytes": 8365,
+      "sha256": "5919545bfbd848375f89cb0b38db62bdce88fa93fb75936d71197a15ea0846d4"
+    },
+    {
+      "path": "public/assets/clubs/crests/ned-feyenoord.svg",
+      "bytes": 4897,
+      "sha256": "2fc8441047bd8b71440e073bc38ee9f7e17d2595f7e5e7c187926380af95b8fc"
+    },
+    {
+      "path": "public/assets/clubs/crests/ned1-az-alkmaar.svg",
+      "bytes": 5298,
+      "sha256": "5a7c3735b10de1b413a7780838e9e2339769265a84435f356990ac5011cf2f02"
+    },
+    {
+      "path": "public/assets/clubs/crests/ned1-fc-twente.svg",
+      "bytes": 10566,
+      "sha256": "0d8cc681dae6f3a019a2e94dbed6e2682124d614e01c6d1f4470244c6733d3cd"
+    },
+    {
+      "path": "public/assets/clubs/crests/ned1-psv-eindhoven.svg",
+      "bytes": 5728,
+      "sha256": "920951819ced1856a9d288959d89b947a0ff5bf3d58bb410810d13e8211f6b3c"
+    },
+    {
+      "path": "public/assets/clubs/crests/por-benfica.svg",
+      "bytes": 8257,
+      "sha256": "465dfe710e0dff8ea2769ace804320c0a9d5ad3582247e519b9884bf19ab4b2f"
+    },
+    {
+      "path": "public/assets/clubs/crests/por-porto.svg",
+      "bytes": 7878,
+      "sha256": "c7379069792debcdde9a1e0dd508edc99dfa6aa692997f5495dc701a30dbdf4f"
+    },
+    {
+      "path": "public/assets/clubs/crests/por1-braga.svg",
+      "bytes": 7372,
+      "sha256": "4976a0edd972ea2912a4025e839bab1bfcc10f7014a2a0923fc3e4ee6256ffa1"
+    },
+    {
+      "path": "public/assets/clubs/crests/por1-sporting-cp.svg",
+      "bytes": 12224,
+      "sha256": "f968055350eb10d4ebfe6537422f43fabe9c0a5fd7b325e06371c3b7626b5cab"
+    },
+    {
+      "path": "public/assets/clubs/crests/por1-vitoria-guimaraes.svg",
+      "bytes": 4540,
+      "sha256": "c466ef4e692dfb9e69e7233097b603ebe05f730eaaac2bc132497f77b226445d"
+    },
+    {
+      "path": "public/assets/clubs/crests/bel-anderlecht.svg",
+      "bytes": 8072,
+      "sha256": "589ddae1591b5cde7fa23eb101be887fa9e63e3f74f9f02f27013f2c7d2aedc9"
+    },
+    {
+      "path": "public/assets/clubs/crests/bel-club-brugge.svg",
+      "bytes": 11766,
+      "sha256": "e28f05c80223a1846ff84328cffa9041fc0469f024c1d573e83cbbb800b57dae"
+    },
+    {
+      "path": "public/assets/clubs/crests/bel1-antwerp.svg",
+      "bytes": 7159,
+      "sha256": "c73cd86a09a1b9d5928b2e17b283b33581dbc762257230cf1945137c822e2d4c"
+    },
+    {
+      "path": "public/assets/clubs/crests/bel1-genk.svg",
+      "bytes": 2955,
+      "sha256": "d7035f29ed757e9228f978dde8dee29595522506bb453dce1395b4c2736bfada"
+    },
+    {
+      "path": "public/assets/clubs/crests/bel1-gent.svg",
+      "bytes": 13196,
+      "sha256": "d9af521b80cb35ea88f30a127e9dfdfc4047aff915cc287603a004c2d9a61650"
+    },
+    {
+      "path": "public/assets/clubs/crests/bel1-standard-liege.svg",
+      "bytes": 8958,
+      "sha256": "7315a1f64a1790ca84a9df03f86d8c1dd741dc274e52643355fbb1a5ffe84659"
+    },
+    {
+      "path": "public/assets/clubs/crests/bel1-union-saint-gilloise.svg",
+      "bytes": 12753,
+      "sha256": "6d544901c1e6255101d413e0c575db6d307bdcbcad086b5176d5cd267ca53379"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg-boca.svg",
+      "bytes": 7643,
+      "sha256": "3be8377ad1412ae5496e527f84695dfbe3d9ca404bdc45839c1a2114e50214e4"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg-river.svg",
+      "bytes": 4549,
+      "sha256": "fbb0c9ce08beeefe78c654cebdb9f26879f3e95bed04c13309eef25c5bc75a51"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-argentinos-juniors.svg",
+      "bytes": 5294,
+      "sha256": "dd2b348f6e2ad7b2c00e72194e249091d4da3709b800d734dcd3d52ebd38bbfe"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-estudiantes-de-la-plata.svg",
+      "bytes": 10060,
+      "sha256": "f42b348f662fc695b84c265b5770fc0fa25e79afb083b055e8acef593c249010"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-independiente.svg",
+      "bytes": 8171,
+      "sha256": "1ff98459f20e378994dcb0040ddfd8fb7ad81ae6b62cf086c6b57e7df5f2e1ab"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-newell-s-old-boys.svg",
+      "bytes": 4466,
+      "sha256": "62c83793277566655875dd0c84b35f4d54df1fdac6c663b8f49eafbea74cfffe"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-racing-club.svg",
+      "bytes": 5463,
+      "sha256": "f562afda12ce8ee63dbbb46a64eae3bba712747280a7bca7952521727110b62a"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-rosario-central.svg",
+      "bytes": 7698,
+      "sha256": "1709e9bcc39f9ed4ac147fcad7b135523b22779bf9fdf6b27e04719126e66c3d"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-san-lorenzo.svg",
+      "bytes": 7062,
+      "sha256": "b12382a7a03d967e74edcb3728e79c2057497ddcbc8c5fd507ac7dc9243b5502"
+    },
+    {
+      "path": "public/assets/clubs/crests/arg1-velez-sarsfield.svg",
+      "bytes": 4079,
+      "sha256": "705b34f2ec615b81063a3255c035944f9fa782c02e90f45d861ee78e5b142585"
+    },
+    {
+      "path": "public/assets/clubs/crests/kor-jeonbuk-hyundai-motors.svg",
+      "bytes": 16002,
+      "sha256": "b3e95901db7fd8616ce3ff7796faa5af87b55bf985e5bd9190721b568e7189ad"
+    },
+    {
+      "path": "public/assets/clubs/crests/kor1-fc-seoul.svg",
+      "bytes": 10566,
+      "sha256": "486150cdc191ce75bc14798b64e7097fec86fee3eeede78314a9aad84d971feb"
+    },
+    {
+      "path": "public/assets/clubs/crests/kor1-pohang-steelers.svg",
+      "bytes": 6008,
+      "sha256": "7d7d1e5b14b43126490beb90d7c976edfee3d9d2ba3828450a2f5202dc8653eb"
+    },
+    {
+      "path": "public/assets/clubs/crests/kor1-ulsan-hd.svg",
+      "bytes": 8906,
+      "sha256": "0f5bd6b24b002b7d9434ad4902d9f3a5803803465349bdd17835e5fd0091afe0"
+    },
+    {
+      "path": "public/assets/clubs/crests/jpn-urawa.svg",
+      "bytes": 3810,
+      "sha256": "b55cbb3015552b6ac6cdfd7fe547afc80248f079493cee00b75fcc8448b1457e"
+    },
+    {
+      "path": "public/assets/clubs/crests/jpn-vissel.svg",
+      "bytes": 5295,
+      "sha256": "9e5235ab334bc7d277279fb08d990b5a0fd84ffdefd6e063916b3a287dd21054"
+    },
+    {
+      "path": "public/assets/clubs/crests/jpn1-gamba-osaka.svg",
+      "bytes": 3788,
+      "sha256": "27834bf7805845844b58b038d42fe6b07da40b6f810e33b05754e4efc03f513d"
+    },
+    {
+      "path": "public/assets/clubs/crests/jpn1-kashima-antlers.svg",
+      "bytes": 4994,
+      "sha256": "11f85b01dc43229f6658647ce89356da726e455258a0a13a2a352030d5d4aab8"
+    },
+    {
+      "path": "public/assets/clubs/crests/jpn1-kawasaki-frontale.svg",
+      "bytes": 4352,
+      "sha256": "e58d007bc39fa91846bef7763a8ea02ab8a6a800607885e79450c0b7e6060517"
+    },
+    {
+      "path": "public/assets/clubs/crests/jpn1-sanfrecce-hiroshima.svg",
+      "bytes": 2623,
+      "sha256": "11483ead1f2e6b2cc7689269c1376d30ab99d14215b56dc233c1b7d6d917dc41"
+    },
+    {
+      "path": "public/assets/clubs/crests/jpn1-yokohama-f-marinos.svg",
+      "bytes": 5430,
+      "sha256": "811c3a554bcce98346e525c494e0bc58ea9b624364d10a95833dadb96dcdfef1"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra-flamengo.svg",
+      "bytes": 10428,
+      "sha256": "1e577d33bcc7009b2cd442fb884cc2f59ecd2616ffe8d03de133f9f23a05ea5a"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra-palmeiras.svg",
+      "bytes": 12815,
+      "sha256": "4b9bb41896a7f6ea5b3cf73791d91e14a796564982dfee7482728298bcbe9ff8"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-atletico-mineiro.svg",
+      "bytes": 18935,
+      "sha256": "d531c8905f84126672b1e461dc6666e1b1f600170cdb3821487cae9fcbacf84b"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-botafogo.svg",
+      "bytes": 14511,
+      "sha256": "6ae3747cf827e5611b6c8322afe838d76c95cbb38d1ec65eb33bd99979ae5be8"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-corinthians.svg",
+      "bytes": 11563,
+      "sha256": "728c6d6ace7f06f74854b6cdf53ebc94ce9990e0787bef088dba82e77f2d2850"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-cruzeiro.svg",
+      "bytes": 2792,
+      "sha256": "fd495f67aa1873d700ac21bc5d637d8b68cffd4754163f4a2c27ef89e8579fc5"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-fluminense.svg",
+      "bytes": 8640,
+      "sha256": "3338316dcff4693d09b52251177ab845b3d8c3970e2c498da7e4a6dd92d065e0"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-gremio.svg",
+      "bytes": 8613,
+      "sha256": "dbbc9fcd5dcf32b49e21082d9f4f1abc8e6da11478b9354b0fa75ce5f9ff7771"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-internacional.svg",
+      "bytes": 7310,
+      "sha256": "c3f8462823ba448dbfe1835d7e1aa7494bd543931ae559b996359705ae1828bb"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-santos.svg",
+      "bytes": 12682,
+      "sha256": "08f8bfeef5d8ca7a95b8ccf84de7e46a384db87dd4793c4ea2e6f81fc76a2dd4"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-sao-paulo.svg",
+      "bytes": 2787,
+      "sha256": "23f1774acd28552476066e04e9ea704328e54cbc25cb7651772dd0b976069786"
+    },
+    {
+      "path": "public/assets/clubs/crests/bra1-vasco-da-gama.svg",
+      "bytes": 31135,
+      "sha256": "1622c60814cf9f186b291b971f4f90e16e14db48c8bf22e5c1c0145e22b8a595"
+    },
+    {
+      "path": "src/data/clubs/clubCrests.ts",
+      "bytes": 77260,
+      "sha256": "77331cf1a872e50754392a20ef610c92c75af32cc328e4f74720615e87d9b206"
+    },
+    {
+      "path": "src/data/clubs/__tests__/clubCrests.test.ts",
+      "bytes": 25223,
+      "sha256": "e7ecce65c004735da366f0f1564b4ca4e365d12f580eef725311b46b63184ea2"
+    },
+    {
+      "path": "src/components/__tests__/ClubCrest.test.ts",
+      "bytes": 3581,
+      "sha256": "d9f9a80eff8255007c942b6bee1aed6e311bcd7acf0553a6aae58b572a27fbbf"
+    },
+    {
+      "path": "docs/50-strong-club-crests-replacement.md",
+      "bytes": 5210,
+      "sha256": "5a120c119b081a8b6ee4aac2946ee1290553ea17e6e87f1b0a731a53b2e3238c"
+    },
+    {
+      "path": "docs/evidence/CLR7-20260912/README.md",
+      "bytes": 4796,
+      "sha256": "06bd3b285946b6f5f671387629c5d73a8fcf11c7b28731cc05a7ddfd072ecbb5"
+    },
+    {
+      "path": "docs/evidence/CLR7-20260912/engineering.json",
+      "bytes": 1304,
+      "sha256": "1932c8ecff55c41cecfda03675ebb4d4f44722f4c32c965dbeb2df5138c5254c"
+    },
+    {
+      "path": "docs/evidence/CLR7-20260912/evidence-index.json",
+      "bytes": 62116,
+      "sha256": "001f53524c87637e5b71f03a459aede9ed055585426060cfd97ca61655d855fb"
+    },
+    {
+      "path": "docs/evidence/CLR7-20260912/protection.json",
+      "bytes": 690,
+      "sha256": "b437ffdcb63c1fe66409b8ca8fa7dc4f183ba613632083d52e663d266ddc326a"
+    },
+    {
+      "path": "docs/evidence/CLR7-20260912/source-map.json",
+      "bytes": 41482,
+      "sha256": "0f2b7fdc01ba4137e0709b7a0e64423e6f61b6da8268de2ff89e7f9019ee1e36"
+    },
+    {
+      "path": "docs/evidence/CLR7-20260912/viewed-images.json",
+      "bytes": 24231,
+      "sha256": "49bec6342ce8f05a9d648341ebd3e1e4b64c6c216737e301cd7a53d13a326ab9"
+    },
+    {
+      "path": "docs/evidence/CLR7-20260912/visual-review.json",
+      "bytes": 39800,
+      "sha256": "cb7f9bdaaef57a7f960955572d965f183cf065e348292f2479607ee0c6b7c417"
+    }
+  ]
+}

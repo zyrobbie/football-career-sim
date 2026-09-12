@@ -34,27 +34,27 @@ describe('club crest V1 manifest', () => {
     )
   })
 
-  it('retains auditable real-club references while returning null without original local artwork', () => {
+  it('uses delivered Ajax artwork while retaining undelivered and unknown fallbacks', () => {
     const canonical = getClubCrestManifestRecordByCompatibleId('ned_ajax')
     const workbook = getClubCrestManifestRecordByCompatibleId('ned1_ajax')
 
     expect(workbook).toBe(canonical)
     expect(canonical).toMatchObject({
       canonicalClubId: 'ned_ajax',
-      assetPath: null,
-      sourceType: 'OFFICIAL_CLUB_REFERENCE',
-      rightsStatus: 'TRADEMARK_ASSET_PENDING_CLEARANCE',
+      assetPath: '/assets/clubs/crests/ned-ajax.svg',
+      sourceType: 'ORIGINAL_GAME_ARTWORK',
+      rightsStatus: 'ORIGINAL_GAME_ASSET',
     })
-    expect(getClubCrestByCompatibleId('ned_ajax')).toBeNull()
-    expect(getClubCrestByCompatibleId('ned_ajax')).toBeNull()
+    expect(getClubCrestByCompatibleId('ned_ajax')).toBe(canonical)
+    expect(getClubCrestByCompatibleId('ned1_utrecht')).toBeNull()
     expect(getClubCrestByCompatibleId('missing-club')).toBeNull()
   })
 
-  it('has 131 unique, canonical, audit-complete records and 128 usable local crests', () => {
-    expect(CLUB_CREST_MANIFEST).toHaveLength(131)
-    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.canonicalClubId)).size).toBe(131)
-    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.crestKey)).size).toBe(131)
-    expect(CLUB_CREST_MANIFEST.filter((crest) => crest.assetPath !== null)).toHaveLength(128)
+  it('has 178 unique, canonical, audit-complete records and 178 usable local crests', () => {
+    expect(CLUB_CREST_MANIFEST).toHaveLength(178)
+    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.canonicalClubId)).size).toBe(178)
+    expect(new Set(CLUB_CREST_MANIFEST.map((crest) => crest.crestKey)).size).toBe(178)
+    expect(CLUB_CREST_MANIFEST.filter((crest) => crest.assetPath !== null)).toHaveLength(178)
 
     for (const crest of CLUB_CREST_MANIFEST) {
       expect(getClubCrestManifestRecordByCompatibleId(crest.canonicalClubId)).toBe(crest)
@@ -318,6 +318,273 @@ describe('CLR4 complete game-catalog coverage', () => {
       expect(expected).toHaveLength(count)
       const actual = CLUB_CREST_MANIFEST.filter(crest => crest.sourceUrl.startsWith(`local://CLR4-20260912/${league}/`)).map(crest => crest.canonicalClubId).sort()
       expect(actual).toEqual(expected)
+    }
+  })
+})
+
+ describe('CLR7 exact supplied strong-club coverage', () => {
+  it('resolves all fifty exact delivered canonical/workbook pairs and files', () => {
+    const samples = [
+      [
+            "ned_ajax",
+            "ned1_ajax",
+            "ned-ajax.svg"
+      ],
+      [
+            "ned1_feyenoord",
+            "ned1_feyenoord",
+            "ned-feyenoord.svg"
+      ],
+      [
+            "ned1_az",
+            "ned1_az",
+            "ned1-az-alkmaar.svg"
+      ],
+      [
+            "ned1_twente",
+            "ned1_twente",
+            "ned1-fc-twente.svg"
+      ],
+      [
+            "ned_psv",
+            "ned1_psv",
+            "ned1-psv-eindhoven.svg"
+      ],
+      [
+            "por_benfica",
+            "por1_benfica",
+            "por-benfica.svg"
+      ],
+      [
+            "por_porto",
+            "por1_fc_porto",
+            "por-porto.svg"
+      ],
+      [
+            "por1_braga",
+            "por1_braga",
+            "por1-braga.svg"
+      ],
+      [
+            "por1_sporting_cp",
+            "por1_sporting_cp",
+            "por1-sporting-cp.svg"
+      ],
+      [
+            "por1_vitoria_sc",
+            "por1_vitoria_sc",
+            "por1-vitoria-guimaraes.svg"
+      ],
+      [
+            "bel_anderlecht",
+            "bel1_anderlecht",
+            "bel-anderlecht.svg"
+      ],
+      [
+            "bel_brugge",
+            "bel1_club_brugge",
+            "bel-club-brugge.svg"
+      ],
+      [
+            "bel1_antwerp",
+            "bel1_antwerp",
+            "bel1-antwerp.svg"
+      ],
+      [
+            "bel1_genk",
+            "bel1_genk",
+            "bel1-genk.svg"
+      ],
+      [
+            "bel1_gent",
+            "bel1_gent",
+            "bel1-gent.svg"
+      ],
+      [
+            "bel1_standard_liege",
+            "bel1_standard_liege",
+            "bel1-standard-liege.svg"
+      ],
+      [
+            "bel1_union_saint_gilloise",
+            "bel1_union_saint_gilloise",
+            "bel1-union-saint-gilloise.svg"
+      ],
+      [
+            "arg_boca",
+            "arg1_boca_juniors",
+            "arg-boca.svg"
+      ],
+      [
+            "arg_river",
+            "arg1_river_plate",
+            "arg-river.svg"
+      ],
+      [
+            "arg1_argentinos_juniors",
+            "arg1_argentinos_juniors",
+            "arg1-argentinos-juniors.svg"
+      ],
+      [
+            "arg1_estudiantes_de_la_plata",
+            "arg1_estudiantes_de_la_plata",
+            "arg1-estudiantes-de-la-plata.svg"
+      ],
+      [
+            "arg1_independiente",
+            "arg1_independiente",
+            "arg1-independiente.svg"
+      ],
+      [
+            "arg1_newell_s_old_boys",
+            "arg1_newell_s_old_boys",
+            "arg1-newell-s-old-boys.svg"
+      ],
+      [
+            "arg1_racing_club",
+            "arg1_racing_club",
+            "arg1-racing-club.svg"
+      ],
+      [
+            "arg1_rosario_central",
+            "arg1_rosario_central",
+            "arg1-rosario-central.svg"
+      ],
+      [
+            "arg1_san_lorenzo",
+            "arg1_san_lorenzo",
+            "arg1-san-lorenzo.svg"
+      ],
+      [
+            "arg1_velez_sarsfield",
+            "arg1_velez_sarsfield",
+            "arg1-velez-sarsfield.svg"
+      ],
+      [
+            "kor_jeonbuk",
+            "kor1_jeonbuk_hyundai_motors",
+            "kor-jeonbuk-hyundai-motors.svg"
+      ],
+      [
+            "kor1_fc_seoul",
+            "kor1_fc_seoul",
+            "kor1-fc-seoul.svg"
+      ],
+      [
+            "kor1_pohang_steelers",
+            "kor1_pohang_steelers",
+            "kor1-pohang-steelers.svg"
+      ],
+      [
+            "kor_ulsan",
+            "kor1_ulsan_hd",
+            "kor1-ulsan-hd.svg"
+      ],
+      [
+            "jpn_urawa",
+            "jpn1_urawa_red_diamonds",
+            "jpn-urawa.svg"
+      ],
+      [
+            "jpn_vissel",
+            "jpn1_vissel_kobe",
+            "jpn-vissel.svg"
+      ],
+      [
+            "jpn1_gamba_osaka",
+            "jpn1_gamba_osaka",
+            "jpn1-gamba-osaka.svg"
+      ],
+      [
+            "jpn1_kashima_antlers",
+            "jpn1_kashima_antlers",
+            "jpn1-kashima-antlers.svg"
+      ],
+      [
+            "jpn1_kawasaki_frontale",
+            "jpn1_kawasaki_frontale",
+            "jpn1-kawasaki-frontale.svg"
+      ],
+      [
+            "jpn1_sanfrecce_hiroshima",
+            "jpn1_sanfrecce_hiroshima",
+            "jpn1-sanfrecce-hiroshima.svg"
+      ],
+      [
+            "jpn1_yokohama_f_marinos",
+            "jpn1_yokohama_f_marinos",
+            "jpn1-yokohama-f-marinos.svg"
+      ],
+      [
+            "bra_flamengo",
+            "bra1_flamengo",
+            "bra-flamengo.svg"
+      ],
+      [
+            "bra_palmeiras",
+            "bra1_palmeiras",
+            "bra-palmeiras.svg"
+      ],
+      [
+            "bra1_atletico_mineiro",
+            "bra1_atletico_mineiro",
+            "bra1-atletico-mineiro.svg"
+      ],
+      [
+            "bra1_botafogo",
+            "bra1_botafogo",
+            "bra1-botafogo.svg"
+      ],
+      [
+            "bra1_corinthians",
+            "bra1_corinthians",
+            "bra1-corinthians.svg"
+      ],
+      [
+            "bra1_cruzeiro",
+            "bra1_cruzeiro",
+            "bra1-cruzeiro.svg"
+      ],
+      [
+            "bra1_fluminense",
+            "bra1_fluminense",
+            "bra1-fluminense.svg"
+      ],
+      [
+            "bra1_gremio",
+            "bra1_gremio",
+            "bra1-gremio.svg"
+      ],
+      [
+            "bra1_internacional",
+            "bra1_internacional",
+            "bra1-internacional.svg"
+      ],
+      [
+            "bra1_santos",
+            "bra1_santos",
+            "bra1-santos.svg"
+      ],
+      [
+            "bra1_sao_paulo",
+            "bra1_sao_paulo",
+            "bra1-sao-paulo.svg"
+      ],
+      [
+            "bra1_vasco_da_gama",
+            "bra1_vasco_da_gama",
+            "bra1-vasco-da-gama.svg"
+      ]
+] as const
+    const actual = CLUB_CREST_MANIFEST.filter(r => r.sourceUrl.startsWith('local://CLR7-20260912/'))
+    expect(actual.map(r => r.canonicalClubId).sort()).toEqual(samples.map(r => r[0]).sort())
+    for (const [id, workbookId, filename] of samples) {
+      const crest = getClubCrestByCompatibleId(id)
+      expect(crest).toMatchObject({ assetPath: `/assets/clubs/crests/${filename}`, sourceType: 'ORIGINAL_GAME_ARTWORK', rightsStatus: 'ORIGINAL_GAME_ASSET' })
+      expect(getClubCrestByCompatibleId(workbookId)).toBe(crest)
+      const svg = readFileSync(resolve(process.cwd(), 'public/assets/clubs/crests', filename), 'utf8')
+      expect(svg).toContain('viewBox="0 0 128 128"')
+      expect(svg).not.toMatch(/<(?:text|script|image)\b|font-family|(?:href|xlink:href)="(?:https?:|data:)/i)
     }
   })
 })
