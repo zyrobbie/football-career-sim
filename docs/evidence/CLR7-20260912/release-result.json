@@ -1,0 +1,460 @@
+{
+  "status": "Published and coordinator verified",
+  "productCommit": "4fb57e2f78805ff1e0371a2054bb6bc8fe6912bf",
+  "pagesRun": "https://github.com/zyrobbie/football-career-sim/actions/runs/34702982241",
+  "pagesConclusion": "success",
+  "site": "https://footballcareer.zyrobbie.site/",
+  "version": "1.9.0",
+  "saveDataVersions": "12/12",
+  "onlineResources": {
+    "checkedAt": "2026-09-12T15:43:25.362605+00:00",
+    "assets": [
+      {
+        "path": "assets/clubs/crests/ned-ajax.svg",
+        "status": 200,
+        "expected": "5919545bfbd848375f89cb0b38db62bdce88fa93fb75936d71197a15ea0846d4",
+        "actual": "5919545bfbd848375f89cb0b38db62bdce88fa93fb75936d71197a15ea0846d4",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/ned-feyenoord.svg",
+        "status": 200,
+        "expected": "2fc8441047bd8b71440e073bc38ee9f7e17d2595f7e5e7c187926380af95b8fc",
+        "actual": "2fc8441047bd8b71440e073bc38ee9f7e17d2595f7e5e7c187926380af95b8fc",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/ned1-az-alkmaar.svg",
+        "status": 200,
+        "expected": "5a7c3735b10de1b413a7780838e9e2339769265a84435f356990ac5011cf2f02",
+        "actual": "5a7c3735b10de1b413a7780838e9e2339769265a84435f356990ac5011cf2f02",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/ned1-fc-twente.svg",
+        "status": 200,
+        "expected": "0d8cc681dae6f3a019a2e94dbed6e2682124d614e01c6d1f4470244c6733d3cd",
+        "actual": "0d8cc681dae6f3a019a2e94dbed6e2682124d614e01c6d1f4470244c6733d3cd",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/ned1-psv-eindhoven.svg",
+        "status": 200,
+        "expected": "920951819ced1856a9d288959d89b947a0ff5bf3d58bb410810d13e8211f6b3c",
+        "actual": "920951819ced1856a9d288959d89b947a0ff5bf3d58bb410810d13e8211f6b3c",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/por-benfica.svg",
+        "status": 200,
+        "expected": "465dfe710e0dff8ea2769ace804320c0a9d5ad3582247e519b9884bf19ab4b2f",
+        "actual": "465dfe710e0dff8ea2769ace804320c0a9d5ad3582247e519b9884bf19ab4b2f",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/por-porto.svg",
+        "status": 200,
+        "expected": "c7379069792debcdde9a1e0dd508edc99dfa6aa692997f5495dc701a30dbdf4f",
+        "actual": "c7379069792debcdde9a1e0dd508edc99dfa6aa692997f5495dc701a30dbdf4f",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/por1-braga.svg",
+        "status": 200,
+        "expected": "4976a0edd972ea2912a4025e839bab1bfcc10f7014a2a0923fc3e4ee6256ffa1",
+        "actual": "4976a0edd972ea2912a4025e839bab1bfcc10f7014a2a0923fc3e4ee6256ffa1",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/por1-sporting-cp.svg",
+        "status": 200,
+        "expected": "f968055350eb10d4ebfe6537422f43fabe9c0a5fd7b325e06371c3b7626b5cab",
+        "actual": "f968055350eb10d4ebfe6537422f43fabe9c0a5fd7b325e06371c3b7626b5cab",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/por1-vitoria-guimaraes.svg",
+        "status": 200,
+        "expected": "c466ef4e692dfb9e69e7233097b603ebe05f730eaaac2bc132497f77b226445d",
+        "actual": "c466ef4e692dfb9e69e7233097b603ebe05f730eaaac2bc132497f77b226445d",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bel-anderlecht.svg",
+        "status": 200,
+        "expected": "589ddae1591b5cde7fa23eb101be887fa9e63e3f74f9f02f27013f2c7d2aedc9",
+        "actual": "589ddae1591b5cde7fa23eb101be887fa9e63e3f74f9f02f27013f2c7d2aedc9",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bel-club-brugge.svg",
+        "status": 200,
+        "expected": "e28f05c80223a1846ff84328cffa9041fc0469f024c1d573e83cbbb800b57dae",
+        "actual": "e28f05c80223a1846ff84328cffa9041fc0469f024c1d573e83cbbb800b57dae",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bel1-antwerp.svg",
+        "status": 200,
+        "expected": "c73cd86a09a1b9d5928b2e17b283b33581dbc762257230cf1945137c822e2d4c",
+        "actual": "c73cd86a09a1b9d5928b2e17b283b33581dbc762257230cf1945137c822e2d4c",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bel1-genk.svg",
+        "status": 200,
+        "expected": "d7035f29ed757e9228f978dde8dee29595522506bb453dce1395b4c2736bfada",
+        "actual": "d7035f29ed757e9228f978dde8dee29595522506bb453dce1395b4c2736bfada",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bel1-gent.svg",
+        "status": 200,
+        "expected": "d9af521b80cb35ea88f30a127e9dfdfc4047aff915cc287603a004c2d9a61650",
+        "actual": "d9af521b80cb35ea88f30a127e9dfdfc4047aff915cc287603a004c2d9a61650",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bel1-standard-liege.svg",
+        "status": 200,
+        "expected": "7315a1f64a1790ca84a9df03f86d8c1dd741dc274e52643355fbb1a5ffe84659",
+        "actual": "7315a1f64a1790ca84a9df03f86d8c1dd741dc274e52643355fbb1a5ffe84659",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bel1-union-saint-gilloise.svg",
+        "status": 200,
+        "expected": "6d544901c1e6255101d413e0c575db6d307bdcbcad086b5176d5cd267ca53379",
+        "actual": "6d544901c1e6255101d413e0c575db6d307bdcbcad086b5176d5cd267ca53379",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg-boca.svg",
+        "status": 200,
+        "expected": "3be8377ad1412ae5496e527f84695dfbe3d9ca404bdc45839c1a2114e50214e4",
+        "actual": "3be8377ad1412ae5496e527f84695dfbe3d9ca404bdc45839c1a2114e50214e4",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg-river.svg",
+        "status": 200,
+        "expected": "fbb0c9ce08beeefe78c654cebdb9f26879f3e95bed04c13309eef25c5bc75a51",
+        "actual": "fbb0c9ce08beeefe78c654cebdb9f26879f3e95bed04c13309eef25c5bc75a51",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-argentinos-juniors.svg",
+        "status": 200,
+        "expected": "dd2b348f6e2ad7b2c00e72194e249091d4da3709b800d734dcd3d52ebd38bbfe",
+        "actual": "dd2b348f6e2ad7b2c00e72194e249091d4da3709b800d734dcd3d52ebd38bbfe",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-estudiantes-de-la-plata.svg",
+        "status": 200,
+        "expected": "f42b348f662fc695b84c265b5770fc0fa25e79afb083b055e8acef593c249010",
+        "actual": "f42b348f662fc695b84c265b5770fc0fa25e79afb083b055e8acef593c249010",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-independiente.svg",
+        "status": 200,
+        "expected": "1ff98459f20e378994dcb0040ddfd8fb7ad81ae6b62cf086c6b57e7df5f2e1ab",
+        "actual": "1ff98459f20e378994dcb0040ddfd8fb7ad81ae6b62cf086c6b57e7df5f2e1ab",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-newell-s-old-boys.svg",
+        "status": 200,
+        "expected": "62c83793277566655875dd0c84b35f4d54df1fdac6c663b8f49eafbea74cfffe",
+        "actual": "62c83793277566655875dd0c84b35f4d54df1fdac6c663b8f49eafbea74cfffe",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-racing-club.svg",
+        "status": 200,
+        "expected": "f562afda12ce8ee63dbbb46a64eae3bba712747280a7bca7952521727110b62a",
+        "actual": "f562afda12ce8ee63dbbb46a64eae3bba712747280a7bca7952521727110b62a",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-rosario-central.svg",
+        "status": 200,
+        "expected": "1709e9bcc39f9ed4ac147fcad7b135523b22779bf9fdf6b27e04719126e66c3d",
+        "actual": "1709e9bcc39f9ed4ac147fcad7b135523b22779bf9fdf6b27e04719126e66c3d",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-san-lorenzo.svg",
+        "status": 200,
+        "expected": "b12382a7a03d967e74edcb3728e79c2057497ddcbc8c5fd507ac7dc9243b5502",
+        "actual": "b12382a7a03d967e74edcb3728e79c2057497ddcbc8c5fd507ac7dc9243b5502",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/arg1-velez-sarsfield.svg",
+        "status": 200,
+        "expected": "705b34f2ec615b81063a3255c035944f9fa782c02e90f45d861ee78e5b142585",
+        "actual": "705b34f2ec615b81063a3255c035944f9fa782c02e90f45d861ee78e5b142585",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/kor-jeonbuk-hyundai-motors.svg",
+        "status": 200,
+        "expected": "b3e95901db7fd8616ce3ff7796faa5af87b55bf985e5bd9190721b568e7189ad",
+        "actual": "b3e95901db7fd8616ce3ff7796faa5af87b55bf985e5bd9190721b568e7189ad",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/kor1-fc-seoul.svg",
+        "status": 200,
+        "expected": "486150cdc191ce75bc14798b64e7097fec86fee3eeede78314a9aad84d971feb",
+        "actual": "486150cdc191ce75bc14798b64e7097fec86fee3eeede78314a9aad84d971feb",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/kor1-pohang-steelers.svg",
+        "status": 200,
+        "expected": "7d7d1e5b14b43126490beb90d7c976edfee3d9d2ba3828450a2f5202dc8653eb",
+        "actual": "7d7d1e5b14b43126490beb90d7c976edfee3d9d2ba3828450a2f5202dc8653eb",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/kor1-ulsan-hd.svg",
+        "status": 200,
+        "expected": "0f5bd6b24b002b7d9434ad4902d9f3a5803803465349bdd17835e5fd0091afe0",
+        "actual": "0f5bd6b24b002b7d9434ad4902d9f3a5803803465349bdd17835e5fd0091afe0",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/jpn-urawa.svg",
+        "status": 200,
+        "expected": "b55cbb3015552b6ac6cdfd7fe547afc80248f079493cee00b75fcc8448b1457e",
+        "actual": "b55cbb3015552b6ac6cdfd7fe547afc80248f079493cee00b75fcc8448b1457e",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/jpn-vissel.svg",
+        "status": 200,
+        "expected": "9e5235ab334bc7d277279fb08d990b5a0fd84ffdefd6e063916b3a287dd21054",
+        "actual": "9e5235ab334bc7d277279fb08d990b5a0fd84ffdefd6e063916b3a287dd21054",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/jpn1-gamba-osaka.svg",
+        "status": 200,
+        "expected": "27834bf7805845844b58b038d42fe6b07da40b6f810e33b05754e4efc03f513d",
+        "actual": "27834bf7805845844b58b038d42fe6b07da40b6f810e33b05754e4efc03f513d",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/jpn1-kashima-antlers.svg",
+        "status": 200,
+        "expected": "11f85b01dc43229f6658647ce89356da726e455258a0a13a2a352030d5d4aab8",
+        "actual": "11f85b01dc43229f6658647ce89356da726e455258a0a13a2a352030d5d4aab8",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/jpn1-kawasaki-frontale.svg",
+        "status": 200,
+        "expected": "e58d007bc39fa91846bef7763a8ea02ab8a6a800607885e79450c0b7e6060517",
+        "actual": "e58d007bc39fa91846bef7763a8ea02ab8a6a800607885e79450c0b7e6060517",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/jpn1-sanfrecce-hiroshima.svg",
+        "status": 200,
+        "expected": "11483ead1f2e6b2cc7689269c1376d30ab99d14215b56dc233c1b7d6d917dc41",
+        "actual": "11483ead1f2e6b2cc7689269c1376d30ab99d14215b56dc233c1b7d6d917dc41",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/jpn1-yokohama-f-marinos.svg",
+        "status": 200,
+        "expected": "811c3a554bcce98346e525c494e0bc58ea9b624364d10a95833dadb96dcdfef1",
+        "actual": "811c3a554bcce98346e525c494e0bc58ea9b624364d10a95833dadb96dcdfef1",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra-flamengo.svg",
+        "status": 200,
+        "expected": "1e577d33bcc7009b2cd442fb884cc2f59ecd2616ffe8d03de133f9f23a05ea5a",
+        "actual": "1e577d33bcc7009b2cd442fb884cc2f59ecd2616ffe8d03de133f9f23a05ea5a",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra-palmeiras.svg",
+        "status": 200,
+        "expected": "4b9bb41896a7f6ea5b3cf73791d91e14a796564982dfee7482728298bcbe9ff8",
+        "actual": "4b9bb41896a7f6ea5b3cf73791d91e14a796564982dfee7482728298bcbe9ff8",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-atletico-mineiro.svg",
+        "status": 200,
+        "expected": "d531c8905f84126672b1e461dc6666e1b1f600170cdb3821487cae9fcbacf84b",
+        "actual": "d531c8905f84126672b1e461dc6666e1b1f600170cdb3821487cae9fcbacf84b",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-botafogo.svg",
+        "status": 200,
+        "expected": "6ae3747cf827e5611b6c8322afe838d76c95cbb38d1ec65eb33bd99979ae5be8",
+        "actual": "6ae3747cf827e5611b6c8322afe838d76c95cbb38d1ec65eb33bd99979ae5be8",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-corinthians.svg",
+        "status": 200,
+        "expected": "728c6d6ace7f06f74854b6cdf53ebc94ce9990e0787bef088dba82e77f2d2850",
+        "actual": "728c6d6ace7f06f74854b6cdf53ebc94ce9990e0787bef088dba82e77f2d2850",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-cruzeiro.svg",
+        "status": 200,
+        "expected": "fd495f67aa1873d700ac21bc5d637d8b68cffd4754163f4a2c27ef89e8579fc5",
+        "actual": "fd495f67aa1873d700ac21bc5d637d8b68cffd4754163f4a2c27ef89e8579fc5",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-fluminense.svg",
+        "status": 200,
+        "expected": "3338316dcff4693d09b52251177ab845b3d8c3970e2c498da7e4a6dd92d065e0",
+        "actual": "3338316dcff4693d09b52251177ab845b3d8c3970e2c498da7e4a6dd92d065e0",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-gremio.svg",
+        "status": 200,
+        "expected": "dbbc9fcd5dcf32b49e21082d9f4f1abc8e6da11478b9354b0fa75ce5f9ff7771",
+        "actual": "dbbc9fcd5dcf32b49e21082d9f4f1abc8e6da11478b9354b0fa75ce5f9ff7771",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-internacional.svg",
+        "status": 200,
+        "expected": "c3f8462823ba448dbfe1835d7e1aa7494bd543931ae559b996359705ae1828bb",
+        "actual": "c3f8462823ba448dbfe1835d7e1aa7494bd543931ae559b996359705ae1828bb",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-santos.svg",
+        "status": 200,
+        "expected": "08f8bfeef5d8ca7a95b8ccf84de7e46a384db87dd4793c4ea2e6f81fc76a2dd4",
+        "actual": "08f8bfeef5d8ca7a95b8ccf84de7e46a384db87dd4793c4ea2e6f81fc76a2dd4",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-sao-paulo.svg",
+        "status": 200,
+        "expected": "23f1774acd28552476066e04e9ea704328e54cbc25cb7651772dd0b976069786",
+        "actual": "23f1774acd28552476066e04e9ea704328e54cbc25cb7651772dd0b976069786",
+        "match": true
+      },
+      {
+        "path": "assets/clubs/crests/bra1-vasco-da-gama.svg",
+        "status": 200,
+        "expected": "1622c60814cf9f186b291b971f4f90e16e14db48c8bf22e5c1c0145e22b8a595",
+        "actual": "1622c60814cf9f186b291b971f4f90e16e14db48c8bf22e5c1c0145e22b8a595",
+        "match": true
+      },
+      {
+        "path": "assets/index-CtMQSs8I.js",
+        "status": 200,
+        "expected": "b6b98398593cafbea96e7a91027ba18c64e227d36371ca23ce1cf93329cf8bb8",
+        "actual": "b6b98398593cafbea96e7a91027ba18c64e227d36371ca23ce1cf93329cf8bb8",
+        "match": true
+      },
+      {
+        "path": "assets/html2canvas-VaWFoeQG.js",
+        "status": 200,
+        "expected": "37401bc394fa1dbdba5e3e62cc8887e8f8b814366750627aa7f80fb7da9ec680",
+        "actual": "37401bc394fa1dbdba5e3e62cc8887e8f8b814366750627aa7f80fb7da9ec680",
+        "match": true
+      },
+      {
+        "path": "assets/index-BXyw3Raw.css",
+        "status": 200,
+        "expected": "163aac24fbde1b940e63a09c6f950d97f2a972bef8c1c69df7b3d4fd3f20c41f",
+        "actual": "163aac24fbde1b940e63a09c6f950d97f2a972bef8c1c69df7b3d4fd3f20c41f",
+        "match": true
+      },
+      {
+        "path": "index.html",
+        "status": 200,
+        "expected": "f3894ddf1c1a75c87396eaf7e6460723946736ced2d58d67f7f8d0cb9bf5e187",
+        "actual": "f3894ddf1c1a75c87396eaf7e6460723946736ced2d58d67f7f8d0cb9bf5e187",
+        "match": true
+      }
+    ]
+  },
+  "onlinePage": {
+    "viewport": "430x932",
+    "constructedInput": true,
+    "clicks": 15,
+    "errors": [],
+    "checks": [
+      "market selection",
+      "signing",
+      "arrival",
+      "plan",
+      "player",
+      "history",
+      "save reload",
+      "actual retirement export",
+      "close preview"
+    ],
+    "export": {
+      "width": 2360,
+      "height": 3980,
+      "SHA": "aa9226c2f43d4ec20acda1706b5b66ea93e01098cccc12f75592ce2c0b71dc7e",
+      "bytes": 993844
+    },
+    "nativePNGViewed": true
+  },
+  "rollback": {
+    "head": "4fb57e2f78805ff1e0371a2054bb6bc8fe6912bf",
+    "baseline": "e6202a8b5a53a9c60625db81674748e766d3aff6",
+    "product": "4fb57e2f78805ff1e0371a2054bb6bc8fe6912bf",
+    "reversedPaths": 53,
+    "productionMatchesBaseline": true,
+    "currentDocsPreserved": true,
+    "worktreeAndRealIndexUntouched": true,
+    "rollbackTag": "rollback/clr7-20260912-before"
+  },
+  "evidence": [
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/online/result.json",
+      "sha256": "7ba49f6b8386d90ac8846cf89755342c092c64ad38e97d2609b01a011330ad02"
+    },
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/online/430-market-offers.png",
+      "sha256": "af90948a5baec1ce5bd8a469aa01ee030c63895c5f4cb32d0849ec602bfb9d88"
+    },
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/online/430-export.png",
+      "sha256": "aa9226c2f43d4ec20acda1706b5b66ea93e01098cccc12f75592ce2c0b71dc7e"
+    },
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/online-export-native-clubs.png",
+      "sha256": "f7fdf1e9b43a4fc7bcd0513c734d4bcfc0e51a0f5d578ea92178892a3f579aee"
+    },
+    {
+      "path": "/tmp/CLR7-20260912-coordinator/pages-ci.json",
+      "sha256": "5b6171c8e3738b84760cf1e8ec9ee529ce3c8fad60b1e7faf0d3db3b3d9b8049"
+    }
+  ],
+  "limitations": [
+    "Real phone, WeChat, Safari and photo-library not tested",
+    "Build bundle warning 910.36kB",
+    "CI warns legacy Node20 action targets are run on Node24; pipeline successful"
+  ],
+  "localArchive": {
+    "archive": "/Users/zhihu/Documents/足球生涯游戏/outputs/CLR7-20260912/CLR7-20260912-evidence.tar.gz",
+    "bytes": 35502090,
+    "sha256": "7d9f46a565d89d56c8039617a84247a73237fd0108a464ba2d645b33070953b4",
+    "fileCount": 406,
+    "allMembersVerified": true
+  }
+}
