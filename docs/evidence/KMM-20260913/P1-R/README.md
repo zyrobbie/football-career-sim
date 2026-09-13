@@ -1,3 +1,9 @@
+# ASTRA-KMM-P1R2：V2.5.0 已发布
+
+产品404572e、测试补正b08ac9e；[发布记录](publish/README.md)与[统筹复核](coordinator-release-review.md)为当前结论。Pages34746326886成功，线上匿名V12/V13及资源身份通过。
+
+## 以下为P1-R1候选交付历史（保留原时点）
+
 # ASTRA-KMM-P1R1：最终候选待统筹复核
 
 package/lock2.5.0，SAVE/DATA13/13；只加“当时”短标签，40目录与选择/模拟/保存规则不变。HEAD仍`7421b442983d27bc17f535cf741a7f065b1ee87e`。未stage、提交、打tag、推送或部署。

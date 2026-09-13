@@ -4,7 +4,7 @@
 
 在线试玩：[https://footballcareer.zyrobbie.site/](https://footballcareer.zyrobbie.site/)
 
-当前工作树为 **V2.5.0 发布候选**（[版本与发布边界](docs/key-match-moment-v2.5-release.md)），已完成从建档到退役的可玩生涯闭环，覆盖：
+当前已发布 **V2.5.0**（[版本与发布边界](docs/key-match-moment-v2.5-release.md)），已完成从建档到退役的可玩生涯闭环，覆盖：
 
 > 建档 → 生成球员与留洋偏好 → 三份青训邀请 → 入队事件 → 青训与一线队晋升 → 职业合同 → 连续职业半年 → 国内与海外转会、续约或自由转会 → 国家队与荣誉 → 退役档案 → 带二维码的生涯图片导出
 
