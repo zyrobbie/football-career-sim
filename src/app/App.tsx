@@ -1,3 +1,4 @@
+import { KeyMatchMomentScreen } from '../screens/KeyMatchMomentScreen'
 import { useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
 import { AcademyOffersScreen } from '../screens/AcademyOffersScreen'
@@ -66,6 +67,8 @@ function AppContent() {
       screen = <AcademyOffersScreen />
     } else if (game.phase === 'ARRIVAL_EVENT') {
       screen = <ArrivalScreen />
+    } else if (game.phase === 'KEY_MATCH_MOMENT' || game.phase === 'KEY_MATCH_MOMENT_RESULT' || (game.phase === 'SIMULATION_READY' && game.pendingKeyMatchMoment)) {
+      screen = <KeyMatchMomentScreen />
     } else if (
       game.phase === 'HALF_YEAR_PLAN' ||
       game.phase === 'SIMULATION_READY'

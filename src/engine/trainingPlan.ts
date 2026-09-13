@@ -20,7 +20,7 @@ export function normalizeTrainingFocus(focus: TrainingFocus | null, age: number)
   return focus
 }
 export function normalizePendingTraining(state: GameState): GameState {
-  if (!['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY'].includes(state.phase)) return state
+  if (!['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY', 'KEY_MATCH_MOMENT', 'KEY_MATCH_MOMENT_RESULT'].includes(state.phase)) return state
   const trainingFocus = normalizeTrainingFocus(state.trainingFocus, playerAgeAtWindow(state.windowIndex))
   return trainingFocus === state.trainingFocus ? state : { ...state, trainingFocus }
 }

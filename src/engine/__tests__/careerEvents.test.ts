@@ -27,6 +27,7 @@ function createState(windowIndex = 1): GameState {
   const academyOffers = generateAcademyOffers(player, careerSeed)
   const offer = academyOffers[0]!
   return {
+    pendingKeyMatchMoment: null,
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'HALF_YEAR_PLAN',

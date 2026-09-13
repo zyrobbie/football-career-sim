@@ -1,0 +1,172 @@
+[
+  {
+    "id": "P1-A-forward",
+    "pending": "docs/evidence/KMM-20260913/P1-A/review-fixtures/forward.json",
+    "pendingSHA": "8f5a76acb3808393a6ed5027132921b51f6c3a7a71c829ee4667714138cf4230",
+    "archive": "outputs/KMM-20260913-P1-A/local-evidence.tar.gz",
+    "archiveSHA": "d6a4f23e16e0c16488c84d8cd6965dd890924d38d659b7cb5c8120d7ee5a7286",
+    "member": "pages/results.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-forward-result.json.gz",
+      "sha256": "ab782689c334c73b5aefd51d555714aeea4c08e6f997d9fbc36e28f20ab7888a"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-forward-report.json.gz",
+      "sha256": "d7fa470561b9abbc0bf362faaf363158900c6a9d6b3d1eaf6c71e27e7d360338"
+    }
+  },
+  {
+    "id": "P1-A-creative",
+    "pending": "docs/evidence/KMM-20260913/P1-A/review-fixtures/creative.json",
+    "pendingSHA": "e1275410d1784f41e3dba41d57519e7acaaee90e23bee5d5a0a9dcd73c0aff45",
+    "archive": "outputs/KMM-20260913-P1-A/local-evidence.tar.gz",
+    "archiveSHA": "d6a4f23e16e0c16488c84d8cd6965dd890924d38d659b7cb5c8120d7ee5a7286",
+    "member": "pages/results.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-creative-result.json.gz",
+      "sha256": "3e8269e309f14e23065673631d9f49e9efcca5bf4c82fe8925daaf8fdc5ed6b0"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-creative-report.json.gz",
+      "sha256": "f07549ecd25c223d25aaca386740149c9422bd779a2c20eaf66346b37179460f"
+    }
+  },
+  {
+    "id": "P1-A-mid-yellow",
+    "pending": "docs/evidence/KMM-20260913/P1-A/review-fixtures/mid-yellow.json",
+    "pendingSHA": "fcd4c307f7599a15b497163b6376d0b7ff5add525ffcd338356816d89cd472a8",
+    "archive": "outputs/KMM-20260913-P1-A/local-evidence.tar.gz",
+    "archiveSHA": "d6a4f23e16e0c16488c84d8cd6965dd890924d38d659b7cb5c8120d7ee5a7286",
+    "member": "pages/results.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-mid-yellow-result.json.gz",
+      "sha256": "13bd0ef5ed70addf855f950aaec7f67589a9e830c39f35c6ecf3cf4e447ea290"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-mid-yellow-report.json.gz",
+      "sha256": "9077e954cbaf4c0a86d7acca7b35f4911f9443508398a7d85697cfba1dc37808"
+    }
+  },
+  {
+    "id": "P1-A-fullback",
+    "pending": "docs/evidence/KMM-20260913/P1-A/review-fixtures/fullback.json",
+    "pendingSHA": "92e05301772c8e70a93cf1a4b7ccb860ff7af3f4cdcc92ed6d78dcd82f1ef430",
+    "archive": "outputs/KMM-20260913-P1-A/local-evidence.tar.gz",
+    "archiveSHA": "d6a4f23e16e0c16488c84d8cd6965dd890924d38d659b7cb5c8120d7ee5a7286",
+    "member": "pages/results.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-fullback-result.json.gz",
+      "sha256": "3d2ed59204186b42aeb07bf83fb8dc70fa14c00c4406c679d2a258e080d53e99"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-fullback-report.json.gz",
+      "sha256": "e0791ad8ac1bce60d9271c7af7a09cb4f706e1b2baa4e48f5f6855f80f38a6a9"
+    }
+  },
+  {
+    "id": "P1-A-defender-yellow",
+    "pending": "docs/evidence/KMM-20260913/P1-A/review-fixtures/defender-yellow.json",
+    "pendingSHA": "2979af92f07e24188d202dc4c8e96616642ea5d83e17f510f4feb8d0e61c3dc8",
+    "archive": "outputs/KMM-20260913-P1-A/local-evidence.tar.gz",
+    "archiveSHA": "d6a4f23e16e0c16488c84d8cd6965dd890924d38d659b7cb5c8120d7ee5a7286",
+    "member": "pages/results.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-defender-yellow-result.json.gz",
+      "sha256": "b61d2caf41752bb5cc598ef47fe5ab403aebc6112e24f96d97e2cbf6c7991302"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-A-defender-yellow-report.json.gz",
+      "sha256": "ea3e48d37352b2df872e3a21d2c662fbcc581c8832ef0fd799de99574c7ae6a5"
+    }
+  },
+  {
+    "id": "P1-B-forward",
+    "pending": "docs/evidence/KMM-20260913/P1-B/review-fixtures/forward.json",
+    "pendingSHA": "31061bfbbc92317e334368c5adb8e5f3155c54149618ac0091e24c751a002102",
+    "archive": "outputs/KMM-20260913-P1-B/local-evidence.tar.gz",
+    "archiveSHA": "b8be539d7080c8fde45be1f4cd686086b01c34d5d576c0938fba077c9f1647b0",
+    "member": "pages-final.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-forward-result.json.gz",
+      "sha256": "3484063455711200774f822aca7946e7f3e4ecc06fca9f90ba2ea89890805966"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-forward-report.json.gz",
+      "sha256": "5c5c7150445ac1886b04e4a1b912c015a51fa186c700594e579ec30e96339a39"
+    }
+  },
+  {
+    "id": "P1-B-creative",
+    "pending": "docs/evidence/KMM-20260913/P1-B/review-fixtures/creative.json",
+    "pendingSHA": "628a0ef5beb2e17adfadc802efe8f57873ae21be9549285b97b17808ee96c7e7",
+    "archive": "outputs/KMM-20260913-P1-B/local-evidence.tar.gz",
+    "archiveSHA": "b8be539d7080c8fde45be1f4cd686086b01c34d5d576c0938fba077c9f1647b0",
+    "member": "pages-final.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-creative-result.json.gz",
+      "sha256": "02061b33c8620804bb7d727c6bd8c5b3dd702bbb398745105eb4757fb7df00ff"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-creative-report.json.gz",
+      "sha256": "2eeaf918a797c648bb651edfd1b6bf140a4f40cd4104a70a4904093c9bcba3ec"
+    }
+  },
+  {
+    "id": "P1-B-mid",
+    "pending": "docs/evidence/KMM-20260913/P1-B/review-fixtures/mid.json",
+    "pendingSHA": "53d8a74b3081567462abcd83fa15d93311ad8bf239f5c9861b26a6cc8d74e941",
+    "archive": "outputs/KMM-20260913-P1-B/local-evidence.tar.gz",
+    "archiveSHA": "b8be539d7080c8fde45be1f4cd686086b01c34d5d576c0938fba077c9f1647b0",
+    "member": "pages-final.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-mid-result.json.gz",
+      "sha256": "a358b12763b61a592fbd70ab3e185c20120e87ae85b784c6dbd136e0d2e40d39"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-mid-report.json.gz",
+      "sha256": "63ead6a2dbe9486873c1275788db921e3213aa14df9ffb64e1ef1b49fb8e20f1"
+    }
+  },
+  {
+    "id": "P1-B-fullback",
+    "pending": "docs/evidence/KMM-20260913/P1-B/review-fixtures/fullback.json",
+    "pendingSHA": "d4d11ff5e450537cfe228fa6de9c00aa997e69cda80d0b8371dec0fca398aaf2",
+    "archive": "outputs/KMM-20260913-P1-B/local-evidence.tar.gz",
+    "archiveSHA": "b8be539d7080c8fde45be1f4cd686086b01c34d5d576c0938fba077c9f1647b0",
+    "member": "pages-final.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-fullback-result.json.gz",
+      "sha256": "6a129dbf6e816e6492cbefdef3eaf7a28686dff1f4aa5446938dcc6458eea4f8"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-fullback-report.json.gz",
+      "sha256": "dde991e96515784cfb260102f157cc7ed7d927ff578bd437ea28b9b50c11006f"
+    }
+  },
+  {
+    "id": "P1-B-defender",
+    "pending": "docs/evidence/KMM-20260913/P1-B/review-fixtures/defender.json",
+    "pendingSHA": "33180f57a821b3ab9ebbde692cce73feb924f557a6a022319a4f345ad3c58982",
+    "archive": "outputs/KMM-20260913-P1-B/local-evidence.tar.gz",
+    "archiveSHA": "b8be539d7080c8fde45be1f4cd686086b01c34d5d576c0938fba077c9f1647b0",
+    "member": "pages-final.json",
+    "choice": "A",
+    "result": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-defender-result.json.gz",
+      "sha256": "c9dca2cb734398b9bbedbd59228d12b0c2a185095b4c3576fe17bc41c917c781"
+    },
+    "report": {
+      "path": "docs/evidence/KMM-20260913/P1-C/legacy-fixtures/P1-B-defender-report.json.gz",
+      "sha256": "dd52554065f4fc6eaa863c8d311883bf3cf969d6953608505e639151c471888b"
+    }
+  }
+]

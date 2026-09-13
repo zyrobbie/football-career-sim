@@ -1,3 +1,5 @@
+import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
 import {afterAll,afterEach,it,expect,vi} from 'vitest'
 import {readFileSync,writeFileSync} from 'node:fs'
 import {createHash} from 'node:crypto'
@@ -18,8 +20,8 @@ it.each(cases)('one new settlement after %s %s %s',(name,action,choice)=>{
  const write=vi.fn((key:string,value:string)=>{m.set(key,value);writes.push({key,value})})
  vi.stubGlobal('window',{localStorage:{getItem:(k:string)=>m.get(k)??null,setItem:write,removeItem:(k:string)=>m.delete(k)}})
  useGameStore.setState({game:null,error:null,isReviewingReport:false,voluntaryRetirementConfirmation:null});expect(m.has('career_save_backup')).toBe(false)
- expect(sha(input.raw)).toBe(input.inputSHA);expect(loadGame()).toEqual(input.input);s().continueCareer();expect(s().game).toEqual(input.input)
- const start={...structuredClone(input.input),phase:'HALF_YEAR_REPORT' as const};saveGame(start);s().continueCareer();expect(s().game).toEqual(start)
+ expect(sha(input.raw)).toBe(input.inputSHA);expect(loadGame()).toEqual(currentSchemaExpected(input.input));s().continueCareer();expect(s().game).toEqual(currentSchemaExpected(input.input))
+ const start={...currentSchemaExpected(structuredClone(input.input)),phase:'HALF_YEAR_REPORT' as const};saveGame(start);s().continueCareer();expect(s().game).toEqual(start)
  const steps:unknown[]=[]
  function run(label:string,fn:()=>void,settles=false,event=false){const before=structuredClone(s().game!),offset=writes.length;fn();expect(s().error,label).toBeNull();const after=structuredClone(s().game!);const saved=m.get('career_save_current')!;expect(JSON.parse(saved).data).toEqual(after)
   if(!settles&&!event)expect(facts(after)).toEqual(facts(before))
@@ -51,7 +53,7 @@ it.each(cases)('one new settlement after %s %s %s',(name,action,choice)=>{
   run('event result continue/simulation',()=>s().continueAfterCareerEvent(),true)
   stale('repeat event result',()=>s().continueAfterCareerEvent())
  }
- const report=structuredClone(s().game!);expect(report.phase).toBe('HALF_YEAR_REPORT');expect(report.history.length).toBe(start.history.length+1);expect(report.history.slice(0,start.history.length)).toEqual(start.history);expect(report.history.at(-1)!.windowIndex).toBe(plan.windowIndex)
+ completePendingMoment(s); const report=structuredClone(s().game!);expect(report.phase).toBe('HALF_YEAR_REPORT');expect(report.history.length).toBe(start.history.length+1);expect(report.history.slice(0,start.history.length)).toEqual(start.history);expect(report.history.at(-1)!.windowIndex).toBe(plan.windowIndex)
  expect(report.careerEventHistory.slice(0,start.careerEventHistory.length)).toEqual(start.careerEventHistory);expect(Number.isFinite(report.cashEuro)).toBe(true)
  s().continueCareer();expect(s().game).toEqual(report);s().continueCareer();expect(s().game).toEqual(report)
  const next=professionalNextAction(report).primary!;expect(next).not.toBeNull();run('new report legal next '+next.action,()=>s().advanceProfessionalReport(next.action,report.windowIndex,report.careerSeed))

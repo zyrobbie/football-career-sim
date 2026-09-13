@@ -1,3 +1,6 @@
+import type { MomentActionContext } from '../models/keyMatchMoment'
+import { createKeyMatchMoment, resolveKeyMatchMoment, momentSnapshot, validateMomentContext, MomentRecoveryError } from '../engine/keyMatchMoments'
+import { canonicalSimulationBase, prepareReadySimulation } from '../engine/simulationPreparation'
 import { allowsProfessionalAction, professionalNextAction, type ProfessionalAction, type CareerWindowContext, type VoluntaryRetirementConfirmation } from './professionalNextAction'
 import { restoreMarketContext } from './marketContext'
 import { canEditCareerPreferences, normalizeCareerPreferences } from './careerPreferences'
@@ -19,7 +22,6 @@ import { createCareerSeed } from '../engine/random'
 import {
   attachCareerEventToReport,
   careerEventIsEligible,
-  consumeCareerConsequences,
   eligibleCareerEventChoices,
   getCareerEvent,
   resolveCareerEventChoice,
@@ -73,6 +75,7 @@ import {
   hasSavedCareer,
   loadGame,
   saveGame,
+  validateGameState,
 } from '../persistence/save'
 
 interface GameStore {
@@ -104,6 +107,8 @@ interface GameStore {
   ) => void
   chooseCareerEvent: (choice: CareerEventChoiceId) => void
   continueAfterCareerEvent: () => void
+  chooseKeyMatchMoment: (choiceId: string, expected: MomentActionContext) => void
+  finishKeyMatchMoment: (expected: MomentActionContext) => void
   advanceProfessionalReport: (action: ProfessionalAction, expectedWindowIndex: number, expectedCareerSeed?: string) => void
   advanceAfterReport: () => void
   reviewReport: () => void
@@ -173,6 +178,7 @@ function createInitialGame(): GameState {
     arrivalChoice: null,
     transferArrivalChoice: null,
     pendingCareerEvent: null,
+    pendingKeyMatchMoment: null,
     careerEventHistory: [],
     pendingConsequences: [],
     careerStory: createCareerStoryState(),
@@ -188,15 +194,8 @@ function createInitialGame(): GameState {
   }
 }
 
-export const useGameStore = create<GameStore>((set, get) => {
-  const commit = (next: GameState) => {
-    const normalized = enforceAgeBasedFirstTeam(next)
-    saveGame(normalized)
-    set({ game: normalized, hasSave: true, error: null, isReviewingReport: false, voluntaryRetirementConfirmation: null })
-  }
-
-  const runReadySimulation = (inputState: GameState) => {
-    const state = normalizePendingTraining(inputState)
+export function runReadySimulation(inputState: GameState, options: { keyMatchMoments?: boolean } = {}): GameState {
+    const state = canonicalSimulationBase(inputState)
     if (
       state.phase !== 'SIMULATION_READY' ||
       !state.player ||
@@ -205,34 +204,18 @@ export const useGameStore = create<GameStore>((set, get) => {
     ) {
       return state
     }
-    const offer =
-      state.academyOffers.find(
-        (candidate) => candidate.club.id === state.selectedClubId,
-      ) ??
-      buildClubSimulationOffer(
-        state.selectedClubId,
-        state.youthRole ?? 'ROTATION',
-      )
-    if (!offer) throw new Error('当前俱乐部信息不完整，这半年暂时无法模拟。')
-    const consequences = consumeCareerConsequences(state)
-    const simulationState: GameState = {
-      ...state,
-      player: consequences.player,
-      pendingConsequences: consequences.pendingConsequences,
-      trainingQualityBonus:
-        state.trainingQualityBonus + consequences.trainingBonus,
-    }
-    const currentEventRecord = [...state.careerEventHistory]
-      .reverse()
-      .find((entry) => entry.windowIndex === state.windowIndex) ?? null
+    validateMomentContext(state)
+    const {offer, consequences, simulationState, currentEventRecord} = prepareReadySimulation(state)
     if (
       simulationState.contract &&
       simulationState.windowIndex >= DEMO_WINDOW_COUNT
     ) {
-      const result = simulateProfessionalHalfYear({
-        state: simulationState,
-        offer,
-      })
+      const pending = state.pendingKeyMatchMoment
+      const result = simulateProfessionalHalfYear({state: simulationState, offer, momentResolution: pending?.resolution ?? undefined})
+      if (!pending && options.keyMatchMoments !== false) {
+        const moment = createKeyMatchMoment(state, result.report)
+        if (moment) return {...state, phase: 'KEY_MATCH_MOMENT', pendingKeyMatchMoment: moment}
+      }
       const clubReport = attachCareerEventToReport({
         report: result.report,
         record: currentEventRecord,
@@ -282,12 +265,14 @@ export const useGameStore = create<GameStore>((set, get) => {
       }
       const report = {
         ...reportWithNationalTeam,
+        ...(pending?.snapshot ? {keyMatchMoment: pending.snapshot} : {}),
         clubSeason: honorSettlement.clubSeason,
         honors: honorSettlement.honors,
       }
       return {
         ...simulationState,
         phase: 'HALF_YEAR_REPORT',
+        pendingKeyMatchMoment: null,
         pendingCareerEvent: null,
         trainingQualityBonus: 0,
         player: settledPlayer,
@@ -307,6 +292,7 @@ export const useGameStore = create<GameStore>((set, get) => {
             clubName: offer.club.name,
             role: report.contract?.actualRole ?? report.roleBefore,
             stats: report.stats,
+            ...(pending?.snapshot ? {keyMatchMoment: pending.snapshot} : {}),
             arrivalChoice: null,
             trainingFocus: state.trainingFocus,
             developmentApproach: state.developmentApproach,
@@ -378,6 +364,33 @@ export const useGameStore = create<GameStore>((set, get) => {
         },
       ],
     } satisfies GameState
+  }
+
+
+export const useGameStore = create<GameStore>((set, get) => {
+  const commit = (next: GameState) => {
+    const normalized = canonicalSimulationBase(next.saveVersion === SAVE_VERSION ? next : validateGameState(next))
+    saveGame(normalized)
+    set({ game: normalized, hasSave: true, error: null, isReviewingReport: false, voluntaryRetirementConfirmation: null })
+  }
+
+
+  const momentActionState = (expected: MomentActionContext, required: GamePhase): GameState | null => {
+    const game = get().game, p = game?.pendingKeyMatchMoment
+    if (!game || !p || game.phase !== required || game.careerSeed !== expected.careerSeed || game.player?.id !== expected.playerId || game.windowIndex !== expected.windowIndex || game.selectedClubId !== expected.clubId || p.id !== expected.momentId || p.inputFingerprint !== expected.inputFingerprint) return null
+    // A write may have succeeded before the old page heard about it. Read first,
+    // so retrying another choice cannot replace that already durable decision.
+    const saved = loadGame()
+    if (!saved || saved.careerSeed !== game.careerSeed) throw new MomentRecoveryError('磁盘进度已变化。')
+    if (saved.phase === 'HALF_YEAR_REPORT' && saved.lastReport?.keyMatchMoment?.id === p.id) {
+      set({game:saved,error:null}); return null
+    }
+    if (saved.pendingKeyMatchMoment?.id !== p.id || saved.pendingKeyMatchMoment.inputFingerprint !== p.inputFingerprint) throw new MomentRecoveryError()
+    if (saved.phase !== game.phase || saved.pendingKeyMatchMoment.selectedChoiceId !== p.selectedChoiceId) {
+      set({game:saved,error:null}); return null
+    }
+    validateMomentContext(saved)
+    return saved
   }
 
   return {
@@ -705,8 +718,24 @@ export const useGameStore = create<GameStore>((set, get) => {
         phase: 'SIMULATION_READY',
         pendingCareerEvent: null,
       }
-      commit(ready)
-      commit(runReadySimulation(ready))
+      try { commit(ready); commit(runReadySimulation(ready)) }
+      catch (error) { set({error: error instanceof Error ? error.message : '比赛进度未保存，请重新载入。'}) }
+    },
+
+    chooseKeyMatchMoment: (choiceId, expected) => {
+      try {
+        const game=momentActionState(expected,'KEY_MATCH_MOMENT'); if(!game) return
+        const pending=game.pendingKeyMatchMoment!, resolution=resolveKeyMatchMoment(pending,choiceId)
+        commit({...game,phase:'KEY_MATCH_MOMENT_RESULT',pendingKeyMatchMoment:{...pending,selectedChoiceId:choiceId,resolution,snapshot:momentSnapshot(game,pending,resolution)}})
+      } catch(error) { set({error:error instanceof Error?error.message:'这次选择未保存，请重试。'}) }
+    },
+    finishKeyMatchMoment: (expected) => {
+      try {
+        const game=momentActionState(expected,'KEY_MATCH_MOMENT_RESULT'); if(!game)return
+        const ready:GameState={...game,phase:'SIMULATION_READY'}
+        commit(ready)
+        commit(runReadySimulation(ready))
+      } catch(error) { set({error:error instanceof Error?error.message:'这半年未保存，请重新载入。'}) }
     },
 
     advanceProfessionalReport: (action, expectedWindowIndex, expectedCareerSeed) => {

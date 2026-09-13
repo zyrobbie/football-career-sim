@@ -1,3 +1,5 @@
+import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
 import {afterAll,afterEach,expect,it,vi} from 'vitest'
 import {readFileSync,writeFileSync} from 'node:fs'
 import {createHash} from 'node:crypto'
@@ -16,8 +18,8 @@ it.each(matrix.branches)('direct raw chain $id $name',b=>{
  const old=JSON.parse(raw).data as GameState,memory=new Map([['career_save_current',raw]]),writes:{key:string;value:string}[]=[]
  vi.stubGlobal('window',{localStorage:{getItem:(k:string)=>memory.get(k)??null,setItem:(key:string,value:string)=>{memory.set(key,value);writes.push({key,value})},removeItem:(k:string)=>memory.delete(k)}})
  useGameStore.setState({game:null,error:null,isReviewingReport:false,voluntaryRetirementConfirmation:null});expect(memory.has('career_save_backup')).toBe(false)
- const loaded=loadGame()!;expect(loaded).toEqual({...old,saveVersion:12,dataVersion:12});const canonical=normalizePendingTraining(restoreMarketContext(loaded))
- s().continueCareer();expect(s().error).toBeNull();const first=structuredClone(s().game!)
+ const loaded=loadGame()!;expect(loaded).toEqual(currentSchemaExpected(old));const canonical=normalizePendingTraining(restoreMarketContext(loaded))
+ s().continueCareer();completePendingMoment(s);expect(s().error).toBeNull();const first=structuredClone(s().game!)
  if(old.phase==='SIMULATION_READY'){expect(first.history.length).toBe(old.history.length+1);expect(first.history.at(-1)!.trainingFocus).toBe(canonical.trainingFocus)}else expect(first).toEqual(canonical)
  expect(first.history.slice(0,old.history.length)).toEqual(old.history)
  const steps:unknown[]=[]
@@ -33,7 +35,8 @@ it.each(matrix.branches)('direct raw chain $id $name',b=>{
    case 'HALF_YEAR_PLAN':{const model=trainingPlanView(g),focus=model.recovery?'BODY_CARE':model.initialFocus,selection=trainingSubmission(g,{focus,approach:'STEADY'})!;act('chooseTraining',()=>s().chooseTraining(selection.focus,selection.approach,{windowIndex:g.windowIndex,careerSeed:g.careerSeed}));break}
    case 'SPECIAL_EVENT':{const p=g.pendingCareerEvent!,e=getCareerEvent(p.eventId),eligible=eligibleCareerEventChoices(g,e),route=e.setup?.options.find(o=>o.id===p.variantId);const id=e.setup&&p.stepIndex===0?e.setup.options.find(o=>o.choiceIds.some(id=>eligible.some(c=>c.id===id)))!.id:eligible.find(c=>!route||route.choiceIds.includes(c.id))!.id;act('chooseCareerEvent',()=>s().chooseCareerEvent(id));break}
    case 'SPECIAL_EVENT_RESULT':act('continueAfterCareerEvent',()=>s().continueAfterCareerEvent());break
-   case 'HALF_YEAR_REPORT':case 'PRO_STAGE_COMPLETE':{
+   case 'KEY_MATCH_MOMENT': case 'KEY_MATCH_MOMENT_RESULT': completePendingMoment(s); break
+    case 'HALF_YEAR_REPORT':case 'PRO_STAGE_COMPLETE':{
     if(!g.contract){act('advanceAfterReport',()=>s().advanceAfterReport());break}
     const model=professionalNextAction(g),action=b.policy==='stay'&&model.secondary.some(x=>x.action==='STAY')?'STAY':model.primary!.action;act('advanceProfessionalReport',()=>s().advanceProfessionalReport(action,g.windowIndex,g.careerSeed));break
    }

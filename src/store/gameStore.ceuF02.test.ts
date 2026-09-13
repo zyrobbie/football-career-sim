@@ -1,3 +1,5 @@
+import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
 import { afterAll, afterEach, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -21,7 +23,7 @@ function install(name:string,phase?:GamePhase){
  vi.stubGlobal('window',{localStorage:{getItem:(k:string)=>memory.get(k)??null,setItem:write,removeItem:(k:string)=>memory.delete(k)}})
  useGameStore.setState({game:null,error:null,isReviewingReport:false,voluntaryRetirementConfirmation:null})
  expect(memory.has('career_save_backup')).toBe(false)
- expect(persistence.loadGame()).toEqual(source.input);s().continueCareer();expect(s().game).toEqual(source.input)
+ expect(persistence.loadGame()).toEqual(currentSchemaExpected(source.input));s().continueCareer();expect(s().game).toEqual(currentSchemaExpected(source.input))
  if(phase){useGameStore.setState({game:{...s().game!,phase}})} // Explicit phase-only construction AFTER direct original raw load.
  write.mockClear()
  return {source,memory,write}
@@ -101,7 +103,7 @@ it('only trains a current PLAN; wrong phase and stale callbacks cannot simulate'
   s().chooseCareerEvent(event.setup&&pending.stepIndex===0?event.setup.options[0]!.id:route?.choiceIds[0]??event.choices[0]!.id)
  }
  if(s().game!.phase==='SPECIAL_EVENT_RESULT')s().continueAfterCareerEvent()
- expect(s().game!.phase).toBe('HALF_YEAR_REPORT');expect(s().game!.history).toHaveLength(plan.history.length+1);expect(s().game!.history.slice(0,plan.history.length)).toEqual(plan.history)
+ completePendingMoment(s); expect(s().game!.phase).toBe('HALF_YEAR_REPORT');expect(s().game!.history).toHaveLength(plan.history.length+1);expect(s().game!.history.slice(0,plan.history.length)).toEqual(plan.history)
  const final=structuredClone(s().game!);s().chooseTraining('BALANCED','STEADY',current);s().continueAfterCareerEvent();expect(s().game).toEqual(final);roundtrip()
  rows.push({kind:'training-guard',before:report,plan,chosen,final})
 })
@@ -122,9 +124,9 @@ it.each(recoveryRows)('direct raw recovery $kind $name and legal successor',entr
  vi.stubGlobal('window',{localStorage:{getItem:(k:string)=>memory.get(k)??null,setItem:(k:string,v:string)=>memory.set(k,v),removeItem:(k:string)=>memory.delete(k)}})
  useGameStore.setState({game:null,error:null,isReviewingReport:false,voluntaryRetirementConfirmation:null})
  expect(memory.has('career_save_backup')).toBe(false)
- const loaded=persistence.loadGame()!;expect(loaded).toEqual(JSON.parse(entry.raw).data)
+ const loaded=persistence.loadGame()!;expect(loaded).toEqual(currentSchemaExpected(JSON.parse(entry.raw).data))
  const rng=vi.spyOn(random,'createRandom'),generator=vi.spyOn(transfers,'generateTransferOffers'),expiry=vi.spyOn(transfers,'generateContractExpiryOffers')
- s().continueCareer();expect(s().game).toEqual(entry.expected)
+ s().continueCareer();expect(s().game).toEqual(currentSchemaExpected(entry.expected))
  const before=structuredClone(s().game!)
  s().reviewReport();s().advanceProfessionalReport('MARKET',before.windowIndex,before.careerSeed);s().requestRetirement();s().retireFromNationalTeam();s().closeReportReview()
  s().openTransferWindow();s().advanceAfterReport();s().continueProfessionalCareer();expect(s().game).toEqual(before)

@@ -8576,3 +8576,24 @@ svg {
     width: 100%;
   }
 }
+
+/* KMM: compact V2.0 typography, scoped to the new opportunity and snapshot. */
+.key-moment { margin: 16px; max-width: 720px; color: var(--ink); font-size: 12px; line-height: 1.4; }
+.key-moment header { border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 8px; }
+.key-moment h1, .key-moment-summary h3 { font: inherit; font-size: 13px; font-weight: 700; line-height: 1.35; margin: 4px 0; white-space: normal; }
+.key-moment p, .key-moment-summary p { margin: 6px 0; white-space: normal; overflow-wrap: anywhere; }
+.key-moment__note, .key-moment header > span { color: var(--muted); }
+.key-moment__choices { display: grid; gap: 6px; margin: 8px 0; }
+.key-moment__choice { border: 1px solid var(--line); background: var(--paper); min-width: 0; }
+.key-moment__choice button { width: 100%; min-height: 54px; text-align: left; border: 0; padding: 8px; background: transparent; color: var(--ink); font: inherit; cursor: pointer; }
+.key-moment__choice button strong { display: block; font-size: 12px; line-height: 1.35; white-space: normal; }
+.key-moment__choice button span { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 11px; line-height: 1.35; margin-top: 4px; }
+.key-moment__choice button em { font-style: normal; color: var(--muted); }
+.key-moment__choice button:hover, .key-moment__choice button:focus-visible { background: var(--panel); outline: 2px solid var(--ink); outline-offset: -2px; }
+.key-moment details, .key-moment-summary details { font-size: 12px; margin: 0 8px; }
+.key-moment summary, .key-moment-summary summary, .key-moment-history > summary { min-height: 44px; padding: 12px 0; cursor: pointer; line-height: 1.4; }
+.key-moment .key-moment__finish { min-height: 44px; margin-top: 8px; padding: 8px 12px; font-size: 12px; white-space: normal; }
+.key-moment-summary { min-width: 0; padding: 8px; margin: 8px 0; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 12px; line-height: 1.4; }
+.key-moment-summary__contribution { font-weight: 600; }
+.key-moment-history { font-size: 12px; border-top: 1px solid var(--line); }
+@media (max-width: 760px) { .key-moment { margin: 8px 8px 88px; } }

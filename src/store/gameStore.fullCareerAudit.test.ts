@@ -1,3 +1,4 @@
+import { completePendingMoment, installTestStorage } from '../testing/keyMatchMomentTestSupport'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 const seedControl = vi.hoisted(() => ({ current: 'uninitialized-career-seed' }))
@@ -34,6 +35,7 @@ const baseScenarios: readonly Omit<CareerAuditScenario, 'seed'>[] = [
 ]
 const scenarios = baseScenarios.flatMap((scenario, index) => [0, 1, 2].map((variant) => ({ ...scenario, seed: `full-career-${index}-${variant}` })))
 const firstTeamRoleRank: Record<FirstTeamRole, number> = { FRINGE: 0, SUBSTITUTE: 1, ROTATION: 2, STARTER: 3, CORE: 4 }
+const completedAuditResults = new Map<string, CareerAuditResult>()
 let transitionCounts = { permanent: 0, renewal: 0, free: 0, stay: 0 }
 
 function numeric(value: number, label: string) { expect(Number.isFinite(value), label).toBe(true); expect(value, label).toBeGreaterThanOrEqual(0) }
@@ -96,7 +98,9 @@ function driveCareer(scenario: CareerAuditScenario): CareerAuditResult {
     if (game.phase === 'CAREER_RETIRED') {
       const retirementSummary = buildRetirementSummary(game); for (const value of [retirementSummary.age, retirementSummary.finalOverall, retirementSummary.peakOverall, retirementSummary.potentialOverall, retirementSummary.finalMarketValueEuro, retirementSummary.peakMarketValueEuro, retirementSummary.evaluation.completedPoints]) numeric(value, 'retirement summary')
       const eventCountsById = game.careerEventHistory.reduce<Record<string, number>>((counts, event) => ({ ...counts, [event.eventId]: (counts[event.eventId] ?? 0) + 1 }), {}); const interactionKindCounts = game.careerEventHistory.reduce<Record<string, number>>((counts, event) => { const kind = getCareerEvent(event.eventId).interactionKind; return { ...counts, [kind]: (counts[kind] ?? 0) + 1 } }, {}); const tierWindows = game.history.reduce<Record<string, number>>((counts, entry) => { const tier = getClubParametersByCompatibleId(entry.clubId)?.platformTier; return { ...counts, [`T${tier}`]: (counts[`T${tier}`] ?? 0) + 1 } }, {})
-      return { scenario, game, actionCount, maxWindowIndex, retirementSummary, eventCount: game.careerEventHistory.length, eventCountsById, interactionKindCounts, transferCount: transitionCounts.permanent, renewalCount: transitionCounts.renewal, freeTransferCount: transitionCounts.free, stayCount: transitionCounts.stay, clubIds: [...new Set(game.history.map((entry) => entry.clubId))], tierWindows }
+      const result = { scenario, game, actionCount, maxWindowIndex, retirementSummary, eventCount: game.careerEventHistory.length, eventCountsById, interactionKindCounts, transferCount: transitionCounts.permanent, renewalCount: transitionCounts.renewal, freeTransferCount: transitionCounts.free, stayCount: transitionCounts.stay, clubIds: [...new Set(game.history.map((entry) => entry.clubId))], tierWindows }
+      completedAuditResults.set(scenario.seed, result)
+      return result
     }
     switch (game.phase) {
       case 'ACADEMY_OFFERS': action('selectAcademy', () => store().selectAcademy(game.academyOffers[steps % game.academyOffers.length]!.club.id)); break
@@ -104,7 +108,8 @@ function driveCareer(scenario: CareerAuditScenario): CareerAuditResult {
       case 'HALF_YEAR_PLAN': { const training = trainingFor(game, scenario); action('chooseTraining', () => store().chooseTraining(training.focus, training.approach)); break }
       case 'SPECIAL_EVENT': { const pending = game.pendingCareerEvent!; const event = getCareerEvent(pending.eventId); const eligible = eligibleCareerEventChoices(game, event); const route = event.setup?.options.find((option) => option.id === pending.variantId); const choices = event.setup && pending.stepIndex === 0 ? event.setup.options.filter((option) => option.choiceIds.some((id) => eligible.some((choice) => choice.id === id))).map((option) => option.id) : eligible.filter((choice) => !route || route.choiceIds.includes(choice.id)).map((choice) => choice.id); if (!choices.length) throw new Error(`no eligible event option seed=${scenario.seed} window=${game.windowIndex} event=${event.id} kind=${pending.interactionKind} eligible=${eligible.map((choice) => choice.id)}`); const choice = choices[steps % choices.length]!; if (route) expect(route.choiceIds).toContain(choice); if (!route && !(event.setup && pending.stepIndex === 0)) expect(eligible.map((option) => option.id)).toContain(choice); action('chooseCareerEvent', () => store().chooseCareerEvent(choice)); break }
       case 'SPECIAL_EVENT_RESULT': action('continueAfterCareerEvent', () => store().continueAfterCareerEvent()); break
-      case 'HALF_YEAR_REPORT': action('advanceAfterReport', () => store().advanceAfterReport()); break
+      case 'KEY_MATCH_MOMENT': case 'KEY_MATCH_MOMENT_RESULT': completePendingMoment(store); break
+    case 'HALF_YEAR_REPORT': action('advanceAfterReport', () => store().advanceAfterReport()); break
       case 'CAREER_DASHBOARD': action('openProfessionalContract', () => store().openProfessionalContract()); break
       case 'PRO_CONTRACT_OFFER': action('acceptProfessionalContract', () => store().acceptProfessionalContract()); break
       case 'PRO_CONTRACT_COMPLETE': action('startProfessionalCareer', () => store().startProfessionalCareer()); break
@@ -118,9 +123,9 @@ function driveCareer(scenario: CareerAuditScenario): CareerAuditResult {
   }
   throw new Error(`audit exceeded action limit seed=${scenario.seed} phase=${store().game?.phase} window=${store().game?.windowIndex}`)
 }
-function resetStore() { useGameStore.setState({ game: null, hasSave: false, error: null }); transitionCounts = { permanent: 0, renewal: 0, free: 0, stay: 0 } }
+function resetStore() { installTestStorage(); useGameStore.setState({ game: null, hasSave: false, error: null }); transitionCounts = { permanent: 0, renewal: 0, free: 0, stay: 0 } }
 beforeEach(() => { vi.useFakeTimers(); vi.setSystemTime(new Date('2026-08-16T00:00:00Z')); resetStore() })
-afterEach(() => { vi.useRealTimers() })
+afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals() })
 function deterministicSummary(result: CareerAuditResult) { return { seed: result.game.careerSeed, phase: result.game.phase, retirementReason: result.game.retirementReason, actionCount: result.actionCount, history: result.game.history, nationalTeam: result.game.nationalTeam, eventHistory: result.game.careerEventHistory, cashEuro: result.game.cashEuro, summary: result.retirementSummary, transfers: { stay: result.stayCount, renewal: result.renewalCount, permanent: result.transferCount, free: result.freeTransferCount } } }
 function mean(values: number[]) { return Math.round(values.reduce((total, value) => total + value, 0) / values.length * 100) / 100 }
 function median(values: number[]) { const sorted = [...values].sort((a, b) => a - b); const middle = Math.floor(sorted.length / 2); return sorted.length % 2 ? sorted[middle]! : (sorted[middle - 1]! + sorted[middle]!) / 2 }
@@ -139,4 +144,4 @@ function auditSummary(results: CareerAuditResult[]) {
 }
 describe('36 full public gameStore career audits', () => { it.each(scenarios)('$seed · $primaryPosition · $intent · $marketPolicy · $trainingPolicy', (scenario) => { const result = driveCareer(scenario); expect(result.game.phase).toBe('CAREER_RETIRED'); expect(result.game.retirementReason).toBe('AGE_LIMIT'); expect([39, 40]).toContain(result.retirementSummary.age); if (result.retirementSummary.age === 39) { expect(result.game.contract?.remainingHalfYears).toBe(0); expect(shouldRetireAtContractExpiry(result.game.windowIndex)).toBe(true) }; expect(useGameStore.getState().error).toBeNull(); expect(result.actionCount).toBeLessThan(1000) }) })
 describe('full-career audit determinism', () => { const selected = [scenarios[0]!, scenarios[4]!, scenarios[8]!, scenarios[13]!, scenarios[19]!, scenarios[25]!]; it.each(selected)('replays $seed exactly', (scenario) => { const first = driveCareer(scenario); resetStore(); const second = driveCareer(scenario); expect(deterministicSummary(second)).toEqual(deterministicSummary(first)) }) })
-describe('full-career audit aggregate', () => { it('emits stable statistics from all 36 completed careers', () => { const results = scenarios.map((scenario) => { resetStore(); return driveCareer(scenario) }); const summary = auditSummary(results); expect(summary.completed).toBe(36); expect(summary.retirement.reasons).toEqual({ AGE_LIMIT: 36 }); expect(summary.retirement.ages['40']).toBeGreaterThan(0); console.info(`FULL_CAREER_AUDIT_JSON=${JSON.stringify(summary)}`) }, 30_000) })
+describe('full-career audit aggregate', () => { it('emits stable statistics from all 36 completed careers', () => { const results = scenarios.map((scenario) => { const result = completedAuditResults.get(scenario.seed); if (!result) throw new Error('Missing completed audit: '+scenario.seed); return result }); const summary = auditSummary(results); expect(summary.completed).toBe(36); expect(summary.retirement.reasons).toEqual({ AGE_LIMIT: 36 }); expect(summary.retirement.ages['40']).toBeGreaterThan(0); console.info(`FULL_CAREER_AUDIT_JSON=${JSON.stringify(summary)}`) }, 30_000) })

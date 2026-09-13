@@ -1,3 +1,4 @@
+import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
 import { afterEach, expect, it, vi } from 'vitest'
 import { writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -61,7 +62,8 @@ function drive(index:number){
    }
    case 'SPECIAL_EVENT':{const p=g.pendingCareerEvent!,e=getCareerEvent(p.eventId),eligible=eligibleCareerEventChoices(g,e),route=e.setup?.options.find(o=>o.id===p.variantId);const id=e.setup&&p.stepIndex===0?e.setup.options.find(o=>o.choiceIds.some(id=>eligible.some(c=>c.id===id)))!.id:eligible.find(c=>!route||route.choiceIds.includes(c.id))!.id;act('chooseCareerEvent',()=>s().chooseCareerEvent(id));break}
    case 'SPECIAL_EVENT_RESULT':act('continueAfterCareerEvent',()=>s().continueAfterCareerEvent());break
-   case 'HALF_YEAR_REPORT':{
+   case 'KEY_MATCH_MOMENT': case 'KEY_MATCH_MOMENT_RESULT': completePendingMoment(s); break
+    case 'HALF_YEAR_REPORT':{
     if(!g.contract){act('advanceAfterReport',()=>s().advanceAfterReport());break}
     if(age>=31)expect(g.lastReport!.eventSummary).toContain('本期训练：')
     const model=professionalNextAction(g);expect(model.primary).not.toBeNull()

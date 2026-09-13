@@ -285,6 +285,7 @@ function professionalState(seed: string, overall: AuditCase['overall'], club: Cl
   return {
     academy,
     state: {
+      pendingKeyMatchMoment: null,
       saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase: 'SIMULATION_READY', careerSeed: seed, startYear: 2026, windowIndex: PEAK_SEASON_START_WINDOW,
       draft, player: tunedPlayer, academyOffers: [academy], selectedClubId: club.id, teamLevel: 'FIRST_TEAM', youthRole: null,
       firstTeamRole: 'CORE', contract: contractFromOffer(professionalOffer), professionalOffer, transferOffers: [], selectedTransferChoiceId: null,

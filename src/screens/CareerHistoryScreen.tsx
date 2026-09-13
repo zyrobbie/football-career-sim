@@ -1,3 +1,4 @@
+import { KeyMatchMomentSummary } from '../components/KeyMatchMomentSummary'
 import { AppShell } from '../components/AppShell'
 import { CareerTopbar } from '../components/CareerTopbar'
 import { ClubCrest } from '../components/ClubCrest'
@@ -71,6 +72,7 @@ export function CareerHistoryScreen({ game }: { game: GameState }) {
           )}
         </section>
 
+        {game.history.some(entry=>entry.keyMatchMoment) ? <section className="history-screen__section" aria-label="比赛时刻回看"><header><h2>比赛时刻</h2></header>{[...game.history].reverse().filter(entry=>entry.keyMatchMoment).map(entry=><details className="key-moment-history" key={entry.windowIndex}><summary>第{entry.windowIndex+1}个半年 · {entry.clubName} · {entry.keyMatchMoment!.title}</summary><KeyMatchMomentSummary moment={entry.keyMatchMoment!}/></details>)}</section> : null}
         <section className="history-screen__section" aria-label="俱乐部生涯数据汇总">
           <header><Icon name="career" /><h2>俱乐部生涯</h2></header>
           {view.clubs.length === 0 ? <p className="history-screen__empty">你的俱乐部履历还没有开始。</p> : (

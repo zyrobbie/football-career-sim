@@ -1,3 +1,4 @@
+import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
 import { afterAll, afterEach, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -50,6 +51,7 @@ it.each(plan.branches as Array<{seed:string;source:string;policy:string}>)('boun
     action='chooseCareerEvent';args=[id];store().chooseCareerEvent(id);break
    }
    case 'SPECIAL_EVENT_RESULT':action='continueAfterCareerEvent';store().continueAfterCareerEvent();break
+   case 'KEY_MATCH_MOMENT': case 'KEY_MATCH_MOMENT_RESULT':action='completePendingMoment';completePendingMoment(store);break
    case 'SIMULATION_READY':action='continueCareer';store().continueCareer();break
    case 'HALF_YEAR_REPORT':action='advanceAfterReport';store().advanceAfterReport();break
    case 'PRO_STAGE_COMPLETE':{

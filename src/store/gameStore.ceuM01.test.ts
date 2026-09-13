@@ -1,3 +1,4 @@
+import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
 import { afterEach, afterAll, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -30,8 +31,8 @@ it.each(fixtures)('directly loads original envelope $name then legally continues
   expect(sha(raw)).toBe(entry.sha256); expect(Buffer.byteLength(raw)).toBe(entry.bytes)
   const original: GameState = JSON.parse(raw).data
   const memory = installRaw(raw)
-  expect(loadGame()).toEqual(original)
-  store().continueCareer(); expect(store().error).toBeNull(); expect(store().game).toEqual(original)
+  expect(loadGame()).toEqual(currentSchemaExpected(original))
+  store().continueCareer(); expect(store().error).toBeNull(); expect(store().game).toEqual(currentSchemaExpected(original))
   const offer = original.transferOffers.find(o => o.id === original.selectedTransferChoiceId && !o.withdrawn) ?? original.transferOffers.find(o => o.type === 'RENEWAL' && !o.withdrawn) ?? original.transferOffers.find(o => !o.withdrawn)
   const choice = offer?.id ?? (original.contract!.remainingHalfYears > 0 ? 'STAY' : null)
   expect(choice).not.toBeNull()
@@ -54,11 +55,11 @@ it.each(['regular-reentry', 'expiry-reentry', 'empty-reentry', 'empty-forced-ree
   const row = json(`${G}/reentry.json`).find((r: { kind: string }) => r.kind === kind)
   const before: GameState = row.before
   // Explicit in-memory reconstruction of a frozen defect setup, separate from the eight raw-envelope tests.
-  installRaw(''); saveGame(before); store().continueCareer(); expect(store().game).toEqual(before)
+  installRaw(''); saveGame(before); store().continueCareer(); expect(store().game).toEqual(currentSchemaExpected(before))
   run('reviewReport'); run('advanceAfterReport'); run('openTransferWindow', kind === 'empty-forced-reentry' ? [true] : [])
   const after = structuredClone(store().game!)
   expect(store().error).toBeNull()
-  expect(after).toEqual(before)
+  expect(after).toEqual(currentSchemaExpected(before))
   store().closeReportReview()
   for (const key of ['cashEuro', 'history', 'careerEventHistory', 'lastReport'] as const) expect(after[key]).toEqual(before[key])
   risks.push({ kind, before, after, error: store().error, status: 'M-03 target: no regeneration, rejection or window advance' })

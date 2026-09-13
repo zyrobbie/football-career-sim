@@ -1,3 +1,5 @@
+import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
 import { professionalNextAction } from './professionalNextAction'
 import { afterEach, afterAll, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
@@ -31,6 +33,7 @@ function nextAction(game: GameState, focus: TrainingFocus, run: (name: string, a
       run('chooseCareerEvent', [choices[0]!], () => store().chooseCareerEvent(choices[0]!)); break
     }
     case 'SPECIAL_EVENT_RESULT': run('continueAfterCareerEvent', [], () => store().continueAfterCareerEvent()); break
+    case 'KEY_MATCH_MOMENT': case 'KEY_MATCH_MOMENT_RESULT': completePendingMoment(store); break
     case 'HALF_YEAR_REPORT': run('advanceAfterReport', [], () => store().advanceAfterReport()); break
     case 'CAREER_DASHBOARD': run('openProfessionalContract', [], () => store().openProfessionalContract()); break
     case 'PRO_CONTRACT_OFFER': run('acceptProfessionalContract', [], () => store().acceptProfessionalContract()); break
@@ -65,9 +68,9 @@ it.each(fixtures)('migrates and resumes $name from its untouched v11 envelope', 
   expect(store().game).toBeNull()
   const loaded = loadGame()!
   // The migration itself changes only version fields for these legal v11 inputs.
-  expect(loaded).toEqual({ ...old, saveVersion: 12, dataVersion: 12 })
+  expect(loaded).toEqual(currentSchemaExpected(old))
   const canonical = normalizePendingTraining(loaded)
-  store().continueCareer(); expect(store().error).toBeNull()
+  store().continueCareer(); completePendingMoment(store); expect(store().error).toBeNull()
   if (old.phase !== 'SIMULATION_READY') expect(store().game).toEqual(canonical)
   else {
     expect(store().game!.history).toHaveLength(old.history.length + 1)
@@ -100,11 +103,14 @@ it.each(fixtures)('migrates and resumes $name from its untouched v11 envelope', 
     expect(final.trainingQualityBonus).toBe(0)
     if (final.windowIndex >= 36) expect(final.lastReport!.eventSummary).toContain('本期训练：')
   }
+  const executionsBeforeReload=executionSpy.mock.calls.length
   saveGame(final)
-  expect(JSON.parse(memory.get('career_save_current')!).data.saveVersion).toBe(12)
+  expect(JSON.parse(memory.get('career_save_current')!).data.saveVersion).toBe(13)
   expect(loadGame()).toEqual(final)
   for (let i = 0; i < 3; i++) { store().continueCareer(); expect(store().game).toEqual(final) }
-  expect(executionSpy).toHaveBeenCalledTimes(final.phase === 'HALF_YEAR_REPORT' ? 1 : 0)
+  // Pure preparation may repeat for frozen-context validation; no application or new simulation on reload.
+  expect(executionSpy).toHaveBeenCalledTimes(executionsBeforeReload)
+  expect(executionsBeforeReload>0).toBe(final.phase === 'HALF_YEAR_REPORT')
   const execution = executionSpy.mock.results.at(-1)?.value
   if (item.name.startsWith('constructed/')) {
     expect(execution).not.toBeNull()

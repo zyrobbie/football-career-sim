@@ -93,6 +93,7 @@ function retirementGame(): GameState {
   ]
 
   return {
+    pendingKeyMatchMoment: null,
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'CAREER_RETIRED',

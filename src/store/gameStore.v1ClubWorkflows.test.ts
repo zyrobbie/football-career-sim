@@ -1,6 +1,7 @@
+import { completePendingMoment, installTestStorage } from '../testing/keyMatchMomentTestSupport'
 import { readFileSync } from 'node:fs'
 import { SAVE_VERSION, DATA_VERSION } from '../models/game'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach,vi,beforeEach, describe, expect, it } from 'vitest'
 import { CLUBS } from '../data/balance'
 import { getClubParametersByCompatibleId } from '../data/clubs/clubRepository'
 import { createCareerStoryState } from '../engine/careerStory'
@@ -19,6 +20,7 @@ function academyGame(seed: string): GameState {
   const player = generatePlayer(draft, seed)
   const offers = generateAcademyOffers(player, seed)
   return {
+    pendingKeyMatchMoment: null,
     saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase: 'ACADEMY_OFFERS', careerSeed: seed, startYear: 2026, windowIndex: 0,
     draft, player, academyOffers: offers, selectedClubId: null, teamLevel: 'YOUTH', youthRole: null, firstTeamRole: null,
     contract: null, professionalOffer: null, transferOffers: [], selectedTransferChoiceId: null, transferDecision: null,
@@ -46,6 +48,7 @@ function professionalGame(seed: string, clubId: string, phase: GameState['phase'
   const progress = { ...createFirstTeamProgress(clubId), attention: 100, readiness: 100, matchProof: 100, coachBacking: 100, status: 'PROMOTED' as const }
   const professional = generateFirstProfessionalOffer({ player, club: academy.club, youthRole: 'STARTER', teamLevel: 'FIRST_TEAM', firstTeamProgress: progress, careerSeed: seed })
   return {
+    pendingKeyMatchMoment: null,
     saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase, careerSeed: seed, startYear: 2026, windowIndex: 9,
     draft, player, academyOffers: [academy, ...generateAcademyOffers(player, `${seed}-offers`).slice(0, 2)], selectedClubId: clubId, teamLevel: 'FIRST_TEAM', youthRole: null, firstTeamRole: 'ROTATION',
     contract: { ...contractFromOffer(professional), remainingHalfYears: expired ? 0 : 6 }, professionalOffer: professional,
@@ -75,6 +78,7 @@ function settlePlan() {
   if (useGameStore.getState().game?.phase === 'SPECIAL_EVENT_RESULT') {
     useGameStore.getState().continueAfterCareerEvent()
   }
+  completePendingMoment(useGameStore.getState)
   const game = useGameStore.getState().game!
   expect(game.phase).toBe('HALF_YEAR_REPORT')
 }
@@ -103,7 +107,8 @@ function acceptInjectedTransfer(targetId: string, seed: string) {
 }
 
 describe('V1 club public gameStore workflows', () => {
-  beforeEach(() => useGameStore.setState({ game: null, hasSave: false, error: null }))
+  beforeEach(() => {installTestStorage();useGameStore.setState({ game: null, hasSave: false, error: null })})
+  afterEach(()=>vi.unstubAllGlobals())
 
   it('selects a new Chinese academy club through public academy actions', () => {
     const { game, target } = academyGameWithNewClub('v1-academy-china-one')

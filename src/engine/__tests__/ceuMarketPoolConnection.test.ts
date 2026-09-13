@@ -1,3 +1,4 @@
+import { currentSchemaExpected } from '../../testing/keyMatchMomentTestSupport'
 import { afterEach, afterAll, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync } from 'node:fs'
 import type { Club } from '../../models/game'
@@ -75,7 +76,7 @@ it('preserves scarce expiry markets under the R1 persistence contract', async ()
     expect(offers).toHaveLength(externalCount + 1)
     const constructed = { ...old, transferOffers: offers, selectedTransferChoiceId: offers[0]!.id }
     const normalized = validateGameState(constructed)
-    expect(normalized).toEqual(constructed)
+    expect(normalized).toEqual(currentSchemaExpected(constructed))
     results.push({ name: `existing-persistence-scarcity-${externalCount}`, source: 'explicit constructed expiry output under isolated catalog', constructed, normalized, status: 'R1 validation preserves complete market; public save/load/signing covered in gameStore.ceuM02R1.test.ts' })
   }
 })

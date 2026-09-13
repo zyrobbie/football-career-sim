@@ -1,3 +1,5 @@
+import { pendingMomentSchema, momentSnapshotSchema } from './keyMatchMomentSchema'
+import { canonicalMomentJSON, MomentRecoveryError, validateMomentContext } from '../engine/keyMatchMoments'
 import { z } from 'zod'
 import { MAX_CAREER_AGE } from '../data/ageCurve'
 import {
@@ -23,6 +25,7 @@ import {
 const CURRENT_KEY = 'career_save_current'
 const BACKUP_KEY = 'career_save_backup'
 const V11_BACKUP_KEY = 'career_save_v11_backup'
+const V12_BACKUP_KEY = 'career_save_v12_backup'
 
 const attributesSchema = z.object({
   attack: z.number().finite(),
@@ -324,6 +327,8 @@ const stateSchema = z.object({
     'SPECIAL_EVENT',
     'SPECIAL_EVENT_RESULT',
     'SIMULATION_READY',
+    'KEY_MATCH_MOMENT',
+    'KEY_MATCH_MOMENT_RESULT',
     'HALF_YEAR_REPORT',
     'CAREER_DASHBOARD',
     'PRO_CONTRACT_OFFER',
@@ -384,6 +389,7 @@ const stateSchema = z.object({
     ])
     .nullable(),
   transferArrivalChoice: transferArrivalChoiceSchema.nullable(),
+  pendingKeyMatchMoment: pendingMomentSchema.nullable(),
   pendingCareerEvent: z
     .object({
       eventId: careerEventIdSchema,
@@ -677,7 +683,8 @@ function migrateLegacyState(value: unknown): unknown {
   }
 
   if (
-    [7, 8, 9, 10, 11, 12].includes(Number(migrated.saveVersion)) &&
+    [7, 8, 9, 10, 11, 12, 13].includes(Number(migrated.saveVersion)) &&
+    !migrated.pendingKeyMatchMoment &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
     ['HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY'].includes(
@@ -789,16 +796,34 @@ function migrateLegacyState(value: unknown): unknown {
   // v11 histories, reports and pending choices retain their original semantics.
   // Only the runtime pending-window entry points canonicalize training.
   if (migrated.saveVersion === 11 && migrated.dataVersion === 11) {
-    migrated = { ...migrated, saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION }
+    migrated = { ...migrated, saveVersion: 12, dataVersion: 12 }
+  }
+  if (migrated.saveVersion === 12 && migrated.dataVersion === 12) {
+    migrated = { ...migrated, saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, pendingKeyMatchMoment: null }
   }
 
   return migrated
 }
 
 export function validateGameState(value: unknown): GameState {
-  const parsed = enforceAgeBasedFirstTeam(
-    stateSchema.parse(migrateLegacyState(value)) as GameState,
-  )
+  let parsed: GameState
+  try {
+    parsed = enforceAgeBasedFirstTeam(stateSchema.parse(migrateLegacyState(value)) as GameState)
+    validateMomentContext(parsed)
+    for (const entry of parsed.history) if ('keyMatchMoment' in entry) {
+      const moment = momentSnapshotSchema.parse(entry.keyMatchMoment)
+      if (moment.windowIndex !== entry.windowIndex || moment.clubId !== entry.clubId) throw new MomentRecoveryError('履历中的关键比赛记录不匹配。')
+    }
+    if (parsed.lastReport && 'keyMatchMoment' in parsed.lastReport) {
+      const moment = momentSnapshotSchema.parse(parsed.lastReport.keyMatchMoment)
+      const historyMoment = parsed.history.find(entry => entry.windowIndex === moment.windowIndex)?.keyMatchMoment
+      if (moment.windowIndex !== parsed.history.at(-1)?.windowIndex || moment.clubId !== parsed.lastReport.clubId || canonicalMomentJSON(moment) !== canonicalMomentJSON(historyMoment)) throw new MomentRecoveryError('报告与履历中的关键比赛记录不一致。')
+    }
+  } catch (error) {
+    const raw = value as Partial<GameState> | null
+    if (raw?.pendingKeyMatchMoment || raw?.phase === 'KEY_MATCH_MOMENT' || raw?.phase === 'KEY_MATCH_MOMENT_RESULT') throw new MomentRecoveryError(error instanceof MomentRecoveryError ? error.message : '关键比赛记录校验失败。')
+    throw error
+  }
   if (parsed.draft.priorities.length !== 4) {
     throw new Error('Career priority ranking must contain four items.')
   }
@@ -938,7 +963,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
+    ['ACADEMY_OFFERS', 'ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY', 'KEY_MATCH_MOMENT', 'KEY_MATCH_MOMENT_RESULT', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
       parsed.phase,
     ) &&
     parsed.academyOffers.length !== 3
@@ -947,7 +972,7 @@ export function validateGameState(value: unknown): GameState {
   }
 
   if (
-    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
+    ['ARRIVAL_EVENT', 'HALF_YEAR_PLAN', 'SPECIAL_EVENT', 'SPECIAL_EVENT_RESULT', 'SIMULATION_READY', 'KEY_MATCH_MOMENT', 'KEY_MATCH_MOMENT_RESULT', 'HALF_YEAR_REPORT', 'CAREER_DASHBOARD', 'PRO_CONTRACT_OFFER', 'PRO_CONTRACT_COMPLETE', 'PRO_STAGE_COMPLETE', 'TRANSFER_WINDOW', 'TRANSFER_ARRIVAL', 'TRANSFER_STAGE_COMPLETE', 'RETIREMENT_DECISION', 'CAREER_RETIRED'].includes(
       parsed.phase,
     ) &&
     (!parsed.selectedClubId ||
@@ -1139,6 +1164,7 @@ function decode(raw: string): GameState {
   }
   const payload = JSON.stringify(envelope.data)
   if (checksum(payload) !== envelope.checksum) {
+    if (envelope.data.pendingKeyMatchMoment || ['KEY_MATCH_MOMENT', 'KEY_MATCH_MOMENT_RESULT'].includes(envelope.data.phase)) throw new MomentRecoveryError('关键比赛存档校验和不匹配。')
     throw new Error('Save checksum mismatch.')
   }
   return validateGameState(envelope.data)
@@ -1150,6 +1176,17 @@ function storageAvailable(): boolean {
 
 // Called only after decode succeeds. Keep the pre-upgrade bytes independent
 // of the rotating backup; a failed write must leave the old current untouched.
+function preserveV12Backup(raw: string): void {
+  if (JSON.parse(raw).data.saveVersion !== 12) return
+  const existing = window.localStorage.getItem(V12_BACKUP_KEY)
+  if (existing !== null) {
+    if (JSON.parse(existing).data.saveVersion !== 12) throw new Error('升级前备份不完整，原存档已保留。')
+    decode(existing)
+    return
+  }
+  window.localStorage.setItem(V12_BACKUP_KEY, raw)
+  if (window.localStorage.getItem(V12_BACKUP_KEY) !== raw) throw new Error('无法保存升级前备份，原存档已保留。')
+}
 function preserveV11Backup(raw: string): void {
   if (JSON.parse(raw).data.saveVersion === 11 &&
       window.localStorage.getItem(V11_BACKUP_KEY) === null) {
@@ -1161,7 +1198,7 @@ function preserveV11Backup(raw: string): void {
 }
 
 export function saveGame(state: GameState): void {
-  if (!storageAvailable()) return
+  if (!storageAvailable()) { if (state.pendingKeyMatchMoment || state.lastReport?.keyMatchMoment) throw new Error('无法保存比赛进度，请启用本地存储后重试。'); return }
   const encoded = encode(state)
   const current = window.localStorage.getItem(CURRENT_KEY)
   if (current) {
@@ -1169,16 +1206,20 @@ export function saveGame(state: GameState): void {
     try {
       decode(current)
       valid = true
-    } catch {
+    } catch (error) {
+      if (error instanceof MomentRecoveryError) throw error
       // Keep the last known valid backup when the current value is corrupt.
     }
     if (valid) {
+      preserveV12Backup(current)
       preserveV11Backup(current)
       window.localStorage.setItem(BACKUP_KEY, current)
     }
   }
   window.localStorage.setItem(CURRENT_KEY, encoded)
-  decode(window.localStorage.getItem(CURRENT_KEY) ?? '')
+  const written = window.localStorage.getItem(CURRENT_KEY)
+  if (written !== encoded) throw new Error('存档写入未确认，请重新载入当前进度。')
+  decode(written)
 }
 
 export function loadGame(): GameState | null {
@@ -1188,15 +1229,18 @@ export function loadGame(): GameState | null {
     let decoded: GameState | null = null
     try {
       decoded = decode(current)
-    } catch {
+    } catch (error) {
+      if (error instanceof MomentRecoveryError) throw error
       // Fall through to the internal backup.
     }
     if (decoded) {
       const normalized = encode(decoded)
       if (normalized !== current) {
+        preserveV12Backup(current)
         preserveV11Backup(current)
         window.localStorage.setItem(BACKUP_KEY, current)
         window.localStorage.setItem(CURRENT_KEY, normalized)
+        if (window.localStorage.getItem(CURRENT_KEY) !== normalized) throw new Error('存档迁移写入未确认，请重试。')
       }
       return decoded
     }
@@ -1204,8 +1248,11 @@ export function loadGame(): GameState | null {
   const backup = window.localStorage.getItem(BACKUP_KEY)
   if (!backup) return null
   const recovered = decode(backup)
+  preserveV12Backup(backup)
   preserveV11Backup(backup)
-  window.localStorage.setItem(CURRENT_KEY, encode(recovered))
+  const encoded = encode(recovered)
+  window.localStorage.setItem(CURRENT_KEY, encoded)
+  if (window.localStorage.getItem(CURRENT_KEY) !== encoded) throw new Error('存档恢复写入未确认，请重试。')
   return recovered
 }
 
@@ -1222,4 +1269,5 @@ export function deleteSavedCareer(): void {
   window.localStorage.removeItem(CURRENT_KEY)
   window.localStorage.removeItem(BACKUP_KEY)
   window.localStorage.removeItem(V11_BACKUP_KEY)
+  window.localStorage.removeItem(V12_BACKUP_KEY)
 }

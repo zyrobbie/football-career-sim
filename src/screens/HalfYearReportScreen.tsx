@@ -1,3 +1,4 @@
+import { KeyMatchMomentSummary } from '../components/KeyMatchMomentSummary'
 import { uniqueClubChampionships } from '../engine/honors'
 import { ProfessionalReportActions } from '../components/ProfessionalReportActions'
 import { CareerHub } from '../components/CareerHub'
@@ -176,6 +177,7 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
           </aside>
         </div>
 
+        {report.keyMatchMoment ? <KeyMatchMomentSummary moment={report.keyMatchMoment} /> : null}
         <section className={`report-footer${!readOnly && isProfessionalWindow ? " report-footer--professional" : ""}`}>
           <div>
             <h2>

@@ -1,5 +1,7 @@
-import { professionalApproachSummary, prepareProfessionalWindow, adjustedProfessionalRange, professionalInjuryRisk, PROFESSIONAL_APPEARANCE_LIMIT, type ProfessionalMatchModifiers } from './professionalApproach'
-import { resolveTrainingPlan, applyTrainingMaintenance, trainingEventSummary, type TrainingExecution } from './trainingPlan'
+import type { MomentResolution } from '../models/keyMatchMoment'
+import { prepareFirstTeamSimulation } from './simulationPreparation'
+import { professionalApproachSummary, adjustedProfessionalRange, professionalInjuryRisk, PROFESSIONAL_APPEARANCE_LIMIT, type ProfessionalMatchModifiers } from './professionalApproach'
+import { resolveTrainingPlan, trainingEventSummary, type TrainingExecution } from './trainingPlan'
 import {
   BASE_RATES,
   FIRST_TEAM_BENCHMARKS,
@@ -145,6 +147,7 @@ function simulateFirstTeamStats(input: {
   seed: string
   matchModifiers: ProfessionalMatchModifiers
   recovery: boolean
+  momentResolution?: MomentResolution | undefined
 }): {
   stats: HalfYearStats
   injury: HalfYearReport['injury']
@@ -205,10 +208,10 @@ function simulateFirstTeamStats(input: {
     teamFactor *
     matchState
   const dataRandom = createRandom(seed, 'professional-performance')
-  const goals = poisson(dataRandom, goalExpected)
-  const assists = poisson(dataRandom, assistExpected)
+  let goals = poisson(dataRandom, goalExpected)
+  let assists = poisson(dataRandom, assistExpected)
   const disciplineFactor = 1.25 - player.attributes.mental * 0.005
-  const yellowCards = poisson(
+  let yellowCards = poisson(
     dataRandom,
     (minutes / 90) * rates.yellow * disciplineFactor,
   )
@@ -216,6 +219,8 @@ function simulateFirstTeamStats(input: {
     dataRandom,
     (minutes / 90) * rates.red * disciplineFactor,
   )
+  const momentDelta = input.momentResolution?.delta
+  if (momentDelta) { goals += momentDelta.goals; assists += momentDelta.assists; yellowCards += momentDelta.yellowCards }
   const overall = calculateOverall(
     player.attributes,
     player.primaryPosition,
@@ -238,7 +243,7 @@ function simulateFirstTeamStats(input: {
         abilityFit +
         stateEffect +
         dataEffect +
-        ratingRandom.float(-0.15, 0.15),
+        ratingRandom.float(-0.15, 0.15) + (momentDelta?.averageRating ?? 0),
       5.5,
       8.5,
     ),
@@ -432,6 +437,7 @@ function simulateFirstTeamHalfYear(input: {
   role: FirstTeamRole
   focus: TrainingFocus
   approach: DevelopmentApproach | null
+  momentResolution?: MomentResolution | undefined
 }): {
   player: Player
   report: HalfYearReport
@@ -440,10 +446,7 @@ function simulateFirstTeamHalfYear(input: {
   cashEuro: number
 } {
   const { state, offer, role, focus, approach } = input
-  const startPlayer = structuredClone(state.player!)
-  const preparation = prepareProfessionalWindow(startPlayer, approach)
-  const workingPlayer = preparation.player
-  const trainingExecution = applyTrainingMaintenance(startPlayer, workingPlayer, playerAgeAtWindow(state.windowIndex), focus)
+  const { startPlayer, preparation, workingPlayer, trainingExecution } = prepareFirstTeamSimulation(state, focus, approach)
   const seed = `${state.careerSeed}:window:${state.windowIndex}`
   const { stats, injury, execution } = simulateFirstTeamStats({
     player: workingPlayer,
@@ -452,6 +455,7 @@ function simulateFirstTeamHalfYear(input: {
     seed,
     matchModifiers: preparation.matchModifiers,
     recovery: preparation.recovery,
+    momentResolution: input.momentResolution,
   })
   const formAfter = clamp(
     stats.appearances >= 8
@@ -624,6 +628,7 @@ function simulateFirstTeamHalfYear(input: {
 export function simulateProfessionalHalfYear(input: {
   state: GameState
   offer: AcademyOffer
+  momentResolution?: MomentResolution | undefined
 }): {
   player: Player
   report: HalfYearReport
@@ -644,6 +649,11 @@ export function simulateProfessionalHalfYear(input: {
     throw new Error('职业半年模拟缺少球员、合同或训练选择。')
   }
 
+  if (input.momentResolution) {
+    const r=input.momentResolution,d=r.delta
+    if (r.windowIndex!==state.windowIndex || r.clubId!==state.selectedClubId || state.teamLevel!=='FIRST_TEAM' ||
+      ![d.goals,d.assists,d.yellowCards].every(v=>Number.isInteger(v)&&v>=0&&v<=1) || d.goals+d.assists>1 || d.redCards!==0 || !Number.isFinite(d.averageRating) || Math.abs(d.averageRating)>.15) throw new Error('比赛贡献与本窗不匹配。')
+  }
   if (state.teamLevel === 'FIRST_TEAM') {
     const role =
       state.firstTeamRole ??
@@ -654,6 +664,7 @@ export function simulateProfessionalHalfYear(input: {
       role,
       focus: state.trainingFocus,
       approach: state.developmentApproach,
+      momentResolution: input.momentResolution,
     })
     return {
       ...result,

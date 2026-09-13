@@ -43,6 +43,7 @@ function createFirstTeamState(
   })
   const contract = contractFromOffer(professionalOffer)
   const state: GameState = {
+    pendingKeyMatchMoment: null,
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'SIMULATION_READY',

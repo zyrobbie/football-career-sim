@@ -1,3 +1,4 @@
+import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
 import { afterAll, afterEach, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -22,7 +23,7 @@ const original: GameState = JSON.parse(rawSource).data
 const rows: unknown[] = []
 const store = () => useGameStore.getState()
 function setup(count: number) {
-  const game = structuredClone(original)
+  const game = currentSchemaExpected(structuredClone(original))
   const ids = [game.selectedClubId!, ...all.filter(c => c.id !== game.selectedClubId).slice(0, count).map(c => c.id)]
   control.ids = ids
   game.transferOffers = generateContractExpiryOffers({ player: game.player!, currentClubId: game.selectedClubId!, currentTeamLevel: game.teamLevel!, currentRole: game.firstTeamRole ?? game.youthRole!, currentContract: game.contract!, latestReport: game.lastReport!, careerSeed: game.careerSeed, windowIndex: game.windowIndex })
@@ -36,7 +37,7 @@ function setup(count: number) {
   return { game, memory, ids }
 }
 function roundtrip(memory: Map<string, string>) {
-  const expected = structuredClone(store().game!)
+  const expected = currentSchemaExpected(structuredClone(store().game!))
   expect(store().error).toBeNull()
   const raw = memory.get('career_save_current')!
   expect(JSON.parse(raw).data).toEqual(expected)
@@ -113,7 +114,7 @@ it('preserves a constructed withdrawn record alongside a selected renewal in a s
   store().selectTransferChoice(game.transferOffers[0]!.id)
   expect(memory.has('career_save_backup')).toBe(false)
   const { expected, raw } = roundtrip(memory)
-  expect(expected).toEqual(game)
+  expect(expected).toEqual(currentSchemaExpected(game))
   expect(expected.transferOffers[1]!.withdrawn).toBe(true)
   rows.push({ kind: 'constructed-withdrawal-persistence-only', source, sourceSha, withdrawnSource, withdrawnSha: createHash('sha256').update(withdrawnRaw).digest('hex'), modifications: { 'transferOffers[1]': patch }, explanation: '18 fixed public attempts produced no withdrawal; copied only frozen negotiation fields to a real generated sparse external offer. Selection and persistence are public; withdrawal here is constructed, not publicly produced.', expected, firstActualEnvelope: JSON.parse(raw), result: 'passed' })
 })
@@ -141,7 +142,7 @@ it.each(anomalies)('keeps damaged expiry protection: %s', (name, mutate) => {
     return
   }
   const repaired = validateGameState(game)
-  expect(repaired).toEqual({ ...game, phase: 'PRO_STAGE_COMPLETE', windowIndex: game.history.at(-1)!.windowIndex, transferOffers: [], selectedTransferChoiceId: null })
+  expect(repaired) .toEqual({ ...currentSchemaExpected(game), phase: 'PRO_STAGE_COMPLETE', windowIndex: game.history.at(-1)!.windowIndex, transferOffers: [], selectedTransferChoiceId: null })
   saveGame(game)
   expect(JSON.parse(memory.get('career_save_current')!).data).toEqual(repaired)
   expect(loadGame()).toEqual(repaired)
@@ -155,7 +156,7 @@ it('retains legal STAY in an empty market with an effective contract', () => {
   useGameStore.setState({ game })
   store().selectTransferChoice('STAY')
   const result = roundtrip(memory)
-  expect(result.expected).toEqual(game)
+  expect(result.expected).toEqual(currentSchemaExpected(game))
   rows.push({ kind: 'effective-contract-empty-stay', game, result: 'passed' })
 })
 afterAll(() => {

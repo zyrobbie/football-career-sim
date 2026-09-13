@@ -90,6 +90,12 @@ function resolveEventIfNeeded() {
     store.chooseCareerEvent(option)
   }
   if (state().phase === 'SPECIAL_EVENT_RESULT') store.continueAfterCareerEvent()
+  const game=state(), pending=game.pendingKeyMatchMoment
+  if(pending){
+    const expected={careerSeed:game.careerSeed,playerId:game.player!.id,windowIndex:game.windowIndex,clubId:pending.clubId,momentId:pending.id,inputFingerprint:pending.inputFingerprint}
+    if(game.phase==='KEY_MATCH_MOMENT')store.chooseKeyMatchMoment(pending.choices[0]!.id,expected)
+    if(state().phase==='KEY_MATCH_MOMENT_RESULT')store.finishKeyMatchMoment(expected)
+  }
 }
 
 function reportGame(): GameState {
@@ -299,7 +305,7 @@ export function createCopyAuditGame(phase: GamePhase): GameState | null {
 
   if (phase === 'RETIREMENT_DECISION') {
     const game = professionalStageGame()
-    useGameStore.setState({ game: { ...game, windowIndex: 34, history: game.history.map((h, i) => i === game.history.length - 1 ? { ...h, windowIndex: 34 } : h) }, error: null })
+    useGameStore.setState({ game: { ...game, windowIndex: 34, lastReport: game.lastReport?.keyMatchMoment ? {...game.lastReport,keyMatchMoment:{...game.lastReport.keyMatchMoment,windowIndex:34,result:{...game.lastReport.keyMatchMoment.result,windowIndex:34}}} : game.lastReport, history: game.history.map((h, i) => i === game.history.length - 1 ? { ...h, windowIndex: 34, ...(h.keyMatchMoment?{keyMatchMoment:{...h.keyMatchMoment,windowIndex:34,result:{...h.keyMatchMoment.result,windowIndex:34}}}:{}) } : h) }, error: null })
     useGameStore.getState().requestRetirement()
     return validateFixture(state())
   }

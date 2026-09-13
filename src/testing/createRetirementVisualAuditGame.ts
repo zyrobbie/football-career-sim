@@ -48,6 +48,7 @@ export function createRetirementVisualAuditGame(clubIds: readonly string[]): Gam
     teamLevel: 'FIRST_TEAM',
   }))
   const game: GameState = {
+    pendingKeyMatchMoment: null,
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'CAREER_RETIRED',

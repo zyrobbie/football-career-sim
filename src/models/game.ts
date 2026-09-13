@@ -1,3 +1,4 @@
+import type { PendingKeyMatchMoment, MomentSnapshot } from './keyMatchMoment'
 import type {
   CareerEventCategory,
   CareerEventId,
@@ -10,8 +11,8 @@ export type {
   CareerEventInteractionKind,
 } from '../data/careerEventIds'
 
-export const SAVE_VERSION = 12 as const
-export const DATA_VERSION = 12 as const
+export const SAVE_VERSION = 13 as const
+export const DATA_VERSION = 13 as const
 
 export const positions = [
   'ST',
@@ -258,6 +259,8 @@ export type GamePhase =
   | 'SPECIAL_EVENT'
   | 'SPECIAL_EVENT_RESULT'
   | 'SIMULATION_READY'
+  | 'KEY_MATCH_MOMENT'
+  | 'KEY_MATCH_MOMENT_RESULT'
   | 'HALF_YEAR_REPORT'
   | 'CAREER_DASHBOARD'
   | 'PRO_CONTRACT_OFFER'
@@ -431,6 +434,7 @@ export interface TransferDecision {
 }
 
 export interface HalfYearReport {
+  keyMatchMoment?: MomentSnapshot
   fromLabel: string
   toLabel: string
   clubId: string
@@ -488,6 +492,7 @@ export interface HalfYearReport {
 }
 
 export interface CareerHistoryEntry {
+  keyMatchMoment?: MomentSnapshot
   windowIndex: number
   clubId: string
   clubName?: string
@@ -504,6 +509,7 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
+  pendingKeyMatchMoment: PendingKeyMatchMoment | null
   saveVersion: typeof SAVE_VERSION
   dataVersion: typeof DATA_VERSION
   phase: GamePhase

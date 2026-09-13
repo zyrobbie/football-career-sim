@@ -17,6 +17,7 @@ function createOverAgeYouthState(): GameState {
   const inter = CLUBS.find((club) => club.id === 'ita_inter')!
 
   return {
+    pendingKeyMatchMoment: null,
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'HALF_YEAR_PLAN',

@@ -1,4 +1,7 @@
-import { describe, expect, it } from 'vitest'
+import { beforeEach,afterEach,vi,describe, expect, it } from 'vitest'
+import { installTestStorage } from './keyMatchMomentTestSupport'
+beforeEach(installTestStorage)
+afterEach(()=>vi.unstubAllGlobals())
 import { validateGameState } from '../persistence/save'
 import { COPY_AUDIT_PHASES, createCopyAuditGame } from './createCopyAuditGame'
 

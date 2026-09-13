@@ -1,3 +1,4 @@
+import { completePendingMoment, installTestStorage } from '../testing/keyMatchMomentTestSupport'
 import { readFileSync } from 'node:fs'
 import { SAVE_VERSION, DATA_VERSION } from '../models/game'
 import { beforeEach, describe, expect, it } from 'vitest'
@@ -30,9 +31,11 @@ function resolveSpecialEventIfPresent() {
   if (store.game?.phase === 'SPECIAL_EVENT_RESULT') {
     useGameStore.getState().continueAfterCareerEvent()
   }
+  completePendingMoment(useGameStore.getState)
 }
 
 describe('academy two-year progression', () => {
+  beforeEach(() => installTestStorage())
   beforeEach(() => {
     useGameStore.setState({
       game: null,
@@ -77,6 +80,8 @@ describe('academy two-year progression', () => {
       game: {
         ...game,
         windowIndex: 3,
+        trainingFocus: 'BALANCED',
+        developmentApproach: 'STEADY',
         phase: 'SPECIAL_EVENT',
         pendingCareerEvent: {
           eventId: 'COACH_TACTICAL_MEETING',
@@ -440,7 +445,8 @@ describe('academy two-year progression', () => {
         ...game!,
         phase: 'PRO_STAGE_COMPLETE',
         windowIndex: 34,
-        history: game!.history.map((h,i) => i === game!.history.length - 1 ? { ...h, windowIndex: 34 } : h),
+        lastReport: game!.lastReport?.keyMatchMoment ? {...game!.lastReport,keyMatchMoment:{...game!.lastReport.keyMatchMoment,windowIndex:34,result:{...game!.lastReport.keyMatchMoment.result,windowIndex:34}}} : game!.lastReport,
+        history: game!.history.map((h,i) => i === game!.history.length - 1 ? { ...h, windowIndex: 34, ...(h.keyMatchMoment?{keyMatchMoment:{...h.keyMatchMoment,windowIndex:34,result:{...h.keyMatchMoment.result,windowIndex:34}}}:{}) } : h),
         retirementReason: null,
       },
     })
@@ -450,11 +456,13 @@ describe('academy two-year progression', () => {
     store.cancelRetirement()
     expect(useGameStore.getState().game?.phase).toBe('PRO_STAGE_COMPLETE')
 
+    const retirementFixture=useGameStore.getState().game!
     useGameStore.setState({
       game: {
-        ...useGameStore.getState().game!,
+        ...retirementFixture,
         windowIndex: 55,
-        history: useGameStore.getState().game!.history.map((h,i,hs) => i === hs.length - 1 ? { ...h, windowIndex: 55 } : h),
+        lastReport: retirementFixture.lastReport?.keyMatchMoment ? {...retirementFixture.lastReport,keyMatchMoment:{...retirementFixture.lastReport.keyMatchMoment,windowIndex:55,result:{...retirementFixture.lastReport.keyMatchMoment.result,windowIndex:55}}} : retirementFixture.lastReport,
+        history: useGameStore.getState().game!.history.map((h,i,hs) => i === hs.length - 1 ? { ...h, windowIndex: 55, ...(h.keyMatchMoment?{keyMatchMoment:{...h.keyMatchMoment,windowIndex:55,result:{...h.keyMatchMoment.result,windowIndex:55}}}:{}) } : h),
         retirementReason: null,
       },
     })
@@ -483,6 +491,7 @@ describe('academy two-year progression', () => {
     const academyOffers = generateAcademyOffers(player, careerSeed)
     const selected = academyOffers[0]!
     const game: GameState = {
+      pendingKeyMatchMoment: null,
       saveVersion: SAVE_VERSION,
       dataVersion: DATA_VERSION,
       phase: 'HALF_YEAR_PLAN',
@@ -553,7 +562,7 @@ describe('academy two-year progression', () => {
     )
 
     useGameStore.setState({
-      game: { ...completed, phase: 'PRO_STAGE_COMPLETE', windowIndex: 34, history: completed.history.map((h,i) => i === completed.history.length - 1 ? { ...h, windowIndex: 34 } : h) },
+      game: { ...completed, phase: 'PRO_STAGE_COMPLETE', windowIndex: 34, lastReport: completed.lastReport?.keyMatchMoment ? {...completed.lastReport,keyMatchMoment:{...completed.lastReport.keyMatchMoment,windowIndex:34,result:{...completed.lastReport.keyMatchMoment.result,windowIndex:34}}} : completed.lastReport, history: completed.history.map((h,i) => i === completed.history.length - 1 ? { ...h, windowIndex: 34, ...(h.keyMatchMoment?{keyMatchMoment:{...h.keyMatchMoment,windowIndex:34,result:{...h.keyMatchMoment.result,windowIndex:34}}}:{}) } : h) },
     })
     useGameStore.getState().retireFromNationalTeam()
     expect(useGameStore.getState().game?.nationalTeam.retired).toBe(true)
