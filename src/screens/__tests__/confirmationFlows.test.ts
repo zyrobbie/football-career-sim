@@ -1,4 +1,6 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { installTestStorage } from '../../testing/keyMatchMomentTestSupport'
+import * as random from '../../engine/random'
 import {
   deleteCareerIfConfirmed as deleteHomeCareerIfConfirmed,
   HOME_DELETE_CAREER_CONFIRMATION,
@@ -21,7 +23,12 @@ function seedCareer() {
 }
 
 describe('native confirmation flows', () => {
-  beforeEach(() => useGameStore.setState({ game: null, hasSave: false, error: null }))
+  beforeEach(() => {
+    installTestStorage()
+    vi.spyOn(random, 'createCareerSeed').mockReturnValue('ci-confirmation-77')
+    useGameStore.setState({ game: null, hasSave: false, error: null })
+  })
+  afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals() })
 
   it('keeps an existing home career when replacing it is cancelled, then starts normally when accepted', () => {
     seedCareer()
@@ -53,10 +60,17 @@ describe('native confirmation flows', () => {
 
   it('only retires from the national team after confirmation and preserves club state', () => {
     const game = createCopyAuditGame('PRO_STAGE_COMPLETE')!
+    // This fixed seed actually traverses a persisted Moment, rather than avoiding it.
+    expect(game.lastReport?.keyMatchMoment).toBeTruthy()
+    expect(game.history.at(-1)?.keyMatchMoment).toEqual(game.lastReport?.keyMatchMoment)
+    // Explicit age-boundary construction: keep report/history snapshots aligned.
+    const moment = game.lastReport!.keyMatchMoment!
+    const agedMoment = { ...moment, windowIndex: 34, result: { ...moment.result, windowIndex: 34 } }
     const eligible = {
       ...game,
       windowIndex: 34,
-      history: game.history.map((h, i) => i === game.history.length - 1 ? { ...h, windowIndex: 34 } : h),
+      history: game.history.map((h, i) => i === game.history.length - 1 ? { ...h, windowIndex: 34, keyMatchMoment: agedMoment } : h),
+      lastReport: { ...game.lastReport!, keyMatchMoment: agedMoment },
       teamLevel: 'FIRST_TEAM' as const,
       youthRole: null,
       firstTeamRole: 'FRINGE' as const,
