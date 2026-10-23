@@ -1,6 +1,6 @@
 # V3.0.1 interaction-feedback candidate verification
 
-Status: UNACCEPTED CANDIDATE. Do not treat this document or the presence of the runner as visual approval. The runtime candidate is commit `934a1117573fd790171acf3937745d49ba4563cd`; this directory and the portable runner are documentation/QA-only additions.
+Status: implementation, strategy and candidate-browser gates PASSED; production publication is a separate step and is not claimed here. The tested runtime is commit `934a1117573fd790171acf3937745d49ba4563cd`; later commits in this revision add only documentation and QA tooling.
 
 ## Scope
 
@@ -12,7 +12,13 @@ Status: UNACCEPTED CANDIDATE. Do not treat this document or the presence of the 
 
 ## Candidate checks already run
 
-TypeScript, production build, club-parameter consistency, retirement QR verification, and 91 focused assertions passed before this QA-only commit. The complete regression suite was still running when this candidate document was written. Rendered browser acceptance was NOT YET RUN. The production bundle retains the existing large-chunk warning.
+- TypeScript, production build, club-parameter consistency, retirement QR verification and 91 focused assertions: PASS.
+- Complete regression suite: 93 test files / 1,180 assertions PASS, 711.40 seconds, four workers, no test exclusions added.
+- Independent strategy checks: 9 PASS, including sponsor tradeoffs, historical pending/result compatibility and save/reload/settlement behavior.
+- Isolated Mac Chromium visual checks: 32/32 PASS, zero browser errors. The executing reviewer opened six key original screenshots, plus long-copy and training views, and verified horizontal cards, readable typography and no clipping.
+- The initial runner attempt failed 29 cases because the synthetic fixture omitted required training focus and development approach. Setting BALANCED/STEADY fixed the fixture; all 32 cases then passed without changing runtime code. The committed runner contains this correction.
+
+The production bundle retains the existing large-chunk warning. These are candidate-browser checks, not physical-device or live-production verification. Library screenshot upload was unavailable; the original screenshots remain in the local QA output rather than being represented as transferred cloud evidence.
 
 ## Reproduce visual checks
 
