@@ -22,7 +22,7 @@ describe('settings screen helpers', () => {
     const view = buildSettingsView()
     expect(view).toEqual({
       gameVersion: version,
-      saveVersion: SAVE_VERSION,
+    saveVersion: SAVE_VERSION,
       dataVersion: DATA_VERSION,
       clubCount: CLUBS.length,
       leagueCount: new Set(

@@ -1,0 +1,105 @@
+{
+  "kind": "isolated anonymous migration→preservedV14→originalV13continue→restoreV14 drill, not an automatic production downgrade feature",
+  "baseline": "37411e336d1b837e99720bb444eb0b0761eb852e",
+  "candidate": "3dbddbdd189a240ff814d0b0cf3036f25ee2f940",
+  "cases": [
+    {
+      "scenario": "young",
+      "phase": "SIMULATION_READY",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "young",
+      "phase": "KEY_MATCH_MOMENT",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "31-body",
+      "phase": "SIMULATION_READY",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "31-body",
+      "phase": "KEY_MATCH_MOMENT",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "34-body",
+      "phase": "SIMULATION_READY",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "34-body",
+      "phase": "KEY_MATCH_MOMENT",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "34-recovery",
+      "phase": "SIMULATION_READY",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "34-recovery",
+      "phase": "KEY_MATCH_MOMENT",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "22-youth",
+      "phase": "SIMULATION_READY",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "22-youth",
+      "phase": "KEY_MATCH_MOMENT",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "consequence",
+      "phase": "SIMULATION_READY",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "consequence",
+      "phase": "KEY_MATCH_MOMENT",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "terminal54",
+      "phase": "SIMULATION_READY",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    },
+    {
+      "scenario": "terminal54",
+      "phase": "KEY_MATCH_MOMENT",
+      "v13RestoredExactExpected": true,
+      "v14ProgressPreservedAndReloaded": true,
+      "rawV13BackupByteExact": true
+    }
+  ]
+}

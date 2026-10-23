@@ -1,3 +1,4 @@
+import { careerWindowLabel } from '../engine/careerTime'
 import { KeyMatchMomentSummary } from '../components/KeyMatchMomentSummary'
 import { AppShell } from '../components/AppShell'
 import { CareerTopbar } from '../components/CareerTopbar'
@@ -72,6 +73,7 @@ export function CareerHistoryScreen({ game }: { game: GameState }) {
           )}
         </section>
 
+        {game.history.some(entry => entry.offPitchSummary || entry.personalArrangementSummary) ? <section className="history-screen__section v3-story-summary" aria-label="场外生涯记忆"><header><h2>场外生涯记忆</h2></header>{[...game.history].reverse().filter(entry => entry.offPitchSummary || entry.personalArrangementSummary).map(entry => <details key={entry.windowIndex}><summary>{careerWindowLabel(game.startYear, entry.windowIndex)} · {entry.clubName}</summary>{entry.offPitchSummary ? <p>{entry.offPitchSummary}</p> : null}{entry.personalArrangementSummary ? <p>{entry.personalArrangementSummary}</p> : null}</details>)}</section> : null}
         {game.history.some(entry=>entry.keyMatchMoment) ? <section className="history-screen__section" aria-label="比赛时刻回看"><header><h2>比赛时刻</h2></header>{[...game.history].reverse().filter(entry=>entry.keyMatchMoment).map(entry=><details className="key-moment-history" key={entry.windowIndex}><summary>第{entry.windowIndex+1}个半年 · {entry.clubName} · {entry.keyMatchMoment!.title}</summary><KeyMatchMomentSummary moment={entry.keyMatchMoment!}/></details>)}</section> : null}
         <section className="history-screen__section" aria-label="俱乐部生涯数据汇总">
           <header><Icon name="career" /><h2>俱乐部生涯</h2></header>

@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../entertainmentV3'
 import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
@@ -286,7 +287,8 @@ function professionalState(seed: string, overall: AuditCase['overall'], club: Cl
     academy,
     state: {
       pendingKeyMatchMoment: null,
-      saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase: 'SIMULATION_READY', careerSeed: seed, startYear: 2026, windowIndex: PEAK_SEASON_START_WINDOW,
+      entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
+    saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase: 'SIMULATION_READY', careerSeed: seed, startYear: 2026, windowIndex: PEAK_SEASON_START_WINDOW,
       draft, player: tunedPlayer, academyOffers: [academy], selectedClubId: club.id, teamLevel: 'FIRST_TEAM', youthRole: null,
       firstTeamRole: 'CORE', contract: contractFromOffer(professionalOffer), professionalOffer, transferOffers: [], selectedTransferChoiceId: null,
       transferDecision: null, arrivalChoice: 'COACH', transferArrivalChoice: null, pendingCareerEvent: null, careerEventHistory: [], pendingConsequences: [],

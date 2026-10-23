@@ -1,3 +1,7 @@
+import { createEntertainmentV3State, syncEntertainmentCity, finalizeEntertainmentWindow } from '../engine/entertainmentV3'
+import { purchasePersonalArrangement, terminatePersonalArrangements } from '../engine/personalArrangements'
+import { recordV3StoryChoice, closeV3Story } from '../engine/offPitchStories'
+import type { ArrangementPurchaseRequest } from '../models/personalArrangements'
 import type { MomentActionContext } from '../models/keyMatchMoment'
 import { createKeyMatchMoment, resolveKeyMatchMoment, momentSnapshot, validateMomentContext, MomentRecoveryError } from '../engine/keyMatchMoments'
 import { canonicalSimulationBase, prepareReadySimulation } from '../engine/simulationPreparation'
@@ -100,6 +104,7 @@ interface GameStore {
   confirmPlayer: () => void
   selectAcademy: (clubId: string) => void
   chooseArrival: (choice: ArrivalChoice) => void
+  purchasePersonalArrangement: (request: ArrangementPurchaseRequest) => void
   chooseTraining: (
     focus: TrainingFocus,
     approach?: DevelopmentApproach | null,
@@ -143,6 +148,7 @@ function currentYear(): number {
 function createInitialGame(): GameState {
   const startYear = currentYear()
   return {
+    entertainmentV3: createEntertainmentV3State(),
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'CREATE_IDENTITY',
@@ -269,7 +275,7 @@ export function runReadySimulation(inputState: GameState, options: { keyMatchMom
         clubSeason: honorSettlement.clubSeason,
         honors: honorSettlement.honors,
       }
-      return {
+      return finalizeEntertainmentWindow({
         ...simulationState,
         phase: 'HALF_YEAR_REPORT',
         pendingKeyMatchMoment: null,
@@ -304,7 +310,7 @@ export function runReadySimulation(inputState: GameState, options: { keyMatchMom
             honors: honorSettlement.honors,
           },
         ],
-      } satisfies GameState
+      } satisfies GameState)
     }
     if (!simulationState.youthRole || !simulationState.arrivalChoice) {
       return state
@@ -369,7 +375,10 @@ export function runReadySimulation(inputState: GameState, options: { keyMatchMom
 
 export const useGameStore = create<GameStore>((set, get) => {
   const commit = (next: GameState) => {
-    const normalized = canonicalSimulationBase(next.saveVersion === SAVE_VERSION ? next : validateGameState(next))
+    const citySynced = syncEntertainmentCity(next)
+    const retired = citySynced.phase === 'CAREER_RETIRED' ? terminatePersonalArrangements(citySynced, 'RETIREMENT') : citySynced
+    const storySynced = retired.entertainmentV3 ? {...retired, entertainmentV3: {...retired.entertainmentV3, stories: closeV3Story(retired)}} : retired
+    const normalized = canonicalSimulationBase(storySynced.saveVersion === SAVE_VERSION ? storySynced : validateGameState(storySynced))
     saveGame(normalized)
     set({ game: normalized, hasSave: true, error: null, isReviewingReport: false, voluntaryRetirementConfirmation: null })
   }
@@ -573,6 +582,19 @@ export const useGameStore = create<GameStore>((set, get) => {
       })
     },
 
+    purchasePersonalArrangement: (request) => {
+      const game = get().game
+      if (!game || get().isReviewingReport || get().voluntaryRetirementConfirmation) return
+      try {
+        const saved = loadGame()
+        if (!saved || saved.careerSeed !== game.careerSeed || saved.player?.id !== request.playerId) throw new Error('请先确认当前生涯已可靠保存。')
+        if (saved.entertainmentV3?.arrangements.some(a => a.id === request.purchaseId)) { set({game: saved, error: null}); return }
+        const next = purchasePersonalArrangement(saved, request)
+        saveGame(next, {strict: true})
+        set({game: next, hasSave: true, error: null})
+      } catch (error) { set({error: error instanceof Error ? error.message : '付款结果尚未确认，请重新载入当前进度后核对。'}) }
+    },
+
     chooseTraining: (focus, approach = null, expected) => {
       const game = get().game
       if (!game || game.phase !== 'HALF_YEAR_PLAN' || get().isReviewingReport ||
@@ -587,7 +609,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         })
         const pendingCareerEventId = selectCareerEvent(ready)
         if (pendingCareerEventId) {
-          const event = getCareerEvent(pendingCareerEventId)
+          const event = getCareerEvent(pendingCareerEventId, ready)
           commit({
             ...ready,
             phase: 'SPECIAL_EVENT',
@@ -621,7 +643,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         return
       }
       try {
-        const event = getCareerEvent(game.pendingCareerEvent.eventId)
+        const event = getCareerEvent(game.pendingCareerEvent.eventId, game)
         if (
           game.phase === 'SPECIAL_EVENT' &&
           game.pendingCareerEvent.selections.length === 0 &&
@@ -696,7 +718,7 @@ export const useGameStore = create<GameStore>((set, get) => {
           trainingQualityBonus:
             game.trainingQualityBonus + resolved.trainingBonus,
         }
-        commit(ready)
+        commit(ready.entertainmentV3 ? {...ready, entertainmentV3: {...ready.entertainmentV3, stories: recordV3StoryChoice(ready, resolved.record)}} : ready)
       } catch (error) {
         set({
           error:

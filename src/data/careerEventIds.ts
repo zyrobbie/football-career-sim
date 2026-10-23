@@ -1,4 +1,5 @@
-export const CAREER_EVENT_IDS = [
+import { V3_STORY_EVENT_IDS } from '../models/offPitchStories'
+export const LEGACY_CAREER_EVENT_IDS = [
   'COACH_DEFENSIVE_TASK',
   'COACH_ROLE_TRIAL',
   'COACH_TACTICAL_MEETING',
@@ -84,6 +85,8 @@ export const CAREER_EVENT_IDS = [
   'NATIONAL_FIFTY_CAPS',
   'FIRST_BALLON_DOR_NIGHT',
 ] as const
+
+export const CAREER_EVENT_IDS = [...LEGACY_CAREER_EVENT_IDS, ...V3_STORY_EVENT_IDS] as const
 
 export type CareerEventId = (typeof CAREER_EVENT_IDS)[number]
 

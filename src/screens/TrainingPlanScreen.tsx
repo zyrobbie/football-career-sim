@@ -1,3 +1,4 @@
+import { PersonalArrangementsPanel } from '../components/PersonalArrangementsPanel'
 import { CareerPreferencesEditor } from '../components/CareerPreferencesEditor'
 import { Fragment, useRef, useState } from 'react'
 import { CareerHub } from '../components/CareerHub'
@@ -134,6 +135,7 @@ function TrainingPlanContent({ game }: { game: GameState }) {
                 : '未来半年没有标准答案。你选的方向，会改变成长节奏，也可能带来不同的故事。'}
         </p> : null}
         <CareerPreferencesEditor key={game.careerSeed} game={game} />
+        <PersonalArrangementsPanel game={game} selection={{focus: selected, approach}} />
         {model.recovery ? (
           <section className="training-plan__recovery" aria-label="本期先恢复">
             <h2>本期先恢复</h2>

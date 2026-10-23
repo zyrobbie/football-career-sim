@@ -1,4 +1,5 @@
 import type { PendingKeyMatchMoment, MomentSnapshot } from './keyMatchMoment'
+import type { EntertainmentV3State, ArrangementWindowReceipt } from './personalArrangements'
 import type {
   CareerEventCategory,
   CareerEventId,
@@ -11,8 +12,8 @@ export type {
   CareerEventInteractionKind,
 } from '../data/careerEventIds'
 
-export const SAVE_VERSION = 13 as const
-export const DATA_VERSION = 13 as const
+export const SAVE_VERSION = 14 as const
+export const DATA_VERSION = 14 as const
 
 export const positions = [
   'ST',
@@ -226,6 +227,8 @@ export interface PlayerEventDelta {
 }
 
 export interface CareerEventRecord {
+  definitionRevision?: 1
+  eventTitle?: string
   eventId: CareerEventId
   choiceId: CareerEventChoiceId
   windowIndex: number
@@ -434,6 +437,8 @@ export interface TransferDecision {
 }
 
 export interface HalfYearReport {
+  personalArrangements?: { receipts: ArrangementWindowReceipt[]; purchaseEuro: number; refundEuro: number; ledgerEntryIds?: string[]; summaries: string[] }
+  offPitchSummary?: string
   keyMatchMoment?: MomentSnapshot
   fromLabel: string
   toLabel: string
@@ -492,6 +497,8 @@ export interface HalfYearReport {
 }
 
 export interface CareerHistoryEntry {
+  offPitchSummary?: string
+  personalArrangementSummary?: string
   keyMatchMoment?: MomentSnapshot
   windowIndex: number
   clubId: string
@@ -509,6 +516,7 @@ export interface CareerHistoryEntry {
 }
 
 export interface GameState {
+  entertainmentV3?: EntertainmentV3State
   pendingKeyMatchMoment: PendingKeyMatchMoment | null
   saveVersion: typeof SAVE_VERSION
   dataVersion: typeof DATA_VERSION

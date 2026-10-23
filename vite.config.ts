@@ -13,6 +13,7 @@ export default defineConfig({
     port: 4173,
   },
   test: {
+    include: ['src/**/*.test.{ts,tsx}'],
     environment: 'node',
   },
 })

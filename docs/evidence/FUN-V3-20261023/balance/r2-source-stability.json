@@ -1,0 +1,29 @@
+{
+  "runtime": "Node22.23.4",
+  "baselineReferenceRuntime": "Node24.19.0; exact OFF checks also establish agreement across these runtimes",
+  "allEngineDataModelStorePersistenceModulesStable": true,
+  "harnessStable": true,
+  "changesAfterRunStarted": [
+    {
+      "path": "src/components/PersonalArrangementsPanel.tsx",
+      "beforeSHA256": "4d5c925f99df0201a48c2d3ed55864d15d6140e8b698e15d36ebbb403e95ae5c",
+      "afterSHA256": "83816eb24f8f33a4f85b093c63cabe82e7a84c86c123f828ebdd3af37b629f02"
+    },
+    {
+      "path": "src/engine/__tests__/offPitchStories.test.ts",
+      "beforeSHA256": "0f1c09ebe88e1c10e90980e369c7a399bcb117c178e6d4ccf0aa237c715fe6c6",
+      "afterSHA256": "52f49cf61c45e3c5c70148bbef2f6aea2757ac306e60edddaaf6a649b1f3a84c"
+    },
+    {
+      "path": "src/persistence/__tests__/save.test.ts",
+      "beforeSHA256": "75c537de791dd9e771a5ff13fdeedec26db5aae0e64ce95dce5848353162f90a",
+      "afterSHA256": "2d7140981fced39dbd202aaf9cc6705fbc41ceda74decef929c29dfbf0bf9877"
+    },
+    {
+      "path": "src/screens/RetirementScreen.tsx",
+      "beforeSHA256": "51acd50c82fdce29f69d265ee005ee2fbc6c96fd54751e1da8ae8b0c7f3e495b",
+      "afterSHA256": "1d5a3228ccd4c2f3c003a84b15ca5cd9fd21c86c8ca30d2cf2e93bb427267a59"
+    }
+  ],
+  "scope": "UI/unrelated tests only; no numerical, eligibility, policy or engine narrative changes during R2 capture"
+}

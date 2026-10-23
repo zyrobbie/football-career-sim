@@ -1,5 +1,5 @@
 import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
-import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected, legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import { professionalNextAction } from './professionalNextAction'
 import { afterEach, afterAll, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
@@ -68,7 +68,7 @@ it.each(fixtures)('migrates and resumes $name from its untouched v11 envelope', 
   expect(store().game).toBeNull()
   const loaded = loadGame()!
   // The migration itself changes only version fields for these legal v11 inputs.
-  expect(loaded).toEqual(currentSchemaExpected(old))
+  expect(legacyBusinessProjection(loaded)).toEqual(legacyBusinessProjection(currentSchemaExpected(old)))
   const canonical = normalizePendingTraining(loaded)
   store().continueCareer(); completePendingMoment(store); expect(store().error).toBeNull()
   if (old.phase !== 'SIMULATION_READY') expect(store().game).toEqual(canonical)
@@ -105,7 +105,7 @@ it.each(fixtures)('migrates and resumes $name from its untouched v11 envelope', 
   }
   const executionsBeforeReload=executionSpy.mock.calls.length
   saveGame(final)
-  expect(JSON.parse(memory.get('career_save_current')!).data.saveVersion).toBe(13)
+  expect(JSON.parse(memory.get('career_save_current')!).data.saveVersion).toBe(14)
   expect(loadGame()).toEqual(final)
   for (let i = 0; i < 3; i++) { store().continueCareer(); expect(store().game).toEqual(final) }
   // Pure preparation may repeat for frozen-context validation; no application or new simulation on reload.

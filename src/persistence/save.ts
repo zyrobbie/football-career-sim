@@ -1,3 +1,5 @@
+import { entertainmentV3Schema, validateEntertainmentV3 } from './entertainmentV3Schema'
+import { createEntertainmentV3State, migrationActivationWindow } from '../engine/entertainmentV3'
 import { pendingMomentSchema, momentSnapshotSchema } from './keyMatchMomentSchema'
 import { canonicalMomentJSON, MomentRecoveryError, validateMomentContext } from '../engine/keyMatchMoments'
 import { z } from 'zod'
@@ -22,10 +24,15 @@ import {
   type GameState,
 } from '../models/game'
 
+export class EntertainmentRecoveryError extends Error {
+  constructor(detail = 'V3进度校验失败。') { super(`${detail} 原始存档已保留，请勿重新开档覆盖。`); this.name = 'EntertainmentRecoveryError' }
+}
+
 const CURRENT_KEY = 'career_save_current'
 const BACKUP_KEY = 'career_save_backup'
 const V11_BACKUP_KEY = 'career_save_v11_backup'
 const V12_BACKUP_KEY = 'career_save_v12_backup'
+const V13_BACKUP_KEY = 'career_save_v13_backup'
 
 const attributesSchema = z.object({
   attack: z.number().finite(),
@@ -242,6 +249,8 @@ const playerEventDeltaSchema = z.object({
 })
 
 const careerEventRecordSchema = z.object({
+  definitionRevision: z.literal(1).optional(),
+  eventTitle: z.string().min(1).max(120).optional(),
   eventId: careerEventIdSchema,
   choiceId: z.string().min(1).max(32),
   windowIndex: z.number().int().nonnegative(),
@@ -312,6 +321,7 @@ const nationalTeamStateSchema = z.object({
 })
 
 const stateSchema = z.object({
+  entertainmentV3: entertainmentV3Schema,
   saveVersion: z.literal(SAVE_VERSION),
   dataVersion: z.literal(DATA_VERSION),
   phase: z.enum([
@@ -683,7 +693,7 @@ function migrateLegacyState(value: unknown): unknown {
   }
 
   if (
-    [7, 8, 9, 10, 11, 12, 13].includes(Number(migrated.saveVersion)) &&
+    [7, 8, 9, 10, 11, 12, 13, 14].includes(Number(migrated.saveVersion)) &&
     !migrated.pendingKeyMatchMoment &&
     isRecord(migrated.contract) &&
     migrated.contract.remainingHalfYears === 0 &&
@@ -799,9 +809,13 @@ function migrateLegacyState(value: unknown): unknown {
     migrated = { ...migrated, saveVersion: 12, dataVersion: 12 }
   }
   if (migrated.saveVersion === 12 && migrated.dataVersion === 12) {
-    migrated = { ...migrated, saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, pendingKeyMatchMoment: null }
+    migrated = { ...migrated, saveVersion: 13, dataVersion: 13, pendingKeyMatchMoment: null }
   }
 
+  if (migrated.saveVersion === 13 && migrated.dataVersion === 13) {
+    const activationWindowIndex = migrationActivationWindow(migrated as unknown as GameState)
+    migrated = {...migrated, saveVersion: 14, dataVersion: 14, entertainmentV3: createEntertainmentV3State(typeof migrated.selectedClubId === 'string' ? migrated.selectedClubId : null, activationWindowIndex)}
+  }
   return migrated
 }
 
@@ -809,6 +823,7 @@ export function validateGameState(value: unknown): GameState {
   let parsed: GameState
   try {
     parsed = enforceAgeBasedFirstTeam(stateSchema.parse(migrateLegacyState(value)) as GameState)
+    validateEntertainmentV3(parsed)
     validateMomentContext(parsed)
     for (const entry of parsed.history) if ('keyMatchMoment' in entry) {
       const moment = momentSnapshotSchema.parse(entry.keyMatchMoment)
@@ -1165,9 +1180,14 @@ function decode(raw: string): GameState {
   const payload = JSON.stringify(envelope.data)
   if (checksum(payload) !== envelope.checksum) {
     if (envelope.data.pendingKeyMatchMoment || ['KEY_MATCH_MOMENT', 'KEY_MATCH_MOMENT_RESULT'].includes(envelope.data.phase)) throw new MomentRecoveryError('关键比赛存档校验和不匹配。')
+    if (envelope.data.saveVersion === 14) throw new EntertainmentRecoveryError('V3存档校验和不匹配。')
     throw new Error('Save checksum mismatch.')
   }
-  return validateGameState(envelope.data)
+  try { return validateGameState(envelope.data) } catch (error) {
+    if (error instanceof MomentRecoveryError) throw error
+    if (envelope.data.saveVersion === 14) throw new EntertainmentRecoveryError()
+    throw error
+  }
 }
 
 function storageAvailable(): boolean {
@@ -1176,6 +1196,17 @@ function storageAvailable(): boolean {
 
 // Called only after decode succeeds. Keep the pre-upgrade bytes independent
 // of the rotating backup; a failed write must leave the old current untouched.
+function preserveV13Backup(raw: string): void {
+  if (JSON.parse(raw).data.saveVersion !== 13) return
+  const existing = window.localStorage.getItem(V13_BACKUP_KEY)
+  if (existing !== null) {
+    if (JSON.parse(existing).data.saveVersion !== 13) throw new Error('V13升级前备份不完整，原存档已保留。')
+    decode(existing)
+    return
+  }
+  window.localStorage.setItem(V13_BACKUP_KEY, raw)
+  if (window.localStorage.getItem(V13_BACKUP_KEY) !== raw) throw new Error('无法保存V13升级前备份，原存档已保留。')
+}
 function preserveV12Backup(raw: string): void {
   if (JSON.parse(raw).data.saveVersion !== 12) return
   const existing = window.localStorage.getItem(V12_BACKUP_KEY)
@@ -1197,8 +1228,8 @@ function preserveV11Backup(raw: string): void {
   }
 }
 
-export function saveGame(state: GameState): void {
-  if (!storageAvailable()) { if (state.pendingKeyMatchMoment || state.lastReport?.keyMatchMoment) throw new Error('无法保存比赛进度，请启用本地存储后重试。'); return }
+export function saveGame(state: GameState, options: {strict?: boolean} = {}): void {
+  if (!storageAvailable()) { if (options.strict || state.entertainmentV3?.arrangements.length || state.pendingKeyMatchMoment || state.lastReport?.keyMatchMoment) throw new Error('无法保存比赛进度，请启用本地存储后重试。'); return }
   const encoded = encode(state)
   const current = window.localStorage.getItem(CURRENT_KEY)
   if (current) {
@@ -1207,10 +1238,11 @@ export function saveGame(state: GameState): void {
       decode(current)
       valid = true
     } catch (error) {
-      if (error instanceof MomentRecoveryError) throw error
+      if (error instanceof MomentRecoveryError || error instanceof EntertainmentRecoveryError) throw error
       // Keep the last known valid backup when the current value is corrupt.
     }
     if (valid) {
+      preserveV13Backup(current)
       preserveV12Backup(current)
       preserveV11Backup(current)
       window.localStorage.setItem(BACKUP_KEY, current)
@@ -1230,12 +1262,13 @@ export function loadGame(): GameState | null {
     try {
       decoded = decode(current)
     } catch (error) {
-      if (error instanceof MomentRecoveryError) throw error
+      if (error instanceof MomentRecoveryError || error instanceof EntertainmentRecoveryError) throw error
       // Fall through to the internal backup.
     }
     if (decoded) {
       const normalized = encode(decoded)
       if (normalized !== current) {
+        preserveV13Backup(current)
         preserveV12Backup(current)
         preserveV11Backup(current)
         window.localStorage.setItem(BACKUP_KEY, current)
@@ -1248,6 +1281,7 @@ export function loadGame(): GameState | null {
   const backup = window.localStorage.getItem(BACKUP_KEY)
   if (!backup) return null
   const recovered = decode(backup)
+  preserveV13Backup(backup)
   preserveV12Backup(backup)
   preserveV11Backup(backup)
   const encoded = encode(recovered)
@@ -1270,4 +1304,5 @@ export function deleteSavedCareer(): void {
   window.localStorage.removeItem(BACKUP_KEY)
   window.localStorage.removeItem(V11_BACKUP_KEY)
   window.localStorage.removeItem(V12_BACKUP_KEY)
+  window.localStorage.removeItem(V13_BACKUP_KEY)
 }

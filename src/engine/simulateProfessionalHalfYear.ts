@@ -346,6 +346,7 @@ function settleContract(input: {
   actualTeamLevel: TeamLevel
   actualRole: SquadRole
   cashBeforeEuro: number
+  uncapped?: boolean
 }): {
   contract: ContractState
   incomeEuro: number
@@ -362,7 +363,7 @@ function settleContract(input: {
     contract.annualSalaryEuro,
   )
   const reserveLimit = cashReserveLimit(contract.annualSalaryEuro)
-  const cashAfterEuro = Math.min(
+  const cashAfterEuro = input.uncapped ? cashBeforeEuro + availableIncome : Math.min(
     cashBeforeEuro + availableIncome,
     Math.max(cashBeforeEuro, reserveLimit),
   )
@@ -446,7 +447,7 @@ function simulateFirstTeamHalfYear(input: {
   cashEuro: number
 } {
   const { state, offer, role, focus, approach } = input
-  const { startPlayer, preparation, workingPlayer, trainingExecution } = prepareFirstTeamSimulation(state, focus, approach)
+  const { startPlayer, preparation, workingPlayer, trainingExecution, personalArrangementReceipts } = prepareFirstTeamSimulation(state, focus, approach)
   const seed = `${state.careerSeed}:window:${state.windowIndex}`
   const { stats, injury, execution } = simulateFirstTeamStats({
     player: workingPlayer,
@@ -540,6 +541,7 @@ function simulateFirstTeamHalfYear(input: {
     actualTeamLevel: 'FIRST_TEAM',
     actualRole: role,
     cashBeforeEuro: state.cashEuro,
+    uncapped: entertainmentV3Active(state) && state.entertainmentV3?.cashPolicy === 'UNCAPPED',
   })
   const nextWindowLabel = careerWindowLabel(
     state.startYear,
@@ -606,7 +608,7 @@ function simulateFirstTeamHalfYear(input: {
     ],
   }
   const report = attachContractReport({
-    report: baseReport,
+    report: personalArrangementReceipts.length ? {...baseReport, personalArrangements: {receipts: personalArrangementReceipts, purchaseEuro: 0, refundEuro: 0, summaries: []}} : baseReport,
     contractBefore: state.contract!,
     contractAfter: settlement.contract,
     actualTeamLevel: 'FIRST_TEAM',
@@ -698,6 +700,7 @@ export function simulateProfessionalHalfYear(input: {
     firstTeamProgress: state.firstTeamProgress,
     teamLevel: state.teamLevel,
     eventTrainingBonus: state.trainingQualityBonus,
+    personalArrangementState: state,
   })
   // 本窗口的比赛仍由窗口开始时的球队层级与角色生成；晋升与角色调整
   // 在窗口结束后生效，只影响下一个窗口，不能倒过来参与本窗口合同结算。
@@ -713,6 +716,7 @@ export function simulateProfessionalHalfYear(input: {
     actualTeamLevel,
     actualRole,
     cashBeforeEuro: state.cashEuro,
+    uncapped: entertainmentV3Active(state) && state.entertainmentV3?.cashPolicy === 'UNCAPPED',
   })
   const report = attachContractReport({
     report: youthResult.report,
@@ -737,3 +741,4 @@ export function simulateProfessionalHalfYear(input: {
     firstTeamProgress: youthResult.firstTeamProgress,
   }
 }
+import { entertainmentV3Active } from './personalArrangements'

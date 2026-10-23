@@ -1,0 +1,1652 @@
+{
+  "OFF": {
+    "careers": 48,
+    "adultWindows": 2200,
+    "v3NodeReach": {},
+    "chainClosures": {},
+    "adultEventDeltaTotals": {
+      "fitness": 137,
+      "fanRelation": 797,
+      "morale": 2162,
+      "coachRelation": 973,
+      "squadRelation": 1211,
+      "mediaRelation": 696,
+      "form": 1192,
+      "reputation": 730,
+      "agentRelation": 561,
+      "clubAttachment": 78
+    },
+    "v3OnlyEventDeltaTotals": {},
+    "prioritizedHealthEventCounts": {
+      "FITNESS_WARNING": 19,
+      "KEY_MATCH_PAIN": 16
+    },
+    "expiredFollowupCases": []
+  },
+  "ON_FREE": {
+    "careers": 48,
+    "adultWindows": 2198,
+    "v3NodeReach": {
+      "V3_C01A_LOCAL_CAR": 7,
+      "V3_C01B_LOCAL_CAR_RETURN": 1,
+      "V3_C02A_PUBLIC_RESPONSE": 8,
+      "V3_C02B_PUBLIC_RESPONSE_RETURN": 3,
+      "V3_C04A_HOMETOWN_CAMP": 16,
+      "V3_C04B_HOMETOWN_CAMP_RETURN": 5,
+      "V3_E01_PRESS_DRINK": 17,
+      "V3_E03_INTERVIEW_CLIP": 8,
+      "V3_E04_FAN_SCHEDULE": 14,
+      "V3_E05_OLD_POST": 11,
+      "V3_E06_FAMILY_VISIT": 10,
+      "V3_E07_LANGUAGE_MIXUP": 4,
+      "V3_E08_NEW_NEIGHBOR": 4,
+      "V3_E09_LOCAL_RADIO": 7,
+      "V3_E10_TEAM_PHOTO": 12,
+      "V3_E11_COMMUTE": 13,
+      "V3_E12_FAN_GIFT": 10
+    },
+    "chainClosures": {
+      "C01:COMPLETED": 1,
+      "C01:EXPIRED": 6,
+      "C02:COMPLETED": 3,
+      "C02:EXPIRED": 5,
+      "C04:COMPLETED": 5,
+      "C04:EXPIRED": 10,
+      "C04:RETIRED": 1
+    },
+    "adultEventDeltaTotals": {
+      "form": 645,
+      "fitness": -1270,
+      "morale": 1164,
+      "coachRelation": 797,
+      "mediaRelation": 142,
+      "fanRelation": 394,
+      "squadRelation": 701,
+      "reputation": 418,
+      "agentRelation": 116,
+      "clubAttachment": 14
+    },
+    "v3OnlyEventDeltaTotals": {
+      "morale": 78,
+      "mediaRelation": 31,
+      "fitness": -16,
+      "fanRelation": 44,
+      "squadRelation": 7
+    },
+    "prioritizedHealthEventCounts": {
+      "KEY_MATCH_PAIN": 498,
+      "FITNESS_WARNING": 490
+    },
+    "expiredFollowupCases": [
+      {
+        "seed": "FUNV3-LONG-04",
+        "chainId": "C04",
+        "firstWindowIndex": 41,
+        "closedWindowIndex": 44,
+        "followupSlots": [
+          {
+            "windowIndex": 42,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-08",
+        "chainId": "C04",
+        "firstWindowIndex": 52,
+        "closedWindowIndex": 55,
+        "followupSlots": [
+          {
+            "windowIndex": 53,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": true
+          },
+          {
+            "windowIndex": 54,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 55,
+            "eventId": null,
+            "initialLowState": true
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-09",
+        "chainId": "C04",
+        "firstWindowIndex": 40,
+        "closedWindowIndex": 43,
+        "followupSlots": [
+          {
+            "windowIndex": 41,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 42,
+            "eventId": null,
+            "initialLowState": true
+          },
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-10",
+        "chainId": "C01",
+        "firstWindowIndex": 29,
+        "closedWindowIndex": 32,
+        "followupSlots": [
+          {
+            "windowIndex": 30,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 31,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 32,
+            "eventId": null,
+            "initialLowState": true
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-11",
+        "chainId": "C02",
+        "firstWindowIndex": 24,
+        "closedWindowIndex": 27,
+        "followupSlots": [
+          {
+            "windowIndex": 25,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 27,
+            "eventId": null,
+            "initialLowState": true
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-12",
+        "chainId": "C04",
+        "firstWindowIndex": 12,
+        "closedWindowIndex": 15,
+        "followupSlots": [
+          {
+            "windowIndex": 13,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 14,
+            "eventId": "FIRST_TEAM_ROLE_SECURED",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 15,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-12",
+        "chainId": "C02",
+        "firstWindowIndex": 24,
+        "closedWindowIndex": 27,
+        "followupSlots": [
+          {
+            "windowIndex": 25,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 27,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-14",
+        "chainId": "C04",
+        "firstWindowIndex": 48,
+        "closedWindowIndex": 51,
+        "followupSlots": [
+          {
+            "windowIndex": 49,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 50,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 51,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-16",
+        "chainId": "C04",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-22",
+        "chainId": "C04",
+        "firstWindowIndex": 34,
+        "closedWindowIndex": 37,
+        "followupSlots": [
+          {
+            "windowIndex": 35,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 36,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 37,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-25",
+        "chainId": "C04",
+        "firstWindowIndex": 23,
+        "closedWindowIndex": 26,
+        "followupSlots": [
+          {
+            "windowIndex": 24,
+            "eventId": "NATIONAL_FIFTY_CAPS",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 25,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-25",
+        "chainId": "C01",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-27",
+        "chainId": "C01",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": true
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": true
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-29",
+        "chainId": "C04",
+        "firstWindowIndex": 45,
+        "closedWindowIndex": 48,
+        "followupSlots": [
+          {
+            "windowIndex": 46,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 47,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 48,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-34",
+        "chainId": "C01",
+        "firstWindowIndex": 46,
+        "closedWindowIndex": 49,
+        "followupSlots": [
+          {
+            "windowIndex": 47,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 48,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 49,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-35",
+        "chainId": "C01",
+        "firstWindowIndex": 37,
+        "closedWindowIndex": 40,
+        "followupSlots": [
+          {
+            "windowIndex": 38,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 39,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 40,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-36",
+        "chainId": "C02",
+        "firstWindowIndex": 30,
+        "closedWindowIndex": 33,
+        "followupSlots": [
+          {
+            "windowIndex": 31,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 32,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 33,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-42",
+        "chainId": "C02",
+        "firstWindowIndex": 17,
+        "closedWindowIndex": 20,
+        "followupSlots": [
+          {
+            "windowIndex": 18,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 19,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 20,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-42",
+        "chainId": "C04",
+        "firstWindowIndex": 51,
+        "closedWindowIndex": 54,
+        "followupSlots": [
+          {
+            "windowIndex": 52,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 53,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 54,
+            "eventId": "STARTING_ROLE_LOST",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-45",
+        "chainId": "C01",
+        "firstWindowIndex": 35,
+        "closedWindowIndex": 38,
+        "followupSlots": [
+          {
+            "windowIndex": 36,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 37,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 38,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-47",
+        "chainId": "C02",
+        "firstWindowIndex": 16,
+        "closedWindowIndex": 19,
+        "followupSlots": [
+          {
+            "windowIndex": 17,
+            "eventId": "FIRST_TEAM_100_APPEARANCES",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 18,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 19,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      }
+    ]
+  },
+  "ON_FIXED_BODY": {
+    "careers": 48,
+    "adultWindows": 2200,
+    "v3NodeReach": {
+      "V3_C01A_LOCAL_CAR": 10,
+      "V3_C01B_LOCAL_CAR_RETURN": 6,
+      "V3_C02A_PUBLIC_RESPONSE": 14,
+      "V3_C02B_PUBLIC_RESPONSE_RETURN": 4,
+      "V3_C03A_YOUNG_TEAMMATE": 2,
+      "V3_C04A_HOMETOWN_CAMP": 18,
+      "V3_C04B_HOMETOWN_CAMP_RETURN": 8,
+      "V3_E01_PRESS_DRINK": 20,
+      "V3_E02_AD_TEAMMATE": 2,
+      "V3_E03_INTERVIEW_CLIP": 16,
+      "V3_E04_FAN_SCHEDULE": 16,
+      "V3_E05_OLD_POST": 8,
+      "V3_E06_FAMILY_VISIT": 17,
+      "V3_E07_LANGUAGE_MIXUP": 6,
+      "V3_E08_NEW_NEIGHBOR": 4,
+      "V3_E09_LOCAL_RADIO": 12,
+      "V3_E10_TEAM_PHOTO": 14,
+      "V3_E11_COMMUTE": 14,
+      "V3_E12_FAN_GIFT": 14
+    },
+    "chainClosures": {
+      "C01:COMPLETED": 6,
+      "C01:EXPIRED": 3,
+      "C01:RETIRED": 1,
+      "C02:COMPLETED": 4,
+      "C02:EXPIRED": 9,
+      "C02:RETIRED": 1,
+      "C03:EXPIRED": 2,
+      "C04:COMPLETED": 8,
+      "C04:EXPIRED": 9,
+      "C04:RETIRED": 1
+    },
+    "adultEventDeltaTotals": {
+      "form": 722,
+      "fitness": -1492,
+      "morale": 1288,
+      "coachRelation": 810,
+      "mediaRelation": 137,
+      "fanRelation": 414,
+      "squadRelation": 752,
+      "reputation": 426,
+      "agentRelation": 115,
+      "clubAttachment": -1
+    },
+    "v3OnlyEventDeltaTotals": {
+      "morale": 122,
+      "mediaRelation": 32,
+      "fitness": -27,
+      "fanRelation": 56,
+      "squadRelation": 19
+    },
+    "prioritizedHealthEventCounts": {
+      "KEY_MATCH_PAIN": 533,
+      "FITNESS_WARNING": 367
+    },
+    "expiredFollowupCases": [
+      {
+        "seed": "FUNV3-LONG-03",
+        "chainId": "C02",
+        "firstWindowIndex": 17,
+        "closedWindowIndex": 20,
+        "followupSlots": [
+          {
+            "windowIndex": 18,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 19,
+            "eventId": "FIRST_TEAM_100_APPEARANCES",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 20,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-09",
+        "chainId": "C04",
+        "firstWindowIndex": 40,
+        "closedWindowIndex": 43,
+        "followupSlots": [
+          {
+            "windowIndex": 41,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 42,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-10",
+        "chainId": "C02",
+        "firstWindowIndex": 29,
+        "closedWindowIndex": 32,
+        "followupSlots": [
+          {
+            "windowIndex": 30,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 31,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 32,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-11",
+        "chainId": "C02",
+        "firstWindowIndex": 24,
+        "closedWindowIndex": 27,
+        "followupSlots": [
+          {
+            "windowIndex": 25,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 27,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-12",
+        "chainId": "C04",
+        "firstWindowIndex": 12,
+        "closedWindowIndex": 15,
+        "followupSlots": [
+          {
+            "windowIndex": 13,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 14,
+            "eventId": "FIRST_TEAM_ROLE_SECURED",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 15,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-12",
+        "chainId": "C02",
+        "firstWindowIndex": 24,
+        "closedWindowIndex": 27,
+        "followupSlots": [
+          {
+            "windowIndex": 25,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 27,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-16",
+        "chainId": "C04",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-22",
+        "chainId": "C04",
+        "firstWindowIndex": 34,
+        "closedWindowIndex": 37,
+        "followupSlots": [
+          {
+            "windowIndex": 35,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 36,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 37,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-25",
+        "chainId": "C04",
+        "firstWindowIndex": 23,
+        "closedWindowIndex": 26,
+        "followupSlots": [
+          {
+            "windowIndex": 24,
+            "eventId": "NATIONAL_FIFTY_CAPS",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 25,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-25",
+        "chainId": "C01",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-27",
+        "chainId": "C03",
+        "firstWindowIndex": 34,
+        "closedWindowIndex": 37,
+        "followupSlots": [
+          {
+            "windowIndex": 35,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 36,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 37,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-27",
+        "chainId": "C01",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-29",
+        "chainId": "C04",
+        "firstWindowIndex": 45,
+        "closedWindowIndex": 48,
+        "followupSlots": [
+          {
+            "windowIndex": 46,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 47,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 48,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-35",
+        "chainId": "C04",
+        "firstWindowIndex": 27,
+        "closedWindowIndex": 30,
+        "followupSlots": [
+          {
+            "windowIndex": 28,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 29,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 30,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-35",
+        "chainId": "C01",
+        "firstWindowIndex": 48,
+        "closedWindowIndex": 51,
+        "followupSlots": [
+          {
+            "windowIndex": 49,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 50,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 51,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-36",
+        "chainId": "C02",
+        "firstWindowIndex": 30,
+        "closedWindowIndex": 33,
+        "followupSlots": [
+          {
+            "windowIndex": 31,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 32,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 33,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-37",
+        "chainId": "C02",
+        "firstWindowIndex": 23,
+        "closedWindowIndex": 26,
+        "followupSlots": [
+          {
+            "windowIndex": 24,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 25,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-38",
+        "chainId": "C02",
+        "firstWindowIndex": 50,
+        "closedWindowIndex": 53,
+        "followupSlots": [
+          {
+            "windowIndex": 51,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 52,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 53,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-39",
+        "chainId": "C03",
+        "firstWindowIndex": 27,
+        "closedWindowIndex": 30,
+        "followupSlots": [
+          {
+            "windowIndex": 28,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 29,
+            "eventId": "NATIONAL_FIFTY_CAPS",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 30,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-40",
+        "chainId": "C04",
+        "firstWindowIndex": 21,
+        "closedWindowIndex": 24,
+        "followupSlots": [
+          {
+            "windowIndex": 22,
+            "eventId": "FIRST_CUP_TITLE_REACTION",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 23,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 24,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-42",
+        "chainId": "C02",
+        "firstWindowIndex": 17,
+        "closedWindowIndex": 20,
+        "followupSlots": [
+          {
+            "windowIndex": 18,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 19,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 20,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-42",
+        "chainId": "C04",
+        "firstWindowIndex": 51,
+        "closedWindowIndex": 54,
+        "followupSlots": [
+          {
+            "windowIndex": 52,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 53,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 54,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-47",
+        "chainId": "C02",
+        "firstWindowIndex": 16,
+        "closedWindowIndex": 19,
+        "followupSlots": [
+          {
+            "windowIndex": 17,
+            "eventId": "FIRST_TEAM_100_APPEARANCES",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 18,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 19,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          }
+        ]
+      }
+    ]
+  },
+  "ON_SITUATIONAL": {
+    "careers": 48,
+    "adultWindows": 2200,
+    "v3NodeReach": {
+      "V3_C01A_LOCAL_CAR": 5,
+      "V3_C01B_LOCAL_CAR_RETURN": 1,
+      "V3_C02A_PUBLIC_RESPONSE": 8,
+      "V3_C02B_PUBLIC_RESPONSE_RETURN": 1,
+      "V3_C04A_HOMETOWN_CAMP": 16,
+      "V3_C04B_HOMETOWN_CAMP_RETURN": 6,
+      "V3_E01_PRESS_DRINK": 18,
+      "V3_E03_INTERVIEW_CLIP": 8,
+      "V3_E04_FAN_SCHEDULE": 16,
+      "V3_E05_OLD_POST": 8,
+      "V3_E06_FAMILY_VISIT": 10,
+      "V3_E07_LANGUAGE_MIXUP": 3,
+      "V3_E08_NEW_NEIGHBOR": 5,
+      "V3_E09_LOCAL_RADIO": 7,
+      "V3_E10_TEAM_PHOTO": 12,
+      "V3_E11_COMMUTE": 14,
+      "V3_E12_FAN_GIFT": 9
+    },
+    "chainClosures": {
+      "C01:COMPLETED": 1,
+      "C01:EXPIRED": 3,
+      "C01:RETIRED": 1,
+      "C02:COMPLETED": 1,
+      "C02:EXPIRED": 7,
+      "C04:COMPLETED": 6,
+      "C04:EXPIRED": 9,
+      "C04:RETIRED": 1
+    },
+    "adultEventDeltaTotals": {
+      "form": 633,
+      "fitness": -1327,
+      "morale": 1147,
+      "coachRelation": 776,
+      "mediaRelation": 121,
+      "fanRelation": 466,
+      "squadRelation": 756,
+      "reputation": 429,
+      "agentRelation": 104,
+      "clubAttachment": 18
+    },
+    "v3OnlyEventDeltaTotals": {
+      "morale": 68,
+      "mediaRelation": 27,
+      "fitness": -14,
+      "fanRelation": 45,
+      "squadRelation": 5
+    },
+    "prioritizedHealthEventCounts": {
+      "KEY_MATCH_PAIN": 495,
+      "FITNESS_WARNING": 491
+    },
+    "expiredFollowupCases": [
+      {
+        "seed": "FUNV3-LONG-08",
+        "chainId": "C02",
+        "firstWindowIndex": 52,
+        "closedWindowIndex": 55,
+        "followupSlots": [
+          {
+            "windowIndex": 53,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 54,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 55,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-09",
+        "chainId": "C04",
+        "firstWindowIndex": 40,
+        "closedWindowIndex": 43,
+        "followupSlots": [
+          {
+            "windowIndex": 41,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 42,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-10",
+        "chainId": "C02",
+        "firstWindowIndex": 29,
+        "closedWindowIndex": 32,
+        "followupSlots": [
+          {
+            "windowIndex": 30,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 31,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 32,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-11",
+        "chainId": "C02",
+        "firstWindowIndex": 24,
+        "closedWindowIndex": 27,
+        "followupSlots": [
+          {
+            "windowIndex": 25,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 27,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-12",
+        "chainId": "C04",
+        "firstWindowIndex": 12,
+        "closedWindowIndex": 15,
+        "followupSlots": [
+          {
+            "windowIndex": 13,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 14,
+            "eventId": "FIRST_TEAM_ROLE_SECURED",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 15,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-12",
+        "chainId": "C02",
+        "firstWindowIndex": 24,
+        "closedWindowIndex": 27,
+        "followupSlots": [
+          {
+            "windowIndex": 25,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 27,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-14",
+        "chainId": "C04",
+        "firstWindowIndex": 48,
+        "closedWindowIndex": 51,
+        "followupSlots": [
+          {
+            "windowIndex": 49,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 50,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 51,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-16",
+        "chainId": "C04",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-22",
+        "chainId": "C04",
+        "firstWindowIndex": 34,
+        "closedWindowIndex": 37,
+        "followupSlots": [
+          {
+            "windowIndex": 35,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 36,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 37,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-25",
+        "chainId": "C04",
+        "firstWindowIndex": 23,
+        "closedWindowIndex": 26,
+        "followupSlots": [
+          {
+            "windowIndex": 24,
+            "eventId": "NATIONAL_FIFTY_CAPS",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 25,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 26,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-27",
+        "chainId": "C01",
+        "firstWindowIndex": 42,
+        "closedWindowIndex": 45,
+        "followupSlots": [
+          {
+            "windowIndex": 43,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 44,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 45,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-29",
+        "chainId": "C04",
+        "firstWindowIndex": 45,
+        "closedWindowIndex": 48,
+        "followupSlots": [
+          {
+            "windowIndex": 46,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 47,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 48,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-35",
+        "chainId": "C01",
+        "firstWindowIndex": 37,
+        "closedWindowIndex": 40,
+        "followupSlots": [
+          {
+            "windowIndex": 38,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 39,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 40,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-36",
+        "chainId": "C02",
+        "firstWindowIndex": 30,
+        "closedWindowIndex": 33,
+        "followupSlots": [
+          {
+            "windowIndex": 31,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 32,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 33,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-40",
+        "chainId": "C04",
+        "firstWindowIndex": 21,
+        "closedWindowIndex": 24,
+        "followupSlots": [
+          {
+            "windowIndex": 22,
+            "eventId": "FIRST_CUP_TITLE_REACTION",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 23,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 24,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-42",
+        "chainId": "C02",
+        "firstWindowIndex": 17,
+        "closedWindowIndex": 20,
+        "followupSlots": [
+          {
+            "windowIndex": 18,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 19,
+            "eventId": null,
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 20,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-42",
+        "chainId": "C04",
+        "firstWindowIndex": 51,
+        "closedWindowIndex": 54,
+        "followupSlots": [
+          {
+            "windowIndex": 52,
+            "eventId": null,
+            "initialLowState": true
+          },
+          {
+            "windowIndex": 53,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 54,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-45",
+        "chainId": "C01",
+        "firstWindowIndex": 35,
+        "closedWindowIndex": 38,
+        "followupSlots": [
+          {
+            "windowIndex": 36,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 37,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 38,
+            "eventId": null,
+            "initialLowState": false
+          }
+        ]
+      },
+      {
+        "seed": "FUNV3-LONG-47",
+        "chainId": "C02",
+        "firstWindowIndex": 16,
+        "closedWindowIndex": 19,
+        "followupSlots": [
+          {
+            "windowIndex": 17,
+            "eventId": "FIRST_TEAM_100_APPEARANCES",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 18,
+            "eventId": "FITNESS_WARNING",
+            "initialLowState": false
+          },
+          {
+            "windowIndex": 19,
+            "eventId": "KEY_MATCH_PAIN",
+            "initialLowState": false
+          }
+        ]
+      }
+    ]
+  }
+}

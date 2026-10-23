@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../../engine/entertainmentV3'
 import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import { generateAcademyOffers } from '../../engine/offers'
@@ -58,6 +59,7 @@ function eventReadyState() {
     player,
     academyOffers,
     selectedClubId: selected.club.id,
+      entertainmentV3: createEntertainmentV3State(selected.club.id),
     youthRole: selected.expectedRole,
     arrivalChoice: 'COACH' as const,
     trainingFocus: 'BALANCED' as const,
@@ -117,6 +119,7 @@ describe('save migration', () => {
       player,
       academyOffers,
       selectedClubId: selected.club.id,
+      entertainmentV3: createEntertainmentV3State(selected.club.id),
       careerStory: createCareerStoryState(selected.club.id),
       youthRole: selected.expectedRole,
       arrivalChoice: 'COACH',
@@ -265,6 +268,7 @@ describe('save migration', () => {
       player,
       academyOffers,
       selectedClubId: selected.club.id,
+      entertainmentV3: createEntertainmentV3State(selected.club.id),
       careerStory: createCareerStoryState(selected.club.id),
       teamLevel: 'FIRST_TEAM',
       youthRole: null,
@@ -340,6 +344,7 @@ describe('save migration', () => {
       player,
       academyOffers,
       selectedClubId: selected.club.id,
+      entertainmentV3: createEntertainmentV3State(selected.club.id),
       careerStory: createCareerStoryState(selected.club.id),
       teamLevel: 'YOUTH',
       youthRole: 'CORE',
@@ -406,6 +411,7 @@ describe('save migration', () => {
       player: second.player,
       academyOffers: offers,
       selectedClubId: offer.club.id,
+      entertainmentV3: createEntertainmentV3State(offer.club.id),
       youthRole: second.role,
       arrivalChoice: 'COACH',
       trainingFocus: 'mental',
@@ -506,6 +512,7 @@ describe('save migration', () => {
       player: simulated.player,
       academyOffers: offers,
       selectedClubId: offer.club.id,
+      entertainmentV3: createEntertainmentV3State(offer.club.id),
       teamLevel: 'FIRST_TEAM',
       youthRole: null,
       firstTeamRole: 'STARTER',

@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../engine/entertainmentV3'
 import { completePendingMoment, installTestStorage } from '../testing/keyMatchMomentTestSupport'
 import { readFileSync } from 'node:fs'
 import { SAVE_VERSION, DATA_VERSION } from '../models/game'
@@ -21,6 +22,7 @@ function academyGame(seed: string): GameState {
   const offers = generateAcademyOffers(player, seed)
   return {
     pendingKeyMatchMoment: null,
+    entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
     saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase: 'ACADEMY_OFFERS', careerSeed: seed, startYear: 2026, windowIndex: 0,
     draft, player, academyOffers: offers, selectedClubId: null, teamLevel: 'YOUTH', youthRole: null, firstTeamRole: null,
     contract: null, professionalOffer: null, transferOffers: [], selectedTransferChoiceId: null, transferDecision: null,
@@ -49,6 +51,7 @@ function professionalGame(seed: string, clubId: string, phase: GameState['phase'
   const professional = generateFirstProfessionalOffer({ player, club: academy.club, youthRole: 'STARTER', teamLevel: 'FIRST_TEAM', firstTeamProgress: progress, careerSeed: seed })
   return {
     pendingKeyMatchMoment: null,
+    entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
     saveVersion: SAVE_VERSION, dataVersion: DATA_VERSION, phase, careerSeed: seed, startYear: 2026, windowIndex: 9,
     draft, player, academyOffers: [academy, ...generateAcademyOffers(player, `${seed}-offers`).slice(0, 2)], selectedClubId: clubId, teamLevel: 'FIRST_TEAM', youthRole: null, firstTeamRole: 'ROTATION',
     contract: { ...contractFromOffer(professional), remainingHalfYears: expired ? 0 : 6 }, professionalOffer: professional,

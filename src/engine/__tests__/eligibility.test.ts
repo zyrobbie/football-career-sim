@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../entertainmentV3'
 import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import { CLUBS } from '../../data/balance'
@@ -18,6 +19,7 @@ function createOverAgeYouthState(): GameState {
 
   return {
     pendingKeyMatchMoment: null,
+    entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'HALF_YEAR_PLAN',

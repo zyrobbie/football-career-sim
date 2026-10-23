@@ -1,4 +1,4 @@
-import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected, legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import { afterAll, afterEach, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -114,7 +114,7 @@ it('preserves a constructed withdrawn record alongside a selected renewal in a s
   store().selectTransferChoice(game.transferOffers[0]!.id)
   expect(memory.has('career_save_backup')).toBe(false)
   const { expected, raw } = roundtrip(memory)
-  expect(expected).toEqual(currentSchemaExpected(game))
+  expect(legacyBusinessProjection(expected)).toEqual(legacyBusinessProjection(currentSchemaExpected(game)))
   expect(expected.transferOffers[1]!.withdrawn).toBe(true)
   rows.push({ kind: 'constructed-withdrawal-persistence-only', source, sourceSha, withdrawnSource, withdrawnSha: createHash('sha256').update(withdrawnRaw).digest('hex'), modifications: { 'transferOffers[1]': patch }, explanation: '18 fixed public attempts produced no withdrawal; copied only frozen negotiation fields to a real generated sparse external offer. Selection and persistence are public; withdrawal here is constructed, not publicly produced.', expected, firstActualEnvelope: JSON.parse(raw), result: 'passed' })
 })
@@ -156,7 +156,7 @@ it('retains legal STAY in an empty market with an effective contract', () => {
   useGameStore.setState({ game })
   store().selectTransferChoice('STAY')
   const result = roundtrip(memory)
-  expect(result.expected).toEqual(currentSchemaExpected(game))
+  expect(legacyBusinessProjection(result.expected)).toEqual(legacyBusinessProjection(currentSchemaExpected(game)))
   rows.push({ kind: 'effective-contract-empty-stay', game, result: 'passed' })
 })
 afterAll(() => {

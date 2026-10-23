@@ -113,7 +113,7 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
             {report.nationalTeam ? (
               <NationalTeamReport record={report.nationalTeam} />
             ) : null}
-            {report.specialEvent ? (
+            {report.specialEvent && !report.offPitchSummary ? (
               <section className="special-event-result">
               <h2>半年故事</h2>
                 <strong>{report.specialEvent.title}</strong>
@@ -121,6 +121,8 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
                 <p>{report.specialEvent.outcomeSummary}</p>
               </section>
             ) : null}
+            {report.offPitchSummary ? <section className="v3-story-summary" aria-label="重要场外回顾"><h2>场外回顾</h2>{report.specialEvent?.eventId.startsWith('V3_') ? <strong>{report.specialEvent.title}</strong> : null}<p>{report.offPitchSummary}</p></section> : null}
+            {report.personalArrangements ? <section className="v3-story-summary" aria-label="个人安排本期结算" data-testid="arrangement-settlement"><h2>个人安排 · 实际结算</h2>{report.personalArrangements.summaries.map((text,i) => <p key={i}>{text}</p>)}<p>本期购买 €{report.personalArrangements.purchaseEuro.toLocaleString('en-US')}；退款 €{report.personalArrangements.refundEuro.toLocaleString('en-US')}。</p>{game.entertainmentV3?.ledger.filter(l => l.windowIndex === game.history.at(-1)?.windowIndex && l.kind === 'REFUND' && report.personalArrangements?.ledgerEntryIds?.includes(l.id)).map(l => <p key={l.id}>{l.reason}：€{l.amountEuro.toLocaleString('en-US')}。</p>)}<p>以上是服务实际贡献，不是包含比赛消耗与其他事件的半年净变化；后续期不重复扣费。</p></section> : null}
             {report.consequenceSummaries?.length ? (
               <section className="consequence-result">
                 <h2>持续影响</h2>
@@ -145,6 +147,7 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
                 value={report.stipendEuro}
                 positive
               />
+              {report.personalArrangements?.refundEuro ? <MoneyRow label="个人安排退款" value={report.personalArrangements.refundEuro} positive /> : null}
               <MoneyRow label="额外支出" value={report.expenseEuro} />
               <MoneyRow label="可支配现金" value={report.cashAfterEuro} />
             </section>

@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../entertainmentV3'
 import { SAVE_VERSION, DATA_VERSION, type Club, type GameState, type Position } from '../../models/game'
 import {
   contractFromOffer,
@@ -41,6 +42,7 @@ export function createTrainingBaselineState(
   const contract = contractFromOffer(professionalOffer)
   const state: GameState = {
     pendingKeyMatchMoment: null,
+    entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'SIMULATION_READY',

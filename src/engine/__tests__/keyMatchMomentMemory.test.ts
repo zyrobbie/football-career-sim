@@ -1,3 +1,4 @@
+import { legacyBusinessProjection, currentSchemaExpected } from '../../testing/keyMatchMomentTestSupport'
 import {expect,it,vi} from 'vitest'
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs'
 import {createHash} from 'node:crypto'
@@ -45,12 +46,12 @@ for(const fixture of fixtures)it(`frozen ${fixture.id} Pending/Result/actual REA
  const expectedResult=read(fixture.result),expectedReport=read(fixture.report);let ready:string|null=null
  const install=(initial:string)=>{const m=new Map<string,string>([['career_save_current',initial]]);vi.stubGlobal('window',{localStorage:{getItem:(k:string)=>m.get(k)??null,removeItem:(k:string)=>m.delete(k),setItem:(k:string,v:string)=>{m.set(k,v);if(k==='career_save_current'&&JSON.parse(v).data.phase==='SIMULATION_READY')ready=v}}});useGameStore.setState({game:null,error:null,isReviewingReport:false,voluntaryRetirementConfirmation:null});return m}
  try{
-  const memory=install(raw),g=loadGame()!,p=g.pendingKeyMatchMoment!;expect(g).toEqual(JSON.parse(raw).data);useGameStore.setState({game:g});const ctx={careerSeed:g.careerSeed,playerId:g.player!.id,windowIndex:g.windowIndex,clubId:p.clubId,momentId:p.id,inputFingerprint:p.inputFingerprint}
-  useGameStore.getState().chooseKeyMatchMoment(fixture.choice,ctx);expect(loadGame()).toEqual(JSON.parse(expectedResult).data)
-  saveGame(loadGame()!);useGameStore.setState({game:null});useGameStore.getState().continueCareer();expect(loadGame()).toEqual(JSON.parse(expectedResult).data)
-  useGameStore.getState().finishKeyMatchMoment(ctx);expect(useGameStore.getState().error).toBeNull();expect(loadGame()).toEqual(JSON.parse(expectedReport).data);expect(ready).not.toBeNull()
-  const actualReady=ready!;install(actualReady);useGameStore.getState().continueCareer();expect(loadGame()).toEqual(JSON.parse(expectedReport).data);saveGame(loadGame()!);expect(loadGame()).toEqual(JSON.parse(expectedReport).data)
-  install(expectedResult);useGameStore.getState().continueCareer();useGameStore.getState().finishKeyMatchMoment(ctx);expect(loadGame()).toEqual(JSON.parse(expectedReport).data)
+  const memory=install(raw),g=loadGame()!,p=g.pendingKeyMatchMoment!;expect(legacyBusinessProjection(g)).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(raw).data)));useGameStore.setState({game:g});const ctx={careerSeed:g.careerSeed,playerId:g.player!.id,windowIndex:g.windowIndex,clubId:p.clubId,momentId:p.id,inputFingerprint:p.inputFingerprint}
+  useGameStore.getState().chooseKeyMatchMoment(fixture.choice,ctx);expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(expectedResult).data)))
+  saveGame(loadGame()!);useGameStore.setState({game:null});useGameStore.getState().continueCareer();expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(expectedResult).data)))
+  useGameStore.getState().finishKeyMatchMoment(ctx);expect(useGameStore.getState().error).toBeNull();expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(expectedReport).data)));expect(ready).not.toBeNull()
+  const actualReady=ready!;install(actualReady);useGameStore.getState().continueCareer();expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(expectedReport).data)));saveGame(loadGame()!);expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(expectedReport).data)))
+  install(expectedResult);useGameStore.getState().continueCareer();useGameStore.getState().finishKeyMatchMoment(ctx);expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(expectedReport).data)))
   if(process.env.KMM_P1C_COLLECT==='1'){mkdirSync('docs/evidence/KMM-20260913/P1-C/ready-fixtures',{recursive:true});writeFileSync(`docs/evidence/KMM-20260913/P1-C/ready-fixtures/${fixture.id}.json.gz`,gzipSync(actualReady),{flag:'wx'})}
   expect(memory.has('career_save_current')).toBe(true)
  }finally{vi.unstubAllGlobals()}

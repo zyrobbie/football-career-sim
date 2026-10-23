@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../engine/entertainmentV3'
 import { completePendingMoment, installTestStorage } from '../testing/keyMatchMomentTestSupport'
 import { readFileSync } from 'node:fs'
 import { SAVE_VERSION, DATA_VERSION } from '../models/game'
@@ -492,7 +493,8 @@ describe('academy two-year progression', () => {
     const selected = academyOffers[0]!
     const game: GameState = {
       pendingKeyMatchMoment: null,
-      saveVersion: SAVE_VERSION,
+      entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
+    saveVersion: SAVE_VERSION,
       dataVersion: DATA_VERSION,
       phase: 'HALF_YEAR_PLAN',
       careerSeed,

@@ -1,0 +1,3021 @@
+{
+  "syntheticInitial": true,
+  "freePreparedFitness": 69,
+  "paidPreparedFitness": 77,
+  "receiptActual": 8,
+  "repeatedPureValidations": 5,
+  "steps": [
+    {
+      "label": "buy",
+      "game": {
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "rulesVersion": 1,
+              "cap": 85,
+              "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+              "category": "BODY",
+              "tier": "PREMIUM",
+              "title": "身体养护 · 高阶",
+              "priceEuro": 40000,
+              "purchaseYear": 2044,
+              "purchaseWindowIndex": 36,
+              "moveId": null,
+              "periods": [
+                {
+                  "windowIndex": 36,
+                  "status": "PENDING",
+                  "planned": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "actual": null,
+                  "reason": null
+                }
+              ],
+              "refundEuro": 0,
+              "refundReceipts": [],
+              "quotaRestored": false,
+              "terminationCause": null
+            }
+          ],
+          "ledger": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment",
+              "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "windowIndex": 36,
+              "kind": "PAYMENT",
+              "amountEuro": 40000,
+              "reason": "身体养护 · 高阶"
+            }
+          ],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "eligibilityMoveId": null,
+            "moves": []
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "phase": "HALF_YEAR_PLAN",
+        "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-V3-INDEPENDE",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 78,
+            "defense": 78,
+            "physical": 78,
+            "mental": 78
+          },
+          "potentials": {
+            "attack": 90,
+            "defense": 90,
+            "physical": 90,
+            "mental": 90
+          },
+          "form": 65,
+          "fitness": 60,
+          "morale": 62,
+          "coachRelation": 50,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 65,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_xian_changan",
+              "name": "西安长安",
+              "shortMark": "西",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施62、青训59。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_foshan_lingnan",
+              "name": "佛山岭南",
+              "shortMark": "佛",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施53、青训49。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 10,
+          "annualSalaryEuro": 18000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "id": "first-pro-V3-INDEPEN-eng_arsenal",
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "trainingFocus": null,
+        "transferArrivalChoice": null,
+        "pendingKeyMatchMoment": null,
+        "pendingCareerEvent": null,
+        "careerEventHistory": [],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "developmentApproach": null,
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 160000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      }
+    },
+    {
+      "label": "train",
+      "game": {
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "rulesVersion": 1,
+              "cap": 85,
+              "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+              "category": "BODY",
+              "tier": "PREMIUM",
+              "title": "身体养护 · 高阶",
+              "priceEuro": 40000,
+              "purchaseYear": 2044,
+              "purchaseWindowIndex": 36,
+              "moveId": null,
+              "periods": [
+                {
+                  "windowIndex": 36,
+                  "status": "PENDING",
+                  "planned": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "actual": null,
+                  "reason": null
+                }
+              ],
+              "refundEuro": 0,
+              "refundReceipts": [],
+              "quotaRestored": false,
+              "terminationCause": null
+            }
+          ],
+          "ledger": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment",
+              "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "windowIndex": 36,
+              "kind": "PAYMENT",
+              "amountEuro": 40000,
+              "reason": "身体养护 · 高阶"
+            }
+          ],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "eligibilityMoveId": null,
+            "moves": []
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "phase": "SPECIAL_EVENT",
+        "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-V3-INDEPENDE",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 78,
+            "defense": 78,
+            "physical": 78,
+            "mental": 78
+          },
+          "potentials": {
+            "attack": 90,
+            "defense": 90,
+            "physical": 90,
+            "mental": 90
+          },
+          "form": 65,
+          "fitness": 60,
+          "morale": 62,
+          "coachRelation": 50,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 65,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_xian_changan",
+              "name": "西安长安",
+              "shortMark": "西",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施62、青训59。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_foshan_lingnan",
+              "name": "佛山岭南",
+              "shortMark": "佛",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施53、青训49。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 10,
+          "annualSalaryEuro": 18000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "id": "first-pro-V3-INDEPEN-eng_arsenal",
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "trainingFocus": "BALANCED",
+        "transferArrivalChoice": null,
+        "pendingKeyMatchMoment": null,
+        "pendingCareerEvent": {
+          "eventId": "FITNESS_WARNING",
+          "interactionKind": "CHOICE",
+          "stepIndex": 0,
+          "selections": [],
+          "variantId": null
+        },
+        "careerEventHistory": [],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "developmentApproach": "STEADY",
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 160000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      }
+    },
+    {
+      "label": "event",
+      "game": {
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "rulesVersion": 1,
+              "cap": 85,
+              "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+              "category": "BODY",
+              "tier": "PREMIUM",
+              "title": "身体养护 · 高阶",
+              "priceEuro": 40000,
+              "purchaseYear": 2044,
+              "purchaseWindowIndex": 36,
+              "moveId": null,
+              "periods": [
+                {
+                  "windowIndex": 36,
+                  "status": "PENDING",
+                  "planned": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "actual": null,
+                  "reason": null
+                }
+              ],
+              "refundEuro": 0,
+              "refundReceipts": [],
+              "quotaRestored": false,
+              "terminationCause": null
+            }
+          ],
+          "ledger": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment",
+              "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "windowIndex": 36,
+              "kind": "PAYMENT",
+              "amountEuro": 40000,
+              "reason": "身体养护 · 高阶"
+            }
+          ],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "eligibilityMoveId": null,
+            "moves": []
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "phase": "SPECIAL_EVENT_RESULT",
+        "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-V3-INDEPENDE",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 78,
+            "defense": 78,
+            "physical": 78,
+            "mental": 78
+          },
+          "potentials": {
+            "attack": 90,
+            "defense": 90,
+            "physical": 90,
+            "mental": 90
+          },
+          "form": 63,
+          "fitness": 67,
+          "morale": 62,
+          "coachRelation": 52,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 65,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_xian_changan",
+              "name": "西安长安",
+              "shortMark": "西",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施62、青训59。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_foshan_lingnan",
+              "name": "佛山岭南",
+              "shortMark": "佛",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施53、青训49。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 10,
+          "annualSalaryEuro": 18000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "id": "first-pro-V3-INDEPEN-eng_arsenal",
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "trainingFocus": "BALANCED",
+        "transferArrivalChoice": null,
+        "pendingKeyMatchMoment": null,
+        "pendingCareerEvent": {
+          "eventId": "FITNESS_WARNING",
+          "interactionKind": "CHOICE",
+          "stepIndex": 0,
+          "selections": [
+            "A"
+          ],
+          "variantId": null
+        },
+        "careerEventHistory": [
+          {
+            "eventId": "FITNESS_WARNING",
+            "choiceId": "A",
+            "windowIndex": 36,
+            "choiceTitle": "完整执行休整",
+            "outcomeSummary": "你完整执行了恢复方案，身体指标回到安全区，但训练节奏暂时放慢。",
+            "appliedDelta": {
+              "form": -2,
+              "fitness": 7,
+              "coachRelation": 2
+            },
+            "cashDeltaEuro": 0
+          }
+        ],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "developmentApproach": "STEADY",
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 160000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      }
+    },
+    {
+      "label": "continueEvent",
+      "game": {
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "rulesVersion": 1,
+              "cap": 85,
+              "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+              "category": "BODY",
+              "tier": "PREMIUM",
+              "title": "身体养护 · 高阶",
+              "priceEuro": 40000,
+              "purchaseYear": 2044,
+              "purchaseWindowIndex": 36,
+              "moveId": null,
+              "periods": [
+                {
+                  "windowIndex": 36,
+                  "status": "PENDING",
+                  "planned": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "actual": null,
+                  "reason": null
+                }
+              ],
+              "refundEuro": 0,
+              "refundReceipts": [],
+              "quotaRestored": false,
+              "terminationCause": null
+            }
+          ],
+          "ledger": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment",
+              "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "windowIndex": 36,
+              "kind": "PAYMENT",
+              "amountEuro": 40000,
+              "reason": "身体养护 · 高阶"
+            }
+          ],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "eligibilityMoveId": null,
+            "moves": []
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "phase": "KEY_MATCH_MOMENT",
+        "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-V3-INDEPENDE",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 78,
+            "defense": 78,
+            "physical": 78,
+            "mental": 78
+          },
+          "potentials": {
+            "attack": 90,
+            "defense": 90,
+            "physical": 90,
+            "mental": 90
+          },
+          "form": 63,
+          "fitness": 67,
+          "morale": 62,
+          "coachRelation": 52,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 65,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_xian_changan",
+              "name": "西安长安",
+              "shortMark": "西",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施62、青训59。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_foshan_lingnan",
+              "name": "佛山岭南",
+              "shortMark": "佛",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施53、青训49。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 10,
+          "annualSalaryEuro": 18000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "id": "first-pro-V3-INDEPEN-eng_arsenal",
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "trainingFocus": "BALANCED",
+        "transferArrivalChoice": null,
+        "pendingKeyMatchMoment": {
+          "id": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+          "windowIndex": 36,
+          "clubId": "eng_arsenal",
+          "templateId": "KM-CRE-04",
+          "templateRevision": 1,
+          "rulesVersion": 1,
+          "fingerprintVersion": 2,
+          "inputFingerprint": "19e83346d899e464",
+          "minute": 86,
+          "ownScore": 0,
+          "opponentScore": 1,
+          "debutMoment": true,
+          "title": "贴身盯防下接应",
+          "scene": "传球即将到你脚下，盯防者从身后逼近；队友从侧面斜插，前方有一小片起脚空间。",
+          "choices": [
+            {
+              "id": "A",
+              "title": "转身摆脱后射门",
+              "weights": {
+                "attack": 0.45,
+                "defense": 0,
+                "physical": 0.55,
+                "mental": 0
+              },
+              "difficulty": 54,
+              "risk": "MEDIUM",
+              "explanation": "争取一次进球；处理失误会影响本次表现。",
+              "outcomes": {
+                "EXCELLENT": {
+                  "text": "你接球转身甩开盯防，起脚破门。",
+                  "delta": {
+                    "goals": 1,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.05
+                  }
+                },
+                "POSITIVE": {
+                  "text": "你转出空当射门，收获进球。",
+                  "delta": {
+                    "goals": 1,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0
+                  }
+                },
+                "NEGATIVE": {
+                  "text": "转身时被紧跟，射门遭到封堵。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": -0.05
+                  }
+                }
+              }
+            },
+            {
+              "id": "B",
+              "title": "一脚做给斜插队友",
+              "weights": {
+                "attack": 0.45,
+                "defense": 0,
+                "physical": 0,
+                "mental": 0.55
+              },
+              "difficulty": 52,
+              "risk": "LOW",
+              "explanation": "寻找队友，争取一次助攻；传球失误会影响本次表现。",
+              "outcomes": {
+                "EXCELLENT": {
+                  "text": "你不停球做出精准传递，队友顺势破门。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 1,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.05
+                  }
+                },
+                "POSITIVE": {
+                  "text": "斜插队友接到做球得分，你收获助攻。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 1,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0
+                  }
+                },
+                "NEGATIVE": {
+                  "text": "一脚做球没能对上跑位，被对手截住。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": -0.04
+                  }
+                }
+              }
+            },
+            {
+              "id": "C",
+              "title": "停球护住",
+              "weights": {
+                "attack": 0,
+                "defense": 0,
+                "physical": 0.45,
+                "mental": 0.55
+              },
+              "difficulty": 44,
+              "risk": "MEDIUM",
+              "explanation": "争取稳定处理，提高本次表现；不直接增加进球或助攻。",
+              "outcomes": {
+                "EXCELLENT": {
+                  "text": "你把球停在安全一侧，稳稳护住球权。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.1
+                  }
+                },
+                "POSITIVE": {
+                  "text": "你停球转侧身，守住球权。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.05
+                  }
+                },
+                "NEGATIVE": {
+                  "text": "停球稍远，盯防者先伸脚抢到球。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": -0.06
+                  }
+                }
+              }
+            }
+          ],
+          "prepared": {
+            "attributes": {
+              "attack": 78,
+              "defense": 78,
+              "physical": 78,
+              "mental": 78
+            },
+            "form": 66,
+            "fitness": 77,
+            "morale": 62,
+            "actualTeamLevel": "FIRST_TEAM"
+          },
+          "baseStats": {
+            "appearances": 16,
+            "starts": 13,
+            "minutes": 1183,
+            "goals": 5,
+            "assists": 7,
+            "yellowCards": 0,
+            "redCards": 0,
+            "averageRating": 6.6
+          },
+          "roll": 0.9399165213108063,
+          "selectedChoiceId": null,
+          "resolution": null,
+          "snapshot": null
+        },
+        "pendingCareerEvent": null,
+        "careerEventHistory": [
+          {
+            "eventId": "FITNESS_WARNING",
+            "choiceId": "A",
+            "windowIndex": 36,
+            "choiceTitle": "完整执行休整",
+            "outcomeSummary": "你完整执行了恢复方案，身体指标回到安全区，但训练节奏暂时放慢。",
+            "appliedDelta": {
+              "form": -2,
+              "fitness": 7,
+              "coachRelation": 2
+            },
+            "cashDeltaEuro": 0
+          }
+        ],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "developmentApproach": "STEADY",
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 160000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      }
+    },
+    {
+      "label": "chooseMoment",
+      "game": {
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "rulesVersion": 1,
+              "cap": 85,
+              "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+              "category": "BODY",
+              "tier": "PREMIUM",
+              "title": "身体养护 · 高阶",
+              "priceEuro": 40000,
+              "purchaseYear": 2044,
+              "purchaseWindowIndex": 36,
+              "moveId": null,
+              "periods": [
+                {
+                  "windowIndex": 36,
+                  "status": "PENDING",
+                  "planned": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "actual": null,
+                  "reason": null
+                }
+              ],
+              "refundEuro": 0,
+              "refundReceipts": [],
+              "quotaRestored": false,
+              "terminationCause": null
+            }
+          ],
+          "ledger": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment",
+              "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "windowIndex": 36,
+              "kind": "PAYMENT",
+              "amountEuro": 40000,
+              "reason": "身体养护 · 高阶"
+            }
+          ],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "eligibilityMoveId": null,
+            "moves": []
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "phase": "KEY_MATCH_MOMENT_RESULT",
+        "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-V3-INDEPENDE",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 78,
+            "defense": 78,
+            "physical": 78,
+            "mental": 78
+          },
+          "potentials": {
+            "attack": 90,
+            "defense": 90,
+            "physical": 90,
+            "mental": 90
+          },
+          "form": 63,
+          "fitness": 67,
+          "morale": 62,
+          "coachRelation": 52,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 65,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_xian_changan",
+              "name": "西安长安",
+              "shortMark": "西",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施62、青训59。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_foshan_lingnan",
+              "name": "佛山岭南",
+              "shortMark": "佛",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施53、青训49。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 10,
+          "annualSalaryEuro": 18000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "id": "first-pro-V3-INDEPEN-eng_arsenal",
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "trainingFocus": "BALANCED",
+        "transferArrivalChoice": null,
+        "pendingKeyMatchMoment": {
+          "id": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+          "windowIndex": 36,
+          "clubId": "eng_arsenal",
+          "templateId": "KM-CRE-04",
+          "templateRevision": 1,
+          "rulesVersion": 1,
+          "minute": 86,
+          "ownScore": 0,
+          "opponentScore": 1,
+          "debutMoment": true,
+          "title": "贴身盯防下接应",
+          "scene": "传球即将到你脚下，盯防者从身后逼近；队友从侧面斜插，前方有一小片起脚空间。",
+          "fingerprintVersion": 2,
+          "inputFingerprint": "19e83346d899e464",
+          "choices": [
+            {
+              "id": "A",
+              "title": "转身摆脱后射门",
+              "explanation": "争取一次进球；处理失误会影响本次表现。",
+              "risk": "MEDIUM",
+              "weights": {
+                "attack": 0.45,
+                "defense": 0,
+                "physical": 0.55,
+                "mental": 0
+              },
+              "difficulty": 54,
+              "outcomes": {
+                "EXCELLENT": {
+                  "text": "你接球转身甩开盯防，起脚破门。",
+                  "delta": {
+                    "goals": 1,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.05
+                  }
+                },
+                "POSITIVE": {
+                  "text": "你转出空当射门，收获进球。",
+                  "delta": {
+                    "goals": 1,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0
+                  }
+                },
+                "NEGATIVE": {
+                  "text": "转身时被紧跟，射门遭到封堵。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": -0.05
+                  }
+                }
+              }
+            },
+            {
+              "id": "B",
+              "title": "一脚做给斜插队友",
+              "explanation": "寻找队友，争取一次助攻；传球失误会影响本次表现。",
+              "risk": "LOW",
+              "weights": {
+                "attack": 0.45,
+                "defense": 0,
+                "physical": 0,
+                "mental": 0.55
+              },
+              "difficulty": 52,
+              "outcomes": {
+                "EXCELLENT": {
+                  "text": "你不停球做出精准传递，队友顺势破门。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 1,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.05
+                  }
+                },
+                "POSITIVE": {
+                  "text": "斜插队友接到做球得分，你收获助攻。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 1,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0
+                  }
+                },
+                "NEGATIVE": {
+                  "text": "一脚做球没能对上跑位，被对手截住。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": -0.04
+                  }
+                }
+              }
+            },
+            {
+              "id": "C",
+              "title": "停球护住",
+              "explanation": "争取稳定处理，提高本次表现；不直接增加进球或助攻。",
+              "risk": "MEDIUM",
+              "weights": {
+                "attack": 0,
+                "defense": 0,
+                "physical": 0.45,
+                "mental": 0.55
+              },
+              "difficulty": 44,
+              "outcomes": {
+                "EXCELLENT": {
+                  "text": "你把球停在安全一侧，稳稳护住球权。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.1
+                  }
+                },
+                "POSITIVE": {
+                  "text": "你停球转侧身，守住球权。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": 0.05
+                  }
+                },
+                "NEGATIVE": {
+                  "text": "停球稍远，盯防者先伸脚抢到球。",
+                  "delta": {
+                    "goals": 0,
+                    "assists": 0,
+                    "yellowCards": 0,
+                    "redCards": 0,
+                    "averageRating": -0.06
+                  }
+                }
+              }
+            }
+          ],
+          "prepared": {
+            "attributes": {
+              "attack": 78,
+              "defense": 78,
+              "physical": 78,
+              "mental": 78
+            },
+            "form": 66,
+            "fitness": 77,
+            "morale": 62,
+            "actualTeamLevel": "FIRST_TEAM"
+          },
+          "baseStats": {
+            "appearances": 16,
+            "starts": 13,
+            "minutes": 1183,
+            "goals": 5,
+            "assists": 7,
+            "yellowCards": 0,
+            "redCards": 0,
+            "averageRating": 6.6
+          },
+          "roll": 0.9399165213108063,
+          "selectedChoiceId": "A",
+          "resolution": {
+            "momentId": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+            "windowIndex": 36,
+            "clubId": "eng_arsenal",
+            "templateId": "KM-CRE-04",
+            "choiceId": "A",
+            "tier": "NEGATIVE",
+            "text": "转身时被紧跟，射门遭到封堵。",
+            "delta": {
+              "goals": 0,
+              "assists": 0,
+              "yellowCards": 0,
+              "redCards": 0,
+              "averageRating": -0.05
+            }
+          },
+          "snapshot": {
+            "id": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+            "windowIndex": 36,
+            "clubId": "eng_arsenal",
+            "templateId": "KM-CRE-04",
+            "templateRevision": 1,
+            "rulesVersion": 1,
+            "minute": 86,
+            "ownScore": 0,
+            "opponentScore": 1,
+            "debutMoment": true,
+            "title": "贴身盯防下接应",
+            "scene": "传球即将到你脚下，盯防者从身后逼近；队友从侧面斜插，前方有一小片起脚空间。",
+            "choiceTitle": "转身摆脱后射门",
+            "result": {
+              "momentId": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+              "windowIndex": 36,
+              "clubId": "eng_arsenal",
+              "templateId": "KM-CRE-04",
+              "choiceId": "A",
+              "tier": "NEGATIVE",
+              "text": "转身时被紧跟，射门遭到封堵。",
+              "delta": {
+                "goals": 0,
+                "assists": 0,
+                "yellowCards": 0,
+                "redCards": 0,
+                "averageRating": -0.05
+              }
+            },
+            "appliedStatsDelta": {
+              "goals": 0,
+              "assists": 0,
+              "yellowCards": 0,
+              "redCards": 0,
+              "averageRating": 0
+            }
+          }
+        },
+        "pendingCareerEvent": null,
+        "careerEventHistory": [
+          {
+            "eventId": "FITNESS_WARNING",
+            "choiceId": "A",
+            "windowIndex": 36,
+            "choiceTitle": "完整执行休整",
+            "outcomeSummary": "你完整执行了恢复方案，身体指标回到安全区，但训练节奏暂时放慢。",
+            "appliedDelta": {
+              "form": -2,
+              "fitness": 7,
+              "coachRelation": 2
+            },
+            "cashDeltaEuro": 0
+          }
+        ],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "developmentApproach": "STEADY",
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 160000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      }
+    },
+    {
+      "label": "finishMoment",
+      "game": {
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "rulesVersion": 1,
+              "cap": 85,
+              "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+              "category": "BODY",
+              "tier": "PREMIUM",
+              "title": "身体养护 · 高阶",
+              "priceEuro": 40000,
+              "purchaseYear": 2044,
+              "purchaseWindowIndex": 36,
+              "moveId": null,
+              "periods": [
+                {
+                  "windowIndex": 36,
+                  "status": "EXECUTED",
+                  "planned": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "actual": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "reason": null
+                }
+              ],
+              "refundEuro": 0,
+              "refundReceipts": [],
+              "quotaRestored": false,
+              "terminationCause": null
+            }
+          ],
+          "ledger": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment",
+              "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "windowIndex": 36,
+              "kind": "PAYMENT",
+              "amountEuro": 40000,
+              "reason": "身体养护 · 高阶"
+            }
+          ],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "eligibilityMoveId": null,
+            "moves": []
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "phase": "HALF_YEAR_REPORT",
+        "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-V3-INDEPENDE",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 78.5,
+            "defense": 78.1,
+            "physical": 77.6,
+            "mental": 78.4
+          },
+          "potentials": {
+            "attack": 90,
+            "defense": 90,
+            "physical": 90,
+            "mental": 90
+          },
+          "form": 63.6,
+          "fitness": 72,
+          "morale": 65.1,
+          "coachRelation": 52,
+          "squadRelation": 62,
+          "agentRelation": 50,
+          "fanRelation": 52,
+          "mediaRelation": 50,
+          "reputation": 70,
+          "clubAttachment": 47,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_xian_changan",
+              "name": "西安长安",
+              "shortMark": "西",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施62、青训59。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_foshan_lingnan",
+              "name": "佛山岭南",
+              "shortMark": "佛",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施53、青训49。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "ROTATION",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 11,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 10,
+          "annualSalaryEuro": 18000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "id": "first-pro-V3-INDEPEN-eng_arsenal",
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "trainingFocus": "BALANCED",
+        "transferArrivalChoice": null,
+        "pendingKeyMatchMoment": null,
+        "pendingCareerEvent": null,
+        "careerEventHistory": [
+          {
+            "eventId": "FITNESS_WARNING",
+            "choiceId": "A",
+            "windowIndex": 36,
+            "choiceTitle": "完整执行休整",
+            "outcomeSummary": "你完整执行了恢复方案，身体指标回到安全区，但训练节奏暂时放慢。",
+            "appliedDelta": {
+              "form": -2,
+              "fitness": 7,
+              "coachRelation": 2
+            },
+            "cashDeltaEuro": 0
+          }
+        ],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "developmentApproach": "STEADY",
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 189000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": "CORE",
+          "caps": 5,
+          "goals": 4,
+          "assists": 1,
+          "debutWindowIndex": 36,
+          "history": [
+            {
+              "windowIndex": 36,
+              "calledUp": true,
+              "role": "CORE",
+              "competition": "INTERNATIONAL_WINDOW",
+              "stage": null,
+              "appearances": 5,
+              "starts": 5,
+              "minutes": 414,
+              "goals": 4,
+              "assists": 1,
+              "averageRating": 7.3,
+              "selectionScore": 80.9,
+              "selectionBenchmark": 64,
+              "debut": true,
+              "summary": "你完成了中国成年国家队首秀，5场4球1助攻。"
+            }
+          ]
+        },
+        "retirementReason": null,
+        "lastReport": {
+          "fromLabel": "2044年夏季",
+          "toLabel": "2044年冬季",
+          "clubId": "eng_arsenal",
+          "clubName": "阿森纳",
+          "roleBefore": "STARTER",
+          "roleAfter": "ROTATION",
+          "stats": {
+            "appearances": 16,
+            "starts": 13,
+            "minutes": 1183,
+            "goals": 5,
+            "assists": 7,
+            "yellowCards": 0,
+            "redCards": 0,
+            "averageRating": 6.6
+          },
+          "attributes": {
+            "attack": {
+              "before": 78,
+              "after": 78.5,
+              "delta": 0.5
+            },
+            "defense": {
+              "before": 78,
+              "after": 78.1,
+              "delta": 0.1
+            },
+            "physical": {
+              "before": 78,
+              "after": 77.6,
+              "delta": -0.4
+            },
+            "mental": {
+              "before": 78,
+              "after": 78.4,
+              "delta": 0.4
+            }
+          },
+          "states": {
+            "form": {
+              "before": 65,
+              "after": 63.6,
+              "delta": -1.4
+            },
+            "fitness": {
+              "before": 60,
+              "after": 72,
+              "delta": 12
+            },
+            "morale": {
+              "before": 62,
+              "after": 65.1,
+              "delta": 3.1
+            }
+          },
+          "relations": {
+            "coach": {
+              "before": 50,
+              "after": 52,
+              "delta": 2
+            },
+            "squad": {
+              "before": 60,
+              "after": 62,
+              "delta": 2
+            },
+            "fans": {
+              "before": 50,
+              "after": 52,
+              "delta": 2
+            }
+          },
+          "firstTeam": {
+            "attention": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "readiness": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "matchProof": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "coachBacking": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "statusBefore": "PROMOTED",
+            "statusAfter": "PROMOTED",
+            "outcomeSummary": "教练组根据训练和比赛表现调整了你的一线队角色。"
+          },
+          "stipendEuro": 29000,
+          "incomeLabel": "工资可支配收入",
+          "expenseEuro": 40000,
+          "cashAfterEuro": 189000,
+          "injury": null,
+          "eventSummary": "本期策略：先站稳脚跟。保持原角色机会范围，伤病风险已到下限。\n准备实际变化：竞技状态+3、身体状态+2。\n本期训练：均衡训练；按原规则分配成长，身体不再正常成长。",
+          "hints": [
+            "你完成了中国成年国家队首秀，5场4球1助攻。",
+            "俱乐部本窗口兑现了合同中的球队层级与角色承诺。",
+            "你的队内角色发生了一级变化，下一窗口出场比例也会随之调整。"
+          ],
+          "personalArrangements": {
+            "receipts": [
+              {
+                "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+                "windowIndex": 36,
+                "planned": {
+                  "fitness": 8,
+                  "morale": 0,
+                  "squadRelation": 0
+                },
+                "actual": {
+                  "fitness": 8,
+                  "morale": 0,
+                  "squadRelation": 0
+                },
+                "reason": null
+              }
+            ],
+            "purchaseEuro": 40000,
+            "refundEuro": 0,
+            "ledgerEntryIds": [
+              "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment"
+            ],
+            "summaries": [
+              "身体养护 · 高阶：第1/1期，计划身体状态 +8，本期身体状态 +8，执行后剩余0期。"
+            ]
+          },
+          "contract": {
+            "annualSalaryEuro": 240000,
+            "remainingHalfYears": 11,
+            "promisedTeamLevel": "FIRST_TEAM",
+            "promisedRole": "STARTER",
+            "actualTeamLevel": "FIRST_TEAM",
+            "actualRole": "STARTER",
+            "promiseFulfilled": true,
+            "brokenPromiseWindows": 0
+          },
+          "specialEvent": {
+            "eventId": "FITNESS_WARNING",
+            "title": "体能团队发现你的疲劳指标偏高。",
+            "choiceTitle": "完整执行休整",
+            "outcomeSummary": "你完整执行了恢复方案，身体指标回到安全区，但训练节奏暂时放慢。"
+          },
+          "consequenceSummaries": [],
+          "nationalTeam": {
+            "windowIndex": 36,
+            "calledUp": true,
+            "role": "CORE",
+            "competition": "INTERNATIONAL_WINDOW",
+            "stage": null,
+            "appearances": 5,
+            "starts": 5,
+            "minutes": 414,
+            "goals": 4,
+            "assists": 1,
+            "averageRating": 7.3,
+            "selectionScore": 80.9,
+            "selectionBenchmark": 64,
+            "debut": true,
+            "summary": "你完成了中国成年国家队首秀，5场4球1助攻。"
+          },
+          "keyMatchMoment": {
+            "id": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+            "windowIndex": 36,
+            "clubId": "eng_arsenal",
+            "templateId": "KM-CRE-04",
+            "templateRevision": 1,
+            "rulesVersion": 1,
+            "minute": 86,
+            "ownScore": 0,
+            "opponentScore": 1,
+            "debutMoment": true,
+            "title": "贴身盯防下接应",
+            "scene": "传球即将到你脚下，盯防者从身后逼近；队友从侧面斜插，前方有一小片起脚空间。",
+            "choiceTitle": "转身摆脱后射门",
+            "result": {
+              "momentId": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+              "windowIndex": 36,
+              "clubId": "eng_arsenal",
+              "templateId": "KM-CRE-04",
+              "choiceId": "A",
+              "tier": "NEGATIVE",
+              "text": "转身时被紧跟，射门遭到封堵。",
+              "delta": {
+                "goals": 0,
+                "assists": 0,
+                "yellowCards": 0,
+                "redCards": 0,
+                "averageRating": -0.05
+              }
+            },
+            "appliedStatsDelta": {
+              "goals": 0,
+              "assists": 0,
+              "yellowCards": 0,
+              "redCards": 0,
+              "averageRating": 0
+            }
+          },
+          "clubSeason": null,
+          "honors": []
+        },
+        "history": [
+          {
+            "windowIndex": 36,
+            "clubId": "eng_arsenal",
+            "clubName": "阿森纳",
+            "role": "STARTER",
+            "stats": {
+              "appearances": 16,
+              "starts": 13,
+              "minutes": 1183,
+              "goals": 5,
+              "assists": 7,
+              "yellowCards": 0,
+              "redCards": 0,
+              "averageRating": 6.6
+            },
+            "keyMatchMoment": {
+              "id": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+              "windowIndex": 36,
+              "clubId": "eng_arsenal",
+              "templateId": "KM-CRE-04",
+              "templateRevision": 1,
+              "rulesVersion": 1,
+              "minute": 86,
+              "ownScore": 0,
+              "opponentScore": 1,
+              "debutMoment": true,
+              "title": "贴身盯防下接应",
+              "scene": "传球即将到你脚下，盯防者从身后逼近；队友从侧面斜插，前方有一小片起脚空间。",
+              "choiceTitle": "转身摆脱后射门",
+              "result": {
+                "momentId": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+                "windowIndex": 36,
+                "clubId": "eng_arsenal",
+                "templateId": "KM-CRE-04",
+                "choiceId": "A",
+                "tier": "NEGATIVE",
+                "text": "转身时被紧跟，射门遭到封堵。",
+                "delta": {
+                  "goals": 0,
+                  "assists": 0,
+                  "yellowCards": 0,
+                  "redCards": 0,
+                  "averageRating": -0.05
+                }
+              },
+              "appliedStatsDelta": {
+                "goals": 0,
+                "assists": 0,
+                "yellowCards": 0,
+                "redCards": 0,
+                "averageRating": 0
+              }
+            },
+            "arrivalChoice": null,
+            "trainingFocus": "BALANCED",
+            "developmentApproach": "STEADY",
+            "endingAttributes": {
+              "attack": 78.5,
+              "defense": 78.1,
+              "physical": 77.6,
+              "mental": 78.4
+            },
+            "firstTeamAttention": 100,
+            "teamLevel": "FIRST_TEAM",
+            "clubSeason": null,
+            "honors": [],
+            "personalArrangementSummary": "身体养护 · 高阶：第1/1期，计划身体状态 +8，本期身体状态 +8，执行后剩余0期。"
+          }
+        ]
+      }
+    },
+    {
+      "label": "duplicateFinish",
+      "game": {
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "rulesVersion": 1,
+              "cap": 85,
+              "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+              "category": "BODY",
+              "tier": "PREMIUM",
+              "title": "身体养护 · 高阶",
+              "priceEuro": 40000,
+              "purchaseYear": 2044,
+              "purchaseWindowIndex": 36,
+              "moveId": null,
+              "periods": [
+                {
+                  "windowIndex": 36,
+                  "status": "EXECUTED",
+                  "planned": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "actual": {
+                    "fitness": 8,
+                    "morale": 0,
+                    "squadRelation": 0
+                  },
+                  "reason": null
+                }
+              ],
+              "refundEuro": 0,
+              "refundReceipts": [],
+              "quotaRestored": false,
+              "terminationCause": null
+            }
+          ],
+          "ledger": [
+            {
+              "id": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment",
+              "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+              "windowIndex": 36,
+              "kind": "PAYMENT",
+              "amountEuro": 40000,
+              "reason": "身体养护 · 高阶"
+            }
+          ],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "eligibilityMoveId": null,
+            "moves": []
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "phase": "HALF_YEAR_REPORT",
+        "careerSeed": "V3-INDEPENDENT-BODY-ONCE",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-V3-INDEPENDE",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 78.5,
+            "defense": 78.1,
+            "physical": 77.6,
+            "mental": 78.4
+          },
+          "potentials": {
+            "attack": 90,
+            "defense": 90,
+            "physical": 90,
+            "mental": 90
+          },
+          "form": 63.6,
+          "fitness": 72,
+          "morale": 65.1,
+          "coachRelation": 52,
+          "squadRelation": 62,
+          "agentRelation": 50,
+          "fanRelation": 52,
+          "mediaRelation": 50,
+          "reputation": 70,
+          "clubAttachment": 47,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_xian_changan",
+              "name": "西安长安",
+              "shortMark": "西",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施62、青训59。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_foshan_lingnan",
+              "name": "佛山岭南",
+              "shortMark": "佛",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施53、青训49。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "ROTATION",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 11,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 10,
+          "annualSalaryEuro": 18000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 430000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "id": "first-pro-V3-INDEPEN-eng_arsenal",
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "trainingFocus": "BALANCED",
+        "transferArrivalChoice": null,
+        "pendingKeyMatchMoment": null,
+        "pendingCareerEvent": null,
+        "careerEventHistory": [
+          {
+            "eventId": "FITNESS_WARNING",
+            "choiceId": "A",
+            "windowIndex": 36,
+            "choiceTitle": "完整执行休整",
+            "outcomeSummary": "你完整执行了恢复方案，身体指标回到安全区，但训练节奏暂时放慢。",
+            "appliedDelta": {
+              "form": -2,
+              "fitness": 7,
+              "coachRelation": 2
+            },
+            "cashDeltaEuro": 0
+          }
+        ],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "developmentApproach": "STEADY",
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 189000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": "CORE",
+          "caps": 5,
+          "goals": 4,
+          "assists": 1,
+          "debutWindowIndex": 36,
+          "history": [
+            {
+              "windowIndex": 36,
+              "calledUp": true,
+              "role": "CORE",
+              "competition": "INTERNATIONAL_WINDOW",
+              "stage": null,
+              "appearances": 5,
+              "starts": 5,
+              "minutes": 414,
+              "goals": 4,
+              "assists": 1,
+              "averageRating": 7.3,
+              "selectionScore": 80.9,
+              "selectionBenchmark": 64,
+              "debut": true,
+              "summary": "你完成了中国成年国家队首秀，5场4球1助攻。"
+            }
+          ]
+        },
+        "retirementReason": null,
+        "lastReport": {
+          "fromLabel": "2044年夏季",
+          "toLabel": "2044年冬季",
+          "clubId": "eng_arsenal",
+          "clubName": "阿森纳",
+          "roleBefore": "STARTER",
+          "roleAfter": "ROTATION",
+          "stats": {
+            "appearances": 16,
+            "starts": 13,
+            "minutes": 1183,
+            "goals": 5,
+            "assists": 7,
+            "yellowCards": 0,
+            "redCards": 0,
+            "averageRating": 6.6
+          },
+          "attributes": {
+            "attack": {
+              "before": 78,
+              "after": 78.5,
+              "delta": 0.5
+            },
+            "defense": {
+              "before": 78,
+              "after": 78.1,
+              "delta": 0.1
+            },
+            "physical": {
+              "before": 78,
+              "after": 77.6,
+              "delta": -0.4
+            },
+            "mental": {
+              "before": 78,
+              "after": 78.4,
+              "delta": 0.4
+            }
+          },
+          "states": {
+            "form": {
+              "before": 65,
+              "after": 63.6,
+              "delta": -1.4
+            },
+            "fitness": {
+              "before": 60,
+              "after": 72,
+              "delta": 12
+            },
+            "morale": {
+              "before": 62,
+              "after": 65.1,
+              "delta": 3.1
+            }
+          },
+          "relations": {
+            "coach": {
+              "before": 50,
+              "after": 52,
+              "delta": 2
+            },
+            "squad": {
+              "before": 60,
+              "after": 62,
+              "delta": 2
+            },
+            "fans": {
+              "before": 50,
+              "after": 52,
+              "delta": 2
+            }
+          },
+          "firstTeam": {
+            "attention": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "readiness": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "matchProof": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "coachBacking": {
+              "before": 100,
+              "after": 100,
+              "delta": 0
+            },
+            "statusBefore": "PROMOTED",
+            "statusAfter": "PROMOTED",
+            "outcomeSummary": "教练组根据训练和比赛表现调整了你的一线队角色。"
+          },
+          "stipendEuro": 29000,
+          "incomeLabel": "工资可支配收入",
+          "expenseEuro": 40000,
+          "cashAfterEuro": 189000,
+          "injury": null,
+          "eventSummary": "本期策略：先站稳脚跟。保持原角色机会范围，伤病风险已到下限。\n准备实际变化：竞技状态+3、身体状态+2。\n本期训练：均衡训练；按原规则分配成长，身体不再正常成长。",
+          "hints": [
+            "你完成了中国成年国家队首秀，5场4球1助攻。",
+            "俱乐部本窗口兑现了合同中的球队层级与角色承诺。",
+            "你的队内角色发生了一级变化，下一窗口出场比例也会随之调整。"
+          ],
+          "personalArrangements": {
+            "receipts": [
+              {
+                "arrangementId": "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0",
+                "windowIndex": 36,
+                "planned": {
+                  "fitness": 8,
+                  "morale": 0,
+                  "squadRelation": 0
+                },
+                "actual": {
+                  "fitness": 8,
+                  "morale": 0,
+                  "squadRelation": 0
+                },
+                "reason": null
+              }
+            ],
+            "purchaseEuro": 40000,
+            "refundEuro": 0,
+            "ledgerEntryIds": [
+              "V3-INDEPENDENT-BODY-ONCE:player-V3-INDEPENDE:2044:36:BODY:PREMIUM:0:payment"
+            ],
+            "summaries": [
+              "身体养护 · 高阶：第1/1期，计划身体状态 +8，本期身体状态 +8，执行后剩余0期。"
+            ]
+          },
+          "contract": {
+            "annualSalaryEuro": 240000,
+            "remainingHalfYears": 11,
+            "promisedTeamLevel": "FIRST_TEAM",
+            "promisedRole": "STARTER",
+            "actualTeamLevel": "FIRST_TEAM",
+            "actualRole": "STARTER",
+            "promiseFulfilled": true,
+            "brokenPromiseWindows": 0
+          },
+          "specialEvent": {
+            "eventId": "FITNESS_WARNING",
+            "title": "体能团队发现你的疲劳指标偏高。",
+            "choiceTitle": "完整执行休整",
+            "outcomeSummary": "你完整执行了恢复方案，身体指标回到安全区，但训练节奏暂时放慢。"
+          },
+          "consequenceSummaries": [],
+          "nationalTeam": {
+            "windowIndex": 36,
+            "calledUp": true,
+            "role": "CORE",
+            "competition": "INTERNATIONAL_WINDOW",
+            "stage": null,
+            "appearances": 5,
+            "starts": 5,
+            "minutes": 414,
+            "goals": 4,
+            "assists": 1,
+            "averageRating": 7.3,
+            "selectionScore": 80.9,
+            "selectionBenchmark": 64,
+            "debut": true,
+            "summary": "你完成了中国成年国家队首秀，5场4球1助攻。"
+          },
+          "keyMatchMoment": {
+            "id": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+            "windowIndex": 36,
+            "clubId": "eng_arsenal",
+            "templateId": "KM-CRE-04",
+            "templateRevision": 1,
+            "rulesVersion": 1,
+            "minute": 86,
+            "ownScore": 0,
+            "opponentScore": 1,
+            "debutMoment": true,
+            "title": "贴身盯防下接应",
+            "scene": "传球即将到你脚下，盯防者从身后逼近；队友从侧面斜插，前方有一小片起脚空间。",
+            "choiceTitle": "转身摆脱后射门",
+            "result": {
+              "momentId": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+              "windowIndex": 36,
+              "clubId": "eng_arsenal",
+              "templateId": "KM-CRE-04",
+              "choiceId": "A",
+              "tier": "NEGATIVE",
+              "text": "转身时被紧跟，射门遭到封堵。",
+              "delta": {
+                "goals": 0,
+                "assists": 0,
+                "yellowCards": 0,
+                "redCards": 0,
+                "averageRating": -0.05
+              }
+            },
+            "appliedStatsDelta": {
+              "goals": 0,
+              "assists": 0,
+              "yellowCards": 0,
+              "redCards": 0,
+              "averageRating": 0
+            }
+          },
+          "clubSeason": null,
+          "honors": []
+        },
+        "history": [
+          {
+            "windowIndex": 36,
+            "clubId": "eng_arsenal",
+            "clubName": "阿森纳",
+            "role": "STARTER",
+            "stats": {
+              "appearances": 16,
+              "starts": 13,
+              "minutes": 1183,
+              "goals": 5,
+              "assists": 7,
+              "yellowCards": 0,
+              "redCards": 0,
+              "averageRating": 6.6
+            },
+            "keyMatchMoment": {
+              "id": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+              "windowIndex": 36,
+              "clubId": "eng_arsenal",
+              "templateId": "KM-CRE-04",
+              "templateRevision": 1,
+              "rulesVersion": 1,
+              "minute": 86,
+              "ownScore": 0,
+              "opponentScore": 1,
+              "debutMoment": true,
+              "title": "贴身盯防下接应",
+              "scene": "传球即将到你脚下，盯防者从身后逼近；队友从侧面斜插，前方有一小片起脚空间。",
+              "choiceTitle": "转身摆脱后射门",
+              "result": {
+                "momentId": "V3-INDEPENDENT-BODY-ONCE:36:eng_arsenal:KM-CRE-04:1",
+                "windowIndex": 36,
+                "clubId": "eng_arsenal",
+                "templateId": "KM-CRE-04",
+                "choiceId": "A",
+                "tier": "NEGATIVE",
+                "text": "转身时被紧跟，射门遭到封堵。",
+                "delta": {
+                  "goals": 0,
+                  "assists": 0,
+                  "yellowCards": 0,
+                  "redCards": 0,
+                  "averageRating": -0.05
+                }
+              },
+              "appliedStatsDelta": {
+                "goals": 0,
+                "assists": 0,
+                "yellowCards": 0,
+                "redCards": 0,
+                "averageRating": 0
+              }
+            },
+            "arrivalChoice": null,
+            "trainingFocus": "BALANCED",
+            "developmentApproach": "STEADY",
+            "endingAttributes": {
+              "attack": 78.5,
+              "defense": 78.1,
+              "physical": 77.6,
+              "mental": 78.4
+            },
+            "firstTeamAttention": 100,
+            "teamLevel": "FIRST_TEAM",
+            "clubSeason": null,
+            "honors": [],
+            "personalArrangementSummary": "身体养护 · 高阶：第1/1期，计划身体状态 +8，本期身体状态 +8，执行后剩余0期。"
+          }
+        ]
+      }
+    }
+  ]
+}

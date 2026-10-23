@@ -1,0 +1,7 @@
+{
+  "runs": 48,
+  "totalPublicActions": 13048,
+  "initialFinalAndEachStepEqual": true,
+  "fourWayInitialSHAEqual": true,
+  "comparison": "Direct independent JSON equality, not a rerun of the developer assertion"
+}

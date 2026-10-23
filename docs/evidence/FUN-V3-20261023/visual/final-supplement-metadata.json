@@ -1,0 +1,981 @@
+{
+  "at": "2026-10-23T14:02:18.745729+00:00",
+  "sourceManifest": {
+    "commit": "3dbddbdd189a240ff814d0b0cf3036f25ee2f940",
+    "at": "2026-10-23T13:59:24.607178+00:00",
+    "method": "git archive exact commit, installed node_modules symlink only",
+    "hashes": {
+      "src/main.tsx": "bb701f6f85fafe8cc5e86a0b65572fc07d1a67ce1fcff58b4719972fcfed62eb",
+      "src/vite-env.d.ts": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "src/models/keyMatchMoment.ts": "eaed8faaf398ad0da7cb1bcdde0db27b7f0ba9e4c05eca9425559efd8864d295",
+      "src/models/offPitchStories.ts": "54052b4cf734533936f1c23b6c3a15a4735ab6337b6d28960db1c2baa70dafeb",
+      "src/models/game.ts": "6bd70115027924b29cf6cbcc19d9a3d80e355d2f3aff5849a297dec51ee171db",
+      "src/models/personalArrangements.ts": "1f8fb6786adb6fc5a16d5f48cf57e08ce0c21f03c60aa4f1c93f08c7fc9b81f4",
+      "src/screens/KeyMatchMomentScreen.tsx": "042cb359a9655f9b5392f58663d92f49ed94ac598f4b32395c3153ac296e6159",
+      "src/screens/ArrivalScreen.tsx": "717b495e0f5f19c7da08c40396e53553d555fcca09c89acc09b2bb4873c9e88c",
+      "src/screens/TransferWindowScreen.tsx": "9144e1ee3cb9bd8d78f39d98c12bd4a2e8e4fe743023c77146e77b10ea08c3f2",
+      "src/screens/AcademyOffersScreen.tsx": "e82967eff60056489016f3a5f8f8dc87f0bbf4269703c80e5688f8c046178a0e",
+      "src/screens/HalfYearReportScreen.tsx": "acf2af82327100d21c124dc6346a9b39ce54dda756a2142efe267d986da652c3",
+      "src/screens/PlayerRevealScreen.tsx": "9418411fb8094674c5909407bf65d2501a2cdbec193ff434d0d6d24eb6caa038",
+      "src/screens/RetirementScreen.tsx": "1d5a3228ccd4c2f3c003a84b15ca5cd9fd21c86c8ca30d2cf2e93bb427267a59",
+      "src/screens/SettingsScreen.tsx": "1db1564e966317042accaa90c00814dc1c0c23165e8b2c7d7c2a16ab3294a297",
+      "src/screens/CareerHistoryScreen.tsx": "d767cc3d5f508c85d54a5309dd07cd3719b1d7eeeed072c667ce958556dc29bd",
+      "src/screens/PlayerScreen.tsx": "ab961c41e5dde2705f0b9ee168f602fa31c4f52a64165f11f0b4821b9965f82f",
+      "src/screens/ProfessionalContractScreen.tsx": "a20dc23a7866d8c650f345cdd097c645710eb1894331847435513d54dccb429f",
+      "src/screens/TrainingPlanScreen.tsx": "768a006fbe04efba2ea89fd04f81db32795de4eef3105597201324ad17723be0",
+      "src/screens/HomeScreen.tsx": "5a6fdfa19f3d6fe401ddf597f62ccd70dab8fa07b42077620096f19a796cdfe8",
+      "src/screens/CreationScreen.tsx": "e7c2a07d0350e90c4139c3fa15e9591314275a3f48fc0efcc75a5f710b752970",
+      "src/screens/SpecialEventScreen.tsx": "83fb0c3cf79d6fd5c681edb16141f6e32038eba859e9d345131a9887cb5704ff",
+      "src/screens/DemoCompleteScreen.tsx": "eea1e3fde2fc2cf5540fa6cb47207f60ac2995e2839f59dbefdf7c899f3bcf1a",
+      "src/screens/ProfessionalStageCompleteScreen.tsx": "48fc29f97fe4ba87390ae9086ab83dbc26ce276c1209e5c4f7422712c34c0694",
+      "src/ui/careerHistoryView.ts": "017222fdb9a20a75412615a8086acdf3c2af09ddaec9d71ffcdbc8d167b7b7fd",
+      "src/ui/format.test.ts": "3f0948def7659cc01d71f1dbf5b6064803090e4bb4af8be89a062b7295cd0e12",
+      "src/ui/trainingPlanView.test.ts": "99eabcdfd22516fd75a5cee0a53cf8ac850539af4ee0056782746531a2240865",
+      "src/ui/trainingPlanView.ts": "46d35353969745f36564f668095a2ef3fc5883826d2e6958b02b69c526769b1d",
+      "src/ui/careerView.ts": "442b2109a56692d55dbc8b72c1f9b342390df84af510a3af393c53918db6a1de",
+      "src/ui/careerView.test.ts": "6040a91301af1d21182354c55f10eae1aee2bc8670cd8d6067433fd47018e219",
+      "src/ui/clubVisualTheme.test.ts": "af4bcf13510ef9fb75ea31a89737f37cf2e9910b2192f148c80425dd221f8c70",
+      "src/ui/format.ts": "b468c9148ad5dd7aa848f556d5cd9fc2ba90e3ad60933d5b209ad5cc222c2e3b",
+      "src/ui/careerHistoryView.test.ts": "d0924ac2f03f1b5466da8e2ffc57afca8360ebd647c8bffde4d582d1450e674b",
+      "src/ui/trainingSummary.test.ts": "07b8d11e2eb3615d39558507254808a77dfaf20924b9cfc697a8bee4d9535541",
+      "src/ui/clubVisualTheme.ts": "828bc358f6732145cb236a127c315cfc0c7fddd2487102779802dd4c865080ee",
+      "src/components/CareerHub.tsx": "102e81dca05bd812900c997bf03eb3261e9876dcd5d600dcfbc0bd11b3ea0cd5",
+      "src/components/PersonalArrangementsPanel.tsx": "83816eb24f8f33a4f85b093c63cabe82e7a84c86c123f828ebdd3af37b629f02",
+      "src/components/RetirementRecordExportActions.tsx": "0110488d190fd38856f20e07b6da93bf8f2ff37d2af414d67413b5c0e999b6dc",
+      "src/components/PlayerDossier.tsx": "5942c6ab2e7e5c86ce8ada6a82c831c752f1ce37355eb57db308adb150acfa6d",
+      "src/components/CareerTopbar.tsx": "ec83c02963fa46a1ae72c073b0cd6c9cf40e084740e656213abd1b37c3a1ce5c",
+      "src/components/ClubCrest.tsx": "a4844dfba565c3b06f9b20392581fc046d4b63e5ef46c57d246ee571a7a45664",
+      "src/components/HonorBadge.tsx": "ee38855b7272f21f966f409502ac4e7d7cdc10478061b26da5ba5908718fa182",
+      "src/components/Icons.tsx": "2c0dd96ab0576167135399cab5ae1ce40138412b6aff460a1f6ee1a229e17a93",
+      "src/components/CareerPreferencesEditor.tsx": "d97155738d6e329a6719ab2b87a2441fa646339bf89e9718245ffb32899d33fa",
+      "src/components/ProfessionalReportActions.tsx": "029279ee2a8c99d3c4220208a8665ffae8345929d51f06fa9b3c32c9b27ca36c",
+      "src/components/Brand.tsx": "41e5d258d5f85fcb9b46b91e0d31e76fb09ffebdafbef40e9224c894c3beea46",
+      "src/components/AppShell.tsx": "09b39694f7352089a620af4faee2050fc9cb209638d61bb10431e31804006584",
+      "src/components/KeyMatchMomentSummary.tsx": "130f1f5fccb6ddf081dd63688c5d85e6a694a11b72352b1c8e3f1e90eb070943",
+      "src/components/SetupFrame.tsx": "e9473606b4fe07d6c812c90a58ee9d2289009a80609d4b24b4016b89318c14a0",
+      "src/store/gameStore.ceuQ01Career.test.ts": "512e07aaa1c749642ab5328e743761e1e1f4edd4bc90dd0ed225e59d627eafe9",
+      "src/store/gameStore.trainingPlan.test.ts": "d75c208267d9ae6fe4db846c1b4a306375f3431d629b887d76c585cc8b2aa28a",
+      "src/store/gameStore.ceuQ01Matrix.test.ts": "60db8bbd650cc6851ff0070e4eee10ee10731d0c40341040aa0251d31f7b3685",
+      "src/store/gameStore.ceuT01.test.ts": "82c70a42e8ca374c0ebc660ded922bf9edce70071b1149cb070c46d10ca0ba40",
+      "src/store/gameStore.ts": "8e83ed0cf0453541da31c498480f906761944deca0760539ac63455dc7be07d8",
+      "src/store/gameStore.ceuF03.test.ts": "f6e238b8754955e3dc952594448fc778e49a2c679474ad30e1b7436a4c992eea",
+      "src/store/gameStore.ceuF01.test.ts": "f971775116893f0ea05d43001105d6f4160d96b70497100eec54f5da0410bd91",
+      "src/store/gameStore.ceuM03.test.ts": "8cd0b7d6be39729b101a0c964fb5860d9cc4e684d5bf566955e51b6ac685f060",
+      "src/store/marketContext.ts": "8345b2641b95c5721bc2a0c5bb89fc74ebdd66a0fffac9993e6352b99b72748b",
+      "src/store/gameStore.retirementArchive.test.ts": "337690fd86fde33f9ff123c3ad800e1ff1700b8409ae8f85d08a2ae048ae9b0d",
+      "src/store/gameStore.ceuF02.test.ts": "00c73ea42dba6ba318837e09ca4f1db6b04b06247f52dfdd32dae2e6a21839f7",
+      "src/store/gameStore.fullCareerAudit.test.ts": "f57af5864e6b563d980f5f6848a925ed184baaf700724d8e8e975b1c39190b81",
+      "src/store/gameStore.test.ts": "c858f5a6100140102ec8e95f0c48d4b074fb4a3e9c99ee5f0f4dddeae68664a8",
+      "src/store/gameStore.v3FirstSix.test.ts": "97b5396d40fd0d181fcb97a1ecd878460ddad31ebebe4cb5104088903f5085de",
+      "src/store/gameStore.keyMatchMoment.test.ts": "867d1ef2a263eedeba7bd6596fbcfeacd1d2fb0ff0f531c267d1009f2294fbaa",
+      "src/store/gameStore.v3PublicFlow.test.ts": "f581df5daf1ed66d503194083fd5ef2929399cfaf91fa4ed1bd704888b4ec932",
+      "src/store/gameStore.ceuM01.test.ts": "3cd5410335b0985c6ed7d629552177fc2aa00a710e908192c06ceca5f9b0ab19",
+      "src/store/gameStore.ceuS0Baseline.test.ts": "e7020edb073d368b34ad57b9ed3095da07b146433030887d38f8f290b00d8616",
+      "src/store/professionalNextAction.ts": "4857a41011e06aaad12bd7f6ef309c3ccf745a91b6c93b68d610b9d5fe19192c",
+      "src/store/careerPreferences.ts": "a5b0d76dbcf6242ab53d008bd8a8874cbc5b6ade702932ee27ae9623cbd9b0ab",
+      "src/store/gameStore.ceuM04.test.ts": "02ff5314e332fcce7174cb27d571dc4f3550ddd2e30243c242b2f5573082bf2a",
+      "src/store/gameStore.v13Migration.test.ts": "76b07bca8995062c05af148dbbf497c1054471baf777679a819b3d4bc29b306d",
+      "src/store/gameStore.personalArrangements.test.ts": "3fded2011ac9aeebc616356e40c1c3387e35bc22447778e12c45711a3b434819",
+      "src/store/gameStore.v1ClubWorkflows.test.ts": "b23849c8a8de4ecc87f466ab52cfff1e563cc6bb1713b21d45fcf7fe6a3610df",
+      "src/store/gameStore.ceuM02R1.test.ts": "a51491cee686ee165c0c6acc172d402c9effdeea0b1e5e40bd81336d3b31ff83",
+      "src/store/gameStore.v3Balance.test.ts": "ac3258b5c49b958de8947320cf1e2c5db4ec380f7cf1a9d110141f1dd68b63d5",
+      "src/data/keyMatchMomentTemplates.ts": "a323e5bbc3beeb71beed846bbad386ac9940e35621380a712a326863d6049e04",
+      "src/data/clubCities.ts": "b5a1123e4aacc0d44dc9dbb5213349d9e4e412b1ceac93b2e194ac7c52ef24bb",
+      "src/data/offPitchStories.ts": "ed687b1fc2e522fd883f31ddc77b4b833ab104af337e4966954c4c287023be05",
+      "src/data/balance.ts": "4d02ff784dfbd9c7e8c8bc4a447a366b83e9e6294c7780831d395840baf379b9",
+      "src/data/careerEventIds.ts": "22a4a5ad205d9cdf0d7bec884cc06dc471a75a978fdb15a44ed8cb278d60e68e",
+      "src/data/ageCurve.ts": "a082569152cee1c9815e221b63e41a689ad6bd3d866ce01e8dac75217be1515f",
+      "src/persistence/keyMatchMomentSchema.ts": "b176a50005c0b0ab690542016a2c91e33e19947f3c91ad3f9f50e808987f97d0",
+      "src/persistence/entertainmentV3Schema.ts": "f5b5a19d51d70f166745becf4a371742478febf58f65fe28a5b15e347d6adb67",
+      "src/persistence/save.ts": "2feed14ecc927dad522c494fe180199e1d8f177754672882759ff3970cdacd0e",
+      "src/export/retirementRecord.ts": "1943ac6596e76bbb39d2d15b1e721ad902dddba2ef94c3c840c9d0b12f700cd8",
+      "src/engine/professionalApproach.ts": "386cb390d46c07880491f16f279d04843dac3bf9bb9c30194256c9515939685d",
+      "src/engine/random.ts": "9e8dba4ab788c3732fd9ee3aaec1d5086cd44433755d2b9ad51e898e504e42fb",
+      "src/engine/keyMatchMoments.ts": "5e167310000fb900c99b437c469e24c1e6bb6addbab291d224a7ee87dee5d806",
+      "src/engine/livingCity.ts": "55664eebf2e8b019b51ff9fa028add3605e1ebca274242c348c5e828fbb080d4",
+      "src/engine/simulateProfessionalHalfYear.ts": "d2d6660e17941fb03463d6e2f69610ade199b261a1b0312d9a681db5b123ad27",
+      "src/engine/contracts.ts": "969355362cedf9d89796347c7ad3ef7a71d86c4dbfb9d981d39ae618296150e3",
+      "src/engine/honors.ts": "446d1a3d3085cd41f128806ac97b51e4ee09f7a83a743b1972d333c8d8b4b3c4",
+      "src/engine/simulationPreparation.ts": "dde7a1bde5c47aacef1016e6c591d9cc1c06a03f908a05273f5720dd646f8a54",
+      "src/engine/entertainmentV3.ts": "784238b705079cd388b60f474bb3c8f3490cd88ed1fe49f9d768c6e7d90e13dc",
+      "src/engine/careerEvents.ts": "8923f18440e077e19f1302a2fdbfd3c46aab08090d10875388da30c3a3a67234",
+      "src/engine/eligibility.ts": "8f7719c875e29b8c5fb9cdbd9c7014c004a6c4537f19deb6f42b95c3081b6522",
+      "src/engine/careerStory.ts": "a3b347a54e642ead86f0a0262dc8bd74bfdde7e56ec3a160a095617fce89cc08",
+      "src/engine/trainingPlan.ts": "97a351c5aac251dd6fc0f96aa6e9e49fa973b65e855956ca76852b54396ce720",
+      "src/engine/nationalTeam.ts": "437f3d502a335817a4ece33476eea09533c67eae6f9874cacff8a60b5d892ca0",
+      "src/engine/ageDevelopment.ts": "929aa4321ced9e635b8aaefc5ab3aefedbc341b9f7ad9ea7312bf5fba163773b",
+      "src/engine/honorAggregation.ts": "b0bfd42b1df3de117a15b04045648dcbb18ece6aeeabf37d7b16ac3fee334551",
+      "src/engine/offPitchStories.ts": "50721170193e196cf2efa13fe3a9fb87d447b50ed58707b4dfe7edabdaa6cf31",
+      "src/engine/player.ts": "411492c71082b093c4ddc87f4b46ec01d354f5235e021097bd89f186f80abf70",
+      "src/engine/trainingQuality.ts": "a27c1214c21a91edd510f87ad59587e4f5834e607689319fd8cbd5ce4ce81321",
+      "src/engine/offers.ts": "9c59025a1d5cb4b3acda49180b0c4337feda0284cc127a0510c4b4afd08cf722",
+      "src/engine/finance.ts": "87abd76ae9c0ceb63704742e93dafb019a5d25a8a827d65ef6773c93de6a29b2",
+      "src/engine/careerSummary.ts": "d7183569b490f3ce0ba947da55d615b5b88da16aa699c9b145312f87ddb72e22",
+      "src/engine/personalArrangements.ts": "3f0580cfbb4ef555cd86ab62a579fbfeacd0ca7851e83e79fd227dce093eeac6",
+      "src/engine/simulateHalfYear.ts": "77a31a87cced49e42b3fc50556b4c8fe0f731a05a3e01b11159ed826315b96ca",
+      "src/engine/careerTime.ts": "8df68f776ad01d5598232b641ce997f09feaa345154443dfff1f790176bcc890",
+      "src/engine/firstTeamPath.ts": "006251dc8da6c3e13e3571067bc7f1ca535cbd7f551cda7585316b4bbc7592f2",
+      "src/engine/transfers.ts": "f67a2eac6a19a9801036a5609d16966b78d72542154c2f3e18ea7c67aeff5fc0",
+      "src/app/careerNavigation.test.ts": "8be50626b02d77dc4dd553cfa528813af4b7a8049e25a4e4c753dbbcc20195e8",
+      "src/app/careerNavigation.tsx": "6c6299e907c226ef90137e6310f2a64a09e8b16520c9d05db0914233c214e6cf",
+      "src/app/ClubVisualThemeProvider.tsx": "dd90241694481b949ece3998039e835bbc4a81e6460200491fe9bfc1068a754d",
+      "src/app/ClubVisualThemeProvider.test.ts": "cb53b81d7d5fa69f71b8ed7e42a3b6bac1a8f281fca080b22bf0b13139adda96",
+      "src/app/App.tsx": "ac9e905fd8e26bb2096d602861bf5192844792bdc23a58012226098f7de69aa8",
+      "src/styles/main.css": "eb59a27aff42c2e3cb969c8743247a2ee76af4c347c901550e522f4e7dcdc4fe",
+      "src/testing/createRetirementVisualAuditGame.ts": "8e8e2fb6473fd411572e572d2750e626c8975423aa8bde391cb129ace7fe7b6c",
+      "src/testing/keyMatchMomentTestSupport.ts": "2ac5a560edce091e947858689a066348cab217707206e6c5c78ffd4c7e194543",
+      "src/testing/createEntertainmentV3Game.ts": "7635242ae9138a86fe52b6f37e921bfbd9418666b33930ea2897dc2b6199247a",
+      "src/testing/createRetirementVisualAuditGame.test.ts": "2b1816c71634eb0a637c01a1d504aec0d12615ce52b9b6bbe8778438ed3ed9e3",
+      "src/testing/createCopyAuditGame.ts": "facd30b3e81ebb93eb1e26ec853133c515fdb409f23f30be7fc0c69ce612b0c3",
+      "src/testing/createCopyAuditGame.test.ts": "6eb7af3287afe751719c82356ca279b7acc673a70d2e5a18c0ef3f8fcf48a5ec",
+      "src/screens/__tests__/RetirementScreen.test.ts": "1c51129b350f78dff0dcc65a879f241c4f8e4de3f7bb9fcc6221a89a7211f724",
+      "src/screens/__tests__/TransferWindowScreen.test.ts": "52d7803f02c4dcf26e02a68e48ab490701c4fb3a34cc6d10d08c318021fe0a04",
+      "src/screens/__tests__/ProfessionalStageCompleteScreen.test.ts": "5ad42a98617f10d0180722e0ea5eb82399bc526d527ccb804116ee93ba92f145",
+      "src/screens/__tests__/PlayerScreen.test.ts": "09c9866557b97dac4042cc12c884283b74b517980c9e3e43e7367b9facc85226",
+      "src/screens/__tests__/confirmationFlows.test.ts": "b3b13c60c7dc920ebfee235b4904ba18ae5f88ed06cbe6f730c841327a9fa3a2",
+      "src/screens/__tests__/SettingsScreen.test.ts": "522e02ea5d49572dc0b541d9c3f7b80cb945493d13d81cb96d83007969fa3a0f",
+      "src/components/__tests__/brandAssets.test.ts": "537cc8480260ffb4aed5a280a66837bb665ad8d0482733ed2a370711bb780ced",
+      "src/components/__tests__/RetirementRecordExportActions.test.tsx": "c6eba8fb00402f0732e3edb78c4f5c4a8624d795876bd8b9636ad6506b0e3d41",
+      "src/components/__tests__/HonorBadge.test.ts": "1dac4eeecea434baf95a4a4283ba15e52586db9b28d5fafba7c94b59569d034d",
+      "src/components/__tests__/ClubCrest.test.ts": "d9f9a80eff8255007c942b6bee1aed6e311bcd7acf0553a6aae58b572a27fbbf",
+      "src/components/__tests__/Brand.test.tsx": "2f111580d11f19c347cd8e2a285df4a0dc8c8fad8efb3f28ff0292771bc0ac4b",
+      "src/data/honors/honorVisualRegistry.ts": "287988c8844a43d7590828611500e6f5a3ff7ff3b98ac929f4a939f1c9dd2d2a",
+      "src/data/clubs/clubParametersV1.ts": "7fa50679be976079ad87d6d6c4c6305eb4c51d202c152d0e95382c272b34a707",
+      "src/data/clubs/runtimeClubCatalog.test.ts": "94926573467066eaa51f317078c57d154fdab4ebb9e19a5ad8fc9896783ae221",
+      "src/data/clubs/legacyClubIdMap.ts": "7b6fd9b8518d4a2c5760986adc82f38fbb2215d64e81895a476de860cfbf128a",
+      "src/data/clubs/clubThemeAssignments.ts": "04a0beb419efb3aa271a333018ab460f5616edbddfa182feac72bd3813de4952",
+      "src/data/clubs/clubCrests.ts": "77331cf1a872e50754392a20ef610c92c75af32cc328e4f74720615e87d9b206",
+      "src/data/clubs/clubChineseNames.ts": "ac9fd4c2807003a3b8eb62fa47019b546157135827761db9cdde97944d1a365f",
+      "src/data/clubs/clubCities.test.ts": "6032c329c6b49a2a9235b909ca5c6aced317fcd5c79099bf1e91e6ce8c133077",
+      "src/data/clubs/types.ts": "fe87e1ff6e4b4983dc46d122dc3f3e04766bfb85395668eb2fe722a418e6d2e5",
+      "src/data/clubs/clubRepository.ts": "5c07a11fed0b525a4ec092b0232760d9b2f425723161d6f6739a96167d01435c",
+      "src/data/clubs/runtimeClubCatalog.ts": "9fd09d344787ef9b07436390230ecf8e87624e9bb7e494838b3ff668b96a4357",
+      "src/data/honors/__tests__/honorVisualAssets.test.ts": "2425c5bba1aced694315ee19345ce2f13f39b4e3253926fb9ba9a14a14fa7d21",
+      "src/data/clubs/__tests__/clubThemeAssignments.test.ts": "b7e84f7eb9395aeeb3a91c953b28feb42cc6d503a22fa290399522cb2b8689ce",
+      "src/data/clubs/__tests__/clubChineseNames.test.ts": "e6ae0869fc596f1860a4d8f9ba8f51ebd54b62afeaada57a48d570e0dc4feed9",
+      "src/data/clubs/__tests__/clubRepository.test.ts": "95e6dbdcaba944feadc9099af204dd0481d1cf034e524045152b4039e96a2e95",
+      "src/data/clubs/__tests__/clubCrests.test.ts": "e7ecce65c004735da366f0f1564b4ca4e365d12f580eef725311b46b63184ea2",
+      "src/persistence/__tests__/v11Backup.test.ts": "c7e9e065544b92d1b7503eee78ac66b93f1a2c6049b6fce5e707b722e38a4428",
+      "src/persistence/__tests__/entertainmentV3.test.ts": "f275aa7be81b887fa4f9557af83db659831ac7024eb0ed94a24b1561b7aef508",
+      "src/persistence/__tests__/save.test.ts": "2d7140981fced39dbd202aaf9cc6705fbc41ceda74decef929c29dfbf0bf9877",
+      "src/export/__tests__/retirementRecord.test.ts": "5ee451c1004b5f19affac6cc58ede7e9d7a465d5515767dae4fd075ce63108ad",
+      "src/engine/__tests__/eligibility.test.ts": "e7fea7e1b8a9971ac4ed641c8a2f9d07d92649be54e3c1bb3fc1d8bc851d2a54",
+      "src/engine/__tests__/nationalTeam.test.ts": "cc6d8ca99d9967f86cc923ea7553f8b49185bf290e7aa30224d66a296f84e55e",
+      "src/engine/__tests__/ceuTrainingBaselineFixture.ts": "d75081650205a144f4738215aaad32d675ffd816bc1da7cf873852fda46eaece",
+      "src/engine/__tests__/careerStory.test.ts": "d1018618e5edf081ea12c3b706d9656bc5b4f97f52c47cafe4a7ff82a6b63cc0",
+      "src/engine/__tests__/careerEvents.test.ts": "a7e9fcd57cfdb87f09e5f8a6c8d8416d619aef1a3c86e18aa993d7166e56c972",
+      "src/engine/__tests__/finance.test.ts": "c4b103fc05884ca9880e267df30895ddb9e8fd5f37479272ef69942bb791e2e7",
+      "src/engine/__tests__/careerGrowth.test.ts": "8f55c3b19000208721e7079c7e424bcc30a8a65f4e273d12fa1f9dd0b3941c35",
+      "src/engine/__tests__/personalArrangements.test.ts": "9298659a28b6e88f4b8a0221728853475d84ba915b569e56b38f779e9fc660f2",
+      "src/engine/__tests__/simulation.distribution.test.ts": "d222474bd534753bfdc655497fbfc2100e7b5f99858e4e298f464874f410b399",
+      "src/engine/__tests__/careerSummary.test.ts": "71d3da40e0d29d9fa2fe69b5d9e5b9124d5130a99ed7f48b0b777d8bb366192c",
+      "src/engine/__tests__/honorAggregation.test.ts": "eb039f72e00789df4d1cafdd8aebac8c6170409b6c7338770d3ff0133fd03779",
+      "src/engine/__tests__/honors.test.ts": "b644bfd7d47ec38239995b748e015bad3d3d4eb81f52886a9e792e45bc4c8916",
+      "src/engine/__tests__/player.test.ts": "b57c35d330f5dfe444deb21e4c09dbdab1eb7bb3e49b3efb4b01f6f8b34a020f",
+      "src/engine/__tests__/ceuMarketPolicy.test.ts": "e0de5a9e5aaee190e77c8d6a6e515f2a85c5c102890f02253170c2412fa981f0",
+      "src/engine/__tests__/professionalApproach.test.ts": "f0ff0431530872857809b58d5ef9d8869a3cb1a8adb5b9070f2e85665f08bad9",
+      "src/engine/__tests__/trainingPlan.test.ts": "1ac46f227e4e08130af200a174056f24de4c966960a2e50068e307216211def6",
+      "src/engine/__tests__/entertainmentV3.test.ts": "8a36cdf8746702b257339492bc9496351d04dece147b61d1c99dd58bce6f5c87",
+      "src/engine/__tests__/keyMatchMomentMemory.test.ts": "588ca2a99b92a3d2104c391d626ea971d0936abc7257ba6a88dede302e9873fb",
+      "src/engine/__tests__/ageDevelopment.test.ts": "b21ead6585f06eb22bf13f168abcecc63448bf6d400ddbc91e873cce31ec4f0f",
+      "src/engine/__tests__/professionalSummary.test.ts": "eb9e1eb6a60816e4353a83fd3458b068641b08d4fdeaa5728aa8f5bd9ac50399",
+      "src/engine/__tests__/livingCity.test.ts": "80f7cfe798b63016eb711a3ad74c36ecfbb5f717c79de3483aa0a746f75e3d69",
+      "src/engine/__tests__/simulation.test.ts": "06c79d3c04a6a22bca04a01b21539200def3a6ff955b94ea11a5f7131cfbf287",
+      "src/engine/__tests__/v3EventScheduling.test.ts": "e4107ee9742382d6e821704d3fb6071cdd6c704118cb1b8cd140706bcd4a6d54",
+      "src/engine/__tests__/ceuTrainingBaseline.test.ts": "4ce08c70e1259497658bc2110bdd2888fc8a539d1e22ba2cc4deed00cb4835c5",
+      "src/engine/__tests__/keyMatchMomentCatalogue.test.ts": "6eead402a010b6e4bf89fb6e9034d526bae2efc0d668c878a5d8f729eecbb267",
+      "src/engine/__tests__/ceuMarketPoolConnection.test.ts": "caace216435449830d7991d1be919c365db13f398f04f331ecb47756a71cc57c",
+      "src/engine/__tests__/trainingQuality.test.ts": "25245f79be55e22018e6b005cbefa33e8e063e0c99af50e35a98605160f1c201",
+      "src/engine/__tests__/contracts.test.ts": "f62e891eb664ecc730c9642af4505506b78126e941891fe3dd6b9dba9d85eb20",
+      "src/engine/__tests__/transfers.test.ts": "02ec15014a76c222e42ba63742711ac4c61aa50ac1bcb0c0477f1c9b5ed63a91",
+      "src/engine/__tests__/careerTime.test.ts": "c86cfd703e0e1830ea25e28d75162c7b14d2e216959aa5a3d430e2657d32ce45",
+      "src/engine/__tests__/honorUniqueness.test.ts": "4555a9ea315ac2dd41b014bdcabeaa7a4d91a68b8bf73c2303a91f533424f492",
+      "src/engine/__tests__/firstTeamPath.test.ts": "a5f3fc3fc9b1c956c4194e1fa4998e6e38e1123922842b65c9bd2617e66b0587",
+      "src/engine/__tests__/testFixtures.ts": "d813a9ed03d694f1532ae17addcfafc5b464658dec3a1183ac5d8524857b29ff",
+      "src/engine/__tests__/professionalSimulation.test.ts": "947913fbe2011448786c64aef3089da723e3be1c0f05678de417d0146c436daf",
+      "src/engine/__tests__/offPitchStories.test.ts": "52f49cf61c45e3c5c70148bbef2f6aea2757ac306e60edddaaf6a649b1f3a84c",
+      "src/styles/__tests__/creationMobileLayout.test.ts": "074bbb83cf965808486eb3b53a28c2c34133a520c3a8926926879c1f5ed67456",
+      "src/styles/__tests__/specialEventLayout.test.ts": "bcf7e522c632bad294102b8ad4b62941fb88e7d718cc3d625116ebf55300705f",
+      "src/styles/__tests__/v3VisualFixes.test.ts": "0db90b9c719ea9b23756d262708719f2c2cb1697258f1decf90a1e05ffe9553d"
+    }
+  },
+  "purpose": "Final identity smoke with real saved-state loading; synthetic moved-followup and saved-plan boundary labeled separately",
+  "results": [
+    {
+      "name": "saved-plan",
+      "viewport": [
+        320,
+        568
+      ],
+      "errors": [],
+      "screenshots": [
+        {
+          "path": "320x568-saved-plan-retained-plan.png",
+          "full": false,
+          "scrollY": 806
+        },
+        {
+          "path": "320x568-saved-plan-full.png",
+          "full": true,
+          "scrollY": 806
+        }
+      ],
+      "input": {
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [],
+          "ledger": [],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "moves": [],
+            "eligibilityMoveId": null
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "phase": "HALF_YEAR_PLAN",
+        "careerSeed": "FUNV3-ANONYMOUS-QA",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-FUNV3-ANONYM",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 45.8,
+            "defense": 23.4,
+            "physical": 39.6,
+            "mental": 41.4
+          },
+          "potentials": {
+            "attack": 90.6,
+            "defense": 59.9,
+            "physical": 78.9,
+            "mental": 86.7
+          },
+          "form": 65,
+          "fitness": 60,
+          "morale": 95,
+          "coachRelation": 50,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 45,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_henan_zhongyuan",
+              "name": "河南中原",
+              "shortMark": "河",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施65、青训61。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_meizhou_jiaying",
+              "name": "梅州嘉应",
+              "shortMark": "梅",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施54、青训47。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 1200000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "id": "first-pro-FUNV3-ANON-eng_arsenal",
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 6,
+          "annualSalaryEuro": 48000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 1200000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "transferArrivalChoice": null,
+        "pendingCareerEvent": null,
+        "pendingKeyMatchMoment": null,
+        "careerEventHistory": [],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "trainingFocus": "MENTAL_RESET",
+        "developmentApproach": "STEADY",
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 200000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      },
+      "text": "接下来的半年，你想怎么踢？\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n个人安排\n本年可购买\n现金 €200,000\n展开\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2\n当前心理状态已达95，不能新选此计划。\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n心理调适：心理状态最多+4、竞技状态−2；不提升心理能力。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n\n已保留存档中的计划。你可以继续，实际准备收益可能为0，成本仍会执行；也可以改选其他计划。\n\n开始这半年",
+      "passed": true
+    },
+    {
+      "name": "compact-plan",
+      "viewport": [
+        402,
+        874
+      ],
+      "errors": [],
+      "screenshots": [
+        {
+          "path": "402x874-compact-plan-compact.png",
+          "full": false,
+          "scrollY": 353
+        },
+        {
+          "path": "402x874-compact-plan-full.png",
+          "full": true,
+          "scrollY": 353
+        }
+      ],
+      "input": {
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [],
+          "ledger": [],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "moves": [],
+            "eligibilityMoveId": null
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "phase": "HALF_YEAR_PLAN",
+        "careerSeed": "FUNV3-ANONYMOUS-QA",
+        "startYear": 2026,
+        "windowIndex": 36,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-FUNV3-ANONYM",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 45.8,
+            "defense": 23.4,
+            "physical": 39.6,
+            "mental": 41.4
+          },
+          "potentials": {
+            "attack": 90.6,
+            "defense": 59.9,
+            "physical": 78.9,
+            "mental": 86.7
+          },
+          "form": 65,
+          "fitness": 60,
+          "morale": 62,
+          "coachRelation": 50,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 45,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_henan_zhongyuan",
+              "name": "河南中原",
+              "shortMark": "河",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施65、青训61。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_meizhou_jiaying",
+              "name": "梅州嘉应",
+              "shortMark": "梅",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施54、青训47。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 1200000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "id": "first-pro-FUNV3-ANON-eng_arsenal",
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 6,
+          "annualSalaryEuro": 48000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 1200000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "transferArrivalChoice": null,
+        "pendingCareerEvent": null,
+        "pendingKeyMatchMoment": null,
+        "careerEventHistory": [],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "trainingFocus": null,
+        "developmentApproach": null,
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 200000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      },
+      "text": "接下来的半年，你想怎么踢？\n\n选择本期训练重心，兼顾状态与身体负担。\n\n求职方向\n条件合适时留洋\n调整\n个人安排\n本年可购买\n现金 €200,000\n展开\n这半年，你想把重心放在哪里？\n一线队\n主动争取出场\n出场首发更多\n负荷、伤病风险增\n先站稳脚跟\n稳住竞技和身体\n伤病风险降低\n先服从球队安排\n替补/队内关系增\n首发占比降低\n重点练进攻\n侧重进攻能力\n重点练防守\n侧重防守与无球\n重点练心理\n判断与专注能力\n均衡训练\n按位置均衡分配\n身体维护\n身体最多+4 · 竞技−2\n心理调适\n心理最多+4 · 竞技−2\n\n先站稳脚跟：先适应职业队的训练、比赛准备和恢复，再慢慢扩大角色。\n\n身体维护：身体状态最多+4、竞技状态−2；身体衰退减缓20%。\n\n状态准备上限95，不是半年净增长；收益为0时仍扣成本。事件、到期后果及策略影响最终执行，低状态恢复优先。\n\n训练与成长说明\n开始这半年",
+      "passed": true
+    },
+    {
+      "name": "long-confirmation",
+      "viewport": [
+        320,
+        568
+      ],
+      "errors": [],
+      "screenshots": [
+        {
+          "path": "320x568-long-confirmation-expanded.png",
+          "full": false,
+          "scrollY": 621
+        },
+        {
+          "path": "320x568-long-confirmation-actions.png",
+          "full": false,
+          "scrollY": 1027
+        },
+        {
+          "path": "320x568-long-confirmation-full.png",
+          "full": true,
+          "scrollY": 1027
+        }
+      ],
+      "input": {
+        "saveVersion": 14,
+        "dataVersion": 14,
+        "entertainmentV3": {
+          "rulesVersion": 1,
+          "activationWindowIndex": 0,
+          "cashPolicy": "UNCAPPED",
+          "arrangements": [],
+          "ledger": [],
+          "livingCity": {
+            "cityId": "gb_london",
+            "clubId": "eng_arsenal",
+            "moves": [
+              {
+                "id": "LC-10-1ac901dbf85d5a6d",
+                "fromCityId": "it_milano",
+                "toCityId": "gb_london",
+                "fromClubId": "ita_inter",
+                "toClubId": "eng_arsenal",
+                "windowIndex": 10,
+                "purchasedArrangementId": null,
+                "source": "TRANSFER_COMMIT"
+              }
+            ],
+            "eligibilityMoveId": "LC-10-1ac901dbf85d5a6d"
+          },
+          "stories": {
+            "completedNodeIds": [],
+            "activeChain": null,
+            "closedChains": []
+          }
+        },
+        "phase": "HALF_YEAR_PLAN",
+        "careerSeed": "FUNV3-ANONYMOUS-QA",
+        "startYear": 2026,
+        "windowIndex": 10,
+        "draft": {
+          "name": "林知行",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "player": {
+          "id": "player-FUNV3-ANONYM",
+          "name": "林知行",
+          "nationality": "CHN",
+          "jerseyNumber": 10,
+          "preferredFoot": "RIGHT",
+          "primaryPosition": "CAM",
+          "secondaryPosition": "CM",
+          "positionFamiliarity": {
+            "CAM": 100,
+            "CM": 92
+          },
+          "attributes": {
+            "attack": 45.8,
+            "defense": 23.4,
+            "physical": 39.6,
+            "mental": 41.4
+          },
+          "potentials": {
+            "attack": 90.6,
+            "defense": 59.9,
+            "physical": 78.9,
+            "mental": 86.7
+          },
+          "form": 65,
+          "fitness": 60,
+          "morale": 62,
+          "coachRelation": 50,
+          "squadRelation": 60,
+          "agentRelation": 50,
+          "fanRelation": 50,
+          "mediaRelation": 50,
+          "reputation": 45,
+          "clubAttachment": 45,
+          "priorities": [
+            "PLAYING_TIME",
+            "COMPETITIVE_LEVEL",
+            "SALARY",
+            "STABILITY"
+          ],
+          "priorityValues": {
+            "PLAYING_TIME": 85,
+            "COMPETITIVE_LEVEL": 70,
+            "SALARY": 55,
+            "STABILITY": 40
+          },
+          "overseasIntent": "CONDITIONAL",
+          "preferredLeagues": [
+            "英格兰"
+          ]
+        },
+        "academyOffers": [
+          {
+            "club": {
+              "id": "eng_arsenal",
+              "name": "阿森纳",
+              "shortMark": "枪",
+              "country": "英格兰",
+              "leagueKey": "英格兰",
+              "leagueLabel": "Premier League（20）",
+              "profile": "ELITE",
+              "tier": 1,
+              "facilityTier": 1,
+              "academyTier": 1,
+              "description": "Premier League（20）的高竞争平台，训练设施96、青训94。"
+            },
+            "expectedRole": "STARTER",
+            "firstTeamChance": "HARD",
+            "annualStipendEuro": 8000
+          },
+          {
+            "club": {
+              "id": "chn1_henan_zhongyuan",
+              "name": "河南中原",
+              "shortMark": "河",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国顶级联赛（16）",
+              "profile": "BALANCED",
+              "tier": 5,
+              "facilityTier": 5,
+              "academyTier": 5,
+              "description": "中国顶级联赛（16）的均衡平台，训练设施65、青训61。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "NORMAL",
+            "annualStipendEuro": 4000
+          },
+          {
+            "club": {
+              "id": "chn2_meizhou_jiaying",
+              "name": "梅州嘉应",
+              "shortMark": "梅",
+              "country": "中国",
+              "leagueKey": "中国",
+              "leagueLabel": "中国次级联赛（16）",
+              "profile": "SMALL",
+              "tier": 6,
+              "facilityTier": 6,
+              "academyTier": 6,
+              "description": "中国次级联赛（16）的成长型平台，训练设施54、青训47。"
+            },
+            "expectedRole": "CORE",
+            "firstTeamChance": "FAST",
+            "annualStipendEuro": 3000
+          }
+        ],
+        "selectedClubId": "eng_arsenal",
+        "teamLevel": "FIRST_TEAM",
+        "youthRole": null,
+        "firstTeamRole": "STARTER",
+        "contract": {
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 12,
+          "annualSalaryEuro": 240000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "STARTER",
+          "releaseClauseEuro": 1200000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0
+        },
+        "professionalOffer": {
+          "id": "first-pro-FUNV3-ANON-eng_arsenal",
+          "type": "FIRST_PRO",
+          "clubId": "eng_arsenal",
+          "remainingHalfYears": 6,
+          "annualSalaryEuro": 48000,
+          "promisedTeamLevel": "FIRST_TEAM",
+          "promisedRole": "FRINGE",
+          "releaseClauseEuro": 1200000,
+          "clubOptionYears": 1,
+          "parentClubId": null,
+          "brokenPromiseWindows": 0,
+          "counterUsed": false,
+          "counterDirection": null,
+          "negotiationSucceeded": null,
+          "negotiationMessage": null
+        },
+        "transferOffers": [],
+        "selectedTransferChoiceId": null,
+        "transferDecision": null,
+        "arrivalChoice": "COACH",
+        "transferArrivalChoice": null,
+        "pendingCareerEvent": null,
+        "pendingKeyMatchMoment": null,
+        "careerEventHistory": [],
+        "pendingConsequences": [],
+        "careerStory": {
+          "club": {
+            "clubId": "eng_arsenal",
+            "leadership": "NONE",
+            "rivalry": "NONE",
+            "mentorship": "NONE"
+          },
+          "publicPersona": "NEUTRAL",
+          "tendencies": {
+            "leadership": 0,
+            "diplomacy": 0,
+            "professionalism": 0,
+            "clutch": 0
+          }
+        },
+        "trainingFocus": null,
+        "developmentApproach": null,
+        "trainingQualityBonus": 0,
+        "firstTeamProgress": {
+          "clubId": "eng_arsenal",
+          "attention": 100,
+          "readiness": 100,
+          "matchProof": 100,
+          "coachBacking": 100,
+          "status": "PROMOTED"
+        },
+        "cashEuro": 200000,
+        "nationalTeam": {
+          "retired": false,
+          "currentRole": null,
+          "caps": 0,
+          "goals": 0,
+          "assists": 0,
+          "debutWindowIndex": null,
+          "history": []
+        },
+        "retirementReason": null,
+        "lastReport": null,
+        "history": []
+      },
+      "text": "个人安排\n本年可购买\n现金 €200,000\n收起\n身体养护\n心理支持\n✓ 安顿生活\n○ 安顿生活 · 基础\n€10,000\n每期心理状态 +1；队内关系 +1 · 3期 · 理论合计心理状态 +3；队内关系 +3\n○ 安顿生活 · 进阶\n€20,000\n每期心理状态 +2；队内关系 +2 · 3期 · 理论合计心理状态 +6；队内关系 +6\n● 安顿生活 · 高阶\n€60,000\n每期心理状态 +4；队内关系 +3 · 3期 · 理论合计心理状态 +12；队内关系 +9\n\n安顿生活 · 高阶 · 一次支付 €60,000，不自动续费。\n\n当前现金 €200,000 → 支付后 €140,000\n\n每期心理状态 +4；队内关系 +3 × 3期，理论合计心理状态 +12；队内关系 +9。\n\n从2031年夏季本次结算起效；按当前训练与已有服务准备，首期暂估心理状态 +4；队内关系 +3。事件仍可能改变实际贡献。\n\n个人安排统一状态上限85，不降低原有高值。低状态恢复优先，不增加能力或保证出场。实际收益可能部分或全部为0。\n\n已知最多可经历 3/3期；搬城仅中断原安顿，退休中断剩余服务。未执行期按比例向下取整退款；全程实际为0自动全额冲销，执行过不返年度名额。\n\n确认支付 €60,000\n本次不安排，继续\n\n关闭面板不扣款、不占名额。免费球队支持与训练规则保持不变。",
+      "passed": true
+    }
+  ],
+  "chromium": "155.0.8059.79"
+}

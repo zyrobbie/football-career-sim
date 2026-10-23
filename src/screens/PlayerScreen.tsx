@@ -1,3 +1,4 @@
+import { publicImpressions } from '../engine/offPitchStories'
 import { ATTRIBUTE_LABELS, PRIORITY_LABELS } from '../data/balance'
 import { playerAgeAtWindow } from '../engine/careerTime'
 import { calculateOverall } from '../engine/player'
@@ -140,6 +141,10 @@ export function PlayerScreen({ game }: { game: GameState }) {
           </div>
         </section>
 
+        <section className="player-screen__section v3-public-impressions v3-story-summary" aria-label="当前公众印象">
+          <header><h2>当前公众印象</h2></header>
+          {publicImpressions(game).length ? publicImpressions(game).map(impression => <div key={impression.id}><strong>{impression.label}</strong><p>{impression.summary}</p><details><summary>选择依据</summary>{impression.evidence.map(e => <p key={`${e.eventId}:${e.windowIndex}`}>第{e.windowIndex + 1}个半年 · {e.choiceTitle}：{e.outcomeSummary}</p>)}</details></div>) : <p>尚未形成鲜明印象。需要不同半年的真实选择作为依据，印象本身不增加属性。</p>}
+        </section>
         <section className="player-screen__section player-screen__tags" aria-label="生涯标签">
           <header><h2>生涯标签</h2></header>
           <p>你的生涯标签会在退役时揭晓。</p>

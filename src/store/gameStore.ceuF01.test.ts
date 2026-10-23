@@ -1,5 +1,5 @@
 import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
-import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected, legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import { afterEach, expect, it, vi } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -22,7 +22,7 @@ function install(raw:string) {
 function facts(g:GameState){return {history:g.history,cash:g.cashEuro,report:g.lastReport,events:g.careerEventHistory,national:g.nationalTeam}}
 it.each(rows.filter(r=>r.input))('continues frozen F-01 input $name using approved F-02 actions',r=>{
  expect(createHash('sha256').update(r.raw).digest('hex')).toBe(r.inputSHA)
- install(r.raw);expect(s().game).toEqual(currentSchemaExpected(r.input))
+ install(r.raw);expect(legacyBusinessProjection(s().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(r.input)))
  const before=structuredClone(s().game!),name=r.name
  if(name.startsWith('national')){
   expect(retireFromNationalTeamIfConfirmed(()=>false,()=>s().retireFromNationalTeam())).toBe(false);expect(s().game).toEqual(before)

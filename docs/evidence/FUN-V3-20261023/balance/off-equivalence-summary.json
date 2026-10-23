@@ -1,0 +1,412 @@
+{
+  "baselineCommit": "37411e336d1b837e99720bb444eb0b0761eb852e",
+  "seeds": 48,
+  "positions": {
+    "ST": 5,
+    "LW": 5,
+    "RW": 5,
+    "CAM": 5,
+    "LM": 4,
+    "RM": 4,
+    "CM": 4,
+    "CDM": 4,
+    "LB": 4,
+    "RB": 4,
+    "CB": 4
+  },
+  "adultPublicStateChecks": 13048,
+  "preludePublicStateChecks": 2582,
+  "allowedProjectionDifferences": [
+    "root entertainmentV3",
+    "saveVersion/dataVersion",
+    "V3-only optional report/history presentation fields; absent in actual OFF results"
+  ],
+  "canonicalObjectKeyOrderIgnored": true,
+  "allEqual": true,
+  "cases": [
+    {
+      "seed": "FUNV3-LONG-00",
+      "position": "ST",
+      "adultPublicActions": 252,
+      "preludePublicActions": 57,
+      "initialBusinessSHA256": "f97f28b846c37471117b3eeced4495cc6995ee798a2f4333691f5d9c66ed6a11",
+      "finalBusinessSHA256": "f99eaeb98dde0a5e87ecd90d283af806a09c81fe3aef6907a7564db2babe8a70"
+    },
+    {
+      "seed": "FUNV3-LONG-01",
+      "position": "LW",
+      "adultPublicActions": 281,
+      "preludePublicActions": 55,
+      "initialBusinessSHA256": "1e924c316bbc57cead7313a5d543c351a870919f10aa3fbddd7da20472b99238",
+      "finalBusinessSHA256": "4d75c5798ed1a2c26e27f08a84d7ee3a11b62e972e6907b5f7519dd0eba4b0f5"
+    },
+    {
+      "seed": "FUNV3-LONG-02",
+      "position": "RW",
+      "adultPublicActions": 291,
+      "preludePublicActions": 59,
+      "initialBusinessSHA256": "f0d8b2429fcb5e7de8c3a318050bcfb8b868f7f51b93f0fac7ecfb6e74fa2a21",
+      "finalBusinessSHA256": "cb60463a5ccbad6cb152abb172a810be76bfd63f1004216e000b88aac97ae1d4"
+    },
+    {
+      "seed": "FUNV3-LONG-03",
+      "position": "CAM",
+      "adultPublicActions": 265,
+      "preludePublicActions": 52,
+      "initialBusinessSHA256": "60abef59fae06564bb65894a63553c188bd1816e930a1fa8c87ba167e2d73144",
+      "finalBusinessSHA256": "ec57a2ec325fe249742bd47769f0b389f30835b34e5617d0c0ee4cbeaf142e13"
+    },
+    {
+      "seed": "FUNV3-LONG-04",
+      "position": "LM",
+      "adultPublicActions": 252,
+      "preludePublicActions": 55,
+      "initialBusinessSHA256": "656a5ab821e775d0f86e6a7f8736f9ec546d13f4007f8ca966acebfb4216c30b",
+      "finalBusinessSHA256": "dd7f01f316e9ed7fbaeb382319cc6a2a4c4e0a2f84194c138f13b80bc0d3675a"
+    },
+    {
+      "seed": "FUNV3-LONG-05",
+      "position": "RM",
+      "adultPublicActions": 278,
+      "preludePublicActions": 56,
+      "initialBusinessSHA256": "b0d5626004b0271eb8edb6dd7cbbaa984cd0c656dcf8b09ce0a7fdd50828c5c3",
+      "finalBusinessSHA256": "86c09d235679a5a801d6d725fc15063bafaf52384a50b644679007f7e13d3666"
+    },
+    {
+      "seed": "FUNV3-LONG-06",
+      "position": "CM",
+      "adultPublicActions": 257,
+      "preludePublicActions": 55,
+      "initialBusinessSHA256": "a125d67e3e06d087c51953551079591b5ae80994925dfa5eebb091c741d78f93",
+      "finalBusinessSHA256": "9d509dbfae6b001c47243160ff24dba4f19322b758064198b46d1239052ee9be"
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "position": "CDM",
+      "adultPublicActions": 289,
+      "preludePublicActions": 53,
+      "initialBusinessSHA256": "581f3deaa72f076253018cad8822b38460157074b41e50245cfd3c00b910e7af",
+      "finalBusinessSHA256": "95e4aa88bacc83e337086013dfafcad1a1ef56031872e8ef818d5005f6169de7"
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "position": "LB",
+      "adultPublicActions": 287,
+      "preludePublicActions": 58,
+      "initialBusinessSHA256": "301924e4c9b4568210d5b0403e05de2a29d99f3f9e0094b7b6a53fed86fa77db",
+      "finalBusinessSHA256": "9e76251a0ff37ad40faac14c281645ddfecb1bb41d8c73def8d772f70d3556a2"
+    },
+    {
+      "seed": "FUNV3-LONG-09",
+      "position": "RB",
+      "adultPublicActions": 268,
+      "preludePublicActions": 53,
+      "initialBusinessSHA256": "34db685d77d23805437d36bfe324cf9d8e7ef79c49a42eb6244bde7414e13f0d",
+      "finalBusinessSHA256": "0fced2b0f8ba829b7dd81f3799b1e2be51fd878e08cfcb90e20bfda692ba4408"
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "position": "CB",
+      "adultPublicActions": 283,
+      "preludePublicActions": 52,
+      "initialBusinessSHA256": "5b3e696c597aacbe2b84f4483e7bed49ecb8674a9fcf568f28b1e31c6a9b45cd",
+      "finalBusinessSHA256": "3c6cacf7897477dc6949ec88e71e3f0a7e264d2c7433bf04f6b6457a6cd7b4f0"
+    },
+    {
+      "seed": "FUNV3-LONG-11",
+      "position": "ST",
+      "adultPublicActions": 292,
+      "preludePublicActions": 51,
+      "initialBusinessSHA256": "cfacd21533e52bc5b2bac8e27cdc15df30e61e78854d7ef7592a70885a8bb5d6",
+      "finalBusinessSHA256": "977e4dc078907d646806a5877eff9519ffe0cf8cee91bc46f5a687083c9cae6d"
+    },
+    {
+      "seed": "FUNV3-LONG-12",
+      "position": "LW",
+      "adultPublicActions": 261,
+      "preludePublicActions": 52,
+      "initialBusinessSHA256": "e8f6f0fc6a1cafc6b568e12de896944f1b49bec2a7366fa050c7ac201a5ec1d2",
+      "finalBusinessSHA256": "419ee4cb9389cb217e3f6a57a2a9aa91ea4b559a55cf12ffbd3d1563e338c9a5"
+    },
+    {
+      "seed": "FUNV3-LONG-13",
+      "position": "RW",
+      "adultPublicActions": 280,
+      "preludePublicActions": 53,
+      "initialBusinessSHA256": "aa00859beccae59fcd464d6cb542e16e734ea5c12e4c03fcb34de0de36b1a408",
+      "finalBusinessSHA256": "2f0b806d674a417d5af73240850961c294390ca9878e629020aaf98bbb2b2eb4"
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "position": "CAM",
+      "adultPublicActions": 278,
+      "preludePublicActions": 58,
+      "initialBusinessSHA256": "37848f24a2ece448e62b026fe81a438e3c35463053a8619a2992b457103d630a",
+      "finalBusinessSHA256": "8bc878980ce25b52acf6ad0187bcc12c4646796b38dd5967872b5233aab7500c"
+    },
+    {
+      "seed": "FUNV3-LONG-15",
+      "position": "LM",
+      "adultPublicActions": 259,
+      "preludePublicActions": 54,
+      "initialBusinessSHA256": "10049930e440beeb3241300d4cf86916587610d693d815d8ee30e7f19be850ee",
+      "finalBusinessSHA256": "c67c699d5ec1be4e08d75cf02f5d9843bf4f98c64f30667ab0800181e0eab4d4"
+    },
+    {
+      "seed": "FUNV3-LONG-16",
+      "position": "RM",
+      "adultPublicActions": 238,
+      "preludePublicActions": 54,
+      "initialBusinessSHA256": "4a21808d145cb25a0c94420571987772d1228b7e9af5e27b1c2c3cb9975c2155",
+      "finalBusinessSHA256": "01c9615d0a5eba6650cce431da0f2e55732c2dd79be7ba34f5c486acde999ec0"
+    },
+    {
+      "seed": "FUNV3-LONG-17",
+      "position": "CM",
+      "adultPublicActions": 277,
+      "preludePublicActions": 54,
+      "initialBusinessSHA256": "99fd6dc480976697a1804a687121dac57ff4e89ef4f2ce0a0da0d411fb663bfc",
+      "finalBusinessSHA256": "2ab6c5dab13e8d3ee5b219d83aca804ec21533f7bfe72eb2eaf05c2edc6b4635"
+    },
+    {
+      "seed": "FUNV3-LONG-18",
+      "position": "CDM",
+      "adultPublicActions": 283,
+      "preludePublicActions": 51,
+      "initialBusinessSHA256": "9a5c0530027c87a983f1f3235acfc657d08d59d28c6150948cc6889bee83fd63",
+      "finalBusinessSHA256": "382bd0187db31be160cdb17fe7316480e1148dc014e1510f27844e65e805a1da"
+    },
+    {
+      "seed": "FUNV3-LONG-19",
+      "position": "LB",
+      "adultPublicActions": 259,
+      "preludePublicActions": 57,
+      "initialBusinessSHA256": "6935707f06886fdad32f29d36c967c2f22ae0e3e9d53d93f77eec1a43b2e823a",
+      "finalBusinessSHA256": "0d56cf7233f9b4c6c308b79a25e5fa1c0bc15436206a71de854b5624a8b745bc"
+    },
+    {
+      "seed": "FUNV3-LONG-20",
+      "position": "RB",
+      "adultPublicActions": 280,
+      "preludePublicActions": 53,
+      "initialBusinessSHA256": "2aca27a6b29a54e67fd87377fd4e7e11d6c91a907e91c36bf4dbfc86c63c4a5b",
+      "finalBusinessSHA256": "5cbe4a39ce7c05d1afaed911b07f17a94bdeda43c157a7949c9d7053c09fa857"
+    },
+    {
+      "seed": "FUNV3-LONG-21",
+      "position": "CB",
+      "adultPublicActions": 246,
+      "preludePublicActions": 49,
+      "initialBusinessSHA256": "7085222003250b90c45a3650b348c25a32b41f89b754eb354b8a8bfbf1ae7455",
+      "finalBusinessSHA256": "af9fe4797d6cb00a0d6768ef0a46243ef2ca9fac9fd4a18cce178fbc00b3ee36"
+    },
+    {
+      "seed": "FUNV3-LONG-22",
+      "position": "ST",
+      "adultPublicActions": 272,
+      "preludePublicActions": 53,
+      "initialBusinessSHA256": "1b4309709f74c5696229ed47cd21577b8cd08aaa235c2029dfe0eb1cbbf04cf5",
+      "finalBusinessSHA256": "8ebe50caaeb0f4f3f9c176de420411ff204edd2010fdaeafcd0e94aa1174931e"
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "position": "LW",
+      "adultPublicActions": 292,
+      "preludePublicActions": 54,
+      "initialBusinessSHA256": "672e6b8d57551ab6d384f996e10c08cb7510c376657abf624c765672aaa71d58",
+      "finalBusinessSHA256": "0ddf18987c6f4f379b6fc8bba824bd29110fe335c629f58c0fcb70e5b36326e0"
+    },
+    {
+      "seed": "FUNV3-LONG-24",
+      "position": "RW",
+      "adultPublicActions": 259,
+      "preludePublicActions": 50,
+      "initialBusinessSHA256": "f8694aff136899107aa2680fa3648f1d4881bb22862467c8ea2bc41de3a63c90",
+      "finalBusinessSHA256": "7231a459de57f356b38c7497623a59b1228d78151e5e34ca5cf4de5316690748"
+    },
+    {
+      "seed": "FUNV3-LONG-25",
+      "position": "CAM",
+      "adultPublicActions": 261,
+      "preludePublicActions": 53,
+      "initialBusinessSHA256": "09dfb9386637b183bbc9b7614d354d68018d64beb4844e61d471a2a63f50c127",
+      "finalBusinessSHA256": "a9481e80b52792e74e7031515b64300a2cb7e15cb73c9ad85f22c55d72030d44"
+    },
+    {
+      "seed": "FUNV3-LONG-26",
+      "position": "LM",
+      "adultPublicActions": 283,
+      "preludePublicActions": 57,
+      "initialBusinessSHA256": "ab899715e897b6dc7723616ef60fbec735b0a058778f807a03e8d6be3ecee485",
+      "finalBusinessSHA256": "e041fd4a1d9585e5325d8998f2abce7f9e2b4ae0c0be055ab8d6d1faf6246f04"
+    },
+    {
+      "seed": "FUNV3-LONG-27",
+      "position": "RM",
+      "adultPublicActions": 256,
+      "preludePublicActions": 57,
+      "initialBusinessSHA256": "6ba92ae9701cd8514412fef4a3ded5b6dd97ee9a0298c5064ba4ad7b3e0f25be",
+      "finalBusinessSHA256": "a0d64656840260bfaa1a62aacfd90ca2b4e5af158c6d029a9fa26772fac417b4"
+    },
+    {
+      "seed": "FUNV3-LONG-28",
+      "position": "CM",
+      "adultPublicActions": 259,
+      "preludePublicActions": 50,
+      "initialBusinessSHA256": "acb997cd72581e17cc805fed3ec7dff59cfcfc58ef79f3428e88c3159fd4314f",
+      "finalBusinessSHA256": "6a88f3211e2f6308ddf1e2a1ce40325bf0e2f08b645fb8de164232303f60cf22"
+    },
+    {
+      "seed": "FUNV3-LONG-29",
+      "position": "CDM",
+      "adultPublicActions": 288,
+      "preludePublicActions": 56,
+      "initialBusinessSHA256": "1fc2e86e61a6913f6dbce14e1a4f4dc4445ea4bdf69b0537730557701d97c2ae",
+      "finalBusinessSHA256": "14031a976de02db09f0d8955f4ec23c10375bb2171c6f3ccd6d27fb6eca79ab1"
+    },
+    {
+      "seed": "FUNV3-LONG-30",
+      "position": "LB",
+      "adultPublicActions": 272,
+      "preludePublicActions": 52,
+      "initialBusinessSHA256": "47507696d0eda929f649a158965e9caaed5d1ad8a663b25d8bc536a0be549339",
+      "finalBusinessSHA256": "44e8051c88114c3c704cbb65d757e9a1fba511cbc6c87251a6a0021cb5998937"
+    },
+    {
+      "seed": "FUNV3-LONG-31",
+      "position": "RB",
+      "adultPublicActions": 284,
+      "preludePublicActions": 56,
+      "initialBusinessSHA256": "fcccf847c2f293a4d6bf7a3958854d32d0f2213c74a2c931a6aed7326dedb82b",
+      "finalBusinessSHA256": "9e46121d080f822936db5687376377629871b11b0b912b8e8d2d23d2915dc99b"
+    },
+    {
+      "seed": "FUNV3-LONG-32",
+      "position": "CB",
+      "adultPublicActions": 283,
+      "preludePublicActions": 58,
+      "initialBusinessSHA256": "69d48f659707f63e95c99a4b3e23199a87df7efa911d3f21b69fc3f991eac8f9",
+      "finalBusinessSHA256": "2ca246c60ebe6b5d8cb33b32f99756fd1f731c798c88db994dcd5120e066c78a"
+    },
+    {
+      "seed": "FUNV3-LONG-33",
+      "position": "ST",
+      "adultPublicActions": 272,
+      "preludePublicActions": 58,
+      "initialBusinessSHA256": "81c6ca8f949bfdd6cd96dbd4f922be75dc88e05b48c4c6562397da8821ade930",
+      "finalBusinessSHA256": "4e5fc72b2c0d030e77ca486e495cd2bb842ab76c86484389bdac3a841263fde0"
+    },
+    {
+      "seed": "FUNV3-LONG-34",
+      "position": "LW",
+      "adultPublicActions": 283,
+      "preludePublicActions": 54,
+      "initialBusinessSHA256": "7ec31fe508424c0d3e0bf7e10c7d0e0a182eee2b8b047bcabf011f8663815c0d",
+      "finalBusinessSHA256": "800a1e972b74f02be72abb0942f155f45724c332f3bbd5ed4e87fbcc63f9bdeb"
+    },
+    {
+      "seed": "FUNV3-LONG-35",
+      "position": "RW",
+      "adultPublicActions": 294,
+      "preludePublicActions": 51,
+      "initialBusinessSHA256": "b8e93bc81ddf82c1c100f0ff4e6d5e13abb54e4015ed18d4a5b50f531774ffb1",
+      "finalBusinessSHA256": "51d2176ffe31162c88bd1fe87b5b919709ffecdb42d0704c1e973dc2da130e14"
+    },
+    {
+      "seed": "FUNV3-LONG-36",
+      "position": "CAM",
+      "adultPublicActions": 259,
+      "preludePublicActions": 55,
+      "initialBusinessSHA256": "8e79ed0c87ea80965a4776cc8459ee746771b7a5b9dc138396e8a45e3f3066fd",
+      "finalBusinessSHA256": "8f8a1b4165c5f504ece23bb9e3fbb4cdfda3e01d7afd3f5f936b3827aa238ee6"
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "position": "LM",
+      "adultPublicActions": 264,
+      "preludePublicActions": 50,
+      "initialBusinessSHA256": "913446712722dce50678a1fb7ddcbaa04fcd326eae2ec162755d088db3200e1f",
+      "finalBusinessSHA256": "e09d94c130a606f2868c83fa8619d74327b5a8788a78f28844123588f2ae18e0"
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "position": "RM",
+      "adultPublicActions": 295,
+      "preludePublicActions": 61,
+      "initialBusinessSHA256": "d9044e29d21d45ad254741f5553a6114f77b7da5874b1ec11205b56ea5e4821b",
+      "finalBusinessSHA256": "43e9b43d9ef830cc87a42966adbb158d34b380b4132b5f12edde5b7a806af887"
+    },
+    {
+      "seed": "FUNV3-LONG-39",
+      "position": "CM",
+      "adultPublicActions": 251,
+      "preludePublicActions": 46,
+      "initialBusinessSHA256": "b059f50ebdfa72dfc02d998416e8e084f4e7050443c944254435bd563cde0d05",
+      "finalBusinessSHA256": "b70b38b4a8ea12c819507ee4e4587527ffdb89a4342a26333ea6eb23eee1ef8b"
+    },
+    {
+      "seed": "FUNV3-LONG-40",
+      "position": "CDM",
+      "adultPublicActions": 251,
+      "preludePublicActions": 55,
+      "initialBusinessSHA256": "898818502ffe245816c73d2a39609b45549ce6e47fd7478018c31d8d8bf81c92",
+      "finalBusinessSHA256": "dc4db84e28bd11c7e30333671c9ee550ef05233b03bb833f1d9a93ec38927483"
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "position": "LB",
+      "adultPublicActions": 288,
+      "preludePublicActions": 56,
+      "initialBusinessSHA256": "5945955aa7cc5749e05739667e5281a955bacb31c42f401cda04ed84c5056038",
+      "finalBusinessSHA256": "bd826832f7f1f36bdbe3b80cfd601b9bfdf12ee772a56a1d6ee7126f003c9d28"
+    },
+    {
+      "seed": "FUNV3-LONG-42",
+      "position": "RB",
+      "adultPublicActions": 271,
+      "preludePublicActions": 51,
+      "initialBusinessSHA256": "6b8bdd246cbd546e9691c6ab266453ceea030c7eaaffb44950e1ac351bf5fc00",
+      "finalBusinessSHA256": "0ef8ae8532eb52388db062385eaabb3439810e2fe447533d9b54511c05a9666b"
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "position": "CB",
+      "adultPublicActions": 270,
+      "preludePublicActions": 53,
+      "initialBusinessSHA256": "130010cd66de8ce0531ec2cbf95d8705931f5e339dfd26fb57f7aa5017009cd0",
+      "finalBusinessSHA256": "9f8b0baf90b07fced8ef35aa8be4c063050f506869c8e315b3b33eec9e22c603"
+    },
+    {
+      "seed": "FUNV3-LONG-44",
+      "position": "ST",
+      "adultPublicActions": 276,
+      "preludePublicActions": 51,
+      "initialBusinessSHA256": "c98b00248444eefb6f7e415afce2219d2a846b042655d15b4ca0df8c7edff53a",
+      "finalBusinessSHA256": "4d5f57b35120f1905dbcf0e91b69f452ef84ff33a56a7f7badc2f0e2656384c8"
+    },
+    {
+      "seed": "FUNV3-LONG-45",
+      "position": "LW",
+      "adultPublicActions": 259,
+      "preludePublicActions": 49,
+      "initialBusinessSHA256": "64aa70964a3fccfd2e66dd03698dabe8406d754a6b2c97cb8680aed4a0c1d675",
+      "finalBusinessSHA256": "64a990d963ac130a0a2a9e6122abd3f7c4ab1aa7378eb8ca9398d7141d5f96ad"
+    },
+    {
+      "seed": "FUNV3-LONG-46",
+      "position": "RW",
+      "adultPublicActions": 271,
+      "preludePublicActions": 55,
+      "initialBusinessSHA256": "ec8b73148c7b4b83dfe6c4674ebc0453fd0706445f2abcfee0b90c103c3fa8ee",
+      "finalBusinessSHA256": "4b7e56ee13b9825aa6a2829e5b0cbaa5394ab95c06a75c1b538ec10c8b66c9bb"
+    },
+    {
+      "seed": "FUNV3-LONG-47",
+      "position": "CAM",
+      "adultPublicActions": 279,
+      "preludePublicActions": 50,
+      "initialBusinessSHA256": "40a9e8cf58a3d8ae37de3e5b8164cf4e545ca5e0824e35ae4d4b32b6934eaad9",
+      "finalBusinessSHA256": "6df87dc7cf9cf79f5725c57d6cc08f96ca7e407e9bd4249a9bf99710d1be2384"
+    }
+  ]
+}

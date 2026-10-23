@@ -1,5 +1,5 @@
 import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
-import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected, legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import {afterAll,afterEach,it,expect,vi} from 'vitest'
 import {readFileSync,writeFileSync} from 'node:fs'
 import {createHash} from 'node:crypto'
@@ -20,7 +20,7 @@ it.each(cases)('one new settlement after %s %s %s',(name,action,choice)=>{
  const write=vi.fn((key:string,value:string)=>{m.set(key,value);writes.push({key,value})})
  vi.stubGlobal('window',{localStorage:{getItem:(k:string)=>m.get(k)??null,setItem:write,removeItem:(k:string)=>m.delete(k)}})
  useGameStore.setState({game:null,error:null,isReviewingReport:false,voluntaryRetirementConfirmation:null});expect(m.has('career_save_backup')).toBe(false)
- expect(sha(input.raw)).toBe(input.inputSHA);expect(loadGame()).toEqual(currentSchemaExpected(input.input));s().continueCareer();expect(s().game).toEqual(currentSchemaExpected(input.input))
+ expect(sha(input.raw)).toBe(input.inputSHA);expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(input.input)));s().continueCareer();expect(legacyBusinessProjection(s().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(input.input)))
  const start={...currentSchemaExpected(structuredClone(input.input)),phase:'HALF_YEAR_REPORT' as const};saveGame(start);s().continueCareer();expect(s().game).toEqual(start)
  const steps:unknown[]=[]
  function run(label:string,fn:()=>void,settles=false,event=false){const before=structuredClone(s().game!),offset=writes.length;fn();expect(s().error,label).toBeNull();const after=structuredClone(s().game!);const saved=m.get('career_save_current')!;expect(JSON.parse(saved).data).toEqual(after)

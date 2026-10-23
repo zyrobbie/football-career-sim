@@ -1,5 +1,5 @@
 import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
-import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected, legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import { afterEach, expect, it, vi } from 'vitest'
 import { readFileSync } from 'node:fs'
 import type { GameState } from '../models/game'
@@ -136,7 +136,7 @@ it.each([{ fitness: 46, choice: 'C', after: 45, recovery: true }, { fitness: 45,
 
 it('validates save and data version independently without rewriting pending focus during migration', () => {
   const data = JSON.parse(readFileSync('docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/READY_attack.json', 'utf8')).data
-  expect(validateGameState(data)).toEqual(currentSchemaExpected(data))
+  expect(legacyBusinessProjection(validateGameState(data))).toEqual(legacyBusinessProjection(currentSchemaExpected(data)))
   expect(() => validateGameState({ ...data, dataVersion: 12 })).toThrow()
   expect(() => validateGameState({ ...data, saveVersion: 12 })).toThrow()
 })

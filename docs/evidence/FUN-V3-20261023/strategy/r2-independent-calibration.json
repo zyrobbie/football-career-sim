@@ -1,0 +1,1331 @@
+{
+  "decision": "Accept unchanged nine-tier prices/gains, cap85 and UNCAPPED candidate after scheduler correction; not subjective acceptance or final release",
+  "sourceSHA256": "a322ca175e4af6aecb34438cdf0126cafeaf28246be4ae7d05214291647d64cc",
+  "groups": {
+    "OFF": {
+      "careers": 48,
+      "sums": {
+        "windows": 2200,
+        "recoveryWindows": 319,
+        "injuryWindows": 38,
+        "injuryWeeks": 180,
+        "minutes": 1958663,
+        "starts": 22561,
+        "appearances": 28006,
+        "goals": 4405,
+        "assists": 4457,
+        "peakOverall": 3674,
+        "finalOverall": 3389,
+        "averageFitness": 3033.7806324110666,
+        "honors": 637,
+        "salaryDueEuro": 296895025,
+        "paymentEuro": 0,
+        "refundEuro": 0,
+        "purchaseCount": 0,
+        "consecutiveSameEventCategory": 130,
+        "eventCount": 1546
+      },
+      "eventCategories": {
+        "MEDIA": 327,
+        "COACH": 184,
+        "NATIONAL": 156,
+        "MILESTONE": 204,
+        "MATCH": 210,
+        "TEAM": 211,
+        "CONTRACT": 219,
+        "HEALTH": 35
+      },
+      "nodeCounts": {},
+      "closures": {}
+    },
+    "ON_FREE": {
+      "careers": 48,
+      "sums": {
+        "windows": 2199,
+        "recoveryWindows": 338,
+        "injuryWindows": 39,
+        "injuryWeeks": 185,
+        "minutes": 1929764,
+        "starts": 22228,
+        "appearances": 27693,
+        "goals": 4319,
+        "assists": 4390,
+        "peakOverall": 3669,
+        "finalOverall": 3383,
+        "averageFitness": 3028.0462450592886,
+        "honors": 623,
+        "salaryDueEuro": 291490925,
+        "paymentEuro": 0,
+        "refundEuro": 0,
+        "purchaseCount": 0,
+        "consecutiveSameEventCategory": 200,
+        "eventCount": 1540
+      },
+      "eventCategories": {
+        "MEDIA": 611,
+        "TEAM": 317,
+        "NATIONAL": 92,
+        "COACH": 96,
+        "MILESTONE": 193,
+        "CONTRACT": 102,
+        "MATCH": 100,
+        "HEALTH": 29
+      },
+      "nodeCounts": {
+        "V3_E03_INTERVIEW_CLIP": 40,
+        "V3_E06_FAMILY_VISIT": 42,
+        "V3_E04_FAN_SCHEDULE": 36,
+        "V3_E01_PRESS_DRINK": 43,
+        "V3_E05_OLD_POST": 38,
+        "V3_E09_LOCAL_RADIO": 39,
+        "V3_E11_COMMUTE": 43,
+        "V3_E12_FAN_GIFT": 41,
+        "V3_C03A_YOUNG_TEAMMATE": 22,
+        "V3_C03B_YOUNG_TEAMMATE_RETURN": 14,
+        "V3_C02A_PUBLIC_RESPONSE": 40,
+        "V3_C02B_PUBLIC_RESPONSE_RETURN": 39,
+        "V3_E10_TEAM_PHOTO": 40,
+        "V3_C01A_LOCAL_CAR": 38,
+        "V3_C01B_LOCAL_CAR_RETURN": 36,
+        "V3_E02_AD_TEAMMATE": 26,
+        "V3_C04A_HOMETOWN_CAMP": 39,
+        "V3_C04B_HOMETOWN_CAMP_RETURN": 35,
+        "V3_E08_NEW_NEIGHBOR": 19,
+        "V3_E07_LANGUAGE_MIXUP": 13
+      },
+      "closures": {
+        "COMPLETED": 124,
+        "RETIRED": 8,
+        "EXPIRED": 3,
+        "CLUB_CHANGED": 4
+      }
+    },
+    "ON_FIXED_BODY": {
+      "careers": 48,
+      "sums": {
+        "windows": 2200,
+        "recoveryWindows": 5,
+        "injuryWindows": 34,
+        "injuryWeeks": 165,
+        "minutes": 2096696,
+        "starts": 22753,
+        "appearances": 28336,
+        "goals": 4789,
+        "assists": 4968,
+        "peakOverall": 3679,
+        "finalOverall": 3432,
+        "averageFitness": 3750.8685770750994,
+        "honors": 659,
+        "salaryDueEuro": 302880925,
+        "paymentEuro": 29110000,
+        "refundEuro": 960000,
+        "purchaseCount": 757,
+        "consecutiveSameEventCategory": 203,
+        "eventCount": 1539
+      },
+      "eventCategories": {
+        "MEDIA": 615,
+        "TEAM": 325,
+        "NATIONAL": 96,
+        "COACH": 106,
+        "MILESTONE": 186,
+        "CONTRACT": 92,
+        "MATCH": 98,
+        "HEALTH": 21
+      },
+      "nodeCounts": {
+        "V3_E03_INTERVIEW_CLIP": 40,
+        "V3_E06_FAMILY_VISIT": 43,
+        "V3_E04_FAN_SCHEDULE": 39,
+        "V3_E01_PRESS_DRINK": 42,
+        "V3_E05_OLD_POST": 36,
+        "V3_E09_LOCAL_RADIO": 44,
+        "V3_E11_COMMUTE": 42,
+        "V3_E12_FAN_GIFT": 39,
+        "V3_C03A_YOUNG_TEAMMATE": 23,
+        "V3_C03B_YOUNG_TEAMMATE_RETURN": 14,
+        "V3_C02A_PUBLIC_RESPONSE": 40,
+        "V3_C02B_PUBLIC_RESPONSE_RETURN": 39,
+        "V3_E10_TEAM_PHOTO": 44,
+        "V3_C01A_LOCAL_CAR": 37,
+        "V3_C01B_LOCAL_CAR_RETURN": 36,
+        "V3_E02_AD_TEAMMATE": 27,
+        "V3_C04A_HOMETOWN_CAMP": 37,
+        "V3_C04B_HOMETOWN_CAMP_RETURN": 33,
+        "V3_E07_LANGUAGE_MIXUP": 18,
+        "V3_E08_NEW_NEIGHBOR": 20
+      },
+      "closures": {
+        "COMPLETED": 122,
+        "RETIRED": 8,
+        "CLUB_CHANGED": 4,
+        "EXPIRED": 3
+      }
+    },
+    "ON_SITUATIONAL": {
+      "careers": 48,
+      "sums": {
+        "windows": 2200,
+        "recoveryWindows": 49,
+        "injuryWindows": 36,
+        "injuryWeeks": 174,
+        "minutes": 2006341,
+        "starts": 22705,
+        "appearances": 28282,
+        "goals": 4535,
+        "assists": 4635,
+        "peakOverall": 3674,
+        "finalOverall": 3397,
+        "averageFitness": 3225.502964426877,
+        "honors": 651,
+        "salaryDueEuro": 298617475,
+        "paymentEuro": 28280000,
+        "refundEuro": 1846658,
+        "purchaseCount": 655,
+        "consecutiveSameEventCategory": 195,
+        "eventCount": 1542
+      },
+      "eventCategories": {
+        "MEDIA": 610,
+        "TEAM": 316,
+        "NATIONAL": 87,
+        "COACH": 100,
+        "MILESTONE": 195,
+        "CONTRACT": 104,
+        "MATCH": 101,
+        "HEALTH": 29
+      },
+      "nodeCounts": {
+        "V3_E03_INTERVIEW_CLIP": 38,
+        "V3_E06_FAMILY_VISIT": 44,
+        "V3_E04_FAN_SCHEDULE": 37,
+        "V3_E01_PRESS_DRINK": 42,
+        "V3_E05_OLD_POST": 38,
+        "V3_E09_LOCAL_RADIO": 41,
+        "V3_E11_COMMUTE": 43,
+        "V3_E12_FAN_GIFT": 38,
+        "V3_C03A_YOUNG_TEAMMATE": 21,
+        "V3_C03B_YOUNG_TEAMMATE_RETURN": 13,
+        "V3_C02A_PUBLIC_RESPONSE": 41,
+        "V3_C02B_PUBLIC_RESPONSE_RETURN": 39,
+        "V3_E10_TEAM_PHOTO": 40,
+        "V3_C01A_LOCAL_CAR": 37,
+        "V3_C01B_LOCAL_CAR_RETURN": 36,
+        "V3_E02_AD_TEAMMATE": 26,
+        "V3_C04A_HOMETOWN_CAMP": 38,
+        "V3_C04B_HOMETOWN_CAMP_RETURN": 35,
+        "V3_E08_NEW_NEIGHBOR": 20,
+        "V3_E07_LANGUAGE_MIXUP": 13
+      },
+      "closures": {
+        "COMPLETED": 123,
+        "RETIRED": 7,
+        "EXPIRED": 3,
+        "CLUB_CHANGED": 4
+      }
+    }
+  },
+  "paired": {
+    "ON_FIXED_BODY": {
+      "minutes": {
+        "medianAbsoluteDelta": 3359.5,
+        "min": 9,
+        "max": 14015,
+        "higher": 48,
+        "equal": 0,
+        "lower": 0
+      },
+      "starts": {
+        "medianAbsoluteDelta": 3.0,
+        "min": -57,
+        "max": 137,
+        "higher": 26,
+        "equal": 9,
+        "lower": 13
+      },
+      "goals": {
+        "medianAbsoluteDelta": 6.0,
+        "min": 0,
+        "max": 31,
+        "higher": 43,
+        "equal": 5,
+        "lower": 0
+      },
+      "assists": {
+        "medianAbsoluteDelta": 10.0,
+        "min": -5,
+        "max": 41,
+        "higher": 40,
+        "equal": 5,
+        "lower": 3
+      },
+      "peakOverall": {
+        "medianAbsoluteDelta": 0.0,
+        "min": 0,
+        "max": 1,
+        "higher": 10,
+        "equal": 38,
+        "lower": 0
+      },
+      "finalOverall": {
+        "medianAbsoluteDelta": 1.0,
+        "min": 0,
+        "max": 3,
+        "higher": 37,
+        "equal": 11,
+        "lower": 0
+      },
+      "honors": {
+        "medianAbsoluteDelta": 1.0,
+        "min": -7,
+        "max": 6,
+        "higher": 27,
+        "equal": 12,
+        "lower": 9
+      },
+      "injuryWeeks": {
+        "medianAbsoluteDelta": 0.0,
+        "min": -7,
+        "max": 6,
+        "higher": 1,
+        "equal": 41,
+        "lower": 6
+      },
+      "recoveryWindows": {
+        "medianAbsoluteDelta": -8.0,
+        "min": -16,
+        "max": 0,
+        "higher": 0,
+        "equal": 7,
+        "lower": 41
+      },
+      "averageFitness": {
+        "medianAbsoluteDelta": 17.170454545454547,
+        "min": 0.4130434782608603,
+        "max": 26.891304347826093,
+        "higher": 48,
+        "equal": 0,
+        "lower": 0
+      }
+    },
+    "ON_SITUATIONAL": {
+      "minutes": {
+        "medianAbsoluteDelta": 1078.5,
+        "min": -284,
+        "max": 9961,
+        "higher": 44,
+        "equal": 2,
+        "lower": 2
+      },
+      "starts": {
+        "medianAbsoluteDelta": 0.0,
+        "min": -28,
+        "max": 129,
+        "higher": 22,
+        "equal": 14,
+        "lower": 12
+      },
+      "goals": {
+        "medianAbsoluteDelta": 3.0,
+        "min": -1,
+        "max": 31,
+        "higher": 40,
+        "equal": 6,
+        "lower": 2
+      },
+      "assists": {
+        "medianAbsoluteDelta": 4.0,
+        "min": -8,
+        "max": 27,
+        "higher": 40,
+        "equal": 6,
+        "lower": 2
+      },
+      "peakOverall": {
+        "medianAbsoluteDelta": 0.0,
+        "min": 0,
+        "max": 1,
+        "higher": 5,
+        "equal": 43,
+        "lower": 0
+      },
+      "finalOverall": {
+        "medianAbsoluteDelta": 0.0,
+        "min": -1,
+        "max": 1,
+        "higher": 16,
+        "equal": 30,
+        "lower": 2
+      },
+      "honors": {
+        "medianAbsoluteDelta": 0.0,
+        "min": -2,
+        "max": 5,
+        "higher": 17,
+        "equal": 23,
+        "lower": 8
+      },
+      "injuryWeeks": {
+        "medianAbsoluteDelta": 0.0,
+        "min": -6,
+        "max": 6,
+        "higher": 1,
+        "equal": 43,
+        "lower": 4
+      },
+      "recoveryWindows": {
+        "medianAbsoluteDelta": -7.0,
+        "min": -14,
+        "max": 0,
+        "higher": 0,
+        "equal": 7,
+        "lower": 41
+      },
+      "averageFitness": {
+        "medianAbsoluteDelta": 4.347826086956523,
+        "min": -6.978260869565219,
+        "max": 9.217391304347828,
+        "higher": 44,
+        "equal": 2,
+        "lower": 2
+      }
+    }
+  },
+  "naturalPortableCompletions": [
+    {
+      "seed": "FUNV3-LONG-05",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "chn1_shenzhen_pengcheng",
+      "followupClub": "chn1_dalian_bincheng",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "eng_fulham",
+      "followupClub": "cn_chengdu_jincheng",
+      "firstW": 21,
+      "followupW": 23
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "ita_torino",
+      "followupClub": "esp2_tenerife",
+      "firstW": 38,
+      "followupW": 39
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "bra1_internacional",
+      "followupClub": "ger2_heidenheim",
+      "firstW": 51,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "chn1_nanjing_jinling",
+      "followupClub": "cn_wuhan_jiangcheng",
+      "firstW": 25,
+      "followupW": 26
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "fra2_grenoble",
+      "followupClub": "por1_gil_vicente",
+      "firstW": 33,
+      "followupW": 34
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "eng1_newcastle_united",
+      "followupClub": "eng1_ipswich_town",
+      "firstW": 29,
+      "followupW": 31
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "esp1_real_betis",
+      "followupClub": "ita_inter",
+      "firstW": 43,
+      "followupW": 45
+    },
+    {
+      "seed": "FUNV3-LONG-11",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "chn2_hohhot_qingcheng",
+      "followupClub": "eng2_west_bromwich_albion",
+      "firstW": 14,
+      "followupW": 16
+    },
+    {
+      "seed": "FUNV3-LONG-13",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "por1_estoril_praia",
+      "followupClub": "ita1_udinese",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "chn1_chongqing_shancheng",
+      "followupClub": "chn2_hohhot_qingcheng",
+      "firstW": 38,
+      "followupW": 39
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "chn2_meizhou_jiaying",
+      "followupClub": "chn2_nantong_jianghai",
+      "firstW": 48,
+      "followupW": 49
+    },
+    {
+      "seed": "FUNV3-LONG-16",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "cn_beijing_yuhua",
+      "followupClub": "arg1_rosario_central",
+      "firstW": 42,
+      "followupW": 44
+    },
+    {
+      "seed": "FUNV3-LONG-19",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "esp1_osasuna",
+      "followupClub": "ger_bayern",
+      "firstW": 40,
+      "followupW": 41
+    },
+    {
+      "seed": "FUNV3-LONG-22",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "eng1_nottingham_forest",
+      "followupClub": "chn1_shandong_taiyue",
+      "firstW": 34,
+      "followupW": 37
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "chn1_shandong_taiyue",
+      "followupClub": "arg1_talleres",
+      "firstW": 33,
+      "followupW": 34
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "chn1_zhejiang_qianchao",
+      "followupClub": "cn_beijing_yuhua",
+      "firstW": 45,
+      "followupW": 46
+    },
+    {
+      "seed": "FUNV3-LONG-25",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "esp_celta",
+      "followupClub": "esp1_osasuna",
+      "firstW": 42,
+      "followupW": 44
+    },
+    {
+      "seed": "FUNV3-LONG-29",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "cn_yunnan_shanhe",
+      "followupClub": "chn2_hefei_luzhou",
+      "firstW": 45,
+      "followupW": 47
+    },
+    {
+      "seed": "FUNV3-LONG-31",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "esp1_villarreal",
+      "followupClub": "eng1_everton",
+      "firstW": 40,
+      "followupW": 41
+    },
+    {
+      "seed": "FUNV3-LONG-32",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "chn1_henan_zhongyuan",
+      "followupClub": "chn1_zhejiang_qianchao",
+      "firstW": 45,
+      "followupW": 47
+    },
+    {
+      "seed": "FUNV3-LONG-34",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "esp1_osasuna",
+      "followupClub": "ger_bayern",
+      "firstW": 40,
+      "followupW": 43
+    },
+    {
+      "seed": "FUNV3-LONG-35",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "chn2_nantong_jianghai",
+      "followupClub": "ita2_juve_stabia",
+      "firstW": 14,
+      "followupW": 16
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "ger1_augsburg",
+      "followupClub": "eng2_cardiff_city",
+      "firstW": 36,
+      "followupW": 39
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "eng1_ipswich_town",
+      "followupClub": "ita1_lazio",
+      "firstW": 48,
+      "followupW": 49
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "chn2_guizhou_qianfeng",
+      "followupClub": "chn2_hohhot_qingcheng",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "cn_wuhan_jiangcheng",
+      "followupClub": "eng2_birmingham_city",
+      "firstW": 50,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-40",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "fra1_rennes",
+      "followupClub": "ita1_fiorentina",
+      "firstW": 21,
+      "followupW": 23
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "chn2_hefei_luzhou",
+      "followupClub": "cn_wuhan_jiangcheng",
+      "firstW": 18,
+      "followupW": 21
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "cn_wuhan_jiangcheng",
+      "followupClub": "chn1_shenzhen_pengcheng",
+      "firstW": 23,
+      "followupW": 24
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "chn1_shandong_taiyue",
+      "followupClub": "chn1_shenzhen_pengcheng",
+      "firstW": 45,
+      "followupW": 46
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_FREE",
+      "chain": "C01",
+      "fromClub": "ita1_genoa",
+      "followupClub": "eng2_sheffield_united",
+      "firstW": 50,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-44",
+      "group": "ON_FREE",
+      "chain": "C02",
+      "fromClub": "chn2_wuxi_taihu",
+      "followupClub": "chn2_foshan_lingnan",
+      "firstW": 10,
+      "followupW": 12
+    },
+    {
+      "seed": "FUNV3-LONG-47",
+      "group": "ON_FREE",
+      "chain": "C04",
+      "fromClub": "cn_yunnan_shanhe",
+      "followupClub": "chn2_guizhou_qianfeng",
+      "firstW": 32,
+      "followupW": 34
+    },
+    {
+      "seed": "FUNV3-LONG-02",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "chn1_nanjing_jinling",
+      "followupClub": "chn2_suzhou_wumen",
+      "firstW": 32,
+      "followupW": 35
+    },
+    {
+      "seed": "FUNV3-LONG-05",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "chn1_shenzhen_pengcheng",
+      "followupClub": "chn1_dalian_bincheng",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "eng_fulham",
+      "followupClub": "cn_chengdu_jincheng",
+      "firstW": 21,
+      "followupW": 23
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "ita_torino",
+      "followupClub": "esp2_tenerife",
+      "firstW": 38,
+      "followupW": 39
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "bra1_internacional",
+      "followupClub": "ger2_heidenheim",
+      "firstW": 51,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "chn1_nanjing_jinling",
+      "followupClub": "cn_wuhan_jiangcheng",
+      "firstW": 25,
+      "followupW": 26
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "jpn1_tokyo_verdy",
+      "followupClub": "chn1_dalian_bincheng",
+      "firstW": 47,
+      "followupW": 50
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "eng1_manchester_united",
+      "followupClub": "eng1_crystal_palace",
+      "firstW": 29,
+      "followupW": 31
+    },
+    {
+      "seed": "FUNV3-LONG-11",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "chn2_hohhot_qingcheng",
+      "followupClub": "eng2_west_bromwich_albion",
+      "firstW": 14,
+      "followupW": 16
+    },
+    {
+      "seed": "FUNV3-LONG-13",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "por1_estoril_praia",
+      "followupClub": "ita1_udinese",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "chn2_suzhou_wumen",
+      "followupClub": "chn2_shaanxi_qinling",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "chn2_hohhot_qingcheng",
+      "followupClub": "chn2_wuxi_taihu",
+      "firstW": 39,
+      "followupW": 42
+    },
+    {
+      "seed": "FUNV3-LONG-20",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "chn1_shandong_taiyue",
+      "followupClub": "cn_wuhan_jiangcheng",
+      "firstW": 50,
+      "followupW": 53
+    },
+    {
+      "seed": "FUNV3-LONG-22",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "eng1_nottingham_forest",
+      "followupClub": "chn1_shandong_taiyue",
+      "firstW": 34,
+      "followupW": 37
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "chn2_ningbo_yongjiang",
+      "followupClub": "chn2_liaoning_tiecheng",
+      "firstW": 10,
+      "followupW": 11
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "cn_chengdu_jincheng",
+      "followupClub": "arg1_talleres",
+      "firstW": 33,
+      "followupW": 34
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "chn1_zhejiang_qianchao",
+      "followupClub": "cn_beijing_yuhua",
+      "firstW": 45,
+      "followupW": 46
+    },
+    {
+      "seed": "FUNV3-LONG-25",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "esp_celta",
+      "followupClub": "esp1_osasuna",
+      "firstW": 42,
+      "followupW": 44
+    },
+    {
+      "seed": "FUNV3-LONG-28",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "ita_juventus",
+      "followupClub": "cn_shanghai_donggang",
+      "firstW": 51,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-29",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "cn_yunnan_shanhe",
+      "followupClub": "eng2_bolton_wanderers",
+      "firstW": 45,
+      "followupW": 47
+    },
+    {
+      "seed": "FUNV3-LONG-31",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "esp1_villarreal",
+      "followupClub": "eng1_everton",
+      "firstW": 40,
+      "followupW": 41
+    },
+    {
+      "seed": "FUNV3-LONG-32",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "chn1_tianjin_jinmen",
+      "followupClub": "chn1_changchun_beichen",
+      "firstW": 30,
+      "followupW": 31
+    },
+    {
+      "seed": "FUNV3-LONG-32",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "fra1_rennes",
+      "followupClub": "chn1_shandong_taiyue",
+      "firstW": 45,
+      "followupW": 47
+    },
+    {
+      "seed": "FUNV3-LONG-34",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "esp1_osasuna",
+      "followupClub": "ger_bayern",
+      "firstW": 40,
+      "followupW": 43
+    },
+    {
+      "seed": "FUNV3-LONG-35",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "chn2_nantong_jianghai",
+      "followupClub": "ita2_juve_stabia",
+      "firstW": 14,
+      "followupW": 16
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "eng1_ipswich_town",
+      "followupClub": "ita1_lazio",
+      "firstW": 48,
+      "followupW": 49
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "chn2_guizhou_qianfeng",
+      "followupClub": "chn2_hohhot_qingcheng",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "cn_wuhan_jiangcheng",
+      "followupClub": "eng2_birmingham_city",
+      "firstW": 50,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-40",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "fra1_rennes",
+      "followupClub": "ita1_fiorentina",
+      "firstW": 21,
+      "followupW": 23
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "chn2_hefei_luzhou",
+      "followupClub": "chn1_chongqing_shancheng",
+      "firstW": 18,
+      "followupW": 21
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "ita1_como",
+      "followupClub": "ita1_roma",
+      "firstW": 39,
+      "followupW": 41
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "chn1_shandong_taiyue",
+      "followupClub": "chn1_shenzhen_pengcheng",
+      "firstW": 45,
+      "followupW": 46
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "ita1_frosinone",
+      "followupClub": "eng2_sheffield_united",
+      "firstW": 50,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-44",
+      "group": "ON_FIXED_BODY",
+      "chain": "C02",
+      "fromClub": "chn2_wuxi_taihu",
+      "followupClub": "chn2_foshan_lingnan",
+      "firstW": 10,
+      "followupW": 12
+    },
+    {
+      "seed": "FUNV3-LONG-46",
+      "group": "ON_FIXED_BODY",
+      "chain": "C01",
+      "fromClub": "arg1_independiente",
+      "followupClub": "esp1_valencia",
+      "firstW": 23,
+      "followupW": 24
+    },
+    {
+      "seed": "FUNV3-LONG-47",
+      "group": "ON_FIXED_BODY",
+      "chain": "C04",
+      "fromClub": "cn_yunnan_shanhe",
+      "followupClub": "chn2_guizhou_qianfeng",
+      "firstW": 32,
+      "followupW": 34
+    },
+    {
+      "seed": "FUNV3-LONG-05",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "chn1_shenzhen_pengcheng",
+      "followupClub": "chn1_dalian_bincheng",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "eng_fulham",
+      "followupClub": "cn_chengdu_jincheng",
+      "firstW": 21,
+      "followupW": 23
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "ita_torino",
+      "followupClub": "esp2_tenerife",
+      "firstW": 38,
+      "followupW": 39
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "bra1_internacional",
+      "followupClub": "ger2_heidenheim",
+      "firstW": 51,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "chn1_nanjing_jinling",
+      "followupClub": "cn_wuhan_jiangcheng",
+      "firstW": 25,
+      "followupW": 26
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "jpn1_v_varen_nagasaki",
+      "followupClub": "chn1_henan_zhongyuan",
+      "firstW": 47,
+      "followupW": 50
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "eng1_newcastle_united",
+      "followupClub": "eng1_crystal_palace",
+      "firstW": 29,
+      "followupW": 31
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "esp1_real_betis",
+      "followupClub": "eng_liverpool",
+      "firstW": 43,
+      "followupW": 46
+    },
+    {
+      "seed": "FUNV3-LONG-11",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "chn2_hohhot_qingcheng",
+      "followupClub": "eng2_west_bromwich_albion",
+      "firstW": 14,
+      "followupW": 16
+    },
+    {
+      "seed": "FUNV3-LONG-13",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "por1_estoril_praia",
+      "followupClub": "ita1_udinese",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "chn1_chongqing_shancheng",
+      "followupClub": "chn2_hohhot_qingcheng",
+      "firstW": 38,
+      "followupW": 39
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "chn2_meizhou_jiaying",
+      "followupClub": "chn2_nantong_jianghai",
+      "firstW": 48,
+      "followupW": 49
+    },
+    {
+      "seed": "FUNV3-LONG-22",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "eng1_nottingham_forest",
+      "followupClub": "chn1_shandong_taiyue",
+      "firstW": 34,
+      "followupW": 37
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "chn1_shandong_taiyue",
+      "followupClub": "arg1_talleres",
+      "firstW": 33,
+      "followupW": 34
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "chn1_zhejiang_qianchao",
+      "followupClub": "cn_beijing_yuhua",
+      "firstW": 45,
+      "followupW": 46
+    },
+    {
+      "seed": "FUNV3-LONG-25",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "esp_celta",
+      "followupClub": "esp1_osasuna",
+      "firstW": 42,
+      "followupW": 44
+    },
+    {
+      "seed": "FUNV3-LONG-29",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "cn_yunnan_shanhe",
+      "followupClub": "chn2_hefei_luzhou",
+      "firstW": 45,
+      "followupW": 47
+    },
+    {
+      "seed": "FUNV3-LONG-31",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "esp1_villarreal",
+      "followupClub": "eng1_everton",
+      "firstW": 40,
+      "followupW": 41
+    },
+    {
+      "seed": "FUNV3-LONG-34",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "esp1_osasuna",
+      "followupClub": "ger_bayern",
+      "firstW": 40,
+      "followupW": 43
+    },
+    {
+      "seed": "FUNV3-LONG-35",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "chn2_nantong_jianghai",
+      "followupClub": "ita2_juve_stabia",
+      "firstW": 14,
+      "followupW": 16
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "ger1_augsburg",
+      "followupClub": "eng2_cardiff_city",
+      "firstW": 36,
+      "followupW": 39
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "eng1_ipswich_town",
+      "followupClub": "ita1_lazio",
+      "firstW": 48,
+      "followupW": 49
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "chn2_guizhou_qianfeng",
+      "followupClub": "chn2_hohhot_qingcheng",
+      "firstW": 18,
+      "followupW": 20
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "cn_wuhan_jiangcheng",
+      "followupClub": "eng2_birmingham_city",
+      "firstW": 50,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-40",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "fra1_rennes",
+      "followupClub": "ita1_fiorentina",
+      "firstW": 21,
+      "followupW": 23
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "chn2_hefei_luzhou",
+      "followupClub": "chn1_chongqing_shancheng",
+      "firstW": 18,
+      "followupW": 21
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "chn1_chongqing_shancheng",
+      "followupClub": "chn1_dalian_bincheng",
+      "firstW": 23,
+      "followupW": 24
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "ita1_como",
+      "followupClub": "ita1_roma",
+      "firstW": 39,
+      "followupW": 41
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "chn1_shandong_taiyue",
+      "followupClub": "chn1_shenzhen_pengcheng",
+      "firstW": 45,
+      "followupW": 46
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_SITUATIONAL",
+      "chain": "C01",
+      "fromClub": "ita1_genoa",
+      "followupClub": "eng2_sheffield_united",
+      "firstW": 50,
+      "followupW": 52
+    },
+    {
+      "seed": "FUNV3-LONG-44",
+      "group": "ON_SITUATIONAL",
+      "chain": "C02",
+      "fromClub": "chn2_wuxi_taihu",
+      "followupClub": "chn2_foshan_lingnan",
+      "firstW": 10,
+      "followupW": 12
+    },
+    {
+      "seed": "FUNV3-LONG-47",
+      "group": "ON_SITUATIONAL",
+      "chain": "C04",
+      "fromClub": "cn_yunnan_shanhe",
+      "followupClub": "chn2_guizhou_qianfeng",
+      "firstW": 32,
+      "followupW": 35
+    }
+  ],
+  "fixedBodyCostDistribution": {
+    "netEuro": {
+      "min": 10000,
+      "median": 650000.0,
+      "max": 920000
+    },
+    "shareOfDisposableWagesPercent": {
+      "min": 0.7089684509039348,
+      "median": 8.862160757667887,
+      "max": 31.00114316715429
+    },
+    "purchaseCount": {
+      "min": 1,
+      "median": 17.0,
+      "max": 23
+    }
+  }
+}

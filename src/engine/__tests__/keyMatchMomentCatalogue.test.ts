@@ -1,5 +1,5 @@
 import { expect,it,vi } from 'vitest'
-import { installTestStorage } from '../../testing/keyMatchMomentTestSupport'
+import { installTestStorage, currentSchemaExpected, legacyBusinessProjection } from '../../testing/keyMatchMomentTestSupport'
 import { useGameStore } from '../../store/gameStore'
 import { readFileSync,writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -32,13 +32,13 @@ it('runs 1800 preparation/choice rows with exact original-engine rating differen
  expect(dominated).toEqual([])
 })
 it('old S1 pending and saved report preserve complete snapshots after expanding to forty',()=>{
- for(const id of ['forward','creative','defender','narrow-recovery','wide-defender'])for(const phase of ['pending','result','report']){const raw=JSON.parse(readFileSync(`docs/evidence/KMM-20260913/S1/review-fixtures/${id}-${phase}.json`,'utf8')).data;expect(canonicalMomentJSON(validateGameState(raw))).toBe(canonicalMomentJSON(raw))}
+ for(const id of ['forward','creative','defender','narrow-recovery','wide-defender'])for(const phase of ['pending','result','report']){const raw=JSON.parse(readFileSync(`docs/evidence/KMM-20260913/S1/review-fixtures/${id}-${phase}.json`,'utf8')).data;expect(canonicalMomentJSON(legacyBusinessProjection(validateGameState(raw)))).toBe(canonicalMomentJSON(legacyBusinessProjection(currentSchemaExpected(raw))))}
 })
 
 it('direct old raw load, public choice and finish still match original S1 complete saved report',()=>{
  try{for(const id of ['forward','creative','defender','narrow-recovery','wide-defender']){
  const memory=installTestStorage(),prefix=`docs/evidence/KMM-20260913/S1/review-fixtures/${id}-`,raw=readFileSync(prefix+'pending.json','utf8'),oldResult=JSON.parse(readFileSync(prefix+'result.json','utf8')).data as GameState,oldReport=JSON.parse(readFileSync(prefix+'report.json','utf8')).data as GameState
- memory.set('career_save_current',raw);const g=loadGame()!,p=g.pendingKeyMatchMoment!;expect(g).toEqual(JSON.parse(raw).data);useGameStore.setState({game:g,error:null});const e={careerSeed:g.careerSeed,playerId:g.player!.id,windowIndex:g.windowIndex,clubId:p.clubId,momentId:p.id,inputFingerprint:p.inputFingerprint}
- useGameStore.getState().chooseKeyMatchMoment(oldResult.pendingKeyMatchMoment!.selectedChoiceId!,e);expect(loadGame()).toEqual(oldResult);useGameStore.getState().finishKeyMatchMoment(e);expect(loadGame()).toEqual(oldReport);saveGame(loadGame()!);expect(loadGame()).toEqual(oldReport)
+ memory.set('career_save_current',raw);const g=loadGame()!,p=g.pendingKeyMatchMoment!;expect(legacyBusinessProjection(g)).toEqual(legacyBusinessProjection(currentSchemaExpected(JSON.parse(raw).data)));useGameStore.setState({game:g,error:null});const e={careerSeed:g.careerSeed,playerId:g.player!.id,windowIndex:g.windowIndex,clubId:p.clubId,momentId:p.id,inputFingerprint:p.inputFingerprint}
+ useGameStore.getState().chooseKeyMatchMoment(oldResult.pendingKeyMatchMoment!.selectedChoiceId!,e);expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(oldResult)));useGameStore.getState().finishKeyMatchMoment(e);expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(oldReport)));saveGame(loadGame()!);expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(oldReport)))
  }}finally{vi.unstubAllGlobals()}
 })

@@ -1,0 +1,964 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> football-career-sim@2.5.0 test:run
+> vitest run --exclude src/store/gameStore.v3Balance.test.ts
+
+
+ RUN  v4.1.10 /workspace/shared/football-career-v3
+
+ ❯ src/engine/__tests__/keyMatchMomentCatalogue.test.ts (4 tests | 2 failed) 1430ms
+   × old S1 pending and saved report preserve complete snapshots after expanding to forty 25ms
+   × direct old raw load, public choice and finish still match original S1 complete saved report 34ms
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts (69 tests | 69 failed) 7561ms
+     × 'FUNV3-LONG-00' / 'ST' 347ms
+     × 'FUNV3-LONG-01' / 'LW' 122ms
+     × 'FUNV3-LONG-02' / 'RW' 91ms
+     × 'FUNV3-LONG-03' / 'CAM' 90ms
+     × 'FUNV3-LONG-04' / 'LM' 296ms
+     × 'FUNV3-LONG-05' / 'RM' 57ms
+     × 'FUNV3-LONG-06' / 'CM' 66ms
+     × 'FUNV3-LONG-07' / 'CDM' 353ms
+     × 'FUNV3-LONG-08' / 'LB' 123ms
+     × 'FUNV3-LONG-09' / 'RB' 110ms
+     × 'FUNV3-LONG-10' / 'CB' 122ms
+     × 'FUNV3-LONG-11' / 'ST' 72ms
+     × 'FUNV3-LONG-12' / 'LW' 51ms
+     × 'FUNV3-LONG-13' / 'RW' 149ms
+     × 'FUNV3-LONG-14' / 'CAM' 35ms
+     × 'FUNV3-LONG-15' / 'LM' 67ms
+     × 'FUNV3-LONG-16' / 'RM' 259ms
+     × 'FUNV3-LONG-17' / 'CM' 112ms
+     × 'FUNV3-LONG-18' / 'CDM' 230ms
+     × 'FUNV3-LONG-19' / 'LB' 33ms
+     × 'FUNV3-LONG-20' / 'RB' 122ms
+     × 'FUNV3-LONG-21' / 'CB' 69ms
+     × 'FUNV3-LONG-22' / 'ST' 265ms
+     × 'FUNV3-LONG-23' / 'LW' 38ms
+     × 'FUNV3-LONG-24' / 'RW' 74ms
+     × 'FUNV3-LONG-25' / 'CAM' 47ms
+     × 'FUNV3-LONG-26' / 'LM' 107ms
+     × 'FUNV3-LONG-27' / 'RM' 122ms
+     × 'FUNV3-LONG-28' / 'CM' 230ms
+     × 'FUNV3-LONG-29' / 'CDM' 124ms
+     × 'FUNV3-LONG-30' / 'LB' 62ms
+     × 'FUNV3-LONG-31' / 'RB' 215ms
+     × 'FUNV3-LONG-32' / 'CB' 82ms
+     × 'FUNV3-LONG-33' / 'ST' 69ms
+     × 'FUNV3-LONG-34' / 'LW' 43ms
+     × 'FUNV3-LONG-35' / 'RW' 96ms
+     × 'FUNV3-LONG-36' / 'CAM' 82ms
+     × 'FUNV3-LONG-37' / 'LM' 253ms
+     × 'FUNV3-LONG-38' / 'RM' 50ms
+     × 'FUNV3-LONG-39' / 'CM' 108ms
+     × 'FUNV3-LONG-40' / 'CDM' 239ms
+     × 'FUNV3-LONG-41' / 'LB' 97ms
+     × 'FUNV3-LONG-42' / 'RB' 84ms
+     × 'FUNV3-LONG-43' / 'CB' 141ms
+     × 'FUNV3-LONG-44' / 'ST' 36ms
+     × 'FUNV3-LONG-45' / 'LW' 104ms
+     × 'FUNV3-LONG-46' / 'RW' 188ms
+     × 'FUNV3-LONG-47' / 'CAM' 35ms
+     × 'FUNV3-CASH-00' income stratum 89ms
+     × 'FUNV3-CASH-01' income stratum 67ms
+     × 'FUNV3-CASH-02' income stratum 56ms
+     × 'FUNV3-CASH-03' income stratum 120ms
+     × 'FUNV3-CASH-04' income stratum 66ms
+     × 'FUNV3-CASH-05' income stratum 92ms
+     × 'FUNV3-CASH-06' income stratum 101ms
+     × 'FUNV3-CASH-07' income stratum 53ms
+     × 'FUNV3-CASH-08' income stratum 53ms
+     × 'FUNV3-CASH-09' income stratum 78ms
+     × 'FUNV3-CASH-10' income stratum 64ms
+     × 'FUNV3-CASH-11' income stratum 57ms
+     × 'FUNV3-CASH-12' income stratum 82ms
+     × 'FUNV3-CASH-13' income stratum 73ms
+     × 'FUNV3-CASH-14' income stratum 45ms
+     × 'FUNV3-CASH-15' income stratum 105ms
+     × 'FUNV3-CASH-16' income stratum 81ms
+     × 'FUNV3-CASH-17' income stratum 55ms
+     × 'FUNV3-CASH-18' income stratum 126ms
+     × 'FUNV3-CASH-19' income stratum 71ms
+   × replays four preselected situational careers exactly (additional runs, not unique samples) 57ms
+ ❯ src/styles/__tests__/specialEventLayout.test.ts (6 tests | 2 failed) 10ms
+     × keeps .special-event__choices strong visible instead of replacing it with an ellipsis 5ms
+     × does not line-clamp .special-event__choices small 1ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 73 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/engine/__tests__/keyMatchMomentCatalogue.test.ts > old S1 pending and saved report preserve complete snapshots after expanding to forty
+AssertionError: expected '{"academyOffers":[{"annualStipendEuro…' to be '{"academyOffers":[{"annualStipendEuro…' // Object.is equality
+
+Expected: "{"academyOffers":[{"annualStipendEuro":8000,"club":{"academyTier":1,"country":"意大利","description":"Serie A（20）的高竞争平台，训练设施99、青训95。","facilityTier":1,"id":"ita_inter","leagueKey":"意大利","leagueLabel":"Serie A（20）","name":"国际米兰","profile":"ELITE","shortMark":"国","tier":1},"expectedRole":"ROTATION","firstTeamChance":"HARD"},{"annualStipendEuro":5000,"club":{"academyTier":4,"country":"中国","description":"中国顶级联赛（16）的高竞争平台，训练设施74、青训66。","facilityTier":4,"id":"chn1_shandong_taiyue","leagueKey":"中国","leagueLabel":"中国顶级联赛（16）","name":"山东泰岳","profile":"ELITE","shortMark":"山","tier":4},"expectedRole":"STARTER","firstTeamChance":"HARD"},{"annualStipendEuro":4000,"club":{"academyTier":5,"country":"中国","description":"中国顶级联赛（16）的均衡平台，训练设施62、青训59。","facilityTier":5,"id":"chn1_xian_changan","leagueKey":"中国","leagueLabel":"中国顶级联赛（16）","name":"西安长安","profile":"BALANCED","shortMark":"西","tier":5},"expectedRole":"STARTER","firstTeamChance":"NORMAL"}],"arrivalChoice":"COACH","careerEventHistory":[],"careerSeed":"kmm-s1-page-0","careerStory":{"club":{"clubId":"ita_inter","leadership":"NONE","mentorship":"NONE","rivalry":"NONE"},"publicPersona":"NEUTRAL","tendencies":{"clutch":0,"diplomacy":0,"leadership":0,"professionalism":0}},"cashEuro":7000,"contract":{"annualSalaryEuro":10000,"brokenPromiseWindows":0,"clubId":"ita_inter","clubOptionYears":0,"parentClubId":null,"promisedRole":"ROTATION","promisedTeamLevel":"FIRST_TEAM","releaseClauseEuro":250000,"remainingHalfYears":8,"type":"FIRST_PRO"},"dataVersion":13,"developmentApproach":"STEADY","draft":{"jerseyNumber":10,"name":"PSU匿名基线","overseasIntent":"CONDITIONAL","preferredFoot":"RIGHT","preferredLeagues":["英格兰"],"primaryPosition":"CAM","priorities":["PLAYING_TIME","COMPETITIVE_LEVEL","SALARY","STABILITY"],"secondaryPosition":"CM"},"firstTeamProgress":{"attention":100,"clubId":"ita_inter","coachBacking":100,"matchProof":100,"readiness":100,"status":"PROMOTED"},"firstTeamRole":"ROTATION","history":[],"lastReport":null,"nationalTeam":{"assists":0,"caps":0,"currentRole":null,"debutWindowIndex":null,"goals":0,"history":[],"retired":false},"pendingCareerEvent":null,"pendingConsequences":[],"pendingKeyMatchMoment":{"baseStats":{"appearances":10,"assists":1,"averageRating":6.3,"goals":3,"minutes":555,"redCards":0,"starts":5,"yellowCards":1},"choices":[{"difficulty":56,"explanation":"争取一次进球；处理失误会影响本次表现。","id":"A","outcomes":{"EXCELLENT":{"delta":{"assists":0,"averageRating":0.05,"goals":1,"redCards":0,"yellowCards":0},"text":"你果断推向远角，完成了一次漂亮的破门。"},"NEGATIVE":{"delta":{"assists":0,"averageRating":-0.05,"goals":0,"redCards":0,"yellowCards":0},"text":"你起脚稍急，没能把这次机会转化为进球。"},"POSITIVE":{"delta":{"assists":0,"averageRating":0,"goals":1,"redCards":0,"yellowCards":0},"text":"你的射门越过门将，收获一粒进球。"}},"risk":"MEDIUM","title":"第一时间打远角","weights":{"attack":0.7,"defense":0,"mental":0.2,"physical":0.1}},{"difficulty":56,"explanation":"争取一次进球；处理失误会影响本次表现。","id":"B","outcomes":{"EXCELLENT":{"delta":{"assists":0,"averageRating":0.05,"goals":1,"redCards":0,"yellowCards":0},"text":"你加速晃开门将，冷静把球送进空门。"},"NEGATIVE":{"delta":{"assists":0,"averageRating":-0.05,"goals":0,"redCards":0,"yellowCards":0},"text":"门将跟上了你的第二步，这次突破未能得手。"},"POSITIVE":{"delta":{"assists":0,"averageRating":0,"goals":1,"redCards":0,"yellowCards":0},"text":"你多带一步拉开角度，完成了破门。"}},"risk":"MEDIUM","title":"再趟一步晃开门将","weights":{"attack":0.35,"defense":0,"mental":0.1,"physical":0.55}},{"difficulty":52,"explanation":"寻找队友，争取一次助攻；传球失误会影响本次表现。","id":"C","outcomes":{"EXCELLENT":{"delta":{"assists":1,"averageRating":0.05,"goals":0,"redCards":0,"yellowCards":0},"text":"你找到更好的线路，横传帮助队友轻松破门。"},"NEGATIVE":{"delta":{"assists":0,"averageRating":-0.04,"goals":0,"redCards":0,"yellowCards":0},"text":"横传线路被封住，这次配合没有形成进球。"},"POSITIVE":{"delta":{"assists":1,"averageRating":0,"goals":0,"redCards":0,"yellowCards":0},"text":"队友接到你的横传完成破门，你收获一次助攻。"}},"risk":"LOW","title":"观察队友后横传","weights":{"attack":0.5,"defense":0,"mental":0.4,"physical":0.1}}],"clubId":"ita_inter","debutMoment":true,"fingerprintVersion":1,"id":"kmm-s1-page-0:22:ita_inter:KM-FWD-01:1","inputFingerprint":"106f3665bae8e859","minute":82,"opponentScore":0,"ownScore":1,"prepared":{"actualTeamLevel":"FIRST_TEAM","attributes":{"attack":65,"defense":65,"mental":65,"physical":65},"fitness":72,"form":73,"morale":70},"resolution":null,"roll":0.3859391890000552,"rulesVersion":1,"scene":"你反越位成功，在禁区右侧得到单刀机会，门将已经开始出击。","selectedChoiceId":null,"snapshot":null,"templateId":"KM-FWD-01","templateRevision":1,"title":"单刀前的最后决定","windowIndex":22},"phase":"KEY_MATCH_MOMENT","player":{"agentRelation":60,"attributes":{"attack":65,"defense":65,"mental":65,"physical":65},"clubAttachment":60,"coachRelation":60,"fanRelation":60,"fitness":70,"form":70,"id":"player-psu-s1-sourc","jerseyNumber":10,"mediaRelation":60,"morale":70,"name":"PSU匿名基线","nationality":"CHN","overseasIntent":"CONDITIONAL","positionFamiliarity":{"CAM":100,"CM":92,"ST":100},"potentials":{"attack":90,"defense":90,"mental":90,"physical":90},"preferredFoot":"RIGHT","preferredLeagues":["英格兰"],"primaryPosition":"ST","priorities":["PLAYING_TIME","COMPETITIVE_LEVEL","SALARY","STABILITY"],"priorityValues":{"COMPETITIVE_LEVEL":70,"PLAYING_TIME":85,"SALARY":55,"STABILITY":40},"reputation":8,"secondaryPosition":"CM","squadRelation":60},"professionalOffer":{"annualSalaryEuro":10000,"brokenPromiseWindows":0,"clubId":"chn1_xian_changan","clubOptionYears":0,"counterDirection":null,"counterUsed":false,"id":"first-pro-psu-s1-sou-chn1_xian_changan","negotiationMessage":null,"negotiationSucceeded":null,"parentClubId":null,"promisedRole":"FRINGE","promisedTeamLevel":"FIRST_TEAM","releaseClauseEuro":250000,"remainingHalfYears":6,"type":"FIRST_PRO"},"retirementReason":null,"saveVersion":13,"selectedClubId":"ita_inter","selectedTransferChoiceId":null,"startYear":2026,"teamLevel":"FIRST_TEAM","trainingFocus":"BALANCED","trainingQualityBonus":0,"transferArrivalChoice":null,"transferDecision":null,"transferOffers":[],"windowIndex":22,"youthRole":null}"
+Received: "{"academyOffers":[{"annualStipendEuro":8000,"club":{"academyTier":1,"country":"意大利","description":"Serie A（20）的高竞争平台，训练设施99、青训95。","facilityTier":1,"id":"ita_inter","leagueKey":"意大利","leagueLabel":"Serie A（20）","name":"国际米兰","profile":"ELITE","shortMark":"国","tier":1},"expectedRole":"ROTATION","firstTeamChance":"HARD"},{"annualStipendEuro":5000,"club":{"academyTier":4,"country":"中国","description":"中国顶级联赛（16）的高竞争平台，训练设施74、青训66。","facilityTier":4,"id":"chn1_shandong_taiyue","leagueKey":"中国","leagueLabel":"中国顶级联赛（16）","name":"山东泰岳","profile":"ELITE","shortMark":"山","tier":4},"expectedRole":"STARTER","firstTeamChance":"HARD"},{"annualStipendEuro":4000,"club":{"academyTier":5,"country":"中国","description":"中国顶级联赛（16）的均衡平台，训练设施62、青训59。","facilityTier":5,"id":"chn1_xian_changan","leagueKey":"中国","leagueLabel":"中国顶级联赛（16）","name":"西安长安","profile":"BALANCED","shortMark":"西","tier":5},"expectedRole":"STARTER","firstTeamChance":"NORMAL"}],"arrivalChoice":"COACH","careerEventHistory":[],"careerSeed":"kmm-s1-page-0","careerStory":{"club":{"clubId":"ita_inter","leadership":"NONE","mentorship":"NONE","rivalry":"NONE"},"publicPersona":"NEUTRAL","tendencies":{"clutch":0,"diplomacy":0,"leadership":0,"professionalism":0}},"cashEuro":7000,"contract":{"annualSalaryEuro":10000,"brokenPromiseWindows":0,"clubId":"ita_inter","clubOptionYears":0,"parentClubId":null,"promisedRole":"ROTATION","promisedTeamLevel":"FIRST_TEAM","releaseClauseEuro":250000,"remainingHalfYears":8,"type":"FIRST_PRO"},"dataVersion":14,"developmentApproach":"STEADY","draft":{"jerseyNumber":10,"name":"PSU匿名基线","overseasIntent":"CONDITIONAL","preferredFoot":"RIGHT","preferredLeagues":["英格兰"],"primaryPosition":"CAM","priorities":["PLAYING_TIME","COMPETITIVE_LEVEL","SALARY","STABILITY"],"secondaryPosition":"CM"},"entertainmentV3":{"activationWindowIndex":23,"arrangements":[],"cashPolicy":"UNCAPPED","ledger":[],"livingCity":{"cityId":"it_milano","clubId":"ita_inter","eligibilityMoveId":null,"moves":[]},"rulesVersion":1,"stories":{"activeChain":null,"closedChains":[],"completedNodeIds":[]}},"firstTeamProgress":{"attention":100,"clubId":"ita_inter","coachBacking":100,"matchProof":100,"readiness":100,"status":"PROMOTED"},"firstTeamRole":"ROTATION","history":[],"lastReport":null,"nationalTeam":{"assists":0,"caps":0,"currentRole":null,"debutWindowIndex":null,"goals":0,"history":[],"retired":false},"pendingCareerEvent":null,"pendingConsequences":[],"pendingKeyMatchMoment":{"baseStats":{"appearances":10,"assists":1,"averageRating":6.3,"goals":3,"minutes":555,"redCards":0,"starts":5,"yellowCards":1},"choices":[{"difficulty":56,"explanation":"争取一次进球；处理失误会影响本次表现。","id":"A","outcomes":{"EXCELLENT":{"delta":{"assists":0,"averageRating":0.05,"goals":1,"redCards":0,"yellowCards":0},"text":"你果断推向远角，完成了一次漂亮的破门。"},"NEGATIVE":{"delta":{"assists":0,"averageRating":-0.05,"goals":0,"redCards":0,"yellowCards":0},"text":"你起脚稍急，没能把这次机会转化为进球。"},"POSITIVE":{"delta":{"assists":0,"averageRating":0,"goals":1,"redCards":0,"yellowCards":0},"text":"你的射门越过门将，收获一粒进球。"}},"risk":"MEDIUM","title":"第一时间打远角","weights":{"attack":0.7,"defense":0,"mental":0.2,"physical":0.1}},{"difficulty":56,"explanation":"争取一次进球；处理失误会影响本次表现。","id":"B","outcomes":{"EXCELLENT":{"delta":{"assists":0,"averageRating":0.05,"goals":1,"redCards":0,"yellowCards":0},"text":"你加速晃开门将，冷静把球送进空门。"},"NEGATIVE":{"delta":{"assists":0,"averageRating":-0.05,"goals":0,"redCards":0,"yellowCards":0},"text":"门将跟上了你的第二步，这次突破未能得手。"},"POSITIVE":{"delta":{"assists":0,"averageRating":0,"goals":1,"redCards":0,"yellowCards":0},"text":"你多带一步拉开角度，完成了破门。"}},"risk":"MEDIUM","title":"再趟一步晃开门将","weights":{"attack":0.35,"defense":0,"mental":0.1,"physical":0.55}},{"difficulty":52,"explanation":"寻找队友，争取一次助攻；传球失误会影响本次表现。","id":"C","outcomes":{"EXCELLENT":{"delta":{"assists":1,"averageRating":0.05,"goals":0,"redCards":0,"yellowCards":0},"text":"你找到更好的线路，横传帮助队友轻松破门。"},"NEGATIVE":{"delta":{"assists":0,"averageRating":-0.04,"goals":0,"redCards":0,"yellowCards":0},"text":"横传线路被封住，这次配合没有形成进球。"},"POSITIVE":{"delta":{"assists":1,"averageRating":0,"goals":0,"redCards":0,"yellowCards":0},"text":"队友接到你的横传完成破门，你收获一次助攻。"}},"risk":"LOW","title":"观察队友后横传","weights":{"attack":0.5,"defense":0,"mental":0.4,"physical":0.1}}],"clubId":"ita_inter","debutMoment":true,"fingerprintVersion":1,"id":"kmm-s1-page-0:22:ita_inter:KM-FWD-01:1","inputFingerprint":"106f3665bae8e859","minute":82,"opponentScore":0,"ownScore":1,"prepared":{"actualTeamLevel":"FIRST_TEAM","attributes":{"attack":65,"defense":65,"mental":65,"physical":65},"fitness":72,"form":73,"morale":70},"resolution":null,"roll":0.3859391890000552,"rulesVersion":1,"scene":"你反越位成功，在禁区右侧得到单刀机会，门将已经开始出击。","selectedChoiceId":null,"snapshot":null,"templateId":"KM-FWD-01","templateRevision":1,"title":"单刀前的最后决定","windowIndex":22},"phase":"KEY_MATCH_MOMENT","player":{"agentRelation":60,"attributes":{"attack":65,"defense":65,"mental":65,"physical":65},"clubAttachment":60,"coachRelation":60,"fanRelation":60,"fitness":70,"form":70,"id":"player-psu-s1-sourc","jerseyNumber":10,"mediaRelation":60,"morale":70,"name":"PSU匿名基线","nationality":"CHN","overseasIntent":"CONDITIONAL","positionFamiliarity":{"CAM":100,"CM":92,"ST":100},"potentials":{"attack":90,"defense":90,"mental":90,"physical":90},"preferredFoot":"RIGHT","preferredLeagues":["英格兰"],"primaryPosition":"ST","priorities":["PLAYING_TIME","COMPETITIVE_LEVEL","SALARY","STABILITY"],"priorityValues":{"COMPETITIVE_LEVEL":70,"PLAYING_TIME":85,"SALARY":55,"STABILITY":40},"reputation":8,"secondaryPosition":"CM","squadRelation":60},"professionalOffer":{"annualSalaryEuro":10000,"brokenPromiseWindows":0,"clubId":"chn1_xian_changan","clubOptionYears":0,"counterDirection":null,"counterUsed":false,"id":"first-pro-psu-s1-sou-chn1_xian_changan","negotiationMessage":null,"negotiationSucceeded":null,"parentClubId":null,"promisedRole":"FRINGE","promisedTeamLevel":"FIRST_TEAM","releaseClauseEuro":250000,"remainingHalfYears":6,"type":"FIRST_PRO"},"retirementReason":null,"saveVersion":14,"selectedClubId":"ita_inter","selectedTransferChoiceId":null,"startYear":2026,"teamLevel":"FIRST_TEAM","trainingFocus":"BALANCED","trainingQualityBonus":0,"transferArrivalChoice":null,"transferDecision":null,"transferOffers":[],"windowIndex":22,"youthRole":null}"
+
+ ❯ src/engine/__tests__/keyMatchMomentCatalogue.test.ts:35:304
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/73]⎯
+
+ FAIL  src/engine/__tests__/keyMatchMomentCatalogue.test.ts > direct old raw load, public choice and finish still match original S1 complete saved report
+AssertionError: expected { entertainmentV3: { …(7) }, …(34) } to deeply equal { saveVersion: 13, …(33) }
+
+- Expected
++ Received
+
+@@ -84,11 +84,11 @@
+      "promisedTeamLevel": "FIRST_TEAM",
+      "releaseClauseEuro": 250000,
+      "remainingHalfYears": 8,
+      "type": "FIRST_PRO",
+    },
+-   "dataVersion": 13,
++   "dataVersion": 14,
+    "developmentApproach": "STEADY",
+    "draft": {
+      "jerseyNumber": 10,
+      "name": "PSU匿名基线",
+      "overseasIntent": "CONDITIONAL",
+@@ -102,10 +102,28 @@
+        "COMPETITIVE_LEVEL",
+        "SALARY",
+        "STABILITY",
+      ],
+      "secondaryPosition": "CM",
++   },
++   "entertainmentV3": {
++     "activationWindowIndex": 23,
++     "arrangements": [],
++     "cashPolicy": "UNCAPPED",
++     "ledger": [],
++     "livingCity": {
++       "cityId": "it_milano",
++       "clubId": "ita_inter",
++       "eligibilityMoveId": null,
++       "moves": [],
++     },
++     "rulesVersion": 1,
++     "stories": {
++       "activeChain": null,
++       "closedChains": [],
++       "completedNodeIds": [],
++     },
+    },
+    "firstTeamProgress": {
+      "attention": 100,
+      "clubId": "ita_inter",
+      "coachBacking": 100,
+@@ -375,11 +393,11 @@
+      "releaseClauseEuro": 250000,
+      "remainingHalfYears": 6,
+      "type": "FIRST_PRO",
+    },
+    "retirementReason": null,
+-   "saveVersion": 13,
++   "saveVersion": 14,
+    "selectedClubId": "ita_inter",
+    "selectedTransferChoiceId": null,
+    "startYear": 2026,
+    "teamLevel": "FIRST_TEAM",
+    "trainingFocus": "BALANCED",
+
+ ❯ src/engine/__tests__/keyMatchMomentCatalogue.test.ts:41:97
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/73]⎯
+
+ FAIL  src/styles/__tests__/specialEventLayout.test.ts > mobile special-event copy layout > keeps .special-event__choices strong visible instead of replacing it with an ellipsis
+AssertionError: expected ' font-size: 12px; ' to contain 'white-space: normal'
+
+Expected: "white-space: normal"
+Received: " font-size: 12px; "
+
+ ❯ src/styles/__tests__/specialEventLayout.test.ts:24:18
+     22|     const rule = latestRule(selector)
+     23|
+     24|     expect(rule).toContain('white-space: normal')
+       |                  ^
+     25|     expect(rule).toContain('overflow-wrap: anywhere')
+     26|     expect(rule).not.toContain('text-overflow: ellipsis')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/73]⎯
+
+ FAIL  src/styles/__tests__/specialEventLayout.test.ts > mobile special-event copy layout > does not line-clamp .special-event__choices small
+AssertionError: expected ' font-size: 12px; line-height: 1.5; w…' to contain 'overflow-wrap: anywhere'
+
+Expected: "overflow-wrap: anywhere"
+Received: " font-size: 12px; line-height: 1.5; white-space: normal; "
+
+ ❯ src/styles/__tests__/specialEventLayout.test.ts:37:18
+     35|     const rule = latestRule(selector)
+     36|
+     37|     expect(rule).toContain('overflow-wrap: anywhere')
+       |                  ^
+     38|     expect(rule).not.toContain('-webkit-line-clamp')
+     39|     expect(rule).not.toContain('overflow: hidden')
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-00' / 'ST'
+Error: FUNV3-LONG-00/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-01' / 'LW'
+Error: FUNV3-LONG-01/OFF continueAfterCareerEvent W4: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-02' / 'RW'
+Error: FUNV3-LONG-02/OFF continueAfterCareerEvent W4: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-03' / 'CAM'
+Error: FUNV3-LONG-03/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-04' / 'LM'
+Error: FUNV3-LONG-04/OFF continueAfterCareerEvent W14: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-05' / 'RM'
+Error: FUNV3-LONG-05/OFF continueAfterCareerEvent W4: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-06' / 'CM'
+Error: FUNV3-LONG-06/OFF chooseTraining W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-07' / 'CDM'
+Error: FUNV3-LONG-07/OFF chooseTraining W18: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-08' / 'LB'
+Error: FUNV3-LONG-08/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-09' / 'RB'
+Error: FUNV3-LONG-09/OFF continueAfterCareerEvent W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-10' / 'CB'
+Error: FUNV3-LONG-10/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-11' / 'ST'
+Error: FUNV3-LONG-11/OFF chooseTraining W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-12' / 'LW'
+Error: FUNV3-LONG-12/OFF chooseTraining W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-13' / 'RW'
+Error: FUNV3-LONG-13/OFF continueAfterCareerEvent W16: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-14' / 'CAM'
+Error: FUNV3-LONG-14/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-15' / 'LM'
+Error: FUNV3-LONG-15/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-16' / 'RM'
+Error: FUNV3-LONG-16/OFF continueAfterCareerEvent W18: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[21/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-17' / 'CM'
+Error: FUNV3-LONG-17/OFF continueAfterCareerEvent W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-18' / 'CDM'
+Error: FUNV3-LONG-18/OFF continueAfterCareerEvent W13: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[23/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-19' / 'LB'
+Error: FUNV3-LONG-19/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[24/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-20' / 'RB'
+Error: FUNV3-LONG-20/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[25/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-21' / 'CB'
+Error: FUNV3-LONG-21/OFF continueAfterCareerEvent W8: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[26/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-22' / 'ST'
+Error: FUNV3-LONG-22/OFF continueAfterCareerEvent W18: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[27/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-23' / 'LW'
+Error: FUNV3-LONG-23/OFF chooseTraining W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[28/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-24' / 'RW'
+Error: FUNV3-LONG-24/OFF chooseTraining W7: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[29/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-25' / 'CAM'
+Error: FUNV3-LONG-25/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[30/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-26' / 'LM'
+Error: FUNV3-LONG-26/OFF continueAfterCareerEvent W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[31/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-27' / 'RM'
+Error: FUNV3-LONG-27/OFF continueAfterCareerEvent W10: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[32/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-28' / 'CM'
+Error: FUNV3-LONG-28/OFF continueAfterCareerEvent W18: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[33/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-29' / 'CDM'
+Error: FUNV3-LONG-29/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[34/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-30' / 'LB'
+Error: FUNV3-LONG-30/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[35/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-31' / 'RB'
+Error: FUNV3-LONG-31/OFF chooseTraining W16: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[36/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-32' / 'CB'
+Error: FUNV3-LONG-32/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[37/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-33' / 'ST'
+Error: FUNV3-LONG-33/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[38/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-34' / 'LW'
+Error: FUNV3-LONG-34/OFF chooseTraining W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[39/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-35' / 'RW'
+Error: FUNV3-LONG-35/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[40/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-36' / 'CAM'
+Error: FUNV3-LONG-36/OFF chooseTraining W8: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[41/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-37' / 'LM'
+Error: FUNV3-LONG-37/OFF chooseTraining W18: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[42/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-38' / 'RM'
+Error: FUNV3-LONG-38/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[43/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-39' / 'CM'
+Error: FUNV3-LONG-39/OFF continueAfterCareerEvent W10: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[44/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-40' / 'CDM'
+Error: FUNV3-LONG-40/OFF continueAfterCareerEvent W18: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[45/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-41' / 'LB'
+Error: FUNV3-LONG-41/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[46/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-42' / 'RB'
+Error: FUNV3-LONG-42/OFF chooseTraining W8: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[47/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-43' / 'CB'
+Error: FUNV3-LONG-43/OFF chooseTraining W11: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[48/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-44' / 'ST'
+Error: FUNV3-LONG-44/OFF chooseTraining W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[49/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-45' / 'LW'
+Error: FUNV3-LONG-45/OFF continueAfterCareerEvent W10: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[50/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-46' / 'RW'
+Error: FUNV3-LONG-46/OFF chooseTraining W14: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:317:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[51/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 frozen 48 x 4 long-career public-store experiment > 'FUNV3-LONG-47' / 'CAM'
+Error: FUNV3-LONG-47/OFF chooseTraining W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:315:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[52/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-00' income stratum
+Error: FUNV3-CASH-00/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[53/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-01' income stratum
+Error: FUNV3-CASH-01/OFF chooseTraining W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[54/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-02' income stratum
+Error: FUNV3-CASH-02/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[55/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-03' income stratum
+Error: FUNV3-CASH-03/OFF continueAfterCareerEvent W8: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[56/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-04' income stratum
+Error: FUNV3-CASH-04/OFF continueAfterCareerEvent W7: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[57/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-05' income stratum
+Error: FUNV3-CASH-05/OFF chooseTraining W9: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[58/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-06' income stratum
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-15' income stratum
+TypeError: store(...).purchasePersonalArrangement is not a function
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:135:56
+    133|         writeFileSync(resolve(OUT, `quote-mismatch-${scenario.seed}-${…
+    134|       }
+    135|       act('purchasePersonalArrangement', () => store().purchasePersona…
+       |                                                        ^
+    136|     }
+    137|   }
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:211:5
+ ❯ maybePurchase outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:135:7
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:145:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ run outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:296:18
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:329:22
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[59/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-07' income stratum
+Error: FUNV3-CASH-07/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[60/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-08' income stratum
+Error: FUNV3-CASH-08/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[61/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-09' income stratum
+Error: FUNV3-CASH-09/OFF continueAfterCareerEvent W7: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[62/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-10' income stratum
+Error: FUNV3-CASH-10/OFF chooseTraining W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[63/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-11' income stratum
+Error: FUNV3-CASH-11/OFF continueAfterCareerEvent W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[64/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-12' income stratum
+Error: FUNV3-CASH-12/OFF continueAfterCareerEvent W7: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[65/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-13' income stratum
+Error: FUNV3-CASH-13/OFF chooseTraining W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[66/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-14' income stratum
+Error: FUNV3-CASH-14/OFF chooseTraining W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[67/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-16' income stratum
+Error: FUNV3-CASH-16/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[68/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-17' income stratum
+Error: FUNV3-CASH-17/OFF chooseTraining W5: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[69/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-18' income stratum
+Error: FUNV3-CASH-18/OFF continueAfterCareerEvent W8: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[70/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > FUNV3 controlled 20-start cash A/B with no-spend context > 'FUNV3-CASH-19' income stratum
+Error: FUNV3-CASH-19/OFF chooseTraining W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:147:7
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:326:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[71/73]⎯
+
+ FAIL  outputs/FUN-V3-20261023/balance/baseline-reference.test.ts > replays four preselected situational careers exactly (additional runs, not unique samples)
+Error: FUNV3-LONG-00/OFF continueAfterCareerEvent W6: 关键比赛时刻与当前进度不一致。 原始存档已保留，请勿重新开档覆盖。 原始存档已保留，请勿重新开档覆盖。
+ ❯ act outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:212:30
+
+ ❯ nextAction outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:160:34
+ ❯ driver outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:253:5
+ ❯ adultFixture outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:258:19
+ ❯ outputs/FUN-V3-20261023/balance/baseline-reference.test.ts:337:51
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[72/73]⎯
+
+
+ Test Files  3 failed | 83 passed (86)
+      Tests  73 failed | 1076 passed (1149)
+   Start at  21:33:56
+   Duration  134.29s (transform 9.02s, setup 0ms, import 26.88s, tests 256.22s, environment 20ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

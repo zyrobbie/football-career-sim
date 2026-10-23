@@ -22,7 +22,7 @@ export interface MomentSnapshot {
 }
 export interface PendingKeyMatchMoment {
   id: string; windowIndex: number; clubId: string; templateId: string; templateRevision: number; rulesVersion: 1
-  fingerprintVersion: 1; inputFingerprint: string
+  fingerprintVersion: 1 | 2; inputFingerprint: string
   minute: number; ownScore: number; opponentScore: number; debutMoment: boolean
   title: string; scene: string; choices: MomentChoice[]
   prepared: { attributes: Attributes; form: number; fitness: number; morale: number; actualTeamLevel: 'FIRST_TEAM' }

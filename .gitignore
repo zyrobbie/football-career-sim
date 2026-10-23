@@ -6,3 +6,7 @@ test-results/
 *.log
 *.tsbuildinfo
 .DS_Store
+
+# Large V3 local traces are retained outside the compact committed evidence.
+outputs/FUN-V3-20261023/
+docs/evidence/FUN-V3-20261023/balance/__pycache__/

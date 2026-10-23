@@ -71,7 +71,7 @@ export function SpecialEventScreen() {
     (state) => state.continueAfterCareerEvent,
   )
   if (!game?.player || !game.pendingCareerEvent) return null
-  const event = getCareerEvent(game.pendingCareerEvent.eventId)
+  const event = getCareerEvent(game.pendingCareerEvent.eventId, game)
   const windowLabel = careerWindowLabel(game.startYear, game.windowIndex)
   const isResult = game.phase === 'SPECIAL_EVENT_RESULT'
   const record = isResult ? game.careerEventHistory.at(-1) : null
@@ -89,7 +89,7 @@ export function SpecialEventScreen() {
 
   return (
     <CareerHub game={game} sectionLabel="特殊事件">
-      <section className="special-event" aria-labelledby="special-event-title">
+      <section className={`special-event${event.id.startsWith('V3_') ? ' v3-event' : ''}`} aria-labelledby="special-event-title">
         <header className="career-panel-heading">
           <Icon name={categoryIcons[event.category]} />
           <h1 id="special-event-title">{event.title}</h1>
@@ -164,7 +164,7 @@ export function SpecialEventScreen() {
                   role="group"
                   aria-label="特殊事件选择"
                 >
-                  {visibleChoices.map((choice) => (
+                  {visibleChoices.map((choice, choiceIndex) => (
                     <button
                       key={choice.id}
                       type="button"
@@ -172,7 +172,7 @@ export function SpecialEventScreen() {
                         chooseCareerEvent(choice.id as CareerEventChoiceId)
                       }
                     >
-                      <span>{choice.id}</span>
+                      <span>{event.id.startsWith('V3_') ? String.fromCharCode(65 + choiceIndex) : choice.id}</span>
                       <strong>{choice.title}</strong>
                       <small>{choice.description}</small>
                       <em>{choice.effectPreview}</em>

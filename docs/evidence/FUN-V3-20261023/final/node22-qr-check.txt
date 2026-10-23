@@ -1,0 +1,11 @@
+(node:137) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> football-career-sim@3.0.0 verify:retirement-qr
+> node scripts/verify-retirement-qr.mjs
+
+(node:150) [UNDICI-EHPA] Warning: EnvHttpProxyAgent is experimental, expect them to change at any time.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Verified retirement QR: https://footballcareer.zyrobbie.site/
+QR source unchanged (sha256): 889beded3a2d9ec322e7bc13316d26ed9f916909f836c46d42ca867db785a03b

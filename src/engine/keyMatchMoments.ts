@@ -1,3 +1,4 @@
+import { entertainmentV3Active } from './personalArrangements'
 import type { GameState, HalfYearStats } from '../models/game'
 import type { MomentChoice, MomentResolution, MomentSnapshot, MomentTemplate, PendingKeyMatchMoment } from '../models/keyMatchMoment'
 import { KEY_MATCH_MOMENT_TEMPLATES } from '../data/keyMatchMomentTemplates'
@@ -18,8 +19,9 @@ export function canonicalMomentJSON(value:unknown):string {
   }
   return JSON.stringify(normalize(value))
 }
-export function momentFingerprint(state:GameState):string {
+export function momentFingerprint(state:GameState, version: 1 | 2 = state.pendingKeyMatchMoment?.fingerprintVersion ?? (entertainmentV3Active(state) ? 2 : 1)):string {
   const {phase: _phase,pendingKeyMatchMoment:_pending,saveVersion:_save,dataVersion:_data,...base}=state
+  if (version === 1) delete base.entertainmentV3
   const text=canonicalMomentJSON(base);let a=2166136261,b=2246822519
   for(let i=0;i<text.length;i++){a=Math.imul(a^text.charCodeAt(i),16777619);b=Math.imul(b^text.charCodeAt(i),3266489917)}
   return `${(a>>>0).toString(16).padStart(8,'0')}${(b>>>0).toString(16).padStart(8,'0')}`
@@ -53,10 +55,10 @@ export function createKeyMatchMoment(base:GameState,report:ReturnType<typeof sim
   const template=createRandom(base.careerSeed,base.windowIndex,'key-match-moment-template').pick(pool)
   const id=`${base.careerSeed}:${base.windowIndex}:${base.selectedClubId}:${template.id}:${template.revision}`
   const context=createRandom(id,'key-match-moment-context'),score=context.pick([[0,0],[1,1],[0,1],[1,0]] as const)
-  return {id,windowIndex:base.windowIndex,clubId:base.selectedClubId!,templateId:template.id,templateRevision:template.revision,rulesVersion:1,fingerprintVersion:1,inputFingerprint:momentFingerprint(base),minute:context.pick([62,68,73,78,82,86,89]),ownScore:score[0],opponentScore:score[1],debutMoment:debut,title:template.title,scene:template.scene,choices:structuredClone(template.choices),prepared:preparedContext(base),baseStats:{...report.stats},roll:createRandom(id,'key-match-moment-outcome').next(),selectedChoiceId:null,resolution:null,snapshot:null}
+  return {id,windowIndex:base.windowIndex,clubId:base.selectedClubId!,templateId:template.id,templateRevision:template.revision,rulesVersion:1,fingerprintVersion:entertainmentV3Active(base)?2:1,inputFingerprint:momentFingerprint(base),minute:context.pick([62,68,73,78,82,86,89]),ownScore:score[0],opponentScore:score[1],debutMoment:debut,title:template.title,scene:template.scene,choices:structuredClone(template.choices),prepared:preparedContext(base),baseStats:{...report.stats},roll:createRandom(id,'key-match-moment-outcome').next(),selectedChoiceId:null,resolution:null,snapshot:null}
 }
 export function resolveKeyMatchMoment(p:PendingKeyMatchMoment,choiceId:string):MomentResolution {
-  if(p.rulesVersion!==1||p.fingerprintVersion!==1)throw new MomentRecoveryError('不支持这份关键比赛规则。')
+  if(p.rulesVersion!==1||![1,2].includes(p.fingerprintVersion))throw new MomentRecoveryError('不支持这份关键比赛规则。')
   const c=p.choices.find(c=>c.id===choiceId);if(!c)throw new MomentRecoveryError('选择不属于这次机会。')
   const {positive,excellent}=momentChances(p.prepared,c),tier=p.roll<excellent?'EXCELLENT':p.roll<positive?'POSITIVE':'NEGATIVE'
   return {momentId:p.id,windowIndex:p.windowIndex,clubId:p.clubId,templateId:p.templateId,choiceId,tier,text:c.outcomes[tier].text,delta:{...c.outcomes[tier].delta}}
@@ -70,7 +72,8 @@ export function validateMomentContext(state:GameState):void {
   const p=state.pendingKeyMatchMoment,phase=state.phase
   if(!p){if(phase==='KEY_MATCH_MOMENT'||phase==='KEY_MATCH_MOMENT_RESULT')throw new MomentRecoveryError('比赛机会记录缺失。');return}
   if(!['KEY_MATCH_MOMENT','KEY_MATCH_MOMENT_RESULT','SIMULATION_READY'].includes(phase)||!state.player||!state.contract||!state.trainingFocus||state.pendingCareerEvent||state.history.some(h=>h.windowIndex===state.windowIndex))throw new MomentRecoveryError()
-  if(p.rulesVersion!==1||p.fingerprintVersion!==1||p.windowIndex!==state.windowIndex||p.clubId!==state.selectedClubId||p.inputFingerprint!==momentFingerprint(state)||momentFingerprint(canonicalSimulationBase(state))!==p.inputFingerprint)throw new MomentRecoveryError()
+  if(p.rulesVersion!==1||![1,2].includes(p.fingerprintVersion)||p.windowIndex!==state.windowIndex||p.clubId!==state.selectedClubId||p.inputFingerprint!==momentFingerprint(state,p.fingerprintVersion)||momentFingerprint(canonicalSimulationBase(state),p.fingerprintVersion)!==p.inputFingerprint)throw new MomentRecoveryError()
+  if (p.fingerprintVersion === 1 && entertainmentV3Active(state)) throw new MomentRecoveryError('旧比赛机会不能使用新安排。')
   if(!KEY_MATCH_MOMENT_TEMPLATES.some(t=>t.id===p.templateId&&t.positions.includes(state.player!.primaryPosition)) || state.contract.remainingHalfYears<=0) throw new MomentRecoveryError('这份比赛机会不属于当前位置或合同。')
   if(p.id!==`${state.careerSeed}:${p.windowIndex}:${p.clubId}:${p.templateId}:${p.templateRevision}`||p.roll!==createRandom(p.id,'key-match-moment-outcome').next())throw new MomentRecoveryError()
   if(canonicalMomentJSON(preparedContext(state))!==canonicalMomentJSON(p.prepared))throw new MomentRecoveryError('比赛准备状态不匹配。')

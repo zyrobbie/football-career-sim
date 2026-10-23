@@ -1,0 +1,1302 @@
+{
+  "kind": "Rejected R1 receipt accounting only, not balance acceptance",
+  "runs": [
+    {
+      "seed": "FUNV3-LONG-00",
+      "group": "ON_FIXED_BODY",
+      "purchases": 18,
+      "executedPeriods": 18,
+      "planned": 144,
+      "actual": 110,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-00",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-00",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 15,
+      "planned": 96,
+      "actual": 96,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-01",
+      "group": "ON_FIXED_BODY",
+      "purchases": 19,
+      "executedPeriods": 19,
+      "planned": 152,
+      "actual": 112,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-01",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-01",
+      "group": "ON_SITUATIONAL",
+      "purchases": 21,
+      "executedPeriods": 42,
+      "planned": 292,
+      "actual": 268.4,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-02",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 180,
+      "actual": 151,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-02",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-02",
+      "group": "ON_SITUATIONAL",
+      "purchases": 17,
+      "executedPeriods": 22,
+      "planned": 161,
+      "actual": 132.7,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-03",
+      "group": "ON_FIXED_BODY",
+      "purchases": 21,
+      "executedPeriods": 21,
+      "planned": 164,
+      "actual": 149,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-03",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-03",
+      "group": "ON_SITUATIONAL",
+      "purchases": 14,
+      "executedPeriods": 15,
+      "planned": 108,
+      "actual": 108,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-04",
+      "group": "ON_FIXED_BODY",
+      "purchases": 5,
+      "executedPeriods": 5,
+      "planned": 40,
+      "actual": 34,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-04",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-04",
+      "group": "ON_SITUATIONAL",
+      "purchases": 14,
+      "executedPeriods": 31,
+      "planned": 198,
+      "actual": 197.2,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-05",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 172,
+      "actual": 162,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-05",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-05",
+      "group": "ON_SITUATIONAL",
+      "purchases": 16,
+      "executedPeriods": 17,
+      "planned": 134,
+      "actual": 129.7,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-06",
+      "group": "ON_FIXED_BODY",
+      "purchases": 14,
+      "executedPeriods": 14,
+      "planned": 112,
+      "actual": 78,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-06",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-06",
+      "group": "ON_SITUATIONAL",
+      "purchases": 7,
+      "executedPeriods": 9,
+      "planned": 48,
+      "actual": 48,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FIXED_BODY",
+      "purchases": 6,
+      "executedPeriods": 6,
+      "planned": 48,
+      "actual": 48,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-07",
+      "group": "ON_SITUATIONAL",
+      "purchases": 16,
+      "executedPeriods": 35,
+      "planned": 232,
+      "actual": 228,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 180,
+      "actual": 160,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-08",
+      "group": "ON_SITUATIONAL",
+      "purchases": 17,
+      "executedPeriods": 19,
+      "planned": 141,
+      "actual": 133.0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-09",
+      "group": "ON_FIXED_BODY",
+      "purchases": 17,
+      "executedPeriods": 17,
+      "planned": 132,
+      "actual": 118,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-09",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-09",
+      "group": "ON_SITUATIONAL",
+      "purchases": 11,
+      "executedPeriods": 11,
+      "planned": 84,
+      "actual": 84,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_FIXED_BODY",
+      "purchases": 21,
+      "executedPeriods": 21,
+      "planned": 168,
+      "actual": 162,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-10",
+      "group": "ON_SITUATIONAL",
+      "purchases": 22,
+      "executedPeriods": 31,
+      "planned": 230,
+      "actual": 220.9,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-11",
+      "group": "ON_FIXED_BODY",
+      "purchases": 22,
+      "executedPeriods": 22,
+      "planned": 168,
+      "actual": 130,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-11",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-11",
+      "group": "ON_SITUATIONAL",
+      "purchases": 16,
+      "executedPeriods": 23,
+      "planned": 165,
+      "actual": 123.5,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-12",
+      "group": "ON_FIXED_BODY",
+      "purchases": 18,
+      "executedPeriods": 18,
+      "planned": 144,
+      "actual": 132,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-12",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-12",
+      "group": "ON_SITUATIONAL",
+      "purchases": 14,
+      "executedPeriods": 15,
+      "planned": 112,
+      "actual": 112,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-13",
+      "group": "ON_FIXED_BODY",
+      "purchases": 11,
+      "executedPeriods": 11,
+      "planned": 88,
+      "actual": 67,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-13",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-13",
+      "group": "ON_SITUATIONAL",
+      "purchases": 19,
+      "executedPeriods": 39,
+      "planned": 263,
+      "actual": 260.4,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_FIXED_BODY",
+      "purchases": 21,
+      "executedPeriods": 21,
+      "planned": 168,
+      "actual": 135,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-14",
+      "group": "ON_SITUATIONAL",
+      "purchases": 15,
+      "executedPeriods": 20,
+      "planned": 137,
+      "actual": 130.9,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-15",
+      "group": "ON_FIXED_BODY",
+      "purchases": 19,
+      "executedPeriods": 19,
+      "planned": 148,
+      "actual": 134,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-15",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-15",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 14,
+      "planned": 100,
+      "actual": 100,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-16",
+      "group": "ON_FIXED_BODY",
+      "purchases": 10,
+      "executedPeriods": 10,
+      "planned": 80,
+      "actual": 70,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-16",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-16",
+      "group": "ON_SITUATIONAL",
+      "purchases": 14,
+      "executedPeriods": 28,
+      "planned": 151,
+      "actual": 151,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-17",
+      "group": "ON_FIXED_BODY",
+      "purchases": 21,
+      "executedPeriods": 21,
+      "planned": 160,
+      "actual": 121,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-17",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-17",
+      "group": "ON_SITUATIONAL",
+      "purchases": 8,
+      "executedPeriods": 13,
+      "planned": 83,
+      "actual": 75.7,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-18",
+      "group": "ON_FIXED_BODY",
+      "purchases": 22,
+      "executedPeriods": 22,
+      "planned": 172,
+      "actual": 157,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-18",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-18",
+      "group": "ON_SITUATIONAL",
+      "purchases": 16,
+      "executedPeriods": 16,
+      "planned": 120,
+      "actual": 120,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-19",
+      "group": "ON_FIXED_BODY",
+      "purchases": 10,
+      "executedPeriods": 10,
+      "planned": 76,
+      "actual": 55,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-19",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-19",
+      "group": "ON_SITUATIONAL",
+      "purchases": 17,
+      "executedPeriods": 38,
+      "planned": 238,
+      "actual": 228.5,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-20",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 176,
+      "actual": 161,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-20",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-20",
+      "group": "ON_SITUATIONAL",
+      "purchases": 18,
+      "executedPeriods": 18,
+      "planned": 135,
+      "actual": 131,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-21",
+      "group": "ON_FIXED_BODY",
+      "purchases": 2,
+      "executedPeriods": 2,
+      "planned": 12,
+      "actual": 9,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-21",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-21",
+      "group": "ON_SITUATIONAL",
+      "purchases": 4,
+      "executedPeriods": 8,
+      "planned": 32,
+      "actual": 32,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-22",
+      "group": "ON_FIXED_BODY",
+      "purchases": 12,
+      "executedPeriods": 12,
+      "planned": 96,
+      "actual": 64,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-22",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-22",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 27,
+      "planned": 183,
+      "actual": 178.2,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 180,
+      "actual": 164,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-23",
+      "group": "ON_SITUATIONAL",
+      "purchases": 15,
+      "executedPeriods": 16,
+      "planned": 116,
+      "actual": 115,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-24",
+      "group": "ON_FIXED_BODY",
+      "purchases": 5,
+      "executedPeriods": 5,
+      "planned": 40,
+      "actual": 26,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-24",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-24",
+      "group": "ON_SITUATIONAL",
+      "purchases": 2,
+      "executedPeriods": 3,
+      "planned": 12,
+      "actual": 12,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-25",
+      "group": "ON_FIXED_BODY",
+      "purchases": 2,
+      "executedPeriods": 2,
+      "planned": 16,
+      "actual": 11,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-25",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-25",
+      "group": "ON_SITUATIONAL",
+      "purchases": 10,
+      "executedPeriods": 25,
+      "planned": 166,
+      "actual": 166,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-26",
+      "group": "ON_FIXED_BODY",
+      "purchases": 20,
+      "executedPeriods": 20,
+      "planned": 156,
+      "actual": 127,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-26",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-26",
+      "group": "ON_SITUATIONAL",
+      "purchases": 14,
+      "executedPeriods": 16,
+      "planned": 121,
+      "actual": 121,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-27",
+      "group": "ON_FIXED_BODY",
+      "purchases": 20,
+      "executedPeriods": 20,
+      "planned": 156,
+      "actual": 115,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-27",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-27",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 13,
+      "planned": 104,
+      "actual": 104,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-28",
+      "group": "ON_FIXED_BODY",
+      "purchases": 11,
+      "executedPeriods": 11,
+      "planned": 88,
+      "actual": 73,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-28",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-28",
+      "group": "ON_SITUATIONAL",
+      "purchases": 15,
+      "executedPeriods": 29,
+      "planned": 198,
+      "actual": 167.6,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-29",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 176,
+      "actual": 155,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-29",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-29",
+      "group": "ON_SITUATIONAL",
+      "purchases": 15,
+      "executedPeriods": 20,
+      "planned": 133,
+      "actual": 112.1,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-30",
+      "group": "ON_FIXED_BODY",
+      "purchases": 19,
+      "executedPeriods": 19,
+      "planned": 152,
+      "actual": 146,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-30",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-30",
+      "group": "ON_SITUATIONAL",
+      "purchases": 16,
+      "executedPeriods": 17,
+      "planned": 128,
+      "actual": 128,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-31",
+      "group": "ON_FIXED_BODY",
+      "purchases": 10,
+      "executedPeriods": 10,
+      "planned": 80,
+      "actual": 74,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-31",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-31",
+      "group": "ON_SITUATIONAL",
+      "purchases": 17,
+      "executedPeriods": 35,
+      "planned": 246,
+      "actual": 245,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-32",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 172,
+      "actual": 136,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-32",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-32",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 16,
+      "planned": 104,
+      "actual": 96.7,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-33",
+      "group": "ON_FIXED_BODY",
+      "purchases": 19,
+      "executedPeriods": 19,
+      "planned": 152,
+      "actual": 144,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-33",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-33",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 13,
+      "planned": 104,
+      "actual": 104,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-34",
+      "group": "ON_FIXED_BODY",
+      "purchases": 8,
+      "executedPeriods": 8,
+      "planned": 64,
+      "actual": 49,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-34",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-34",
+      "group": "ON_SITUATIONAL",
+      "purchases": 15,
+      "executedPeriods": 32,
+      "planned": 206,
+      "actual": 200.6,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-35",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 176,
+      "actual": 125,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-35",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-35",
+      "group": "ON_SITUATIONAL",
+      "purchases": 17,
+      "executedPeriods": 18,
+      "planned": 130,
+      "actual": 125.5,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-36",
+      "group": "ON_FIXED_BODY",
+      "purchases": 15,
+      "executedPeriods": 15,
+      "planned": 116,
+      "actual": 91,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-36",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-36",
+      "group": "ON_SITUATIONAL",
+      "purchases": 9,
+      "executedPeriods": 10,
+      "planned": 72,
+      "actual": 72,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_FIXED_BODY",
+      "purchases": 12,
+      "executedPeriods": 12,
+      "planned": 96,
+      "actual": 84,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-37",
+      "group": "ON_SITUATIONAL",
+      "purchases": 16,
+      "executedPeriods": 31,
+      "planned": 194,
+      "actual": 194,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 180,
+      "actual": 141,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-38",
+      "group": "ON_SITUATIONAL",
+      "purchases": 14,
+      "executedPeriods": 19,
+      "planned": 130,
+      "actual": 125.2,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-39",
+      "group": "ON_FIXED_BODY",
+      "purchases": 17,
+      "executedPeriods": 17,
+      "planned": 132,
+      "actual": 110,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-39",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-39",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 16,
+      "planned": 100,
+      "actual": 100,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-40",
+      "group": "ON_FIXED_BODY",
+      "purchases": 8,
+      "executedPeriods": 8,
+      "planned": 64,
+      "actual": 57,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-40",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-40",
+      "group": "ON_SITUATIONAL",
+      "purchases": 11,
+      "executedPeriods": 22,
+      "planned": 149,
+      "actual": 149,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 184,
+      "actual": 135,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-41",
+      "group": "ON_SITUATIONAL",
+      "purchases": 16,
+      "executedPeriods": 17,
+      "planned": 130,
+      "actual": 122,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-42",
+      "group": "ON_FIXED_BODY",
+      "purchases": 19,
+      "executedPeriods": 19,
+      "planned": 144,
+      "actual": 114,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-42",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-42",
+      "group": "ON_SITUATIONAL",
+      "purchases": 11,
+      "executedPeriods": 13,
+      "planned": 80,
+      "actual": 80,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_FIXED_BODY",
+      "purchases": 18,
+      "executedPeriods": 18,
+      "planned": 144,
+      "actual": 138,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-43",
+      "group": "ON_SITUATIONAL",
+      "purchases": 19,
+      "executedPeriods": 32,
+      "planned": 229,
+      "actual": 213.9,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-44",
+      "group": "ON_FIXED_BODY",
+      "purchases": 23,
+      "executedPeriods": 23,
+      "planned": 180,
+      "actual": 135,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-44",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-44",
+      "group": "ON_SITUATIONAL",
+      "purchases": 14,
+      "executedPeriods": 18,
+      "planned": 131,
+      "actual": 108.3,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-45",
+      "group": "ON_FIXED_BODY",
+      "purchases": 15,
+      "executedPeriods": 15,
+      "planned": 116,
+      "actual": 84,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-45",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-45",
+      "group": "ON_SITUATIONAL",
+      "purchases": 5,
+      "executedPeriods": 5,
+      "planned": 40,
+      "actual": 40,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-46",
+      "group": "ON_FIXED_BODY",
+      "purchases": 13,
+      "executedPeriods": 13,
+      "planned": 104,
+      "actual": 97,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-46",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-46",
+      "group": "ON_SITUATIONAL",
+      "purchases": 20,
+      "executedPeriods": 34,
+      "planned": 237,
+      "actual": 237,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-47",
+      "group": "ON_FIXED_BODY",
+      "purchases": 20,
+      "executedPeriods": 20,
+      "planned": 152,
+      "actual": 110,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-47",
+      "group": "ON_FREE",
+      "purchases": 0,
+      "executedPeriods": 0,
+      "planned": 0,
+      "actual": 0,
+      "metricReconciled": true
+    },
+    {
+      "seed": "FUNV3-LONG-47",
+      "group": "ON_SITUATIONAL",
+      "purchases": 13,
+      "executedPeriods": 19,
+      "planned": 123,
+      "actual": 101.3,
+      "metricReconciled": true
+    }
+  ],
+  "all144Reconciled": true
+}

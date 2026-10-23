@@ -1,0 +1,122 @@
+{
+  "purpose": "Actual public retirement PNG export capture; anonymous synthetic input",
+  "capturedAt": "2026-10-23T14:00:48.477125+00:00",
+  "sourceRepo": "/workspace/shared/football-v3-visual-qa/candidate-final-site",
+  "fixtureSource": "/workspace/shared/football-career-v3/outputs/FUN-V3-20261023/balance/main-r2/natural-impressions/2-impressions-FUNV3-LONG-05-ON_FIXED_BODY.save.json",
+  "fixtureAlterations": [],
+  "results": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshots": [
+        {
+          "path": "390x844-retirement-first.png",
+          "fullPage": false,
+          "scrollY": 0
+        },
+        {
+          "path": "390x844-retirement-full.png",
+          "fullPage": true,
+          "scrollY": 0
+        },
+        {
+          "path": "390x844-retirement-actions.png",
+          "fullPage": false,
+          "scrollY": 1814
+        },
+        {
+          "path": "390x844-retirement-preview.png",
+          "fullPage": false,
+          "scrollY": 1814
+        }
+      ],
+      "actions": [
+        "Continue Career from anonymous retirement fixture",
+        "Click actual public Save My Career export",
+        "Close preview and verify archive remains"
+      ],
+      "identity": {
+        "url": "http://127.0.0.1:4330/",
+        "title": "上场 · TAKE THE FIELD"
+      },
+      "export": {
+        "width": 2360,
+        "height": 4126,
+        "bytes": 1118149,
+        "path": "390x844-actual-export.png",
+        "sha256": "695b102d7ecd1e35111af495b1e6019313994c58668d1d646701836e4daf1382",
+        "pngDimensions": [
+          2360,
+          4126
+        ]
+      },
+      "previewClosed": true,
+      "archiveRemains": true,
+      "text": "球员生涯档案\n2026—2053\nFINAL OVR\n77\n\n终场之后\n\n固定样本05\n40岁 · #8 · RM\n生涯评价\n中国足球旗帜\n\n俱乐部履历与国家队担当共同定义了你的球员生涯。\n\n一线队生涯\n805场 · 104球 · 177助\n另有青年队 48 场\n能力轨迹\n巅峰 81 · 退役 77\n30岁抵达巅峰\n估算身价\n巅峰 €36,900,000\n31岁巅峰 · 退役 €2,950,000\n国家队生涯\n中国国家队\n出场\n187\n进球\n19\n助攻\n34\n世界杯最佳\n4强\n亚洲杯最佳\n冠军\n俱乐部生涯\n12家俱乐部 · 853场正式履历\n2026夏—2032冬\n梅州嘉应\n中国 · 中国第二级别联赛球队\n青年队 / 一线队\n179\n16\n28\n66\n中国足协杯冠军 ×2\n2033夏—2033冬\n苏州吴门\n中国 · 中国第二级别联赛球队\n一线队\n33\n3\n6\n69\n尚无\n2034夏—2035夏\n深圳鹏城\n中国 · 中国顶级联赛中游\n一线队\n49\n9\n7\n72\n中国足协杯冠军 ×1\n2035冬—2036夏\n2039夏—2040夏\n大连滨城\n中国 · 中国顶级联赛中游\n一线队\n79\n9\n12\n79\n中国足协杯冠军 ×2\n2036冬—2037冬\n2050冬—2051夏\n北京御华\n中国 · 中国顶级联赛豪门\n一线队\n74\n7\n11\n79\n亚冠精英联赛冠军 ×1\n中国足协杯冠军 ×1\n2038夏—2038冬\n2051冬—2053冬\n成都锦城\n中国 · 中国顶级联赛豪门\n一线队\n117\n17\n31\n78\n中国足协杯冠军 ×1\n2040冬—2041夏\n重庆山城\n中国 · 中国顶级联赛中游\n一线队\n32\n4\n8\n79\n尚无\n2041冬—2042冬\n2045冬—2046夏\n2048夏—2048冬\n天津津门\n中国 · 中国顶级联赛豪门\n一线队\n113\n20\n32\n81\n中国足协杯冠军 ×1\n2043夏—2043冬\n圣洛伦索\n阿根廷 · 南美强队\n一线队\n32\n3\n7\n81\n尚无\n2044夏—2045夏\n乌\n乌德勒支\n荷兰 · 欧洲发展联赛强队\n一线队\n47\n5\n13\n81\n尚无\n2046冬—2047冬\n弗赖堡\n德国 · 五大联赛中游\n一线队\n49\n7\n15\n81\n尚无\n2049夏—2050夏\n浙江钱潮\n中国 · 中国顶级联赛豪门\n一线队\n49\n6\n18\n80\n尚无\n生涯评价\n最终评分\n97\n中国足球旗帜\n97/100 分\n俱乐部表现\n25/25\n国家队表现\n15/15\n巅峰与平台\n12/15\n职业寿命\n5/5\n集体荣誉\n25/25\n个人荣誉\n15/15\n\n俱乐部与国家队表现、巅峰高度、职业长度和荣誉，一起构成这段生涯的最终评分。\n\n荣誉室\n21项\n俱乐部\n\n亚冠精英联赛冠军 ×1\n中国足协杯冠军 ×8\n\n国家队\n\n亚洲杯冠军 ×1\n\n个人\n\n阿甲最佳阵容 ×1\n德甲最佳阵容 ×1\n中超联赛最佳球员 ×1\n中超最佳阵容 ×8\n\n生涯标签\n8枚\n中国足球旗帜\n为国家队出场187次\n冠军收割者\n球员生涯赢得10项集体荣誉\n国家队英雄\n在国家队贡献了大量关键进球与助攻\n常青树\n保持竞争力直至生涯暮年\n四海为家\n职业生涯先后效力12家俱乐部\n领袖\n赢得教练和更衣室的共同信任\n铁人\n多年保持稳定的比赛出勤\n旅欧名将\n在海外一线队赢得了持续出场\n场外生涯记忆\n2035年夏季 → 2036年夏季 · 家乡训练营问，你愿意留下怎样的支持？\n\n上次你选择“诚恳说明这次无法参与”；这次你提供了一段可公开的训练心得，清楚说明它不是未来出席承诺。\n\n2052年冬季 → 2053年夏季 · 本地代步品牌“路伴”想借你半天时间。\n\n上次你选择“只接一小时的简短拍摄”；这次你礼貌结束了这次洽谈，没有新增酬劳或后续义务。\n\n2053年冬季 · 一位年轻队友把训练笔记递给了你。\n\n当时你选择“每周留一次简短交流”。你已经结束球员生涯，未发生的后续不再安排。这段经历仍留在你的履历里。\n\n个人安排共23项，一次支付合计 €830,000，实际退款 €0。剩余服务已随退休终止，不提前补发收益。\n\n隐藏潜力\n88\n巅峰能力\n81\n天赋兑现率\n92%\n\n从第一次上场，到最后一次离场。 从13岁的青训少年，到最后一场职业比赛，每一次选择都留在这里。球员生涯结束了，这段故事属于你。\n\n这份退役档案已保存在本地",
+      "horizontalOverflow": false,
+      "noFrameworkOverlay": true,
+      "passed": true
+    },
+    {
+      "viewport": [
+        1366,
+        768
+      ],
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshots": [
+        {
+          "path": "1366x768-retirement-first.png",
+          "fullPage": false,
+          "scrollY": 0
+        },
+        {
+          "path": "1366x768-retirement-full.png",
+          "fullPage": true,
+          "scrollY": 0
+        },
+        {
+          "path": "1366x768-retirement-actions.png",
+          "fullPage": false,
+          "scrollY": 1486
+        },
+        {
+          "path": "1366x768-retirement-preview.png",
+          "fullPage": false,
+          "scrollY": 1486
+        }
+      ],
+      "actions": [
+        "Continue Career from anonymous retirement fixture",
+        "Click actual public Save My Career export",
+        "Close preview and verify archive remains"
+      ],
+      "identity": {
+        "url": "http://127.0.0.1:4330/",
+        "title": "上场 · TAKE THE FIELD"
+      },
+      "export": {
+        "width": 2360,
+        "height": 4664,
+        "bytes": 1280614,
+        "path": "1366x768-actual-export.png",
+        "sha256": "3bad24bcd3eb72bba0aad4b7b9a3cfaeb71d6cdc81d7d3baef35bd52b8e6ab10",
+        "pngDimensions": [
+          2360,
+          4664
+        ]
+      },
+      "previewClosed": true,
+      "archiveRemains": true,
+      "text": "球员生涯档案\n2026—2053\nFINAL OVR\n77\n\n终场之后\n\n固定样本05\n40岁 · #8 · RM\n生涯评价\n中国足球旗帜\n\n俱乐部履历与国家队担当共同定义了你的球员生涯。\n\n一线队生涯\n805场 · 104球 · 177助\n另有青年队 48 场\n能力轨迹\n巅峰 81 · 退役 77\n30岁抵达巅峰\n估算身价\n巅峰 €36,900,000\n31岁巅峰 · 退役 €2,950,000\n国家队生涯\n中国国家队\n出场\n187\n进球\n19\n助攻\n34\n世界杯最佳\n4强\n亚洲杯最佳\n冠军\n俱乐部生涯\n12家俱乐部 · 853场正式履历\n效力时间\n俱乐部 / 级别\n队伍\n出场\n进球\n助攻\n巅峰\n荣誉\n2026夏—2032冬\n梅州嘉应\n中国 · 中国第二级别联赛球队\n青年队 / 一线队\n179\n16\n28\n66\n中国足协杯冠军 ×2\n2033夏—2033冬\n苏州吴门\n中国 · 中国第二级别联赛球队\n一线队\n33\n3\n6\n69\n尚无\n2034夏—2035夏\n深圳鹏城\n中国 · 中国顶级联赛中游\n一线队\n49\n9\n7\n72\n中国足协杯冠军 ×1\n2035冬—2036夏\n2039夏—2040夏\n大连滨城\n中国 · 中国顶级联赛中游\n一线队\n79\n9\n12\n79\n中国足协杯冠军 ×2\n2036冬—2037冬\n2050冬—2051夏\n北京御华\n中国 · 中国顶级联赛豪门\n一线队\n74\n7\n11\n79\n亚冠精英联赛冠军 ×1\n中国足协杯冠军 ×1\n2038夏—2038冬\n2051冬—2053冬\n成都锦城\n中国 · 中国顶级联赛豪门\n一线队\n117\n17\n31\n78\n中国足协杯冠军 ×1\n2040冬—2041夏\n重庆山城\n中国 · 中国顶级联赛中游\n一线队\n32\n4\n8\n79\n尚无\n2041冬—2042冬\n2045冬—2046夏\n2048夏—2048冬\n天津津门\n中国 · 中国顶级联赛豪门\n一线队\n113\n20\n32\n81\n中国足协杯冠军 ×1\n2043夏—2043冬\n圣洛伦索\n阿根廷 · 南美强队\n一线队\n32\n3\n7\n81\n尚无\n2044夏—2045夏\n乌\n乌德勒支\n荷兰 · 欧洲发展联赛强队\n一线队\n47\n5\n13\n81\n尚无\n2046冬—2047冬\n弗赖堡\n德国 · 五大联赛中游\n一线队\n49\n7\n15\n81\n尚无\n2049夏—2050夏\n浙江钱潮\n中国 · 中国顶级联赛豪门\n一线队\n49\n6\n18\n80\n尚无\n生涯评价\n最终评分\n97\n中国足球旗帜\n97/100 分\n俱乐部表现\n25/25\n国家队表现\n15/15\n巅峰与平台\n12/15\n职业寿命\n5/5\n集体荣誉\n25/25\n个人荣誉\n15/15\n\n俱乐部与国家队表现、巅峰高度、职业长度和荣誉，一起构成这段生涯的最终评分。\n\n荣誉室\n21项\n俱乐部\n\n亚冠精英联赛冠军 ×1\n中国足协杯冠军 ×8\n\n国家队\n\n亚洲杯冠军 ×1\n\n个人\n\n阿甲最佳阵容 ×1\n德甲最佳阵容 ×1\n中超联赛最佳球员 ×1\n中超最佳阵容 ×8\n\n生涯标签\n8枚\n中国足球旗帜\n为国家队出场187次\n冠军收割者\n球员生涯赢得10项集体荣誉\n国家队英雄\n在国家队贡献了大量关键进球与助攻\n常青树\n保持竞争力直至生涯暮年\n四海为家\n职业生涯先后效力12家俱乐部\n领袖\n赢得教练和更衣室的共同信任\n铁人\n多年保持稳定的比赛出勤\n旅欧名将\n在海外一线队赢得了持续出场\n场外生涯记忆\n2035年夏季 → 2036年夏季 · 家乡训练营问，你愿意留下怎样的支持？\n\n上次你选择“诚恳说明这次无法参与”；这次你提供了一段可公开的训练心得，清楚说明它不是未来出席承诺。\n\n2052年冬季 → 2053年夏季 · 本地代步品牌“路伴”想借你半天时间。\n\n上次你选择“只接一小时的简短拍摄”；这次你礼貌结束了这次洽谈，没有新增酬劳或后续义务。\n\n2053年冬季 · 一位年轻队友把训练笔记递给了你。\n\n当时你选择“每周留一次简短交流”。你已经结束球员生涯，未发生的后续不再安排。这段经历仍留在你的履历里。\n\n个人安排共23项，一次支付合计 €830,000，实际退款 €0。剩余服务已随退休终止，不提前补发收益。\n\n隐藏潜力\n88\n巅峰能力\n81\n天赋兑现率\n92%\n\n从第一次上场，到最后一次离场。 从13岁的青训少年，到最后一场职业比赛，每一次选择都留在这里。球员生涯结束了，这段故事属于你。\n\n这份退役档案已保存在本地",
+      "horizontalOverflow": false,
+      "noFrameworkOverlay": true,
+      "passed": true
+    }
+  ],
+  "chromiumVersion": "155.0.8059.79"
+}

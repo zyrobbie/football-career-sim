@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../entertainmentV3'
 import { SAVE_VERSION, DATA_VERSION } from '../../models/game'
 import { describe, expect, it } from 'vitest'
 import type { GameState } from '../../models/game'
@@ -28,6 +29,7 @@ function createState(windowIndex = 1): GameState {
   const offer = academyOffers[0]!
   return {
     pendingKeyMatchMoment: null,
+    entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'HALF_YEAR_PLAN',
@@ -194,7 +196,7 @@ describe('career events', () => {
 
   it('keeps every registered event definition structurally valid', () => {
     expect(validateCareerEventDefinitions()).toEqual([])
-    expect(CAREER_EVENTS).toHaveLength(84)
+    expect(CAREER_EVENTS).toHaveLength(104)
   })
 
   it('routes multi-stage events through valid setup choices', () => {

@@ -1,0 +1,14 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> football-career-sim@3.0.0 test:run
+> vitest run src/engine/__tests__/v3EventScheduling.test.ts src/engine/__tests__/offPitchStories.test.ts src/store/gameStore.v13Migration.test.ts src/store/gameStore.personalArrangements.test.ts
+
+
+ RUN  v4.1.10 /workspace/shared/football-career-v3
+
+
+ Test Files  4 passed (4)
+      Tests  108 passed (108)
+   Start at  21:47:22
+   Duration  1.37s (transform 1.37s, setup 0ms, import 2.44s, tests 1.21s, environment 0ms)
+

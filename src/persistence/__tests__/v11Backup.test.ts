@@ -16,20 +16,20 @@ afterEach(() => vi.unstubAllGlobals())
 it('keeps exact v11 bytes after migration and repeated current-version save/reload', () => {
   const data = storage([[current, raw]])
   const game = loadGame()!
-  expect(game.saveVersion).toBe(13)
+  expect(game.saveVersion).toBe(14)
   for (let i = 0; i < 3; i++) { saveGame(game); expect(loadGame()).toEqual(game) }
-  expect(JSON.parse(data.get(backup)!).data.saveVersion).toBe(13)
+  expect(JSON.parse(data.get(backup)!).data.saveVersion).toBe(14)
   expect(data.get(frozen)).toBe(raw)
 })
 it('preserves v11 on direct save before rotating the current', () => {
   const data = storage([[current, raw]])
   saveGame(validateGameState(JSON.parse(raw).data))
   expect(data.get(frozen)).toBe(raw)
-  expect(JSON.parse(data.get(current)!).data.saveVersion).toBe(13)
+  expect(JSON.parse(data.get(current)!).data.saveVersion).toBe(14)
 })
 it('preserves a valid v11 backup when recovering a corrupt current', () => {
   const data = storage([[current, 'corrupt'], [backup, raw]])
-  expect(loadGame()!.saveVersion).toBe(13)
+  expect(loadGame()!.saveVersion).toBe(14)
   expect(data.get(frozen)).toBe(raw)
 })
 it.each(['load', 'save'])('leaves original slots untouched if persistent backup fails during %s', action => {

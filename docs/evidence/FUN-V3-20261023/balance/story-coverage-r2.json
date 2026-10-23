@@ -1,0 +1,189 @@
+{
+  "ON_FREE": {
+    "careers": 48,
+    "adultWindows": 2199,
+    "nodes": {
+      "V3_C01A_LOCAL_CAR": 38,
+      "V3_C01B_LOCAL_CAR_RETURN": 36,
+      "V3_C02A_PUBLIC_RESPONSE": 40,
+      "V3_C02B_PUBLIC_RESPONSE_RETURN": 39,
+      "V3_C03A_YOUNG_TEAMMATE": 22,
+      "V3_C03B_YOUNG_TEAMMATE_RETURN": 14,
+      "V3_C04A_HOMETOWN_CAMP": 39,
+      "V3_C04B_HOMETOWN_CAMP_RETURN": 35,
+      "V3_E01_PRESS_DRINK": 43,
+      "V3_E02_AD_TEAMMATE": 26,
+      "V3_E03_INTERVIEW_CLIP": 40,
+      "V3_E04_FAN_SCHEDULE": 36,
+      "V3_E05_OLD_POST": 38,
+      "V3_E06_FAMILY_VISIT": 42,
+      "V3_E07_LANGUAGE_MIXUP": 13,
+      "V3_E08_NEW_NEIGHBOR": 19,
+      "V3_E09_LOCAL_RADIO": 39,
+      "V3_E10_TEAM_PHOTO": 40,
+      "V3_E11_COMMUTE": 43,
+      "V3_E12_FAN_GIFT": 41
+    },
+    "chainClosures": {
+      "C01:COMPLETED": 36,
+      "C01:EXPIRED": 1,
+      "C01:RETIRED": 1,
+      "C02:COMPLETED": 39,
+      "C02:RETIRED": 1,
+      "C03:CLUB_CHANGED": 4,
+      "C03:COMPLETED": 14,
+      "C03:EXPIRED": 1,
+      "C03:RETIRED": 3,
+      "C04:COMPLETED": 35,
+      "C04:EXPIRED": 1,
+      "C04:RETIRED": 3
+    },
+    "completionDelayWindows": {
+      "1": 74,
+      "2": 39,
+      "3": 11
+    },
+    "healthPriorityEventCounts": {
+      "FITNESS_WARNING": 13,
+      "KEY_MATCH_PAIN": 16
+    },
+    "adultEventDeltaTotals": {
+      "morale": 1562,
+      "fanRelation": 696,
+      "coachRelation": 536,
+      "squadRelation": 832,
+      "form": 620,
+      "reputation": 495,
+      "mediaRelation": 448,
+      "fitness": -103,
+      "agentRelation": 254,
+      "clubAttachment": 39
+    },
+    "consecutiveSameEventID": 0,
+    "consecutiveSameCategoryAllEvents": 200
+  },
+  "ON_FIXED_BODY": {
+    "careers": 48,
+    "adultWindows": 2200,
+    "nodes": {
+      "V3_C01A_LOCAL_CAR": 37,
+      "V3_C01B_LOCAL_CAR_RETURN": 36,
+      "V3_C02A_PUBLIC_RESPONSE": 40,
+      "V3_C02B_PUBLIC_RESPONSE_RETURN": 39,
+      "V3_C03A_YOUNG_TEAMMATE": 23,
+      "V3_C03B_YOUNG_TEAMMATE_RETURN": 14,
+      "V3_C04A_HOMETOWN_CAMP": 37,
+      "V3_C04B_HOMETOWN_CAMP_RETURN": 33,
+      "V3_E01_PRESS_DRINK": 42,
+      "V3_E02_AD_TEAMMATE": 27,
+      "V3_E03_INTERVIEW_CLIP": 40,
+      "V3_E04_FAN_SCHEDULE": 39,
+      "V3_E05_OLD_POST": 36,
+      "V3_E06_FAMILY_VISIT": 43,
+      "V3_E07_LANGUAGE_MIXUP": 18,
+      "V3_E08_NEW_NEIGHBOR": 20,
+      "V3_E09_LOCAL_RADIO": 44,
+      "V3_E10_TEAM_PHOTO": 44,
+      "V3_E11_COMMUTE": 42,
+      "V3_E12_FAN_GIFT": 39
+    },
+    "chainClosures": {
+      "C01:COMPLETED": 36,
+      "C01:RETIRED": 1,
+      "C02:COMPLETED": 39,
+      "C02:EXPIRED": 1,
+      "C03:CLUB_CHANGED": 4,
+      "C03:COMPLETED": 14,
+      "C03:EXPIRED": 1,
+      "C03:RETIRED": 4,
+      "C04:COMPLETED": 33,
+      "C04:EXPIRED": 1,
+      "C04:RETIRED": 3
+    },
+    "completionDelayWindows": {
+      "1": 67,
+      "2": 37,
+      "3": 18
+    },
+    "healthPriorityEventCounts": {
+      "FITNESS_WARNING": 7,
+      "KEY_MATCH_PAIN": 14
+    },
+    "adultEventDeltaTotals": {
+      "morale": 1481,
+      "fanRelation": 688,
+      "coachRelation": 551,
+      "squadRelation": 813,
+      "form": 681,
+      "reputation": 482,
+      "mediaRelation": 434,
+      "fitness": -78,
+      "agentRelation": 257,
+      "clubAttachment": 34
+    },
+    "consecutiveSameEventID": 0,
+    "consecutiveSameCategoryAllEvents": 203
+  },
+  "ON_SITUATIONAL": {
+    "careers": 48,
+    "adultWindows": 2200,
+    "nodes": {
+      "V3_C01A_LOCAL_CAR": 37,
+      "V3_C01B_LOCAL_CAR_RETURN": 36,
+      "V3_C02A_PUBLIC_RESPONSE": 41,
+      "V3_C02B_PUBLIC_RESPONSE_RETURN": 39,
+      "V3_C03A_YOUNG_TEAMMATE": 21,
+      "V3_C03B_YOUNG_TEAMMATE_RETURN": 13,
+      "V3_C04A_HOMETOWN_CAMP": 38,
+      "V3_C04B_HOMETOWN_CAMP_RETURN": 35,
+      "V3_E01_PRESS_DRINK": 42,
+      "V3_E02_AD_TEAMMATE": 26,
+      "V3_E03_INTERVIEW_CLIP": 38,
+      "V3_E04_FAN_SCHEDULE": 37,
+      "V3_E05_OLD_POST": 38,
+      "V3_E06_FAMILY_VISIT": 44,
+      "V3_E07_LANGUAGE_MIXUP": 13,
+      "V3_E08_NEW_NEIGHBOR": 20,
+      "V3_E09_LOCAL_RADIO": 41,
+      "V3_E10_TEAM_PHOTO": 40,
+      "V3_E11_COMMUTE": 43,
+      "V3_E12_FAN_GIFT": 38
+    },
+    "chainClosures": {
+      "C01:COMPLETED": 36,
+      "C01:EXPIRED": 1,
+      "C02:COMPLETED": 39,
+      "C02:RETIRED": 2,
+      "C03:CLUB_CHANGED": 4,
+      "C03:COMPLETED": 13,
+      "C03:EXPIRED": 1,
+      "C03:RETIRED": 3,
+      "C04:COMPLETED": 35,
+      "C04:EXPIRED": 1,
+      "C04:RETIRED": 2
+    },
+    "completionDelayWindows": {
+      "1": 72,
+      "2": 35,
+      "3": 16
+    },
+    "healthPriorityEventCounts": {
+      "FITNESS_WARNING": 13,
+      "KEY_MATCH_PAIN": 16
+    },
+    "adultEventDeltaTotals": {
+      "morale": 1575,
+      "fanRelation": 732,
+      "coachRelation": 519,
+      "squadRelation": 816,
+      "form": 650,
+      "reputation": 478,
+      "mediaRelation": 423,
+      "fitness": -70,
+      "agentRelation": 258,
+      "clubAttachment": 37
+    },
+    "consecutiveSameEventID": 0,
+    "consecutiveSameCategoryAllEvents": 195
+  }
+}

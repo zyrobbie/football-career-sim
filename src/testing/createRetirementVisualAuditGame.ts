@@ -1,3 +1,4 @@
+import { createEntertainmentV3State } from '../engine/entertainmentV3'
 import { createCareerStoryState } from '../engine/careerStory'
 import { generateAcademyOffers } from '../engine/offers'
 import { generatePlayer } from '../engine/player'
@@ -49,6 +50,7 @@ export function createRetirementVisualAuditGame(clubIds: readonly string[]): Gam
   }))
   const game: GameState = {
     pendingKeyMatchMoment: null,
+    entertainmentV3: {...createEntertainmentV3State(null, 56), cashPolicy: 'LEGACY_CAP'},
     saveVersion: SAVE_VERSION,
     dataVersion: DATA_VERSION,
     phase: 'CAREER_RETIRED',

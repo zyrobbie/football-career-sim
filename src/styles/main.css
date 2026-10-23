@@ -8597,3 +8597,55 @@ svg {
 .key-moment-summary__contribution { font-weight: 600; }
 .key-moment-history { font-size: 12px; border-top: 1px solid var(--line); }
 @media (max-width: 760px) { .key-moment { margin: 8px 8px 88px; } }
+
+/* V3 optional arrangements: local compact controls, never legacy training rules. */
+.personal-arrangements { border-block: 1px solid var(--line); margin: 8px 0; padding: 6px 0; color: var(--text); font-size: 12px; line-height: 1.45; min-width: 0; }
+.personal-arrangements * { min-width: 0; }
+.personal-arrangements p { margin: 4px 0; white-space: normal; overflow-wrap: anywhere; }
+.personal-arrangements button { font-family: inherit; font-size: 12px; line-height: 1.4; min-height: 44px; border: 1px solid var(--line); color: var(--ink); background: var(--paper); padding: 6px 8px; cursor: pointer; }
+.personal-arrangements button:disabled { cursor: not-allowed; color: var(--muted); }
+.personal-arrangements__entry { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.personal-arrangements__entry > div { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.personal-arrangements__entry strong { font-size: 13px; line-height: 1.35; }
+.personal-arrangements__entry small { flex-basis: 100%; font-size: 11px; }
+.personal-arrangements__entry > button { flex-shrink: 0; min-width: 48px; }
+.personal-arrangements__expanded { padding-top: 8px; display: grid; gap: 8px; }
+.personal-arrangements__categories { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 4px; }
+.personal-arrangements__categories small { display: block; font-size: 11px; }
+.personal-arrangements__tiers { display: grid; gap: 6px; }
+.personal-arrangements__tiers > button { display: grid; text-align: left; gap: 4px; padding: 8px; }
+.personal-arrangements__tier-heading { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 8px; }
+.personal-arrangements__tier-heading strong,.personal-arrangements__tier-heading b { font-size: 12px; line-height: 1.35; }
+.personal-arrangements__tiers > button > span:last-child { font-size: 11px; line-height: 1.4; }
+.personal-arrangements [aria-selected="true"],.personal-arrangements [aria-checked="true"] { border-color: var(--ink); background: var(--paper-muted,var(--paper)); }
+.personal-arrangements__confirm { padding: 8px; border: 1px solid var(--line); }
+.personal-arrangements__confirm .button { width: 100%; margin-top: 6px; background: var(--ink); color: var(--paper); }
+.personal-arrangements__confirm .button:disabled { color: var(--muted); background: var(--paper); }
+.personal-arrangements__reason { color: var(--negative,var(--text)); font-weight: 600; }
+.personal-arrangements__cancel { width: 100%; }
+.v3-story-summary { font-size: 12px; line-height: 1.5; white-space: normal; overflow-wrap: anywhere; min-width: 0; }
+.v3-story-summary p { margin: 4px 0; }
+.v3-public-impressions { margin-top: 8px; }
+.v3-public-impressions h2 { margin: 0 0 6px; }
+.v3-public-impressions strong { color: var(--ink); }
+.v3-event .career-panel-lead { font-size: 12px; line-height: 1.5; white-space: normal; }
+.v3-event .special-event__choices button { min-height: 44px; }
+.v3-event .special-event__choices strong { font-size: 12px; white-space: normal; overflow-wrap: anywhere; }
+.v3-event .special-event__choices p,.v3-event .special-event__choices small { font-size: 12px; line-height: 1.5; white-space: normal; overflow-wrap: anywhere; }
+/* V3 stories opt out of the legacy mobile micro-copy and one-line lead. */
+.v3-event .career-panel-lead { display: block; white-space: normal; overflow: visible; text-overflow: clip; -webkit-line-clamp: unset; max-height: none; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.v3-event .career-panel-heading h1 { font-size: 13px; line-height: 1.35; white-space: normal; overflow-wrap: anywhere; }
+.v3-event .special-event__choices { grid-template-columns: minmax(0,1fr); }
+.v3-event .special-event__choices button { display: grid; grid-template-columns: 24px minmax(0,1fr) 16px; gap: 4px 6px; min-height: 72px; padding: 8px; border-left: 0; border-top: 1px solid var(--line); }
+.v3-event .special-event__choices button:first-child { border-top: 0; }
+.v3-event .special-event__choices button > span { float: none; margin: 0; width: 24px; height: 24px; font-size: 12px; }
+.v3-event .special-event__choices strong { grid-column: 2; white-space: normal; overflow: visible; overflow-wrap: anywhere; font-size: 12px; line-height: 1.4; }
+.v3-event .special-event__choices small,.v3-event .special-event__choices em { grid-column: 2 / -1; display: block; white-space: normal; overflow: visible; overflow-wrap: anywhere; max-height: none; margin: 0; font-size: 12px; line-height: 1.5; }
+.v3-event .special-event__choices button > svg { position: static; grid-column: 3; grid-row: 1; width: 16px; height: 16px; }
+.v3-event .special-event__note { font-size: 12px; line-height: 1.45; white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+.v3-event .special-event__reveal p { font-size: 12px; line-height: 1.5; white-space: normal; overflow: visible; overflow-wrap: anywhere; }
+.v3-event .special-event__continue { min-height: 44px; font-size: 12px; }
+.personal-arrangements__history { font-size: 12px; line-height: 1.5; border-top: 1px solid var(--line); margin-top: 6px; }
+.personal-arrangements__history > summary { cursor: pointer; min-height: 44px; padding: 10px 0; }
+.personal-arrangements__history > div { padding: 8px 0; border-top: 1px solid var(--line); }
+@media (max-width: 760px) { .career-report .report-side > .v3-story-summary { grid-column: 1 / -1; } }

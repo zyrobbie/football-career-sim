@@ -1,5 +1,5 @@
 import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
-import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected, legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import {afterAll,afterEach,expect,it,vi} from 'vitest'
 import {readFileSync,writeFileSync} from 'node:fs'
 import {createHash} from 'node:crypto'
@@ -18,7 +18,7 @@ it.each(matrix.branches)('direct raw chain $id $name',b=>{
  const old=JSON.parse(raw).data as GameState,memory=new Map([['career_save_current',raw]]),writes:{key:string;value:string}[]=[]
  vi.stubGlobal('window',{localStorage:{getItem:(k:string)=>memory.get(k)??null,setItem:(key:string,value:string)=>{memory.set(key,value);writes.push({key,value})},removeItem:(k:string)=>memory.delete(k)}})
  useGameStore.setState({game:null,error:null,isReviewingReport:false,voluntaryRetirementConfirmation:null});expect(memory.has('career_save_backup')).toBe(false)
- const loaded=loadGame()!;expect(loaded).toEqual(currentSchemaExpected(old));const canonical=normalizePendingTraining(restoreMarketContext(loaded))
+ const loaded=loadGame()!;expect(legacyBusinessProjection(loaded)).toEqual(legacyBusinessProjection(currentSchemaExpected(old)));const canonical=normalizePendingTraining(restoreMarketContext(loaded))
  s().continueCareer();completePendingMoment(s);expect(s().error).toBeNull();const first=structuredClone(s().game!)
  if(old.phase==='SIMULATION_READY'){expect(first.history.length).toBe(old.history.length+1);expect(first.history.at(-1)!.trainingFocus).toBe(canonical.trainingFocus)}else expect(first).toEqual(canonical)
  expect(first.history.slice(0,old.history.length)).toEqual(old.history)

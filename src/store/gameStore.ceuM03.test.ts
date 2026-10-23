@@ -1,5 +1,5 @@
 import { completePendingMoment } from '../testing/keyMatchMomentTestSupport'
-import { currentSchemaExpected } from '../testing/keyMatchMomentTestSupport'
+import { currentSchemaExpected, legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import { afterAll, afterEach, expect, it, vi } from 'vitest'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
@@ -43,11 +43,11 @@ function unchangedActions() {
   store().reviewReport(); expect(store().isReviewingReport).toBe(true)
   store().advanceAfterReport(); store().goToPhase('PRO_STAGE_COMPLETE'); store().goToPhase('HALF_YEAR_REPORT')
   store().openTransferWindow(); store().openTransferWindow(true)
-  expect(store().game).toEqual(currentSchemaExpected(before)); expect(store().error).toBeNull()
+  expect(legacyBusinessProjection(store().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(before))); expect(store().error).toBeNull()
   store().closeReportReview(); expect(store().isReviewingReport).toBe(false)
   expect(rng).not.toHaveBeenCalled(); vi.restoreAllMocks()
-  saveGame(store().game!); expect(loadGame()).toEqual(currentSchemaExpected(before))
-  store().continueCareer(); expect(store().game).toEqual(currentSchemaExpected(before))
+  saveGame(store().game!); expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(before)))
+  store().continueCareer(); expect(legacyBusinessProjection(store().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(before)))
 }
 const originals = json(`${B}/M-01/generated-r4/manifest.json`).map((r: { name: string; file: string; sha256: string }) => ({ name: r.name, source: `${B}/M-01/generated-r4/${r.file}`, raw: readFileSync(`${B}/M-01/generated-r4/${r.file}`, 'utf8'), hash: r.sha256 }))
 const withdrawnRaw = readFileSync(`${B}/M-01/supplement/withdrawn.json`, 'utf8')
@@ -57,7 +57,7 @@ it.each([...originals, ...sparse])('preserves original raw $name through editing
   expect(sha(entry.raw)).toBe(entry.hash)
   const before: GameState = JSON.parse(entry.raw).data
   const { memory, writes } = install(entry.raw)
-  expect(loadGame()).toEqual(currentSchemaExpected(before)); store().continueCareer(); expect(store().game).toEqual(currentSchemaExpected(before))
+  expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(before))); store().continueCareer(); expect(legacyBusinessProjection(store().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(before)))
   // loadGame may canonicalize envelope formatting; complete data equality above is required.
   writes.mockClear()
   const edits: GameState[] = []
@@ -122,8 +122,8 @@ it.each((json(`${B}/M-02/m03-reentry.json`) as Array<{ kind: string; before: Gam
     // Explicit constructed intermediate old navigation state; original raw cases above are never re-encoded first.
     const legacy = { ...game, phase }; saveGame(legacy)
     const raw = memory.get('career_save_current')!; memory.delete('career_save_backup')
-    expect(loadGame()).toEqual(currentSchemaExpected(legacy))
-    store().continueCareer(); expect(store().game).toEqual(currentSchemaExpected(game))
+    expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(legacy)))
+    store().continueCareer(); expect(legacyBusinessProjection(store().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(game)))
     unchangedActions()
     rows.push({ kind: 'legacy-phase-recovery', name, source: `${B}/M-02/m03-reentry.json`, changes: { phase }, raw, before: legacy, after: store().game, result: 'passed' })
   }
@@ -197,10 +197,10 @@ it('loads constructed legacy report/end phases after actual signing, arrival and
     const raw = memory.get('career_save_current')!
     memory.delete('career_save_backup')
     useGameStore.setState({ game: null, error: null, isReviewingReport: false })
-    expect(loadGame()).toEqual(currentSchemaExpected(legacy))
-    store().continueCareer(); expect(store().game).toEqual(currentSchemaExpected(expected))
-    store().openTransferWindow(); store().advanceAfterReport(); expect(store().game).toEqual(currentSchemaExpected(expected))
-    store().continueCareer(); expect(store().game).toEqual(currentSchemaExpected(expected))
+    expect(legacyBusinessProjection(loadGame())).toEqual(legacyBusinessProjection(currentSchemaExpected(legacy)))
+    store().continueCareer(); expect(legacyBusinessProjection(store().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(expected)))
+    store().openTransferWindow(); store().advanceAfterReport(); expect(legacyBusinessProjection(store().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(expected)))
+    store().continueCareer(); expect(legacyBusinessProjection(store().game)).toEqual(legacyBusinessProjection(currentSchemaExpected(expected)))
     evidence.push({ source: row.source, sourceRawSha: row.hash, publicOrigin: ['confirmTransferChoice', 'chooseTransferArrival NONE', 'continueAfterTransfer'], constructedChange: { phase }, raw, expected, result: 'passed' })
   }
   if (process.env.CEU_M03_EXTRA_EVIDENCE === '1') writeFileSync(`${O}/legacy-successors.json`, JSON.stringify(evidence, null, 2) + '\n', { flag: 'wx' })

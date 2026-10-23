@@ -1,3 +1,4 @@
+import { representativeOffPitchStories } from '../engine/offPitchStories'
 import type { VoluntaryRetirementConfirmation } from '../store/professionalNextAction'
 import { useRef } from 'react'
 import { Brand } from '../components/Brand'
@@ -9,7 +10,7 @@ import { RetirementRecordExportActions } from '../components/RetirementRecordExp
 import { runtimeClubById } from '../data/clubs/runtimeClubCatalog'
 import { buildRetirementSummary } from '../engine/careerSummary'
 import { aggregateCareerHonors, aggregateClubCareerHonors } from '../engine/honorAggregation'
-import { playerAgeAtWindow } from '../engine/careerTime'
+import { playerAgeAtWindow, careerWindowLabel } from '../engine/careerTime'
 import { RETIREMENT_QR_ASSET_PATH, RETIREMENT_RECORD_URL } from '../export/retirementRecord'
 import { useGameStore } from '../store/gameStore'
 import { formatEuro, nationalStageLabel } from '../ui/format'
@@ -263,6 +264,7 @@ function RetirementArchive({ onReturnHome }: { onReturnHome: () => void }) {
           </div>
         </section>
 
+        {representativeOffPitchStories(game).length || game.entertainmentV3?.arrangements.length ? <section className="retirement-archive__section v3-story-summary" aria-label="场外生涯记忆"><div className="retirement-archive__section-title"><div><Icon name="career" /><h2>场外生涯记忆</h2></div></div>{representativeOffPitchStories(game).map(story => <div key={story.id}><strong>{careerWindowLabel(game.startYear, story.windowIndex)}{story.followupWindowIndex !== undefined ? ` → ${careerWindowLabel(game.startYear, story.followupWindowIndex)}` : ''} · {story.title}</strong><p>{story.summary}</p></div>)}{game.entertainmentV3?.arrangements.length ? <p>个人安排共{game.entertainmentV3.arrangements.length}项，一次支付合计 €{game.entertainmentV3.arrangements.reduce((sum,a) => sum+a.priceEuro,0).toLocaleString('en-US')}，实际退款 €{game.entertainmentV3.arrangements.reduce((sum,a) => sum+a.refundEuro,0).toLocaleString('en-US')}。剩余服务已随退休终止，不提前补发收益。</p> : null}{game.entertainmentV3?.arrangements.filter(a => a.terminationCause || a.refundEuro).slice(-3).map(a => <p key={a.id}>{a.title}：已执行{a.periods.filter(p => p.status === 'EXECUTED').length}期、已终止{a.periods.filter(p => p.status === 'TERMINATED').length}期；{a.refundReceipts.map(r => `${r.reason} €${r.amountEuro.toLocaleString('en-US')}`).join('；') || '无退款'}。</p>)}</section> : null}
         <section className="retirement-archive__talent">
           <div>
             <span>隐藏潜力</span>

@@ -1,0 +1,9 @@
+
+ RUN  v4.1.10 /workspace/shared/football-v3-coordination/review-evidence
+
+
+ Test Files  1 passed (1)
+      Tests  14 passed (14)
+   Start at  22:16:16
+   Duration  2.07s (transform 1.09s, setup 0ms, import 1.41s, tests 514ms, environment 0ms)
+

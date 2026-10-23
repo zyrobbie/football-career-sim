@@ -1,3 +1,6 @@
+import { V3_STORY_EVENTS } from '../data/offPitchStories'
+import { getV3StoryEvent, selectV3StoryEvent } from './offPitchStories'
+import { entertainmentV3Active } from './personalArrangements'
 import type {
   CareerConsequence,
   CareerEventCategory,
@@ -452,7 +455,7 @@ function isEstablishedFirstTeamLeader(state: GameState): boolean {
   )
 }
 
-export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
+const LEGACY_CAREER_EVENTS: readonly CareerEventDefinition[] = [
   {
     id: 'COACH_DEFENSIVE_TASK',
     groupId: 'COACH_TRAINING_REQUEST',
@@ -5215,6 +5218,8 @@ export const CAREER_EVENTS: readonly CareerEventDefinition[] = [
   },
 ]
 
+export const CAREER_EVENTS: readonly CareerEventDefinition[] = [...LEGACY_CAREER_EVENTS, ...V3_STORY_EVENTS]
+
 export function validateCareerEventDefinitions(
   definitions: readonly CareerEventDefinition[] = CAREER_EVENTS,
 ): string[] {
@@ -5319,7 +5324,8 @@ if (definitionErrors.length > 0) {
 
 const eventMap = new Map(CAREER_EVENTS.map((event) => [event.id, event]))
 
-export function getCareerEvent(id: CareerEventId): CareerEventDefinition {
+export function getCareerEvent(id: CareerEventId, state?: GameState): CareerEventDefinition {
+  if (state && id.startsWith('V3_')) return getV3StoryEvent(state, id)
   const event = eventMap.get(id)
   if (!event) throw new Error(`Unknown career event: ${id}`)
   return event
@@ -5379,7 +5385,7 @@ export function selectCareerEvent(state: GameState): CareerEventId | null {
     lastTwoCategories[0] === lastTwoCategories[1]
       ? lastTwoCategories[0]
       : null
-  const baseEligible = CAREER_EVENTS.filter((event) =>
+  const baseEligible = LEGACY_CAREER_EVENTS.filter((event) =>
     careerEventIsEligible(state, event),
   )
   const eligible = baseEligible.filter(
@@ -5387,7 +5393,7 @@ export function selectCareerEvent(state: GameState): CareerEventId | null {
       !careerEventIsOnCooldown(state, event) &&
       (event.timing === 'TRANSITION' || event.category !== blockedCategory),
   )
-  if (eligible.length === 0) return null
+  if (eligible.length === 0 && !entertainmentV3Active(state)) return null
 
   const transitionEvents = eligible.filter(
     (event) => event.timing === 'TRANSITION',
@@ -5421,10 +5427,15 @@ export function selectCareerEvent(state: GameState): CareerEventId | null {
     state,
     transitionEvents.length > 0 ? prioritizedTransitionEvents : eligible,
   )
-  return weightedPick(
+  const ordinaryEventId = balancedPool.length ? weightedPick(
     random,
     balancedPool.map((event) => ({ value: event.id, weight: 1 })),
-  )
+  ) : null
+  if (!entertainmentV3Active(state)) return ordinaryEventId
+  // Eligibility alone is not an urgent incident: broad legacy predicates would
+  // otherwise alternate health events every window and starve ordinary stories.
+  const selectedUrgent = ordinaryEventId !== null && ['FITNESS_WARNING','KEY_MATCH_PAIN','CONTRACT_ROLE_TALK'].includes(ordinaryEventId)
+  return selectV3StoryEvent(state, {mandatoryEventId: transitionEvents.length || selectedUrgent ? ordinaryEventId : null, ordinaryEventId, ordinaryOpportunity: true, recentOrdinaryCategories: lastTwoCategories})
 }
 
 function clamp(value: number, min = 0, max = 100): number {
@@ -5503,7 +5514,7 @@ export function resolveCareerEventChoice(input: {
 } {
   const { state, eventId, choiceId } = input
   if (!state.player) throw new Error('特殊事件缺少球员状态。')
-  const event = getCareerEvent(eventId)
+  const event = getCareerEvent(eventId, state)
   const choice = eligibleCareerEventChoices(state, event).find(
     (candidate) => candidate.id === choiceId,
   )
@@ -5547,6 +5558,7 @@ export function resolveCareerEventChoice(input: {
     outcome?.storyEffect,
   )
   const record: CareerEventRecord = {
+    ...(eventId.startsWith('V3_') ? {definitionRevision: 1 as const, eventTitle: event.title} : {}),
     eventId,
     choiceId,
     windowIndex: state.windowIndex,
@@ -5730,7 +5742,7 @@ export function attachCareerEventToReport(input: {
       record && event
         ? {
             eventId: record.eventId,
-            title: event.title,
+            title: record.eventTitle ?? event.title,
             choiceTitle: record.choiceTitle,
             outcomeSummary: record.outcomeSummary,
           }

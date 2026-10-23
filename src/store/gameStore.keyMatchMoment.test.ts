@@ -1,3 +1,4 @@
+import { legacyBusinessProjection } from '../testing/keyMatchMomentTestSupport'
 import { beforeEach, afterEach, expect, it, vi } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { useGameStore, runReadySimulation } from './gameStore'
@@ -21,7 +22,7 @@ function initial(id='young',position='CAM'):GameState {
 }
 function enter(id='young',position='CAM') {const g=initial(id,position);useGameStore.setState({game:g});useGameStore.getState().continueCareer();const pending=useGameStore.getState().game!;expect(useGameStore.getState().error).toBeNull();expect(pending.phase).toBe('KEY_MATCH_MOMENT');return pending}
 for(const row of rows)it(`OFF exactly matches frozen business state: ${row.id}`,()=>{
- mem.set('career_save_current',row.raw);const g=loadGame()!,result=runReadySimulation(g,{keyMatchMoments:false});expect(result).toEqual({...row.final,saveVersion:SAVE_VERSION,dataVersion:DATA_VERSION,pendingKeyMatchMoment:null});expect(mem.get('career_save_v12_backup')).toBe(row.raw)
+ mem.set('career_save_current',row.raw);const g=loadGame()!,result=runReadySimulation(g,{keyMatchMoments:false});expect(legacyBusinessProjection(result)).toEqual({...row.final,saveVersion:SAVE_VERSION,dataVersion:DATA_VERSION,pendingKeyMatchMoment:null});expect(mem.get('career_save_v12_backup')).toBe(row.raw)
 })
 for(const id of ['young','31-body','34-body','34-recovery','22-youth','consequence','terminal54'])it(`prepared pause and full successor exactly once: ${id}`,()=>{
  const p=enter(id),before=rows.find(r=>r.id===id)!.normalized;
@@ -78,7 +79,7 @@ it('write succeeds then read confirmation throws: first disk choice wins, includ
  useGameStore.getState().finishKeyMatchMoment(e);const report=loadGame()!;useGameStore.setState({game:stored});const n=writes;useGameStore.getState().finishKeyMatchMoment(e);expect(writes).toBe(n);expect(useGameStore.getState().game).toEqual(report)
 })
 it('keeps original v11 backup through the explicit 11 to12 to13 chain',()=>{
- const raw=readFileSync('docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/READY_physical.json','utf8').trim();mem.set('career_save_current',raw);const loaded=loadGame()!;expect(loaded.saveVersion).toBe(13);expect(mem.get('career_save_v11_backup')).toBe(raw);expect(mem.has('career_save_v12_backup')).toBe(false);expect(loaded.history).toEqual(JSON.parse(raw).data.history)
+ const raw=readFileSync('docs/evidence/CEU-20260907/S0-v11-supplement/fixtures/READY_physical.json','utf8').trim();mem.set('career_save_current',raw);const loaded=loadGame()!;expect(loaded.saveVersion).toBe(14);expect(mem.get('career_save_v11_backup')).toBe(raw);expect(mem.has('career_save_v12_backup')).toBe(false);expect(loaded.history).toEqual(JSON.parse(raw).data.history)
 })
 
 it('rejects report/history snapshot mismatch without altering saved data',()=>{

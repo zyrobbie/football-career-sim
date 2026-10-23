@@ -1,0 +1,86 @@
+{
+  "decision": "VISUAL PASS on exact runtime commit, not deployment or balance acceptance",
+  "runtimeCommit": "3dbddbdd189a240ff814d0b0cf3036f25ee2f940",
+  "at": "2026-10-23T14:04:02.122819+00:00",
+  "browser": "Isolated cloud Chromium; no user-local profile",
+  "artifacts": [
+    {
+      "name": "compact-plan",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-supplement/402x874-compact-plan-compact.png",
+      "suggestedRepoFilename": "compact-plan.png",
+      "bytes": 104495,
+      "sha256": "ce7973ff3e14b66092d962099c58e2e9711302f8bcd25114eacbcc4cdd9d0599",
+      "caveat": "Anonymous factory input; actual rendered final plan."
+    },
+    {
+      "name": "long-confirmation-top",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-supplement/320x568-long-confirmation-expanded.png",
+      "suggestedRepoFilename": "long-confirmation-top.png",
+      "bytes": 71722,
+      "sha256": "5b880b9a151c39e1104accba989e1e308f2267b247ae0613227b497bf7d942bc",
+      "caveat": "Synthetic eligibility move; full current SETTLE three-tier layout."
+    },
+    {
+      "name": "long-confirmation-actions",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-supplement/320x568-long-confirmation-actions.png",
+      "suggestedRepoFilename": "long-confirmation-actions.png",
+      "bytes": 74811,
+      "sha256": "ea8558fb9812aaa2b1b648913433915b602d852e29dc0b21afafbecb23dab641",
+      "caveat": "Actual scrolled viewport proves both payment and free exit are reachable."
+    },
+    {
+      "name": "story-decision320",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-smoke/320x568-moved-followup-long-background.png",
+      "suggestedRepoFilename": "story-decision320.png",
+      "bytes": 73610,
+      "sha256": "1a913c2798dcb613a08cc2c793d7666725d76779c1145a88b7382e009eca5d8c",
+      "caveat": "Public C01 followup snapshot plus explicit synthetic move to exercise longest remote-context copy."
+    },
+    {
+      "name": "dual-report",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-smoke/390x844-dual-report-receipt.png",
+      "suggestedRepoFilename": "dual-report.png",
+      "bytes": 98418,
+      "sha256": "4d0ac9e64a6adc8885544743d8a62251427892c2565221a8da7d6c7a7e25fd81",
+      "caveat": "Independent public-flow saved report; initial market was constructed, subsequent actions public."
+    },
+    {
+      "name": "natural-one-impression",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-smoke/375x812-natural-one-expanded.png",
+      "suggestedRepoFilename": "natural-one-impression.png",
+      "bytes": 70181,
+      "sha256": "704623852c312b8e74e8127cc8f186e477054172b5ca2e56b1c0ace655d3fcfa",
+      "caveat": "Real R2 career evidence unchanged; only phase changed CAREER_RETIRED to RETIREMENT_DECISION to expose Player tab."
+    },
+    {
+      "name": "natural-two-impressions",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-smoke/390x844-natural-two-expanded.png",
+      "suggestedRepoFilename": "natural-two-impressions.png",
+      "bytes": 90434,
+      "sha256": "1a640f7eae2b080ec88289298cc89deb9c5b880129d67c0afc3fbe18f37efe5a",
+      "caveat": "Real R2 career evidence unchanged; only phase changed CAREER_RETIRED to RETIREMENT_DECISION to expose Player tab."
+    },
+    {
+      "name": "actual-retirement-export",
+      "sourcePath": "/workspace/shared/football-v3-visual-qa/candidate-final-natural-export/390x844-actual-export.png",
+      "suggestedRepoFilename": "actual-retirement-export.png",
+      "bytes": 1118149,
+      "sha256": "695b102d7ecd1e35111af495b1e6019313994c58668d1d646701836e4daf1382",
+      "caveat": "Actual public export blob from unmodified natural retired save; 12 clubs and completed-chain A→B dates."
+    }
+  ],
+  "finalCases": {
+    "smokeValid": 9,
+    "supplementValid": 3,
+    "actualExports": 2,
+    "discardedFixtureAttempt": "saved-plan initially used BODY_CARE, which is deliberately never disabled at saturation. Wrong selector expectation, not product failure. Correct MENTAL_RESET saved-saturated boundary captured successfully in supplement."
+  },
+  "sourceManifest": "/workspace/shared/football-v3-visual-qa/candidate-final-site/qa-source-manifest.json",
+  "metadata": [
+    "/workspace/shared/football-v3-visual-qa/candidate-final-smoke/metadata.json",
+    "/workspace/shared/football-v3-visual-qa/candidate-final-supplement/metadata.json",
+    "/workspace/shared/football-v3-visual-qa/candidate-final-natural-export/metadata.json"
+  ],
+  "acceptanceReport": "/workspace/shared/football-v3-coordination/visual-acceptance.md",
+  "artifactStoragePolicy": "Browser screenshots and actual exported PNGs were internally inspected and remain in the cloud QA directory. They are not committed or included in the source transfer. sourcePath is an internal provenance location, not a delivered image link."
+}

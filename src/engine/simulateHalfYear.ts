@@ -93,7 +93,7 @@ function applyArrivalChoice(
   return { player: next, trainingBonus, summary }
 }
 
-function prepareWindow(
+export function prepareWindow(
   player: Player,
   arrivalChoice: ArrivalChoice | null,
   windowIndex: number,
@@ -375,6 +375,7 @@ export function simulateHalfYear(input: {
   firstTeamProgress?: FirstTeamProgress
   teamLevel?: TeamLevel
   eventTrainingBonus?: number
+  personalArrangementState?: import('../models/game').GameState
 }): {
   player: Player
   report: HalfYearReport
@@ -400,8 +401,10 @@ export function simulateHalfYear(input: {
     windowIndex,
     developmentApproach,
   )
-  const workingPlayer = windowPreparation.player
+  let workingPlayer = windowPreparation.player
   const trainingExecution = applyTrainingMaintenance(startPlayer, workingPlayer, playerAgeAtWindow(windowIndex), trainingFocus)
+  const personal = input.personalArrangementState ? preparePersonalArrangementWindow(input.personalArrangementState, workingPlayer) : null
+  if (personal) workingPlayer = personal.player
   const simulationSeed = `${careerSeed}:window:${windowIndex}`
   const { stats, injury } = simulateStats(
     workingPlayer,
@@ -519,6 +522,7 @@ export function simulateHalfYear(input: {
   }
 
   const report: HalfYearReport = {
+    ...(personal?.receipts.length ? {personalArrangements: {receipts: personal.receipts, purchaseEuro: 0, refundEuro: 0, summaries: []}} : {}),
     fromLabel: careerWindowLabel(startYear, windowIndex),
     toLabel: nextWindowLabel,
     clubId: offer.club.id,
@@ -585,3 +589,4 @@ export function simulateHalfYear(input: {
     teamLevel,
   }
 }
+import { preparePersonalArrangementWindow } from './personalArrangements'

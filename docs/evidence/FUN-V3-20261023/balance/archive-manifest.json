@@ -1,0 +1,72 @@
+{
+  "format": "gzip, compression9, blank filename, mtime0; deterministic from exact source bytes",
+  "ciDependency": "Only bundled original business projections and src harness are CI inputs; these captures are audit artifacts, not hidden CI dependencies.",
+  "artifacts": [
+    {
+      "archive": "archives/r1-long-results.json.gz",
+      "source": "outputs/FUN-V3-20261023/balance/main-full20/long-results.json",
+      "purpose": "Rejected R1 complete192; broad health-priority starvation; not final balance acceptance",
+      "sourceBytes": 58332986,
+      "archiveBytes": 6595890,
+      "sourceSHA256": "586b225014cd07128bf7c51aff303b6c53e3fc9b86cf1c47a706561b1fbcb542",
+      "archiveSHA256": "536bba532c1a98b46f493c5a7bd586d74de2625b0d4e1c8b6df20aaa4377c065",
+      "gzipMtime": 0,
+      "decompressionVerifiedByteExact": true
+    },
+    {
+      "archive": "archives/r2-long-results.json.gz",
+      "source": "outputs/FUN-V3-20261023/balance/main-r2/long-results.json",
+      "purpose": "R2 candidate complete192; exact frozen48 starts; Node22.23.4; all checks green",
+      "sourceBytes": 61587567,
+      "archiveBytes": 7199394,
+      "sourceSHA256": "a322ca175e4af6aecb34438cdf0126cafeaf28246be4ae7d05214291647d64cc",
+      "archiveSHA256": "1050034be4f214490626190f8eb20f1101f9b65e140fe0d667f124315f051f24",
+      "gzipMtime": 0,
+      "decompressionVerifiedByteExact": true
+    },
+    {
+      "archive": "archives/r2-cash-results.json.gz",
+      "source": "outputs/FUN-V3-20261023/balance/main-r2/cash/results.json",
+      "purpose": "R2 controlled20x4 cash experiment;80 runs; all checks green",
+      "sourceBytes": 6384971,
+      "archiveBytes": 929555,
+      "sourceSHA256": "ce3452c68ba0acdb638b6f477cb8531b3a231fc2333bbf5b17a270a3b1de7055",
+      "archiveSHA256": "5e6a79146eba150c5628c8d02d39a473ccf80e7080cb2bec6c9db4470ea7b14d",
+      "gzipMtime": 0,
+      "decompressionVerifiedByteExact": true
+    },
+    {
+      "archive": "archives/r2-replay-test-log.txt.gz",
+      "source": "outputs/FUN-V3-20261023/balance/main-r2/replay.log",
+      "purpose": "R2 exact whole-result equality on4preselectedstarts;8 additional runs, not unique samples",
+      "sourceBytes": 9619,
+      "archiveBytes": 879,
+      "sourceSHA256": "7ad4629d348bf0dadb4684d2c1bb27c7839f9908acae4146b6ab9f531f17c773",
+      "archiveSHA256": "81aa64bd8991513e4158ef463461ce4d63f2feaf28b95ac3f66dc3fcc94baf20",
+      "gzipMtime": 0,
+      "decompressionVerifiedByteExact": true
+    },
+    {
+      "archive": "archives/r2-natural-one-impression.save.json.gz",
+      "source": "outputs/FUN-V3-20261023/balance/main-r2/natural-impressions/1-impressions-FUNV3-LONG-00-ON_FREE.save.json",
+      "purpose": "Natural R2 validV14 envelope; one public impression; no injected evidence",
+      "sourceBytes": 104618,
+      "archiveBytes": 15881,
+      "sourceSHA256": "cb7fc603097bec8e12f30809086c481f3a43c994ecacbcafe31a5553c6f09cae",
+      "archiveSHA256": "b3ee1295480bb517cbc9e73649293af3bd2f3d9e4964baaefbb3e06be271150e",
+      "gzipMtime": 0,
+      "decompressionVerifiedByteExact": true
+    },
+    {
+      "archive": "archives/r2-natural-two-impressions.save.json.gz",
+      "source": "outputs/FUN-V3-20261023/balance/main-r2/natural-impressions/2-impressions-FUNV3-LONG-05-ON_FIXED_BODY.save.json",
+      "purpose": "Natural R2 validV14 envelope; two public impressions; no injected evidence",
+      "sourceBytes": 128099,
+      "archiveBytes": 17867,
+      "sourceSHA256": "6d6b88e6af5e1820943f8c14c6afef4fadfb837faea4b5913564501bd2a2ed43",
+      "archiveSHA256": "b3b50614be7e6c8d42b1630a335d8594238d68be956ca538b8e0d0a1f86973ac",
+      "gzipMtime": 0,
+      "decompressionVerifiedByteExact": true
+    }
+  ]
+}
