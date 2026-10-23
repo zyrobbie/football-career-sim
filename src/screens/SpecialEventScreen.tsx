@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react'
+import { qualitativeEventPreview } from '../ui/careerEventPreview'
 import { CareerHub } from '../components/CareerHub'
 import { Icon, type IconName } from '../components/Icons'
 import { careerWindowLabel } from '../engine/careerTime'
@@ -92,7 +94,7 @@ export function SpecialEventScreen() {
       <section className={`special-event${event.id.startsWith('V3_') ? ' v3-event' : ''}`} aria-labelledby="special-event-title">
         <header className="career-panel-heading">
           <Icon name={categoryIcons[event.category]} />
-          <h1 id="special-event-title">{event.title}</h1>
+          <h1 id="special-event-title">{record?.eventTitle ?? event.title}</h1>
           <span>{windowLabel} · {event.eyebrow}</span>
         </header>
         {isResult && record ? (
@@ -133,6 +135,8 @@ export function SpecialEventScreen() {
                 </div>
                 <div
                   className={`special-event__choices special-event__choices--setup special-event__choices--${interactionClass}`}
+                  style={{ '--event-choice-count': setup.options.length } as CSSProperties}
+                  data-choice-count={setup.options.length}
                   role="group"
                   aria-label="生涯事件第一步选择"
                 >
@@ -161,6 +165,8 @@ export function SpecialEventScreen() {
                 ) : null}
                 <div
                   className={`special-event__choices special-event__choices--${interactionClass}`}
+                  style={{ '--event-choice-count': visibleChoices.length } as CSSProperties}
+                  data-choice-count={visibleChoices.length}
                   role="group"
                   aria-label="特殊事件选择"
                 >
@@ -175,7 +181,7 @@ export function SpecialEventScreen() {
                       <span>{event.id.startsWith('V3_') ? String.fromCharCode(65 + choiceIndex) : choice.id}</span>
                       <strong>{choice.title}</strong>
                       <small>{choice.description}</small>
-                      <em>{choice.effectPreview}</em>
+                      <em>{qualitativeEventPreview(choice.effectPreview)}</em>
                       {choice.outcomes?.length ? (
                         <div className="special-event__odds" aria-label="可能出现的结果">
                           {choice.outcomes.map((outcome) => (
@@ -191,7 +197,7 @@ export function SpecialEventScreen() {
             )}
             <p className="special-event__note">
               <Icon name="info" />
-              {interactionLabels[event.interactionKind]} · 概率与范围提前显示；刷新不会重新抽取。
+              {interactionLabels[event.interactionKind]} · 仅提示影响方向，具体变化在选择后显示；刷新不会重新抽取。
             </p>
           </>
         )}

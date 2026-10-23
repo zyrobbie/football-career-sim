@@ -6,7 +6,7 @@ import type {
 } from '../models/offPitchStories'
 import { createOffPitchStoryState, V3_STORY_CHAINS, V3_STORY_EVENT_IDS } from '../models/offPitchStories'
 import {
-  activeStoryEventDefinitions, canMentorYoungTeammate, V3_STORY_EVENT_MAP, v3StoriesAreActive,
+  activeStoryEventDefinitions, canMentorYoungTeammate, LEGACY_PRESS_DRINK_EVENT, V3_STORY_EVENT_MAP, v3StoriesAreActive,
 } from '../data/offPitchStories'
 import { CLUBS } from '../data/balance'
 import { createRandom, weightedPick } from './random'
@@ -31,6 +31,13 @@ function sourceForEvent(state: GameState, id: OffPitchStoryEventId): ActiveOffPi
 /** The saved original choice supplies context, never a newly invented sporting result. */
 export function getV3StoryEvent(state: GameState, id: CareerEventId): CareerEventDefinition {
   if (!isV3StoryEventId(id)) throw new Error(`Not a V3 off-pitch event: ${id}`)
+  // Old pending saves had no content snapshot. Keep their original free choices
+  // when they cannot fund the corrected event; new selection requires €400.
+  if (id === 'V3_E01_PRESS_DRINK' && state.pendingCareerEvent?.eventId === id) {
+    const savedChoice = state.pendingCareerEvent.selections.at(-1)
+    const legacySelection = LEGACY_PRESS_DRINK_EVENT.choices.some(choice => choice.id === savedChoice)
+    if (legacySelection || (state.phase === 'SPECIAL_EVENT' && state.cashEuro < 400)) return LEGACY_PRESS_DRINK_EVENT
+  }
   const definition = V3_STORY_EVENT_MAP.get(id)
   if (!definition) throw new Error(`Unknown V3 off-pitch event: ${id}`)
   const source = sourceForEvent(state, id)
@@ -124,7 +131,10 @@ export function recordV3StoryChoice(state: GameState, record: CareerEventRecord)
   if (!v3StoriesAreActive(state) || !isV3StoryEventId(record.eventId) ||
     record.windowIndex !== state.windowIndex || current.completedNodeIds.includes(record.eventId)) return current
   const definition = V3_STORY_EVENT_MAP.get(record.eventId)
-  if (!definition?.choices.some((choice) => choice.id === record.choiceId)) return current
+  const legacyPressChoice = record.eventId === 'V3_E01_PRESS_DRINK' &&
+    record.eventTitle === LEGACY_PRESS_DRINK_EVENT.title &&
+    LEGACY_PRESS_DRINK_EVENT.choices.some((choice) => choice.id === record.choiceId)
+  if (!definition?.choices.some((choice) => choice.id === record.choiceId) && !legacyPressChoice) return current
   if (chainForFirst(record.eventId)) return scheduleV3StoryFollowup(state, record)
   const source = current.activeChain
   const followup = Object.values(V3_STORY_CHAINS).some((chain) => chain.followup === record.eventId)

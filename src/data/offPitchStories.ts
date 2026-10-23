@@ -138,14 +138,22 @@ function event(
   }
 }
 
-/** Twenty fixed, reviewable nodes, all competing for the existing event slot. */
-export const V3_STORY_EVENTS: readonly CareerEventDefinition[] = [
-  event('V3_E01_PRESS_DRINK', 'MEDIA', '发布会桌上，多了一瓶你够不着的饮料。',
+/** Only for an already-pending pre-patch event that cannot fund the new sponsor tradeoff. */
+export const LEGACY_PRESS_DRINK_EVENT = event('V3_E01_PRESS_DRINK', 'MEDIA', '发布会桌上，多了一瓶你够不着的饮料。',
     '工作人员刚摆好桌面，瓶子却正好挡住话筒。主持人还在调试声音，留给你一个轻松的空当。', [
       choice('MOVE', '把瓶子挪到一旁', '先给话筒腾出位置，不把小事变成新闻。', '无费用 · 无数值影响', '你把瓶子移开，主持人试了试话筒，发布会顺利开始。', {}, { persona: 'LOW_KEY' }),
       choice('JOKE', '问它是不是也要接受采访', '用一个小玩笑化解桌面的拥挤。', '媒体关系+1 · 不保证舆论反应', '主持人笑着接过话头，你们把话题带回了足球。', { mediaRelation: 1 }),
       choice('STAFF', '礼貌请工作人员帮忙', '把现场安排交给熟悉流程的人。', '无费用 · 无数值影响', '工作人员重新摆好桌面，你道了声谢，采访照常进行。'),
-    ], (state) => hasFirstTeamAppearance(state) || hasRecordedMediaExperience(state)),
+    ], (state) => hasFirstTeamAppearance(state) || hasRecordedMediaExperience(state))
+
+/** Twenty fixed, reviewable nodes, all competing for the existing event slot. */
+export const V3_STORY_EVENTS: readonly CareerEventDefinition[] = [
+  event('V3_E01_PRESS_DRINK', 'MEDIA', '发布会的矿泉水瓶',
+    '你刚签下个人矿泉水赞助合作。新闻发布会上，你发现身前摆着竞品，镜头已经对准桌面。', [
+      choice('IGNORE', '无视这个矿泉水', '照常回答问题，不打断媒体的采访节奏。', '媒体关系小幅上升 · 赞助收入下降', '你没有理会镜头前的竞品，采访顺畅进行。媒体感谢你的配合，个人赞助商则在本次合作结算中扣减€200。', { mediaRelation: 1 }, { cash: -200 }),
+      choice('TURN', '把矿泉水 logo 转向背面', '照顾自己的赞助合作，但这个动作打断了采访。', '媒体关系小幅下降 · 赞助收入上升', '你把竞品标识转到背面。现场媒体对采访被打断略有不满，个人赞助商因你维护品牌权益，在本次合作结算中追加€400。', { mediaRelation: -1 }, { cash: 400 }),
+      choice('DRINK', '拿起来喝一口', '自然地喝口水，却把竞品带进了特写镜头。', '媒体关系上升 · 赞助收入明显下降', '你拿起竞品喝了一口，媒体得到了自然的现场画面。但个人赞助商认为这损害了品牌权益，在本次合作结算中扣减€400。', { mediaRelation: 2 }, { cash: -400 }),
+    ], (state) => state.cashEuro >= 400 && (hasFirstTeamAppearance(state) || hasRecordedMediaExperience(state))),
   event('V3_E02_AD_TEAMMATE', 'TEAM', '队友模仿起了你广告里的那句台词。',
     '你确实参加过商业合作。今天更衣室有人拿那段广告打趣，还把最后一个字故意拖得很长。', [
       choice('LAUGH', '自己补上下一句台词', '接住玩笑，不让广告成为包袱。', '队内关系+2 · 无费用', '你抢先念完下一句，笑声留在更衣室里，没有发展成新的拍摄任务。', { squadRelation: 2 }, { persona: 'TEAM_FIRST' }),
@@ -250,7 +258,7 @@ export const V3_STORY_EVENTS: readonly CareerEventDefinition[] = [
     ], canMentorYoungTeammate),
   event('V3_C04A_HOMETOWN_CAMP', 'MEDIA', '家乡训练营问，你愿意留下怎样的支持？',
     '组织者正为一场小训练营准备基础用品，也想请你分享一点职业生活经验。对方说，远程参加或这次不来都没有关系。', [
-      choice('DONATE', '捐助一批基础用品', '提供€500，不附带公开宣传的要求。', '花费€500 · 球迷关系+2 · 心理状态+1', '你捐出€500用于基础用品，并说明不要求以个人名义宣传。', { fanRelation: 2, morale: 1 }, { cash: -500, persona: 'LOW_KEY' }),
+      choice('DONATE', '捐助一批基础用品', '自费捐助，不附带公开宣传的要求。', '花费€500 · 球迷关系+2 · 心理状态+1', '你捐出€500用于基础用品，并说明不要求以个人名义宣传。', { fanRelation: 2, morale: 1 }, { cash: -500, persona: 'LOW_KEY' }),
       choice('REMOTE', '安排一次简短远程问答', '付出时间，不需要额外现金。', '球迷关系+2 · 心理状态-1', '你完成了简短远程问答，回答了训练日常的问题，也为此花了一点精力。', { fanRelation: 2, morale: -1 }, { persona: 'TEAM_FIRST' }),
       choice('DECLINE', '诚恳说明这次无法参与', '不随口许诺一个还没确定的日期。', '无费用 · 无数值影响', '你在活动准备前说明无法参与，没有让对方一直等一份未确定的承诺。', {}, { persona: 'LOW_KEY' }),
     ], hasFirstTeamAppearance),

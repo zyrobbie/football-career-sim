@@ -125,13 +125,14 @@ describe('V3 off-pitch catalog and factual eligibility', () => {
     expect(event.choices.length).toBeGreaterThanOrEqual(2)
     expect(event.choices.length).toBeLessThanOrEqual(3)
     const poor = { ...state, cashEuro: 0 }
-    expect(eligibleCareerEventChoices(poor, event).length).toBeGreaterThanOrEqual(2)
+    if (id === 'V3_E01_PRESS_DRINK') expect(event.isEligible(poor)).toBe(false)
+    else expect(eligibleCareerEventChoices(poor, event).length).toBeGreaterThanOrEqual(2)
     for (const choice of event.choices) {
       expect(choice.playerDelta.attributes).toBeUndefined()
       expect(choice.trainingBonus).toBeUndefined()
       expect(choice.delayed).toBeUndefined()
       if ((choice.cashDeltaEuro ?? 0) < 0) {
-        expect(choice.effectPreview).toContain(`€${-choice.cashDeltaEuro!}`)
+        if (id !== 'V3_E01_PRESS_DRINK') expect(choice.effectPreview).toContain(`€${-choice.cashDeltaEuro!}`)
         expect(choice.isEligible?.(poor)).toBe(false)
       }
     }

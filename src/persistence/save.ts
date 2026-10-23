@@ -857,14 +857,14 @@ export function validateGameState(value: unknown): GameState {
   }
   if (
     parsed.pendingCareerEvent &&
-    getCareerEvent(parsed.pendingCareerEvent.eventId).interactionKind !==
+    getCareerEvent(parsed.pendingCareerEvent.eventId, parsed).interactionKind !==
       parsed.pendingCareerEvent.interactionKind
   ) {
     throw new Error('Pending career-event interaction type is invalid.')
   }
   if (parsed.pendingCareerEvent) {
     const pending = parsed.pendingCareerEvent
-    const event = getCareerEvent(pending.eventId)
+    const event = getCareerEvent(pending.eventId, parsed)
     if (event.setup) {
       const route = event.setup.options.find(
         (option) => option.id === pending.variantId,
