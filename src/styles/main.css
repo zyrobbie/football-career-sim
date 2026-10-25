@@ -8681,16 +8681,16 @@ svg {
 }
 
 /* V3.1.1: readable local viewport, never fit the full poster into screen height. */
-.career-poster-reader { width: min(780px, 100%); margin: 0 auto; padding-top: max(16px, env(safe-area-inset-top)); }
-.career-poster-reader__heading { padding: 0 16px 12px; color: var(--paper); }
-.career-poster-reader__heading h1 { margin: 0 0 8px; font-size: 24px; }
-.career-poster-reader__heading p { margin: 0; font-size: 14px; line-height: 1.6; color: #ded7c2; }
+.career-poster-reader { width: min(780px, 100%); margin: 0 auto; background: #f4f0e6; padding-top: max(16px, env(safe-area-inset-top)); }
+.career-poster-reader__heading { padding: 0 16px 12px; color: #153d32; }
+.career-poster-reader__heading h1 { margin: 0 0 8px; font-size: 24px; color: #153d32; }
+.career-poster-reader__heading p { margin: 0; font-size: 14px; line-height: 1.6; color: #59665d; }
 .career-poster-viewport { width: 100%; height: min(76vh, 920px); height: min(76dvh, 920px); min-height: 240px; overflow: auto; border-block: 1px solid var(--gold); background: #f4f0e6; -webkit-overflow-scrolling: touch; }
 .career-poster-viewport img { display: block; width: 100%; height: auto; max-height: none; object-fit: initial; }
 .career-poster-viewport:focus-visible, .retirement-export-preview__image:focus-visible { outline: 3px solid var(--gold); outline-offset: -3px; }
-.career-poster-reader__loading { min-height: 240px; display: grid; place-content: center; gap: 16px; padding: 24px; color: var(--paper); line-height: 1.6; }
+.career-poster-reader__loading { min-height: 240px; display: grid; place-content: center; gap: 16px; padding: 24px; color: #153d32; line-height: 1.6; }
 .retirement-text-archive { margin: 20px auto 0; width: min(1180px, 100%); }
-.retirement-text-archive > summary { padding: 16px; color: var(--paper); cursor: pointer; font-size: 16px; }
+.retirement-text-archive > summary { padding: 16px; color: #153d32; background: #f4f0e6; cursor: pointer; font-size: 16px; }
 .retirement-export-preview { padding: max(8px, env(safe-area-inset-top)) max(0px, env(safe-area-inset-right)) max(8px, env(safe-area-inset-bottom)) max(0px, env(safe-area-inset-left)); }
 .retirement-export-preview__panel { width: min(780px, 100%); height: min(92vh, 1100px); height: min(92dvh, 1100px); min-height: 0; padding: 0; overflow: hidden; gap: 0; }
 .retirement-export-preview__panel > header { padding: 12px 16px; flex: 0 0 auto; }

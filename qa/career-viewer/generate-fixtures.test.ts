@@ -22,7 +22,7 @@ it('generates fresh anonymous CI cases from public game code and explicit consta
   game.player={...generated,attributes:{attack:62,defense:46,physical:65,mental:63},potentials:{attack:80,defense:70,physical:82,mental:81}}
   game.cashEuro=0
   if(game.contract)game.contract={...game.contract,annualSalaryEuro:1200}
-  game.history=game.history.map(entry=>({...entry,stats:{appearances:7,starts:5,minutes:420,goals:2,assists:1,yellowCards:0,redCards:0,averageRating:6.8},endingAttributes:{...game.player!.attributes}}))
+  game.history=game.history.map(entry=>({...entry,clubName:CLUBS.find(club=>club.id===entry.clubId)!.name,stats:{appearances:7,starts:5,minutes:420,goals:2,assists:1,yellowCards:0,redCards:0,averageRating:6.8},endingAttributes:{...game.player!.attributes}}))
   const valid=validateGameState(game)
   expect(buildRetirementSummary(valid).clubs).toHaveLength(count)
   expect(valid.careerEventHistory).toEqual([])

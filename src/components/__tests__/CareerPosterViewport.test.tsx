@@ -22,5 +22,7 @@ describe('readable career viewport', () => {
     expect(css).toContain('height: min(76dvh, 920px)')
     expect(css).toContain('.career-poster-viewport img { display: block; width: 100%; height: auto; max-height: none;')
     expect(css).toContain('height: min(92dvh, 1100px)')
+    expect(css).toContain('.career-poster-reader__heading h1 { margin: 0 0 8px; font-size: 24px; color: #153d32; }')
+    expect(css).toContain('line-height: 1.6; color: #59665d;')
   })
 })
