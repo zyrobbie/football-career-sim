@@ -25,8 +25,11 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Install isolated browser test dependency
-        run: npm install --no-save --package-lock=false @playwright/test@1.56.1
-      - run: npx playwright install --with-deps chromium webkit
+        run: |
+          npm install --prefix "$RUNNER_TEMP/career-browser" --no-package-lock @playwright/test@1.56.1
+          mkdir -p node_modules/@playwright
+          ln -s "$RUNNER_TEMP/career-browser/node_modules/@playwright/test" node_modules/@playwright/test
+      - run: '"$RUNNER_TEMP/career-browser/node_modules/.bin/playwright" install --with-deps chromium webkit'
       - name: Install Chinese system fonts for readable SVG and canvas output
         run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
       - name: Generate fresh synthetic fixtures from repository game factories
@@ -34,6 +37,8 @@ jobs:
       - name: Typecheck and production build
         run: npm run build
       - name: Chromium matrix and mobile WebKit PNG export regression
+        env:
+          BASE_URL: ${{ endsWith(github.ref, '-live') && 'https://footballcareer.zyrobbie.site/' || '' }}
         run: node qa/career-viewer/run.mjs
       - name: Upload browser evidence
         if: always()
