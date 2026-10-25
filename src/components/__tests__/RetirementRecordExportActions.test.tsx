@@ -12,7 +12,7 @@ const exportActionsSource = readFileSync(
 )
 
 describe('retirement record preview', () => {
-  it('shows one long-pressable image without redundant share or download buttons', () => {
+  it('shows a scrollable long-pressable image and explicit accessible download', () => {
     const markup = renderToStaticMarkup(
       <RetirementRecordPreview
         previewUrl="blob:retirement-record"
@@ -28,8 +28,19 @@ describe('retirement record preview', () => {
     expect(markup).toContain('draggable="false"')
     expect(markup).toContain('data-export-file-size="123456"')
     expect(markup).not.toContain('保存到相册 / 分享')
-    expect(markup).not.toContain('下载图片')
+    expect(markup).toContain('下载图片')
+    expect(markup).toContain('data-career-preview-scroll')
+    expect(markup).toContain('tabindex="0"')
+    expect(markup).toContain('download=')
   })
+})
+
+it('explains multipart output and lets the player select a numbered image', () => {
+  const markup = renderToStaticMarkup(<RetirementRecordPreview previewUrl="blob:part" playerName="Robbie" fileSize={42} pageCount={4} pageIndex={2} onPageChange={vi.fn()} onClose={vi.fn()} />)
+  expect(markup).toContain('选择生涯图片')
+  expect(markup).toContain('第 3 / 4 张')
+  expect(markup).toContain('下载当前图片')
+  expect(markup).toContain('完整内容仍可在浏览框连续查看')
 })
 
 describe('retirement record actions', () => {

@@ -4,7 +4,8 @@ export const RETIREMENT_EXPORT_WIDTH = 1180
 export const RETIREMENT_MAX_CANVAS_PIXELS = 12_000_000
 export const RETIREMENT_EXPORT_BOTTOM_PADDING = 28
 const MAX_EXPORT_SCALE = 2
-const MIN_EXPORT_SCALE = 0.25
+// Never silently sacrifice readability to squeeze an arbitrarily long archive into one bitmap.
+export const MIN_EXPORT_SCALE = 1.25
 export const RETIREMENT_EXPORT_IMAGE_TIMEOUT_MS = 5_000
 export const RETIREMENT_EXPORT_FONT_TIMEOUT_MS = 5_000
 
@@ -66,7 +67,7 @@ export function retirementExportErrorMessage(error: unknown): string {
     return '浏览器阻止了图片生成。请退出无痕模式或关闭相关限制后重试。'
   }
   if (error instanceof Error && /canvas|memory|size/i.test(error.message)) {
-    return '这段生涯太长，当前设备无法生成一张完整图片。'
+    return '为保证清晰度，当前设备无法生成这张完整长图。你仍可在生涯档案中查看全部记录。'
   }
   return '生涯长图生成失败，请再试一次。'
 }
@@ -260,7 +261,7 @@ export function cropRetirementExportCanvas(source: HTMLCanvasElement, width: num
 export async function renderRetirementRecordPng(target: HTMLElement): Promise<Blob> {
   await waitForExportFonts(document.fonts)
   const clone = target.cloneNode(true) as HTMLElement
-  clone.classList.add('retirement-export-target', 'is-exporting')
+  clone.classList.add('is-exporting')
   clone.style.cssText = `position:absolute;left:-20000px;top:0;width:${RETIREMENT_EXPORT_WIDTH}px;height:auto;min-height:0;max-height:none;overflow:visible;pointer-events:none;`
   document.body.append(clone)
 
@@ -275,7 +276,7 @@ export async function renderRetirementRecordPng(target: HTMLElement): Promise<Bl
     if (!scale) throw new Error('Canvas size exceeds memory budget.')
     const html2canvas = (await import('html2canvas')).default
     let lastError: unknown
-    for (const attemptScale of [scale, Math.max(MIN_EXPORT_SCALE, scale * 0.72)]) {
+    for (const attemptScale of [...new Set([scale, Math.max(MIN_EXPORT_SCALE, Math.floor(scale * 0.85 * 100) / 100)])]) {
       try {
         if (canvasPixels(width, height, attemptScale) > RETIREMENT_MAX_CANVAS_PIXELS) continue
         const canvas = await html2canvas(clone, {
@@ -286,7 +287,7 @@ export async function renderRetirementRecordPng(target: HTMLElement): Promise<Bl
           width,
           height,
           // Keep html2canvas in the same media-query viewport as the native
-          // clone measurement; only the export sheet itself is fixed at 1180px.
+          // clone measurement; only the export poster itself is fixed at 1180px.
           windowWidth: document.documentElement.clientWidth,
           windowHeight: document.documentElement.clientHeight,
         })

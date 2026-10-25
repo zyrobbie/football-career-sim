@@ -2,7 +2,8 @@ import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
 const css = readFileSync(new URL('../main.css', import.meta.url), 'utf8')
 const screen = readFileSync(new URL('../../screens/SpecialEventScreen.tsx', import.meta.url), 'utf8')
-const patch = css.slice(css.indexOf('/* Shared compact event scale:'))
+// Scope event typography assertions to its patch, not unrelated later viewer styles.
+const patch = css.slice(css.indexOf('/* Shared compact event scale:')).split('/* V3.1.1:')[0]!
 describe('user feedback: compact horizontal choices and unified scale', () => {
   it('uses actual visible option count, including both multistep stages', () => {
     expect(screen).toContain("'--event-choice-count': setup.options.length")

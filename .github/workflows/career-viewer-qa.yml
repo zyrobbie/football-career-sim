@@ -1,0 +1,45 @@
+name: Career viewer browser QA
+
+on:
+  push:
+    branches:
+      - 'candidate/career-viewer-3.1.1-*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: career-viewer-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  browser-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install isolated browser test dependency
+        run: npm install --no-save --package-lock=false @playwright/test@1.56.1
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Install Chinese system fonts for readable SVG and canvas output
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+      - name: Generate fresh synthetic fixtures from repository game factories
+        run: npx vitest run --config qa/career-viewer/vitest.config.ts
+      - name: Typecheck and production build
+        run: npm run build
+      - name: Chromium matrix and mobile WebKit PNG export regression
+        run: node qa/career-viewer/run.mjs
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: career-viewer-evidence-${{ github.sha }}
+          path: qa/career-viewer/artifacts/
+          if-no-files-found: warn
+          retention-days: 14

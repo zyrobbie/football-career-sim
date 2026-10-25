@@ -51,11 +51,13 @@ describe('retirement record export V1', () => {
     expect(canvasPixels(RETIREMENT_EXPORT_WIDTH, 3600, scale!)).toBeLessThanOrEqual(RETIREMENT_MAX_CANVAS_PIXELS)
   })
 
-  it('reduces scale for long careers and rejects only impossible single-image sizes', () => {
+  it('reduces scale within a legibility floor and rejects unreadable single-image sizes', () => {
     const ordinary = calculateRetirementExportScale({ width: RETIREMENT_EXPORT_WIDTH, height: 3600 })!
-    const longCareer = calculateRetirementExportScale({ width: RETIREMENT_EXPORT_WIDTH, height: 26000 })!
+    const longCareer = calculateRetirementExportScale({ width: RETIREMENT_EXPORT_WIDTH, height: 6000 })!
     expect(longCareer).toBeLessThan(ordinary)
-    expect(canvasPixels(RETIREMENT_EXPORT_WIDTH, 26000, longCareer)).toBeLessThanOrEqual(RETIREMENT_MAX_CANVAS_PIXELS)
+    expect(longCareer).toBeGreaterThanOrEqual(1.25)
+    expect(calculateRetirementExportScale({ width: RETIREMENT_EXPORT_WIDTH, height: 26000 })).toBeNull()
+    expect(canvasPixels(RETIREMENT_EXPORT_WIDTH, 6000, longCareer)).toBeLessThanOrEqual(RETIREMENT_MAX_CANVAS_PIXELS)
     expect(calculateRetirementExportScale({ width: RETIREMENT_EXPORT_WIDTH, height: 180000 })).toBeNull()
   })
 
