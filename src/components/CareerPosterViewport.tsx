@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import type { GameState } from '../models/game'
 import type { CareerPosterSvg } from '../export/careerPosterSvg'
 import { prepareCareerPoster } from '../export/careerPosterExport'
@@ -23,17 +23,19 @@ export function useCareerPoster(game: GameState) {
   return { poster, previewUrl, error, retry: () => setAttempt(value => value + 1) }
 }
 
-export function CareerPosterViewport({ previewUrl, playerName, error, onRetry }: {
+export function CareerPosterViewport({ previewUrl, playerName, error, onRetry, actions }: {
   previewUrl: string | null
   playerName: string
   error?: boolean
   onRetry?: () => void
+  actions?: ReactNode
 }) {
   return <section className="career-poster-reader" aria-label="生涯长图浏览框">
     <header className="career-poster-reader__heading">
       <h1>我的职业生涯</h1>
       <p id="career-poster-scroll-help">在浏览框内上下滑动，查看完整生涯。也可查看下方文字版档案。</p>
     </header>
+    {actions}
     {previewUrl ? <div className="career-poster-viewport" data-career-viewer-scroll tabIndex={0}
       role="region" aria-label="可上下滚动的生涯长图" aria-describedby="career-poster-scroll-help">
       <img data-career-viewer-image src={previewUrl} alt={`${playerName}的完整职业生涯长图；完整文字内容位于下方文字版档案`} draggable={false} />

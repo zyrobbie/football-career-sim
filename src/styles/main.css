@@ -8703,3 +8703,8 @@ svg {
 .retirement-export-preview__image { flex: 1 1 auto; min-height: 0; max-height: none; width: 100%; overflow: auto; -webkit-overflow-scrolling: touch; }
 .retirement-export-preview__image img { width: 100%; height: auto; max-height: none; object-fit: initial; }
 @media (max-height: 480px) { .career-poster-viewport { min-height: 160px; } .retirement-export-preview__panel { height: 96dvh; } .retirement-export-preview__tools { max-height: 30dvh; overflow: auto; } }
+
+/* Archive actions stay above the nested reader, visible before any poster scrolling. */
+.career-poster-reader .retirement-export-actions { padding: 0 16px 12px; background: #f4f0e6; }
+.career-poster-reader .retirement-export-actions .button--secondary { color: #153d32; border-color: #a58443; }
+.career-poster-reader .retirement-export-actions > p { color: #93483f; }

@@ -80,7 +80,15 @@ function RetirementArchive({ onReturnHome }: { onReturnHome: () => void }) {
   return (
     <>
     <main className="retirement-archive">
-      <CareerPosterViewport previewUrl={posterState.previewUrl} playerName={player.name} error={posterState.error} onRetry={posterState.retry} />
+      <CareerPosterViewport previewUrl={posterState.previewUrl} playerName={player.name} error={posterState.error} onRetry={posterState.retry} actions={
+    <RetirementRecordExportActions
+      game={game}
+      preparedPoster={posterState.poster}
+      targetRef={exportTargetRef}
+      playerName={player.name}
+      onReturnHome={onReturnHome}
+    />
+      } />
       <details className="retirement-text-archive">
         <summary>查看文字版完整档案</summary>
       <div className="retirement-export-sheet" ref={exportTargetRef} data-retirement-export-target>
@@ -304,13 +312,7 @@ function RetirementArchive({ onReturnHome }: { onReturnHome: () => void }) {
       </div>
       </details>
     </main>
-    <RetirementRecordExportActions
-      game={game}
-      preparedPoster={posterState.poster}
-      targetRef={exportTargetRef}
-      playerName={player.name}
-      onReturnHome={onReturnHome}
-    />
+
     </>
   )
 }

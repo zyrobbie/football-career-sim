@@ -72,6 +72,8 @@ try{
   try{
    const game=JSON.parse(await readFile(resolve(here,'generated-fixtures/retired-8clubs.json'),'utf8'));await seed(page,game)
    row.vector=await inspectVector(page,game,engine+'-'+width+'-vector');row.title=await page.title();assert(row.title);assert.equal(await page.locator('vite-error-overlay').count(),0)
+   row.initialControls=[]
+   for(const label of ['保存我的职业生涯','回到初始界面']){const control=page.getByRole('button',{name:label,exact:true}),box=await control.boundingBox();assert(box,label+' must render');assert(box.y>=0&&box.y+box.height<=height,label+' must be initially reachable without scrolling poster');row.initialControls.push({label,box})}
    row.archiveGeometry=await viewerGeometry(page,page,width,engine+'-'+width+'-archive',true)
    const stored=await page.evaluate(()=>localStorage.getItem('career_save_current'));await shot(page,`${engine}-${width}-archive`)
    let dialog=await open(page);row.geometry=await viewerGeometry(page,dialog,width,`${engine}-${width}-viewer`)
