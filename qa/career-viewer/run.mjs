@@ -36,6 +36,17 @@ async function downloadPng(page,dialog,name){
  assert.equal(await page.evaluate(()=>window.__shareCalls.length),shareBefore,'download must not invoke share');assert.equal(createHash('sha256').update(bytes).digest('hex'),target.sha256,'download equals actual PNG img, not visible page screenshot');assert.equal(meta.width,target.width);assert.equal(meta.height,target.height);assert.equal(meta.format,'png');assert(meta.width>=900);assert(meta.width*meta.height<=12000000)
  return {path:'downloads/'+name+'.png',bytes:bytes.length,width:meta.width,height:meta.height,sha256:createHash('sha256').update(bytes).digest('hex')}
 }
+async function openOriginalImage(page,dialog,label){
+ const expected=await inspectPngTarget(dialog),pending=page.waitForEvent('popup',{timeout:30000})
+ await dialog.locator('[data-png-original]').click();const popup=await pending
+ try{
+  await popup.waitForLoadState('domcontentloaded');const img=popup.locator('img').first();await img.waitFor();await img.evaluate(el=>el.decode())
+  const actual=await img.evaluate(async el=>{const blob=await(await fetch(el.src)).blob(),digest=await crypto.subtle.digest('SHA-256',await blob.arrayBuffer());return {mime:blob.type,width:el.naturalWidth,height:el.naturalHeight,sha256:[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('')}})
+  assert.equal(actual.mime,'image/png');assert.equal(actual.sha256,expected.sha256);assert.equal(actual.width,expected.width);assert.equal(actual.height,expected.height)
+  assert.equal(await popup.locator('[role="dialog"],button,[data-career-preview-scroll]').count(),0,'raw PNG tab must not contain app toolbar or preview frame')
+  await shot(popup,label+'-original-png-tab');return {...actual,standaloneNoAppToolbar:true,notNativePhotoLibraryTest:true}
+ }finally{await popup.close()}
+}
 async function exerciseSharing(page,dialog){
  const share=dialog.locator('[data-png-system-save]'),before=await page.evaluate(()=>window.__shareCalls.length)
  let automaticDownloads=0;const listener=()=>automaticDownloads++;page.on('download',listener)
@@ -110,6 +121,7 @@ try{
    assert.equal(await page.evaluate(()=>document.fonts.status),'loaded')
    await dialog.getByRole('button',{name:'关闭生涯长图预览',exact:true}).focus();await page.keyboard.press('Shift+Tab');assert(await dialog.evaluate(el=>el.contains(document.activeElement)),'focus trap backwards');await page.keyboard.press('Tab');assert(await dialog.getByRole('button',{name:'关闭生涯长图预览',exact:true}).evaluate(el=>el===document.activeElement),'focus trap forwards')
    row.pngTarget=await inspectPngTarget(dialog);row.share=await exerciseSharing(page,dialog);
+   if(width===390)row.originalTab=await openOriginalImage(page,dialog,engine+'-'+width);
    row.download=await downloadPng(page,dialog,`${engine}-${width}-actual-8clubs`);row.qr=await decodeFooter(row.download);assert.equal(row.qr,'https://footballcareer.zyrobbie.site/')
    await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});assert(await page.getByRole('button',{name:'保存我的职业生涯',exact:true}).evaluate(el=>el===document.activeElement),'focus restored')
    dialog=await open(page);await dialog.getByRole('button',{name:'关闭生涯长图预览',exact:true}).click();await dialog.waitFor({state:'hidden'})
