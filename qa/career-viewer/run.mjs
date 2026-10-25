@@ -16,14 +16,39 @@ const report={synthetic:true,url,started:new Date().toISOString(),results:[],bro
 let server,browser
 const sleep=ms=>new Promise(r=>setTimeout(r,ms))
 async function shot(page,name){await page.screenshot({path:resolve(out,name+'.png'),fullPage:false})}
+async function inspectPngTarget(dialog){
+ const data=await dialog.locator('[data-png-save-preview]').evaluate(async img=>{
+  await img.decode();const blob=await(await fetch(img.src)).blob(),bytes=new Uint8Array(await blob.arrayBuffer())
+  const digest=await crypto.subtle.digest('SHA-256',bytes),original=document.querySelector('[data-png-original]'),originalBlob=await(await fetch(original.href)).blob(),originalBytes=new Uint8Array(await originalBlob.arrayBuffer()),originalDigest=await crypto.subtle.digest('SHA-256',originalBytes)
+  const box=img.getBoundingClientRect(),region=img.closest('[data-career-preview-scroll]').getBoundingClientRect()
+  const x=Math.max(box.left,region.left)+Math.min(box.width,region.width)/2,y=Math.max(box.top,region.top)+Math.min(region.height,80)/2
+  return {pngContextMenuAllowed:img.dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true})),originalMime:originalBlob.type,originalTarget:original.target,originalSha256:[...new Uint8Array(originalDigest)].map(v=>v.toString(16).padStart(2,'0')).join(''),mime:blob.type,srcPrefix:img.src.slice(0,30),magic:[...bytes.slice(0,8)],width:img.naturalWidth,height:img.naturalHeight,sha256:[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join(''),hitImage:document.elementFromPoint(x,y)===img,pointerEvents:getComputedStyle(img).pointerEvents,touchCallout:getComputedStyle(img).getPropertyValue('-webkit-touch-callout')}
+ })
+ assert(data.pngContextMenuAllowed,'PNG native long-press/context menu is not cancelled');assert.equal(data.originalMime,'image/png');assert.equal(data.originalTarget,'_blank');assert.equal(data.originalSha256,data.sha256,'original link is same complete PNG');assert.equal(data.mime,'image/png');assert(data.srcPrefix.startsWith('data:image/png;base64,'));assert.deepEqual(data.magic,[137,80,78,71,13,10,26,10]);assert(data.width>=900&&data.height>data.width);assert(data.hitImage,'long-press target is image, not toolbar/overlay');assert.notEqual(data.pointerEvents,'none');assert.notEqual(data.touchCallout,'none');return data
+}
 async function downloadPng(page,dialog,name){
+ const target=await inspectPngTarget(dialog),shareBefore=await page.evaluate(()=>window.__shareCalls.length)
  const wait=page.waitForEvent('download',{timeout:60000})
- await dialog.getByRole('link',{name:/^下载(当前图片|图片)$/}).click()
+ await dialog.locator('[data-png-download]').click()
  const download=await wait;assert.equal(await download.failure(),null)
  const path=resolve(out,'downloads',name+'.png');await download.saveAs(path)
  const bytes=await readFile(path),meta=await sharp(bytes).metadata()
- assert.equal(meta.format,'png');assert(meta.width>=900);assert(meta.width*meta.height<=12000000)
+ assert.equal(await page.evaluate(()=>window.__shareCalls.length),shareBefore,'download must not invoke share');assert.equal(createHash('sha256').update(bytes).digest('hex'),target.sha256,'download equals actual PNG img, not visible page screenshot');assert.equal(meta.width,target.width);assert.equal(meta.height,target.height);assert.equal(meta.format,'png');assert(meta.width>=900);assert(meta.width*meta.height<=12000000)
  return {path:'downloads/'+name+'.png',bytes:bytes.length,width:meta.width,height:meta.height,sha256:createHash('sha256').update(bytes).digest('hex')}
+}
+async function exerciseSharing(page,dialog){
+ const share=dialog.locator('[data-png-system-save]'),before=await page.evaluate(()=>window.__shareCalls.length)
+ let automaticDownloads=0;const listener=()=>automaticDownloads++;page.on('download',listener)
+ for(const mode of ['cancel','fail']){
+  await page.evaluate(mode=>{window.__shareMode=mode},mode);await share.click();await page.waitForTimeout(150)
+  assert(await share.isEnabled(),mode+' leaves retry available');assert(await dialog.locator('[data-png-download]').isVisible());assert.equal(automaticDownloads,0,mode+' must not silently download')
+ }
+ await page.evaluate(()=>{window.__shareMode='pending'});await share.click();assert(await share.isDisabled(),'share reentry disabled while sheet pending')
+ await share.evaluate(el=>el.click());assert.equal(await page.evaluate(()=>window.__shareCalls.length),before+3,'no duplicate share')
+ await page.evaluate(()=>window.__shareResolve());await page.waitForTimeout(100);assert(await share.isEnabled())
+ const calls=await page.evaluate(before=>window.__shareCalls.slice(before),before)
+ assert.equal(calls.length,3);for(const call of calls){assert.deepEqual(call.keys,['files']);assert.equal(call.files.length,1);assert.equal(call.files[0].type,'image/png');assert(call.files[0].size>10000);assert(call.files[0].name.endsWith('.png'))}
+ const fileHash=await page.evaluate(async()=>{const digest=await crypto.subtle.digest('SHA-256',await window.__lastSharedFile.arrayBuffer());return [...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,'0')).join('')});assert.equal(fileHash,(await inspectPngTarget(dialog)).sha256,'share File equals original PNG');page.off('download',listener);return {stubbed:true,notNativePhotoLibraryTest:true,cancelNoDownload:true,errorNoDownload:true,reentryPrevented:true,calls}
 }
 async function decodeFooter(png){
  const path=resolve(out,png.path),meta=await sharp(path).metadata(),height=Math.min(1200,meta.height)
@@ -41,6 +66,7 @@ async function open(page){
  const image=dialog.locator('img');await image.waitFor();await image.evaluate(async el=>{await el.decode()});return dialog
 }
 async function inspectVector(page,game,label){
+ const prevented=await page.locator('[data-career-viewer-image]').evaluate(img=>!img.dispatchEvent(new MouseEvent('contextmenu',{bubbles:true,cancelable:true})));assert(prevented,'SVG reader must not masquerade as save target')
  const evidence=await page.locator('[data-career-viewer-image]').evaluate(async img=>{
   const svg=await(await fetch(img.src)).text(),doc=new DOMParser().parseFromString(svg,'image/svg+xml')
   return {svg,text:[...doc.querySelectorAll('text')].map(n=>n.textContent).join(''),unsafe:doc.querySelectorAll('script,foreignObject,parsererror').length,external:[...doc.querySelectorAll('image')].filter(n=>!n.getAttribute('href')?.startsWith('data:image/')).length,width:Number(doc.documentElement.getAttribute('width')),height:Number(doc.documentElement.getAttribute('height')),imageCount:doc.querySelectorAll('image').length}
@@ -67,7 +93,11 @@ try{
  browser=await kind.launch({headless:true});report.browser=browser.version()
  for(const [width,height] of sizes){
   const row={engine,viewport:[width,height],errors:[],failedRequests:[],passed:false};report.results.push(row)
-  const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,locale:'zh-CN',acceptDownloads:true});const page=await context.newPage()
+  const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,locale:'zh-CN',acceptDownloads:true});await context.addInitScript(()=>{
+   window.__shareCalls=[];window.__shareMode='cancel';window.__shareResolve=null
+   Object.defineProperty(navigator,'canShare',{configurable:true,value:data=>Array.isArray(data?.files)&&data.files.every(f=>f instanceof File&&f.type==='image/png')})
+   Object.defineProperty(navigator,'share',{configurable:true,value:async data=>{window.__lastSharedFile=data.files?.[0];window.__shareCalls.push({keys:Object.keys(data),files:data.files?.map(f=>({name:f.name,type:f.type,size:f.size}))});if(window.__shareMode==='pending')return await new Promise(resolve=>window.__shareResolve=resolve);if(window.__shareMode==='cancel')throw new DOMException('Synthetic user cancelled','AbortError');if(window.__shareMode==='fail')throw new DOMException('Synthetic blocked','NotAllowedError')}})
+  });const page=await context.newPage()
   page.on('pageerror',e=>row.errors.push(String(e)));page.on('console',m=>{if(m.type()==='error')row.errors.push(m.text())});page.on('response',r=>{if(r.status()>=400&&!r.url().endsWith('favicon.ico'))row.failedRequests.push({url:r.url(),status:r.status()})})
   try{
    const game=JSON.parse(await readFile(resolve(here,'generated-fixtures/retired-8clubs.json'),'utf8'));await seed(page,game)
@@ -79,6 +109,7 @@ try{
    let dialog=await open(page);row.geometry=await viewerGeometry(page,dialog,width,`${engine}-${width}-viewer`)
    assert.equal(await page.evaluate(()=>document.fonts.status),'loaded')
    await dialog.getByRole('button',{name:'关闭生涯长图预览',exact:true}).focus();await page.keyboard.press('Shift+Tab');assert(await dialog.evaluate(el=>el.contains(document.activeElement)),'focus trap backwards');await page.keyboard.press('Tab');assert(await dialog.getByRole('button',{name:'关闭生涯长图预览',exact:true}).evaluate(el=>el===document.activeElement),'focus trap forwards')
+   row.pngTarget=await inspectPngTarget(dialog);row.share=await exerciseSharing(page,dialog);
    row.download=await downloadPng(page,dialog,`${engine}-${width}-actual-8clubs`);row.qr=await decodeFooter(row.download);assert.equal(row.qr,'https://footballcareer.zyrobbie.site/')
    await page.keyboard.press('Escape');await dialog.waitFor({state:'hidden'});assert(await page.getByRole('button',{name:'保存我的职业生涯',exact:true}).evaluate(el=>el===document.activeElement),'focus restored')
    dialog=await open(page);await dialog.getByRole('button',{name:'关闭生涯长图预览',exact:true}).click();await dialog.waitFor({state:'hidden'})
@@ -95,7 +126,7 @@ try{
     const longDialog=await open(page),select=longDialog.getByRole('combobox',{name:'选择生涯图片',exact:true})
     await select.waitFor();const count=await select.locator('option').count();assert(count>1);row.parts=[]
     for(let i=0;i<count;i++){
-     if(i){await select.selectOption(String(i));await longDialog.getByRole('link',{name:'下载当前图片',exact:true}).waitFor({timeout:90000});await longDialog.locator('img').evaluate(el=>el.decode())}
+     if(i){await select.selectOption(String(i));await longDialog.locator('[data-png-download]').waitFor({timeout:90000});await longDialog.locator('img').evaluate(el=>el.decode())}
      assert.equal(await select.inputValue(),String(i));await shot(page,'32clubs-part-'+(i+1))
      row.parts.push(await downloadPng(page,longDialog,'32clubs-part-'+(i+1)))
     }

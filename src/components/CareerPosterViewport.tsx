@@ -33,12 +33,12 @@ export function CareerPosterViewport({ previewUrl, playerName, error, onRetry, a
   return <section className="career-poster-reader" aria-label="生涯长图浏览框">
     <header className="career-poster-reader__heading">
       <h1>我的职业生涯</h1>
-      <p id="career-poster-scroll-help">在浏览框内上下滑动，查看完整生涯。也可查看下方文字版档案。</p>
+      <p id="career-poster-scroll-help">在浏览框内上下滑动，查看完整生涯。保存图片请点“保存我的职业生涯”，不要长按此浏览图。</p>
     </header>
     {actions}
     {previewUrl ? <div className="career-poster-viewport" data-career-viewer-scroll tabIndex={0}
       role="region" aria-label="可上下滚动的生涯长图" aria-describedby="career-poster-scroll-help">
-      <img data-career-viewer-image src={previewUrl} alt={`${playerName}的完整职业生涯长图；完整文字内容位于下方文字版档案`} draggable={false} />
+      <img onContextMenu={event => event.preventDefault()} data-career-viewer-image src={previewUrl} alt={`${playerName}的完整职业生涯长图；完整文字内容位于下方文字版档案`} draggable={false} />
     </div> : <div className="career-poster-reader__loading" role={error ? 'alert' : 'status'}>
       {error ? <>长图暂时无法载入，你仍可查看下方完整文字档案。<button type="button" onClick={onRetry}>重新载入长图</button></> : '正在载入生涯长图…'}
     </div>}
