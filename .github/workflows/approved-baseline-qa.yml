@@ -1,0 +1,51 @@
+name: Approved edits exact baseline diagnosis
+on:
+  push:
+    branches: ['candidate/approved-baseline-*']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: approved-baseline-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  component-layout:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Render exact restored-baseline desktop arrival with the same anonymous fixture
+        run: |
+          git fetch --depth=1 origin eb2f252f21a97d811e4536c2d2e8436915b4db23
+          git worktree add --detach "$RUNNER_TEMP/approved-baseline" eb2f252f21a97d811e4536c2d2e8436915b4db23
+          mkdir -p "$RUNNER_TEMP/approved-baseline/qa"
+          cp -R qa/approved-edits "$RUNNER_TEMP/approved-baseline/qa/approved-edits"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/approved-baseline/node_modules"
+          (cd "$RUNNER_TEMP/approved-baseline" && npx vitest run --config qa/approved-edits/vitest.config.ts)
+          mkdir -p /tmp/approved-baseline-html
+          cp "$RUNNER_TEMP/approved-baseline/qa/approved-edits/generated/"*.html /tmp/approved-baseline-html/
+      - name: Render fresh anonymous component-only scenarios
+        run: npx vitest run --config qa/approved-edits/vitest.config.ts
+      - run: for f in /tmp/approved-baseline-html/*.html; do cp "$f" "qa/approved-edits/generated/$(basename "$f" .html)-baseline.html"; done
+      - name: Install isolated browser dependency
+        run: |
+          npm install --prefix "$RUNNER_TEMP/layout-browser" --no-package-lock @playwright/test@1.56.1
+          mkdir -p node_modules/@playwright
+          ln -s "$RUNNER_TEMP/layout-browser/node_modules/@playwright/test" node_modules/@playwright/test
+          "$RUNNER_TEMP/layout-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Chinese font support
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+      - name: 320 to 430 CSS pixels and text-only 200 percent layout checks
+        run: node qa/approved-baseline/run.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: approved-baseline-${{ github.sha }}
+          path: qa/approved-baseline/artifacts/
+          if-no-files-found: warn
+          retention-days: 14
