@@ -21,8 +21,18 @@ jobs:
       - run: npm ci
       - run: npm run test:run
       - run: npm run build
+      - name: Render exact restored-baseline desktop arrival with the same anonymous fixture
+        run: |
+          git fetch --depth=1 origin eb2f252f21a97d811e4536c2d2e8436915b4db23
+          git worktree add --detach "$RUNNER_TEMP/approved-baseline" eb2f252f21a97d811e4536c2d2e8436915b4db23
+          mkdir -p "$RUNNER_TEMP/approved-baseline/qa"
+          cp -R qa/approved-edits "$RUNNER_TEMP/approved-baseline/qa/approved-edits"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$RUNNER_TEMP/approved-baseline/node_modules"
+          (cd "$RUNNER_TEMP/approved-baseline" && npx vitest run --config qa/approved-edits/vitest.config.ts)
+          cp "$RUNNER_TEMP/approved-baseline/qa/approved-edits/generated/arrival.html" /tmp/approved-arrival-baseline.html
       - name: Render fresh anonymous component-only scenarios
         run: npx vitest run --config qa/approved-edits/vitest.config.ts
+      - run: cp /tmp/approved-arrival-baseline.html qa/approved-edits/generated/arrival-baseline.html
       - name: Install isolated browser dependency
         run: |
           npm install --prefix "$RUNNER_TEMP/layout-browser" --no-package-lock @playwright/test@1.56.1

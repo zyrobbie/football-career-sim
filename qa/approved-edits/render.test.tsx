@@ -24,13 +24,14 @@ function write(name:string, game:GameState, node:React.ReactNode) {
  const css=['src/styles/main.css','src/styles/approved-edits.css'].filter(existsSync).map(p=>readFileSync(p,'utf8')).join('\n')
  const markup=renderToStaticMarkup(<CareerNavigationProvider careerKey="isolated-layout-test"><ClubVisualThemeProvider game={game}>{node}</ClubVisualThemeProvider></CareerNavigationProvider>)
  expect(markup.length).toBeGreaterThan(1000)
+ if(name==='training'){expect(markup).toContain('重点练身体：');expect(markup).toContain('提升身体素质')}
  if(name==='report'){expect(markup).not.toContain('请先完成当前进度');expect(markup).toContain('button--primary')}
  writeFileSync(resolve(output,name+'.html'),`<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anonymous component layout QA</title><style>${css}</style></head><body><div id="root">${markup}</div></body></html>`)
 }
 test('generate only fresh anonymous server-rendered component layouts, never user saves',()=>{
  mkdirSync(output,{recursive:true})
  const base=()=>{const g=createEntertainmentV3Game(26,'eng_arsenal','PHASE1-SSR-20261029');g.player!.name='测试球员甲';return g}
- const youth=()=>{const g=base();g.windowIndex=2;g.teamLevel='YOUTH';g.youthRole='ROTATION';g.firstTeamRole=null;g.contract=null;g.firstTeamProgress.attention=32;g.firstTeamProgress.status='WATCHLIST';g.trainingFocus='PHYSICAL';g.developmentApproach='STEADY';return g}
+ const youth=()=>{const g=base();g.windowIndex=2;g.teamLevel='YOUTH';g.youthRole='ROTATION';g.firstTeamRole=null;g.contract=null;g.firstTeamProgress.attention=32;g.firstTeamProgress.status='WATCHLIST';g.trainingFocus='physical';g.developmentApproach='STEADY';return g}
  write('training',youth(),<TrainingPlanScreen />)
  const academy=youth();academy.selectedClubId=null;academy.phase='ACADEMY_OFFERS';write('academy',academy,<AcademyOffersScreen />)
  const arrival=youth();arrival.phase='ARRIVAL_EVENT';write('arrival',arrival,<ArrivalScreen />)

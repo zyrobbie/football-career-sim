@@ -8720,13 +8720,13 @@ svg {
 
 /* V3.1.3 — only the seven user-approved local layout amendments.
    01–02 are desktop-only; 03–07 retain the approved mobile column counts. */
-@media (min-width: 761px) {
+@media (min-width: 821px) {
   .career-workspace--stack.career-workspace--report { row-gap: 12px; }
   .career-workspace--stack.career-workspace--report > .career-active { padding-top: 14px; }
   .career-report .report-side section { padding-bottom: 12px; margin-bottom: 12px; }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 520px) {
   /* 03: preserve all five comparison fields and the three invitation columns. */
   .career-offers .offer-column { padding-top: 0; padding-bottom: 3px; }
   .career-offers .offer-column > header {
@@ -8738,10 +8738,18 @@ svg {
   .career-offers .offer-column.is-selected > header { background: #e4eddf; }
   .career-offers .offer-column__selected { background: transparent; color: var(--ink); }
   .career-offers .offer-column__value { padding-block: 2px; }
+  .career-offers .offer-column header strong,
+  .career-offers .offer-column header small,
+  .career-offers .offer-column__value strong {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
+  }
 
   /* 04A: one continuous identity band, player and team share both row baselines.
      Natural row heights deliberately accommodate long names and large cash. */
-  .career-overview { grid-template-columns: 48px minmax(0, 1fr) minmax(64px, .28fr); }
+  .career-overview { grid-template-columns: minmax(48px, max-content) minmax(0, 1fr) minmax(64px, .28fr); }
   .career-overview > .career-overview__overall { padding-inline: 4px; }
   .career-overview > .career-overview__identity {
     display: grid;
@@ -8770,6 +8778,7 @@ svg {
     min-width: 0;
     margin: 0;
     gap: 4px;
+    align-items: baseline;
     font-size: 15px;
     line-height: 1.35;
     overflow: visible;
@@ -8777,7 +8786,7 @@ svg {
     white-space: normal;
   }
   .career-overview__club > span:not(.club-crest) { min-width: 0; overflow-wrap: anywhere; }
-  .career-overview__club .club-crest--overview { width: 24px; height: 24px; }
+  .career-overview__club .club-crest--overview { width: 24px; height: 24px; align-self: flex-start; }
   .career-overview__identity > small { grid-area: 2 / 2; margin: 0; font-size: 11px; overflow-wrap: anywhere; }
   .career-overview > .career-overview__cash { position: relative; min-width: 0; padding-inline: 5px; border-left: 0 !important; }
   .career-overview__cash strong { max-width: 100%; white-space: normal; overflow-wrap: anywhere; font-size: 14px; }
@@ -8801,6 +8810,9 @@ svg {
   .choice-list--arrival > button.is-selected strong { color: #fffdf7; background: var(--ink); }
   .choice-list--arrival em { display: block; margin: 5px 6px 0; font-size: 9px; overflow: visible; -webkit-line-clamp: unset; white-space: normal; }
 
+}
+
+@media (max-width: 760px) {
   /* 07: preserve 3 strategy columns, 3×2 training and the selected detail copy. */
   .training-plan .path-choice > div { gap: 4px; }
   .training-plan .path-choice button,
