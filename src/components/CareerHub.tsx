@@ -165,7 +165,7 @@ export function CareerHub({
         <div
           className={`career-workspace${
             layout === 'stack' ? ' career-workspace--stack' : ''
-          }`}
+          }${game.phase === 'HALF_YEAR_REPORT' ? ' career-workspace--report' : ''}`}
         >
           <CareerLedger
             game={game}
@@ -215,7 +215,7 @@ function PlayerOverview({
         </p>
         <strong className="career-overview__club">
           <ClubCrest clubId={clubId} shortMark={clubShortMark} className="club-crest--overview" />
-          {clubName}
+          <span>{clubName}</span>
         </strong>
         <small>
           {game.teamLevel === 'FIRST_TEAM'
