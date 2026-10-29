@@ -129,11 +129,7 @@ export function CareerHub({
   const player = game.player
   const currentWindowIndex = visibleCareerWindowIndex(game)
   const currentClub = currentCareerClub(game)
-  const clubName = currentClub
-    ? `${currentClub.name}${
-        game.teamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'
-      }`
-    : '尚未加入俱乐部'
+  const clubName = currentClub?.name ?? '尚未加入俱乐部'
   const totalStats = game.history.reduce(
     (totals, entry) => ({
       appearances: totals.appearances + entry.stats.appearances,

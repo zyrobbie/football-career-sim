@@ -20,7 +20,7 @@ export function ProfessionalReportActions({ game, allowReview = false }: { game:
     else submit()
   }
   return <div className="professional-report-actions">
-    <p>{model.summary}</p>
+    <p className={model.summary.startsWith('经纪团队正在持续观察市场。') ? 'professional-report-actions__market-note' : undefined}>{model.summary}</p>
     <div className="demo-complete__actions">
       {model.primary && <button type="button" className="button button--primary" onClick={() => act(model.primary!.action)}>
         {model.primary.label}<Icon name="arrow" />
