@@ -1,0 +1,54 @@
+name: Retirement keyboard diagnostic comparison
+on:
+  push:
+    branches: ['candidate/retirement-keyboard-diagnostic-*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  keyboard-comparison:
+    strategy:
+      fail-fast: false
+      matrix:
+        ref: ['73e2b5797f8083bf40eadedbb4e13c1c39e6fac9','4725a60bc0b9d2703c5508bacdb4c1df4c445171']
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: diagnostic-source
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+          path: app
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci
+        working-directory: app
+      - name: Apply diagnostics without weakening the keyboard assertion
+        run: node ../diagnostic-source/qa/retirement-keyboard-diagnostic/patch.mjs
+        working-directory: app
+      - name: Isolated WebKit dependency
+        working-directory: app
+        run: |
+          npm install --prefix "$RUNNER_TEMP/keyboard-browser" --no-package-lock @playwright/test@1.56.1
+          mkdir -p node_modules/@playwright
+          ln -s "$RUNNER_TEMP/keyboard-browser/node_modules/@playwright/test" node_modules/@playwright/test
+          "$RUNNER_TEMP/keyboard-browser/node_modules/.bin/playwright" install --with-deps webkit
+          sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+      - run: npx vitest run --config qa/career-viewer/vitest.config.ts
+        working-directory: app
+      - run: npm run build
+        working-directory: app
+      - run: node qa/career-viewer/run.mjs
+        working-directory: app
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: keyboard-diagnostic-${{ matrix.ref }}
+          path: app/qa/career-viewer/artifacts/
+          if-no-files-found: warn
+          retention-days: 14
