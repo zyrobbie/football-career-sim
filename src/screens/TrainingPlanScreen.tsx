@@ -134,7 +134,6 @@ function TrainingPlanContent({ game }: { game: GameState }) {
                 ? '青训进入第二年。你的训练方向和职业策略，会直接影响俱乐部是否愿意把你推向一线队。'
                 : '未来半年没有标准答案。你选的方向，会改变成长节奏，也可能带来不同的故事。'}
         </p> : null}
-        <CareerPreferencesEditor key={game.careerSeed} game={game} />
         <PersonalArrangementsPanel game={game} selection={{focus: selected, approach}} />
         {model.recovery ? (
           <section className="training-plan__recovery" aria-label="本期先恢复">
@@ -245,6 +244,7 @@ function TrainingPlanContent({ game }: { game: GameState }) {
           <Icon name="info" />
           {currentWindow}结束后，将进入{nextWindow}
         </p>
+        <CareerPreferencesEditor key={game.careerSeed} game={game} />
         {game.lastReport ? (
           <section className="previous-change" aria-label="上半年回顾">
             <h2>上半年回顾</h2>

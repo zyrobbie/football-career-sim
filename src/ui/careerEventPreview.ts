@@ -1,14 +1,15 @@
-/** Choice outcomes are directional, not a numerical shopping list.
- * Risk probabilities are not stat-outcome spoilers. Real purchase panels do not use this helper.
- * The settled record is rendered separately and retains exact actual deltas.
+/** Display-only, neutral metric names. Outcomes and settlement values are untouched.
+ * Risk probabilities remain explicit; purchase quotes do not use this helper.
  */
 export function qualitativeEventPreview(preview: string): string {
+  if (/\d+%/.test(preview)) return preview
   return preview
-    .replace(/花费€[\d,]+(?:\.\d+)?/g, '现金减少')
-    .replace(/([+-])€[\d,]+(?:\.\d+)?/g, (_, sign: string) => sign === '+' ? '上升' : '下降')
-    .replace(/([+-])(\d+(?:\.\d+)?)(?![\d.%])/g, (_, sign: string, amount: string) => {
-      const size = Number(amount) <= 2 ? '小幅' : '明显'
-      return `${size}${sign === '+' ? '上升' : '下降'}`
-    })
-    .replace('无数值影响', '状态与收入不变')
+    .replace(/(?:花费|支出)€[\d,]+(?:\.\d+)?/g, '现金')
+    .replace(/[+−-]?\d+(?:\.\d+)?\s*[～~至]\s*[+−-]?\d+(?:\.\d+)?/g, '')
+    .replace(/[+−-]€?[\d,]+(?:\.\d+)?/g, '')
+    .replace(/(?:小幅|明显|略微|略|均衡|平衡|稳定)?(?:上升|下降|增加|减少|提升|降低|恢复|增长|承压|较少|不变|略降|略升)/g, '')
+    .replace(/风险(?:最低|较低)|关系基本稳定/g, value => value.startsWith('风险') ? '风险' : '关系')
+    .replace(/\s+）/g, '）')
+    .replace(/（\s*）/g, '')
+    .replace('无数值影响', '不影响状态与收入')
 }

@@ -65,8 +65,8 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
             {roleLabel(reportRole)}
           </span>
         </header>
-        <div className="report-grid">
-          <section className="report-main">
+        <section className="report-highlights" aria-label="本期关键表现">
+          <h2>本期关键表现</h2>
             <dl className="stat-strip">
               <Stat label="出场" value={stats.appearances} />
               <Stat label="首发" value={stats.starts} />
@@ -74,6 +74,49 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
               <Stat label="助攻" value={stats.assists} />
               <Stat label="平均评分" value={stats.averageRating.toFixed(1)} />
             </dl>
+        </section>
+        <section className={`report-footer${!readOnly && isProfessionalWindow ? " report-footer--professional" : ""}`}>
+          <div>
+            <h2>
+              {isCareerFinalWindow ? '最后一个赛季结束了' : `接下来：${report.toLabel}`}
+            </h2>
+            <p className="event-summary training-event-summary">{report.eventSummary}</p>
+            {isCareerFinalWindow ? (
+              <ul>
+                <li>最后一个赛季已经结束。看完这份回顾，你将正式走向退役。</li>
+              </ul>
+            ) : (
+              <details className="report-detail"><summary>下阶段建议</summary><ul>
+                {report.hints.map((hint) => (
+                  <li key={hint}>{hint}</li>
+                ))}
+              </ul></details>
+            )}
+            <p className="autosave-line">
+              <Icon name="save" />
+              进度已保存
+            </p>
+          </div>
+          {!readOnly && isProfessionalWindow ? <ProfessionalReportActions game={game} /> : <button
+            type="button"
+            className="button button--primary"
+            onClick={readOnly ? onReturn : advanceAfterReport}
+          >
+            {readOnly ? '返回当前进度' : isProfessionalWindow
+              ? isCareerFinalWindow
+                ? '结束最后一个半年'
+                : '结束这半年'
+              : isDemoComplete
+              ? '结束青训第二年'
+              : `进入${report.toLabel}`}
+            <Icon name="arrow" />
+          </button>}
+        </section>
+        <div className="report-grid">
+          <section className="report-main">
+            <details className="report-detail">
+              <summary>能力变化 · 查看各项明细</summary>
+
             <div className="attribute-table" role="table" aria-label="这半年能力变化">
               <div role="row" className="attribute-table__head">
                 <span role="columnheader">能力</span>
@@ -101,6 +144,7 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
                 部分能力已经在积累进步，只是还没有跨过下一个整数等级。
               </p>
             ) : null}
+            </details>
           </section>
 
           <aside className="report-side">
@@ -131,6 +175,8 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
                 ))}
               </section>
             ) : null}
+            <details className="report-detail report-detail--states">
+              <summary>状态、关系与收支</summary>
             <section className="report-side__states">
               <h2>状态与关系</h2>
               <ReportChange label="竞技状态" change={report.states.form} />
@@ -151,6 +197,7 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
               <MoneyRow label="额外支出" value={report.expenseEuro} />
               <MoneyRow label="可支配现金" value={report.cashAfterEuro} />
             </section>
+            </details>
             {report.contract ? (
               <ContractReport contract={report.contract} />
             ) : (
@@ -181,43 +228,7 @@ export function HalfYearReportScreen({ readOnly = false, onReturn }: { readOnly?
         </div>
 
         {report.keyMatchMoment ? <KeyMatchMomentSummary moment={report.keyMatchMoment} /> : null}
-        <section className={`report-footer${!readOnly && isProfessionalWindow ? " report-footer--professional" : ""}`}>
-          <div>
-            <h2>
-              {isCareerFinalWindow ? '最后一个赛季结束了' : `接下来：${report.toLabel}`}
-            </h2>
-            <p className="event-summary training-event-summary">{report.eventSummary}</p>
-            {isCareerFinalWindow ? (
-              <ul>
-                <li>最后一个赛季已经结束。看完这份回顾，你将正式走向退役。</li>
-              </ul>
-            ) : (
-              <ul>
-                {report.hints.map((hint) => (
-                  <li key={hint}>{hint}</li>
-                ))}
-              </ul>
-            )}
-            <p className="autosave-line">
-              <Icon name="save" />
-              进度已保存
-            </p>
-          </div>
-          {!readOnly && isProfessionalWindow ? <ProfessionalReportActions game={game} /> : <button
-            type="button"
-            className="button button--primary"
-            onClick={readOnly ? onReturn : advanceAfterReport}
-          >
-            {readOnly ? '返回当前进度' : isProfessionalWindow
-              ? isCareerFinalWindow
-                ? '结束最后一个半年'
-                : '结束这半年'
-              : isDemoComplete
-              ? '结束青训第二年'
-              : `进入${report.toLabel}`}
-            <Icon name="arrow" />
-          </button>}
-        </section>
+
       </article>
     </CareerHub>
   )

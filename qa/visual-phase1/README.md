@@ -1,0 +1,5 @@
+# Phase one component-layout QA
+
+Fresh synthetic scenarios are server-rendered from the repository's own test factory and game functions. No private browser save, user record, or screenshot is included. Generated HTML and screenshots stay in CI artifacts and must not be committed. This suite verifies CSS geometry and native details disclosure only. It does not demonstrate real gameplay, simulated-browser save flows, physical iOS, native sharing, or save-to-album.
+
+Run `npx vitest run --config qa/visual-phase1/vitest.config.ts`, then `node qa/visual-phase1/run.mjs` with Playwright Chromium available. The workflow installs the test dependency outside the project's dependency tree/lockfile. Cases: training, veteran capped maintenance, forced recovery, long-name training, two- and three-choice career interactions, long career interaction, transfer offers, half-year report; widths 320/375/390/430 and normal/200% text-only approximated sizing. Native details are also opened to detect expanded overflow.
