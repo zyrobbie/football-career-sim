@@ -298,10 +298,7 @@ export function TransferWindowScreen() {
             : '留下最熟悉，但不一定是最好。三家俱乐部会根据你的能力、表现和职业偏好给出不同角色。'}
         </p>
 
-        <details className="transfer-preferences">
-          <summary>职业偏好 · 查看与调整</summary>
-          <CareerPreferencesEditor key={game.careerSeed} game={game} />
-        </details>
+        <CareerPreferencesEditor key={game.careerSeed} game={game} />
         {!contractExpired ? (
           <button
             type="button"
@@ -310,13 +307,11 @@ export function TransferWindowScreen() {
                 ? ' is-selected'
                 : ''
             }`}
-            aria-pressed={game.selectedTransferChoiceId === 'STAY'}
             onClick={() => selectTransferChoice('STAY')}
           >
             <span>
               <strong>留在 {currentClubName}</strong>
-              <small>现有合同 {game.contract.remainingHalfYears / 2}年 · {game.contract.promisedTeamLevel === 'FIRST_TEAM' ? '一线队' : '青年队'} · {game.contract.promisedRole ? roleLabel(game.contract.promisedRole) : '角色待定'}</small>
-              <small>保留在队内建立的关系</small>
+              <small>保留现有合同、角色和在队内建立的关系</small>
             </span>
             <em>
               {formatEuro(game.contract.annualSalaryEuro)} / 年
@@ -330,7 +325,6 @@ export function TransferWindowScreen() {
                 ? ' is-selected'
                 : ''
             }`}
-            aria-pressed={game.selectedTransferChoiceId === renewalOffer.id}
             onClick={() => selectTransferChoice(renewalOffer.id)}
           >
             <span>
@@ -361,7 +355,6 @@ export function TransferWindowScreen() {
                 className={`${selected ? 'is-selected' : ''}${
                   offer.withdrawn ? ' is-withdrawn' : ''
                 }`}
-                aria-pressed={selected}
                 disabled={offer.withdrawn}
                 onClick={() => selectTransferChoice(offer.id)}
               >
@@ -386,10 +379,6 @@ export function TransferWindowScreen() {
                   </small>
                 ) : null}
                 <dl>
-                  <div>
-                    <dt>合同年限</dt>
-                    <dd>{offer.remainingHalfYears / 2}年</dd>
-                  </div>
                   <div>
                     <dt>年薪</dt>
                     <dd>{formatEuro(offer.annualSalaryEuro)}</dd>
@@ -466,7 +455,6 @@ function TransferOfferDetail({
   const higherRoleAvailable = canRequestHigherTransferRole(offer)
   return (
     <section className="transfer-offer-detail" aria-label="当前选择的报价详情">
-      <h2>当前选择 · {clubName(offer.clubId)}</h2>
       <dl>
         <div>
           <dt>合同</dt>

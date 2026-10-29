@@ -151,31 +151,30 @@ export function CareerHub({
       topbar={<CareerTopbar game={game} sectionLabel={sectionLabel} />}
     >
       <div className="career-hub">
-        <div className="career-task-context" aria-label="当前决策状态">
-          <strong>{player.name} · {overall} OVR</strong>
-          <span>现金 {formatEuro(game.cashEuro)}</span>
-          <span>竞技 {Math.round(player.form)}</span>
-          <span>身体 {Math.round(player.fitness)}</span>
-          <span>心理 {Math.round(player.morale)}</span>
-        </div>
-        <section className={`career-active career-active--task${layout === 'stack' ? ' career-active--stack' : ''}`} aria-label={sectionLabel}>
-          {children}
-        </section>
-        <details className="career-reference">
-          <summary>球员总览、关系与生涯履历</summary>
-          <PlayerOverview
+        <PlayerOverview
+          game={game}
+          age={playerAgeAtWindow(currentWindowIndex)}
+          clubId={currentClub?.id ?? null}
+          clubShortMark={currentClub?.shortMark ?? '足'}
+          clubName={clubName}
+          overall={overall}
+          totalStats={totalStats}
+        />
+        <CareerMeters game={game} />
+        <FirstTeamPath game={game} />
+        <div
+          className={`career-workspace${
+            layout === 'stack' ? ' career-workspace--stack' : ''
+          }`}
+        >
+          <CareerLedger
             game={game}
-            age={playerAgeAtWindow(currentWindowIndex)}
-            clubId={currentClub?.id ?? null}
-            clubShortMark={currentClub?.shortMark ?? '足'}
-            clubName={clubName}
-            overall={overall}
-            totalStats={totalStats}
+            rows={ledgerRows}
           />
-          <CareerMeters game={game} />
-          <FirstTeamPath game={game} />
-          <CareerLedger game={game} rows={ledgerRows} />
-        </details>
+          <section className="career-active" aria-label={sectionLabel}>
+            {children}
+          </section>
+        </div>
       </div>
     </AppShell>
   )

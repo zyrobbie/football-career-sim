@@ -148,6 +148,7 @@ export function SpecialEventScreen() {
                     >
                       <span>{index + 1}</span>
                       <strong>{option.title}</strong>
+                      <small>{option.description}</small>
                       <em>先选方向，下一步再决定具体做法</em>
                       <Icon name="arrow" />
                     </button>
@@ -179,6 +180,7 @@ export function SpecialEventScreen() {
                     >
                       <span>{event.id.startsWith('V3_') ? String.fromCharCode(65 + choiceIndex) : choice.id}</span>
                       <strong>{choice.title}</strong>
+                      <small>{choice.description}</small>
                       <em>{qualitativeEventPreview(choice.effectPreview)}</em>
                       {choice.outcomes?.length ? (
                         <div className="special-event__odds" aria-label="可能出现的结果">
@@ -193,15 +195,9 @@ export function SpecialEventScreen() {
                 </div>
               </>
             )}
-            <details className="special-event__details">
-              <summary>查看各选项的完整说明</summary>
-              {(isSetupStep && setup ? setup.options : visibleChoices).map(option => (
-                <div key={option.id}><strong>{option.title}</strong><p>{option.description}</p></div>
-              ))}
-            </details>
             <p className="special-event__note">
               <Icon name="info" />
-              {interactionLabels[event.interactionKind]} · 仅提示涉及的指标，具体变化在选择后显示；刷新不会重新抽取。
+              {interactionLabels[event.interactionKind]} · 仅提示影响方向，具体变化在选择后显示；刷新不会重新抽取。
             </p>
           </>
         )}
