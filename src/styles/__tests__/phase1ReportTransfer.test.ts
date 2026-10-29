@@ -37,4 +37,11 @@ describe('Phase 1 report and transfer presentation contract', () => {
     expect(css).toContain('font-size: var(--font-meta, .875rem)')
     expect(css).toContain('.transfer-preferences > summary { min-height: 48px;')
   })
+
+  it('keeps mobile decision copy full width and uses high-contrast paper ink', () => {
+    expect(css).toContain('.transfer-actions p {\n  width: 100%;\n  max-width: none;')
+    expect(css).toContain('color: var(--club-paper-ink, var(--ink));')
+    expect(css).toContain('.report-footer summary {\n  min-height: 48px;')
+  })
+
 })

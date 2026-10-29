@@ -29,7 +29,22 @@ try{
    const m=row.metrics;check(m.scrollWidth<=width+1,'horizontal document overflow')
    check(m.clipped.length===0,'clipped button/summary content')
    if(name.startsWith('event-')){const expected=name==='event-two'?2:3;check(m.cards.length===expected,'wrong choice count');check(Math.max(...m.cards.map(c=>c.y))-Math.min(...m.cards.map(c=>c.y))<2,'career interaction cards must remain one horizontal row');check(m.cards.every(c=>c.scrollW<=c.clientW+2&&c.scrollH<=c.clientH+2),'clipped career interaction card');check(!/[+−-]\s*\d/.test((await page.locator('.special-event__choices em').allTextContents()).join(' ')),'numeric effect delta before choosing')}
-   if(name==='transfer'&&m.offers.length>1)check(new Set(m.offers.map(c=>Math.round(c.y))).size===m.offers.length,'mobile transfer offers not independent rows')
+   if(name==='report'){
+    check(await page.locator('.professional-report-actions button.button--primary').count()===1,'settled report must include actual next-action button')
+    row.reportSummaryHeights=await page.locator('.report-footer summary').evaluateAll(es=>es.map(e=>e.getBoundingClientRect().height))
+    check(row.reportSummaryHeights.every(h=>h>=44),'report disclosure touch target under44px')
+   }
+   if(name==='transfer'){
+    if(m.offers.length>1)check(new Set(m.offers.map(c=>Math.round(c.y))).size===m.offers.length,'mobile transfer offers not independent rows')
+    row.footerWidth=await page.locator('.transfer-actions p').evaluate(el=>({actual:el.getBoundingClientRect().width,parent:el.parentElement.clientWidth}))
+    check(row.footerWidth.actual>=row.footerWidth.parent*.9,'transfer instructions remain trapped in a narrow legacy column')
+    row.contrast=await page.locator('.transfer-stay em,.transfer-offer-grid__environment,.transfer-offer-grid > button > em').evaluateAll(es=>{
+     const canvas=document.createElement('canvas');canvas.width=canvas.height=1;const ctx=canvas.getContext('2d');
+     const lum=rgb=>rgb.slice(0,3).map(v=>v/255).map(v=>v<=.04045?v/12.92:((v+.055)/1.055)**2.4).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0);
+     return es.map(el=>{ctx.clearRect(0,0,1,1);ctx.fillStyle='#fff';ctx.fillRect(0,0,1,1);let ancestors=[];for(let n=el;n;n=n.parentElement)ancestors.unshift(n);for(const n of ancestors){ctx.fillStyle=getComputedStyle(n).backgroundColor;ctx.fillRect(0,0,1,1)}const background=[...ctx.getImageData(0,0,1,1).data];ctx.fillStyle=getComputedStyle(el).color;ctx.fillRect(0,0,1,1);const foreground=[...ctx.getImageData(0,0,1,1).data];const a=lum(background),b=lum(foreground);return{text:el.textContent,ratio:(Math.max(a,b)+.05)/(Math.min(a,b)+.05),foreground,background}})
+    })
+    check(row.contrast.length>0&&row.contrast.every(c=>c.ratio>=4.5),'important transfer text contrast below4.5:1')
+   }
    if(scale===1)check(m.type.every(t=>t.font>=14),'primary decision/support content under14px')
    await page.screenshot({path:resolve(out,`${name}-${width}-${scale}x.png`),fullPage:true})
    // Native details must remain readable after expanding, independent of React event handlers.

@@ -48,6 +48,7 @@
 .career-preferences { margin-top: 24px; }
 .career-preferences :is(button, select, input, label) { min-height: 44px; }
 .career-preferences :is(button, select, label, p, legend, .career-preferences__summary) { font-size: var(--font-meta); line-height: 1.6; }
+.career-preferences select { font-size: var(--font-body); }
 .career-preferences__bar { flex-wrap: wrap; }
 .career-preferences__summary > * { white-space: normal; }
 .special-event__choices { gap: 8px; border: 0; }

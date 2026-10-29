@@ -22,6 +22,7 @@ function write(name:string, game:GameState, node:React.ReactNode) {
  const css=['src/styles/main.css','src/styles/phase1.css','src/styles/phase1-report-transfer.css'].filter(existsSync).map(p=>readFileSync(p,'utf8')).join('\n')
  const markup=renderToStaticMarkup(<CareerNavigationProvider careerKey="isolated-layout-test"><ClubVisualThemeProvider game={game}>{node}</ClubVisualThemeProvider></CareerNavigationProvider>)
  expect(markup.length).toBeGreaterThan(1000)
+ if(name==='report'){expect(markup).not.toContain('请先完成当前进度');expect(markup).toContain('button--primary')}
  writeFileSync(resolve(output,name+'.html'),`<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anonymous component layout QA</title><style>${css}</style></head><body><div id="root">${markup}</div></body></html>`)
 }
 test('generate only fresh anonymous server-rendered component layouts, never user saves',()=>{
@@ -34,7 +35,7 @@ test('generate only fresh anonymous server-rendered component layouts, never use
   const g=base(),event=getCareerEvent(id,g);expect(event).toBeTruthy();g.phase='SPECIAL_EVENT';g.pendingCareerEvent={eventId:id,interactionKind:event.interactionKind,stepIndex:0,selections:[],variantId:null};write(name,g,<SpecialEventScreen />)
  }
  const transfer=base();transfer.phase='TRANSFER_WINDOW';transfer.transferOffers=generateTransferOffers({player:transfer.player!,currentClubId:transfer.selectedClubId!,currentTeamLevel:transfer.teamLevel,latestReport:null,careerSeed:transfer.careerSeed,windowIndex:transfer.windowIndex});expect(transfer.transferOffers.length).toBeGreaterThan(0);write('transfer',transfer,<TransferWindowScreen />)
- const report=base();report.trainingFocus='BALANCED';report.developmentApproach='STEADY';const result=simulateProfessionalHalfYear({state:report,offer:report.academyOffers[0]!});Object.assign(report,result,{lastReport:result.report,phase:'HALF_YEAR_REPORT'});write('report',report,<HalfYearReportScreen />)
+ const report=base();report.trainingFocus='BALANCED';report.developmentApproach='STEADY';const result=simulateProfessionalHalfYear({state:report,offer:report.academyOffers[0]!});Object.assign(report,result,{lastReport:result.report,phase:'HALF_YEAR_REPORT'});report.history=[{windowIndex:report.windowIndex,clubId:report.selectedClubId!,clubName:report.academyOffers[0]!.club.name,role:result.report.contract?.actualRole??result.report.roleBefore,stats:result.report.stats,arrivalChoice:null,trainingFocus:report.trainingFocus,developmentApproach:report.developmentApproach,endingAttributes:{...result.player.attributes},firstTeamAttention:result.firstTeamProgress.attention,teamLevel:result.teamLevel}];write('report',report,<HalfYearReportScreen />)
  const long=base();long.player!.name='测试这是很长的中文球员姓名用来检测换行';long.cashEuro=1234567890;write('training-long',long,<TrainingPlanScreen />)
  writeFileSync(resolve(output,'cases.json'),JSON.stringify(['training','training-capped','training-recovery','event-three','event-long','event-two','transfer','report','training-long']))
 })

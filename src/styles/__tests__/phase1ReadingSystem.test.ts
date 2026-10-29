@@ -15,6 +15,7 @@ describe('phase 1 mobile reading system', () => {
     expect(css).toContain('min-height: 48px')
     expect(css).toContain('font-size: var(--font-body)')
     expect(css).toContain('env(safe-area-inset-bottom)')
+    expect(css).toContain('.career-preferences select { font-size: var(--font-body); }')
     expect(css).not.toMatch(/font-size:\s*(?:[6-9]|1[0-3])px/)
     expect(css).not.toContain('.career-poster-viewport')
     expect(css).not.toContain('.retirement-export')
