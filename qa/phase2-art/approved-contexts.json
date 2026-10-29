@@ -1,0 +1,2786 @@
+[
+  {
+    "entityId": "KM-FWD-01",
+    "entityType": "match",
+    "variantKey": "KM-FWD-01@r1",
+    "title": "单刀前的最后决定",
+    "description": "你反越位成功，在禁区右侧得到单刀机会，门将已经开始出击。"
+  },
+  {
+    "entityId": "KM-FWD-02",
+    "entityType": "match",
+    "variantKey": "KM-FWD-02@r1",
+    "title": "后点包抄",
+    "description": "边路队友正准备传中，你奔向后点，也可以回撤接应或接球后回做。"
+  },
+  {
+    "entityId": "KM-FWD-03",
+    "entityType": "match",
+    "variantKey": "KM-FWD-03@r1",
+    "title": "前场高压",
+    "description": "对手中卫接到门将短传，停球稍大，你已经逼到他身前。"
+  },
+  {
+    "entityId": "KM-FWD-04",
+    "entityType": "match",
+    "variantKey": "KM-FWD-04@r1",
+    "title": "反击中的推进选择",
+    "description": "你持球推进，防线边退边收紧，侧面的队友正在跟进，身后还有支援。"
+  },
+  {
+    "entityId": "KM-FWD-05",
+    "entityType": "match",
+    "variantKey": "KM-FWD-05@r1",
+    "title": "背身支点",
+    "description": "你背对球门接球，中卫紧贴身后；一名队友正从侧面前插，另一名正在靠近接应。"
+  },
+  {
+    "entityId": "KM-FWD-06",
+    "entityType": "match",
+    "variantKey": "KM-FWD-06@r1",
+    "title": "门前补射",
+    "description": "门将挡出的球弹向你身前，后卫正赶来封堵，侧后方队友面对球门接应。"
+  },
+  {
+    "entityId": "KM-FWD-07",
+    "entityType": "match",
+    "variantKey": "KM-FWD-07@r1",
+    "title": "边线护球转攻",
+    "description": "你在前场边线拿球，防守者向外靠近；内侧有起脚路线，中路和身后都有接应。"
+  },
+  {
+    "entityId": "KM-FWD-08",
+    "entityType": "match",
+    "variantKey": "KM-FWD-08@r1",
+    "title": "弧顶迎球",
+    "description": "地面传球来到禁区弧顶，防守者迎面扑来，你可以直接起脚、晃开他或分球给侧面队友。"
+  },
+  {
+    "entityId": "COACH_DEFENSIVE_TASK",
+    "entityType": "event",
+    "variantKey": "COACH_DEFENSIVE_TASK@current",
+    "title": "球队需要你补上防守训练。",
+    "description": "教练认为你的进攻特点已经很鲜明，但球队最近缺少愿意参与防守的球员。",
+    "artGroup": "E-01",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球队需要你补上防守训练。",
+      "resolvedDescription": "教练认为你的进攻特点已经很鲜明，但球队最近缺少愿意参与防守的球员。"
+    }
+  },
+  {
+    "entityId": "COACH_ROLE_TRIAL",
+    "entityType": "event",
+    "variantKey": "COACH_ROLE_TRIAL@current",
+    "title": "教练想在下一场改变你的场上职责。",
+    "description": "这不是正式学习新位置，而是一次短期战术试验，可能改变教练对你的判断。",
+    "artGroup": "E-01",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练想在下一场改变你的场上职责。",
+      "resolvedDescription": "这不是正式学习新位置，而是一次短期战术试验，可能改变教练对你的判断。"
+    }
+  },
+  {
+    "entityId": "COACH_TACTICAL_MEETING",
+    "entityType": "event",
+    "variantKey": "COACH_TACTICAL_MEETING@current@setup",
+    "title": "教练组希望听听你对最近战术的看法。",
+    "description": "你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "教练组希望听听你对最近战术的看法。",
+      "resolvedDescription": "你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。"
+    }
+  },
+  {
+    "entityId": "COACH_TACTICAL_MEETING",
+    "entityType": "event",
+    "variantKey": "COACH_TACTICAL_MEETING@current@route-PRIVATE",
+    "title": "教练组希望听听你对最近战术的看法。",
+    "description": "你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练组希望听听你对最近战术的看法。",
+      "resolvedDescription": "你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。"
+    }
+  },
+  {
+    "entityId": "COACH_TACTICAL_MEETING",
+    "entityType": "event",
+    "variantKey": "COACH_TACTICAL_MEETING@current@route-GROUP",
+    "title": "教练组希望听听你对最近战术的看法。",
+    "description": "你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练组希望听听你对最近战术的看法。",
+      "resolvedDescription": "你可以先决定沟通场合，再选择具体表达方式。不同场合会改变教练如何理解你的意见。"
+    }
+  },
+  {
+    "entityId": "COACH_SET_PIECE_DUTY",
+    "entityType": "event",
+    "variantKey": "COACH_SET_PIECE_DUTY@current",
+    "title": "教练给了你一份额外定位球训练额度。",
+    "description": "额外训练时间有限，你必须决定如何分配，无法同时获得全部收益。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练给了你一份额外定位球训练额度。",
+      "resolvedDescription": "额外训练时间有限，你必须决定如何分配，无法同时获得全部收益。"
+    }
+  },
+  {
+    "entityId": "COACH_ROTATION_WARNING",
+    "entityType": "event",
+    "variantKey": "COACH_ROTATION_WARNING@current@setup",
+    "title": "教练提醒你：近期位置并不稳固。",
+    "description": "你要先决定把这次谈话当作风险控制，还是一次主动翻盘的机会。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "教练提醒你：近期位置并不稳固。",
+      "resolvedDescription": "你要先决定把这次谈话当作风险控制，还是一次主动翻盘的机会。"
+    }
+  },
+  {
+    "entityId": "COACH_ROTATION_WARNING",
+    "entityType": "event",
+    "variantKey": "COACH_ROTATION_WARNING@current@route-CONTROL",
+    "title": "教练提醒你：近期位置并不稳固。",
+    "description": "你要先决定把这次谈话当作风险控制，还是一次主动翻盘的机会。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练提醒你：近期位置并不稳固。",
+      "resolvedDescription": "你要先决定把这次谈话当作风险控制，还是一次主动翻盘的机会。"
+    }
+  },
+  {
+    "entityId": "COACH_ROTATION_WARNING",
+    "entityType": "event",
+    "variantKey": "COACH_ROTATION_WARNING@current@route-ATTACK",
+    "title": "教练提醒你：近期位置并不稳固。",
+    "description": "你要先决定把这次谈话当作风险控制，还是一次主动翻盘的机会。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练提醒你：近期位置并不稳固。",
+      "resolvedDescription": "你要先决定把这次谈话当作风险控制，还是一次主动翻盘的机会。"
+    }
+  },
+  {
+    "entityId": "CAPTAIN_VIDEO_REVIEW",
+    "entityType": "event",
+    "variantKey": "CAPTAIN_VIDEO_REVIEW@current",
+    "title": "队长邀请你参加赛后录像复盘。",
+    "description": "这不是强制活动，但资深球员都在观察年轻人愿不愿意参与球队讨论。",
+    "artGroup": "E-04",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "队长邀请你参加赛后录像复盘。",
+      "resolvedDescription": "这不是强制活动，但资深球员都在观察年轻人愿不愿意参与球队讨论。"
+    }
+  },
+  {
+    "entityId": "CAPTAIN_ARMBAND_OFFER",
+    "entityType": "event",
+    "variantKey": "CAPTAIN_ARMBAND_OFFER@current@setup",
+    "title": "教练问你是否愿意在下一场戴上队长袖标。",
+    "description": "这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。",
+    "artGroup": "E-05",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "教练问你是否愿意在下一场戴上队长袖标。",
+      "resolvedDescription": "这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。"
+    }
+  },
+  {
+    "entityId": "CAPTAIN_ARMBAND_OFFER",
+    "entityType": "event",
+    "variantKey": "CAPTAIN_ARMBAND_OFFER@current@route-STEADY",
+    "title": "教练问你是否愿意在下一场戴上队长袖标。",
+    "description": "这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。",
+    "artGroup": "E-05",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练问你是否愿意在下一场戴上队长袖标。",
+      "resolvedDescription": "这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。"
+    }
+  },
+  {
+    "entityId": "CAPTAIN_ARMBAND_OFFER",
+    "entityType": "event",
+    "variantKey": "CAPTAIN_ARMBAND_OFFER@current@route-STATEMENT",
+    "title": "教练问你是否愿意在下一场戴上队长袖标。",
+    "description": "这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。",
+    "artGroup": "E-05",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练问你是否愿意在下一场戴上队长袖标。",
+      "resolvedDescription": "这既是荣誉也是公开考验。你要先决定如何理解这份责任，再选择具体做法。"
+    }
+  },
+  {
+    "entityId": "TEAMMATE_RIVALRY",
+    "entityType": "event",
+    "variantKey": "TEAMMATE_RIVALRY@current",
+    "title": "同位置队友开始公开与你竞争。",
+    "description": "训练表现接近的两个人只能有一个首发位置，更衣室也在等待你的反应。",
+    "artGroup": "E-06",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "同位置队友开始公开与你竞争。",
+      "resolvedDescription": "训练表现接近的两个人只能有一个首发位置，更衣室也在等待你的反应。"
+    }
+  },
+  {
+    "entityId": "DRESSING_ROOM_DISPUTE",
+    "entityType": "event",
+    "variantKey": "DRESSING_ROOM_DISPUTE@current",
+    "title": "一次训练冲突让更衣室气氛紧张。",
+    "description": "两名队友互相指责，队长希望有人让大家重新把注意力放回比赛。",
+    "artGroup": "E-07",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一次训练冲突让更衣室气氛紧张。",
+      "resolvedDescription": "两名队友互相指责，队长希望有人让大家重新把注意力放回比赛。"
+    }
+  },
+  {
+    "entityId": "YOUNG_TEAMMATE_MENTOR",
+    "entityType": "event",
+    "variantKey": "YOUNG_TEAMMATE_MENTOR@current@setup",
+    "title": "一名刚进入一线队的年轻队友向你求助。",
+    "description": "他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。",
+    "artGroup": "E-08",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "一名刚进入一线队的年轻队友向你求助。",
+      "resolvedDescription": "他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。"
+    }
+  },
+  {
+    "entityId": "YOUNG_TEAMMATE_MENTOR",
+    "entityType": "event",
+    "variantKey": "YOUNG_TEAMMATE_MENTOR@current@route-FOOTBALL",
+    "title": "一名刚进入一线队的年轻队友向你求助。",
+    "description": "他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。",
+    "artGroup": "E-08",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一名刚进入一线队的年轻队友向你求助。",
+      "resolvedDescription": "他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。"
+    }
+  },
+  {
+    "entityId": "YOUNG_TEAMMATE_MENTOR",
+    "entityType": "event",
+    "variantKey": "YOUNG_TEAMMATE_MENTOR@current@route-LIFE",
+    "title": "一名刚进入一线队的年轻队友向你求助。",
+    "description": "他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。",
+    "artGroup": "E-08",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一名刚进入一线队的年轻队友向你求助。",
+      "resolvedDescription": "他既担心训练跟不上，也不知道如何融入更衣室。你可以先选择谈话重点。"
+    }
+  },
+  {
+    "entityId": "TEAM_SOCIAL_CLIQUE",
+    "entityType": "event",
+    "variantKey": "TEAM_SOCIAL_CLIQUE@current@setup",
+    "title": "更衣室里的两个小圈子都在拉拢你。",
+    "description": "你要先决定和谁谈，再选择自己的表达方式；这会影响队友如何理解你的立场。",
+    "artGroup": "E-09",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "更衣室里的两个小圈子都在拉拢你。",
+      "resolvedDescription": "你要先决定和谁谈，再选择自己的表达方式；这会影响队友如何理解你的立场。"
+    }
+  },
+  {
+    "entityId": "TEAM_SOCIAL_CLIQUE",
+    "entityType": "event",
+    "variantKey": "TEAM_SOCIAL_CLIQUE@current@route-CAPTAIN_GROUP",
+    "title": "更衣室里的两个小圈子都在拉拢你。",
+    "description": "你要先决定和谁谈，再选择自己的表达方式；这会影响队友如何理解你的立场。",
+    "artGroup": "E-09",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "更衣室里的两个小圈子都在拉拢你。",
+      "resolvedDescription": "你要先决定和谁谈，再选择自己的表达方式；这会影响队友如何理解你的立场。"
+    }
+  },
+  {
+    "entityId": "TEAM_SOCIAL_CLIQUE",
+    "entityType": "event",
+    "variantKey": "TEAM_SOCIAL_CLIQUE@current@route-YOUNG_GROUP",
+    "title": "更衣室里的两个小圈子都在拉拢你。",
+    "description": "你要先决定和谁谈，再选择自己的表达方式；这会影响队友如何理解你的立场。",
+    "artGroup": "E-09",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "更衣室里的两个小圈子都在拉拢你。",
+      "resolvedDescription": "你要先决定和谁谈，再选择自己的表达方式；这会影响队友如何理解你的立场。"
+    }
+  },
+  {
+    "entityId": "MEDIA_BREAKTHROUGH",
+    "entityType": "event",
+    "variantKey": "MEDIA_BREAKTHROUGH@current",
+    "title": "一段比赛集锦让你受到额外关注。",
+    "description": "本地媒体把你称作值得期待的年轻球员，记者要求你回应外界评价。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一段比赛集锦让你受到额外关注。",
+      "resolvedDescription": "本地媒体把你称作值得期待的年轻球员，记者要求你回应外界评价。"
+    }
+  },
+  {
+    "entityId": "ONLINE_CRITICISM",
+    "entityType": "event",
+    "variantKey": "ONLINE_CRITICISM@current",
+    "title": "连续几场普通表现引来网络批评。",
+    "description": "有人质疑你只靠天赋，也有人认为俱乐部给了你过多机会。",
+    "artGroup": "E-11",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "连续几场普通表现引来网络批评。",
+      "resolvedDescription": "有人质疑你只靠天赋，也有人认为俱乐部给了你过多机会。"
+    }
+  },
+  {
+    "entityId": "FAN_DAY_OR_REST",
+    "entityType": "event",
+    "variantKey": "FAN_DAY_OR_REST@current",
+    "title": "球迷见面会与恢复训练撞期。",
+    "description": "俱乐部允许你自己决定参加程度，但球迷和体能团队都在等待答案。",
+    "artGroup": "E-12",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球迷见面会与恢复训练撞期。",
+      "resolvedDescription": "俱乐部允许你自己决定参加程度，但球迷和体能团队都在等待答案。"
+    }
+  },
+  {
+    "entityId": "PENALTY_SHOOTOUT_ORDER",
+    "entityType": "event",
+    "variantKey": "PENALTY_SHOOTOUT_ORDER@current@setup",
+    "title": "淘汰赛进入点球大战，教练让你选择主罚顺位。",
+    "description": "你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。",
+    "artGroup": "E-13",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "淘汰赛进入点球大战，教练让你选择主罚顺位。",
+      "resolvedDescription": "你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。"
+    }
+  },
+  {
+    "entityId": "PENALTY_SHOOTOUT_ORDER",
+    "entityType": "event",
+    "variantKey": "PENALTY_SHOOTOUT_ORDER@current@route-CONTROL",
+    "title": "淘汰赛进入点球大战，教练让你选择主罚顺位。",
+    "description": "你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。",
+    "artGroup": "E-13",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "淘汰赛进入点球大战，教练让你选择主罚顺位。",
+      "resolvedDescription": "你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。"
+    }
+  },
+  {
+    "entityId": "PENALTY_SHOOTOUT_ORDER",
+    "entityType": "event",
+    "variantKey": "PENALTY_SHOOTOUT_ORDER@current@route-DECIDE",
+    "title": "淘汰赛进入点球大战，教练让你选择主罚顺位。",
+    "description": "你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。",
+    "artGroup": "E-13",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "淘汰赛进入点球大战，教练让你选择主罚顺位。",
+      "resolvedDescription": "你要先决定承担多大的责任，再从对应顺位中作出选择。成功和失败的概率都会提前显示。"
+    }
+  },
+  {
+    "entityId": "LATE_SUBSTITUTION_BRIEF",
+    "entityType": "event",
+    "variantKey": "LATE_SUBSTITUTION_BRIEF@current@setup",
+    "title": "比赛还剩十五分钟，助教让你准备替补出场。",
+    "description": "场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。",
+    "artGroup": "E-14",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "比赛还剩十五分钟，助教让你准备替补出场。",
+      "resolvedDescription": "场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。"
+    }
+  },
+  {
+    "entityId": "LATE_SUBSTITUTION_BRIEF",
+    "entityType": "event",
+    "variantKey": "LATE_SUBSTITUTION_BRIEF@current@route-SCORE",
+    "title": "比赛还剩十五分钟，助教让你准备替补出场。",
+    "description": "场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。",
+    "artGroup": "E-14",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "比赛还剩十五分钟，助教让你准备替补出场。",
+      "resolvedDescription": "场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。"
+    }
+  },
+  {
+    "entityId": "LATE_SUBSTITUTION_BRIEF",
+    "entityType": "event",
+    "variantKey": "LATE_SUBSTITUTION_BRIEF@current@route-ROLE",
+    "title": "比赛还剩十五分钟，助教让你准备替补出场。",
+    "description": "场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。",
+    "artGroup": "E-14",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "比赛还剩十五分钟，助教让你准备替补出场。",
+      "resolvedDescription": "场上局面混乱，指令只有几句话。你可以先确认球队最需要什么，再决定如何执行。"
+    }
+  },
+  {
+    "entityId": "CUP_ROTATION_START",
+    "entityType": "event",
+    "variantKey": "CUP_ROTATION_START@current",
+    "title": "杯赛首发前，教练让你明确自己的比赛优先级。",
+    "description": "你必须在个人表现、战术纪律和身体管理之间排出先后顺序。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "杯赛首发前，教练让你明确自己的比赛优先级。",
+      "resolvedDescription": "你必须在个人表现、战术纪律和身体管理之间排出先后顺序。"
+    }
+  },
+  {
+    "entityId": "FITNESS_WARNING",
+    "entityType": "event",
+    "variantKey": "FITNESS_WARNING@current",
+    "title": "体能团队发现你的疲劳指标偏高。",
+    "description": "目前还不是伤病，但如果继续维持高负荷，本窗口后半程的训练质量会受到影响。",
+    "artGroup": "E-15",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "体能团队发现你的疲劳指标偏高。",
+      "resolvedDescription": "目前还不是伤病，但如果继续维持高负荷，本窗口后半程的训练质量会受到影响。"
+    }
+  },
+  {
+    "entityId": "KEY_MATCH_PAIN",
+    "entityType": "event",
+    "variantKey": "KEY_MATCH_PAIN@current",
+    "title": "关键比赛前，你感到脚踝轻微不适。",
+    "description": "检查结果并不严重，但是否如实报告、是否坚持比赛，将由你自己决定。",
+    "artGroup": "E-16",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "关键比赛前，你感到脚踝轻微不适。",
+      "resolvedDescription": "检查结果并不严重，但是否如实报告、是否坚持比赛，将由你自己决定。"
+    }
+  },
+  {
+    "entityId": "CONTRACT_ROLE_TALK",
+    "entityType": "event",
+    "variantKey": "CONTRACT_ROLE_TALK@current",
+    "title": "你的实际角色与合同承诺出现落差。",
+    "description": "经纪人建议尽早沟通，但直接施压也可能伤害你与教练的关系。",
+    "artGroup": "E-17",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你的实际角色与合同承诺出现落差。",
+      "resolvedDescription": "经纪人建议尽早沟通，但直接施压也可能伤害你与教练的关系。"
+    }
+  },
+  {
+    "entityId": "TRANSFER_RUMOR",
+    "entityType": "event",
+    "variantKey": "TRANSFER_RUMOR@current@visibility-domestic",
+    "title": "媒体突然把你与另一家俱乐部联系起来。",
+    "description": "消息真假难辨，但你的回应会影响现俱乐部、球迷和潜在追求者的态度。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "媒体突然把你与另一家俱乐部联系起来。",
+      "resolvedDescription": "消息真假难辨，但你的回应会影响现俱乐部、球迷和潜在追求者的态度。"
+    }
+  },
+  {
+    "entityId": "TRANSFER_RUMOR",
+    "entityType": "event",
+    "variantKey": "TRANSFER_RUMOR@current@visibility-overseas",
+    "title": "媒体突然把你与另一家俱乐部联系起来。",
+    "description": "消息真假难辨，但你的回应会影响现俱乐部、球迷和潜在追求者的态度。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "媒体突然把你与另一家俱乐部联系起来。",
+      "resolvedDescription": "消息真假难辨，但你的回应会影响现俱乐部、球迷和潜在追求者的态度。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_DEBUT_REVIEW",
+    "entityType": "event",
+    "variantKey": "NATIONAL_DEBUT_REVIEW@current",
+    "title": "国家队首秀结束后，教练组单独留下了你。",
+    "description": "第一次穿上国家队球衣已经成为履历的一部分，现在要决定如何理解这次起点。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "国家队首秀结束后，教练组单独留下了你。",
+      "resolvedDescription": "第一次穿上国家队球衣已经成为履历的一部分，现在要决定如何理解这次起点。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_ROLE_MEETING",
+    "entityType": "event",
+    "variantKey": "NATIONAL_ROLE_MEETING@current@setup",
+    "title": "国家队教练与你讨论下一阶段的队内定位。",
+    "description": "你已经不再是第一次报到的新人，可以先决定谈话重点，再表达自己的诉求。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "国家队教练与你讨论下一阶段的队内定位。",
+      "resolvedDescription": "你已经不再是第一次报到的新人，可以先决定谈话重点，再表达自己的诉求。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_ROLE_MEETING",
+    "entityType": "event",
+    "variantKey": "NATIONAL_ROLE_MEETING@current@route-ROLE",
+    "title": "国家队教练与你讨论下一阶段的队内定位。",
+    "description": "你已经不再是第一次报到的新人，可以先决定谈话重点，再表达自己的诉求。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "国家队教练与你讨论下一阶段的队内定位。",
+      "resolvedDescription": "你已经不再是第一次报到的新人，可以先决定谈话重点，再表达自己的诉求。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_ROLE_MEETING",
+    "entityType": "event",
+    "variantKey": "NATIONAL_ROLE_MEETING@current@route-TEAM",
+    "title": "国家队教练与你讨论下一阶段的队内定位。",
+    "description": "你已经不再是第一次报到的新人，可以先决定谈话重点，再表达自己的诉求。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "国家队教练与你讨论下一阶段的队内定位。",
+      "resolvedDescription": "你已经不再是第一次报到的新人，可以先决定谈话重点，再表达自己的诉求。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_SQUAD_OMISSION",
+    "entityType": "event",
+    "variantKey": "NATIONAL_SQUAD_OMISSION@current",
+    "title": "有过国家队经历的你，这次没有进入集训名单。",
+    "description": "落选不是生涯失败，但公开反应和接下来的训练方式会影响你重返名单的路径。",
+    "artGroup": "E-18",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "有过国家队经历的你，这次没有进入集训名单。",
+      "resolvedDescription": "落选不是生涯失败，但公开反应和接下来的训练方式会影响你重返名单的路径。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_CLUB_LOAD_CONFLICT",
+    "entityType": "event",
+    "variantKey": "NATIONAL_CLUB_LOAD_CONFLICT@current",
+    "title": "俱乐部和国家队对你的训练负荷产生分歧。",
+    "description": "两边都希望你保持状态，但恢复时间有限，必须明确这一阶段的分配方式。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "俱乐部和国家队对你的训练负荷产生分歧。",
+      "resolvedDescription": "两边都希望你保持状态，但恢复时间有限，必须明确这一阶段的分配方式。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_TOURNAMENT_REACTION",
+    "entityType": "event",
+    "variantKey": "NATIONAL_TOURNAMENT_REACTION@current",
+    "title": "国家队大赛结束，所有人都在总结这段经历。",
+    "description": "无论成绩好坏，你都要决定把公众责任、个人复盘和身体恢复放在怎样的顺序。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "国家队大赛结束，所有人都在总结这段经历。",
+      "resolvedDescription": "无论成绩好坏，你都要决定把公众责任、个人复盘和身体恢复放在怎样的顺序。"
+    }
+  },
+  {
+    "entityId": "AGENT_MARKET_CHECK",
+    "entityType": "event",
+    "variantKey": "AGENT_MARKET_CHECK@current@setup",
+    "title": "经纪人建议在合同期内做一次非正式市场评估。",
+    "description": "这不会立刻产生转会报价，只是帮助你判断外界位置；你要先确定谈话方向。",
+    "artGroup": "E-17",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "经纪人建议在合同期内做一次非正式市场评估。",
+      "resolvedDescription": "这不会立刻产生转会报价，只是帮助你判断外界位置；你要先确定谈话方向。"
+    }
+  },
+  {
+    "entityId": "AGENT_MARKET_CHECK",
+    "entityType": "event",
+    "variantKey": "AGENT_MARKET_CHECK@current@route-CAREER",
+    "title": "经纪人建议在合同期内做一次非正式市场评估。",
+    "description": "这不会立刻产生转会报价，只是帮助你判断外界位置；你要先确定谈话方向。",
+    "artGroup": "E-17",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "经纪人建议在合同期内做一次非正式市场评估。",
+      "resolvedDescription": "这不会立刻产生转会报价，只是帮助你判断外界位置；你要先确定谈话方向。"
+    }
+  },
+  {
+    "entityId": "AGENT_MARKET_CHECK",
+    "entityType": "event",
+    "variantKey": "AGENT_MARKET_CHECK@current@route-CONTRACT",
+    "title": "经纪人建议在合同期内做一次非正式市场评估。",
+    "description": "这不会立刻产生转会报价，只是帮助你判断外界位置；你要先确定谈话方向。",
+    "artGroup": "E-17",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "经纪人建议在合同期内做一次非正式市场评估。",
+      "resolvedDescription": "这不会立刻产生转会报价，只是帮助你判断外界位置；你要先确定谈话方向。"
+    }
+  },
+  {
+    "entityId": "RENEWAL_EXPECTATION_TALK",
+    "entityType": "event",
+    "variantKey": "RENEWAL_EXPECTATION_TALK@current",
+    "title": "俱乐部提前询问你对下一份合同的基本态度。",
+    "description": "这不是正式续约，也不会改变当前合同，只是双方在谈判前交换预期。",
+    "artGroup": "E-17",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "俱乐部提前询问你对下一份合同的基本态度。",
+      "resolvedDescription": "这不是正式续约，也不会改变当前合同，只是双方在谈判前交换预期。"
+    }
+  },
+  {
+    "entityId": "RELEASE_CLAUSE_BRIEFING",
+    "entityType": "event",
+    "variantKey": "RELEASE_CLAUSE_BRIEFING@current",
+    "title": "经纪人重新向你解释合同里的解约金条款。",
+    "description": "条款本身不会在这次谈话中改变，但你可以决定未来谈判更重视自由、稳定还是收入。",
+    "artGroup": "E-17",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "经纪人重新向你解释合同里的解约金条款。",
+      "resolvedDescription": "条款本身不会在这次谈话中改变，但你可以决定未来谈判更重视自由、稳定还是收入。"
+    }
+  },
+  {
+    "entityId": "DEADLINE_DAY_SPECULATION",
+    "entityType": "event",
+    "variantKey": "DEADLINE_DAY_SPECULATION@current@setup",
+    "title": "转会截止日前，记者堵住了你的离场通道。",
+    "description": "没有正式报价需要处理，但一句话就可能改变俱乐部和市场对你的判断。",
+    "artGroup": "E-10",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "转会截止日前，记者堵住了你的离场通道。",
+      "resolvedDescription": "没有正式报价需要处理，但一句话就可能改变俱乐部和市场对你的判断。"
+    }
+  },
+  {
+    "entityId": "DEADLINE_DAY_SPECULATION",
+    "entityType": "event",
+    "variantKey": "DEADLINE_DAY_SPECULATION@current@route-CLUB",
+    "title": "转会截止日前，记者堵住了你的离场通道。",
+    "description": "没有正式报价需要处理，但一句话就可能改变俱乐部和市场对你的判断。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "转会截止日前，记者堵住了你的离场通道。",
+      "resolvedDescription": "没有正式报价需要处理，但一句话就可能改变俱乐部和市场对你的判断。"
+    }
+  },
+  {
+    "entityId": "DEADLINE_DAY_SPECULATION",
+    "entityType": "event",
+    "variantKey": "DEADLINE_DAY_SPECULATION@current@route-MARKET",
+    "title": "转会截止日前，记者堵住了你的离场通道。",
+    "description": "没有正式报价需要处理，但一句话就可能改变俱乐部和市场对你的判断。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "转会截止日前，记者堵住了你的离场通道。",
+      "resolvedDescription": "没有正式报价需要处理，但一句话就可能改变俱乐部和市场对你的判断。"
+    }
+  },
+  {
+    "entityId": "INTERVIEW_MISQUOTE",
+    "entityType": "event",
+    "variantKey": "INTERVIEW_MISQUOTE@current@setup",
+    "title": "一段采访被剪成了与你原意不同的标题。",
+    "description": "俱乐部允许你回应，但越强硬的处理越可能延长争议。",
+    "artGroup": "E-11",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "一段采访被剪成了与你原意不同的标题。",
+      "resolvedDescription": "俱乐部允许你回应，但越强硬的处理越可能延长争议。"
+    }
+  },
+  {
+    "entityId": "INTERVIEW_MISQUOTE",
+    "entityType": "event",
+    "variantKey": "INTERVIEW_MISQUOTE@current@route-QUIET",
+    "title": "一段采访被剪成了与你原意不同的标题。",
+    "description": "俱乐部允许你回应，但越强硬的处理越可能延长争议。",
+    "artGroup": "E-11",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一段采访被剪成了与你原意不同的标题。",
+      "resolvedDescription": "俱乐部允许你回应，但越强硬的处理越可能延长争议。"
+    }
+  },
+  {
+    "entityId": "INTERVIEW_MISQUOTE",
+    "entityType": "event",
+    "variantKey": "INTERVIEW_MISQUOTE@current@route-PUBLIC",
+    "title": "一段采访被剪成了与你原意不同的标题。",
+    "description": "俱乐部允许你回应，但越强硬的处理越可能延长争议。",
+    "artGroup": "E-11",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一段采访被剪成了与你原意不同的标题。",
+      "resolvedDescription": "俱乐部允许你回应，但越强硬的处理越可能延长争议。"
+    }
+  },
+  {
+    "entityId": "SPONSOR_APPEARANCE",
+    "entityType": "event",
+    "variantKey": "SPONSOR_APPEARANCE@current",
+    "title": "一家品牌邀请你参加半天的公开活动。",
+    "description": "这是一笔真实可支配收入，但活动、训练和恢复无法同时占满时间。",
+    "artGroup": "E-20",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一家品牌邀请你参加半天的公开活动。",
+      "resolvedDescription": "这是一笔真实可支配收入，但活动、训练和恢复无法同时占满时间。"
+    }
+  },
+  {
+    "entityId": "AWAY_FAN_CONFRONTATION",
+    "entityType": "event",
+    "variantKey": "AWAY_FAN_CONFRONTATION@current@setup",
+    "title": "客场离场时，一群球迷在通道旁激烈挑衅。",
+    "description": "安保人员已经介入，你仍要决定先照顾谁的情绪，以及采用什么态度。",
+    "artGroup": "E-21",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "客场离场时，一群球迷在通道旁激烈挑衅。",
+      "resolvedDescription": "安保人员已经介入，你仍要决定先照顾谁的情绪，以及采用什么态度。"
+    }
+  },
+  {
+    "entityId": "AWAY_FAN_CONFRONTATION",
+    "entityType": "event",
+    "variantKey": "AWAY_FAN_CONFRONTATION@current@route-OWN_FANS",
+    "title": "客场离场时，一群球迷在通道旁激烈挑衅。",
+    "description": "安保人员已经介入，你仍要决定先照顾谁的情绪，以及采用什么态度。",
+    "artGroup": "E-21",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "客场离场时，一群球迷在通道旁激烈挑衅。",
+      "resolvedDescription": "安保人员已经介入，你仍要决定先照顾谁的情绪，以及采用什么态度。"
+    }
+  },
+  {
+    "entityId": "AWAY_FAN_CONFRONTATION",
+    "entityType": "event",
+    "variantKey": "AWAY_FAN_CONFRONTATION@current@route-SECURITY",
+    "title": "客场离场时，一群球迷在通道旁激烈挑衅。",
+    "description": "安保人员已经介入，你仍要决定先照顾谁的情绪，以及采用什么态度。",
+    "artGroup": "E-21",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "客场离场时，一群球迷在通道旁激烈挑衅。",
+      "resolvedDescription": "安保人员已经介入，你仍要决定先照顾谁的情绪，以及采用什么态度。"
+    }
+  },
+  {
+    "entityId": "COACH_PROGRESS_REVIEW",
+    "entityType": "event",
+    "variantKey": "COACH_PROGRESS_REVIEW@current@setup",
+    "title": "教练安排了一次阶段个人面谈。",
+    "description": "教练希望重新核对你的场上特点和职业目标，你可以先决定这次谈话从哪里开始。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "教练安排了一次阶段个人面谈。",
+      "resolvedDescription": "教练希望重新核对你的场上特点和职业目标，你可以先决定这次谈话从哪里开始。"
+    }
+  },
+  {
+    "entityId": "COACH_PROGRESS_REVIEW",
+    "entityType": "event",
+    "variantKey": "COACH_PROGRESS_REVIEW@current@route-FOOTBALL",
+    "title": "教练安排了一次阶段个人面谈。",
+    "description": "教练希望重新核对你的场上特点和职业目标，你可以先决定这次谈话从哪里开始。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练安排了一次阶段个人面谈。",
+      "resolvedDescription": "教练希望重新核对你的场上特点和职业目标，你可以先决定这次谈话从哪里开始。"
+    }
+  },
+  {
+    "entityId": "COACH_PROGRESS_REVIEW",
+    "entityType": "event",
+    "variantKey": "COACH_PROGRESS_REVIEW@current@route-CAREER",
+    "title": "教练安排了一次阶段个人面谈。",
+    "description": "教练希望重新核对你的场上特点和职业目标，你可以先决定这次谈话从哪里开始。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练安排了一次阶段个人面谈。",
+      "resolvedDescription": "教练希望重新核对你的场上特点和职业目标，你可以先决定这次谈话从哪里开始。"
+    }
+  },
+  {
+    "entityId": "FORMER_TEAMMATE_REUNION",
+    "entityType": "event",
+    "variantKey": "FORMER_TEAMMATE_REUNION@current",
+    "title": "赛后通道里，你遇见了一名昔日队友。",
+    "description": "你们如今效力不同俱乐部，这次重逢可以只停留在寒暄，也可以重新建立联系。",
+    "artGroup": "E-22",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "赛后通道里，你遇见了一名昔日队友。",
+      "resolvedDescription": "你们如今效力不同俱乐部，这次重逢可以只停留在寒暄，也可以重新建立联系。"
+    }
+  },
+  {
+    "entityId": "YOUNG_CHALLENGER_ARRIVES",
+    "entityType": "event",
+    "variantKey": "YOUNG_CHALLENGER_ARRIVES@current@setup",
+    "title": "一名年轻新援公开表示，希望竞争你的位置。",
+    "description": "你已经是球队稳定成员，可以先决定把他视作竞争者还是后辈，再选择具体回应。",
+    "artGroup": "E-06",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "一名年轻新援公开表示，希望竞争你的位置。",
+      "resolvedDescription": "你已经是球队稳定成员，可以先决定把他视作竞争者还是后辈，再选择具体回应。"
+    }
+  },
+  {
+    "entityId": "YOUNG_CHALLENGER_ARRIVES",
+    "entityType": "event",
+    "variantKey": "YOUNG_CHALLENGER_ARRIVES@current@route-RIVAL",
+    "title": "一名年轻新援公开表示，希望竞争你的位置。",
+    "description": "你已经是球队稳定成员，可以先决定把他视作竞争者还是后辈，再选择具体回应。",
+    "artGroup": "E-06",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一名年轻新援公开表示，希望竞争你的位置。",
+      "resolvedDescription": "你已经是球队稳定成员，可以先决定把他视作竞争者还是后辈，再选择具体回应。"
+    }
+  },
+  {
+    "entityId": "YOUNG_CHALLENGER_ARRIVES",
+    "entityType": "event",
+    "variantKey": "YOUNG_CHALLENGER_ARRIVES@current@route-JUNIOR",
+    "title": "一名年轻新援公开表示，希望竞争你的位置。",
+    "description": "你已经是球队稳定成员，可以先决定把他视作竞争者还是后辈，再选择具体回应。",
+    "artGroup": "E-06",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一名年轻新援公开表示，希望竞争你的位置。",
+      "resolvedDescription": "你已经是球队稳定成员，可以先决定把他视作竞争者还是后辈，再选择具体回应。"
+    }
+  },
+  {
+    "entityId": "FIRST_TEAM_DEBUT_REFLECTION",
+    "entityType": "event",
+    "variantKey": "FIRST_TEAM_DEBUT_REFLECTION@current",
+    "title": "你的一线队首秀已经写入生涯履历。",
+    "description": "第一次正式登场不必完美，但你可以决定怎样保存这段起点。",
+    "artGroup": "E-23",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你的一线队首秀已经写入生涯履历。",
+      "resolvedDescription": "第一次正式登场不必完美，但你可以决定怎样保存这段起点。"
+    }
+  },
+  {
+    "entityId": "FIRST_SENIOR_GOAL_REACTION",
+    "entityType": "event",
+    "variantKey": "FIRST_SENIOR_GOAL_REACTION@current",
+    "title": "你的第一粒一线队进球已经被记入数据。",
+    "description": "这个进球属于职业生涯，也属于参与其中的整支球队。",
+    "artGroup": "E-23",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你的第一粒一线队进球已经被记入数据。",
+      "resolvedDescription": "这个进球属于职业生涯，也属于参与其中的整支球队。"
+    }
+  },
+  {
+    "entityId": "SCORING_DROUGHT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "SCORING_DROUGHT_RESPONSE@current@setup",
+    "title": "连续两个阶段没有进球，外界开始讨论你的效率。",
+    "description": "你需要先确定问题来自比赛方式还是心理压力，再决定怎样回应。",
+    "artGroup": "E-19",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "连续两个阶段没有进球，外界开始讨论你的效率。",
+      "resolvedDescription": "你需要先确定问题来自比赛方式还是心理压力，再决定怎样回应。"
+    }
+  },
+  {
+    "entityId": "SCORING_DROUGHT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "SCORING_DROUGHT_RESPONSE@current@route-FOOTBALL",
+    "title": "连续两个阶段没有进球，外界开始讨论你的效率。",
+    "description": "你需要先确定问题来自比赛方式还是心理压力，再决定怎样回应。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "连续两个阶段没有进球，外界开始讨论你的效率。",
+      "resolvedDescription": "你需要先确定问题来自比赛方式还是心理压力，再决定怎样回应。"
+    }
+  },
+  {
+    "entityId": "SCORING_DROUGHT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "SCORING_DROUGHT_RESPONSE@current@route-MIND",
+    "title": "连续两个阶段没有进球，外界开始讨论你的效率。",
+    "description": "你需要先确定问题来自比赛方式还是心理压力，再决定怎样回应。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "连续两个阶段没有进球，外界开始讨论你的效率。",
+      "resolvedDescription": "你需要先确定问题来自比赛方式还是心理压力，再决定怎样回应。"
+    }
+  },
+  {
+    "entityId": "SUSTAINED_HIGH_FORM",
+    "entityType": "event",
+    "variantKey": "SUSTAINED_HIGH_FORM@current",
+    "title": "连续两个阶段表现出色，额外关注和比赛负荷同时到来。",
+    "description": "时间和体能有限，你必须决定如何在比赛、恢复和公众活动之间分配精力。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "连续两个阶段表现出色，额外关注和比赛负荷同时到来。",
+      "resolvedDescription": "时间和体能有限，你必须决定如何在比赛、恢复和公众活动之间分配精力。"
+    }
+  },
+  {
+    "entityId": "IMPACT_SUBSTITUTE_RECOGNITION",
+    "entityType": "event",
+    "variantKey": "IMPACT_SUBSTITUTE_RECOGNITION@current@setup",
+    "title": "有限出场时间里连续制造进球，教练开始重新评估你。",
+    "description": "你可以稳步扩大角色，也可以利用这次表现直接要求更多首发机会。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "有限出场时间里连续制造进球，教练开始重新评估你。",
+      "resolvedDescription": "你可以稳步扩大角色，也可以利用这次表现直接要求更多首发机会。"
+    }
+  },
+  {
+    "entityId": "IMPACT_SUBSTITUTE_RECOGNITION",
+    "entityType": "event",
+    "variantKey": "IMPACT_SUBSTITUTE_RECOGNITION@current@route-PRIVATE",
+    "title": "有限出场时间里连续制造进球，教练开始重新评估你。",
+    "description": "你可以稳步扩大角色，也可以利用这次表现直接要求更多首发机会。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "有限出场时间里连续制造进球，教练开始重新评估你。",
+      "resolvedDescription": "你可以稳步扩大角色，也可以利用这次表现直接要求更多首发机会。"
+    }
+  },
+  {
+    "entityId": "IMPACT_SUBSTITUTE_RECOGNITION",
+    "entityType": "event",
+    "variantKey": "IMPACT_SUBSTITUTE_RECOGNITION@current@route-PUBLIC",
+    "title": "有限出场时间里连续制造进球，教练开始重新评估你。",
+    "description": "你可以稳步扩大角色，也可以利用这次表现直接要求更多首发机会。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "有限出场时间里连续制造进球，教练开始重新评估你。",
+      "resolvedDescription": "你可以稳步扩大角色，也可以利用这次表现直接要求更多首发机会。"
+    }
+  },
+  {
+    "entityId": "FIRST_LEAGUE_TITLE_REACTION",
+    "entityType": "event",
+    "variantKey": "FIRST_LEAGUE_TITLE_REACTION@current",
+    "title": "你的第一座联赛冠军已经写入荣誉室。",
+    "description": "庆祝、感谢和重新设定目标都很重要，你要决定这三件事的先后。",
+    "artGroup": "E-24",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你的第一座联赛冠军已经写入荣誉室。",
+      "resolvedDescription": "庆祝、感谢和重新设定目标都很重要，你要决定这三件事的先后。"
+    }
+  },
+  {
+    "entityId": "FIRST_CUP_TITLE_REACTION",
+    "entityType": "event",
+    "variantKey": "FIRST_CUP_TITLE_REACTION@current",
+    "title": "你第一次随队赢得了杯赛或洲际赛事冠军。",
+    "description": "淘汰赛冠军往往浓缩了许多关键时刻，你可以决定如何理解自己的贡献。",
+    "artGroup": "E-24",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你第一次随队赢得了杯赛或洲际赛事冠军。",
+      "resolvedDescription": "淘汰赛冠军往往浓缩了许多关键时刻，你可以决定如何理解自己的贡献。"
+    }
+  },
+  {
+    "entityId": "FINAL_DEFEAT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "FINAL_DEFEAT_RESPONSE@current@setup",
+    "title": "球队在决赛中失利，赛季以距离奖杯一步之遥结束。",
+    "description": "失望是真实的，但你仍要决定先面对队友还是公众，再选择具体表达。",
+    "artGroup": "E-19",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "球队在决赛中失利，赛季以距离奖杯一步之遥结束。",
+      "resolvedDescription": "失望是真实的，但你仍要决定先面对队友还是公众，再选择具体表达。"
+    }
+  },
+  {
+    "entityId": "FINAL_DEFEAT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "FINAL_DEFEAT_RESPONSE@current@route-TEAM",
+    "title": "球队在决赛中失利，赛季以距离奖杯一步之遥结束。",
+    "description": "失望是真实的，但你仍要决定先面对队友还是公众，再选择具体表达。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球队在决赛中失利，赛季以距离奖杯一步之遥结束。",
+      "resolvedDescription": "失望是真实的，但你仍要决定先面对队友还是公众，再选择具体表达。"
+    }
+  },
+  {
+    "entityId": "FINAL_DEFEAT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "FINAL_DEFEAT_RESPONSE@current@route-PUBLIC",
+    "title": "球队在决赛中失利，赛季以距离奖杯一步之遥结束。",
+    "description": "失望是真实的，但你仍要决定先面对队友还是公众，再选择具体表达。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球队在决赛中失利，赛季以距离奖杯一步之遥结束。",
+      "resolvedDescription": "失望是真实的，但你仍要决定先面对队友还是公众，再选择具体表达。"
+    }
+  },
+  {
+    "entityId": "INDIVIDUAL_AWARD_REACTION",
+    "entityType": "event",
+    "variantKey": "INDIVIDUAL_AWARD_REACTION@current@setup",
+    "title": "赛季个人奖项公布，你的名字出现在获奖名单中。",
+    "description": "关注集中到你身上，你要先确定感谢对象，再选择表达方式。",
+    "artGroup": "E-25",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "赛季个人奖项公布，你的名字出现在获奖名单中。",
+      "resolvedDescription": "关注集中到你身上，你要先确定感谢对象，再选择表达方式。"
+    }
+  },
+  {
+    "entityId": "INDIVIDUAL_AWARD_REACTION",
+    "entityType": "event",
+    "variantKey": "INDIVIDUAL_AWARD_REACTION@current@route-TEAM",
+    "title": "赛季个人奖项公布，你的名字出现在获奖名单中。",
+    "description": "关注集中到你身上，你要先确定感谢对象，再选择表达方式。",
+    "artGroup": "E-25",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "赛季个人奖项公布，你的名字出现在获奖名单中。",
+      "resolvedDescription": "关注集中到你身上，你要先确定感谢对象，再选择表达方式。"
+    }
+  },
+  {
+    "entityId": "INDIVIDUAL_AWARD_REACTION",
+    "entityType": "event",
+    "variantKey": "INDIVIDUAL_AWARD_REACTION@current@route-SELF",
+    "title": "赛季个人奖项公布，你的名字出现在获奖名单中。",
+    "description": "关注集中到你身上，你要先确定感谢对象，再选择表达方式。",
+    "artGroup": "E-25",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "赛季个人奖项公布，你的名字出现在获奖名单中。",
+      "resolvedDescription": "关注集中到你身上，你要先确定感谢对象，再选择表达方式。"
+    }
+  },
+  {
+    "entityId": "STRONG_SEASON_WITHOUT_TROPHY",
+    "entityType": "event",
+    "variantKey": "STRONG_SEASON_WITHOUT_TROPHY@current",
+    "title": "个人表现出色，但球队赛季结束时没有赢得冠军。",
+    "description": "你要在个人进步、球队差距和未来目标之间排出复盘顺序。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "个人表现出色，但球队赛季结束时没有赢得冠军。",
+      "resolvedDescription": "你要在个人进步、球队差距和未来目标之间排出复盘顺序。"
+    }
+  },
+  {
+    "entityId": "FIRST_TEAM_100_APPEARANCES",
+    "entityType": "event",
+    "variantKey": "FIRST_TEAM_100_APPEARANCES@current",
+    "title": "你已经完成职业生涯第100次一线队出场。",
+    "description": "从首秀到百场，稳定本身已经成为一种职业能力。",
+    "artGroup": "E-23",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你已经完成职业生涯第100次一线队出场。",
+      "resolvedDescription": "从首秀到百场，稳定本身已经成为一种职业能力。"
+    }
+  },
+  {
+    "entityId": "LONG_SERVICE_RECOGNITION",
+    "entityType": "event",
+    "variantKey": "LONG_SERVICE_RECOGNITION@current",
+    "title": "俱乐部准备为你的长期效力安排一次纪念活动。",
+    "description": "活动时间有限，你可以把重点留给球迷、青训球员或昔日队友。",
+    "artGroup": "E-26",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "俱乐部准备为你的长期效力安排一次纪念活动。",
+      "resolvedDescription": "活动时间有限，你可以把重点留给球迷、青训球员或昔日队友。"
+    }
+  },
+  {
+    "entityId": "RETURN_TO_FORMER_CLUB",
+    "entityType": "event",
+    "variantKey": "RETURN_TO_FORMER_CLUB@current@setup",
+    "title": "转会完成后，你重新走进了曾经熟悉的俱乐部。",
+    "description": "过去的关系和现在的角色并不相同，你要先决定如何面对这次回归。",
+    "artGroup": "E-27",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "转会完成后，你重新走进了曾经熟悉的俱乐部。",
+      "resolvedDescription": "过去的关系和现在的角色并不相同，你要先决定如何面对这次回归。"
+    }
+  },
+  {
+    "entityId": "RETURN_TO_FORMER_CLUB",
+    "entityType": "event",
+    "variantKey": "RETURN_TO_FORMER_CLUB@current@route-PAST",
+    "title": "转会完成后，你重新走进了曾经熟悉的俱乐部。",
+    "description": "过去的关系和现在的角色并不相同，你要先决定如何面对这次回归。",
+    "artGroup": "E-27",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "转会完成后，你重新走进了曾经熟悉的俱乐部。",
+      "resolvedDescription": "过去的关系和现在的角色并不相同，你要先决定如何面对这次回归。"
+    }
+  },
+  {
+    "entityId": "RETURN_TO_FORMER_CLUB",
+    "entityType": "event",
+    "variantKey": "RETURN_TO_FORMER_CLUB@current@route-PRESENT",
+    "title": "转会完成后，你重新走进了曾经熟悉的俱乐部。",
+    "description": "过去的关系和现在的角色并不相同，你要先决定如何面对这次回归。",
+    "artGroup": "E-27",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "转会完成后，你重新走进了曾经熟悉的俱乐部。",
+      "resolvedDescription": "过去的关系和现在的角色并不相同，你要先决定如何面对这次回归。"
+    }
+  },
+  {
+    "entityId": "LONG_SERVICE_FAREWELL",
+    "entityType": "event",
+    "variantKey": "LONG_SERVICE_FAREWELL@current@setup",
+    "title": "长期效力之后，你需要正式告别上一家俱乐部。",
+    "description": "转会已经完成，你可以先决定告别对象，再选择表达方式。",
+    "artGroup": "E-27",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "长期效力之后，你需要正式告别上一家俱乐部。",
+      "resolvedDescription": "转会已经完成，你可以先决定告别对象，再选择表达方式。"
+    }
+  },
+  {
+    "entityId": "LONG_SERVICE_FAREWELL",
+    "entityType": "event",
+    "variantKey": "LONG_SERVICE_FAREWELL@current@route-FANS",
+    "title": "长期效力之后，你需要正式告别上一家俱乐部。",
+    "description": "转会已经完成，你可以先决定告别对象，再选择表达方式。",
+    "artGroup": "E-27",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "长期效力之后，你需要正式告别上一家俱乐部。",
+      "resolvedDescription": "转会已经完成，你可以先决定告别对象，再选择表达方式。"
+    }
+  },
+  {
+    "entityId": "LONG_SERVICE_FAREWELL",
+    "entityType": "event",
+    "variantKey": "LONG_SERVICE_FAREWELL@current@route-CLUB",
+    "title": "长期效力之后，你需要正式告别上一家俱乐部。",
+    "description": "转会已经完成，你可以先决定告别对象，再选择表达方式。",
+    "artGroup": "E-27",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "长期效力之后，你需要正式告别上一家俱乐部。",
+      "resolvedDescription": "转会已经完成，你可以先决定告别对象，再选择表达方式。"
+    }
+  },
+  {
+    "entityId": "VETERAN_ROLE_ADJUSTMENT",
+    "entityType": "event",
+    "variantKey": "VETERAN_ROLE_ADJUSTMENT@current",
+    "title": "进入生涯后期，教练希望重新分配你的比赛和恢复时间。",
+    "description": "你仍然能够贡献，但必须在出场数量、关键比赛和身体恢复之间做出取舍。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "进入生涯后期，教练希望重新分配你的比赛和恢复时间。",
+      "resolvedDescription": "你仍然能够贡献，但必须在出场数量、关键比赛和身体恢复之间做出取舍。"
+    }
+  },
+  {
+    "entityId": "DRESSING_ROOM_DEFEAT_REVIEW",
+    "entityType": "event",
+    "variantKey": "DRESSING_ROOM_DEFEAT_REVIEW@current@setup",
+    "title": "一次糟糕表现后，更衣室需要有人先把话说清楚。",
+    "description": "教练没有点名批评任何人，但沉默正在把一次失利变成更长的压力。",
+    "artGroup": "E-19",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "一次糟糕表现后，更衣室需要有人先把话说清楚。",
+      "resolvedDescription": "教练没有点名批评任何人，但沉默正在把一次失利变成更长的压力。"
+    }
+  },
+  {
+    "entityId": "DRESSING_ROOM_DEFEAT_REVIEW",
+    "entityType": "event",
+    "variantKey": "DRESSING_ROOM_DEFEAT_REVIEW@current@route-SELF",
+    "title": "一次糟糕表现后，更衣室需要有人先把话说清楚。",
+    "description": "教练没有点名批评任何人，但沉默正在把一次失利变成更长的压力。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一次糟糕表现后，更衣室需要有人先把话说清楚。",
+      "resolvedDescription": "教练没有点名批评任何人，但沉默正在把一次失利变成更长的压力。"
+    }
+  },
+  {
+    "entityId": "DRESSING_ROOM_DEFEAT_REVIEW",
+    "entityType": "event",
+    "variantKey": "DRESSING_ROOM_DEFEAT_REVIEW@current@route-TEAM",
+    "title": "一次糟糕表现后，更衣室需要有人先把话说清楚。",
+    "description": "教练没有点名批评任何人，但沉默正在把一次失利变成更长的压力。",
+    "artGroup": "E-19",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一次糟糕表现后，更衣室需要有人先把话说清楚。",
+      "resolvedDescription": "教练没有点名批评任何人，但沉默正在把一次失利变成更长的压力。"
+    }
+  },
+  {
+    "entityId": "PLAYER_COUNCIL_VOTE",
+    "entityType": "event",
+    "variantKey": "PLAYER_COUNCIL_VOTE@current@setup",
+    "title": "更衣室准备推选新的球员委员会成员。",
+    "description": "这不是队长袖标，但入选者需要代表队友与教练组沟通日常问题。",
+    "artGroup": "E-28",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "更衣室准备推选新的球员委员会成员。",
+      "resolvedDescription": "这不是队长袖标，但入选者需要代表队友与教练组沟通日常问题。"
+    }
+  },
+  {
+    "entityId": "PLAYER_COUNCIL_VOTE",
+    "entityType": "event",
+    "variantKey": "PLAYER_COUNCIL_VOTE@current@route-RUN",
+    "title": "更衣室准备推选新的球员委员会成员。",
+    "description": "这不是队长袖标，但入选者需要代表队友与教练组沟通日常问题。",
+    "artGroup": "E-28",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "更衣室准备推选新的球员委员会成员。",
+      "resolvedDescription": "这不是队长袖标，但入选者需要代表队友与教练组沟通日常问题。"
+    }
+  },
+  {
+    "entityId": "PLAYER_COUNCIL_VOTE",
+    "entityType": "event",
+    "variantKey": "PLAYER_COUNCIL_VOTE@current@route-QUIET",
+    "title": "更衣室准备推选新的球员委员会成员。",
+    "description": "这不是队长袖标，但入选者需要代表队友与教练组沟通日常问题。",
+    "artGroup": "E-28",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "更衣室准备推选新的球员委员会成员。",
+      "resolvedDescription": "这不是队长袖标，但入选者需要代表队友与教练组沟通日常问题。"
+    }
+  },
+  {
+    "entityId": "TEAMMATE_CONTRACT_TENSION",
+    "entityType": "event",
+    "variantKey": "TEAMMATE_CONTRACT_TENSION@current@setup",
+    "title": "一名队友的续约争议开始影响更衣室气氛。",
+    "description": "有人认为俱乐部不够尊重球员，也有人担心公开讨论会拖累比赛。",
+    "artGroup": "E-07",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "一名队友的续约争议开始影响更衣室气氛。",
+      "resolvedDescription": "有人认为俱乐部不够尊重球员，也有人担心公开讨论会拖累比赛。"
+    }
+  },
+  {
+    "entityId": "TEAMMATE_CONTRACT_TENSION",
+    "entityType": "event",
+    "variantKey": "TEAMMATE_CONTRACT_TENSION@current@route-PLAYER",
+    "title": "一名队友的续约争议开始影响更衣室气氛。",
+    "description": "有人认为俱乐部不够尊重球员，也有人担心公开讨论会拖累比赛。",
+    "artGroup": "E-07",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一名队友的续约争议开始影响更衣室气氛。",
+      "resolvedDescription": "有人认为俱乐部不够尊重球员，也有人担心公开讨论会拖累比赛。"
+    }
+  },
+  {
+    "entityId": "TEAMMATE_CONTRACT_TENSION",
+    "entityType": "event",
+    "variantKey": "TEAMMATE_CONTRACT_TENSION@current@route-STAFF",
+    "title": "一名队友的续约争议开始影响更衣室气氛。",
+    "description": "有人认为俱乐部不够尊重球员，也有人担心公开讨论会拖累比赛。",
+    "artGroup": "E-07",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一名队友的续约争议开始影响更衣室气氛。",
+      "resolvedDescription": "有人认为俱乐部不够尊重球员，也有人担心公开讨论会拖累比赛。"
+    }
+  },
+  {
+    "entityId": "OVERSEAS_COMMUNICATION_PLAN",
+    "entityType": "event",
+    "variantKey": "OVERSEAS_COMMUNICATION_PLAN@current",
+    "title": "海外生活已经开始，但语言和战术术语仍会拖慢反应。",
+    "description": "额外时间有限，你需要决定先解决生活沟通、战术理解，还是训练场默契。",
+    "artGroup": "E-29",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "海外生活已经开始，但语言和战术术语仍会拖慢反应。",
+      "resolvedDescription": "额外时间有限，你需要决定先解决生活沟通、战术理解，还是训练场默契。"
+    }
+  },
+  {
+    "entityId": "EARLY_SUBSTITUTION_REACTION",
+    "entityType": "event",
+    "variantKey": "EARLY_SUBSTITUTION_REACTION@current@setup",
+    "title": "一次首发只踢了半场，教练便示意你离场。",
+    "description": "你对换人理由并不清楚，镜头和替补席都在等待你的第一反应。",
+    "artGroup": "E-14",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "一次首发只踢了半场，教练便示意你离场。",
+      "resolvedDescription": "你对换人理由并不清楚，镜头和替补席都在等待你的第一反应。"
+    }
+  },
+  {
+    "entityId": "EARLY_SUBSTITUTION_REACTION",
+    "entityType": "event",
+    "variantKey": "EARLY_SUBSTITUTION_REACTION@current@route-NOW",
+    "title": "一次首发只踢了半场，教练便示意你离场。",
+    "description": "你对换人理由并不清楚，镜头和替补席都在等待你的第一反应。",
+    "artGroup": "E-14",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一次首发只踢了半场，教练便示意你离场。",
+      "resolvedDescription": "你对换人理由并不清楚，镜头和替补席都在等待你的第一反应。"
+    }
+  },
+  {
+    "entityId": "EARLY_SUBSTITUTION_REACTION",
+    "entityType": "event",
+    "variantKey": "EARLY_SUBSTITUTION_REACTION@current@route-LATER",
+    "title": "一次首发只踢了半场，教练便示意你离场。",
+    "description": "你对换人理由并不清楚，镜头和替补席都在等待你的第一反应。",
+    "artGroup": "E-14",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一次首发只踢了半场，教练便示意你离场。",
+      "resolvedDescription": "你对换人理由并不清楚，镜头和替补席都在等待你的第一反应。"
+    }
+  },
+  {
+    "entityId": "TEMPORARY_TACTICAL_ROLE",
+    "entityType": "event",
+    "variantKey": "TEMPORARY_TACTICAL_ROLE@current@setup",
+    "title": "教练想让你在接下来的比赛里临时承担陌生职责。",
+    "description": "这是短期战术安排，不会占用职业生涯唯一的新位置学习名额。",
+    "artGroup": "E-01",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "教练想让你在接下来的比赛里临时承担陌生职责。",
+      "resolvedDescription": "这是短期战术安排，不会占用职业生涯唯一的新位置学习名额。"
+    }
+  },
+  {
+    "entityId": "TEMPORARY_TACTICAL_ROLE",
+    "entityType": "event",
+    "variantKey": "TEMPORARY_TACTICAL_ROLE@current@route-TASK",
+    "title": "教练想让你在接下来的比赛里临时承担陌生职责。",
+    "description": "这是短期战术安排，不会占用职业生涯唯一的新位置学习名额。",
+    "artGroup": "E-01",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练想让你在接下来的比赛里临时承担陌生职责。",
+      "resolvedDescription": "这是短期战术安排，不会占用职业生涯唯一的新位置学习名额。"
+    }
+  },
+  {
+    "entityId": "TEMPORARY_TACTICAL_ROLE",
+    "entityType": "event",
+    "variantKey": "TEMPORARY_TACTICAL_ROLE@current@route-RISK",
+    "title": "教练想让你在接下来的比赛里临时承担陌生职责。",
+    "description": "这是短期战术安排，不会占用职业生涯唯一的新位置学习名额。",
+    "artGroup": "E-01",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "教练想让你在接下来的比赛里临时承担陌生职责。",
+      "resolvedDescription": "这是短期战术安排，不会占用职业生涯唯一的新位置学习名额。"
+    }
+  },
+  {
+    "entityId": "PROTECT_LEAD_OR_CHASE_STATS",
+    "entityType": "event",
+    "variantKey": "PROTECT_LEAD_OR_CHASE_STATS@current@setup",
+    "title": "球队领先进入最后阶段，你仍有机会继续制造个人数据。",
+    "description": "教练要求全队保持纪律，但场上空间也在不断出现。",
+    "artGroup": "E-30",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "球队领先进入最后阶段，你仍有机会继续制造个人数据。",
+      "resolvedDescription": "教练要求全队保持纪律，但场上空间也在不断出现。"
+    }
+  },
+  {
+    "entityId": "PROTECT_LEAD_OR_CHASE_STATS",
+    "entityType": "event",
+    "variantKey": "PROTECT_LEAD_OR_CHASE_STATS@current@route-TEAM",
+    "title": "球队领先进入最后阶段，你仍有机会继续制造个人数据。",
+    "description": "教练要求全队保持纪律，但场上空间也在不断出现。",
+    "artGroup": "E-30",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球队领先进入最后阶段，你仍有机会继续制造个人数据。",
+      "resolvedDescription": "教练要求全队保持纪律，但场上空间也在不断出现。"
+    }
+  },
+  {
+    "entityId": "PROTECT_LEAD_OR_CHASE_STATS",
+    "entityType": "event",
+    "variantKey": "PROTECT_LEAD_OR_CHASE_STATS@current@route-SELF",
+    "title": "球队领先进入最后阶段，你仍有机会继续制造个人数据。",
+    "description": "教练要求全队保持纪律，但场上空间也在不断出现。",
+    "artGroup": "E-30",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球队领先进入最后阶段，你仍有机会继续制造个人数据。",
+      "resolvedDescription": "教练要求全队保持纪律，但场上空间也在不断出现。"
+    }
+  },
+  {
+    "entityId": "CONGESTED_SCHEDULE_PRIORITIES",
+    "entityType": "event",
+    "variantKey": "CONGESTED_SCHEDULE_PRIORITIES@current",
+    "title": "连续比赛压缩了训练、恢复和个人准备的时间。",
+    "description": "体能团队让你明确接下来最重要的优先顺序。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "连续比赛压缩了训练、恢复和个人准备的时间。",
+      "resolvedDescription": "体能团队让你明确接下来最重要的优先顺序。"
+    }
+  },
+  {
+    "entityId": "FAN_EXPECTATION_SURGE",
+    "entityType": "event",
+    "variantKey": "FAN_EXPECTATION_SURGE@current",
+    "title": "连续好表现后，球迷开始期待你承担更重要的责任。",
+    "description": "赞誉会带来动力，也可能把一段好状态迅速变成必须维持的标准。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "连续好表现后，球迷开始期待你承担更重要的责任。",
+      "resolvedDescription": "赞誉会带来动力，也可能把一段好状态迅速变成必须维持的标准。"
+    }
+  },
+  {
+    "entityId": "OLD_SOCIAL_POST_REVISITED",
+    "entityType": "event",
+    "variantKey": "OLD_SOCIAL_POST_REVISITED@current@setup",
+    "title": "一条少年时期的社交媒体内容突然重新受到关注。",
+    "description": "内容并不严重，但脱离原来语境后，正在被解释成你现在的态度。",
+    "artGroup": "E-11",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "一条少年时期的社交媒体内容突然重新受到关注。",
+      "resolvedDescription": "内容并不严重，但脱离原来语境后，正在被解释成你现在的态度。"
+    }
+  },
+  {
+    "entityId": "OLD_SOCIAL_POST_REVISITED",
+    "entityType": "event",
+    "variantKey": "OLD_SOCIAL_POST_REVISITED@current@route-PRIVATE",
+    "title": "一条少年时期的社交媒体内容突然重新受到关注。",
+    "description": "内容并不严重，但脱离原来语境后，正在被解释成你现在的态度。",
+    "artGroup": "E-11",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一条少年时期的社交媒体内容突然重新受到关注。",
+      "resolvedDescription": "内容并不严重，但脱离原来语境后，正在被解释成你现在的态度。"
+    }
+  },
+  {
+    "entityId": "OLD_SOCIAL_POST_REVISITED",
+    "entityType": "event",
+    "variantKey": "OLD_SOCIAL_POST_REVISITED@current@route-PUBLIC",
+    "title": "一条少年时期的社交媒体内容突然重新受到关注。",
+    "description": "内容并不严重，但脱离原来语境后，正在被解释成你现在的态度。",
+    "artGroup": "E-11",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一条少年时期的社交媒体内容突然重新受到关注。",
+      "resolvedDescription": "内容并不严重，但脱离原来语境后，正在被解释成你现在的态度。"
+    }
+  },
+  {
+    "entityId": "TEAMMATE_RANKING_INTERVIEW",
+    "entityType": "event",
+    "variantKey": "TEAMMATE_RANKING_INTERVIEW@current@setup",
+    "title": "记者要求你公开选出队内表现最好的几名球员。",
+    "description": "任何具体排名都可能制造话题，完全回避也可能被认为缺少诚意。",
+    "artGroup": "E-10",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "记者要求你公开选出队内表现最好的几名球员。",
+      "resolvedDescription": "任何具体排名都可能制造话题，完全回避也可能被认为缺少诚意。"
+    }
+  },
+  {
+    "entityId": "TEAMMATE_RANKING_INTERVIEW",
+    "entityType": "event",
+    "variantKey": "TEAMMATE_RANKING_INTERVIEW@current@route-TEAM",
+    "title": "记者要求你公开选出队内表现最好的几名球员。",
+    "description": "任何具体排名都可能制造话题，完全回避也可能被认为缺少诚意。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "记者要求你公开选出队内表现最好的几名球员。",
+      "resolvedDescription": "任何具体排名都可能制造话题，完全回避也可能被认为缺少诚意。"
+    }
+  },
+  {
+    "entityId": "TEAMMATE_RANKING_INTERVIEW",
+    "entityType": "event",
+    "variantKey": "TEAMMATE_RANKING_INTERVIEW@current@route-MEDIA",
+    "title": "记者要求你公开选出队内表现最好的几名球员。",
+    "description": "任何具体排名都可能制造话题，完全回避也可能被认为缺少诚意。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "记者要求你公开选出队内表现最好的几名球员。",
+      "resolvedDescription": "任何具体排名都可能制造话题，完全回避也可能被认为缺少诚意。"
+    }
+  },
+  {
+    "entityId": "SETTLE_IN_CURRENT_CITY",
+    "entityType": "event",
+    "variantKey": "SETTLE_IN_CURRENT_CITY@current",
+    "title": "家人问你，是否准备把当前城市当作长期生活的地方。",
+    "description": "答案不会直接决定转会，但会影响你面对下一份合同时的真实倾向。",
+    "artGroup": "E-31",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "家人问你，是否准备把当前城市当作长期生活的地方。",
+      "resolvedDescription": "答案不会直接决定转会，但会影响你面对下一份合同时的真实倾向。"
+    }
+  },
+  {
+    "entityId": "THREE_YEAR_CAREER_DIRECTION",
+    "entityType": "event",
+    "variantKey": "THREE_YEAR_CAREER_DIRECTION@current",
+    "title": "经纪人要求你重新确定未来三年的职业优先级。",
+    "description": "这次排序会直接改写现有四项职业追求，后续合同与转会仍使用同一套模型。",
+    "artGroup": "E-17",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "经纪人要求你重新确定未来三年的职业优先级。",
+      "resolvedDescription": "这次排序会直接改写现有四项职业追求，后续合同与转会仍使用同一套模型。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_ROLE_MISMATCH",
+    "entityType": "event",
+    "variantKey": "NATIONAL_ROLE_MISMATCH@current",
+    "title": "国家队和俱乐部要求你承担不同的战术职责。",
+    "description": "比赛理解可以互相促进，但训练时间不足以同时强化所有细节。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "国家队和俱乐部要求你承担不同的战术职责。",
+      "resolvedDescription": "比赛理解可以互相促进，但训练时间不足以同时强化所有细节。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_DEFEAT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "NATIONAL_DEFEAT_RESPONSE@current@setup",
+    "title": "国家队表现不佳，赛后采访要求球员给出解释。",
+    "description": "公众需要回应，但任何一句话都可能改变责任落点。",
+    "artGroup": "E-10",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "国家队表现不佳，赛后采访要求球员给出解释。",
+      "resolvedDescription": "公众需要回应，但任何一句话都可能改变责任落点。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_DEFEAT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "NATIONAL_DEFEAT_RESPONSE@current@route-TEAM",
+    "title": "国家队表现不佳，赛后采访要求球员给出解释。",
+    "description": "公众需要回应，但任何一句话都可能改变责任落点。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "国家队表现不佳，赛后采访要求球员给出解释。",
+      "resolvedDescription": "公众需要回应，但任何一句话都可能改变责任落点。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_DEFEAT_RESPONSE",
+    "entityType": "event",
+    "variantKey": "NATIONAL_DEFEAT_RESPONSE@current@route-PUBLIC",
+    "title": "国家队表现不佳，赛后采访要求球员给出解释。",
+    "description": "公众需要回应，但任何一句话都可能改变责任落点。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "国家队表现不佳，赛后采访要求球员给出解释。",
+      "resolvedDescription": "公众需要回应，但任何一句话都可能改变责任落点。"
+    }
+  },
+  {
+    "entityId": "STARTING_ROLE_LOST",
+    "entityType": "event",
+    "variantKey": "STARTING_ROLE_LOST@current@setup",
+    "title": "你刚刚失去了原本稳定的主力位置。",
+    "description": "角色变化已经发生。现在需要弄清原因，并决定怎样回应。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "你刚刚失去了原本稳定的主力位置。",
+      "resolvedDescription": "角色变化已经发生。现在需要弄清原因，并决定怎样回应。"
+    }
+  },
+  {
+    "entityId": "STARTING_ROLE_LOST",
+    "entityType": "event",
+    "variantKey": "STARTING_ROLE_LOST@current@route-COACH",
+    "title": "你刚刚失去了原本稳定的主力位置。",
+    "description": "角色变化已经发生。现在需要弄清原因，并决定怎样回应。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你刚刚失去了原本稳定的主力位置。",
+      "resolvedDescription": "角色变化已经发生。现在需要弄清原因，并决定怎样回应。"
+    }
+  },
+  {
+    "entityId": "STARTING_ROLE_LOST",
+    "entityType": "event",
+    "variantKey": "STARTING_ROLE_LOST@current@route-SELF",
+    "title": "你刚刚失去了原本稳定的主力位置。",
+    "description": "角色变化已经发生。现在需要弄清原因，并决定怎样回应。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你刚刚失去了原本稳定的主力位置。",
+      "resolvedDescription": "角色变化已经发生。现在需要弄清原因，并决定怎样回应。"
+    }
+  },
+  {
+    "entityId": "FIRST_TEAM_ROLE_SECURED",
+    "entityType": "event",
+    "variantKey": "FIRST_TEAM_ROLE_SECURED@current",
+    "title": "你第一次真正成为了一线队主力。",
+    "description": "位置只是开始，你要决定用什么方式守住它。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你第一次真正成为了一线队主力。",
+      "resolvedDescription": "位置只是开始，你要决定用什么方式守住它。"
+    }
+  },
+  {
+    "entityId": "ELITE_CLUB_FRINGE_REVIEW",
+    "entityType": "event",
+    "variantKey": "ELITE_CLUB_FRINGE_REVIEW@current",
+    "title": "豪门训练质量很高，但你仍徘徊在阵容边缘。",
+    "description": "教练组给出额外方案，有限精力必须用于最可能改变位置的方向。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "豪门训练质量很高，但你仍徘徊在阵容边缘。",
+      "resolvedDescription": "教练组给出额外方案，有限精力必须用于最可能改变位置的方向。"
+    }
+  },
+  {
+    "entityId": "CORE_TACTICAL_DISAGREEMENT",
+    "entityType": "event",
+    "variantKey": "CORE_TACTICAL_DISAGREEMENT@current@setup",
+    "title": "你和教练对自己的战术职责产生了明显分歧。",
+    "description": "你的地位足以提出意见，但表达方式会决定它是建议还是挑战。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "你和教练对自己的战术职责产生了明显分歧。",
+      "resolvedDescription": "你的地位足以提出意见，但表达方式会决定它是建议还是挑战。"
+    }
+  },
+  {
+    "entityId": "CORE_TACTICAL_DISAGREEMENT",
+    "entityType": "event",
+    "variantKey": "CORE_TACTICAL_DISAGREEMENT@current@route-PRIVATE",
+    "title": "你和教练对自己的战术职责产生了明显分歧。",
+    "description": "你的地位足以提出意见，但表达方式会决定它是建议还是挑战。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你和教练对自己的战术职责产生了明显分歧。",
+      "resolvedDescription": "你的地位足以提出意见，但表达方式会决定它是建议还是挑战。"
+    }
+  },
+  {
+    "entityId": "CORE_TACTICAL_DISAGREEMENT",
+    "entityType": "event",
+    "variantKey": "CORE_TACTICAL_DISAGREEMENT@current@route-TEAM",
+    "title": "你和教练对自己的战术职责产生了明显分歧。",
+    "description": "你的地位足以提出意见，但表达方式会决定它是建议还是挑战。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你和教练对自己的战术职责产生了明显分歧。",
+      "resolvedDescription": "你的地位足以提出意见，但表达方式会决定它是建议还是挑战。"
+    }
+  },
+  {
+    "entityId": "CAPTAIN_PUBLIC_CONFLICT",
+    "entityType": "event",
+    "variantKey": "CAPTAIN_PUBLIC_CONFLICT@current@setup",
+    "title": "两名队友的矛盾已经从更衣室蔓延到公开场合。",
+    "description": "作为队长，你不能回避，但先听谁、怎样定调会改变结果。",
+    "artGroup": "E-07",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "两名队友的矛盾已经从更衣室蔓延到公开场合。",
+      "resolvedDescription": "作为队长，你不能回避，但先听谁、怎样定调会改变结果。"
+    }
+  },
+  {
+    "entityId": "CAPTAIN_PUBLIC_CONFLICT",
+    "entityType": "event",
+    "variantKey": "CAPTAIN_PUBLIC_CONFLICT@current@route-PLAYERS",
+    "title": "两名队友的矛盾已经从更衣室蔓延到公开场合。",
+    "description": "作为队长，你不能回避，但先听谁、怎样定调会改变结果。",
+    "artGroup": "E-07",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "两名队友的矛盾已经从更衣室蔓延到公开场合。",
+      "resolvedDescription": "作为队长，你不能回避，但先听谁、怎样定调会改变结果。"
+    }
+  },
+  {
+    "entityId": "CAPTAIN_PUBLIC_CONFLICT",
+    "entityType": "event",
+    "variantKey": "CAPTAIN_PUBLIC_CONFLICT@current@route-STAFF",
+    "title": "两名队友的矛盾已经从更衣室蔓延到公开场合。",
+    "description": "作为队长，你不能回避，但先听谁、怎样定调会改变结果。",
+    "artGroup": "E-07",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "两名队友的矛盾已经从更衣室蔓延到公开场合。",
+      "resolvedDescription": "作为队长，你不能回避，但先听谁、怎样定调会改变结果。"
+    }
+  },
+  {
+    "entityId": "RIVALRY_CROSSROADS",
+    "entityType": "event",
+    "variantKey": "RIVALRY_CROSSROADS@current@setup",
+    "title": "你与同位置队友的敌对竞争已经走到十字路口。",
+    "description": "继续对抗、主动和解或公开摊牌，都可能彻底改变这段关系。",
+    "artGroup": "E-06",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "你与同位置队友的敌对竞争已经走到十字路口。",
+      "resolvedDescription": "继续对抗、主动和解或公开摊牌，都可能彻底改变这段关系。"
+    }
+  },
+  {
+    "entityId": "RIVALRY_CROSSROADS",
+    "entityType": "event",
+    "variantKey": "RIVALRY_CROSSROADS@current@route-REPAIR",
+    "title": "你与同位置队友的敌对竞争已经走到十字路口。",
+    "description": "继续对抗、主动和解或公开摊牌，都可能彻底改变这段关系。",
+    "artGroup": "E-06",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你与同位置队友的敌对竞争已经走到十字路口。",
+      "resolvedDescription": "继续对抗、主动和解或公开摊牌，都可能彻底改变这段关系。"
+    }
+  },
+  {
+    "entityId": "RIVALRY_CROSSROADS",
+    "entityType": "event",
+    "variantKey": "RIVALRY_CROSSROADS@current@route-FIGHT",
+    "title": "你与同位置队友的敌对竞争已经走到十字路口。",
+    "description": "继续对抗、主动和解或公开摊牌，都可能彻底改变这段关系。",
+    "artGroup": "E-06",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你与同位置队友的敌对竞争已经走到十字路口。",
+      "resolvedDescription": "继续对抗、主动和解或公开摊牌，都可能彻底改变这段关系。"
+    }
+  },
+  {
+    "entityId": "MENTEE_BREAKTHROUGH",
+    "entityType": "event",
+    "variantKey": "MENTEE_BREAKTHROUGH@current",
+    "title": "你帮助过的年轻队友开始在一线队崭露头角。",
+    "description": "他的成长也让外界重新评价你在更衣室里的作用。",
+    "artGroup": "E-08",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你帮助过的年轻队友开始在一线队崭露头角。",
+      "resolvedDescription": "他的成长也让外界重新评价你在更衣室里的作用。"
+    }
+  },
+  {
+    "entityId": "DISCIPLINE_AFFECTS_SELECTION",
+    "entityType": "event",
+    "variantKey": "DISCIPLINE_AFFECTS_SELECTION@current",
+    "title": "你的纪律记录开始影响教练的出场安排。",
+    "description": "对抗强度、位置纪律和稳定出场无法同时放在第一位。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你的纪律记录开始影响教练的出场安排。",
+      "resolvedDescription": "对抗强度、位置纪律和稳定出场无法同时放在第一位。"
+    }
+  },
+  {
+    "entityId": "CLUTCH_EXPECTATION_PRESSURE",
+    "entityType": "event",
+    "variantKey": "CLUTCH_EXPECTATION_PRESSURE@current",
+    "title": "“关键先生”的期待正在变成新的压力。",
+    "description": "球队希望你继续承担关键时刻，但心理恢复和日常表现同样重要。",
+    "artGroup": "E-03",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "“关键先生”的期待正在变成新的压力。",
+      "resolvedDescription": "球队希望你继续承担关键时刻，但心理恢复和日常表现同样重要。"
+    }
+  },
+  {
+    "entityId": "FORM_REBOUND_WINDOW",
+    "entityType": "event",
+    "variantKey": "FORM_REBOUND_WINDOW@current@setup",
+    "title": "你刚刚踢出了一个真正的反弹窗口。",
+    "description": "反弹可以成为转折，也可能因为急于证明自己而再次失控。",
+    "artGroup": "E-02",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "你刚刚踢出了一个真正的反弹窗口。",
+      "resolvedDescription": "反弹可以成为转折，也可能因为急于证明自己而再次失控。"
+    }
+  },
+  {
+    "entityId": "FORM_REBOUND_WINDOW",
+    "entityType": "event",
+    "variantKey": "FORM_REBOUND_WINDOW@current@route-PUSH",
+    "title": "你刚刚踢出了一个真正的反弹窗口。",
+    "description": "反弹可以成为转折，也可能因为急于证明自己而再次失控。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你刚刚踢出了一个真正的反弹窗口。",
+      "resolvedDescription": "反弹可以成为转折，也可能因为急于证明自己而再次失控。"
+    }
+  },
+  {
+    "entityId": "FORM_REBOUND_WINDOW",
+    "entityType": "event",
+    "variantKey": "FORM_REBOUND_WINDOW@current@route-CONTROL",
+    "title": "你刚刚踢出了一个真正的反弹窗口。",
+    "description": "反弹可以成为转折，也可能因为急于证明自己而再次失控。",
+    "artGroup": "E-02",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你刚刚踢出了一个真正的反弹窗口。",
+      "resolvedDescription": "反弹可以成为转折，也可能因为急于证明自己而再次失控。"
+    }
+  },
+  {
+    "entityId": "TEAM_SPOKESPERSON_REQUEST",
+    "entityType": "event",
+    "variantKey": "TEAM_SPOKESPERSON_REQUEST@current@setup",
+    "title": "更衣室希望你代表全队与俱乐部沟通。",
+    "description": "议题涉及赛程、训练和球员权益，你必须决定先代表谁的声音。",
+    "artGroup": "E-28",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "更衣室希望你代表全队与俱乐部沟通。",
+      "resolvedDescription": "议题涉及赛程、训练和球员权益，你必须决定先代表谁的声音。"
+    }
+  },
+  {
+    "entityId": "TEAM_SPOKESPERSON_REQUEST",
+    "entityType": "event",
+    "variantKey": "TEAM_SPOKESPERSON_REQUEST@current@route-PLAYERS",
+    "title": "更衣室希望你代表全队与俱乐部沟通。",
+    "description": "议题涉及赛程、训练和球员权益，你必须决定先代表谁的声音。",
+    "artGroup": "E-28",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "更衣室希望你代表全队与俱乐部沟通。",
+      "resolvedDescription": "议题涉及赛程、训练和球员权益，你必须决定先代表谁的声音。"
+    }
+  },
+  {
+    "entityId": "TEAM_SPOKESPERSON_REQUEST",
+    "entityType": "event",
+    "variantKey": "TEAM_SPOKESPERSON_REQUEST@current@route-CLUB",
+    "title": "更衣室希望你代表全队与俱乐部沟通。",
+    "description": "议题涉及赛程、训练和球员权益，你必须决定先代表谁的声音。",
+    "artGroup": "E-28",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "更衣室希望你代表全队与俱乐部沟通。",
+      "resolvedDescription": "议题涉及赛程、训练和球员权益，你必须决定先代表谁的声音。"
+    }
+  },
+  {
+    "entityId": "LOW_KEY_COMMERCIAL_EXPOSURE",
+    "entityType": "event",
+    "variantKey": "LOW_KEY_COMMERCIAL_EXPOSURE@current",
+    "title": "你的低调形象开始遇上越来越多商业邀请。",
+    "description": "曝光会带来收入和知名度，也会占用恢复与私人时间。",
+    "artGroup": "E-20",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你的低调形象开始遇上越来越多商业邀请。",
+      "resolvedDescription": "曝光会带来收入和知名度，也会占用恢复与私人时间。"
+    }
+  },
+  {
+    "entityId": "OUTSPOKEN_PERSONA_REVIEW",
+    "entityType": "event",
+    "variantKey": "OUTSPOKEN_PERSONA_REVIEW@current@setup",
+    "title": "直言不讳正在成为外界对你的固定印象。",
+    "description": "你可以巩固这种形象，也可以重新决定表达的边界。",
+    "artGroup": "E-10",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "直言不讳正在成为外界对你的固定印象。",
+      "resolvedDescription": "你可以巩固这种形象，也可以重新决定表达的边界。"
+    }
+  },
+  {
+    "entityId": "OUTSPOKEN_PERSONA_REVIEW",
+    "entityType": "event",
+    "variantKey": "OUTSPOKEN_PERSONA_REVIEW@current@route-POSITION",
+    "title": "直言不讳正在成为外界对你的固定印象。",
+    "description": "你可以巩固这种形象，也可以重新决定表达的边界。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "直言不讳正在成为外界对你的固定印象。",
+      "resolvedDescription": "你可以巩固这种形象，也可以重新决定表达的边界。"
+    }
+  },
+  {
+    "entityId": "OUTSPOKEN_PERSONA_REVIEW",
+    "entityType": "event",
+    "variantKey": "OUTSPOKEN_PERSONA_REVIEW@current@route-TEAM",
+    "title": "直言不讳正在成为外界对你的固定印象。",
+    "description": "你可以巩固这种形象，也可以重新决定表达的边界。",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "直言不讳正在成为外界对你的固定印象。",
+      "resolvedDescription": "你可以巩固这种形象，也可以重新决定表达的边界。"
+    }
+  },
+  {
+    "entityId": "HOMETOWN_CHARITY_INVITATION",
+    "entityType": "event",
+    "variantKey": "HOMETOWN_CHARITY_INVITATION@current@visibility-cash-25000-to-under60000",
+    "title": "留洋成名后，家乡邀请你支持一项青少年足球计划。",
+    "description": "捐款、亲自参与和低调支持需要投入不同的金钱与时间。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "留洋成名后，家乡邀请你支持一项青少年足球计划。",
+      "resolvedDescription": "捐款、亲自参与和低调支持需要投入不同的金钱与时间。"
+    }
+  },
+  {
+    "entityId": "HOMETOWN_CHARITY_INVITATION",
+    "entityType": "event",
+    "variantKey": "HOMETOWN_CHARITY_INVITATION@current@visibility-cash-at-least60000",
+    "title": "留洋成名后，家乡邀请你支持一项青少年足球计划。",
+    "description": "捐款、亲自参与和低调支持需要投入不同的金钱与时间。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "留洋成名后，家乡邀请你支持一项青少年足球计划。",
+      "resolvedDescription": "捐款、亲自参与和低调支持需要投入不同的金钱与时间。"
+    }
+  },
+  {
+    "entityId": "FINAL_MAJOR_CONTRACT_PRIORITIES",
+    "entityType": "event",
+    "variantKey": "FINAL_MAJOR_CONTRACT_PRIORITIES@current",
+    "title": "经纪人请你定义职业生涯最后一份重要合同。",
+    "description": "这次排序会直接改写后续报价匹配，不新增另一套合同规则。",
+    "artGroup": "E-17",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "经纪人请你定义职业生涯最后一份重要合同。",
+      "resolvedDescription": "这次排序会直接改写后续报价匹配，不新增另一套合同规则。"
+    }
+  },
+  {
+    "entityId": "FIRST_NATIONAL_GOAL_REACTION",
+    "entityType": "event",
+    "variantKey": "FIRST_NATIONAL_GOAL_REACTION@current",
+    "title": "你的第一粒国家队进球已经写入生涯。",
+    "description": "这个进球属于个人，也属于帮助它发生的整支球队。",
+    "artGroup": "E-23",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你的第一粒国家队进球已经写入生涯。",
+      "resolvedDescription": "这个进球属于个人，也属于帮助它发生的整支球队。"
+    }
+  },
+  {
+    "entityId": "NATIONAL_FIFTY_CAPS",
+    "entityType": "event",
+    "variantKey": "NATIONAL_FIFTY_CAPS@current",
+    "title": "你完成了国家队生涯第50次出场。",
+    "description": "五十场意味着个人纪念，也意味着开始承担传承责任。",
+    "artGroup": "E-23",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你完成了国家队生涯第50次出场。",
+      "resolvedDescription": "五十场意味着个人纪念，也意味着开始承担传承责任。"
+    }
+  },
+  {
+    "entityId": "FIRST_BALLON_DOR_NIGHT",
+    "entityType": "event",
+    "variantKey": "FIRST_BALLON_DOR_NIGHT@current@setup",
+    "title": "你第一次捧起了金球奖。",
+    "description": "领奖台上的表达会决定这座奖杯如何被写进你的时代。",
+    "artGroup": "E-33",
+    "step": "setup",
+    "contextGuard": {
+      "resolvedTitle": "你第一次捧起了金球奖。",
+      "resolvedDescription": "领奖台上的表达会决定这座奖杯如何被写进你的时代。"
+    }
+  },
+  {
+    "entityId": "FIRST_BALLON_DOR_NIGHT",
+    "entityType": "event",
+    "variantKey": "FIRST_BALLON_DOR_NIGHT@current@route-TEAM",
+    "title": "你第一次捧起了金球奖。",
+    "description": "领奖台上的表达会决定这座奖杯如何被写进你的时代。",
+    "artGroup": "E-33",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你第一次捧起了金球奖。",
+      "resolvedDescription": "领奖台上的表达会决定这座奖杯如何被写进你的时代。"
+    }
+  },
+  {
+    "entityId": "FIRST_BALLON_DOR_NIGHT",
+    "entityType": "event",
+    "variantKey": "FIRST_BALLON_DOR_NIGHT@current@route-ERA",
+    "title": "你第一次捧起了金球奖。",
+    "description": "领奖台上的表达会决定这座奖杯如何被写进你的时代。",
+    "artGroup": "E-33",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "你第一次捧起了金球奖。",
+      "resolvedDescription": "领奖台上的表达会决定这座奖杯如何被写进你的时代。"
+    }
+  },
+  {
+    "entityId": "V3_E01_PRESS_DRINK",
+    "entityType": "event",
+    "variantKey": "V3_E01_PRESS_DRINK@current",
+    "title": "发布会的矿泉水瓶",
+    "description": "你刚签下个人矿泉水赞助合作。新闻发布会上，你发现身前摆着竞品，镜头已经对准桌面。",
+    "artGroup": "E-34",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "发布会的矿泉水瓶",
+      "resolvedDescription": "你刚签下个人矿泉水赞助合作。新闻发布会上，你发现身前摆着竞品，镜头已经对准桌面。"
+    }
+  },
+  {
+    "entityId": "V3_E02_AD_TEAMMATE",
+    "entityType": "event",
+    "variantKey": "V3_E02_AD_TEAMMATE@current@visibility-cash-under200",
+    "title": "队友模仿起了你广告里的那句台词。",
+    "description": "你确实参加过商业合作。今天更衣室有人拿那段广告打趣，还把最后一个字故意拖得很长。",
+    "artGroup": "E-35",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "队友模仿起了你广告里的那句台词。",
+      "resolvedDescription": "你确实参加过商业合作。今天更衣室有人拿那段广告打趣，还把最后一个字故意拖得很长。"
+    }
+  },
+  {
+    "entityId": "V3_E02_AD_TEAMMATE",
+    "entityType": "event",
+    "variantKey": "V3_E02_AD_TEAMMATE@current@visibility-cash-at-least200",
+    "title": "队友模仿起了你广告里的那句台词。",
+    "description": "你确实参加过商业合作。今天更衣室有人拿那段广告打趣，还把最后一个字故意拖得很长。",
+    "artGroup": "E-35",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "队友模仿起了你广告里的那句台词。",
+      "resolvedDescription": "你确实参加过商业合作。今天更衣室有人拿那段广告打趣，还把最后一个字故意拖得很长。"
+    }
+  },
+  {
+    "entityId": "V3_E03_INTERVIEW_CLIP",
+    "entityType": "event",
+    "variantKey": "V3_E03_INTERVIEW_CLIP@current",
+    "title": "一段采访被剪成了十几秒的短视频。",
+    "description": "你谈的是训练中的一次普通失误，短视频却没有保留前后两句。俱乐部愿意帮你提供原始语境。",
+    "artGroup": "E-11",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一段采访被剪成了十几秒的短视频。",
+      "resolvedDescription": "你谈的是训练中的一次普通失误，短视频却没有保留前后两句。俱乐部愿意帮你提供原始语境。"
+    }
+  },
+  {
+    "entityId": "V3_E04_FAN_SCHEDULE",
+    "entityType": "event",
+    "variantKey": "V3_E04_FAN_SCHEDULE@current",
+    "title": "球迷活动撞上了你早已留好的私人时间。",
+    "description": "俱乐部问你能否参加一次见面活动。对方愿意接受缩短出席或提前录制问候，不要求你取消原有安排。",
+    "artGroup": "E-12",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球迷活动撞上了你早已留好的私人时间。",
+      "resolvedDescription": "俱乐部问你能否参加一次见面活动。对方愿意接受缩短出席或提前录制问候，不要求你取消原有安排。"
+    }
+  },
+  {
+    "entityId": "V3_E05_OLD_POST",
+    "entityType": "event",
+    "variantKey": "V3_E05_OLD_POST@current",
+    "title": "一条旧帖，又被人翻了出来。",
+    "description": "那是你早些时候写下的一句训练感想。现在的你未必还会这样表达，记者问你是否愿意补充。",
+    "artGroup": "E-11",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一条旧帖，又被人翻了出来。",
+      "resolvedDescription": "那是你早些时候写下的一句训练感想。现在的你未必还会这样表达，记者问你是否愿意补充。"
+    }
+  },
+  {
+    "entityId": "V3_E06_FAMILY_VISIT",
+    "entityType": "event",
+    "variantKey": "V3_E06_FAMILY_VISIT@current@visibility-cash-under300",
+    "title": "家人难得来探望，冰箱却只有半盒酸奶。",
+    "description": "这次探望已经约好，不是紧急情况。你可以在正常训练以外留些时间，也可以请人帮忙安排生活琐事。",
+    "artGroup": "E-31",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "家人难得来探望，冰箱却只有半盒酸奶。",
+      "resolvedDescription": "这次探望已经约好，不是紧急情况。你可以在正常训练以外留些时间，也可以请人帮忙安排生活琐事。"
+    }
+  },
+  {
+    "entityId": "V3_E06_FAMILY_VISIT",
+    "entityType": "event",
+    "variantKey": "V3_E06_FAMILY_VISIT@current@visibility-cash-at-least300",
+    "title": "家人难得来探望，冰箱却只有半盒酸奶。",
+    "description": "这次探望已经约好，不是紧急情况。你可以在正常训练以外留些时间，也可以请人帮忙安排生活琐事。",
+    "artGroup": "E-31",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "家人难得来探望，冰箱却只有半盒酸奶。",
+      "resolvedDescription": "这次探望已经约好，不是紧急情况。你可以在正常训练以外留些时间，也可以请人帮忙安排生活琐事。"
+    }
+  },
+  {
+    "entityId": "V3_E07_LANGUAGE_MIXUP",
+    "entityType": "event",
+    "variantKey": "V3_E07_LANGUAGE_MIXUP@current",
+    "title": "新城市的第一堂“更衣室语言课”。",
+    "description": "搬城之后，你还在熟悉这里的表达。队友一句当地说法让你以为要加练，其实只是问你要不要一起吃饭。",
+    "artGroup": "E-29",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "新城市的第一堂“更衣室语言课”。",
+      "resolvedDescription": "搬城之后，你还在熟悉这里的表达。队友一句当地说法让你以为要加练，其实只是问你要不要一起吃饭。"
+    }
+  },
+  {
+    "entityId": "V3_E08_NEW_NEIGHBOR",
+    "entityType": "event",
+    "variantKey": "V3_E08_NEW_NEIGHBOR@current@visibility-cash-under100",
+    "title": "新邻居问，你家门口的纸箱还留着吗？",
+    "description": "你刚搬来，还在收拾住处。邻居不是来索要签名，而是想借一个纸箱寄东西。",
+    "artGroup": "E-36",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "新邻居问，你家门口的纸箱还留着吗？",
+      "resolvedDescription": "你刚搬来，还在收拾住处。邻居不是来索要签名，而是想借一个纸箱寄东西。"
+    }
+  },
+  {
+    "entityId": "V3_E08_NEW_NEIGHBOR",
+    "entityType": "event",
+    "variantKey": "V3_E08_NEW_NEIGHBOR@current@visibility-cash-at-least100",
+    "title": "新邻居问，你家门口的纸箱还留着吗？",
+    "description": "你刚搬来，还在收拾住处。邻居不是来索要签名，而是想借一个纸箱寄东西。",
+    "artGroup": "E-36",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "新邻居问，你家门口的纸箱还留着吗？",
+      "resolvedDescription": "你刚搬来，还在收拾住处。邻居不是来索要签名，而是想借一个纸箱寄东西。"
+    }
+  },
+  {
+    "entityId": "V3_E09_LOCAL_RADIO",
+    "entityType": "event",
+    "variantKey": "V3_E09_LOCAL_RADIO@current",
+    "title": "本地电台留了一个不谈战术的十分钟。",
+    "description": "主持人准备了三个轻松话题：在城里的日常、球队里的小习惯，或者你的家乡。你可以自己决定分享多少。",
+    "artGroup": "E-37",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "本地电台留了一个不谈战术的十分钟。",
+      "resolvedDescription": "主持人准备了三个轻松话题：在城里的日常、球队里的小习惯，或者你的家乡。你可以自己决定分享多少。"
+    }
+  },
+  {
+    "entityId": "V3_E10_TEAM_PHOTO",
+    "entityType": "event",
+    "variantKey": "V3_E10_TEAM_PHOTO@current",
+    "title": "球队合照里，大家都想站得高一点。",
+    "description": "摄影师重新安排站位，有人踮脚，有人躲在后排。旁边的一位年轻球员看起来不太自在。",
+    "artGroup": "E-38",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球队合照里，大家都想站得高一点。",
+      "resolvedDescription": "摄影师重新安排站位，有人踮脚，有人躲在后排。旁边的一位年轻球员看起来不太自在。"
+    }
+  },
+  {
+    "entityId": "V3_E11_COMMUTE",
+    "entityType": "event",
+    "variantKey": "V3_E11_COMMUTE@current@visibility-cash-under25",
+    "title": "去训练基地的路上，车站临时换了站台。",
+    "description": "你提前出门，时间还算充裕。路标有点绕，一位认出你的球迷正好也在查看路线。",
+    "artGroup": "E-39",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "去训练基地的路上，车站临时换了站台。",
+      "resolvedDescription": "你提前出门，时间还算充裕。路标有点绕，一位认出你的球迷正好也在查看路线。"
+    }
+  },
+  {
+    "entityId": "V3_E11_COMMUTE",
+    "entityType": "event",
+    "variantKey": "V3_E11_COMMUTE@current@visibility-cash-at-least25",
+    "title": "去训练基地的路上，车站临时换了站台。",
+    "description": "你提前出门，时间还算充裕。路标有点绕，一位认出你的球迷正好也在查看路线。",
+    "artGroup": "E-39",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "去训练基地的路上，车站临时换了站台。",
+      "resolvedDescription": "你提前出门，时间还算充裕。路标有点绕，一位认出你的球迷正好也在查看路线。"
+    }
+  },
+  {
+    "entityId": "V3_E12_FAN_GIFT",
+    "entityType": "event",
+    "variantKey": "V3_E12_FAN_GIFT@current",
+    "title": "球迷送来一本手工装订的小册子。",
+    "description": "里面是对方画的球衣和看台，没有贵重物品。工作人员已经按俱乐部规则检查，可以收下或礼貌致谢。",
+    "artGroup": "E-40",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "球迷送来一本手工装订的小册子。",
+      "resolvedDescription": "里面是对方画的球衣和看台，没有贵重物品。工作人员已经按俱乐部规则检查，可以收下或礼貌致谢。"
+    }
+  },
+  {
+    "entityId": "V3_C01A_LOCAL_CAR",
+    "entityType": "event",
+    "variantKey": "V3_C01A_LOCAL_CAR@current",
+    "title": "本地代步品牌“路伴”想借你半天时间。",
+    "description": "“路伴”是一家本地代步品牌，愿意为活动提供用车和拍摄酬劳。你可以商量活动强度，也可以拒绝；活动用车结束后归还。",
+    "artGroup": "E-41",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "本地代步品牌“路伴”想借你半天时间。",
+      "resolvedDescription": "“路伴”是一家本地代步品牌，愿意为活动提供用车和拍摄酬劳。你可以商量活动强度，也可以拒绝；活动用车结束后归还。"
+    }
+  },
+  {
+    "entityId": "V3_C01B_LOCAL_CAR_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C01B_LOCAL_CAR_RETURN@same-club@prior-FULL",
+    "title": "“路伴”带来了一份范围更清楚的新邀约。",
+    "description": "你在{source.clubName}时选择了“完成半天拍摄和一次到店见面”。这次回访延续的是当时真实留下的选择。对方记得上回的联系，带来了一份新的活动安排，想听听你的意见。你仍然可以选择不合作。",
+    "artGroup": "E-41",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C01",
+      "firstEventId": "V3_C01A_LOCAL_CAR",
+      "firstChoiceId": "FULL",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C01B_LOCAL_CAR_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C01B_LOCAL_CAR_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C01B_LOCAL_CAR_RETURN@moved-club@prior-FULL",
+    "title": "“路伴”带来了一份范围更清楚的新邀约。",
+    "description": "你在{source.clubName}时选择了“完成半天拍摄和一次到店见面”。你已经换队，当时联系你的品牌通过远程联系发来新邀请，不要求你回到原俱乐部。对方记得上回的联系，带来了一份新的活动安排，想听听你的意见。你仍然可以选择不合作。",
+    "artGroup": "E-41",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C01",
+      "firstEventId": "V3_C01A_LOCAL_CAR",
+      "firstChoiceId": "FULL",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C01B_LOCAL_CAR_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C01B_LOCAL_CAR_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C01B_LOCAL_CAR_RETURN@same-club@prior-SHORT",
+    "title": "“路伴”带来了一份范围更清楚的新邀约。",
+    "description": "你在{source.clubName}时选择了“只接一小时的简短拍摄”。这次回访延续的是当时真实留下的选择。对方记得上回的联系，带来了一份新的活动安排，想听听你的意见。你仍然可以选择不合作。",
+    "artGroup": "E-41",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C01",
+      "firstEventId": "V3_C01A_LOCAL_CAR",
+      "firstChoiceId": "SHORT",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C01B_LOCAL_CAR_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C01B_LOCAL_CAR_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C01B_LOCAL_CAR_RETURN@moved-club@prior-SHORT",
+    "title": "“路伴”带来了一份范围更清楚的新邀约。",
+    "description": "你在{source.clubName}时选择了“只接一小时的简短拍摄”。你已经换队，当时联系你的品牌通过远程联系发来新邀请，不要求你回到原俱乐部。对方记得上回的联系，带来了一份新的活动安排，想听听你的意见。你仍然可以选择不合作。",
+    "artGroup": "E-41",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C01",
+      "firstEventId": "V3_C01A_LOCAL_CAR",
+      "firstChoiceId": "SHORT",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C01B_LOCAL_CAR_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C01B_LOCAL_CAR_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C01B_LOCAL_CAR_RETURN@same-club@prior-DECLINE",
+    "title": "“路伴”带来了一份范围更清楚的新邀约。",
+    "description": "你在{source.clubName}时选择了“礼貌婉拒这次合作”。这次回访延续的是当时真实留下的选择。对方记得上回的联系，带来了一份新的活动安排，想听听你的意见。你仍然可以选择不合作。",
+    "artGroup": "E-41",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C01",
+      "firstEventId": "V3_C01A_LOCAL_CAR",
+      "firstChoiceId": "DECLINE",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C01B_LOCAL_CAR_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C01B_LOCAL_CAR_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C01B_LOCAL_CAR_RETURN@moved-club@prior-DECLINE",
+    "title": "“路伴”带来了一份范围更清楚的新邀约。",
+    "description": "你在{source.clubName}时选择了“礼貌婉拒这次合作”。你已经换队，当时联系你的品牌通过远程联系发来新邀请，不要求你回到原俱乐部。对方记得上回的联系，带来了一份新的活动安排，想听听你的意见。你仍然可以选择不合作。",
+    "artGroup": "E-41",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C01",
+      "firstEventId": "V3_C01A_LOCAL_CAR",
+      "firstChoiceId": "DECLINE",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C01B_LOCAL_CAR_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C02A_PUBLIC_RESPONSE",
+    "entityType": "event",
+    "variantKey": "V3_C02A_PUBLIC_RESPONSE@current",
+    "title": "一次普通的训练调整，引来了公开提问。",
+    "description": "球队刚调整了一项日常训练安排。记者问你，球员有不同意见时，应该怎样把话说清楚？",
+    "artGroup": "E-10",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一次普通的训练调整，引来了公开提问。",
+      "resolvedDescription": "球队刚调整了一项日常训练安排。记者问你，球员有不同意见时，应该怎样把话说清楚？"
+    }
+  },
+  {
+    "entityId": "V3_C02B_PUBLIC_RESPONSE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C02B_PUBLIC_RESPONSE_RETURN@same-club@prior-DIRECT",
+    "title": "那位记者又问：你现在还会这样回答吗？",
+    "description": "你在{source.clubName}时选择了“直说分歧可以被讨论”。这次回访延续的是当时真实留下的选择。记者翻出了上回的采访，想知道你现在是否还认同那番话。你可以延续原意，也可以换一种说法。",
+    "artGroup": "E-42",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C02",
+      "firstEventId": "V3_C02A_PUBLIC_RESPONSE",
+      "firstChoiceId": "DIRECT",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C02B_PUBLIC_RESPONSE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C02B_PUBLIC_RESPONSE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C02B_PUBLIC_RESPONSE_RETURN@moved-club@prior-DIRECT",
+    "title": "那位记者又问：你现在还会这样回答吗？",
+    "description": "你在{source.clubName}时选择了“直说分歧可以被讨论”。你已经换队，记者通过远程采访回访当时的表达。记者翻出了上回的采访，想知道你现在是否还认同那番话。你可以延续原意，也可以换一种说法。",
+    "artGroup": "E-42",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C02",
+      "firstEventId": "V3_C02A_PUBLIC_RESPONSE",
+      "firstChoiceId": "DIRECT",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C02B_PUBLIC_RESPONSE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C02B_PUBLIC_RESPONSE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C02B_PUBLIC_RESPONSE_RETURN@same-club@prior-TEAM",
+    "title": "那位记者又问：你现在还会这样回答吗？",
+    "description": "你在{source.clubName}时选择了“先说共同的训练目标”。这次回访延续的是当时真实留下的选择。记者翻出了上回的采访，想知道你现在是否还认同那番话。你可以延续原意，也可以换一种说法。",
+    "artGroup": "E-42",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C02",
+      "firstEventId": "V3_C02A_PUBLIC_RESPONSE",
+      "firstChoiceId": "TEAM",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C02B_PUBLIC_RESPONSE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C02B_PUBLIC_RESPONSE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C02B_PUBLIC_RESPONSE_RETURN@moved-club@prior-TEAM",
+    "title": "那位记者又问：你现在还会这样回答吗？",
+    "description": "你在{source.clubName}时选择了“先说共同的训练目标”。你已经换队，记者通过远程采访回访当时的表达。记者翻出了上回的采访，想知道你现在是否还认同那番话。你可以延续原意，也可以换一种说法。",
+    "artGroup": "E-42",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C02",
+      "firstEventId": "V3_C02A_PUBLIC_RESPONSE",
+      "firstChoiceId": "TEAM",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C02B_PUBLIC_RESPONSE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C02B_PUBLIC_RESPONSE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C02B_PUBLIC_RESPONSE_RETURN@same-club@prior-PRIVATE",
+    "title": "那位记者又问：你现在还会这样回答吗？",
+    "description": "你在{source.clubName}时选择了“把具体讨论留在内部”。这次回访延续的是当时真实留下的选择。记者翻出了上回的采访，想知道你现在是否还认同那番话。你可以延续原意，也可以换一种说法。",
+    "artGroup": "E-42",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C02",
+      "firstEventId": "V3_C02A_PUBLIC_RESPONSE",
+      "firstChoiceId": "PRIVATE",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C02B_PUBLIC_RESPONSE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C02B_PUBLIC_RESPONSE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C02B_PUBLIC_RESPONSE_RETURN@moved-club@prior-PRIVATE",
+    "title": "那位记者又问：你现在还会这样回答吗？",
+    "description": "你在{source.clubName}时选择了“把具体讨论留在内部”。你已经换队，记者通过远程采访回访当时的表达。记者翻出了上回的采访，想知道你现在是否还认同那番话。你可以延续原意，也可以换一种说法。",
+    "artGroup": "E-42",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C02",
+      "firstEventId": "V3_C02A_PUBLIC_RESPONSE",
+      "firstChoiceId": "PRIVATE",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C02B_PUBLIC_RESPONSE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C03A_YOUNG_TEAMMATE",
+    "entityType": "event",
+    "variantKey": "V3_C03A_YOUNG_TEAMMATE@current",
+    "title": "一位年轻队友把训练笔记递给了你。",
+    "description": "训练后，一位年轻队友翻开记得密密麻麻的小本子，想听听你怎样安排训练和生活。说到作息，他有些不好意思。",
+    "artGroup": "E-08",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "一位年轻队友把训练笔记递给了你。",
+      "resolvedDescription": "训练后，一位年轻队友翻开记得密密麻麻的小本子，想听听你怎样安排训练和生活。说到作息，他有些不好意思。"
+    }
+  },
+  {
+    "entityId": "V3_C03B_YOUNG_TEAMMATE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C03B_YOUNG_TEAMMATE_RETURN@same-club@prior-TIME",
+    "title": "年轻队友拿着新一页笔记来找你。",
+    "description": "你在{source.clubName}时选择了“每周留一次简短交流”。这次回访延续的是当时真实留下的选择。他的本子里多了几处圈出的疑问。说起上次那次交流，他想先告诉你近来的感受，再听听你的想法。",
+    "artGroup": "E-08",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C03",
+      "firstEventId": "V3_C03A_YOUNG_TEAMMATE",
+      "firstChoiceId": "TIME",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C03B_YOUNG_TEAMMATE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C03B_YOUNG_TEAMMATE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C03B_YOUNG_TEAMMATE_RETURN@same-club@prior-NOTES",
+    "title": "年轻队友拿着新一页笔记来找你。",
+    "description": "你在{source.clubName}时选择了“分享一页自己用过的记录方法”。这次回访延续的是当时真实留下的选择。他的本子里多了几处圈出的疑问。说起上次那次交流，他想先告诉你近来的感受，再听听你的想法。",
+    "artGroup": "E-08",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C03",
+      "firstEventId": "V3_C03A_YOUNG_TEAMMATE",
+      "firstChoiceId": "NOTES",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C03B_YOUNG_TEAMMATE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C03B_YOUNG_TEAMMATE_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C03B_YOUNG_TEAMMATE_RETURN@same-club@prior-INTRO",
+    "title": "年轻队友拿着新一页笔记来找你。",
+    "description": "你在{source.clubName}时选择了“介绍合适的球队工作人员”。这次回访延续的是当时真实留下的选择。他的本子里多了几处圈出的疑问。说起上次那次交流，他想先告诉你近来的感受，再听听你的想法。",
+    "artGroup": "E-08",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C03",
+      "firstEventId": "V3_C03A_YOUNG_TEAMMATE",
+      "firstChoiceId": "INTRO",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C03B_YOUNG_TEAMMATE_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C04A_HOMETOWN_CAMP",
+    "entityType": "event",
+    "variantKey": "V3_C04A_HOMETOWN_CAMP@current@visibility-cash-under500",
+    "title": "家乡训练营问，你愿意留下怎样的支持？",
+    "description": "组织者正为一场小训练营准备基础用品，也想请你分享一点职业生活经验。对方说，远程参加或这次不来都没有关系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "家乡训练营问，你愿意留下怎样的支持？",
+      "resolvedDescription": "组织者正为一场小训练营准备基础用品，也想请你分享一点职业生活经验。对方说，远程参加或这次不来都没有关系。"
+    }
+  },
+  {
+    "entityId": "V3_C04A_HOMETOWN_CAMP",
+    "entityType": "event",
+    "variantKey": "V3_C04A_HOMETOWN_CAMP@current@visibility-cash-at-least500",
+    "title": "家乡训练营问，你愿意留下怎样的支持？",
+    "description": "组织者正为一场小训练营准备基础用品，也想请你分享一点职业生活经验。对方说，远程参加或这次不来都没有关系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "resolvedTitle": "家乡训练营问，你愿意留下怎样的支持？",
+      "resolvedDescription": "组织者正为一场小训练营准备基础用品，也想请你分享一点职业生活经验。对方说，远程参加或这次不来都没有关系。"
+    }
+  },
+  {
+    "entityId": "V3_C04B_HOMETOWN_CAMP_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C04B_HOMETOWN_CAMP_RETURN@same-club@prior-DONATE",
+    "title": "训练营发来了一封短短的回信。",
+    "description": "你在{source.clubName}时选择了“捐助一批基础用品”。这次回访延续的是当时真实留下的选择。信里附着新一期的训练时间表。组织者记得你之前的选择，想知道今后是否还适合这样联系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C04",
+      "firstEventId": "V3_C04A_HOMETOWN_CAMP",
+      "firstChoiceId": "DONATE",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C04B_HOMETOWN_CAMP_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C04B_HOMETOWN_CAMP_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C04B_HOMETOWN_CAMP_RETURN@moved-club@prior-DONATE",
+    "title": "训练营发来了一封短短的回信。",
+    "description": "你在{source.clubName}时选择了“捐助一批基础用品”。你已经换队，家乡训练营的来信仍是远程联系，不涉及原队安排。信里附着新一期的训练时间表。组织者记得你之前的选择，想知道今后是否还适合这样联系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C04",
+      "firstEventId": "V3_C04A_HOMETOWN_CAMP",
+      "firstChoiceId": "DONATE",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C04B_HOMETOWN_CAMP_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C04B_HOMETOWN_CAMP_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C04B_HOMETOWN_CAMP_RETURN@same-club@prior-REMOTE",
+    "title": "训练营发来了一封短短的回信。",
+    "description": "你在{source.clubName}时选择了“安排一次简短远程问答”。这次回访延续的是当时真实留下的选择。信里附着新一期的训练时间表。组织者记得你之前的选择，想知道今后是否还适合这样联系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C04",
+      "firstEventId": "V3_C04A_HOMETOWN_CAMP",
+      "firstChoiceId": "REMOTE",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C04B_HOMETOWN_CAMP_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C04B_HOMETOWN_CAMP_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C04B_HOMETOWN_CAMP_RETURN@moved-club@prior-REMOTE",
+    "title": "训练营发来了一封短短的回信。",
+    "description": "你在{source.clubName}时选择了“安排一次简短远程问答”。你已经换队，家乡训练营的来信仍是远程联系，不涉及原队安排。信里附着新一期的训练时间表。组织者记得你之前的选择，想知道今后是否还适合这样联系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C04",
+      "firstEventId": "V3_C04A_HOMETOWN_CAMP",
+      "firstChoiceId": "REMOTE",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C04B_HOMETOWN_CAMP_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C04B_HOMETOWN_CAMP_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C04B_HOMETOWN_CAMP_RETURN@same-club@prior-DECLINE",
+    "title": "训练营发来了一封短短的回信。",
+    "description": "你在{source.clubName}时选择了“诚恳说明这次无法参与”。这次回访延续的是当时真实留下的选择。信里附着新一期的训练时间表。组织者记得你之前的选择，想知道今后是否还适合这样联系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C04",
+      "firstEventId": "V3_C04A_HOMETOWN_CAMP",
+      "firstChoiceId": "DECLINE",
+      "clubRelation": "same-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C04B_HOMETOWN_CAMP_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_C04B_HOMETOWN_CAMP_RETURN",
+    "entityType": "event",
+    "variantKey": "V3_C04B_HOMETOWN_CAMP_RETURN@moved-club@prior-DECLINE",
+    "title": "训练营发来了一封短短的回信。",
+    "description": "你在{source.clubName}时选择了“诚恳说明这次无法参与”。你已经换队，家乡训练营的来信仍是远程联系，不涉及原队安排。信里附着新一期的训练时间表。组织者记得你之前的选择，想知道今后是否还适合这样联系。",
+    "artGroup": "E-32",
+    "step": "choice",
+    "contextGuard": {
+      "chainId": "C04",
+      "firstEventId": "V3_C04A_HOMETOWN_CAMP",
+      "firstChoiceId": "DECLINE",
+      "clubRelation": "moved-club",
+      "window": "W+1..W+3 inclusive",
+      "activeFollowupId": "V3_C04B_HOMETOWN_CAMP_RETURN"
+    }
+  },
+  {
+    "entityId": "V3_E01_PRESS_DRINK",
+    "entityType": "event",
+    "variantKey": "V3_E01_PRESS_DRINK@legacy-pending",
+    "title": "发布会桌上，多了一瓶你够不着的饮料。",
+    "description": "工作人员刚摆好桌面，瓶子却正好挡住话筒。主持人还在调试声音，留给你一个轻松的空当。",
+    "artGroup": "E-43",
+    "step": "choice",
+    "contextGuard": {
+      "pendingEventId": "V3_E01_PRESS_DRINK",
+      "or": [
+        "last saved pending selection in MOVE/JOKE/STAFF",
+        "phase SPECIAL_EVENT and cashEuro<400"
+      ],
+      "resolvedTitle": "发布会桌上，多了一瓶你够不着的饮料。",
+      "resolvedDescription": "工作人员刚摆好桌面，瓶子却正好挡住话筒。主持人还在调试声音，留给你一个轻松的空当。"
+    }
+  }
+]

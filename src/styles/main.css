@@ -8829,3 +8829,13 @@ svg {
 
 /* V3.1.4: only the approved ongoing-market note, not other report copy. */
 .professional-report-actions > .professional-report-actions__market-note { font-size: 12px; line-height: 1.45; }
+
+/* V3.1.5: approved pre-decision line illustrations; no changes to text or choices. */
+.scene-illustration { margin: 8px 0; overflow: hidden; background: var(--paper); }
+.scene-illustration--match { aspect-ratio: 16 / 9; }
+.scene-illustration--event { aspect-ratio: 3 / 1; }
+.scene-illustration img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* Existing result contribution and saved confirmation only; no calculated deltas. */
+.key-moment__result .key-moment-summary__contribution,
+.key-moment__result > .key-moment__note,
+.key-moment__result .key-moment-summary > p:first-child { background: rgba(189, 157, 86, .10); }

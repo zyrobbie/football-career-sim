@@ -1,4 +1,6 @@
 import type { CSSProperties } from 'react'
+import { SceneIllustration } from '../components/SceneIllustration'
+import { resolveCareerEventIllustration } from '../ui/sceneIllustrations'
 import { qualitativeEventPreview } from '../ui/careerEventPreview'
 import { CareerHub } from '../components/CareerHub'
 import { Icon, type IconName } from '../components/Icons'
@@ -88,6 +90,8 @@ export function SpecialEventScreen() {
     ? contextChoices.filter((choice) => selectedRoute.choiceIds.includes(choice.id))
     : contextChoices
   const interactionClass = event.interactionKind.toLowerCase()
+  const illustration = isResult ? null : resolveCareerEventIllustration(event, game)
+  const isModernPress = illustration?.id === 'E-34'
 
   return (
     <CareerHub game={game} sectionLabel="特殊事件">
@@ -127,6 +131,7 @@ export function SpecialEventScreen() {
         ) : (
           <>
             <p className="career-panel-lead">{event.description}</p>
+            <SceneIllustration illustration={illustration} />
             {isSetupStep && setup ? (
               <>
                 <div className="special-event__step">
@@ -181,7 +186,7 @@ export function SpecialEventScreen() {
                       <span>{event.id.startsWith('V3_') ? String.fromCharCode(65 + choiceIndex) : choice.id}</span>
                       <strong>{choice.title}</strong>
                       <small>{choice.description}</small>
-                      <em>{qualitativeEventPreview(choice.effectPreview)}</em>
+                      <em>{isModernPress ? '媒体关系 · 赞助收入' : qualitativeEventPreview(choice.effectPreview)}</em>
                       {choice.outcomes?.length ? (
                         <div className="special-event__odds" aria-label="可能出现的结果">
                           {choice.outcomes.map((outcome) => (
@@ -197,7 +202,7 @@ export function SpecialEventScreen() {
             )}
             <p className="special-event__note">
               <Icon name="info" />
-              {interactionLabels[event.interactionKind]} · 仅提示影响方向，具体变化在选择后显示；刷新不会重新抽取。
+              {interactionLabels[event.interactionKind]} · 仅提示{isModernPress ? '影响指标' : '影响方向'}，具体变化在选择后显示；刷新不会重新抽取。
             </p>
           </>
         )}
