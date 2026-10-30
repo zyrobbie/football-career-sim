@@ -8839,3 +8839,11 @@ svg {
 .key-moment__result .key-moment-summary__contribution,
 .key-moment__result > .key-moment__note,
 .key-moment__result .key-moment-summary > p:first-child { background: rgba(189, 157, 86, .10); }
+
+/* V3.1.6: tiny inline same-scene preview while the prioritized full image arrives. */
+.scene-illustration { background-size: 100% 100%; background-position: center; background-repeat: no-repeat; }
+.scene-illustration[data-scene-loading] img { opacity: 0; transition: opacity 160ms ease-out; }
+.scene-illustration[data-scene-loading="ready"] img { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .scene-illustration[data-scene-loading] img { transition: none; }
+}

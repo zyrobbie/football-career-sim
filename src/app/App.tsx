@@ -1,3 +1,4 @@
+import { resolvePendingSceneIllustrations, sceneImagePreloader } from '../ui/sceneImageLoading'
 import { KeyMatchMomentScreen } from '../screens/KeyMatchMomentScreen'
 import { useEffect } from 'react'
 import { useGameStore } from '../store/gameStore'
@@ -38,6 +39,15 @@ function AppContent() {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [phase, confirmation])
+
+  useEffect(() => {
+    // Only warm a known pending scene while another tab/report/confirmation hides it.
+    // Visible scenes use their own high-priority <img>, not competing low-priority prefetch.
+    const sceneIsHidden = (canUseCareerNavigation(game?.phase) && activeNav !== 'CAREER') ||
+      Boolean(isReviewingReport && game?.lastReport) ||
+      Boolean(confirmation && game?.phase === confirmation.phase && game.careerSeed === confirmation.careerSeed && game.windowIndex === confirmation.windowIndex)
+    sceneImagePreloader.preload(sceneIsHidden ? resolvePendingSceneIllustrations(game).map(asset => asset.src) : [])
+  }, [game, activeNav, isReviewingReport, confirmation])
 
   let screen = <HomeScreen />
 

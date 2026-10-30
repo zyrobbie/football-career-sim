@@ -10,3 +10,6 @@ test-results/
 # Large V3 local traces are retained outside the compact committed evidence.
 outputs/FUN-V3-20261023/
 docs/evidence/FUN-V3-20261023/balance/__pycache__/
+
+# Scene-loading QA evidence is uploaded by CI, never shipped in the site.
+qa/scene-loading/artifacts/
