@@ -10,8 +10,11 @@ const report = { scope: 'Local synthetic component tests, no career saves; Chrom
 let browser
 async function mount(page, id) {
   await page.evaluate(async id => {
-    const React = await import('/node_modules/.vite/deps/react.js')
-    const { createRoot } = await import('/node_modules/.vite/deps/react-dom_client.js')
+    const reactModule = await import('/node_modules/.vite/deps/react.js')
+    const React = reactModule.default ?? reactModule
+    const clientModule = await import('/node_modules/.vite/deps/react-dom_client.js')
+    const createRoot = clientModule.createRoot ?? clientModule.default?.createRoot
+    if (typeof createRoot !== 'function' || typeof React.createElement !== 'function') throw Error('React QA module exports unavailable')
     const { SceneIllustration } = await import('/src/components/SceneIllustration.tsx')
     const { SCENE_ASSETS } = await import('/src/ui/sceneIllustrations.ts')
     if (!window.__sceneQaRoot) {

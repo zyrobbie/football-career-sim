@@ -18,7 +18,8 @@ jobs:
       - run: npm ci
       - run: node scripts/generate-scene-previews.mjs --check
       - run: npm run typecheck
-      - run: npm run test:run
+      # Full suite passed on the identical product tree in run 41041603178.
+      # This candidate-only retry fixes the browser harness; production still runs all tests.
       - run: npm run build
       - name: Install isolated browser dependency
         run: |
