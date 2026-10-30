@@ -63,6 +63,7 @@ export function chooseRetirementRecordDelivery(canShareFile: boolean): RecordDel
 }
 
 export function retirementExportErrorMessage(error: unknown): string {
+  if (error instanceof Error && error.message === '此浏览器不支持完整长图编码，请在新版 Safari 或系统浏览器中重试。') return error.message
   if (error instanceof DOMException && error.name === 'SecurityError') {
     return '浏览器阻止了图片生成。请退出无痕模式或关闭相关限制后重试。'
   }

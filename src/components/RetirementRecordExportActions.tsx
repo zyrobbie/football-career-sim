@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type RefObject } from 'react'
 import type { GameState } from '../models/game'
 import type { CareerPosterSvg } from '../export/careerPosterSvg'
-import { prepareCareerPoster, planCareerPosterPages, renderCareerPosterPage } from '../export/careerPosterExport'
+import { prepareCareerPoster, renderPreparedCareerPosterPng } from '../export/careerPosterExport'
 import { renderRetirementRecordPng, retirementExportErrorMessage, safeRetirementRecordFilename } from '../export/retirementRecord'
 import { Icon } from './Icons'
 import { prepareCareerPngSaveAsset, shareCareerPng, type CareerPngSaveAsset } from '../export/careerPngSave'
@@ -9,12 +9,12 @@ import { prepareCareerPngSaveAsset, shareCareerPng, type CareerPngSaveAsset } fr
 type ExportStatus = 'IDLE' | 'GENERATING' | 'READY' | 'ERROR'
 
 export function RetirementRecordPreview({ previewUrl, playerName, fileSize, onClose,
-  filename = '上场-职业生涯.png', pageIndex = 0, pageCount = 1, busy = false, onPageChange, message, returnFocusRef, pngAsset, originalUrl,
+  filename = '上场-职业生涯.png', busy = false, message, returnFocusRef, pngAsset, originalUrl,
 }: {
   previewUrl: string; playerName: string; fileSize: number; onClose: () => void
   pngAsset?: CareerPngSaveAsset | null; originalUrl?: string | null
-  filename?: string; pageIndex?: number; pageCount?: number; busy?: boolean
-  onPageChange?: (index: number) => void; message?: string | null; returnFocusRef?: RefObject<HTMLElement | null>
+  filename?: string; busy?: boolean
+  message?: string | null; returnFocusRef?: RefObject<HTMLElement | null>
 }) {
   const [shareMessage, setShareMessage] = useState<string | null>(null)
   const [sharing, setSharing] = useState(false)
@@ -61,11 +61,7 @@ export function RetirementRecordPreview({ previewUrl, playerName, fileSize, onCl
       <header><div><span>你的生涯长图做好了</span><strong>保存到手机：PNG 原图</strong></div>
         <button type="button" ref={closeRef} onClick={onClose} aria-label="关闭生涯长图预览">×</button></header>
       <div className="retirement-export-preview__tools">
-        {pageCount > 1 ? <><p>履历较长，分为 {pageCount} 张高清图。请依次选择并保存，完整内容仍可在浏览框连续查看。</p>
-          <label>选择图片 <select aria-label="选择生涯图片" value={pageIndex} disabled={busy} onChange={event => onPageChange?.(Number(event.target.value))}>
-            {Array.from({ length: pageCount }, (_, index) => <option key={index} value={index}>第 {index + 1} / {pageCount} 张</option>)}
-          </select></label></> : null}
-        {busy ? <span role="status">正在生成所选图片…</span> : <>
+        {busy ? <span role="status">正在生成完整长图…</span> : <>
           <button type="button" data-png-system-save disabled={!pngAsset || sharing} onClick={saveWithSystem}>{sharing ? '系统菜单处理中…' : '系统保存 / 分享'}</button>
           <a data-png-download href={previewUrl} download={filename}>下载PNG文件</a>
           <a data-png-original href={originalUrl ?? previewUrl} target="_blank" rel="noopener noreferrer">打开PNG原图</a>
@@ -77,7 +73,7 @@ export function RetirementRecordPreview({ previewUrl, playerName, fileSize, onCl
       </div>
       <div ref={scrollRef} className="retirement-export-preview__image" data-export-file-size={fileSize} data-career-preview-scroll
         tabIndex={0} role="region" aria-label="可上下滚动的保存图片" aria-busy={busy}>
-        <img data-png-save-preview src={previewUrl} alt={`${playerName}的《上场》职业生涯记录${pageCount > 1 ? `，第${pageIndex + 1}张，共${pageCount}张` : ''}`} draggable={false} />
+        <img data-png-save-preview src={previewUrl} alt={`${playerName}的《上场》职业生涯记录`} draggable={false} />
       </div>
     </div>
   </div>
@@ -88,55 +84,52 @@ export function RetirementRecordExportActions({ targetRef, game, preparedPoster,
   playerName: string; onReturnHome: () => void
 }) {
   const mounted = useRef(true), generating = useRef(false), request = useRef(0)
-  const exportPoster = useRef<CareerPosterSvg | null>(null)
+  const controller = useRef<AbortController | null>(null)
   const saveButtonRef = useRef<HTMLButtonElement>(null)
-  useEffect(() => { mounted.current = true; return () => { mounted.current = false; request.current++ } }, [])
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; request.current++; controller.current?.abort() } }, [])
   const [status, setStatus] = useState<ExportStatus>('IDLE')
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [pngAsset, setPngAsset] = useState<CareerPngSaveAsset | null>(null)
   const [originalUrl, setOriginalUrl] = useState<string | null>(null)
   const [fileSize, setFileSize] = useState(0)
-  const [pageIndex, setPageIndex] = useState(0), [pageCount, setPageCount] = useState(1)
   const [message, setMessage] = useState<string | null>(null)
   useEffect(() => () => { if (originalUrl) URL.revokeObjectURL(originalUrl) }, [originalUrl])
-  const closePreview = () => { request.current++; generating.current = false; setPreviewUrl(null); setPngAsset(null); setOriginalUrl(null); setFileSize(0); setStatus('IDLE'); setMessage(null) }
-  const generateRecord = async (index = 0, changePage = false) => {
+  const closePreview = () => { controller.current?.abort(); request.current++; generating.current = false; setPreviewUrl(null); setPngAsset(null); setOriginalUrl(null); setFileSize(0); setStatus('IDLE'); setMessage(null) }
+  const generateRecord = async () => {
     if (generating.current || (!game && !targetRef.current)) return
     generating.current = true
     const token = ++request.current
+    controller.current = new AbortController()
+    const signal = controller.current.signal
     setStatus('GENERATING'); setMessage(null)
     try {
-      let blob: Blob, count = 1
+      let blob: Blob
       if (game) {
-        const poster = (changePage ? exportPoster.current : preparedPoster) ?? await prepareCareerPoster(game)
-        const pages = planCareerPosterPages(poster)
-        count = pages.length
-        const page = pages[index]
-        if (!page) throw new Error('Invalid poster page.')
-        blob = await renderCareerPosterPage(poster, page)
-        if (mounted.current && token === request.current) exportPoster.current = poster
+        const poster = preparedPoster ?? await prepareCareerPoster(game)
+        blob = await renderPreparedCareerPosterPng(poster, signal)
       } else blob = await renderRetirementRecordPng(targetRef.current!)
+      signal.throwIfAborted()
       const baseName = safeRetirementRecordFilename(playerName, game ? game.startYear + Math.floor(game.windowIndex / 2) : new Date().getFullYear())
-      const partName = count > 1 ? baseName.replace(/\.png$/, `-${index + 1}-${count}.png`) : baseName
-      const asset = await prepareCareerPngSaveAsset(blob, partName)
+      const asset = await prepareCareerPngSaveAsset(blob, baseName)
       if (!mounted.current || token !== request.current) return
       setPngAsset(asset); setOriginalUrl(URL.createObjectURL(asset.file));
-      setFileSize(blob.size); setPreviewUrl(asset.dataUrl); setPageCount(count); setPageIndex(index); setStatus('READY')
+      setFileSize(blob.size); setPreviewUrl(asset.dataUrl); setStatus('READY')
     } catch (error) {
       if (!mounted.current || token !== request.current) return
       setMessage(retirementExportErrorMessage(error)); setStatus('ERROR')
     } finally { if (token === request.current) generating.current = false }
   }
   const baseFilename = safeRetirementRecordFilename(playerName, game ? game.startYear + Math.floor(game.windowIndex / 2) : new Date().getFullYear())
-  const filename = pageCount > 1 ? baseFilename.replace(/\.png$/, `-${pageIndex + 1}-${pageCount}.png`) : baseFilename
+  const filename = baseFilename
   return <section className="retirement-export-actions" aria-label="保存职业生涯记录">
     <div className="retirement-export-actions__buttons">
       <button ref={saveButtonRef} type="button" className="button button--primary" onClick={() => void generateRecord()} disabled={status === 'GENERATING'}>
         <Icon name="save" />{status === 'GENERATING' ? '正在生成生涯长图…' : '保存我的职业生涯'}</button>
-      <button type="button" className="button button--secondary button--on-dark" onClick={onReturnHome} disabled={status === 'GENERATING'}>回到初始界面</button>
+      <button type="button" className="button button--secondary button--on-dark" onClick={() => { closePreview(); onReturnHome() }}>回到初始界面</button>
+      {status === 'GENERATING' ? <button type="button" className="button button--secondary" onClick={closePreview}>取消生成</button> : null}
     </div>
     {status === 'ERROR' && message && !previewUrl ? <p role="alert">{message}</p> : null}
     {previewUrl ? <RetirementRecordPreview previewUrl={previewUrl} playerName={playerName} fileSize={fileSize} filename={filename} pngAsset={pngAsset} originalUrl={originalUrl}
-      returnFocusRef={saveButtonRef} pageIndex={pageIndex} pageCount={pageCount} busy={status === 'GENERATING'} onPageChange={index => void generateRecord(index, true)} message={message} onClose={closePreview} /> : null}
+      returnFocusRef={saveButtonRef} busy={status === 'GENERATING'} message={message} onClose={closePreview} /> : null}
   </section>
 }

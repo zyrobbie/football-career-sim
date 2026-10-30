@@ -40,12 +40,14 @@ describe('retirement record preview', () => {
   })
 })
 
-it('explains multipart output and lets the player select a numbered image', () => {
-  const markup = renderToStaticMarkup(<RetirementRecordPreview previewUrl="blob:part" playerName="Robbie" fileSize={42} pageCount={4} pageIndex={2} onPageChange={vi.fn()} onClose={vi.fn()} />)
-  expect(markup).toContain('选择生涯图片')
-  expect(markup).toContain('第 3 / 4 张')
+it('offers one complete PNG without a numbered selector', () => {
+  const markup = renderToStaticMarkup(<RetirementRecordPreview previewUrl="blob:complete" playerName="Robbie" fileSize={42} onClose={vi.fn()} />)
+  expect(markup).not.toContain('选择生涯图片')
+  expect(markup).not.toContain('<select')
   expect(markup).toContain('下载PNG文件')
-  expect(markup).toContain('完整内容仍可在浏览框连续查看')
+  expect(markup).toContain('完整 PNG 图片')
+  expect(exportActionsSource).toContain('renderPreparedCareerPosterPng(poster, signal)')
+  expect(exportActionsSource).not.toContain('planCareerPosterPages')
 })
 
 describe('retirement record actions', () => {
@@ -64,11 +66,13 @@ describe('retirement record actions', () => {
     expect(markup).not.toContain('retirement-export-sheet')
   })
 
-  it('disables both archive actions while the record is generating', () => {
+  it('prevents duplicate exports but permits cancelling or returning home', () => {
     const disabledActions = exportActionsSource.match(
       /disabled=\{status === 'GENERATING'\}/g,
     ) ?? []
 
-    expect(disabledActions).toHaveLength(2)
+    expect(disabledActions).toHaveLength(1)
+    expect(exportActionsSource).toContain('取消生成')
+    expect(exportActionsSource).toContain('controller.current?.abort()')
   })
 })

@@ -1,0 +1,37 @@
+name: Career single PNG QA
+on:
+  push:
+    branches: ['candidate/career-single-png-*']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck && npm run test:run && npm run build
+      - name: Install browser engines and fonts
+        run: |
+          npm install --prefix "$RUNNER_TEMP/png-browser" --no-package-lock @playwright/test@1.56.1
+          "$RUNNER_TEMP/png-browser/node_modules/.bin/playwright" install --with-deps chromium webkit
+          sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+      - name: Run candidate synthetic PNG acceptance
+        run: |
+          mkdir -p qa/single-png/artifacts
+          npm run dev -- --host 127.0.0.1 > qa/single-png/artifacts/vite.log 2>&1 &
+          trap 'kill $! || true' EXIT
+          for i in $(seq 1 60); do curl -sf http://127.0.0.1:4173/ > /dev/null && break; sleep 1; done
+          node scripts/qa/career-single-png.mjs --url http://127.0.0.1:4173/ --module "$RUNNER_TEMP/png-browser/node_modules/playwright" --out qa/single-png/artifacts
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: career-single-png-${{ github.sha }}
+          path: qa/single-png/artifacts/
+          retention-days: 14

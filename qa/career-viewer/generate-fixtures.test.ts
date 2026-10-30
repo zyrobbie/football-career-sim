@@ -7,7 +7,7 @@ import { generatePlayer } from '../../src/engine/player'
 import { CLUBS } from '../../src/data/clubs/runtimeClubCatalog'
 import { validateGameState } from '../../src/persistence/save'
 import { buildCareerPosterSvg, careerPosterAssetPaths } from '../../src/export/careerPosterSvg'
-import { planCareerPosterPages } from '../../src/export/careerPosterExport'
+import { careerPosterSingleImageDimensions } from '../../src/export/careerPosterExport'
 import { buildRetirementSummary } from '../../src/engine/careerSummary'
 
 it('generates fresh anonymous CI cases from public game code and explicit constants only', () => {
@@ -27,9 +27,9 @@ it('generates fresh anonymous CI cases from public game code and explicit consta
   expect(buildRetirementSummary(valid).clubs).toHaveLength(count)
   expect(valid.careerEventHistory).toEqual([])
   const assets=Object.fromEntries(careerPosterAssetPaths(valid).map(path=>[path,'data:image/svg+xml;base64,PHN2Zy8+']))
-  const poster=buildCareerPosterSvg(valid,assets),pages=planCareerPosterPages(poster)
-  if(count===8)expect(pages).toHaveLength(1);else expect(pages.length).toBeGreaterThan(1)
-  console.log({count,width:poster.width,height:poster.height,pages:pages.length})
+  const poster=buildCareerPosterSvg(valid,assets),image=careerPosterSingleImageDimensions(poster)
+  expect(image.width).toBeGreaterThanOrEqual(975);expect(image.height).toBe(Math.floor(poster.height*image.scale))
+  console.log({count,width:poster.width,height:poster.height,imageWidth:image.width,imageHeight:image.height})
   writeFileSync(resolve(out,`retired-${count}clubs.json`),JSON.stringify(valid,null,2)+'\n')
  }
  writeFileSync(resolve(out,'provenance.json'),JSON.stringify({synthetic:true,source:'generate-fixtures.test.ts; existing createRetirementVisualAuditGame/generatePlayer/CLUBS only',externalInputs:[],gameCurrencyOnly:true,notUserSave:true},null,2))

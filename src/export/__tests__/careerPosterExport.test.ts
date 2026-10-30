@@ -3,7 +3,7 @@ import type { GameState } from '../../models/game'
 
 const buildSvg = vi.hoisted(() => vi.fn(() => ({ svg: '<svg xmlns="http://www.w3.org/2000/svg"></svg>', width: 900, height: 2500 })))
 vi.mock('../careerPosterSvg', () => ({ buildCareerPosterSvg: buildSvg, careerPosterAssetPaths: () => ['/crest.svg'] }))
-import { loadCareerPosterAsset, renderCareerPosterPng, prepareCareerPoster, planCareerPosterPages, renderCareerPosterPage, careerPosterPageSvg } from '../careerPosterExport'
+import { loadCareerPosterAsset, renderCareerPosterPng, prepareCareerPoster, careerPosterSingleImageDimensions, renderCareerPosterPage, careerPosterPageSvg, renderPreparedCareerPosterPng } from '../careerPosterExport'
 
 const game = { player: { name: 'Example' } } as GameState
 let canvas: { width: number; height: number; getContext: ReturnType<typeof vi.fn>; toBlob: ReturnType<typeof vi.fn> }
@@ -30,7 +30,7 @@ beforeEach(() => {
     onerror: (() => void) | null = null
     set src(_value: string) { queueMicrotask(() => failImage ? this.onerror?.() : this.onload?.()) }
   })
-  canvas = { width: 0, height: 0, getContext: vi.fn(() => ({ drawImage: draw })), toBlob: vi.fn(callback => callback(new Blob(['png'], { type: 'image/png' }))) }
+  canvas = { width: 0, height: 0, getContext: vi.fn(() => ({ drawImage: draw, getImageData: (_x: number, _y: number, width: number, height: number) => ({ data: new Uint8ClampedArray(width * height * 4) }) })), toBlob: vi.fn(callback => callback(new Blob(['png'], { type: 'image/png' }))) }
   vi.stubGlobal('document', { fonts: { ready: Promise.resolve() }, createElement: vi.fn(() => canvas) })
   vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:vector-poster')
   vi.spyOn(URL, 'revokeObjectURL').mockImplementation(revoke)
@@ -62,11 +62,6 @@ describe('vector poster export pipeline', () => {
     vi.mocked(fetch).mockResolvedValue({ ok: true, blob: async () => new Blob(['error'], { type: 'text/html' }) } as Response)
     await expect(loadCareerPosterAsset('/crest.svg')).rejects.toThrow('not an image')
   })
-  it('does not silently lower resolution below the readable canvas budget', async () => {
-    buildSvg.mockReturnValue({ svg: '<svg xmlns="http://www.w3.org/2000/svg"></svg>', width: 900, height: 10000 })
-    await expect(renderCareerPosterPng(game)).rejects.toThrow('individually selected')
-    expect(URL.createObjectURL).not.toHaveBeenCalled()
-  })
   it('cleans up the SVG URL and bitmap when the browser cannot decode it', async () => {
     failImage = true
     await expect(renderCareerPosterPng(game)).rejects.toThrow('rendering failed')
@@ -83,7 +78,7 @@ describe('vector poster export pipeline', () => {
 })
 
 
-describe('scrollable preview and bounded selected-part output', () => {
+describe('complete preview and bounded internal rasterization', () => {
   it('prepares the complete oversized vector without attempting any canvas or PNG', async () => {
     buildSvg.mockReturnValue({ svg: '<svg width="780" height="19543" viewBox="0 0 780 19543"><text>完整档案</text></svg>', width: 780, height: 19543 })
     const poster = await prepareCareerPoster(game)
@@ -92,27 +87,9 @@ describe('scrollable preview and bounded selected-part output', () => {
     expect(document.createElement).not.toHaveBeenCalled()
     expect(URL.createObjectURL).not.toHaveBeenCalled()
   })
-  it('preserves the approved ordinary 8-club image as one adaptive readable PNG', () => {
-    const pages = planCareerPosterPages({ svg: '', width: 780, height: 9640 })
-    expect(pages).toEqual([{ y: 0, height: 9640, scale: 1.26 }])
-  })
-  it('splits only oversized archives at semantic boundaries at 2x with complete coverage', () => {
-    const poster = { svg: '', width: 780, height: 19543, pageBreaks: Array.from({ length: 19 }, (_, i) => (i + 1) * 1000) }
-    const pages = planCareerPosterPages(poster)
-    expect(pages.length).toBeGreaterThan(1)
-    expect(pages[0]!.y).toBe(0)
-    pages.forEach((page, i) => {
-      expect(page.scale).toBe(2)
-      expect(Math.floor(poster.width * page.scale) * Math.floor(page.height * page.scale)).toBeLessThanOrEqual(12_000_000)
-      if (i) expect(page.y).toBe(pages[i - 1]!.y + pages[i - 1]!.height)
-      if (i < pages.length - 1) expect(poster.pageBreaks).toContain(page.y + page.height)
-    })
-    expect(pages.at(-1)!.y + pages.at(-1)!.height).toBe(poster.height)
-  })
-  it('overlaps an unsplittable legacy record by 80 units rather than losing split lines', () => {
-    const pages = planCareerPosterPages({ svg: '', width: 780, height: 20000 })
-    pages.slice(1).forEach((page, i) => expect(page.y).toBe(pages[i]!.y + pages[i]!.height - 80))
-    expect(pages.at(-1)!.y + pages.at(-1)!.height).toBe(20000)
+  it('preserves readable resolution while producing ONE complete long image', () => {
+    expect(careerPosterSingleImageDimensions({ svg: '', width: 780, height: 9640 })).toEqual({ width: 982, height: 12146, scale: 1.26 })
+    expect(careerPosterSingleImageDimensions({ svg: '', width: 780, height: 19543 })).toEqual({ width: 975, height: 24428, scale: 1.25 })
   })
   it('decodes a cropped SVG viewport, never a full tall image, and renders only the selected part', async () => {
     const poster = { svg: '<svg xmlns="http://www.w3.org/2000/svg" width="780" height="19543" viewBox="0 0 780 19543"><text y="4000">full data retained</text></svg>', width: 780, height: 19543 }
@@ -131,6 +108,41 @@ describe('scrollable preview and bounded selected-part output', () => {
     expect(() => careerPosterPageSvg(poster, { y: 19000, height: 1000, scale: 2 })).toThrow('Invalid')
     expect(() => careerPosterPageSvg(poster, { y: 0, height: 19000, scale: 2 })).toThrow('memory budget')
     expect(() => careerPosterPageSvg(poster, { y: 0, height: 100, scale: 1 })).toThrow('Invalid')
-    expect(() => planCareerPosterPages({ svg: '', width: 780, height: Infinity })).toThrow('Invalid')
+    expect(() => careerPosterSingleImageDimensions({ svg: '', width: 780, height: Infinity })).toThrow('Invalid')
+  })
+})
+
+
+describe('single long PNG bounded rasterization and interruption', () => {
+  it('creates one complete PNG with bounded strips, not a full-image canvas', async () => {
+    const poster = { svg: '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="10001"></svg>', width: 900, height: 10001 }
+    const png = await renderPreparedCareerPosterPng(poster)
+    const header = new DataView(await png.slice(0, 24).arrayBuffer())
+    expect(header.getUint32(16)).toBe(1125)
+    expect(header.getUint32(20)).toBe(12501)
+    expect(draw.mock.calls.length).toBe(25)
+    for (const call of draw.mock.calls) {
+      expect(call[3]).toBe(1125)
+      expect(call[4]).toBeLessThanOrEqual(512)
+    }
+    expect(draw.mock.calls.reduce((rows, call) => rows + call[4], 0)).toBe(12501)
+    expect(canvas.toBlob).not.toHaveBeenCalled()
+    expect(revoke).toHaveBeenCalledTimes(25)
+    expect(canvas.width).toBe(0)
+  })
+  it('releases resources on cancellation and permits a fresh render', async () => {
+    const controller = new AbortController()
+    draw.mockImplementationOnce(() => controller.abort())
+    const poster = { svg: '<svg xmlns="http://www.w3.org/2000/svg" width="900" height="10001"></svg>', width: 900, height: 10001 }
+    await expect(renderPreparedCareerPosterPng(poster, controller.signal)).rejects.toMatchObject({ name: 'AbortError' })
+    expect(draw).toHaveBeenCalledTimes(1)
+    expect(revoke).toHaveBeenCalledTimes(1)
+    expect(canvas.width).toBe(0)
+    await expect(renderPreparedCareerPosterPng({ ...poster, height: 100 })).resolves.toMatchObject({ type: 'image/png' })
+  })
+  it('does not allocate when already cancelled', async () => {
+    const controller = new AbortController(); controller.abort()
+    await expect(renderPreparedCareerPosterPng({ svg: '', width: 780, height: 20000 }, controller.signal)).rejects.toMatchObject({ name: 'AbortError' })
+    expect(document.createElement).not.toHaveBeenCalled()
   })
 })

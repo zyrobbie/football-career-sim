@@ -1,3 +1,4 @@
+import { encodeStripPng } from './streamingPng'
 import type { GameState } from '../models/game'
 import { buildCareerPosterSvg, careerPosterAssetPaths, type CareerPosterSvg } from './careerPosterSvg'
 import {
@@ -45,37 +46,6 @@ export async function prepareCareerPoster(game: GameState): Promise<CareerPoster
 
 export interface CareerPosterPage { y: number; height: number; scale: number }
 export const CAREER_POSTER_PAGE_SCALE = 2
-export const CAREER_POSTER_PAGE_OVERLAP = 80
-
-/** Keep approved single images when readable; only oversized archives need bounded parts. */
-export function planCareerPosterPages(poster: CareerPosterSvg): CareerPosterPage[] {
-  const { width, height } = poster
-  if (![width, height].every(value => Number.isFinite(value) && value > 0)) throw new Error('Invalid poster size.')
-  const singleScale = calculateRetirementExportScale({ width, height })
-  if (singleScale !== null) return [{ y: 0, height, scale: singleScale }]
-  const pixelWidth = Math.floor(width * CAREER_POSTER_PAGE_SCALE)
-  const maxHeight = Math.floor(RETIREMENT_MAX_CANVAS_PIXELS / pixelWidth / CAREER_POSTER_PAGE_SCALE)
-  if (maxHeight <= CAREER_POSTER_PAGE_OVERLAP * 2) throw new Error('Canvas width exceeds the readable export budget.')
-  const breaks = (poster.pageBreaks ?? [])
-    .filter(value => Number.isFinite(value) && value > 0 && value < height)
-    .sort((left, right) => left - right)
-  const pages: CareerPosterPage[] = []
-  let y = 0
-  while (y < height) {
-    const maximumEnd = Math.min(height, y + maxHeight)
-    if (maximumEnd === height) {
-      pages.push({ y, height: height - y, scale: CAREER_POSTER_PAGE_SCALE })
-      break
-    }
-    const boundary = breaks.filter(value => value > y + Math.min(256, maxHeight / 2) && value <= maximumEnd).at(-1)
-    const end = boundary ?? maximumEnd
-    pages.push({ y, height: end - y, scale: CAREER_POSTER_PAGE_SCALE })
-    // Oversized records without a usable boundary overlap, preserving any split line.
-    y = boundary ?? end - CAREER_POSTER_PAGE_OVERLAP
-  }
-  return pages
-}
-
 /** Clip the vector viewport BEFORE decoding to avoid allocating a full oversized bitmap. */
 export function careerPosterPageSvg(poster: CareerPosterSvg, page: CareerPosterPage): string {
   if (![poster.width, poster.height, page.y, page.height, page.scale].every(Number.isFinite)
@@ -92,14 +62,15 @@ export function careerPosterPageSvg(poster: CareerPosterSvg, page: CareerPosterP
 }
 
 /** Rasterize only the selected part; callers must not auto-download all planned parts. */
-export async function renderCareerPosterPage(poster: CareerPosterSvg, page: CareerPosterPage): Promise<Blob> {
+async function rasterizeCareerPosterPage<T>(poster: CareerPosterSvg, page: CareerPosterPage, consume: (canvas: HTMLCanvasElement, context: CanvasRenderingContext2D) => Promise<T>, exactHeight?: number, signal?: AbortSignal): Promise<T> {
+  signal?.throwIfAborted()
   const svg = careerPosterPageSvg(poster, page)
   const dimensions = retirementExportCanvasDimensions(poster.width, page.height, page.scale)
   const canvas = document.createElement('canvas')
   canvas.width = dimensions.width
-  canvas.height = dimensions.height
+  canvas.height = exactHeight ?? dimensions.height
   const context = canvas.getContext('2d')
-  if (!context) throw new Error('Canvas context unavailable.')
+  if (!context) { canvas.width = 0; canvas.height = 0; throw new Error('Canvas context unavailable.') }
   const objectUrl = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml;charset=utf-8' }))
   const image = new Image()
   try {
@@ -108,7 +79,9 @@ export async function renderCareerPosterPage(poster: CareerPosterSvg, page: Care
         clearTimeout(timeout)
         image.onload = null
         image.onerror = null
+        signal?.removeEventListener('abort', abort)
       }
+      const abort = () => { cleanup(); reject(new DOMException('Export cancelled.', 'AbortError')) }
       const timeout = setTimeout(() => {
         cleanup()
         reject(new Error('Poster image rendering timed out.'))
@@ -121,12 +94,13 @@ export async function renderCareerPosterPage(poster: CareerPosterSvg, page: Care
         cleanup()
         reject(new Error('Poster image rendering failed.'))
       }
+      signal?.addEventListener('abort', abort, { once: true })
       image.src = objectUrl
+      if (signal?.aborted) abort()
     })
-    context.drawImage(image, 0, 0, dimensions.width, dimensions.height)
-    return await new Promise<Blob>((resolve, reject) => {
-      canvas.toBlob(blob => blob?.size ? resolve(blob) : reject(new Error('Canvas PNG generation failed.')), 'image/png')
-    })
+    signal?.throwIfAborted()
+    context.drawImage(image, 0, 0, canvas.width, canvas.height)
+    return await consume(canvas, context)
   } finally {
     image.onload = null
     image.onerror = null
@@ -136,10 +110,47 @@ export async function renderCareerPosterPage(poster: CareerPosterSvg, page: Care
   }
 }
 
-/** Compatibility helper for callers which explicitly need a single bitmap. */
+/** Existing bounded renderer, also useful for testing individual strip fidelity. */
+export function renderCareerPosterPage(poster: CareerPosterSvg, page: CareerPosterPage, signal?: AbortSignal): Promise<Blob> {
+  return rasterizeCareerPosterPage(poster, page, canvas => new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob(blob => blob?.size ? resolve(blob) : reject(new Error('Canvas PNG generation failed.')), 'image/png')
+  }), undefined, signal)
+}
+
+export const CAREER_POSTER_STRIP_ROWS = 512
+/** Short images retain their existing quality. Long images use the existing readable
+ * minimum (975 px for the 780 px design), not a 61+ MP 2x bitmap on a phone. */
+export function careerPosterSingleImageDimensions(poster: CareerPosterSvg) {
+  if (![poster.width, poster.height].every(value => Number.isFinite(value) && value > 0)) throw new Error('Invalid poster size.')
+  const scale = calculateRetirementExportScale(poster) ?? MIN_EXPORT_SCALE
+  return { ...retirementExportCanvasDimensions(poster.width, poster.height, scale), scale }
+}
+
+export async function renderPreparedCareerPosterPng(poster: CareerPosterSvg, signal?: AbortSignal): Promise<Blob> {
+  signal?.throwIfAborted()
+  const dimensions = careerPosterSingleImageDimensions(poster)
+  if (dimensions.width * dimensions.height <= RETIREMENT_MAX_CANVAS_PIXELS) {
+    return renderCareerPosterPage(poster, { y: 0, height: poster.height, scale: dimensions.scale }, signal)
+  }
+  // Integer output rows cover the archive exactly once. The last viewport uses the
+  // same effective scale as all other strips, including fractional original heights.
+  const scaleY = dimensions.height / poster.height
+  async function* strips() {
+    for (let row = 0; row < dimensions.height; row += CAREER_POSTER_STRIP_ROWS) {
+      signal?.throwIfAborted()
+      const rows = Math.min(CAREER_POSTER_STRIP_ROWS, dimensions.height - row)
+      const page = { y: row / scaleY, height: rows / scaleY, scale: dimensions.scale }
+      const pixels = await rasterizeCareerPosterPage(poster, page, async (canvas, context) => {
+        return context.getImageData(0, 0, canvas.width, canvas.height).data
+      }, rows, signal)
+      yield pixels
+      // Let close/navigation/paint run between bounded chunks; no gameplay mutations.
+      await new Promise(resolve => setTimeout(resolve, 0))
+    }
+  }
+  return encodeStripPng(dimensions.width, dimensions.height, strips())
+}
+
 export async function renderCareerPosterPng(game: GameState): Promise<Blob> {
-  const poster = await prepareCareerPoster(game)
-  const pages = planCareerPosterPages(poster)
-  if (pages.length !== 1) throw new Error('Canvas size requires individually selected high-resolution parts.')
-  return renderCareerPosterPage(poster, pages[0]!)
+  return renderPreparedCareerPosterPng(await prepareCareerPoster(game))
 }
